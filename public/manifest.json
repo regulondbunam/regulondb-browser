@@ -1,0 +1,10 @@
+{
+  "short_name": "RegulonDB",
+  "name": "RegulonDB Browser",
+  "icons": [
+  ],
+  "start_url": ".",
+  "display": "web",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
