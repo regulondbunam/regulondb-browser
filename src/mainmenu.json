@@ -1,0 +1,84 @@
+{
+    "mainmenu": [
+        {
+            "id": "homeButton",
+            "title": "HOME_BUTTON",
+            "type": "HOME",
+            "link": "/home"
+        },
+        {
+            "id":"menuTools",
+            "title": "Tools",
+            "type": "MENU",
+            "options": [
+                {
+                    "id": "subMenuBrosing",
+                    "title": "BROWSING",
+                    "link": "/browsing",
+                    "type": "SUBMENU",
+                    "options": [
+                        {
+                            "title": "Drawing Traces Tool",
+                            "link" : "/drawingTraces"
+                        },
+                        {
+                            "title": "Tracks (Gbrowser)",
+                            "link" : "/Gbrowser"
+                        },
+                        {
+                            "title": "TextPreso Search",
+                            "link" : "/textPresoSearch"
+                        },
+                        {
+                            "title": "Clustering for PWMs",
+                            "link" : "/ClusteringPWMs"
+                        },
+                        {
+                            "title": "Transcription Factor Family Browser",
+                            "link" : "/TranscriptionBrowser"
+                        },
+                        {
+                            "title": "Coexpression Browser",
+                            "link" : "/CoexpressionBrowser"
+                        }
+                        
+                    ]
+                },
+                {
+                    "id": "SubMenuExternal",
+                    "title": "EXTERNAL",
+                    "link": "/external",
+                    "type": "SUBMENU",
+                    "options": [
+                        {
+                            "title": "RSA Tools",
+                            "link" : "http://embnet.ccg.unam.mx/rsat/",
+                            "target": "_blank"
+                        },
+                        {
+                            "title": "Gene Context Tool",
+                            "link" : "/gbrowser"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id":"menuDoc",
+            "title": "About Us",
+            "type": "MENU",
+            "options":[
+                {
+                    "title": "What is RegulonDB?",
+                    "link": "/aboutRegulonDB",
+                    "type": "LINK"
+                },
+                {
+                    "title": "Manuals",
+                    "link": "/maual",
+                    "type": "LINK"
+                }
+            ]
+        }
+    ]
+}
