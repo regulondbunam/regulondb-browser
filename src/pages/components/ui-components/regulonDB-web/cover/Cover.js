@@ -13,7 +13,7 @@ export default class Cover extends Component {
       source,
       opacity,
       title,
-      colorTitle,
+      //colorTitle,
     } = this.props
 
     let displayed
