@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './pages/Home';
 import Layout from './pages/components/layout/Layout'
+import Error404 from './pages/error404'
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,17 +13,17 @@ import {
 function App() {
   return (
     <Router>
-      <Layout/>
+      <Layout />
       <Switch>
-        <Route path="/">
-            <Home />
-          </Route>
-          <Route>
-            <Home />
-          </Route>
+        <Route path="/home">
+          <Home />
+        </Route>
+        <Route path="*">
+          <Error404 />
+        </Route>
       </Switch>
     </Router>
-      
+
   );
 }
 
