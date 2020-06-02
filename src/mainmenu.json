@@ -14,7 +14,7 @@
                 {
                     "id": "subMenuBrosing",
                     "title": "BROWSING",
-                    "link": "/browsing",
+                    "link": "test-RegulonDB-Browser/browsing",
                     "type": "SUBMENU",
                     "options": [
                         {
