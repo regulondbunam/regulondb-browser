@@ -1,5 +1,6 @@
 import React from 'react';
 import Home from './pages/Home';
+import Layout from './pages/components/layout/Layout'
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,6 +12,7 @@ import {
 function App() {
   return (
     <Router>
+      <Layout/>
       <Switch>
         <Route path="/">
             <Home />
