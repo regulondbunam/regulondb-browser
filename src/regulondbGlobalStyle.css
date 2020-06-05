@@ -1,0 +1,79 @@
+/*
+This is a css for regulonDB Browser site, 
+it contains the definition of global styles titles, paragraphs, font, color palette among others.
+*/
+
+/*elements HTML*/
+
+/*Variables*/
+
+/*color palette*/
+:root{
+	--color-blue1: #1F3D4E;
+	--color-blue2: #32617D;
+	--color-blue3: #3D779B;
+	--color-blue4: #72A7C7;
+	--color-grey1: #373737;
+	--color-grey2: #666666;
+	--color-grey3: #999999;
+	--color-grey4: #D5D5D7;
+	--color-rest: #FFFFFF;
+	--color-accentA: #C93A1D;
+	--color-accentB: #CC9900;
+}
+
+/*all site*/
+body{
+	background-color: var(--color-rest);
+    font-family: sans-serif;
+    margin: 0px;
+}
+
+/*Titles*/
+
+:root{
+	--color-title: var(--color-blue2);
+	--color-subtitle: var(--color-grey1);
+	--font-title: sans-serif;
+	--fontStyle-title: normal;
+	--fontWeight: bold;
+	--lineHeight-title: normal;
+}
+
+h1 {
+	font-size: 24px;
+	font-family: var(--font-title);
+	font-style: var(--fontStyle-title);
+	font-weight: var(--fontWeight);
+	line-height: var(--fontWeight);
+	color: var(--color-title)
+}
+
+h2 {
+	font-size: 20px;
+	font-family: var(--font-title);
+	font-style: var(--fontStyle-title);
+	font-weight: var(--fontWeight);
+	line-height: var(--fontWeight);
+	color: var(--color-subtitle)
+}
+
+h3 {
+	font-size: 18px;
+	font-family: var(--font-title);
+	font-style: var(--fontStyle-title);
+	font-weight: var(--fontWeight);
+	line-height: var(--fontWeight);
+	color: var(--color-subtitle)
+}
+
+/* p */
+
+p {
+	font-family: sans-serif; 
+	font-size: 16px;
+	font-style: normal;
+	line-height: normal; 
+	color: var(--color-grey2);
+	font-weight: normal;
+}

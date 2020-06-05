@@ -11,6 +11,15 @@ const HOME = () => {
             }}>
                 <BodyHome /> 
             </div>
+            <div style={{marginLeft: "50px"}}>
+            <h1>Title 1</h1>
+            <h2>Title 2</h2>
+            <h3>Title 3</h3>
+            <p>
+                ajnsdkaa casa aisjdoiasdj asjakc jandsjnajsd jdaksd ijoisdasdn
+            </p>
+            </div>
+            
                
         </>
     );

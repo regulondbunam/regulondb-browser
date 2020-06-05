@@ -4,7 +4,7 @@ import App from './App';
 import {
   BrowserRouter
 } from "react-router-dom";
-import './index.css'
+import './regulondbGlobalStyle.css'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
