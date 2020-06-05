@@ -21,11 +21,19 @@ it contains the definition of global styles titles, paragraphs, font, color pale
 	--color-accentA: #C93A1D;
 	--color-accentB: #CC9900;
 }
+/*font family */
+:root{
+	--fontFamily-principal: Verdana, Arial, Helvetica, sans-serif;
+	--fontFamily-option: Arial, Helvetica, sans-serif;
+	--fontFamily-simpleText: "Times New Roman", Times, serif;
+	--fontFamily-sequence:  'Courier New',Courier,monospace;
+	
+}
 
 /*all site*/
 body{
 	background-color: var(--color-rest);
-    font-family: sans-serif;
+    font-family: var(--fontFamily-principal);
     margin: 0px;
 }
 
@@ -34,7 +42,7 @@ body{
 :root{
 	--color-title: var(--color-blue2);
 	--color-subtitle: var(--color-grey1);
-	--font-title: sans-serif;
+	--font-title: var(--fontFamily-principal);
 	--fontStyle-title: normal;
 	--fontWeight: bold;
 	--lineHeight-title: normal;
@@ -66,14 +74,47 @@ h3 {
 	line-height: var(--fontWeight);
 	color: var(--color-subtitle)
 }
+h3 {
+	font-size: 18px;
+	font-family: var(--font-title);
+	font-style: var(--fontStyle-title);
+	font-weight: var(--fontWeight);
+	line-height: var(--fontWeight);
+	color: var(--color-subtitle)
+}
+
 
 /* p */
 
 p {
-	font-family: sans-serif; 
+	font-family: var(--fontFamily-principal); 
 	font-size: 16px;
 	font-style: normal;
 	line-height: normal; 
 	color: var(--color-grey2);
 	font-weight: normal;
+}
+
+a {
+	font-family: var(--fontFamily-principal); 
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal; 
+	color: var(--color-accentB);
+	cursor: pointer;
+}
+
+a:link {
+	font-family: var(--fontFamily-principal);  
+	color: var(--color-accentB);
+}
+
+a:visited {
+	font-family: var(--fontFamily-principal);  
+	color: var(--color-accentB);
+}
+/*Features*/
+
+.sequence{
+	font-family: var(--fontFamily-sequence);
 }

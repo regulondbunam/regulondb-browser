@@ -1,0 +1,78 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body { 
+	background-color:#FFFFFF;
+	margin-top: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px; 
+	
+	  
+}
+
+p {
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal; 
+	color: #003366;
+	font-weight: normal;
+}
+
+a {
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal; 
+	color: #003366;
+	font-weight: normal;
+	cursor: hand;
+}
+
+a:link {
+	font-family: Verdana, Arial, Helvetica, sans-serif;  
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal; 
+	color: #003366;
+	font-weight: normal;
+	cursor: hand;
+}
+
+a:visited {
+	font-family: Verdana, Arial, Helvetica, sans-serif;  
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal; 
+	color: #003366;
+	font-weight: normal;
+	cursor: hand;
+}
+
+h1 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;  
+	font-size: 18px;
+	font-style: normal; 
+	line-height: normal; 
+	color: #003366; 
+	font-weight: bold;
+}
+
+h2 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;  
+	font-size: 16px;
+	font-style: normal; 
+	line-height: normal; 
+	color: #fc0000; 
+	font-weight: bold;
+}
+
+h3 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;  
+	font-size: 14px;
+	font-style: normal; 
+	line-height: normal; 
+	color: #00ff37; 
+	font-weight: bold;
+}
