@@ -6,8 +6,7 @@ import UiComponents from './pages/UiComponents'
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 
@@ -16,8 +15,8 @@ function App() {
     <Router>
       <Layout />
       <Switch>
-      <Route path="/">
-          <Home />
+        <Route exact path="/">
+            <Home />
         </Route>
         <Route path="/home">
           <Home />

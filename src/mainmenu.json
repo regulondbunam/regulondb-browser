@@ -12,42 +12,54 @@
             "type": "MENU",
             "options": [
                 {
-                    "id": "subMenuBrosing",
+                    "id": "subMenuBros",
                     "title": "BROWSING",
-                    "link": "test-RegulonDB-Browser/browsing",
+                    "link": "/working",
                     "type": "SUBMENU",
                     "options": [
                         {
                             "title": "Drawing Traces Tool",
-                            "link" : "/drawingTraces"
+                            "link" : "/working"
                         },
                         {
                             "title": "Tracks (Gbrowser)",
-                            "link" : "/Gbrowser"
+                            "link" : "/working"
                         },
                         {
                             "title": "TextPreso Search",
-                            "link" : "/textPresoSearch"
+                            "link" : "/working"
                         },
                         {
                             "title": "Clustering for PWMs",
-                            "link" : "/ClusteringPWMs"
+                            "link" : "/working"
                         },
                         {
                             "title": "Transcription Factor Family Browser",
-                            "link" : "/TranscriptionBrowser"
+                            "link" : "/working"
                         },
                         {
                             "title": "Coexpression Browser",
-                            "link" : "/CoexpressionBrowser"
+                            "link" : "/working"
                         }
                         
                     ]
                 },
                 {
+                    "id": "SunMenuDev",
+                    "title": "DEVELOPER",
+                    "link": "/working",
+                    "type": "SUBMENU",
+                    "options": [
+                        {
+                            "title": "Websrvice",
+                            "link": "/working"
+                        }
+                    ]
+                },
+                {
                     "id": "SubMenuExternal",
                     "title": "EXTERNAL",
-                    "link": "/external",
+                    "link": "/working",
                     "type": "SUBMENU",
                     "options": [
                         {
@@ -57,9 +69,49 @@
                         },
                         {
                             "title": "Gene Context Tool",
-                            "link" : "/gbrowser"
+                            "link" : "/working"
+                        },
+                        {
+                            "title": "Gene Expression Analysis Tools",
+                            "link" : "/working"
+                        },
+                        {
+                            "title": "Promoter Analysis Tool",
+                            "link" : "/working"
                         }
                     ]
+                }
+            ]
+        },
+        {
+            "id": "overViews",
+            "title": "Overviews",
+            "type": "MENU",
+            "options":[
+                {
+                    "title": "Integrated Overview",
+                    "link": "/working",
+                    "type": "LINK"
+                },
+                {
+                    "title": "Gensor Unit Gro",
+                    "link": "/working",
+                    "type": "LINK"
+                },
+                {
+                    "title": "Transcriptional R",
+                    "link": "/working",
+                    "type": "LINK"
+                },
+                {
+                    "title": "Cell Sensing",
+                    "link": "/working",
+                    "type": "LINK"
+                },
+                {
+                    "title": "Additional Resou",
+                    "link": "/working",
+                    "type": "LINK"
                 }
             ]
         },
@@ -70,12 +122,12 @@
             "options":[
                 {
                     "title": "What is RegulonDB?",
-                    "link": "/aboutRegulonDB",
+                    "link": "/working",
                     "type": "LINK"
                 },
                 {
                     "title": "Manuals",
-                    "link": "/maual",
+                    "link": "/working",
                     "type": "LINK"
                 }
             ]

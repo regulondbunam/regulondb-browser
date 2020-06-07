@@ -4,11 +4,23 @@ import {withRouter} from 'react-router-dom';
 
 
 const Error404 = ({location}) => {
-    return ( 
+    //working
+
+    return (
         <>
-        <Cover title="Error 404">
-            <h1> Sorry we can't find the selected site </h1>
-            <h1>{location.pathname}</h1>
+        <Cover title="Error">
+        {
+            location === "/working"
+            ?<>
+            <h1 style={{color: "#FFFFFF"}}> Sorry we can't find the selected site </h1>
+            <h1 style={{color: "#FFFFFF"}}>{location.pathname}</h1>
+            </>
+            :<>
+            <h1 style={{color: "#FFFFFF"}}> We are working hard to make this site available, Thank you for visiting </h1>
+            </>
+            
+            
+        }
         </Cover>
         </>
      );

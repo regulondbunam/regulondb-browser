@@ -6,7 +6,7 @@ import Style from './Style.module.css'
 
 
 
-class PreviewMD extends Component {
+class MarkDown extends Component {
     state = { markDown: "", mdpath: this.props.mdurl }
 
     componentDidMount(){
@@ -32,8 +32,13 @@ class PreviewMD extends Component {
          );
     }
 }
+
+MarkDown.defaultProps = {
+    mdurl: "",
+
+}
  
-export {PreviewMD}
+export default MarkDown
 
 
 

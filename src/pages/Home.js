@@ -1,6 +1,9 @@
 import React from 'react';
 import CoverHome from './components/home/CoverHome'
 import BodyHome from './components/home/BodyHome'
+//import MarkDown from './components/ui-components/infoDisplay/markDown/MarkDown'
+
+//const mdurl = 'https://dl.dropboxusercontent.com/s/spvinutaef097qt/testMD.md?dl=0'
 
 const HOME = () => {
     return (
@@ -18,6 +21,9 @@ const HOME = () => {
             <p>
                 ajnsdkaa casa aisjdoiasdj asjakc jandsjnajsd jdaksd ijoisdasdn
             </p>
+            <a href="/home">Home</a>
+            {//<MarkDown mdurl={mdurl} />
+            }
             </div>
             
                

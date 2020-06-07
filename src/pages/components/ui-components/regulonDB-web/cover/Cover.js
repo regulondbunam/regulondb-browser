@@ -37,7 +37,7 @@ export default class Cover extends Component {
         <div className={Styles.coverComponentGlass} style={{opacity: opacity}} />
         <div className={Styles.coverComponentContent}>
         <h1 className={Styles.coverTitle}>{title}</h1>
-          {this.props.children}
+            {this.props.children}
         </div>
         <div className={Styles.coverComponentBackground}>
           {
