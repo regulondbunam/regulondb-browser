@@ -1,4 +1,5 @@
 import React from 'react';
+import Search from './pages/search/Search'
 import Home from './pages/Home';
 import Layout from './pages/components/layout/Layout'
 import Error404 from './pages/error404'
@@ -20,6 +21,9 @@ function App() {
         </Route>
         <Route path="/home">
           <Home />
+        </Route>
+        <Route path="/search">
+          <Search />
         </Route>
         <Route path="/uiComponents">
           <UiComponents />

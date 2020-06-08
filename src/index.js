@@ -4,13 +4,17 @@ import App from './App';
 import {
   BrowserRouter
 } from "react-router-dom";
+import {ApolloProvider} from '@apollo/client'
+import client from './config/apollo'
 import './regulondbGlobalStyle.css'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <BrowserRouter>
     <React.StrictMode>
-      <App />
+      <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>
     </React.StrictMode>
   </BrowserRouter>
   ,
