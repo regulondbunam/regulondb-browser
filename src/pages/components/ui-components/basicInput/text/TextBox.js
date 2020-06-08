@@ -107,7 +107,7 @@ export default class TextBox extends Component {
 
     _inputChangedHandler(event) {
         this.setState({ keyword: event.target.value })
-        this.props.onChangeText(event.target.value)
+        this.props.onChange(event.target.value)
     }
 
     render() {
@@ -134,7 +134,7 @@ export default class TextBox extends Component {
 
 TextBox.propTypes = {
     disabled: PropTypes.bool,
-	onChangeText: PropTypes.func,
+	onChange: PropTypes.func,
 	placeholder: PropTypes.string,
 	value: PropTypes.string,
 	style: PropTypes.object
@@ -142,7 +142,7 @@ TextBox.propTypes = {
 
 TextBox.defaultProps = {
     disabled: false,
-	onChangeText: noAction,
+	onChange: noAction,
 	placeholder: "type here",
 	value: "",
 	style: {}
