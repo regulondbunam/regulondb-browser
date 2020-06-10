@@ -3,7 +3,6 @@ import Card from '../ui-components/infoDisplay/card/Card'
 import {CountGenes} from '../apollo/Statistics'
 
 const BodyHome = () => {
-    console.log(CountGenes)
     return (
         <div style={{
             display: "flex",

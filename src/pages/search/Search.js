@@ -1,5 +1,6 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
+import ResultsGene from '../components/search/gene/ResultsGene'
 
 const Search = ({
     location
@@ -7,7 +8,8 @@ const Search = ({
     const search = BreakPathName(location.pathname)
     return ( 
         <>
-        <h1>{search}</h1>
+        <h1>Results for: {search}</h1>
+        <ResultsGene search={search}></ResultsGene>
         </>
      );
 }
