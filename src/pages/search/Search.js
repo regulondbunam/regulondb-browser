@@ -6,11 +6,16 @@ const Search = ({
     location
 }) => {
     const search = BreakPathName(location.pathname)
-    return ( 
+    return (
         <>
-        <h1>Results for: {search}</h1>
+        <div style={{backgroundColor: "#666666"}}>
+        <h1 style={{color: "#ffffff"}}>Results for: {search}</h1>
+        </div>
+        <div style={{ marginLeft: "10%", marginRight: "10%", width: "100%", height: "100%" }}>
         <ResultsGene search={search}></ResultsGene>
+        </div>
         </>
+        
      );
 }
 

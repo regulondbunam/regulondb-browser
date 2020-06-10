@@ -8,19 +8,20 @@ const ResultsGene = ({
     const { data, loading, error } = useQuery(SIM_SEARCH, {
         variables: { search }
     })
-    console.log("data: ",data)
-    console.log("loading",loading)
+    // console.log("data: ",data)
+    // console.log("loading",loading)
     console.log("erroo",error)
 
     if (loading) {
         return (
             <div style={{}}>
+                Loading ...
             </div>
         );
     } else {
         return (
             <div>
-                    <div style={{ background: "#ffffff", width: "100%", height: "100%" }}>
+                    <div>
                         <br />
                         <TabGeneResult data={data} />
                     </div>
