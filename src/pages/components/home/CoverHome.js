@@ -17,7 +17,7 @@ const CoverHome = () => {
                 Escherichia coli K-12 <br/>
                 Transcriptional Regulatory Network
                 </h2>
-                <SearchTool />
+                <SearchTool styleBox={styleBox}/>
                 <br/>
                 <br/>
                 <br/>
@@ -38,12 +38,17 @@ const CoverHome = () => {
      );
 }
 
+const styleBox = {
+    width: "90%"
+}
+
 const styleSubtitle = {
     fontFamily: "verdana",
     fontSize: "3vmin",
     textShadow: "1px 1px 2px #000000",
     fontStyle: "italic",
-    fontWeight: "bolder"
+    fontWeight: "bolder",
+    color: "#ffffff"
 }
  
 export default CoverHome;

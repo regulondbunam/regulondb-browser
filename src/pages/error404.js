@@ -19,8 +19,6 @@ const Error404 = ({location}) => {
             <h1 style={{color: "#FFFFFF"}}>{location.pathname}</h1>
             </>
             
-            
-            
         }
         </Cover>
         </>

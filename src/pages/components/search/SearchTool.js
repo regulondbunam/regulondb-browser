@@ -13,7 +13,13 @@ class SearchTool extends Component {
     }
 
     render() { 
+        const {
+            styleBox,
+            styleButton
+        } = this.props
 
+        let styleTexbox = Object.assign({},styleBox,styleTexboxIn)
+        let styleSearch = Object.assign({},styleButton,styleSearchIn)
         const {
             inSearch
         } = this.state
@@ -35,14 +41,13 @@ function noAction (){
 
 }
 
-const styleSearch = {
+const styleSearchIn = {
     display: "flex",
   alignItems: "center",
 }
 
-const styleTexbox = {
+const styleTexboxIn = {
     float: "left",
-    width: "40%",
 }
  
 export default SearchTool;
