@@ -16,7 +16,7 @@ const MenuBody = ({ menuData, id, close }) => {
                                     {
                                         Item.options.map((Item) => {
                                             return (
-                                                <div key={Item.link} style={{ paddingTop: "5%", paddingBottom: "5%" }}>
+                                                <div key={Item.id} style={{ paddingTop: "5%", paddingBottom: "5%" }}>
                                                     <Link style={styleLink} target={Item.target} href={Item.link}>{Item.title}</Link>
                                                 </div>
                                             )
@@ -25,7 +25,7 @@ const MenuBody = ({ menuData, id, close }) => {
                                 </div>
                             )
                         case "LINK":
-                            return (<div key={Item.link} style={styleSubmenu}>
+                            return (<div key={Item.id} style={styleSubmenu}>
                                 <Link style={styleLink} target={Item.target} href={Item.link}>{Item.title}</Link>
                             </div>)
                         case "CARD":
