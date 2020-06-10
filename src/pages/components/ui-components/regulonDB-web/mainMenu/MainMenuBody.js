@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from '../../basicInput/Link'
+import Link from '../../basicInput/HLink'
 
 const MenuBody = ({ menuData, id, close }) => {
     const submenuData = menuData.find(element => element.id === id)

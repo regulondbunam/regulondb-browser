@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from '../ui-components/infoDisplay/media/Image'
-import Link from '../ui-components/basicInput/Link'
+import Link from '../ui-components/basicInput/HLink'
 
 const log = 'https://dl.dropboxusercontent.com/s/enusst8em5oxcah/RegulonLogo.png?dl=0'
 
