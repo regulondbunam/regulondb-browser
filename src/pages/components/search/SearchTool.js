@@ -19,7 +19,6 @@ class SearchTool extends Component {
         } = this.props
 
         let styleTexbox = Object.assign({},styleBox,styleTexboxIn)
-        let styleSearch = Object.assign({},styleButton,styleSearchIn)
         const {
             inSearch
         } = this.state
@@ -28,7 +27,7 @@ class SearchTool extends Component {
             <div style={styleSearch}>
                     <Texbox style={styleTexbox} placeholder={placeHolder} onChange={this.UpdateSearch}/>
                     <Link to={"/search/"+inSearch}>
-                        <Button label="search" accent={true} onClick={noAction}/>
+                        <Button style={styleButton} label="search" accent={true} onClick={noAction}/>
                     </Link>
                     
                 </div>
@@ -41,7 +40,7 @@ function noAction (){
 
 }
 
-const styleSearchIn = {
+const styleSearch = {
     display: "flex",
   alignItems: "center",
 }

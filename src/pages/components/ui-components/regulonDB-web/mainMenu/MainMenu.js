@@ -44,7 +44,7 @@ class MainMenu extends Component {
             }
         }
         return (
-            <div onMouseLeave={this.CloseMenu}>
+            <div style={{width:"100%"}} onMouseLeave={this.CloseMenu}>
                 <div style={styleBar}>
                     {menuButton()}
                 </div>

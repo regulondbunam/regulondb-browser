@@ -6,9 +6,7 @@ const menuData = MenuData.mainmenu
 
 const Menu = () => {
     return ( 
-        <>
         <MainMenu menuData={menuData} />
-        </>
      );
 }
  

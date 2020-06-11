@@ -31,6 +31,10 @@ it contains the definition of global styles titles, paragraphs, font, color pale
 }
 
 /*all site*/
+* {
+  box-sizing: border-box;
+}
+
 body{
 	background-color: var(--color-rest);
     font-family: var(--fontFamily-principal);
