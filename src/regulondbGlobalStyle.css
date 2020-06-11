@@ -117,6 +117,31 @@ a:visited {
 	font-family: var(--fontFamily-principal);  
 	color: var(--color-accentB);
 }
+
+/*TABLES*/
+
+table{
+    font-family: arial, sans-serif;
+    color: rgb(39, 39, 39);
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+td, th {
+    border: 1px solid var(--color-grey2);
+    text-align: left;
+    padding: 10px;
+  }
+
+th {
+	background-color: var(--color-blue2);
+	color: var(--color-rest);
+}
+  
+tr:nth-child(even) {
+    background-color: var(--color-grey3);
+  }
+
 /*Features*/
 
 .sequence{

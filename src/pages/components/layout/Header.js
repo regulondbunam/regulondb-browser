@@ -10,8 +10,6 @@ const Header = ({
     location
 }) => {
     const isHome = location.pathname === "/home" || location.pathname === "/"
-    console.log(location.pathname)
-    console.log(isHome)
     return (
         <div style={StyleHeader}>
             <div style={StyleSide}>

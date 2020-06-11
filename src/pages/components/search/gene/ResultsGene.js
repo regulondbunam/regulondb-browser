@@ -1,7 +1,11 @@
 import React from 'react';
 import {useQuery} from '@apollo/client'
 import {SIM_SEARCH} from '../../apollo/Querys'
+import Image from '../../ui-components/infoDisplay/media/Image'
 
+//https://dl.dropboxusercontent.com/s/pp47gwivftzav85/tenor.gif?dl=0
+
+const furret = 'https://dl.dropboxusercontent.com/s/pp47gwivftzav85/tenor.gif?dl=0'
 const ResultsGene = ({
     search,
 }) => {
@@ -15,17 +19,14 @@ const ResultsGene = ({
     if (loading) {
         return (
             <div style={{}}>
-                Loading ...
+                <Image urlImage={furret} id={"asd5236a"} />
             </div>
         );
     } else {
         return (
-            <div>
                     <div>
-                        <br />
                         <TabGeneResult data={data} />
                     </div>
-            </div>
         );
     }
 
@@ -36,17 +37,6 @@ function TabGeneResult(data) {
     return (
         <div style={{ width: "80%", height: "100%" }}>
             <table >
-                <thead>
-                    <tr >
-                        <th style={{ background: "#32617d", fontSize: "2vw", color: "#ffffff" }} colSpan="3">
-                            Genes
-                        </th>
-                    </tr>
-                    <tr >
-                        <th >Gene Name</th>
-                        <th >Description</th>
-                    </tr>
-                </thead>
                 <tbody>
                     {genesResult.map((gen) => {
                         const gene = gen.geneInfo

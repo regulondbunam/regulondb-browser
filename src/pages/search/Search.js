@@ -15,18 +15,20 @@ const Search = ({
         <h1 style={{color: "#ffffff", margin: "0"}}>Results for: {search}</h1>
         </div>
         <div style={styleBody}>
-            <div style={{width: "auto"}}>
+            <div style={{width: "100%"}}>
             {
                 colecciones.map((item)=>{
                     return (
-                        <div style={{paddingRight: "2%", float: "left"}}>
-                        <Button style={{fontSize: "14px"}} key={item} label={item}/>
+                        <div key={item} style={{paddingRight: "2%", float: "left"}}>
+                        <Button style={{fontSize: "14px"}}  label={item}/>
                         </div>
                     )
                 })
             }
         </div>
+        <br/>
         <div>
+            <Button accent={true} label={"Genes"} />
             <ResultsGene search={search} />
         </div>
         </div>
@@ -44,7 +46,9 @@ function BreakPathName(pathname){
 
 const styleBody = {
     padding: "2% 10% 2% 10%",
-    display: "flex"
+    content: "",
+    display: "grid",
+    clear: "both",
 }
 
 const styleTitle = {
