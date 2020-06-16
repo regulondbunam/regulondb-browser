@@ -28,7 +28,7 @@
 
 ## Props 
 
-  | prop name     | Type     | Default                                              | Description                                 |
+| prop name     | Type     | Default                                              | Description                                 |
 | ------------- | -------- | ---------------------------------------------------- | ------------------------------------------- |
 | active        | boolean  | true                                                 | enables or disables the button              |
 | expand        | boolean  | false                                                | habilita el cuadro de seleccion de opciones |

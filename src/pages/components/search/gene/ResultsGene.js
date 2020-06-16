@@ -7,20 +7,6 @@ import Image from '../../ui-components/infoDisplay/media/Image'
 
 const furret = 'https://dl.dropboxusercontent.com/s/pp47gwivftzav85/tenor.gif?dl=0'
 
-const QUERY_ADV = gql`
-query countGenes($advancedSearch: String){
-    getGenesBy(limit:10 page: 0 advancedSearch:$advancedSearch)
-      {
-        geneInfo{
-          id
-          name
-          
-        }
-      }
-    
-    }
-`
-
 const ResultsGene = ({
     search,
 }) => {
