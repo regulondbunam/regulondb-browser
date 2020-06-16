@@ -36,7 +36,7 @@ it contains the definition of global styles titles, paragraphs, font, color pale
 }
 
 body{
-	padding-top: 3%;
+	padding-top: 1%;
 	background-color: var(--color-rest);
     font-family: var(--fontFamily-principal);
     margin: 0px;

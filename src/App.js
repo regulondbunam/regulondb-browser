@@ -1,8 +1,8 @@
 import React from 'react';
-import Search from './pages/search/Search'
+import Search from './pages/Search'
 import Home from './pages/Home';
 import Layout from './pages/components/layout/Layout'
-import Error404 from './pages/error404'
+import Error from './pages/Error'
 import UiComponents from './pages/UiComponents'
 import {
   BrowserRouter as Router,
@@ -14,7 +14,7 @@ import {
 function App() {
   return (
     <Router>
-      <Layout />
+      <Layout >
       <Switch>
         <Route exact path="/">
             <Home />
@@ -29,9 +29,10 @@ function App() {
           <UiComponents />
         </Route>
         <Route path="*">
-          <Error404 />
+          <Error />
         </Route>
       </Switch>
+      </Layout >
     </Router>
 
   );

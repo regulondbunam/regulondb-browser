@@ -3,7 +3,7 @@ import Cover from './components/ui-components/regulonDB-web/Cover';
 import {withRouter} from 'react-router-dom';
 
 
-const Error404 = ({location}) => {
+const Error = ({location}) => {
     //working
 
     return (
@@ -25,4 +25,4 @@ const Error404 = ({location}) => {
      );
 }
  
-export default withRouter(Error404);
+export default withRouter(Error);

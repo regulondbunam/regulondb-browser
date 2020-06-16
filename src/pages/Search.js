@@ -1,7 +1,7 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
-import ResultsGene from '../components/search/gene/ResultsGene'
-import Button from '../components/ui-components/basicInput/buttons/Button'
+import ResultsGene from './components/search/gene/ResultsGene'
+import Button from './components/ui-components/basicInput/buttons/Button'
 
 const colecciones = ["Genes", "Gensor Unit", "Operon", "Regulon", "Sigmulon", "sRNA", "Grow Conditions"]
 

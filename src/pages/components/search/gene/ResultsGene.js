@@ -1,8 +1,7 @@
 import React from 'react';
 import {useQuery, gql} from '@apollo/client'
-//import {SIM_SEARCH} from '../../apollo/Querys'
+import {SIM_SEARCH} from '../../apollo/Querys'
 import Image from '../../ui-components/infoDisplay/media/Image'
-import Table from './TEST_Tableo2xp'
 
 //https://dl.dropboxusercontent.com/s/pp47gwivftzav85/tenor.gif?dl=0
 
@@ -28,8 +27,8 @@ const ResultsGene = ({
 
     const advancedSearch = search+"[geneInfo.name]"
 
-    const { data, loading, error } = useQuery(QUERY_ADV, {
-        variables: { advancedSearch }
+    const { data, loading, error } = useQuery(SIM_SEARCH, {
+        variables: { search }
     })
     
     // console.log("data: ",data)
