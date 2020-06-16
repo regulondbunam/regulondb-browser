@@ -20,7 +20,12 @@ const Search = ({
                 colecciones.map((item)=>{
                     return (
                         <div key={item} style={{paddingRight: "2%", float: "left"}}>
-                        <Button style={{fontSize: "14px"}}  label={item}/>
+                            {
+                                item !== "Genes"
+                                ?<Button active={false} style={{fontSize: "14px"}}  label={item}/>
+                                :<Button style={{fontSize: "14px"}}  label={item}/>
+                            }
+                        
                         </div>
                     )
                 })
@@ -52,7 +57,7 @@ const styleBody = {
 }
 
 const styleTitle = {
-    backgroundColor: "#666666",
+    backgroundColor: "var(--color-grey3)",
     padding: "2% 10% 2% 10%"
 }
 

@@ -23,7 +23,7 @@ it contains the definition of global styles titles, paragraphs, font, color pale
 }
 /*font family */
 :root{
-	--fontFamily-principal: Verdana, Arial, Helvetica, sans-serif;
+	--fontFamily-principal: sans-serif;
 	--fontFamily-option: Arial, Helvetica, sans-serif;
 	--fontFamily-simpleText: "Times New Roman", Times, serif;
 	--fontFamily-sequence:  'Courier New',Courier,monospace;
@@ -36,6 +36,7 @@ it contains the definition of global styles titles, paragraphs, font, color pale
 }
 
 body{
+	padding-top: 3%;
 	background-color: var(--color-rest);
     font-family: var(--fontFamily-principal);
     margin: 0px;
@@ -139,7 +140,7 @@ th {
 }
   
 tr:nth-child(even) {
-    background-color: var(--color-grey3);
+    background-color: var(--color-grey4);
   }
 
 /*Features*/
