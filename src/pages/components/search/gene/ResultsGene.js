@@ -1,17 +1,16 @@
 import React from 'react';
 import {useQuery, gql} from '@apollo/client'
 import {SIM_SEARCH} from '../../apollo/Querys'
-import Image from '../../ui-components/infoDisplay/media/Image'
+//import Spinner from '../../loading/Spinner'
+
 
 //https://dl.dropboxusercontent.com/s/pp47gwivftzav85/tenor.gif?dl=0
 
-const furret = 'https://dl.dropboxusercontent.com/s/pp47gwivftzav85/tenor.gif?dl=0'
+//const furret = 'https://dl.dropboxusercontent.com/s/pp47gwivftzav85/tenor.gif?dl=0'
 
 const ResultsGene = ({
     search,
 }) => {
-
-    const advancedSearch = search+"[geneInfo.name]"
 
     const { data, loading, error } = useQuery(SIM_SEARCH, {
         variables: { search }
@@ -24,7 +23,7 @@ const ResultsGene = ({
     if (loading) {
         return (
             <div style={{}}>
-                <Image urlImage={furret} id={"asd5236a"} />
+                Loading...
             </div>
         );
     } else {
@@ -35,6 +34,7 @@ const ResultsGene = ({
                 <div>
                     <TabGeneResult data={data} />
                     {getColumns(data)}
+                    
                 </div>
     );
         }
@@ -52,7 +52,7 @@ function getColumns (data){
         )
     })
 
-    console.log(h)
+    //console.log(h)
 
 }
 
