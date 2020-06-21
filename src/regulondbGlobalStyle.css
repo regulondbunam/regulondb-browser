@@ -167,15 +167,17 @@ tr:nth-child(even) {
 
 .tab {
 	background-color: var(--color-rest);
-	color: var(--color-blue3);
-	-webkit-box-shadow: inset 0px 0px 0px 3px var(--color-blue2);
-	-moz-box-shadow: inset 0px 0px 0px 3px var(--color-blue2);
-	box-shadow: inset 0px 0px 0px 3px var(--color-blue2);
+	color: var(--color-grey1);
+	border-top:1px solid var(--color-grey2);
+border-right:1px solid var(--color-grey2);
+border-bottom:3px solid var(--color-blue2);
+border-left:1px solid var(--color-grey2);
 }
 
 .tabActive{
 	background-color: var(--color-rest);
 	color: var(--color-blue3);
+	font-weight: bold;
 	-webkit-box-shadow: inset 0px 3px 0px 3px var(--color-blue2);
 	-moz-box-shadow: inset 0px 3px 0px 3px var(--color-blue2);
 	box-shadow: inset 0px 3px 0px 3px var(--color-blue2);

@@ -16,7 +16,6 @@ const Gene = ({
         <div>
         <GeneTabs />
         </div>
-        
         </div>
         
         </>
