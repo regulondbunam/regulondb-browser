@@ -156,12 +156,34 @@ tr:nth-child(even) {
 	-webkit-box-shadow: inset -1px -10px 0px -6px var(--color-blue2);
 	-moz-box-shadow: inset -1px -10px 0px -6px var(--color-blue2);
 	box-shadow: inset -1px -10px 0px -6px var(--color-blue2);
+	display: flow-root;
+}
+
+.tabContent{
+	float: left;
+	padding-right: 1%;
+	font-size: 12px;
+}
+
+.tab {
+	background-color: var(--color-rest);
+	color: var(--color-blue3);
+	-webkit-box-shadow: inset 0px 0px 0px 3px var(--color-blue2);
+	-moz-box-shadow: inset 0px 0px 0px 3px var(--color-blue2);
+	box-shadow: inset 0px 0px 0px 3px var(--color-blue2);
 }
 
 .tabActive{
 	background-color: var(--color-rest);
-	color: black;
-	-webkit-box-shadow: inset 0px 5px 0px 3px var(--color-blue2);
-	-moz-box-shadow: inset 0px 5px 0px 3px var(--color-blue2);
-	box-shadow: inset 0px 5px 0px 3px var(--color-blue2);
+	color: var(--color-blue3);
+	-webkit-box-shadow: inset 0px 3px 0px 3px var(--color-blue2);
+	-moz-box-shadow: inset 0px 3px 0px 3px var(--color-blue2);
+	box-shadow: inset 0px 3px 0px 3px var(--color-blue2);
+}
+
+.tabActive:hover{
+	background-color: var(--color-grey5);
+	-webkit-box-shadow: inset 0px 3px 0px 3px var(--color-blue2);
+	-moz-box-shadow: inset 0px 3px 0px 3px var(--color-blue2);
+	box-shadow: inset 0px 3px 0px 3px var(--color-blue2);
 }

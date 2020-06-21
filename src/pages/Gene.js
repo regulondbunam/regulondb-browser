@@ -11,7 +11,6 @@ const Gene = ({
         <div >
         <div style={styleTitle}>
         <h1 style={{color: "var(--color-accentB)", margin: "0"}}>Gene </h1>
-        <br/>
         </div>
         <div>
         <GeneTabs />
