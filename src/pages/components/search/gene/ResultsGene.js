@@ -1,5 +1,5 @@
 import React from 'react';
-import {useQuery, gql} from '@apollo/client'
+import {useQuery} from '@apollo/client'
 import {SIM_SEARCH} from '../../apollo/Querys'
 //import Spinner from '../../loading/Spinner'
 
@@ -33,8 +33,6 @@ const ResultsGene = ({
             return (
                 <div>
                     <TabGeneResult data={data} />
-                    {getColumns(data)}
-                    
                 </div>
     );
         }
@@ -43,18 +41,6 @@ const ResultsGene = ({
 
 }
 
-function getColumns (data){
-    const genesResult = data.getGenesBy
-    const h = genesResult.map((gen) => {
-        const gene = gen.geneInfo
-        return (
-            gene.id
-        )
-    })
-
-    //console.log(h)
-
-}
 
 function TabGeneResult(data) {
     const genesResult = data.data.getGenesBy
