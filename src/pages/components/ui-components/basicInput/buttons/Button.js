@@ -131,7 +131,7 @@ import Styles from './Buttons.module.css'
 export default class Button extends Component {
 
     handleOnClickLink = (event) => {
-        if(this.props.active){
+        if (this.props.active) {
             this.props.onClick(event);
         }
     };
@@ -140,6 +140,7 @@ export default class Button extends Component {
         const {
             accent,
             active,
+            className,
             /*icon,*/
             id,
             label,
@@ -147,26 +148,27 @@ export default class Button extends Component {
             /*urlimg*/
         } = this.props;
 
-            return (
-                <button id={id} className={selectStyle(accent, active)} onClick={this.handleOnClickLink} style={style}>
-                    {label}
-                    {this.props.children}
-                </button>
-            )  
+        return (
+            <button id={id} className={selectStyle(accent, active, className)} onClick={this.handleOnClickLink} style={style}>
+                {label}
+                {this.props.children}
+            </button>
+        )
 
     }
 }
 
-function selectStyle (accent, active) {
-    let styleClass = Styles.button
+function selectStyle(accent, active, className) {
+    let styleClass = Styles.button + " " + className
     accent
-    ? styleClass += " "+Styles.accent
-    : styleClass += " "+Styles.default
+        ? styleClass += " " + Styles.accent
+        : styleClass += " " + Styles.default
     active
-    ? styleClass += " "
-    : styleClass += " "+Styles.disabled
+        ? styleClass += " "
+        : styleClass += " " + Styles.disabled
 
     return styleClass
+
 }
 
 function noAction() {
@@ -177,6 +179,7 @@ function noAction() {
 Button.propTypes = {
     accent: PropTypes.bool,
     active: PropTypes.bool,
+    className: PropTypes.string,
     href: PropTypes.string,
     icon: PropTypes.string,
     id: PropTypes.string,
@@ -186,8 +189,9 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-    accent:  false,
+    accent: false,
     active: true,
+    className: "",
     icon: "",
     label: "",
     urlimg: "",

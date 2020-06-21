@@ -17,6 +17,7 @@ it contains the definition of global styles titles, paragraphs, font, color pale
 	--color-grey2: #666666;
 	--color-grey3: #999999;
 	--color-grey4: #D5D5D7;
+	--color-grey5: #F4F5F5;
 	--color-rest: #FFFFFF;
 	--color-accentA: #C93A1D;
 	--color-accentB: #CC9900;
@@ -149,3 +150,18 @@ tr:nth-child(even) {
 	font-family: var(--fontFamily-sequence);
 }
 
+.tabHeader{
+	background-color: var(--color-grey5);
+	padding-left: 10%;
+	-webkit-box-shadow: inset -1px -10px 0px -6px var(--color-blue2);
+	-moz-box-shadow: inset -1px -10px 0px -6px var(--color-blue2);
+	box-shadow: inset -1px -10px 0px -6px var(--color-blue2);
+}
+
+.tabActive{
+	background-color: var(--color-rest);
+	color: black;
+	-webkit-box-shadow: inset 0px 5px 0px 3px var(--color-blue2);
+	-moz-box-shadow: inset 0px 5px 0px 3px var(--color-blue2);
+	box-shadow: inset 0px 5px 0px 3px var(--color-blue2);
+}
