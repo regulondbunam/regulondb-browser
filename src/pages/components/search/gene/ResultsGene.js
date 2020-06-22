@@ -1,6 +1,7 @@
 import React from 'react';
-import {useQuery} from '@apollo/client'
-import {SIM_SEARCH} from '../../apollo/Querys'
+import { useQuery } from '@apollo/client'
+import { SIM_SEARCH } from '../../apollo/Querys'
+import { useHistory } from 'react-router-dom';
 //import Spinner from '../../loading/Spinner'
 
 
@@ -15,10 +16,10 @@ const ResultsGene = ({
     const { data, loading, error } = useQuery(SIM_SEARCH, {
         variables: { search }
     })
-    
+
     // console.log("data: ",data)
     // console.log("loading",loading)
-    console.log("erroo",error)
+    //console.log("erroo", error)
 
     if (loading) {
         return (
@@ -27,22 +28,23 @@ const ResultsGene = ({
             </div>
         );
     } else {
-        if(data === undefined){
-            return(<></>)
-        }else{
+        if (data === undefined) {
+            return (<></>)
+        } else {
             return (
                 <div>
                     <TabGeneResult data={data} />
                 </div>
-    );
+            );
         }
-        
+
     }
 
 }
 
 
 function TabGeneResult(data) {
+    let history = useHistory();
     const genesResult = data.data.getGenesBy
     return (
         <div style={{ width: "80%", height: "100%" }}>
@@ -51,20 +53,20 @@ function TabGeneResult(data) {
                     {genesResult.map((gen) => {
                         const gene = gen.geneInfo
                         return (
-                            <tr  key={gene.id}>
+                            
+                                <tr key={gene.id} className="trClickable" onClick={() => {history.push("/gene/"+gene.id)}}>
                                     <td >{gene.name}</td>
                                     <td >Gene{gene.note}</td>
-                            </tr>
+                                </tr>
+
                         )
 
                     })
                     }
                 </tbody>
             </table>
-
-
         </div>
     )
 }
- 
+
 export default ResultsGene;

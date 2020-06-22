@@ -12,6 +12,11 @@ class GeneTabs extends Component {
     }
 
     render() { 
+
+        const{
+            idGene
+        }=this.props
+
         return ( 
             <>
                 <div className="tabHeader">
@@ -30,9 +35,9 @@ class GeneTabs extends Component {
                     }
                     <br/>
                 </div>
-                <div style={{paddingLeft: "10%"}}>
+                <div style={{paddingLeft: "10%", paddingTop: "5%"}}>
                     {
-                        TabSelector(this.state.ActiveOption)
+                        TabSelector(this.state.ActiveOption, idGene)
                     }
                 </div>
             </>
@@ -40,10 +45,10 @@ class GeneTabs extends Component {
     }
 }
 
-function TabSelector(item){
+function TabSelector(item, idGene){
     switch (item) {
         case "DESCRIPTION":
-            return <GnDescription />
+            return <GnDescription geneID={idGene} />
         case "PRODUCT":
             return <h3> a Product Info</h3>
         case "OPERON":

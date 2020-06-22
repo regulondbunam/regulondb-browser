@@ -23,21 +23,24 @@ const Gene = ({
     const { data, loading, error } = useQuery(GetGeneName, {
         variables: { advancedSearch }
     })
-    console.log("data: ",data)
-    console.log("loading",loading)
-    console.log("error",error)
+    // console.log("data: ",data)
+    // console.log("loading",loading)
+    // console.log("error",error)
     if (loading) {
+        const state = "please wait we are querying the id"
         return (
-            <div style={{}}>
-                Loading...
-            </div>
+            <>
+                {Title(true, "", idgene, state)}
+            </>
         );
     } else {
         if(data === undefined ){
+            const state = "Sorry we have a problem with the server, please try again later, or contact us at xxx_xxx@ccg.unam.mx with the error ####"
+            console.log(error)
             return(
                 //error en sistema
                 <>
-                     {Title(false)}
+                     {Title(true, "", "", state)}
                 </>
             )
         }else{
@@ -45,19 +48,19 @@ const Gene = ({
             try {
                 geneName = data.getGenesBy[0].geneInfo.name
             } catch (error) {
+                const state = "Sorry we couldn't find the identifier"
                 return(
-                    //error en sistema
                     <>
-                         {Title(false,"",idgene)}
+                         {Title(true,"",idgene, state)}
                     </>
                 )
             }
             return ( 
                 <>
                 <div >
-                {Title(true, geneName, idgene)}
+                {Title(false, geneName, idgene)}
                 <div>
-                <GeneTabs />
+                <GeneTabs idGene={idgene}/>
                 </div>
                 </div>
                 </>
@@ -67,8 +70,8 @@ const Gene = ({
     }
 }
 
-function Title(state, geneName, geneID){
-    if(state){
+function Title(error, geneName, geneID, state){
+    if(!error){
         return(
             <div style={styleTitle}>
                     <h1 style={{color: "var(--color-accentB)", margin: "0", float: "left"}}>Gene &nbsp;</h1>
@@ -80,7 +83,7 @@ function Title(state, geneName, geneID){
         return(
             <div style={styleTitle}>
                     <h1 style={{color: "var(--color-accentA)", margin: "5px", float: "left"}}>
-                    Sorry we couldn't find the identifier &nbsp;</h1>
+                    {state} &nbsp;</h1>
                     <h1 style={{margin: "5px"}}>{geneID}</h1>
             </div>
         )
