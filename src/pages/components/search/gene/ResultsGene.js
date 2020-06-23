@@ -1,7 +1,7 @@
 import React from 'react';
-import { useQuery } from '@apollo/client'
-import { SIM_SEARCH } from '../../apollo/Querys'
+import MarckStr from '../../utiles/MarkStr' 
 import { useHistory } from 'react-router-dom';
+import Gene, {SearchGene} from '../../apollo/geneCollection'
 //import Spinner from '../../loading/Spinner'
 
 
@@ -13,11 +13,11 @@ const ResultsGene = ({
     search,
 }) => {
 
-    const { data, loading, error } = useQuery(SIM_SEARCH, {
-        variables: { search }
-    })
+    let searchGene = new SearchGene(search)
 
-    // console.log("data: ",data)
+    const { data, loading, error} = searchGene
+
+    //console.log("data: ",data)
     // console.log("loading",loading)
     //console.log("erroo", error)
 
@@ -33,7 +33,7 @@ const ResultsGene = ({
         } else {
             return (
                 <div>
-                    <TabGeneResult data={data} />
+                    <TabGeneResult data={data} search={search} />
                 </div>
             );
         }
@@ -43,20 +43,38 @@ const ResultsGene = ({
 }
 
 
-function TabGeneResult(data) {
+function TabGeneResult({data,search}) {
     let history = useHistory();
-    const genesResult = data.data.getGenesBy
+    //console.log(data)
+    const genesResult = data.getGenesBy.data
     return (
         <div style={{ width: "80%", height: "100%" }}>
             <table >
+                <thead>
+                    <tr>
+                        <td>Name</td>
+                        <td>Products</td>
+                        <td>Notes</td>
+                    </tr>
+                </thead>
                 <tbody>
                     {genesResult.map((gen) => {
                         const gene = gen.geneInfo
+                        const prod = gen.products
                         return (
                             
-                                <tr key={gene.id} className="trClickable" onClick={() => {history.push("/gene/"+gene.id)}}>
-                                    <td >{gene.name}</td>
-                                    <td >Gene{gene.note}</td>
+                                <tr  key={gene.id} className="trClickable" onClick={() => {history.push("/gene/"+gene.id)}}>
+                                    <td >{gene.name} Gene</td>
+                                    {
+                                        prod.map((product) => {
+                                            return(
+                                            <td key={product.regulatorId} dangerouslySetInnerHTML={{ __html: MarckStr(search, product.name) }}></td>
+                                            )
+                                        }
+
+                                        )
+                                    }
+                                    <td dangerouslySetInnerHTML={{ __html: MarckStr(search,gene.note) }}></td>
                                 </tr>
 
                         )

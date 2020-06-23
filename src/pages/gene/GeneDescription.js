@@ -6,7 +6,8 @@ const GetGeneInfo = gql`
 query countGenes($advancedSearch: String!){
   getGenesBy(limit:10 page: 0 advancedSearch:$advancedSearch)
     {
-      geneInfo{
+      data{
+        geneInfo{
         id
         name
         leftEndPosition
@@ -18,6 +19,7 @@ query countGenes($advancedSearch: String!){
         note
         type
         synonyms
+      }
       }
     }
   
@@ -53,7 +55,7 @@ const GeneDescription = ({
         }else{
             let geneName = ""
             try {
-                geneName = data.getGenesBy[0].geneInfo.name
+                geneName = data.getGenesBy.data[0].geneInfo.name
             } catch (error) {
                 const state = "Sorry we couldn't find the identifier"
                 return(
@@ -63,7 +65,7 @@ const GeneDescription = ({
             }
             return ( 
                 <>
-                <TabData data={data.getGenesBy[0].geneInfo} />
+                <TabData data={data.getGenesBy.data[0].geneInfo} />
                 </>
              );
         }
