@@ -2,7 +2,7 @@ import React from 'react';
 
 const sequence = ({
     sequence,
-    format
+    format,
 }) => {
     switch (format) {
         case 'fasta':

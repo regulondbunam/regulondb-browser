@@ -26,6 +26,8 @@ const TableGeneInfo = ({
                                     return GenomePosition(size,leftEndPosition,rightEndPosition)
                                 case 'rightEndPosition':
                                     return null
+                                case 'sequence':
+                                    return sequenceGene(data[key], key)
                                 default:
                                     return (
                                         <tr key={key}>
@@ -61,17 +63,14 @@ function sizeGene(leftEndPosition,rightEndPosition){
     return 0
 }
 
-const sequenceGene = ({
-    sequence, key
-}) => {
+function sequenceGene(sequence, key){
     return (
-        <tr key={size}>
-            <td style={{fontWeight: "bold"}}>Genome position(nucleotides):</td>
-            <td>{`size: ${size}bp position: ${leftEndPosition} --> ${rightEndPosition}`}</td>
+        <tr key={key}>
+            <td style={{fontWeight: "bold"}}>{key}</td>
+            <td className="sequence" ></td>
         </tr>
     )
 }
- 
-export default sequenceGene;
- 
+
+//dangerouslySetInnerHTML={{ __html: sequenceF}}
 export default TableGeneInfo;
