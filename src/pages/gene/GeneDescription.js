@@ -38,14 +38,14 @@ const GeneDescription = ({
     // console.log("error",error)
 
     if (loading) {
-        const state = "Loading"
+        //const state = "Loading"
         return (
             <>
             </>
         );
     } else {
         if(data === undefined ){
-            const state = "Sorry we have a problem with the server, please try again later, or contact us at xxx_xxx@ccg.unam.mx with the error ####"
+            //const state = "Sorry we have a problem with the server, please try again later, or contact us at xxx_xxx@ccg.unam.mx with the error ####"
             console.log(error)
             //error en sistema
             return(
@@ -53,21 +53,19 @@ const GeneDescription = ({
                 </>
             )
         }else{
-            let geneName = ""
             try {
-                geneName = data.getGenesBy.data[0].geneInfo.name
+                return ( 
+                    <>
+                    <TableGeneInfo data={data.getGenesBy.data[0].geneInfo} />
+                    </>
+                 );
             } catch (error) {
-                const state = "Sorry we couldn't find the identifier"
+                //const state = "Sorry we couldn't find the identifier"
                 return(
                     <>
                     </>
                 )
             }
-            return ( 
-                <>
-                <TableGeneInfo data={data.getGenesBy.data[0].geneInfo} />
-                </>
-             );
         }
         
     }

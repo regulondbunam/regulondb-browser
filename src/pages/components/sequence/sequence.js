@@ -1,4 +1,3 @@
-import React from 'react';
 import FastaFormat from './FastaFormat'
 
 function sequence(
