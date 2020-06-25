@@ -1,20 +1,21 @@
 import React from 'react';
+import FastaFormat from './FastaFormat'
 
-const sequence = ({
+function sequence(
+    gene,
     sequence,
-    format,
-}) => {
+    format){
     switch (format) {
         case 'fasta':
-            return ( 
-                <>
-                </>
-             );
+            let seq = new FastaFormat(sequence)
+            return (
+                    `
+                    >${gene} gene sequence Size = ${seq.size} A: ${seq.nucleotideA} T: ${seq.nucleotideT} C: ${seq.nucleotideC} G: ${seq.nucleotideG} <br>
+                    ${seq.formatSequence}
+                    `
+            )
         default:
-            return ( 
-                <>
-                </>
-             );
+            return ""
     }
 }
  

@@ -190,7 +190,6 @@ Link.propTypes = {
 
 Link.defaultProps = {
     disabled: false,
-    href: "",
     style: {},
     regulonStyle: "",
     target: "_top",

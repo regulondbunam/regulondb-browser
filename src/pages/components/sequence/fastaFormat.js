@@ -25,7 +25,7 @@ export default class FastaFormat {
                     this.nucleotideC += 1
                     break;
                 case 'G':
-                    this.nucleotideT += 1
+                    this.nucleotideG += 1
                     break;
                 default:
                     break;
@@ -37,6 +37,6 @@ export default class FastaFormat {
                 return x;
             }
         }).join('')
-
+        this.size = this.nucleotideA+this.nucleotideC+this.nucleotideG+this.nucleotideT
     }
 }

@@ -156,6 +156,7 @@ tr:nth-child(even) {
 
 .sequence{
 	font-family: var(--fontFamily-sequence);
+	font-size: 16px;
 }
 
 .tabHeader{

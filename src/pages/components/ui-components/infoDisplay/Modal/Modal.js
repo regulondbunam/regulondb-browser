@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { HyperLink } from '../../basicInput/HyperLink'
-
 import Styles from './Modal.module.css'
 
 export default class Modal extends Component {
@@ -19,7 +17,7 @@ export default class Modal extends Component {
 
     collapsedModal = (title) => {
         return (
-            <HyperLink onClick={this._onCollapsed}>{title}</HyperLink>
+            <a href onClick={this._onCollapsed}>{title}</a>
         )
     }
 
