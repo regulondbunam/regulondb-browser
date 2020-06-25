@@ -45,7 +45,7 @@ const GeneDescription = ({
         );
     } else {
         if(data === undefined ){
-            //const state = "Sorry we have a problem with the server, please try again later, or contact us at xxx_xxx@ccg.unam.mx with the error ####"
+            //Sorry for the inconvenience, we have a problem with our service, we are already working to solve it, try again later
             console.log(error)
             //error en sistema
             return(

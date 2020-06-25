@@ -28,7 +28,7 @@ const TableGeneInfo = ({
                                     return (
                                         <tr key={key}>
                                             <td style={{fontWeight: "bold"}}>{key}</td>
-                                            <td>{data[key]}</td>
+                                            <td dangerouslySetInnerHTML={{ __html: data[key]}}></td>
                                         </tr>
                                     )
                             }

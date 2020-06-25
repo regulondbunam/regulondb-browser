@@ -36,8 +36,8 @@ const Gene = ({
             </>
         );
     } else {
-        if(data === undefined ){
-            const state = "Sorry we have a problem with the server, please try again later, or contact us at xxx_xxx@ccg.unam.mx with the error ####"
+        if(error !== undefined ){
+            const state = "Sorry for the inconvenience, we have a problem with our service, we are already working to solve it, try again later"
             console.log(error)
             return(
                 //error en sistema

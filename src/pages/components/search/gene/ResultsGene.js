@@ -1,7 +1,7 @@
 import React from 'react';
 import MarckStr from '../../utiles/MarkStr' 
 import { useHistory } from 'react-router-dom';
-import Gene, {SearchGene} from '../../apollo/geneCollection'
+import {SearchGene} from '../../apollo/geneCollection'
 //import Spinner from '../../loading/Spinner'
 
 
@@ -29,7 +29,7 @@ const ResultsGene = ({
         );
     } else {
         if (data === undefined) {
-            return (<></>)
+        return (<p>{`${error}`}</p>)
         } else {
             return (
                 <div>

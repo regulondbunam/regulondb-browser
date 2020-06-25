@@ -17,9 +17,20 @@ export default class Modal extends Component {
 
     collapsedModal = (title) => {
         return (
-            <a href onClick={this._onCollapsed}>{title}</a>
+            <button 
+            onClick={this._onCollapsed}
+            style={{
+                backgroundColor: "white", 
+                color: "black", 
+                border: "2px solid #CC9900"
+            }}
+            >
+                {title}
+            </button>
         )
     }
+
+    
 
     noAction = () => {
 
