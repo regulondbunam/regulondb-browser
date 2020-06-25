@@ -52,29 +52,25 @@ function TabGeneResult({data,search}) {
             <table >
                 <thead>
                     <tr>
-                        <td>Name</td>
-                        <td>Products</td>
-                        <td>Notes</td>
+                        <td> </td>
                     </tr>
                 </thead>
                 <tbody>
                     {genesResult.map((gen) => {
                         const gene = gen.geneInfo
                         const prod = gen.products
+                        let products = ""
+                        products += prod.map((product) => {
+                            return(
+                                ", "+product.name
+                            )
+                        })
+                        let text = gene.name+' Gene, synonyms: '+gene.synonyms+' products gene: '+products
+                        
                         return (
-                            
+                                
                                 <tr  key={gene.id} className="trClickable" onClick={() => {history.push("/gene/"+gene.id)}}>
-                                    <td >{gene.name} Gene</td>
-                                    {
-                                        prod.map((product) => {
-                                            return(
-                                            <td key={product.regulatorId} dangerouslySetInnerHTML={{ __html: MarckStr(search, product.name) }}></td>
-                                            )
-                                        }
-
-                                        )
-                                    }
-                                    <td dangerouslySetInnerHTML={{ __html: MarckStr(search,gene.note) }}></td>
+                                    <td dangerouslySetInnerHTML={{ __html: MarckStr(search, text) }}></td>
                                 </tr>
 
                         )

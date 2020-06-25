@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Button from '../components/ui-components/basicInput/Buttons'
 import GnDescription from './GeneDescription'
 
-const sections = ['DESCRIPTION','PRODUCT','OPERON','TRANSCRIPTION REGULATION', 'REFERENCES']
+const sections = ['DESCRIPTION','PRODUCT','GROWTH CONDITIONS']
 
 class GeneTabs extends Component {
     state = { ActiveOption: "DESCRIPTION" }
