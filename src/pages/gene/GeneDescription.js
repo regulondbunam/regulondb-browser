@@ -1,6 +1,6 @@
 import React from 'react';
 import {useQuery,gql} from '@apollo/client'
-import TabData from '../components/search/TabData'
+import TableGeneInfo from './descriptionTab/TableGeneInfo'
 
 const GetGeneInfo = gql`
 query countGenes($advancedSearch: String!){
@@ -10,6 +10,7 @@ query countGenes($advancedSearch: String!){
         geneInfo{
         id
         name
+        synonyms
         leftEndPosition
         rightEndPosition
         strand
@@ -18,7 +19,6 @@ query countGenes($advancedSearch: String!){
         centisomePosition
         note
         type
-        synonyms
       }
       }
     }
@@ -65,7 +65,7 @@ const GeneDescription = ({
             }
             return ( 
                 <>
-                <TabData data={data.getGenesBy.data[0].geneInfo} />
+                <TableGeneInfo data={data.getGenesBy.data[0].geneInfo} />
                 </>
              );
         }

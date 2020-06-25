@@ -134,6 +134,10 @@ td, th {
     padding: 10px;
   }
 
+td {
+	font-size: 14px;
+}
+
 th {
 	background-color: var(--color-blue2);
 	color: var(--color-rest);
