@@ -33,9 +33,8 @@ class GeneTabs extends Component {
                             )
                         })
                     }
-                    <br/>
                 </div>
-                <div style={{paddingLeft: "10%", paddingTop: "5%"}}>
+                <div style={{paddingLeft: "10%", paddingTop: "2%"}}>
                     {
                         TabSelector(this.state.ActiveOption, idGene)
                     }
@@ -51,12 +50,8 @@ function TabSelector(item, idGene){
             return <GnDescription geneID={idGene} />
         case "PRODUCT":
             return <h3> a Product Info</h3>
-        case "OPERON":
-            return <h3>a Operon Info</h3>
-        case 'TRANSCRIPTION REGULATION':
-            return <h3>a Transcription Info </h3>
-        case 'REFERENCES':
-            return <h3>a Gene Referneces</h3>
+        case "GROWTH CONDITIONS":
+            return <h3>a Growth Conditions Info</h3>
         default:
             return <h3>Select a tab option</h3>
     }

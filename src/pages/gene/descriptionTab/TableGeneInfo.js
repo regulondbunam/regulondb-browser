@@ -1,45 +1,68 @@
 import React from 'react';
+import Gene from '../../components/apollo/geneCollection'
 import Modal from '../../components/ui-components/infoDisplay/Modal/Modal'
 import Sequence from '../../components/sequence/Sequence'
 
 const TableGeneInfo = ({
-    data
+    idGene
 }) => {
-    const leftEndPosition = data["leftEndPosition"]
-    const rightEndPosition = data["rightEndPosition"]
-    const size = sizeGene(leftEndPosition,rightEndPosition)
+    let gene = new Gene(idGene)
+
+    const {loading, data, error} = gene
     //console.log(size)
     //console.log("data: ",data)
-    return (
-        <div style={{ width: "80%", height: "100%" }}>
-            <table >
-                <tbody>
-                    {Object.keys(data).map((key, index) => {
-                        const test = key.match(/^_/)
-                        if(test === null){
-                            switch (key) {
-                                case 'leftEndPosition':
-                                    return GenomePosition(size,leftEndPosition,rightEndPosition)
-                                case 'rightEndPosition':
+    if (loading) {
+        //const state = "Loading"
+        return (
+            <>
+            loading...
+            </>
+        );
+    } 
+    else{
+        if(error !== undefined){
+            return <>error</>
+        }else{
+            try {
+                const leftEndPosition = data["leftEndPosition"]
+                const rightEndPosition = data["rightEndPosition"]
+                const size = sizeGene(leftEndPosition,rightEndPosition)
+                return (
+                    <div style={{ width: "80%" }}>
+                        <table >
+                            <tbody>
+                                {Object.keys(data).map((key, index) => {
+                                    const test = key.match(/^_/)
+                                    if(test === null){
+                                        switch (key) {
+                                            case 'leftEndPosition':
+                                                return GenomePosition(size,leftEndPosition,rightEndPosition)
+                                            case 'rightEndPosition':
+                                                return null
+                                            case 'sequence':
+                                                return sequenceGene(data['name'],data[key], key)
+                                            default:
+                                                return (
+                                                    <tr key={key}>
+                                                        <td style={{fontWeight: "bold"}}>{key}</td>
+                                                        <td dangerouslySetInnerHTML={{ __html:   data[key]}}></td>
+                                                    </tr>
+                                                )
+                                        }
+                                    }
                                     return null
-                                case 'sequence':
-                                    return sequenceGene(data['name'],data[key], key)
-                                default:
-                                    return (
-                                        <tr key={key}>
-                                            <td style={{fontWeight: "bold"}}>{key}</td>
-                                            <td dangerouslySetInnerHTML={{ __html: data[key]}}></td>
-                                        </tr>
-                                    )
-                            }
-                        }
-                        return null
-                    })
-                    }
-                </tbody>
-            </table>
-        </div>
-    )
+                                })
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                )
+            } catch (error) {
+                console.log(error)
+                return <>catch err</>
+            }
+        }
+    }
 }
 
 

@@ -3,11 +3,42 @@ import { useQuery, gql } from '@apollo/client'
 export default class Gene {
   constructor(id) {
     this.id = id
+    this.getGeneInfo(`${id}[geneInfo.id]`)
   }
-  consoleInfo() {
-    console.log("C: ", this.id)
+  getGeneInfo(advancedSearch) {
+    const { data, loading, error } = useQuery(GENE_INFO, {
+      variables: { advancedSearch }
+    })
+    //console.log(data)
+    if(!loading){
+      this.data = data.getGenesBy.data[0].geneInfo
+    }else{
+      this.data = data
+    }
+    this.loading = loading
+    this.error = error
   }
 }
+export class RegulationInfo {
+  constructor(idGene){
+    this.id = idGene
+    this.regulationInfo(`${idGene}[geneInfo.id]`)
+  }
+  regulationInfo(advancedSearch) {
+    const { data, loading, error } = useQuery(GENE_REGULATION, {
+      variables: { advancedSearch }
+    })
+    //console.log(error)
+    if(!loading){
+      this.data = data.getGenesBy.data[0].regulation.operon
+    }else{
+      this.data = data
+    }
+    this.loading = loading
+    this.error = error
+  }
+}
+
 
 export class SearchGene {
 
@@ -48,5 +79,63 @@ query countGenes($search: String!){
         }
       }
     }
+  }
+`
+
+//advancedSearch
+
+const GENE_INFO = gql`
+query countGenes($advancedSearch: String!){
+  getGenesBy(limit:1 page: 0 advancedSearch:$advancedSearch)
+    {
+      data{
+        geneInfo{
+          id
+          name
+          synonyms
+          leftEndPosition
+          rightEndPosition
+          strand
+          sequence
+          gcContent
+          centisomePosition
+          note
+          type
+        }
+      }
+    }
+  
+  }
+`
+
+const GENE_REGULATION = gql`
+query countGenes($advancedSearch: String!){
+  getGenesBy(limit:1 page: 0 advancedSearch:$advancedSearch)
+    {
+      data{
+        regulation{
+        operon{
+          id
+          name
+          arrangement{
+            regulator{
+              id
+              name
+              type
+            }
+            promoter{
+              id
+              name
+            }
+            transcriptionUnit{
+              id
+              name
+            }
+          }
+        }
+      }
+      }
+    }
+  
   }
 `
