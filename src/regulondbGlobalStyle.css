@@ -144,7 +144,7 @@ th {
 }
   
 tr:nth-child(even) {
-    background-color: var(--color-grey5);
+    background-color: var(--color-grey4);
   }
 
 .trClickable:hover{
