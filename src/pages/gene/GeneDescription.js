@@ -2,6 +2,7 @@ import React from 'react';
 import TableGeneInfo from './descriptionTab/TableGeneInfo'
 import TableOperon from './descriptionTab/TableOperon'
 import TableRegulators from './descriptionTab/TableRegulators'
+import TableContext from './descriptionTab/TableContext'
 
 
 
@@ -15,6 +16,7 @@ const GeneDescription = ({
             <h1>Gene Regulation</h1>
             <TableOperon idGene={geneID} />
             <TableRegulators idGene={geneID} />
+            <TableContext idGene={geneID} />
         </>
     );
 

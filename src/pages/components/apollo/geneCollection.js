@@ -10,9 +10,9 @@ export default class Gene {
       variables: { advancedSearch }
     })
     //console.log(data)
-    if(!loading){
+    if (!loading) {
       this.data = data.getGenesBy.data[0].geneInfo
-    }else{
+    } else {
       this.data = data
     }
     this.loading = loading
@@ -21,7 +21,7 @@ export default class Gene {
 }
 
 export class OperonInfo {
-  constructor(idGene){
+  constructor(idGene) {
     this.id = idGene
     this.OperonInfo(`${idGene}[geneInfo.id]`)
   }
@@ -30,9 +30,9 @@ export class OperonInfo {
       variables: { advancedSearch }
     })
     //console.log(error)
-    if(!loading){
+    if (!loading) {
       this.data = data.getGenesBy.data[0].regulation.operon
-    }else{
+    } else {
       this.data = data
     }
     this.loading = loading
@@ -41,7 +41,7 @@ export class OperonInfo {
 }
 
 export class RegulatorInfo {
-  constructor(idGene){
+  constructor(idGene) {
     this.id = idGene
     this.regulatorInfo(`${idGene}[geneInfo.id]`)
   }
@@ -50,9 +50,9 @@ export class RegulatorInfo {
       variables: { advancedSearch }
     })
     //console.log(error)
-    if(!loading){
+    if (!loading) {
       this.data = data.getGenesBy.data[0].regulation.regulators
-    }else{
+    } else {
       this.data = data
     }
     this.loading = loading
@@ -60,6 +60,24 @@ export class RegulatorInfo {
   }
 }
 
+export class ContextInfo {
+  constructor(idGene) {
+    this.id = idGene
+    this.contextInfo(`${idGene}[geneInfo.id]`)
+  }
+  contextInfo(advancedSearch) {
+    const { data, loading, error } = useQuery(GENE_CONTEXT, {
+      variables: { advancedSearch }
+    })
+    if (!loading) {
+      this.data = data.getGenesBy.data[0].regulation.context
+    } else {
+      this.data = data
+    }
+    this.loading = loading
+    this.error = error
+  }
+}
 
 export class SearchGene {
 
@@ -106,7 +124,7 @@ query countGenes($search: String!){
 //advancedSearch
 
 const GENE_INFO = gql`
-query countGenes($advancedSearch: String!){
+query getGeneInfo($advancedSearch: String!){
   getGenesBy(limit:1 page: 0 advancedSearch:$advancedSearch)
     {
       data{
@@ -130,7 +148,7 @@ query countGenes($advancedSearch: String!){
 `
 
 const GENE_OPERON = gql`
-query countGenes($advancedSearch: String!){
+query getGeneOperon($advancedSearch: String!){
   getGenesBy(limit:1 page: 0 advancedSearch:$advancedSearch)
     {
       data{
@@ -162,7 +180,7 @@ query countGenes($advancedSearch: String!){
 `
 
 const GENE_REGULATOR = gql`
-query countGenes($advancedSearch: String!){
+query getGeneRegulator($advancedSearch: String!){
   getGenesBy(limit:1 page: 0 advancedSearch:$advancedSearch)
     {
       data{
@@ -177,4 +195,31 @@ query countGenes($advancedSearch: String!){
     }
   
   }
+`
+
+const GENE_CONTEXT = gql`
+query getGeneContext($advancedSearch: String!) {
+  getGenesBy(limit: 1, page: 0, advancedSearch: $advancedSearch) {
+    data {
+      regulation {
+        context {
+          type
+          name
+          leftEndPosition
+          rightEndPosition
+          strand
+          note
+          evidenceReferences {
+            evidenceName
+            evidenceCode
+            evidenceType
+            referenceId
+            referenceURL
+            referenceCitation
+          }
+        }
+      }
+    }
+  }
+}
 `

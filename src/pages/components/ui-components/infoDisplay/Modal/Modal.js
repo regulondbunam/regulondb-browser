@@ -8,17 +8,20 @@ export default class Modal extends Component {
     state = {
         collapsed: this.props.collapsed
     }
-
-    _onCollapsed = (event) => {
-        if (event.target.className !== Styles.modalComponentContent) { 
+    _onCollapsed = (open, event) => {
+        if(open){
             this.setState({ collapsed: !this.state.collapsed }) 
+        }else{
+            if (event.target.className === Styles.modalComponent) { 
+                this.setState({ collapsed: !this.state.collapsed }) 
+            }
         }
+        
     }
-
     collapsedModal = (title) => {
         return (
             <button 
-            onClick={this._onCollapsed}
+            onClick={(event)=>{this._onCollapsed(true,event)}}
             style={{
                 backgroundColor: "white", 
                 color: "black", 
@@ -29,16 +32,12 @@ export default class Modal extends Component {
             </button>
         )
     }
-
-    
-
     noAction = () => {
-
     }
     displayModal = (info) => {
         return (
-            <div className={Styles.modalComponent} onClick={this._onCollapsed}>
-                <div dangerouslySetInnerHTML={{ __html: info }} className={Styles.modalComponentContent} onClick={noAction}>
+            <div className={Styles.modalComponent} onClick={(event)=>{this._onCollapsed(false,event)}}>
+                <div dangerouslySetInnerHTML={{ __html: info }} className={Styles.modalComponentContent} onClick={(event)=>{this._onCollapsed(false,event)}}>
                 </div>
             </div>
         )
