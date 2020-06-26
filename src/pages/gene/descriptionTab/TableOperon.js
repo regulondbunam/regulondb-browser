@@ -1,12 +1,12 @@
 import React from 'react';
-import { RegulationInfo } from '../../components/apollo/geneCollection'
+import { OperonInfo } from '../../components/apollo/geneCollection'
 import { useHistory } from 'react-router-dom';
 
 const TableOperon = ({
     idGene
 }) => {
-    let gene = new RegulationInfo(idGene)
-    const { loading, data, error } = gene
+    let operon = new OperonInfo(idGene)
+    const { loading, data, error } = operon
     let history = useHistory();
     // console.log("info: ",idGene)
 

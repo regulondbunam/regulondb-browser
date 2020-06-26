@@ -19,18 +19,39 @@ export default class Gene {
     this.error = error
   }
 }
-export class RegulationInfo {
+
+export class OperonInfo {
   constructor(idGene){
     this.id = idGene
-    this.regulationInfo(`${idGene}[geneInfo.id]`)
+    this.OperonInfo(`${idGene}[geneInfo.id]`)
   }
-  regulationInfo(advancedSearch) {
-    const { data, loading, error } = useQuery(GENE_REGULATION, {
+  OperonInfo(advancedSearch) {
+    const { data, loading, error } = useQuery(GENE_OPERON, {
       variables: { advancedSearch }
     })
     //console.log(error)
     if(!loading){
       this.data = data.getGenesBy.data[0].regulation.operon
+    }else{
+      this.data = data
+    }
+    this.loading = loading
+    this.error = error
+  }
+}
+
+export class RegulatorInfo {
+  constructor(idGene){
+    this.id = idGene
+    this.regulatorInfo(`${idGene}[geneInfo.id]`)
+  }
+  regulatorInfo(advancedSearch) {
+    const { data, loading, error } = useQuery(GENE_REGULATOR, {
+      variables: { advancedSearch }
+    })
+    //console.log(error)
+    if(!loading){
+      this.data = data.getGenesBy.data[0].regulation.regulators
     }else{
       this.data = data
     }
@@ -108,7 +129,7 @@ query countGenes($advancedSearch: String!){
   }
 `
 
-const GENE_REGULATION = gql`
+const GENE_OPERON = gql`
 query countGenes($advancedSearch: String!){
   getGenesBy(limit:1 page: 0 advancedSearch:$advancedSearch)
     {
@@ -132,6 +153,24 @@ query countGenes($advancedSearch: String!){
               name
             }
           }
+        }
+      }
+      }
+    }
+  
+  }
+`
+
+const GENE_REGULATOR = gql`
+query countGenes($advancedSearch: String!){
+  getGenesBy(limit:1 page: 0 advancedSearch:$advancedSearch)
+    {
+      data{
+        regulation{
+          regulators{
+          id
+          name
+          type
         }
       }
       }
