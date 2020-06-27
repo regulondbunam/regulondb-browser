@@ -139,12 +139,12 @@ td {
 }
 
 th {
-	background-color: var(--color-blue2);
+	background-color: var(--color-blue4);
 	color: var(--color-rest);
 }
   
 tr:nth-child(even) {
-    background-color: var(--color-grey4);
+	background-color: var(--color-grey5);
   }
 
 .trClickable:hover{

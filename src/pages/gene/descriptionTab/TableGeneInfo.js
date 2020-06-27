@@ -1,4 +1,6 @@
 import React from 'react';
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 import Gene from '../../components/apollo/geneCollection'
 import Modal from '../../components/ui-components/infoDisplay/Modal/Modal'
 import Sequence from '../../components/sequence/Sequence'
@@ -7,8 +9,10 @@ const TableGeneInfo = ({
     idGene
 }) => {
     let gene = new Gene(idGene)
-
-    const {loading, data, error} = gene
+    const advancedSearch = gene.advancedSearch
+    const { data, loading, error } = useQuery(gene.query, {
+        variables: { advancedSearch }
+      })
     //console.log(size)
     //console.log("data: ",data)
     if (loading) {
@@ -24,6 +28,7 @@ const TableGeneInfo = ({
             return <>error</>
         }else{
             try {
+                console.log(data)
                 const leftEndPosition = data["leftEndPosition"]
                 const rightEndPosition = data["rightEndPosition"]
                 const size = sizeGene(leftEndPosition,rightEndPosition)

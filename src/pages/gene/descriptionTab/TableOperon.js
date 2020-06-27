@@ -1,17 +1,20 @@
 import React from 'react';
 import { OperonInfo } from '../../components/apollo/geneCollection'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 import { useHistory } from 'react-router-dom';
 
-const TableOperon = ({
+
+function TableOperon({
     idGene
-}) => {
-    let operon = new OperonInfo(idGene)
-    const { loading, data, error } = operon
+}){
+    const operon = new OperonInfo(idGene)
+    const advancedSearch = operon.advancedSearch
+    const { data, loading, error } = useQuery(operon.query, {
+        variables: { advancedSearch }
+      })
     let history = useHistory();
-    // console.log("info: ",idGene)
-
-    // console.log("error: ",error)
-
+    console.log("operon")
     if (loading) {
         return <>loading...</>
     } else {
@@ -19,18 +22,20 @@ const TableOperon = ({
             return <>error</>
         } else {
             try {
-                const name = data.name
-                const id = data.id
-                //console.log("data: ", data.arrangement)
-                const arrangement = data.arrangement
+                //console.log(data.getGenesBy.data[0].regulation.operon)
+                const operonData = data.getGenesBy.data[0].regulation.operon
+                const name = operonData.name
+                const id = operonData.id
+                //console.log("operonData: ", operonData.arrangement)
+                const arrangement = operonData.arrangement
                 return (
                     <div style={{ width: "80%" }}>
-                        <h2 style={{ color: "var(--color-accentB)", margin: "0", float: "left" }}>
+                        <h2>
                             Operon &nbsp;
                        </h2>
                         <h2 style={{ margin: "0" }}>{name}</h2>
                         <h3 style={{ margin: "0", fontSize: "9px" }}>{id}</h3>
-                        <h3>arrangement:</h3>
+                        <h3 style={{ margin: "0" }}>arrangement</h3>
                         <table >
                             <thead>
                                 <tr>

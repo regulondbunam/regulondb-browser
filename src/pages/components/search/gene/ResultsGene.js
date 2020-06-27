@@ -2,7 +2,7 @@ import React from 'react';
 import MarckStr from '../../utiles/MarkStr' 
 import { useHistory } from 'react-router-dom';
 import {SearchGene} from '../../apollo/geneCollection'
-//import Spinner from '../../loading/Spinner'
+import { useQuery } from '@apollo/react-hooks';
 
 
 //https://dl.dropboxusercontent.com/s/pp47gwivftzav85/tenor.gif?dl=0
@@ -14,31 +14,19 @@ const ResultsGene = ({
 }) => {
 
     let searchGene = new SearchGene(search)
-
-    const { data, loading, error} = searchGene
+    const { data, loading, error } = useQuery(searchGene.query, {
+        variables: { search }
+      })
 
     //console.log("data: ",data)
     // console.log("loading",loading)
     //console.log("erroo", error)
 
-    if (loading) {
-        return (
-            <div style={{}}>
-                Loading...
-            </div>
-        );
-    } else {
-        if (data === undefined) {
-        return (<p>{`${error}`}</p>)
-        } else {
-            return (
-                <div>
-                    <TabGeneResult data={data} search={search} />
-                </div>
-            );
-        }
-
-    }
+    if(loading) return <p>Loading...</p>
+    if(error) return <p>ERROR :C</p>
+    return  <div>
+        <TabGeneResult data={data} search={search} />
+    </div>
 
 }
 

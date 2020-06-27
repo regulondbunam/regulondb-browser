@@ -22,7 +22,7 @@ const TableRegulators = ({
         if (error !== undefined) {
             return (
                 <>
-                    <h2 style={{ color: "var(--color-accentB)" }}>
+                    <h2 >
                         Regulators
                 </h2>
                 server-error

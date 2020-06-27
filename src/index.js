@@ -4,7 +4,7 @@ import App from './App';
 import {
   BrowserRouter
 } from "react-router-dom";
-import {ApolloProvider} from '@apollo/client'
+import { ApolloProvider } from '@apollo/react-hooks';
 import client from './config/apollo'
 import './regulondbGlobalStyle.css'
 import * as serviceWorker from './serviceWorker';

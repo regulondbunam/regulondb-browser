@@ -20,7 +20,7 @@ const TableContext = ({
             return <>error</>
         } else {
             if (data.length > 0) {
-                console.log(data)
+               // console.log(data)
                 return (
                     <>
                         <div style={{ width: "80%" }}>

@@ -1,42 +1,17 @@
-import { useQuery, gql } from '@apollo/client'
+import { useQuery } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
 
 export default class Gene {
   constructor(id) {
-    this.id = id
-    this.getGeneInfo(`${id}[geneInfo.id]`)
-  }
-  getGeneInfo(advancedSearch) {
-    const { data, loading, error } = useQuery(GENE_INFO, {
-      variables: { advancedSearch }
-    })
-    //console.log(data)
-    if (!loading) {
-      this.data = data.getGenesBy.data[0].geneInfo
-    } else {
-      this.data = data
-    }
-    this.loading = loading
-    this.error = error
+    this.advancedSearch = `${id}[geneInfo.id]`
+    this.query = GENE_INFO
   }
 }
 
-export class OperonInfo {
-  constructor(idGene) {
-    this.id = idGene
-    this.OperonInfo(`${idGene}[geneInfo.id]`)
-  }
-  OperonInfo(advancedSearch) {
-    const { data, loading, error } = useQuery(GENE_OPERON, {
-      variables: { advancedSearch }
-    })
-    //console.log(error)
-    if (!loading) {
-      this.data = data.getGenesBy.data[0].regulation.operon
-    } else {
-      this.data = data
-    }
-    this.loading = loading
-    this.error = error
+export class OperonInfo{
+  constructor(idGene){
+    this.advancedSearch = `${idGene}[geneInfo.id]`
+    this.query = GENE_OPERON
   }
 }
 
@@ -79,28 +54,31 @@ export class ContextInfo {
   }
 }
 
-export class SearchGene {
-
-  constructor(searchTerm) {
-    this.searchTerm = searchTerm
-    this.search(searchTerm)
+export class ShineDalgarno {
+  constructor(idGene) {
+    this.id = idGene
+    this.ShineDalgarnoInfo(`${idGene}[geneInfo.id]`)
   }
-
-  search(search) {
-    const { data, loading, error } = useQuery(GENE_SEARCH, {
-      variables: { search }
+  ShineDalgarnoInfo(advancedSearch) {
+    const { data, loading, error } = useQuery(GENE_SHINEDALGARNO, {
+      variables: { advancedSearch }
     })
-    //console.log(error)
-    this.data = data
+    if (!loading) {
+      this.data = data.getGenesBy.data[0].shineDalgarno
+    } else {
+      this.data = data
+    }
     this.loading = loading
     this.error = error
   }
-
 }
 
-
-/////QUERYS/////
-
+export class SearchGene {
+  constructor(searchTerm) {
+    this.searchTerm = searchTerm
+    this.query = GENE_SEARCH
+  }
+}
 const GENE_SEARCH = gql`
 query countGenes($search: String!){
     getGenesBy(limit:50 page:0 search:$search)
@@ -219,6 +197,21 @@ query getGeneContext($advancedSearch: String!) {
           }
         }
       }
+    }
+  }
+}
+`
+const GENE_SHINEDALGARNO = gql`
+query getGeneShineDalgarno($advancedSearch: String!) {
+  getGenesBy(limit: 1, page: 0, advancedSearch: $advancedSearch) {
+    data {
+      shineDalgarno{
+          distanceToGene
+          leftEndPosition
+          rightEndPosition
+          sequence
+          note
+        }
     }
   }
 }

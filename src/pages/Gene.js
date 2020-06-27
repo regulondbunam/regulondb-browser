@@ -1,6 +1,7 @@
 import React from 'react';
 import GeneTabs from './gene/GeneTabs'
-import {useQuery,gql} from '@apollo/client'
+import { useQuery } from '@apollo/react-hooks';
+import { gql } from "apollo-boost";
 import {withRouter} from 'react-router-dom';
 
 const GetGeneName = gql`
@@ -25,6 +26,7 @@ const Gene = ({
     const { data, loading, error } = useQuery(GetGeneName, {
         variables: { advancedSearch }
     })
+
     // console.log("data: ",data)
     // console.log("loading",loading)
     // console.log("error",error)
