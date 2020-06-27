@@ -1,6 +1,5 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 import Gene from '../../components/apollo/geneCollection'
 import Modal from '../../components/ui-components/infoDisplay/Modal/Modal'
 import Sequence from '../../components/sequence/Sequence'
@@ -12,86 +11,82 @@ const TableGeneInfo = ({
     const advancedSearch = gene.advancedSearch
     const { data, loading, error } = useQuery(gene.query, {
         variables: { advancedSearch }
-      })
-    //console.log(size)
-    //console.log("data: ",data)
+    })
+
     if (loading) {
-        //const state = "Loading"
-        return (
-            <>
-            loading...
-            </>
-        );
-    } 
-    else{
-        if(error !== undefined){
-            return <>error</>
-        }else{
-            try {
-                console.log(data)
-                const leftEndPosition = data["leftEndPosition"]
-                const rightEndPosition = data["rightEndPosition"]
-                const size = sizeGene(leftEndPosition,rightEndPosition)
-                return (
-                    <div style={{ width: "80%" }}>
-                        <table >
-                            <tbody>
-                                {Object.keys(data).map((key, index) => {
-                                    const test = key.match(/^_/)
-                                    if(test === null){
-                                        switch (key) {
-                                            case 'leftEndPosition':
-                                                return GenomePosition(size,leftEndPosition,rightEndPosition)
-                                            case 'rightEndPosition':
-                                                return null
-                                            case 'sequence':
-                                                return sequenceGene(data['name'],data[key], key)
-                                            default:
-                                                return (
-                                                    <tr key={key}>
-                                                        <td style={{fontWeight: "bold"}}>{key}</td>
-                                                        <td dangerouslySetInnerHTML={{ __html:   data[key]}}></td>
-                                                    </tr>
-                                                )
-                                        }
-                                    }
-                                    return null
-                                })
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                )
-            } catch (error) {
-                console.log(error)
-                return <>catch err</>
-            }
-        }
+        return <p>loading...</p>
     }
+    if (error) {
+        return <p>error</p>
+    }
+    try {
+        //console.log(data.getGenesBy.data[0].geneInfo)
+        const geneData = data.getGenesBy.data[0].geneInfo
+        const leftEndPosition = geneData["leftEndPosition"]
+        const rightEndPosition = geneData["rightEndPosition"]
+        const size = sizeGene(leftEndPosition, rightEndPosition)
+        return (
+            <div style={{ width: "80%" }}>
+                <table >
+                    <tbody>
+                        {Object.keys(geneData).map((key, index) => {
+                            const test = key.match(/^_/)
+                            if(geneData[key] === null){
+                                return null
+                            }
+                            if (test === null) {
+                                switch (key) {
+                                    case 'leftEndPosition':
+                                        return GenomePosition(size, leftEndPosition, rightEndPosition)
+                                    case 'rightEndPosition':
+                                        return null
+                                    case 'sequence':
+                                        return sequenceGene(geneData['name'], geneData[key], key)
+                                    default:
+                                        return (
+                                            <tr key={key}>
+                                                <td style={{ fontWeight: "bold" }}>{key}</td>
+                                                <td dangerouslySetInnerHTML={{ __html: geneData[key] }}></td>
+                                            </tr>
+                                        )
+                                }
+                            }
+                            return null
+                        })
+                        }
+                    </tbody>
+                </table>
+            </div>
+        )
+    } catch (error) {
+        console.log(error)
+        return <>catch err</>
+    }
+
 }
 
 
-function GenomePosition(size,leftEndPosition,rightEndPosition){
+function GenomePosition(size, leftEndPosition, rightEndPosition) {
     return (
         <tr key={size}>
-            <td style={{fontWeight: "bold"}}>Genome position(nucleotides):</td>
-            <td>{`size: ${size}, position: ${leftEndPosition} --> ${rightEndPosition}`}</td>
+            <td style={{ fontWeight: "bold" }}>Genome position(nucleotides):</td>
+            <td>{`${leftEndPosition} --> ${rightEndPosition} size: ${size}bp ` }</td>
         </tr>
     )
 }
 
-function sizeGene(leftEndPosition,rightEndPosition){
-    if(typeof(leftEndPosition) === 'number' && typeof(rightEndPosition) === 'number'){
+function sizeGene(leftEndPosition, rightEndPosition) {
+    if (typeof (leftEndPosition) === 'number' && typeof (rightEndPosition) === 'number') {
         return rightEndPosition - leftEndPosition + 1
     }
     return 0
 }
 
-function sequenceGene(gene, sequence, key){
+function sequenceGene(gene, sequence, key) {
     return (
         <tr key={key}>
-            <td style={{fontWeight: "bold"}}>{key}</td>
-            <td className="sequence" ><Modal title={"Get nucleotide sequence"} info={Sequence(gene,sequence,"fasta")}></Modal></td>
+            <td style={{ fontWeight: "bold" }}>{key}</td>
+            <td className="sequence" ><Modal title={"Fasta Format"} info={Sequence(gene, sequence, "fasta")}></Modal></td>
         </tr>
     )
 }

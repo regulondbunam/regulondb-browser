@@ -17,23 +17,27 @@ export class OperonInfo{
 
 export class RegulatorInfo {
   constructor(idGene) {
-    this.id = idGene
-    this.regulatorInfo(`${idGene}[geneInfo.id]`)
-  }
-  regulatorInfo(advancedSearch) {
-    const { data, loading, error } = useQuery(GENE_REGULATOR, {
-      variables: { advancedSearch }
-    })
-    //console.log(error)
-    if (!loading) {
-      this.data = data.getGenesBy.data[0].regulation.regulators
-    } else {
-      this.data = data
-    }
-    this.loading = loading
-    this.error = error
+    this.advancedSearch=`${idGene}[geneInfo.id]`
+    this.query = GENE_REGULATOR
   }
 }
+const GENE_REGULATOR = gql`
+query getGeneRegulator($advancedSearch: String!){
+  getGenesBy(limit:1 page: 0 advancedSearch:$advancedSearch)
+    {
+      data{
+        regulation{
+          regulators{
+          id
+          name
+          type
+        }
+      }
+      }
+    }
+  
+  }
+`
 
 export class ContextInfo {
   constructor(idGene) {
@@ -112,10 +116,10 @@ query getGeneInfo($advancedSearch: String!){
           synonyms
           leftEndPosition
           rightEndPosition
+          centisomePosition
           strand
           sequence
           gcContent
-          centisomePosition
           note
           type
         }
@@ -149,24 +153,6 @@ query getGeneOperon($advancedSearch: String!){
               name
             }
           }
-        }
-      }
-      }
-    }
-  
-  }
-`
-
-const GENE_REGULATOR = gql`
-query getGeneRegulator($advancedSearch: String!){
-  getGenesBy(limit:1 page: 0 advancedSearch:$advancedSearch)
-    {
-      data{
-        regulation{
-          regulators{
-          id
-          name
-          type
         }
       }
       }

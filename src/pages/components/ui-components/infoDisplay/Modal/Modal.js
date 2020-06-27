@@ -22,11 +22,7 @@ export default class Modal extends Component {
         return (
             <button 
             onClick={(event)=>{this._onCollapsed(true,event)}}
-            style={{
-                backgroundColor: "white", 
-                color: "black", 
-                border: "2px solid #CC9900"
-            }}
+            className={Styles.modalButton}
             >
                 {title}
             </button>

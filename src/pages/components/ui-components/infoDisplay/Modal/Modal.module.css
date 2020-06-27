@@ -19,3 +19,15 @@
   width: 80%;
   overflow: auto;
 }
+
+.modalButton{
+  background-color: transparent;
+  color: blue;
+  text-decoration: underline;
+  font-weight: bold;
+  border: 0px solid #000000;
+}
+
+.modalButton:hover{
+  cursor: pointer;
+}
