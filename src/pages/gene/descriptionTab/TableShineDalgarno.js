@@ -1,8 +1,8 @@
 import React from 'react';
 import { ShineDalgarno } from '../../components/apollo/geneCollection'
 import { useQuery } from '@apollo/react-hooks';
-import Modal from '../../components/ui-components/infoDisplay/Modal/Modal'
-import Sequence from '../../components/sequence/Sequence'
+//import Modal from '../../components/ui-components/infoDisplay/Modal/Modal'
+//import Sequence from '../../components/sequence/Sequence'
 
 //
 const TableShineDalgarno = ({
@@ -21,7 +21,7 @@ const TableShineDalgarno = ({
         }
     try {
         const sdData=data.getGenesBy.data[0].shineDalgarno
-        console.log(sdData)
+        //console.log(sdData)
         if (sdData.length > 0) {
             return (
                 <>

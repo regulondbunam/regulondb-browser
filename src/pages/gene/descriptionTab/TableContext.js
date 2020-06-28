@@ -74,11 +74,12 @@ function EvidenceReferencesDisplay(evidenceReferences) {
 
     return evidenceReferences.map((evd) => {
         const evdref = `
-            <h3>${evd.evidenceCode}</h3>
-            <h1>${evd.evidenceName}</h1>
-            <h2>Evidence Type: ${evd.evidenceType}</h2>
-            <a href="${evd.referenceURL}" target="_blank" >View full Refence</a>
-            <p>${evd.referenceCitation}</p>
+            <h2>Evidence</h1>
+            <h1>${evd.evidenceCode} ${evd.evidenceName}</h1>
+            <h2>Type: ${evd.evidenceType}</h2>
+            <h2>Reference:</h2>
+            <h2><a href="${evd.referenceURL}" target="_blank" >View Refence</a></h2>
+            <p class="citation">${evd.referenceCitation}</p>
         `
         return (
             <td key={evd.evidenceCode}><Modal title={evd.evidenceCode + " (" + evd.evidenceType + ")"} info={evdref}></Modal></td>

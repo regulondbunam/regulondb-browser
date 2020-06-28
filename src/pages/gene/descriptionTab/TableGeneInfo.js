@@ -44,6 +44,13 @@ const TableGeneInfo = ({
                                         return null
                                     case 'sequence':
                                         return sequenceGene(geneData['name'], geneData[key], key)
+                                    case 'gcContent':
+                                        return (
+                                            <tr key={key}>
+                                                <td style={{ fontWeight: "bold" }}>{key}</td>
+                                                <td dangerouslySetInnerHTML={{ __html: `${geneData[key]}%` }}></td>
+                                            </tr>
+                                        )
                                     default:
                                         return (
                                             <tr key={key}>
@@ -67,7 +74,6 @@ const TableGeneInfo = ({
 
 }
 
-
 function GenomePosition(size, leftEndPosition, rightEndPosition) {
     return (
         <tr key={size}>
@@ -88,7 +94,10 @@ function sequenceGene(gene, sequence, key) {
     return (
         <tr key={key}>
             <td style={{ fontWeight: "bold" }}>{key}</td>
-            <td className="sequence" ><Modal title={"Fasta Format"} info={Sequence(gene, sequence, "fasta")}></Modal></td>
+            <td className="sequence" >
+                <Modal title={"Fasta Format"} info={Sequence(gene, sequence, "fasta")}></Modal>
+                <Modal title={"genbank Format"} info={Sequence(gene, sequence, "genbank")}></Modal>
+                </td>
         </tr>
     )
 }

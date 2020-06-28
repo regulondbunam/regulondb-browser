@@ -21,7 +21,7 @@ const GeneDescription = ({
             <TableRegulators idGene={geneID} />
             <h2>Context</h2>
             <TableContext idGene={geneID} />
-            <h2>ShineDalgarno</h2>
+            <h1>ShineDalgarno</h1>
             <TableShineDalgarno idGene={geneID}/>
         </>
     );
