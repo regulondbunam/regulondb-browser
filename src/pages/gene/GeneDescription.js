@@ -19,7 +19,10 @@ const GeneDescription = ({
             <TableOperon idGene={geneID} />
             <h2>Regulators</h2>
             <TableRegulators idGene={geneID} />
-            
+            <h2>Context</h2>
+            <TableContext idGene={geneID} />
+            <h2>ShineDalgarno</h2>
+            <TableShineDalgarno idGene={geneID}/>
         </>
     );
 
@@ -28,9 +31,7 @@ const GeneDescription = ({
 /*
 
             
-            <TableContext idGene={geneID} />
-            <h1>ShineDalgarno</h1>
-            <TableShineDalgarno idGene={geneID}/>
+            
  */
 
 export default GeneDescription;

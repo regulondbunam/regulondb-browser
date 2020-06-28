@@ -1,5 +1,6 @@
-import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
+
+// Gene Info
 
 export default class Gene {
   constructor(id) {
@@ -8,12 +9,16 @@ export default class Gene {
   }
 }
 
+// Gene Operon Info
+
 export class OperonInfo{
   constructor(idGene){
     this.advancedSearch = `${idGene}[geneInfo.id]`
     this.query = GENE_OPERON
   }
 }
+
+//Gene Regulators Info
 
 export class RegulatorInfo {
   constructor(idGene) {
@@ -39,43 +44,64 @@ query getGeneRegulator($advancedSearch: String!){
   }
 `
 
+//Gene ContextInfo
+
 export class ContextInfo {
   constructor(idGene) {
-    this.id = idGene
-    this.contextInfo(`${idGene}[geneInfo.id]`)
-  }
-  contextInfo(advancedSearch) {
-    const { data, loading, error } = useQuery(GENE_CONTEXT, {
-      variables: { advancedSearch }
-    })
-    if (!loading) {
-      this.data = data.getGenesBy.data[0].regulation.context
-    } else {
-      this.data = data
-    }
-    this.loading = loading
-    this.error = error
+    this.advancedSearch=`${idGene}[geneInfo.id]`
+    this.query=GENE_CONTEXT
   }
 }
+const GENE_CONTEXT = gql`
+query getGeneContext($advancedSearch: String!) {
+  getGenesBy(limit: 1, page: 0, advancedSearch: $advancedSearch) {
+    data {
+      regulation {
+        context {
+          type
+          name
+          leftEndPosition
+          rightEndPosition
+          strand
+          note
+          evidenceReferences {
+            evidenceName
+            evidenceCode
+            evidenceType
+            referenceId
+            referenceURL
+            referenceCitation
+          }
+        }
+      }
+    }
+  }
+}
+`
+
+// Gene ShineDalgarno Info
 
 export class ShineDalgarno {
   constructor(idGene) {
-    this.id = idGene
-    this.ShineDalgarnoInfo(`${idGene}[geneInfo.id]`)
-  }
-  ShineDalgarnoInfo(advancedSearch) {
-    const { data, loading, error } = useQuery(GENE_SHINEDALGARNO, {
-      variables: { advancedSearch }
-    })
-    if (!loading) {
-      this.data = data.getGenesBy.data[0].shineDalgarno
-    } else {
-      this.data = data
-    }
-    this.loading = loading
-    this.error = error
+    this.advancedSearch=`${idGene}[geneInfo.id]`
+    this.query = GENE_SHINEDALGARNO
   }
 }
+const GENE_SHINEDALGARNO = gql`
+query getGeneShineDalgarno($advancedSearch: String!) {
+  getGenesBy(limit: 1, page: 0, advancedSearch: $advancedSearch) {
+    data {
+      shineDalgarno{
+          distanceToGene
+          leftEndPosition
+          rightEndPosition
+          sequence
+          note
+        }
+    }
+  }
+}
+`
 
 export class SearchGene {
   constructor(searchTerm) {
@@ -159,46 +185,4 @@ query getGeneOperon($advancedSearch: String!){
     }
   
   }
-`
-
-const GENE_CONTEXT = gql`
-query getGeneContext($advancedSearch: String!) {
-  getGenesBy(limit: 1, page: 0, advancedSearch: $advancedSearch) {
-    data {
-      regulation {
-        context {
-          type
-          name
-          leftEndPosition
-          rightEndPosition
-          strand
-          note
-          evidenceReferences {
-            evidenceName
-            evidenceCode
-            evidenceType
-            referenceId
-            referenceURL
-            referenceCitation
-          }
-        }
-      }
-    }
-  }
-}
-`
-const GENE_SHINEDALGARNO = gql`
-query getGeneShineDalgarno($advancedSearch: String!) {
-  getGenesBy(limit: 1, page: 0, advancedSearch: $advancedSearch) {
-    data {
-      shineDalgarno{
-          distanceToGene
-          leftEndPosition
-          rightEndPosition
-          sequence
-          note
-        }
-    }
-  }
-}
 `

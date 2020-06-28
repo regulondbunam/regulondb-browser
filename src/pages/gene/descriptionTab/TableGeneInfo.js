@@ -31,9 +31,11 @@ const TableGeneInfo = ({
                     <tbody>
                         {Object.keys(geneData).map((key, index) => {
                             const test = key.match(/^_/)
-                            if(geneData[key] === null){
+                            if (geneData[key] === null || geneData[key].length<=0) {
                                 return null
                             }
+                            // console.log(`${key}: ${geneData[key]}`)
+                            // console.log(geneData[key])
                             if (test === null) {
                                 switch (key) {
                                     case 'leftEndPosition':
@@ -70,7 +72,7 @@ function GenomePosition(size, leftEndPosition, rightEndPosition) {
     return (
         <tr key={size}>
             <td style={{ fontWeight: "bold" }}>Genome position(nucleotides):</td>
-            <td>{`${leftEndPosition} --> ${rightEndPosition} size: ${size}bp ` }</td>
+            <td>{`${leftEndPosition} --> ${rightEndPosition} size: ${size}bp `}</td>
         </tr>
     )
 }
