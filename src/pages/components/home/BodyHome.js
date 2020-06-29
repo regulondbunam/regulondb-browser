@@ -13,7 +13,7 @@ const BodyHome = () => {
             }}>
                 <Card type="icon" width="100%" icon={"access_time"} iconDivStyle={{ padding: "26px", margin: "auto" }} iconStyle={{ fontSize: "55px" }}>
                     <h1>RegulonDB-Browser</h1>
-                    <p>VERSION: alpha-0.0.11</p>
+                    <p>VERSION: alpha-0.0.12</p>
                 </Card>
             </div>
             <div style={{
