@@ -103,6 +103,8 @@ query getGeneShineDalgarno($advancedSearch: String!) {
 }
 `
 
+// Search Gene
+
 export class SearchGene {
   constructor(searchTerm) {
     this.searchTerm = searchTerm
@@ -110,11 +112,11 @@ export class SearchGene {
   }
 }
 const GENE_SEARCH = gql`
-query countGenes($search: String!){
+query SearchGenes($search: String!){
     getGenesBy(limit:50 page:0 search:$search)
     {
       data {
-        geneInfo {
+      geneInfo {
           id
           name
           synonyms
@@ -124,7 +126,10 @@ query countGenes($search: String!){
           name
           regulatorId
         }
-      }
+    }
+    pagination{
+      totalResults
+    }
     }
   }
 `

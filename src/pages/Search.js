@@ -1,64 +1,42 @@
 import React from 'react';
-import {withRouter} from 'react-router-dom';
-import ResultsGene from './components/search/gene/ResultsGene'
-import Button from './components/ui-components/basicInput/buttons/Button'
-
-const colecciones = ["Genes", "Gensor Unit", "Operon", "Regulon", "Sigmulon", "sRNA", "Grow Conditions"]
+import { withRouter } from 'react-router-dom';
+import CoverSearch from './components/search/CoverSearch'
+import ResultSearch from './components/search/ResultSearch'
 
 const Search = ({
     location
 }) => {
     const search = BreakPathName(location.pathname)
-    return (
-        <>
-        <div style={styleTitle}>
-        <h1 style={{color: "#ffffff", margin: "0"}}>Results for: {search}</h1>
-        </div>
-        <div style={styleBody}>
-            <div style={{width: "100%"}}>
-            {
-                colecciones.map((item)=>{
-                    return (
-                        <div key={item} style={{paddingRight: "2%", float: "left"}}>
-                            {
-                                item !== "Genes"
-                                ?<Button active={false} style={{fontSize: "14px"}}  label={item}/>
-                                :<Button style={{fontSize: "14px"}}  label={item}/>
-                            }
-                        
-                        </div>
-                    )
-                })
-            }
-        </div>
-        <br/>
-        <div>
-            <Button accent={true} label={"Genes"} />
-            <ResultsGene search={search} />
-        </div>
-        </div>
-        </>
-        
-     );
+    //console.log(search, ": ", search.length)
+    if (search.length <= 0) {
+        return (
+            <>
+                {
+                    CoverSearch()
+                }
+                <div style={{ padding: "5% 10% 5% 10%" }}>
+                    <p>
+                        Welcome to the regulonDB search tool, from here,
+                        with a simple search you will be able to find your favorite gene ;)
+            <br />
+            You can search genes by name or product or both with the words OR or AND
+            Example:
+            <br />
+            "araC AND arabinose"
+            <br />
+            "araC  OR transcriptional regulator
+            </p>
+                </div>
+
+            </>
+        )
+    }
+    return <ResultSearch search={search}/>
 }
 
-
-
-function BreakPathName(pathname){
+function BreakPathName(pathname) {
     pathname = pathname.slice(8)
     return pathname
-}
-
-const styleBody = {
-    padding: "2% 10% 2% 10%",
-    content: "",
-    display: "grid",
-    clear: "both",
-}
-
-const styleTitle = {
-    backgroundColor: "var(--color-grey3)",
-    padding: "2% 10% 2% 10%"
 }
 
 export default withRouter(Search);

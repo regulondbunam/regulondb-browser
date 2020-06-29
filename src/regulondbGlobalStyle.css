@@ -16,10 +16,12 @@ it contains the definition of global styles titles, paragraphs, font, color pale
 	--color-grey1: #373737;
 	--color-grey2: #666666;
 	--color-grey3: #999999;
+	--color-grey3A: #99999999;
 	--color-grey4: #D5D5D7;
 	--color-grey5: #F4F5F5;
 	--color-rest: #FFFFFF;
 	--color-accentA: #C93A1D;
+	--color-accentAA: #C93A1D99;
 	--color-accentB: #CC9900;
 }
 /*font family */
@@ -110,6 +112,24 @@ a {
 	cursor: pointer;
 }
 
+.aButton{
+	background-color: transparent;
+	color: blue;
+	text-decoration: underline;
+	font-weight: bold;
+	border: 0px solid #000000;
+}
+
+.aDisabled:hover{
+	cursor: not-allowed !important;
+	box-shadow: 0 0 0px 0 rgba(0, 0, 0, 0) !important;
+	
+}
+
+.aButton:hover{
+  cursor: pointer;
+  box-shadow: 0 0 5px 0 var(--color-blue4);
+}
 a:link {
 	font-family: var(--fontFamily-principal);  
 	color: var(--color-accentB);
@@ -150,6 +170,11 @@ tr:nth-child(even) {
 .trClickable:hover{
 	background-color: #84b7d6;
 	cursor: pointer;
+}
+/*Body div*/
+
+.bodyDiv{
+	padding: 3% 10% 5% 10%
 }
 
 /*Features*/
@@ -210,3 +235,6 @@ border-left:1px solid var(--color-grey2);
 	-moz-box-shadow: inset 2px 3px 13px 1px var(--color-blue4);
 	box-shadow: inset 2px 3px 13px 1px var(--color-blue4);
 }
+
+/* Particular Styles features */
+

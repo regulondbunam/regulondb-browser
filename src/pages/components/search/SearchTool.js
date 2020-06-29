@@ -1,52 +1,35 @@
-import React, {Component} from 'react';
+import React, {Component, useCallback, useState} from 'react';
 import Texbox from '../ui-components/basicInput/Text'
 import Button from '../ui-components/basicInput/Buttons';
-import {Link} from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 
-const placeHolder = 'Example: “araC AND arabinose”, “araC transcriptional regulator”'
 
-class SearchTool extends Component {
-    state = { inSearch: "" }
-
-    UpdateSearch = (search) => {
-        this.setState({ inSearch: search })
+const SearchTool = ({
+    styleTexbox,
+    styleButton,
+    placeHolder = 'Example: “araC AND arabinose”, “araC transcriptional regulator”'
+}) => {
+    let history = useHistory();
+    const [search, setSearch] = useState('')
+    function Call(key){
+        if(key === 'Enter'){
+            history.push("/search/"+search)
+        }
+        
     }
 
-    render() { 
-        const {
-            styleBox,
-            styleButton
-        } = this.props
-
-        let styleTexbox = Object.assign({},styleBox,styleTexboxIn)
-        const {
-            inSearch
-        } = this.state
-
-        return ( 
-            <div style={styleSearch}>
-                    <Texbox style={styleTexbox} placeholder={placeHolder} onChange={this.UpdateSearch}/>
-                    <Link to={"/search/"+inSearch}>
-                        <Button style={styleButton} label="search" accent={true} onClick={noAction}/>
-                    </Link>
-                    
-                </div>
-         );
-    }
+    return (
+        <div style={styleSearch} onKeyPress={(event) => {Call(event.key)}}>
+                    <Texbox  style={styleTexbox} placeholder={placeHolder} onChange={(search)=>{setSearch(search)}}/>
+                    <Button style={styleButton} label="search" accent={true} onClick={()=>{Call('Enter')}}/>          
+        </div>
+    );
 }
- 
 
-function noAction (){
-
-}
 
 const styleSearch = {
     display: "flex",
   alignItems: "center",
-}
-
-const styleTexboxIn = {
-    float: "left",
 }
  
 export default SearchTool;

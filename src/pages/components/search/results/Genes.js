@@ -1,0 +1,57 @@
+import React from 'react';
+import MarckStr from '../../utiles/MarkStr'
+import { useHistory } from 'react-router-dom';
+
+
+
+//https://dl.dropboxusercontent.com/s/pp47gwivftzav85/tenor.gif?dl=0
+
+//const furret = 'https://dl.dropboxusercontent.com/s/pp47gwivftzav85/tenor.gif?dl=0'
+
+const ResultsGene = ({
+    search,
+    loading,
+    data,
+    error
+}) => {
+    let history = useHistory();
+    if (loading) return <p>Loading...</p>
+    if (error) return <p>ERROR :C</p>
+    return (
+        <div style={{ width: "80%", height: "100%" }}>
+            <table >
+                <thead>
+                    <tr>
+                        <td> </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {data.map((gen) => {
+                        const gene = gen.geneInfo
+                        const prod = gen.products
+                        let products = ""
+                        products += prod.map((product) => {
+                            return (
+                                ", " + product.name
+                            )
+                        })
+                        let text = gene.name + ' Gene, synonyms: ' + gene.synonyms + ' products gene: ' + products
+
+                        return (
+
+                            <tr key={gene.id} className="trClickable" onClick={() => { history.push("/gene/" + gene.id) }}>
+                                <td dangerouslySetInnerHTML={{ __html: MarckStr(search, text) }}></td>
+                            </tr>
+
+                        )
+
+                    })
+                    }
+                </tbody>
+            </table>
+        </div>
+    )
+
+}
+
+export default ResultsGene;

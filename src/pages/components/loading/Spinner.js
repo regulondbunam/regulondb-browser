@@ -1,16 +1,45 @@
 import React from 'react';
-import logo from './resources/logo_CCG_color.svg'
+import Style from './style.module.css'
 
 
 
 const Spinner = ({
-    label
+    children
 }) => {
-    return ( 
+    return (
         <>
-        <img src={logo} className="logo" alt="logo" />
+        <div style={{width: '100%'}}>
+            {children}
+        </div>
+        <div className={Style.tileCssAnimationsDemo3}>
+            <span>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </span>
+        </div>
+        
         </>
-     );
+    );
 }
- 
+
 export default Spinner;

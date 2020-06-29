@@ -39,7 +39,7 @@ export default class GeneBankFormat {
                     break;
             }
             if(count===1){
-                console.log(spaceNumber)
+               // console.log(spaceNumber)
                 for(let i = 0; i<spaceNumber-(index.toString().length);i++){
                     line += "&nbsp;"
                 }
