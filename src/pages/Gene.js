@@ -1,12 +1,13 @@
 import React from 'react';
 import GeneTabs from './gene/GeneTabs'
+import CoverLoading from './components/loading/CoverLoading'
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from "apollo-boost";
 import { withRouter } from 'react-router-dom';
 
 const GetGeneName = gql`
 query countGenes($advancedSearch: String!){
-  getGenesBy(limit:10 page: 0 advancedSearch:$advancedSearch)
+  getGenesBy(limit:1 page: 0 advancedSearch:$advancedSearch)
     {
         data{
             geneInfo{
@@ -31,10 +32,10 @@ const Gene = ({
     // console.log("loading",loading)
     // console.log("error",error)
     if (loading) {
-        const state = "please wait we are querying the id"
+        const state = `please wait we are querying the id ${idgene}`
         return (
             <>
-                {Title(true, "", idgene, state)}
+                {CoverLoading(state,'loading')}
             </>
         );
     }
@@ -44,38 +45,34 @@ const Gene = ({
         return (
             //error en sistema
             <>
-                {Title(true, "", "", state)}
+                {CoverLoading(state,'error')}
             </>
         )
     }
-
     let geneName = ""
     try {
         geneName = data.getGenesBy.data[0].geneInfo.name
-    } catch (error) {
-        const state = "Sorry we couldn't find the identifier"
         return (
             <>
-                {Title(true, "", idgene, state)}
+                <div >
+                    {Title(geneName, idgene)}
+                    <div>
+                        <GeneTabs idGene={idgene} />
+                    </div>
+                </div>
+            </>
+        );
+    } catch (error) {
+        const state = `Sorry we couldn't find the identifier: ${idgene}`
+        return (
+            <>
+                {CoverLoading(state,'error')}
             </>
         )
     }
-    return (
-        <>
-            <div >
-                {Title(false, geneName, idgene)}
-                <div>
-                    <GeneTabs idGene={idgene} />
-                </div>
-            </div>
-        </>
-    );
-
-
 }
 
-function Title(error, geneName, geneID, state) {
-    if (!error) {
+function Title(geneName, geneID) {
         return (
             <div style={styleTitle}>
                 <h1 style={{ color: "var(--color-accentB)", margin: "0", float: "left" }}>Gene &nbsp;</h1>
@@ -83,15 +80,7 @@ function Title(error, geneName, geneID, state) {
                 <h3 style={{ margin: "0", fontSize: "9px" }}>{geneID}</h3>
             </div>
         )
-    } else {
-        return (
-            <div style={styleTitle}>
-                <h1 style={{ color: "var(--color-accentA)", margin: "5px", float: "left" }}>
-                    {state} &nbsp;</h1>
-                <h1 style={{ margin: "5px" }}>{geneID}</h1>
-            </div>
-        )
-    }
+
 
 }
 

@@ -3,6 +3,7 @@ import CoverSearch from './CoverSearch'
 import {SearchGene} from '../apollo/geneCollection'
 import { useQuery } from '@apollo/react-hooks';
 import Button from '../ui-components/basicInput/Buttons'
+import Genes from './results/Genes'
 
 const colecciones = ["Genes", "Gensor Unit", "Operon", "Regulon", "Sigmulon", "sRNA", "Grow Conditions"]
 
@@ -29,7 +30,7 @@ const ResultSearch = ({
         )
     }
     try {
-        console.log(data.getGenesBy)
+        //console.log(data.getGenesBy.data)
         let totalResults = data.getGenesBy.pagination.totalResults
         return (
             <>
@@ -50,6 +51,11 @@ const ResultSearch = ({
                             )
                         })
                     }
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <Genes search={search} data={data.getGenesBy.data} />
                 </div>
             </>
         );

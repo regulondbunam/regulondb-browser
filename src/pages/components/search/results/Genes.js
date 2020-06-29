@@ -10,13 +10,9 @@ import { useHistory } from 'react-router-dom';
 
 const ResultsGene = ({
     search,
-    loading,
-    data,
-    error
+    data
 }) => {
     let history = useHistory();
-    if (loading) return <p>Loading...</p>
-    if (error) return <p>ERROR :C</p>
     return (
         <div style={{ width: "80%", height: "100%" }}>
             <table >
@@ -44,7 +40,6 @@ const ResultsGene = ({
                             </tr>
 
                         )
-
                     })
                     }
                 </tbody>
