@@ -22,9 +22,9 @@
 
 .modalButton{
   background-color: transparent;
-  color: blue;
+  color: #72A7C7;
   text-decoration: underline;
-  font-weight: bold;
+  font-weight: normal;
   border: 0px solid #000000;
 }
 

@@ -28,15 +28,19 @@ function TableOperon({
         const arrangement = operonData.arrangement
         return (
             <div style={{ width: "80%" }}>
-                <h2 style={{ margin: "0" }}>{name}</h2>
-                <h3 style={{ margin: "0", fontSize: "9px" }}>{id}</h3>
-                <h3 style={{ margin: "0" }}>arrangement</h3>
-                <table style={{width: "100%"}} >
+                <div
+                    style={{ float: "left", paddingRight: "2%" }}
+                    onClick={() => { history.push("/operon/" + id) }}
+                >
+                    <h2 className="aBase" style={{margin: "0"}}>{name}</h2>
+                </div>
+
+                <table style={{ width: "100%" }} >
                     <thead>
                         <tr>
+                            <th>TranscriptionUnit</th>
                             <th>Promoter</th>
                             <th>Regulator</th>
-                            <th>TranscriptionUnit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,7 +61,7 @@ function TableOperon({
                                         <td>{
                                             `${regulator.name}${convertType(regulator.type)}`
                                         }</td>
-                                        
+
                                     </tr>
                                 )
                             })
@@ -73,7 +77,7 @@ function TableOperon({
 
 }
 
-function convertType(type){
+function convertType(type) {
     switch (type) {
         case "activator":
             return "+"

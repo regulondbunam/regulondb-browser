@@ -8,6 +8,7 @@ export default class Modal extends Component {
     state = {
         collapsed: this.props.collapsed
     }
+
     _onCollapsed = (open, event) => {
         if(open){
             this.setState({ collapsed: !this.state.collapsed }) 
@@ -18,18 +19,19 @@ export default class Modal extends Component {
         }
         
     }
+
     collapsedModal = (title) => {
         return (
             <button 
             onClick={(event)=>{this._onCollapsed(true,event)}}
-            className={Styles.modalButton}
+            className={this.props.className}
+            style = {this.props.style}
             >
                 {title}
             </button>
         )
     }
-    noAction = () => {
-    }
+
     displayModal = (info) => {
         return (
             <div className={Styles.modalComponent} onClick={(event)=>{this._onCollapsed(false,event)}}>
@@ -51,9 +53,11 @@ export default class Modal extends Component {
         } = this.state
         return (
             <React.Fragment>
+                {this.collapsedModal(title)}
                 {
+                    
                     collapsed
-                        ? this.collapsedModal(title)
+                        ? null
                         : this.displayModal(info)
                 }
             </React.Fragment>
@@ -73,9 +77,11 @@ Modal.proTypes = {
     getValue: PropTypes.func,
     showTitle: PropTypes.bool,
     title: PropTypes.string,
+    className: PropTypes.string
 }
 
 Modal.defaultProps = {
+    className: Styles.modalButton,
     collapsed: true,
     info: "info",
     getValue: noAction,

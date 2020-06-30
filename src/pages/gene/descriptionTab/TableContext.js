@@ -50,7 +50,7 @@ const TableContext = ({
                                             <td>{item.leftEndPosition}</td>
                                             <td>{item.rightEndPosition}</td>
                                             <td>{item.strand}</td>
-                                            <td><Modal title={"view note"} info={note}></Modal></td>
+                                            <td><Modal className="aBase" title={"view note"} info={note}></Modal></td>
                                             {EvidenceReferencesDisplay(evidenceReferences)}
                                         </tr>
                                     )
@@ -71,18 +71,21 @@ const TableContext = ({
 }
 
 function EvidenceReferencesDisplay(evidenceReferences) {
-
+    let styleStrong = {}
     return evidenceReferences.map((evd) => {
+        if(evd.evidenceType === "Strong"){
+            styleStrong = {fontWeight: "bold"}
+        }
         const evdref = `
             <h2>Evidence</h1>
-            <h1>${evd.evidenceCode} ${evd.evidenceName}</h1>
-            <h2>Type: ${evd.evidenceType}</h2>
+            <h1>${evd.evidenceCode}: ${evd.evidenceName}</h1>
+            <h3>${evd.evidenceType}</h3>
             <h2>Reference:</h2>
             <h2><a href="${evd.referenceURL}" target="_blank" >View Refence</a></h2>
             <p class="citation">${evd.referenceCitation}</p>
         `
         return (
-            <td key={evd.evidenceCode}><Modal title={evd.evidenceCode + " (" + evd.evidenceType + ")"} info={evdref}></Modal></td>
+            <td key={evd.evidenceCode}><Modal className="aBase" style={styleStrong} title={evd.evidenceCode + " (" + evd.evidenceType + ")"} info={evdref}></Modal></td>
         )
     })
 

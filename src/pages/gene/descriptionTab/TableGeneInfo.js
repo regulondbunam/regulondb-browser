@@ -78,7 +78,7 @@ function GenomePosition(size, leftEndPosition, rightEndPosition) {
     return (
         <tr key={size}>
             <td style={{ fontWeight: "bold" }}>Genome position(nucleotides):</td>
-            <td>{`${leftEndPosition} --> ${rightEndPosition} size: ${size}bp `}</td>
+            <td>{`${leftEndPosition} --> ${rightEndPosition}   Size: ${size}bp `}</td>
         </tr>
     )
 }
@@ -95,8 +95,8 @@ function sequenceGene(gene, sequence, key) {
         <tr key={key}>
             <td style={{ fontWeight: "bold" }}>{key}</td>
             <td className="sequence" >
-                <Modal title={"Fasta Format"} info={Sequence(gene, sequence, "fasta")}></Modal>
-                <Modal title={"genbank Format"} info={Sequence(gene, sequence, "genbank")}></Modal>
+                <Modal className="aBase" title={"Fasta Format"} info={Sequence(gene, sequence, "fasta")}></Modal>
+                <Modal className="aBase" title={"genbank Format"} info={Sequence(gene, sequence, "genbank")}></Modal>
                 </td>
         </tr>
     )

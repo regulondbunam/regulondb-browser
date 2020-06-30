@@ -13,6 +13,7 @@ it contains the definition of global styles titles, paragraphs, font, color pale
 	--color-blue2: #32617D;
 	--color-blue3: #3D779B;
 	--color-blue4: #72A7C7;
+	--color-blue5: #cadce7;
 	--color-grey1: #373737;
 	--color-grey2: #666666;
 	--color-grey3: #999999;
@@ -49,7 +50,7 @@ body{
 
 :root{
 	--color-title: var(--color-blue2);
-	--color-subtitle: var(--color-grey1);
+	--color-subtitle: var(--color-grey2);
 	--font-title: var(--fontFamily-principal);
 	--fontStyle-title: normal;
 	--fontWeight: bold;
@@ -103,41 +104,50 @@ p {
 	font-weight: normal;
 }
 
-a {
-	font-family: var(--fontFamily-principal); 
-	font-size: 12px;
-	font-style: normal;
-	line-height: normal; 
-	color: var(--color-accentB);
-	cursor: pointer;
+:root{
+	--a-fontFamily: var(--fontFamily-principal);
+	--a-fontSize: 14px;
+	--a-fontStyle: normal;
+	--a-fontWeight: normal;
+	--a-line: normal;
+	--a-colorS: var(--color-blue4);
 }
 
-.aButton{
-	background-color: transparent;
-	color: blue;
+
+.aBase{
+	font-family: var(--a-fontFamily); 
+	font-style: var(--a-fontStyle);
+	font-weight: var(--a-fontWeight); 
+	line-height: var(--a-line); 
 	text-decoration: underline;
-	font-weight: bold;
+	color: var(--a-colorS);
+	cursor: pointer;
+	background-color: transparent;
 	border: 0px solid #000000;
 }
 
-.aDisabled:hover{
-	cursor: not-allowed !important;
-	box-shadow: 0 0 0px 0 rgba(0, 0, 0, 0) !important;
-	
+.aAccent{
+	color: var(--color-accentB) !important;
 }
 
-.aButton:hover{
-  cursor: pointer;
-  box-shadow: 0 0 5px 0 var(--color-blue4);
+a {
+	font-family: var(--a-fontFamily); 
+	font-size: var(--a-fontSize);
+	font-style: var(--a-fontStyle);
+	font-weight: var(--a-fontWeight); 
+	line-height: var(--a-line); 
+	color: var(--a-colorS);
+	cursor: pointer;
 }
+
 a:link {
 	font-family: var(--fontFamily-principal);  
-	color: var(--color-accentB);
+	color: var(--color-blue4);
 }
 
 a:visited {
 	font-family: var(--fontFamily-principal);  
-	color: var(--color-accentB);
+	color: var(--color-blue4);
 }
 
 /*TABLES*/
@@ -149,7 +159,7 @@ table{
   }
   
 td, th {
-	border-bottom: 1px solid #ddd;
+	/*border-bottom: 1px solid #ddd;*/
     text-align: left;
     padding: 10px;
   }
@@ -163,12 +173,12 @@ th {
 	color: var(--color-rest);
 }
   
-tr:nth-child(even) {
+/*tr:nth-child(even) {
 	background-color: var(--color-grey5);
-  }
+  }*/
 
 .trClickable:hover{
-	background-color: #84b7d6;
+	background-color: var(--color-grey5);
 	cursor: pointer;
 }
 /*Body div*/

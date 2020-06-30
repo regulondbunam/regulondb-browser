@@ -33,15 +33,14 @@ const TableRegulators = ({
                             regulators.map((item) => {
                                 return (
                                     <div key={item.id}
-                                        className="divA"
                                         style={{ float: "left", paddingRight: "2%" }}
-                                        onClick={() => { history.push("/regulator/" + item.id) }}
+                                        
                                     >
-                                        <h2 style={{ margin: "0", float: "left",color: "blue", textDecoration: "underline" }}>{item.name}</h2>
-                                        <h2 style={{ margin: "0", color: "var(--color-accentA)", fontSize: "12px" }}>
-                                            {item.type}
+                                        <h2 className="aBase" 
+                                        onClick={() => { history.push("/regulator/" + item.id) }}>
+                                            {item.name}({convertType(item.type)})
                                         </h2>
-                                        <h3 style={{ margin: "0", fontSize: "5px" }}>{item.id}</h3>
+                                       
                                     </div>
                                 )
                             })
@@ -60,6 +59,17 @@ const TableRegulators = ({
         }
     }
 
+}
+
+function convertType(type){
+    switch (type) {
+        case "activator":
+            return "+"
+        case "repressor":
+            return "-"
+        default:
+            return ""
+    }
 }
 
 export default TableRegulators;

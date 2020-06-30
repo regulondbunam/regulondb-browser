@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from '../../basicInput/HLink'
 
 const MenuBody = ({ menuData, id, close }) => {
     const submenuData = menuData.find(element => element.id === id)
@@ -12,12 +11,12 @@ const MenuBody = ({ menuData, id, close }) => {
                         case "SUBMENU":
                             return (
                                 <div key={Item.id} style={styleSubmenu}>
-                                    <Link href={Item.link} style={styleSubTitle}>{Item.title}</Link>
+                                    <a href={Item.link} style={styleSubTitle}>{Item.title}</a>
                                     {
                                         Item.options.map((Item) => {
                                             return (
                                                 <div key={Item.id} style={{ paddingTop: "5%", paddingBottom: "5%" }}>
-                                                    <Link style={styleLink} target={Item.target} href={Item.link}>{Item.title}</Link>
+                                                    <a style={styleLink} target={Item.target} href={Item.link}>{Item.title}</a>
                                                 </div>
                                             )
                                         })
@@ -26,7 +25,7 @@ const MenuBody = ({ menuData, id, close }) => {
                             )
                         case "LINK":
                             return (<div key={Item.id} style={styleSubmenu}>
-                                <Link style={styleLink} target={Item.target} href={Item.link}>{Item.title}</Link>
+                                <a style={styleLink} target={Item.target} href={Item.link}>{Item.title}</a>
                             </div>)
                         case "CARD":
                             return (<div></div>)

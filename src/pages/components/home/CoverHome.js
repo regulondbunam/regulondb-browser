@@ -1,6 +1,5 @@
 import React from 'react';
 import Cover from '../ui-components/regulonDB-web/Cover'
-import Link from '../ui-components/basicInput/HLink';
 import SearchTool from '../search/SearchTool'
 import LinksInfo from './linksCover.json'
 
@@ -26,7 +25,7 @@ const CoverHome = () => {
                         links.map((link) => {
                             return(
                                 <div key={link.link} style={{float: "left"}}>
-                                    <Link style={{paddingLeft: "20px"}} href={link.link} regulonStyle={"simple"}>{link.title}</Link>
+                                    <a style={{paddingLeft: "20px", color: "#ffffff"}} href={link.link}>{link.title}</a>
                                 </div>
                             )
                         })

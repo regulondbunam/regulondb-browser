@@ -28,10 +28,17 @@ const ResultsGene = ({
                         let products = ""
                         products += prod.map((product) => {
                             return (
-                                ", " + product.name
+                                `${product.name}, `
                             )
                         })
-                        let text = gene.name + ' Gene, synonyms: ' + gene.synonyms + ' products gene: ' + products
+                        let text = `${gene.name} gene; `
+                        if(gene.synonyms.length> 0){
+                            text += `synonyms: ${gene.synonyms}; `
+                        }
+                        
+                        if(prod.length > 0){
+                            text += `products: ${products}`
+                        }
 
                         return (
 

@@ -19,7 +19,7 @@ function sequence(
             seq = new GenBankFormat(sequence)
             return (
                 `
-                geneInfo\t${gene}gene sequence Size:${seq.size} A:${seq.nucleotideA} T:${seq.nucleotideT} C:${seq.nucleotideC} G:${seq.nucleotideG} <br>
+                ${gene} gene Size:${seq.size} A:${seq.nucleotideA} T:${seq.nucleotideT} C:${seq.nucleotideC} G:${seq.nucleotideG} <br>
                 ${seq.formatSequence}
                 `
         )

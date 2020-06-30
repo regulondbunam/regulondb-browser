@@ -15,8 +15,9 @@ const GeneDescription = ({
             <TableGeneInfo idGene={geneID} />
             <br/>
             <h1>Gene Regulation</h1>
-            <h2>Operon</h2>
+            <h2>Operon Arrangement</h2>
             <TableOperon idGene={geneID} />
+            <br/>
             <h2>Regulators</h2>
             <TableRegulators idGene={geneID} />
             <h2>Context</h2>
