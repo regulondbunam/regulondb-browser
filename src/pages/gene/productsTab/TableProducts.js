@@ -24,7 +24,7 @@ const TableProducts = ({
                     products.map((product) => {
                         return (
                             <div style={{ width: "80%" }} key={product.name}>
-                                <h2 style={{margin: '0'}}>{product.name}</h2>
+                                <h2 style={{ margin: '0' }}>{product.name}</h2>
                                 {TableProductInfo(product)}
                             </div>
                         )
@@ -50,6 +50,10 @@ function TableProductInfo(product) {
                 {
                     Object.keys(product).map((key, index) => {
                         const test = key.match(/^_/)
+                        if (key === 'motifs') {
+                            console.log('motif')
+                            return Motifs(motifE)
+                        }
                         if (product[key] === null || product[key].length <= 0 || test !== null) {
                             return null
                         }
@@ -57,7 +61,7 @@ function TableProductInfo(product) {
                             case "name":
                                 return null
                             case "motifs":
-                                return null
+                                return Motifs(motifE)
                             case 'externalCrossReferences':
                                 return null
                             case 'evidenceReferences':
@@ -76,6 +80,65 @@ function TableProductInfo(product) {
                 }
             </tbody>
         </table>
+    )
+}
+
+const motifE = [
+    {
+        leftEndPosition: 1234,
+        rightEndPosition: 5632,
+        sequence: "ESNITSTLNISQQTLKIQKF",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        type: "alF",
+        note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    },
+    {
+        leftEndPosition: 1234,
+        rightEndPosition: 5632,
+        sequence: "HKNSQLCFSHNQFKIMQLILKNKNESNITSTLNISQQTLKIQKFNIMYKLKLRRMSDIVTLGITSY",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        type: "alF",
+        note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    }
+]
+
+function Motifs(motifs) {
+    return (
+        <React.Fragment key={motifs}>
+            <tr >
+                <td colSpan="2" style={{ fontWeight: "bold", backgroundColor: "#D5D5D7" }}>Motifs:</td>
+            </tr>
+            <tr>
+                <td colSpan="2">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style={{ backgroundColor: "#D5D5D7" }}>Type</th>
+                                <th style={{ backgroundColor: "#D5D5D7" }}>Position</th>
+                                <th style={{ backgroundColor: "#D5D5D7" }}>Sequence</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {
+                            motifs.map((motif) => {
+                                return <tr key={motif}>
+                                    <td>{motif.type}</td>
+                                    <td>{`${motif.leftEndPosition}-->${motif.rightEndPosition}`}</td>
+                                    <td dangerouslySetInnerHTML={{ __html: motif.sequence }}></td>
+                                </tr>
+                            })
+                        }
+                    </tbody>
+                    </table> 
+                </td>
+            </tr>
+        </React.Fragment>
+    )
+}
+
+function motifDisplay(motif) {
+    return (
+        null
     )
 }
 
