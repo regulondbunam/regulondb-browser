@@ -9,6 +9,33 @@ export default class Gene {
   }
 }
 
+const GENE_INFO = gql`
+query getGeneInfo($advancedSearch: String!){
+  getGenesBy(limit:1 page: 0 advancedSearch:$advancedSearch)
+    {
+      data{
+        geneInfo{
+          id
+          name
+          synonyms
+          leftEndPosition
+          rightEndPosition
+          centisomePosition
+          strand
+          sequence
+          gcContent
+          note
+          type
+        }
+        products{
+          name
+        }
+      }
+    }
+  
+  }
+`
+
 // Gene Operon Info
 
 export class OperonInfo{
@@ -131,32 +158,6 @@ query SearchGenes($search: String!){
       totalResults
     }
     }
-  }
-`
-
-//advancedSearch
-
-const GENE_INFO = gql`
-query getGeneInfo($advancedSearch: String!){
-  getGenesBy(limit:1 page: 0 advancedSearch:$advancedSearch)
-    {
-      data{
-        geneInfo{
-          id
-          name
-          synonyms
-          leftEndPosition
-          rightEndPosition
-          centisomePosition
-          strand
-          sequence
-          gcContent
-          note
-          type
-        }
-      }
-    }
-  
   }
 `
 

@@ -22,6 +22,7 @@ const TableGeneInfo = ({
     try {
         //console.log(data.getGenesBy.data[0].geneInfo)
         const geneData = data.getGenesBy.data[0].geneInfo
+        const products = data.getGenesBy.data[0].products
         const leftEndPosition = geneData["leftEndPosition"]
         const rightEndPosition = geneData["rightEndPosition"]
         const size = sizeGene(leftEndPosition, rightEndPosition)
@@ -31,7 +32,7 @@ const TableGeneInfo = ({
                     <tbody>
                         {Object.keys(geneData).map((key, index) => {
                             const test = key.match(/^_/)
-                            if (geneData[key] === null || geneData[key].length<=0) {
+                            if (geneData[key] === null || geneData[key].length <= 0) {
                                 return null
                             }
                             // console.log(`${key}: ${geneData[key]}`)
@@ -47,14 +48,14 @@ const TableGeneInfo = ({
                                     case 'gcContent':
                                         return (
                                             <tr key={key}>
-                                                <td style={{ fontWeight: "bold" }}>{key}</td>
+                                                <td style={{ fontWeight: "bold" }}>{`${key}:`}</td>
                                                 <td dangerouslySetInnerHTML={{ __html: `${geneData[key]}%` }}></td>
                                             </tr>
                                         )
                                     default:
                                         return (
                                             <tr key={key}>
-                                                <td style={{ fontWeight: "bold" }}>{key}</td>
+                                                <td style={{ fontWeight: "bold" }}>{`${key}:`}</td>
                                                 <td dangerouslySetInnerHTML={{ __html: geneData[key] }}></td>
                                             </tr>
                                         )
@@ -63,6 +64,10 @@ const TableGeneInfo = ({
                             return null
                         })
                         }
+                            {
+                                products.length>0?ShowProducts(products):null
+                            }
+                        
                     </tbody>
                 </table>
             </div>
@@ -72,6 +77,23 @@ const TableGeneInfo = ({
         return <>catch err</>
     }
 
+}
+
+function ShowProducts(products){
+    return(
+        <tr>
+            <td style={{ fontWeight: "bold" }}>Products:</td>
+            <td>
+            {
+                products.map((product)=>{
+                    return(
+                    <p key={`${products.name}-infoTable`} className="aBase">{product.name}</p>
+                    )
+                })
+            }
+            </td>
+        </tr>
+    )
 }
 
 function GenomePosition(size, leftEndPosition, rightEndPosition) {
@@ -93,11 +115,11 @@ function sizeGene(leftEndPosition, rightEndPosition) {
 function sequenceGene(gene, sequence, key) {
     return (
         <tr key={key}>
-            <td style={{ fontWeight: "bold" }}>{key}</td>
+            <td style={{ fontWeight: "bold" }}>{`${key}:`}</td>
             <td className="sequence" >
                 <Modal className="aBase" title={"Fasta Format"} info={Sequence(gene, sequence, "fasta")}></Modal>
                 <Modal className="aBase" title={"genbank Format"} info={Sequence(gene, sequence, "genbank")}></Modal>
-                </td>
+            </td>
         </tr>
     )
 }
