@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Button from '../components/ui-components/basicInput/Buttons'
 import GnDescription from './GeneDescription'
+import GnProducts from './GeneProduct'
 
 const sections = ['DESCRIPTION','PRODUCT','GROWTH CONDITIONS']
 
 class GeneTabs extends Component {
-    state = { ActiveOption: "DESCRIPTION" }
+    state = { ActiveOption: "PRODUCT" }
 
     onClick =(event)=>{
         this.setState({ActiveOption: event.target.id})
@@ -34,7 +35,7 @@ class GeneTabs extends Component {
                         })
                     }
                 </div>
-                <div style={{paddingLeft: "10%", paddingTop: "2%"}}>
+                <div style={{paddingLeft: "10%", paddingTop: "2%", paddingRight: "10%"}}>
                     {
                         TabSelector(this.state.ActiveOption, idGene)
                     }
@@ -49,7 +50,7 @@ function TabSelector(item, idGene){
         case "DESCRIPTION":
             return <GnDescription geneID={idGene} />
         case "PRODUCT":
-            return <h3> a Product Info</h3>
+            return <GnProducts geneID={idGene} />
         case "GROWTH CONDITIONS":
             return <h3>a Growth Conditions Info</h3>
         default:

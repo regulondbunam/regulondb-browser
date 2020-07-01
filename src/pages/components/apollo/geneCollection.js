@@ -38,8 +38,8 @@ query getGeneInfo($advancedSearch: String!){
 
 // Gene Operon Info
 
-export class OperonInfo{
-  constructor(idGene){
+export class OperonInfo {
+  constructor(idGene) {
     this.advancedSearch = `${idGene}[geneInfo.id]`
     this.query = GENE_OPERON
   }
@@ -49,7 +49,7 @@ export class OperonInfo{
 
 export class RegulatorInfo {
   constructor(idGene) {
-    this.advancedSearch=`${idGene}[geneInfo.id]`
+    this.advancedSearch = `${idGene}[geneInfo.id]`
     this.query = GENE_REGULATOR
   }
 }
@@ -75,8 +75,8 @@ query getGeneRegulator($advancedSearch: String!){
 
 export class ContextInfo {
   constructor(idGene) {
-    this.advancedSearch=`${idGene}[geneInfo.id]`
-    this.query=GENE_CONTEXT
+    this.advancedSearch = `${idGene}[geneInfo.id]`
+    this.query = GENE_CONTEXT
   }
 }
 const GENE_CONTEXT = gql`
@@ -110,7 +110,7 @@ query getGeneContext($advancedSearch: String!) {
 
 export class ShineDalgarno {
   constructor(idGene) {
-    this.advancedSearch=`${idGene}[geneInfo.id]`
+    this.advancedSearch = `${idGene}[geneInfo.id]`
     this.query = GENE_SHINEDALGARNO
   }
 }
@@ -191,4 +191,54 @@ query getGeneOperon($advancedSearch: String!){
     }
   
   }
+`
+
+//Gene Products Info
+
+export class GeneProducts {
+  constructor(idGene) {
+    this.advancedSearch = `${idGene}[geneInfo.id]`
+    this.query = GENE_PRODUCTS
+  }
+}
+const GENE_PRODUCTS = gql`
+query getGeneProducts($advancedSearch: String!) {
+  getGenesBy(limit: 1, page: 0, advancedSearch: $advancedSearch) {
+    data {
+      products {
+        name
+        synonyms
+        regulatorId
+        sequence
+        isoelectricPoint
+        molecularWeight
+        cellularLocation
+        anticodon
+        note
+        type
+        motifs {
+          leftEndPosition
+          rightEndPosition
+          sequence
+          description
+          type
+          note
+        }
+        externalCrossReferences {
+          id
+          name
+          url
+        }
+        evidenceReferences {
+          evidenceName
+          evidenceCode
+          evidenceType
+          referenceId
+          referenceURL
+          referenceCitation
+        }
+      }
+    }
+  }
+}
 `
