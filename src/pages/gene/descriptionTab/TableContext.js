@@ -81,7 +81,7 @@ function EvidenceReferencesDisplay(evidenceReferences) {
             <h1>${evd.evidenceCode}: ${evd.evidenceName}</h1>
             <h3>${evd.evidenceType}</h3>
             <h2>Reference:</h2>
-            <h2><a href="${evd.referenceURL}" target="_blank" >View Refence</a></h2>
+            <h2><a href="${evd.referenceURL}" target="_blank" rel="noopener noreferrer" >View Refence</a></h2>
             <p class="citation">${evd.referenceCitation}</p>
         `
         return (

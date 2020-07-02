@@ -4,6 +4,7 @@ import TableOperon from './descriptionTab/TableOperon'
 import TableRegulators from './descriptionTab/TableRegulators'
 import TableContext from './descriptionTab/TableContext'
 import TableShineDalgarno from './descriptionTab/TableShineDalgarno'
+import TableGeneExternalID from './descriptionTab/TableGeneExternalID'
 
 
 const GeneDescription = ({
@@ -27,7 +28,7 @@ const GeneDescription = ({
             <TableShineDalgarno idGene={geneID}/>
         </article>
         <aside>
-            <h1>Hola</h1>
+            <TableGeneExternalID idGene={geneID}/>
         </aside>
         </>
     );

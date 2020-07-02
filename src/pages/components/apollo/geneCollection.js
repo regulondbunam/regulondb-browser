@@ -242,3 +242,28 @@ query getGeneProducts($advancedSearch: String!) {
   }
 }
 `
+
+//GEne Esternal Data Bases
+
+export class ExternalDataBases {
+  constructor(idGene) {
+    this.advancedSearch = `${idGene}[geneInfo.id]`
+    this.query = GENE_EXTERNAL
+  }
+}
+const GENE_EXTERNAL = gql`
+query getGeneExternal($advancedSearch: String!) {
+  getGenesBy(limit: 1, page: 0, advancedSearch: $advancedSearch) {
+    data {
+      geneInfo{
+        id
+        externalCrossReferences{
+          id
+          name
+          url
+        }
+      }
+    }
+  }
+}
+`

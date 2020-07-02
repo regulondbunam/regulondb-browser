@@ -27,9 +27,9 @@ const Gene = ({
     const { data, loading, error } = useQuery(GetGeneName, {
         variables: { advancedSearch }
     })
-    console.log("data: ", data)
-    console.log("loading", loading)
-    console.log("error", error)
+    // console.log("data: ", data)
+    // console.log("loading", loading)
+    // console.log("error", error)
     if(idgene === null){
         const state = `Sorry the ID provided is not a valid identifier`
         console.log(error)
