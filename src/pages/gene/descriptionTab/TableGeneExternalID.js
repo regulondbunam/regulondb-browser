@@ -33,7 +33,7 @@ const TableGeneExternalID = ({
                     {
                         exCR.map((item)=>{
                             return(
-                                <tr key={`${item.id}-${item.name}`}>
+                                <tr key={`${item.url}`}>
                                     <td>
                                     <a  href={item.url} target="_blank" rel="noopener noreferrer">{item.name}</a>
                                     </td>

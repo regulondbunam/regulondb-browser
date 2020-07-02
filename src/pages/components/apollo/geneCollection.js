@@ -258,7 +258,6 @@ query getGeneExternal($advancedSearch: String!) {
       geneInfo{
         id
         externalCrossReferences{
-          id
           name
           url
         }
