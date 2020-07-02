@@ -45,6 +45,39 @@ export class OperonInfo {
   }
 }
 
+const GENE_OPERON = gql`
+query getGeneOperon($advancedSearch: String!){
+  getGenesBy(limit:1 page: 0 advancedSearch:$advancedSearch)
+    {
+      data{
+        regulation{
+        operon{
+          id
+          name
+          arrangement{
+            regulator{
+              id
+              name
+              type
+            }
+            promoter{
+              id
+              name
+            }
+            transcriptionUnit{
+              id
+              name
+            }
+          }
+        }
+      }
+      }
+    }
+  
+  }
+`
+
+
 //Gene Regulators Info
 
 export class RegulatorInfo {
@@ -160,39 +193,6 @@ query SearchGenes($search: String!){
     }
   }
 `
-
-const GENE_OPERON = gql`
-query getGeneOperon($advancedSearch: String!){
-  getGenesBy(limit:1 page: 0 advancedSearch:$advancedSearch)
-    {
-      data{
-        regulation{
-        operon{
-          id
-          name
-          arrangement{
-            regulator{
-              id
-              name
-              type
-            }
-            promoter{
-              id
-              name
-            }
-            transcriptionUnit{
-              id
-              name
-            }
-          }
-        }
-      }
-      }
-    }
-  
-  }
-`
-
 //Gene Products Info
 
 export class GeneProducts {

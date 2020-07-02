@@ -27,15 +27,24 @@ const Gene = ({
     const { data, loading, error } = useQuery(GetGeneName, {
         variables: { advancedSearch }
     })
-
-    // console.log("data: ",data)
-    // console.log("loading",loading)
-    // console.log("error",error)
+    console.log("data: ", data)
+    console.log("loading", loading)
+    console.log("error", error)
+    if(idgene === null){
+        const state = `Sorry the ID provided is not a valid identifier`
+        console.log(error)
+        return (
+            //error en sistema
+            <>
+                {CoverLoading(state, 'error')}
+            </>
+        )
+    }
     if (loading) {
         const state = `please wait we are querying the id ${idgene}`
         return (
             <>
-                {CoverLoading(state,'loading')}
+                {CoverLoading(state, 'loading')}
             </>
         );
     }
@@ -45,7 +54,7 @@ const Gene = ({
         return (
             //error en sistema
             <>
-                {CoverLoading(state,'error')}
+                {CoverLoading(state, 'error')}
             </>
         )
     }
@@ -66,27 +75,33 @@ const Gene = ({
         const state = `Sorry we couldn't find the identifier: ${idgene}`
         return (
             <>
-                {CoverLoading(state,'error')}
+                {CoverLoading(state, 'error')}
             </>
         )
     }
 }
 
 function Title(geneName, geneID) {
-        return (
-            <div style={styleTitle}>
-                <h1 style={{ color: "var(--color-accentB)", margin: "0", float: "left" }}>Gene &nbsp;</h1>
-                <h1 style={{ margin: "0" }}>{geneName}</h1>
-                <h3 style={{ margin: "0", fontSize: "9px" }}>{geneID}</h3>
-            </div>
-        )
+    return (
+        <div style={styleTitle}>
+            <h1 style={{ color: "var(--color-accentB)", margin: "0", float: "left" }}>Gene &nbsp;</h1>
+            <h1 style={{ margin: "0" }}>{geneName}</h1>
+            <h3 style={{ margin: "0", fontSize: "9px" }}>{geneID}</h3>
+        </div>
+    )
 
 
 }
 
 function BreakPathName(pathname) {
-    pathname = pathname.slice(6)
-    return pathname
+    //console.log("in: ", pathname)
+    let f = pathname.split('/')
+    pathname = f[2]
+    if (pathname.match('^RDB[A-Z]{5}[A-Z0-9]{5}')) {
+        return pathname
+    }
+    //console.log("out: ", pathname)
+    return null
 }
 
 const styleTitle = {

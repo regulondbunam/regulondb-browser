@@ -6,7 +6,7 @@ import GnProducts from './GeneProduct'
 const sections = ['DESCRIPTION','PRODUCT','GROWTH CONDITIONS']
 
 class GeneTabs extends Component {
-    state = { ActiveOption: "PRODUCT" }
+    state = { ActiveOption: "DESCRIPTION" }
 
     onClick =(event)=>{
         this.setState({ActiveOption: event.target.id})

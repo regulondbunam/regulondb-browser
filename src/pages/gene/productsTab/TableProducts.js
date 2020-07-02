@@ -136,12 +136,6 @@ function Motifs(motifs) {
     )
 }
 
-function motifDisplay(motif) {
-    return (
-        null
-    )
-}
-
 function sequence(gene, sequence, key) {
     return (
         <tr key={`${key}-Sequence`}>
