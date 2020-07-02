@@ -19,7 +19,6 @@ const CoverHome = () => {
                 <SearchTool styleBox={styleBox}/>
                 <br/>
                 <br/>
-                <br/>
                 <div>
                     {
                         links.map((link) => {

@@ -20,7 +20,7 @@ class GeneTabs extends Component {
 
         return ( 
             <>
-                <div className="tabHeader">
+                <nav className="tabHeader">
                     {
                         sections.map((item)=>{
                             let styleTab = "tab"
@@ -34,12 +34,13 @@ class GeneTabs extends Component {
                             )
                         })
                     }
-                </div>
-                <div style={{paddingLeft: "10%", paddingTop: "2%", paddingRight: "10%"}}>
-                    {
+                </nav>
+                <>
+                {
                         TabSelector(this.state.ActiveOption, idGene)
-                    }
-                </div>
+                }
+                </>
+                    
             </>
          );
     }

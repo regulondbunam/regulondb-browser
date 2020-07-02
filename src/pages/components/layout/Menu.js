@@ -5,8 +5,10 @@ import MenuData from '../../../mainmenu.json'
 const menuData = MenuData.mainmenu
 
 const Menu = () => {
-    return ( 
-        <MainMenu menuData={menuData} />
+    return (
+        <nav style={{float: "none"}}>
+            <MainMenu menuData={menuData} />
+        </nav>
      );
 }
  

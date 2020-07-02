@@ -63,12 +63,10 @@ const Gene = ({
         geneName = data.getGenesBy.data[0].geneInfo.name
         return (
             <>
-                <div >
                     {Title(geneName, idgene)}
                     <div>
                         <GeneTabs idGene={idgene} />
                     </div>
-                </div>
             </>
         );
     } catch (error) {

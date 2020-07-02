@@ -48,6 +48,26 @@ body{
     margin: 0px;
 }
 
+/* Layout Site*/
+
+section:after {
+	content: "";
+	clear: both;
+	display: table;
+  }
+
+article{
+	float: left;
+	padding: 3% 0% 2% 10%;
+	width: 80%;
+	
+}
+
+aside{
+	float: left;
+	width: 20%;
+}
+
 /*Titles*/
 
 :root{

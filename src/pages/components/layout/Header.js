@@ -10,7 +10,7 @@ const Header = ({
 }) => {
     const isHome = location.pathname === "/home" || location.pathname === "/"
     return (
-        <div style={StyleHeader}>
+        <header style={StyleHeader}>
             <div style={StyleSide}>
                 <Image id={"logoRegulon"} urlImage={log} imgStyle={{ maxWidth: "239px", maxHeight: "48px" }} />
             </div>
@@ -25,8 +25,7 @@ const Header = ({
                         </>
                 }
             </div>
-
-        </div>
+        </header>
     );
 }
 

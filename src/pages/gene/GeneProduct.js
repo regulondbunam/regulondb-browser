@@ -6,8 +6,13 @@ const GeneProducts = ({
 }) => {
     return ( 
         <>
+        <article>
         <h1>Product information</h1>
         <TableProducts idGene={geneID} />
+        </article>
+        <aside>
+            
+        </aside>
         </>
      );
 }

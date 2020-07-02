@@ -10,8 +10,12 @@ const Layout = ({
         <>
         <Header />
         <Menu />
+        <section>
         {children}
+        </section>
+        <footer>
         <Footer/>
+        </footer>
         </>
      );
 }

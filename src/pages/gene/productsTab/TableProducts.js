@@ -24,7 +24,7 @@ const TableProducts = ({
                     products.map((product) => {
                         return (
                             <div style={{ width: "80%" }} key={product.name}>
-                                <h2 style={{ margin: '0' }}>{product.name}</h2>
+                                <h2 dangerouslySetInnerHTML={{ __html: product.name }} style={{ margin: '0' }}/>
                                 {TableProductInfo(product)}
                             </div>
                         )

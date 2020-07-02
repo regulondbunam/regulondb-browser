@@ -11,6 +11,7 @@ const GeneDescription = ({
 }) => {
     return (
         <>
+        <article>
             <h1>Gene Information</h1>
             <TableGeneInfo idGene={geneID} />
             <br/>
@@ -24,6 +25,10 @@ const GeneDescription = ({
             <TableContext idGene={geneID} />
             <h1>ShineDalgarno</h1>
             <TableShineDalgarno idGene={geneID}/>
+        </article>
+        <aside>
+            <h1>Hola</h1>
+        </aside>
         </>
     );
 
