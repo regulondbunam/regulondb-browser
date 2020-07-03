@@ -4,6 +4,7 @@ import Gene from '../../components/apollo/geneCollection'
 import {GetPhrase} from '../../components/apollo/phraseCollection'
 import Modal from '../../components/ui-components/infoDisplay/Modal/Modal'
 import Sequence from '../../components/sequence/Sequence'
+import Phrase from './phrases/Phrase'
 
 const TableGeneInfo = ({
     idGene
@@ -20,15 +21,24 @@ const TableGeneInfo = ({
         variables: {id}
     })
 
-    if (loading) {
+    if (loading || pharaseData.loading) {
         return <p>loading...</p>
     }
     if (error) {
         return <p>error</p>
     }
     try {
-        console.log(pharaseData)
+        //console.log(pharaseData.data.getPhraseOf[0])
         //console.log(data.getGenesBy.data[0].geneInfo)
+        let Genephrase = {}
+        let phraseProps = []
+        try {
+            Genephrase = pharaseData.data.getPhraseOf[0]
+            phraseProps = Genephrase.properties
+        } catch (error) {
+            console.log("no phrase data")
+        }
+        
         const geneData = data.getGenesBy.data[0].geneInfo
         const products = data.getGenesBy.data[0].products
         const leftEndPosition = geneData["leftEndPosition"]
@@ -48,7 +58,9 @@ const TableGeneInfo = ({
                             if (test === null) {
                                 switch (key) {
                                     case 'leftEndPosition':
-                                        return GenomePosition(size, leftEndPosition, rightEndPosition)
+                                        const phraseL = findInArray('leftEndPosition',phraseProps)
+                                        const phraseR = findInArray('rightEndPosition',phraseProps)
+                                        return GenomePosition(size, leftEndPosition, rightEndPosition, phraseL, phraseR)
                                     case 'rightEndPosition':
                                         return null
                                     case 'sequence':
@@ -87,6 +99,10 @@ const TableGeneInfo = ({
 
 }
 
+function findInArray(propertie,properties){
+    return properties.find(element => element.name === propertie)
+}
+
 function ShowProducts(products){
     return(
         <tr>
@@ -104,11 +120,16 @@ function ShowProducts(products){
     )
 }
 
-function GenomePosition(size, leftEndPosition, rightEndPosition) {
+function GenomePosition(size, leftEndPosition, rightEndPosition, phraseL, phraseR) {
+    //console.log(phraseR)
     return (
         <tr key={size}>
             <td style={{ fontWeight: "bold" }}>Genome position(nucleotides):</td>
-            <td>{`${leftEndPosition} --> ${rightEndPosition}   Size: ${size}bp `}</td>
+            <td>
+            <Phrase phraseData={phraseL} term={leftEndPosition}/> 
+            <p style={{float: "left", margin: "0"}}>&nbsp;{"-->"}&nbsp;</p>
+            <Phrase phraseData={phraseR} term={rightEndPosition}/> 
+            </td>
         </tr>
     )
 }

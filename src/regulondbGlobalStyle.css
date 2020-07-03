@@ -26,6 +26,7 @@ Ver: 0.0.25
 	--color-accentA: #C93A1D;
 	--color-accentAA: #C93A1D99;
 	--color-accentB: #CC9900;
+	--color-postit: #fff8a6;
 }
 /*font family */
 :root{
@@ -119,10 +120,10 @@ h3 {
 
 p {
 	font-family: var(--fontFamily-principal); 
-	font-size: 16px;
+	font-size: 14px;
 	font-style: normal;
 	line-height: normal; 
-	color: var(--color-grey2);
+	color: var(--color-grey1);
 	font-weight: normal;
 }
 
