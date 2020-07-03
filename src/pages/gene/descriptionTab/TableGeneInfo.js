@@ -1,16 +1,23 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import Gene from '../../components/apollo/geneCollection'
+import {GetPhrase} from '../../components/apollo/phraseCollection'
 import Modal from '../../components/ui-components/infoDisplay/Modal/Modal'
 import Sequence from '../../components/sequence/Sequence'
 
 const TableGeneInfo = ({
     idGene
 }) => {
-    let gene = new Gene(idGene)
+    const gene = new Gene(idGene)
+    const phrase = new GetPhrase(idGene)
+    const id = phrase.id
     const advancedSearch = gene.advancedSearch
     const { data, loading, error } = useQuery(gene.query, {
         variables: { advancedSearch }
+    })
+    const pharaseData = useQuery(phrase.query,{
+        skip: !data,
+        variables: {id}
     })
 
     if (loading) {
@@ -20,6 +27,7 @@ const TableGeneInfo = ({
         return <p>error</p>
     }
     try {
+        console.log(pharaseData)
         //console.log(data.getGenesBy.data[0].geneInfo)
         const geneData = data.getGenesBy.data[0].geneInfo
         const products = data.getGenesBy.data[0].products

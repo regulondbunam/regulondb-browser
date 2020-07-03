@@ -19,7 +19,7 @@ const TableGeneExternalID = ({
         return <>error server</>
     }
     try {
-        console.log(data.getGenesBy.data[0].geneInfo.externalCrossReferences)
+        //console.log(data.getGenesBy.data[0].geneInfo.externalCrossReferences)
         const exCR = data.getGenesBy.data[0].geneInfo.externalCrossReferences
         return ( 
             <>
