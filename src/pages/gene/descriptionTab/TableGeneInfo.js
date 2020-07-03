@@ -125,7 +125,7 @@ function GenomePosition(size, leftEndPosition, rightEndPosition, phraseL, phrase
     return (
         <tr key={size}>
             <td style={{ fontWeight: "bold" }}>Genome position(nucleotides):</td>
-            <td>
+            <td className="phraseContent">
             <Phrase phraseData={phraseL} term={leftEndPosition}/> 
             <p style={{float: "left", margin: "0"}}>&nbsp;{"-->"}&nbsp;</p>
             <Phrase phraseData={phraseR} term={rightEndPosition}/> 
