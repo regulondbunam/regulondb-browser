@@ -36,10 +36,10 @@ const TableRegulators = ({
                                         style={{ float: "left", paddingRight: "2%" }}
                                         
                                     >
-                                        <h2 className="aBase" 
+                                        <p className="aBase" 
                                         onClick={() => { history.push("/regulator/" + item.id) }}>
                                             {item.name}({convertType(item.type)})
-                                        </h2>
+                                        </p>
                                        
                                     </div>
                                 )

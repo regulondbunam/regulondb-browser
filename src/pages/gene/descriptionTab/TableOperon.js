@@ -27,7 +27,7 @@ function TableOperon({
         const id = operonData.id
         const arrangement = operonData.arrangement
         return (
-            <div style={{ width: "80%" }}>
+            <div>
                 <div
                     style={{ float: "left", paddingRight: "2%" }}
                     
@@ -36,7 +36,7 @@ function TableOperon({
                     <p className="aBase" onClick={() => { history.push("/operon/" + id) }} style={{margin: "0", float: "left"}}>{name}</p>
                 </div>
 
-                <table style={{ width: "100%" }} >
+                <table>
                     <thead>
                         <tr>
                             <th>TranscriptionUnit</th>

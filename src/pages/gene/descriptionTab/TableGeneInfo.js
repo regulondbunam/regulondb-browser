@@ -62,7 +62,12 @@ const TableGeneInfo = ({
                                         const phraseR = findInArray('rightEndPosition',phraseProps)
                                         return GenomePosition(size, leftEndPosition, rightEndPosition, phraseL, phraseR)
                                     case 'rightEndPosition':
-                                        return null
+                                        return (
+                                            <tr key={key}>
+                                                <td style={{ fontWeight: "bold" }}>size:</td>
+                                                <td dangerouslySetInnerHTML={{ __html: `${size}bp` }}></td>
+                                            </tr>
+                                        )
                                     case 'sequence':
                                         return sequenceGene(geneData['name'], geneData[key], key)
                                     case 'gcContent':
@@ -106,7 +111,7 @@ function findInArray(propertie,properties){
 function ShowProducts(products){
     return(
         <tr>
-            <td style={{ fontWeight: "bold" }}>Products:</td>
+            <td style={{ fontWeight: "bold" }}>products:</td>
             <td>
             {
                 products.map((product)=>{
@@ -124,7 +129,7 @@ function GenomePosition(size, leftEndPosition, rightEndPosition, phraseL, phrase
     //console.log(phraseR)
     return (
         <tr key={size}>
-            <td style={{ fontWeight: "bold" }}>Genome position(nucleotides):</td>
+            <td style={{ fontWeight: "bold" }}>genome position(nucleotides):</td>
             <td className="phraseContent">
             <Phrase phraseData={phraseL} term={leftEndPosition}/> 
             <p style={{float: "left", margin: "0"}}>&nbsp;{"-->"}&nbsp;</p>

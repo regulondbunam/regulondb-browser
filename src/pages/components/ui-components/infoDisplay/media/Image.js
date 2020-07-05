@@ -98,9 +98,9 @@ const Image = ({
 
     return ( 
         item.map(item => {
-            return <a key={item.id} href={item.link} target={item.target}>
-              <img width={item.width} height={item.height} style={item.style} src={item.img} alt={item.alt} title={item.title} />
-            </a>
+            return <React.Fragment key={`img-${item.id}`}>
+              <img  width={item.width} height={item.height} style={item.style} src={item.img} alt={item.alt} title={item.title} />
+            </React.Fragment>
           })
 
      );

@@ -25,17 +25,17 @@ const TableContext = ({
         const contextData =  data.getGenesBy.data[0].regulation.context
         if(contextData.length>0){
             return(
-                <div style={{ width: "80%" }}>
+                <div>
                     <table>
                         <thead>
                             <tr>
                                 <th>Type</th>
                                 <th>Name</th>
-                                <th>PosLeft</th>
-                                <th>Pos Right</th>
+                                <th>Left Position</th>
+                                <th>Right Position</th>
                                 <th>Strand</th>
                                 <th>Notes</th>
-                                <th>Evidence and Referneces</th>
+                                <th>Evidence and References</th>
                             </tr>
                         </thead>
                         <tbody>

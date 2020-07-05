@@ -5,6 +5,7 @@ import TableRegulators from './descriptionTab/TableRegulators'
 import TableContext from './descriptionTab/TableContext'
 import TableShineDalgarno from './descriptionTab/TableShineDalgarno'
 import TableGeneExternalID from './descriptionTab/TableGeneExternalID'
+import GraphicGene from './descriptionTab/GraphicGene'
 
 
 const GeneDescription = ({
@@ -15,6 +16,7 @@ const GeneDescription = ({
         <article>
             <h1>Gene Information</h1>
             <TableGeneInfo idGene={geneID} />
+            <GraphicGene idGene={geneID} />
             <br/>
             <h1>Gene Regulation</h1>
             <h2>Operon Arrangement</h2>

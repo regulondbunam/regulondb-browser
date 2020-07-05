@@ -25,7 +25,7 @@ const TableShineDalgarno = ({
         if (sdData.length > 0) {
             return (
                 <>
-                    <div style={{ width: "80%" }}>
+                    <div>
                         {
                             <table>
                                 <tbody>
