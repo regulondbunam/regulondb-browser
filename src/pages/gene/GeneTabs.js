@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Button from '../components/ui-components/basicInput/Buttons'
 import GnDescription from './GeneDescription'
 import GnProducts from './GeneProduct'
+import GnGrowthC from './GeneGrowthConditions'
 
 const sections = ['DESCRIPTION','PRODUCT','GROWTH CONDITIONS']
 
@@ -53,7 +54,7 @@ function TabSelector(item, idGene){
         case "PRODUCT":
             return <GnProducts geneID={idGene} />
         case "GROWTH CONDITIONS":
-            return <h3>a Growth Conditions Info</h3>
+            return <GnGrowthC geneID={idGene} />
         default:
             return <h3>Select a tab option</h3>
     }

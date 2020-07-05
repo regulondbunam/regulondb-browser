@@ -266,3 +266,23 @@ query getGeneExternal($advancedSearch: String!) {
   }
 }
 `
+
+export class GrowthConditions {
+  constructor(idGene) {
+    this.advancedSearch = `${idGene}[geneInfo.id]`
+    this.query = GENE_GROWTHCONDITIONS
+  }
+}
+const GENE_GROWTHCONDITIONS = gql`
+query getGrowthConditions($advancedSearch: String!) {
+  getGenesBy(limit: 1, page: 0, advancedSearch: $advancedSearch) {
+    data {
+      growthConditions {
+        controlCondition
+        experimentalCondition
+        effect
+      }
+    }
+  }
+}
+`

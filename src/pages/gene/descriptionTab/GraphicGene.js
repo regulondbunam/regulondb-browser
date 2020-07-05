@@ -21,8 +21,8 @@ const GraphicGene = ({
                     <div onClick={() => { setZoom(!zoom) }} style={{ cursor: "grab", width: "100%", textAlign: "center"  }}>
                 {
                     zoom
-                        ? <Image id={idGene} urlImage={imgZ} imgStyle={{ maxWidth: "100%", maxHeight: "100px" }} />
-                        : <Image id={idGene} urlImage={img} imgStyle={{ maxWidth: "100%", maxHeight: "100px" }} />
+                        ? <Image id={idGene} urlImage={imgZ} imgStyle={{ maxWidth: "100%", height: "120px" }} />
+                        : <Image id={idGene} urlImage={img} imgStyle={{ maxWidth: "100%", height: "120px" }} />
                 }
 
             </div>

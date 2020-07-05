@@ -12,8 +12,8 @@ const TableProducts = ({
     const { data, loading, error } = useQuery(productsS.query, {
         variables: { advancedSearch }
     })
-    console.log(data)
-    console.log(error)
+    //console.log(data)
+    //console.log(error)
     if (loading) { return <>Loading...</> }
     if (error) { return <>Server error </> }
     try {
@@ -51,7 +51,7 @@ function TableProductInfo(product) {
                     Object.keys(product).map((key, index) => {
                         const test = key.match(/^_/)
                         if (key === 'motifs') {
-                            console.log('motif')
+                            //console.log('motif')
                             return Motifs(motifE)
                         }
                         if (product[key] === null || product[key].length <= 0 || test !== null) {
@@ -104,7 +104,7 @@ const motifE = [
 
 function Motifs(motifs) {
     return (
-        <React.Fragment key={motifs}>
+        <React.Fragment key={"showMotifs"}>
             <tr >
                 <td colSpan="2" style={{ fontWeight: "bold", backgroundColor: "#D5D5D7" }}>Motifs:</td>
             </tr>
@@ -121,7 +121,7 @@ function Motifs(motifs) {
                         <tbody>
                         {
                             motifs.map((motif) => {
-                                return <tr key={motif}>
+                                return <tr key={motif.sequence}>
                                     <td>{motif.type}</td>
                                     <td>{`${motif.leftEndPosition}-->${motif.rightEndPosition}`}</td>
                                     <td dangerouslySetInnerHTML={{ __html: motif.sequence }}></td>
