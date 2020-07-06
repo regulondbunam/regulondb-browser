@@ -39,7 +39,7 @@ const ResultsGene = ({
                         if(prod.length > 0){
                             text += `products: ${products}`
                         }
-
+                        //console.log(text)
                         return (
 
                             <tr key={gene.id} className="trClickable" onClick={() => { history.push("/gene/" + gene.id) }}>
