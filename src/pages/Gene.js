@@ -13,6 +13,9 @@ query countGenes($advancedSearch: String!){
             geneInfo{
                 name
             }
+            products{
+                name
+            }
         }
     }
   
@@ -20,8 +23,10 @@ query countGenes($advancedSearch: String!){
 `
 
 const Gene = ({
-    location
+    location,
+    geneData = {}
 }) => {
+    
     const idgene = BreakPathName(location.pathname)
     const advancedSearch = idgene + "[geneInfo.id]"
     const { data, loading, error } = useQuery(GetGeneName, {
@@ -30,7 +35,7 @@ const Gene = ({
     // console.log("data: ", data)
     // console.log("loading", loading)
     // console.log("error", error)
-    if(idgene === null){
+    if (idgene === null) {
         const state = `Sorry the ID provided is not a valid identifier`
         console.log(error)
         return (
@@ -60,13 +65,15 @@ const Gene = ({
     }
     let geneName = ""
     try {
+        //console.log(data.getGenesBy.data[0])
         geneName = data.getGenesBy.data[0].geneInfo.name
+        const productsName = data.getGenesBy.data[0].products
         return (
             <>
-                    {Title(geneName, idgene)}
-                    <div>
-                        <GeneTabs idGene={idgene} />
-                    </div>
+                {Title(geneName, idgene,productsName)}
+                <div>
+                    <GeneTabs idGene={idgene} />
+                </div>
             </>
         );
     } catch (error) {
@@ -79,11 +86,16 @@ const Gene = ({
     }
 }
 
-function Title(geneName, geneID) {
+function Title(geneName, geneID, products) {
     return (
         <div style={styleTitle}>
             <h1 style={{ color: "var(--color-accentB)", margin: "0", float: "left" }}>Gene &nbsp;</h1>
-            <h1 style={{ margin: "0" }}>{geneName}</h1>
+            <h1 style={{ margin: "0", float: "left" }}>{geneName}&nbsp;&nbsp;&nbsp;</h1>
+            <h1 style={{ margin: "0" }}>
+                {products.map((product)=>{
+                    return <React.Fragment key={product.name}>{product.name}</React.Fragment>
+                })}
+            </h1>
             <h3 style={{ margin: "0", fontSize: "9px" }}>{geneID}</h3>
         </div>
     )

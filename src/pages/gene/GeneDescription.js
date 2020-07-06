@@ -3,7 +3,7 @@ import TableGeneInfo from './descriptionTab/TableGeneInfo'
 import TableOperon from './descriptionTab/TableOperon'
 import TableRegulators from './descriptionTab/TableRegulators'
 import TableContext from './descriptionTab/TableContext'
-import TableShineDalgarno from './descriptionTab/TableShineDalgarno'
+//import TableShineDalgarno from './descriptionTab/TableShineDalgarno'
 import TableGeneExternalID from './descriptionTab/TableGeneExternalID'
 import GraphicGene from './descriptionTab/GraphicGene'
 
@@ -13,10 +13,10 @@ const GeneDescription = ({
 }) => {
     return (
         <>
+        <GraphicGene idGene={geneID} />
         <article>
             <h1>Gene Information</h1>
             <TableGeneInfo idGene={geneID} />
-            <GraphicGene idGene={geneID} />
             <br/>
             <h1>Gene Regulation</h1>
             <h2>Operon Arrangement</h2>
@@ -26,11 +26,13 @@ const GeneDescription = ({
             <TableRegulators idGene={geneID} />
             <h2>Context</h2>
             <TableContext idGene={geneID} />
-            <h1>ShineDalgarno</h1>
-            <TableShineDalgarno idGene={geneID}/>
+            
         </article>
         <aside>
+            <div style={{paddingTop: "25px"}}>
             <TableGeneExternalID idGene={geneID}/>
+            </div>
+            
         </aside>
         </>
     );
@@ -38,7 +40,8 @@ const GeneDescription = ({
 
 }
 /*
-
+<h1>ShineDalgarno</h1>
+            <TableShineDalgarno idGene={geneID}/>
             
             
  */

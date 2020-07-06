@@ -10,11 +10,6 @@ const GraphicGene = ({
 
     return (
         <table>
-            <thead>
-                <tr>
-                    <th>Graphic</th>
-                </tr>
-            </thead>
             <tbody>
                 <tr>
                     <td>
