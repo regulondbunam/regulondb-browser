@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import { GrowthConditions } from '../../components/apollo/geneCollection'
+import { GrowthConditions } from '../../components/apollo/GeneCollection'
 import { formatError } from 'graphql';
 
 const TabGrowthConditions = ({

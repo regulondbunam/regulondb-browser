@@ -1,5 +1,5 @@
 import React from 'react';
-import { GeneProducts } from '../../components/apollo/geneCollection';
+import { GeneProducts } from '../../components/apollo/GeneCollection';
 import { useQuery } from '@apollo/react-hooks';
 import Modal from '../../components/ui-components/infoDisplay/Modal/Modal';
 import Sequence from '../../components/sequence/Sequence';

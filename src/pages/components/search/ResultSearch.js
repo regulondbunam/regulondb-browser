@@ -1,6 +1,6 @@
 import React from 'react';
 import CoverSearch from './CoverSearch'
-import {SearchGene} from '../apollo/geneCollection'
+import {SearchGene} from '../apollo/GeneCollection'
 import { useQuery } from '@apollo/react-hooks';
 import Button from '../ui-components/basicInput/Buttons'
 import Genes from './results/Genes'

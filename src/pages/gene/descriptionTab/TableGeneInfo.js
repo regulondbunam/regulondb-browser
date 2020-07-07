@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import Gene from '../../components/apollo/geneCollection'
-import {GetPhrase} from '../../components/apollo/phraseCollection'
+import Gene from '../../components/apollo/GeneCollection'
+import {GetPhrase} from '../../components/apollo/PhraseCollection'
 import Modal from '../../components/ui-components/infoDisplay/Modal/Modal'
 import Sequence from '../../components/sequence/Sequence'
 import Phrase from './phrases/Phrase'
