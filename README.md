@@ -1,8 +1,8 @@
-# [Software name]
+# RegulonDB Browser tester
 
 # Description
 
-[High-level description, describing what exactly software does.]
+RegulonDB Browser Functional Prototype Test 
 
 # Motivation
 

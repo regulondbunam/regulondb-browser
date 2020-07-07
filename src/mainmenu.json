@@ -1,0 +1,154 @@
+{
+    "mainmenu": [
+        {
+            "id": "homeButton",
+            "title": "HOME_BUTTON",
+            "type": "HOME",
+            "link": "/home"
+        },
+        {
+            "id":"menuTools",
+            "title": "Tools",
+            "type": "MENU",
+            "options": [
+                {
+                    "id": "subMenuBros",
+                    "title": "BROWSING",
+                    "link": "/working",
+                    "type": "SUBMENU",
+                    "options": [
+                        {
+                            "id": "dtt",
+                            "title": "Drawing Traces Tool",
+                            "link" : "/working"
+                        },
+                        {
+                            "id": "tgb",
+                            "title": "Tracks (Gbrowser)",
+                            "link" : "/working"
+                        },
+                        {
+                            "id": "tps",
+                            "title": "TextPreso Search",
+                            "link" : "/working"
+                        },
+                        {
+                            "id": "pwms",
+                            "title": "Clustering for PWMs",
+                            "link" : "/working"
+                        },
+                        {
+                            "id": "tffb",
+                            "title": "Transcription Factor Family Browser",
+                            "link" : "/working"
+                        },
+                        {
+                            "id": "cbc",
+                            "title": "Coexpression Browser",
+                            "link" : "/working"
+                        }
+                        
+                    ]
+                },
+                {
+                    "id": "SunMenuDev",
+                    "title": "DEVELOPER",
+                    "link": "/working",
+                    "type": "SUBMENU",
+                    "options": [
+                        {
+                            "id": "api",
+                            "title": "Websrvice",
+                            "link": "/working"
+                        }
+                    ]
+                },
+                {
+                    "id": "SubMenuExternal",
+                    "title": "EXTERNAL",
+                    "link": "/working",
+                    "type": "SUBMENU",
+                    "options": [
+                        {
+                            "id": "rsaTOols",
+                            "title": "RSA Tools",
+                            "link" : "http://embnet.ccg.unam.mx/rsat/",
+                            "target": "_blank"
+                        },
+                        {
+                            "id": "geneCons",
+                            "title": "Gene Context Tool",
+                            "link" : "/working"
+                        },
+                        {
+                            "id": "esAtools",
+                            "title": "Gene Expression Analysis Tools",
+                            "link" : "/working"
+                        },
+                        {
+                            "id": "promos",
+                            "title": "Promoter Analysis Tool",
+                            "link" : "/working"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "overViews",
+            "title": "Overviews",
+            "type": "MENU",
+            "options":[
+                {
+                    "id": "iocs",
+                    "title": "Integrated Overview",
+                    "link": "/working",
+                    "type": "LINK"
+                },
+                {
+                    "id": "cusoa",
+                    "title": "Gensor Unit Gro",
+                    "link": "/working",
+                    "type": "LINK"
+                },
+                {
+                    "id": "trans",
+                    "title": "Transcriptional R",
+                    "link": "/working",
+                    "type": "LINK"
+                },
+                {
+                    "id": "cellSEns",
+                    "title": "Cell Sensing",
+                    "link": "/working",
+                    "type": "LINK"
+                },
+                {
+                    "id": "oblic",
+                    "title": "Additional Resou",
+                    "link": "/working",
+                    "type": "LINK"
+                }
+            ]
+        },
+        {
+            "id":"menuDoc",
+            "title": "About Us",
+            "type": "MENU",
+            "options":[
+                {
+                    "id": "regulsoDB",
+                    "title": "What is RegulonDB?",
+                    "link": "/working",
+                    "type": "LINK"
+                },
+                {
+                    "id": "foisas",
+                    "title": "Manuals",
+                    "link": "/working",
+                    "type": "LINK"
+                }
+            ]
+        }
+    ]
+}
