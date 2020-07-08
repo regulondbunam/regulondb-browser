@@ -16,8 +16,26 @@ const GraphicGene = ({
             <tbody>
                 <tr>
                     <td>
-                        <div style={{ textAlign: "center", overflow: 'auto' }}>
-                            <PanZoom ref={imge} disableKeyInteraction={true} disableDoubleClickZoom={true} disableScrollZoom={true}>
+                        <div style={{ textAlign: "center",position:"relative", left:"30%", width: "100%" }}>
+                            <IconButton style={{ float: 'left' }} icon="add" onClick={() => {
+                                imge.current.zoomIn(1)
+                            }} />
+                            <IconButton style={{ float: 'left' }} icon="fullscreen_exit" onClick={() => {
+                                imge.current.reset()
+                            }} />
+                            <IconButton style={{ float: 'left' }} icon="remove" onClick={() => {
+                                imge.current.zoomOut(1)
+                            }} />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style={{padding: "0"}}>
+                        <div style={{ textAlign: "center", overflow: 'hidden' }}>
+                            <PanZoom
+                                ref={imge}
+                                maxZoom={2}
+                                disableKeyInteraction={true} disableDoubleClickZoom={true} disableScrollZoom={true}>
 
                                 {
                                     zoom
@@ -32,16 +50,7 @@ const GraphicGene = ({
                 </tr>
                 <tr>
                     <td>
-                        <div style={{ textAlign: "center" }}>
-                            <IconButton style={{ float: 'left' }} icon="add" onClick={() => {
-                                imge.current.zoomIn(5)
-                            }} />
-                            <IconButton style={{ float: 'left' }} icon="fullscreen_exit" onClick={() => {
-                                imge.current.reset()
-                            }} />
-                            <IconButton style={{ float: 'left' }} icon="remove" onClick={() => {
-                                imge.current.zoomOut(5)
-                            }} />
+                        <div style={{ textAlign: "center",position:"relative", left:"30%", width: "100%" }}>
                             <IconButton style={{ float: 'left' }} icon="code" onClick={() => { setZoom(!zoom) }} />
                             <IconButton icon="help" />
                         </div>
