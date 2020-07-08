@@ -35,8 +35,14 @@ export default class Modal extends Component {
     displayModal = (info) => {
         return (
             <div className={Styles.modalComponent} onClick={(event)=>{this._onCollapsed(false,event)}}>
-                <div dangerouslySetInnerHTML={{ __html: info }} className={Styles.modalComponentContent} onClick={(event)=>{this._onCollapsed(false,event)}}>
+                <div className={Styles.modalComponentContent} onClick={(event)=>{this._onCollapsed(false,event)}}>
+                <div dangerouslySetInnerHTML={{ __html: info }} onClick={(event)=>{this._onCollapsed(false,event)}}>
                 </div>
+                <div onClick={(event)=>{this._onCollapsed(false,event)}}>
+                    {this.props.children}
+                </div>
+                </div>
+                
             </div>
         )
     }
@@ -83,7 +89,7 @@ Modal.proTypes = {
 Modal.defaultProps = {
     className: Styles.modalButton,
     collapsed: true,
-    info: "info",
+    info: "",
     getValue: noAction,
     showTitle: false,
     title: ""
