@@ -1,11 +1,13 @@
 import React from 'react';
-import { DropDown } from './components/ui-components/basicInput/Buttons';
+
+//import { DropDown } from './components/ui-components/basicInput/Buttons';
+
+var page = require('./staticPages/images_context_help.html');
 
 const UiComponents = () => {
     return (
-        <>
-        <DropDown />
-        </>
+        <div dangerouslySetInnerHTML={{__html: page}}>
+        </div>
     );
 }
 
