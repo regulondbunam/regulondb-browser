@@ -38,6 +38,17 @@ const TabGrowthConditions = ({
                 <tbody>
                     {
                         growthc.map((item) => {
+                            let effectStyle = {color: "#000000"}
+                            switch (item.effect) {
+                                case 'induce':
+                                    effectStyle = {color: 'Green'}
+                                    break;
+                                case 'repressed':
+                                    effectStyle = {color: 'Red'}
+                                    break;
+                                default:
+                                    break;
+                            }
                             return (
                                 <tr key={"asdfea"}>
                                     <td>
@@ -55,7 +66,7 @@ const TabGrowthConditions = ({
                                             </tbody>
                                         </table>
                                     </td>
-                                    <td>
+                                    <td style={effectStyle}>
                                         {item.effect}
                                     </td>
                                     <td>
