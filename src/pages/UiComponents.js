@@ -15,7 +15,6 @@ const UiComponents = () => {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200 || xhr.status === 0) {
                     sethtmlFile(xhr.responseText)
-                    console.log(xhr.responseText)
                 }
             }
         }

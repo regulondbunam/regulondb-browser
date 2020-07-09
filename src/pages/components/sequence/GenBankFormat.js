@@ -2,10 +2,7 @@ export default class GeneBankFormat {
 
     constructor(sequence) {
         this.sequence = sequence
-        this.nucleotideA = 0
-        this.nucleotideT = 0
-        this.nucleotideC = 0
-        this.nucleotideG = 0
+        this.size = sequence.length
         this.formatSequence = ''
         this.Format(sequence)
     }
@@ -22,22 +19,6 @@ export default class GeneBankFormat {
             count += 1
             innerCount += 1
             line = ''
-            switch (x) {
-                case 'A':
-                    this.nucleotideA += 1
-                    break;
-                case 'T':
-                    this.nucleotideT += 1
-                    break;
-                case 'C':
-                    this.nucleotideC += 1
-                    break;
-                case 'G':
-                    this.nucleotideG += 1
-                    break;
-                default:
-                    break;
-            }
             if(count===1){
                // console.log(spaceNumber)
                 for(let i = 0; i<spaceNumber-(index.toString().length);i++){
@@ -56,6 +37,5 @@ export default class GeneBankFormat {
             } 
             return x;
         }).join('')
-        this.size = this.nucleotideA+this.nucleotideC+this.nucleotideG+this.nucleotideT
     }
 }

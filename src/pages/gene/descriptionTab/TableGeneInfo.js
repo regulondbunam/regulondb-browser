@@ -69,7 +69,7 @@ const TableGeneInfo = ({
                                             </tr>
                                         )
                                     case 'sequence':
-                                        return sequenceGene(geneData['name'], geneData[key], key)
+                                        return sequenceGene(geneData['name'], geneData[key], key, "gene", true)
                                     case 'gcContent':
                                         return (
                                             <tr key={key}>
@@ -146,13 +146,13 @@ function sizeGene(leftEndPosition, rightEndPosition) {
     return 0
 }
 
-function sequenceGene(gene, sequence, key) {
+function sequenceGene(gene, sequence, key, header, countElements) {
     return (
         <tr key={key}>
             <td style={{ fontWeight: "bold" }}>{`${key}:`}</td>
             <td className="sequence" >
-                <Modal className="aBase" title={"Fasta Format"} info={Sequence(gene, sequence, "fasta")}></Modal>
-                <Modal className="aBase" title={"genbank Format"} info={Sequence(gene, sequence, "genbank")}></Modal>
+                <Modal className="aBase" title={"Fasta Format"} info={Sequence(gene, sequence, "fasta","gene", true)}></Modal>
+                <Modal className="aBase" title={"genbank Format"} info={Sequence(gene, sequence, "genbank","gene",true)}></Modal>
             </td>
         </tr>
     )

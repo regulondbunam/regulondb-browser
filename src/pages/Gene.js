@@ -91,10 +91,11 @@ function Title(geneName, geneID, products) {
         <div style={styleTitle}>
             <h1 style={{ color: "var(--color-accentB)", margin: "0", float: "left" }}>Gene &nbsp;</h1>
             <h1 style={{ margin: "0", float: "left" }}>{geneName}&nbsp;&nbsp;&nbsp;</h1>
-            <h1 style={{ margin: "0" }}>
-                {products.map((product)=>{
-                    return <React.Fragment key={product.name}>{product.name}</React.Fragment>
-                })}
+            <h1 style={{ margin: "0" }}
+            dangerouslySetInnerHTML={{__html: products.map((product)=>{
+                return   `${product.name} `
+            })}}>
+                
             </h1>
             <h3 style={{ margin: "0", fontSize: "9px" }}>{geneID}</h3>
         </div>

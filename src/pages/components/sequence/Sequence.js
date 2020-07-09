@@ -1,17 +1,25 @@
 import FastaFormat from './FastaFormat'
 import GenBankFormat from './GenBankFormat'
+import CountElements from './CountElements'
 
 function sequence(
     gene,
     sequence,
-    format){
-        let seq
+    format,
+    header = '',
+    countElements = false
+) {
+    let seq
+    if (countElements) {
+        console.log(CountElements(sequence))
+        header += ` f`
+    }
     switch (format) {
         case 'fasta':
             seq = new FastaFormat(sequence)
             return (
-                    `
-                    >${gene} gene sequence Size:${seq.size} A:${seq.nucleotideA} T:${seq.nucleotideT} C:${seq.nucleotideC} G:${seq.nucleotideG} <br>
+                `
+                    ${header}<br>
                     ${seq.formatSequence}
                     `
             )
@@ -19,13 +27,13 @@ function sequence(
             seq = new GenBankFormat(sequence)
             return (
                 `
-                ${gene} gene Size:${seq.size} A:${seq.nucleotideA} T:${seq.nucleotideT} C:${seq.nucleotideC} G:${seq.nucleotideG} <br>
+                ${header}<br>
                 ${seq.formatSequence}
                 `
-        )
+            )
         default:
             return ""
     }
 }
- 
+
 export default sequence;
