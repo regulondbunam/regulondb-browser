@@ -30,12 +30,10 @@ export default function CoverSearch(menssage, state) {
             )
         default:
             return (
-                <Spinner>
                     <div style={styleTitle}>
                         <h1 style={{ color: "#ffffff" }}>SearchTool</h1>
                         <SearchTool />
                     </div>
-                </Spinner>
             )
     }
     

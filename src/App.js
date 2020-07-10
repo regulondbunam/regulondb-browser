@@ -1,5 +1,6 @@
 import React from 'react';
 import Search from './pages/Search'
+import GeneTest from './pages/gene/Index'
 import Gene from './pages/Gene'
 import Home from './pages/Home'
 import Layout from './pages/components/layout/Layout'
@@ -27,7 +28,10 @@ function App() {
           <Search />
         </Route>
         <Route path="/gene">
-          <Gene/>
+          <Gene />
+        </Route>
+        <Route path={["/gene/:id/:site/:section","/gene/:id/:site","/gene/:id","/gene",]}>
+          <Gene />
         </Route>
         <Route path="/uiComponents">
           <UiComponents />

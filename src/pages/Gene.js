@@ -16,6 +16,9 @@ query countGenes($advancedSearch: String!){
             products{
                 name
             }
+            growthConditions{
+                effect
+            }
         }
     }
   
@@ -66,13 +69,14 @@ const Gene = ({
     let geneName = ""
     try {
         //console.log(data.getGenesBy.data[0])
+        const gwc = data.getGenesBy.data[0].growthConditions
         geneName = data.getGenesBy.data[0].geneInfo.name
-        const productsName = data.getGenesBy.data[0].products
+        const products= data.getGenesBy.data[0].products
         return (
             <>
-                {Title(geneName, idgene,productsName)}
+                {Title(geneName, idgene,products)}
                 <div>
-                    <GeneTabs idGene={idgene} />
+                    <GeneTabs idGene={idgene} prodCount={products.length} gwcCount={gwc.length}/>
                 </div>
             </>
         );

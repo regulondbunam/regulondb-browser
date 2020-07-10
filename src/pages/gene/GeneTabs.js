@@ -4,50 +4,69 @@ import GnDescription from './GeneDescription'
 import GnProducts from './GeneProduct'
 import GnGrowthC from './GeneGrowthConditions'
 
-const sections = ['DESCRIPTION','PRODUCT','GROWTH CONDITIONS']
+const sections = ['DESCRIPTION', 'PRODUCT', 'GROWTH CONDITIONS']
 
 class GeneTabs extends Component {
     state = { ActiveOption: "DESCRIPTION" }
 
-    onClick =(event)=>{
-        this.setState({ActiveOption: event.target.id})
+    onClick = (event) => {
+        this.setState({ ActiveOption: event.target.id })
     }
 
-    render() { 
+    render() {
 
-        const{
-            idGene
-        }=this.props
+        const {
+            idGene,
+            prodCount,
+            gwcCount
+        } = this.props
 
-        return ( 
+        return (
             <>
                 <nav className="tabHeader">
                     {
-                        sections.map((item)=>{
+                        sections.map((item) => {
                             let styleTab = "tab"
-                            if(this.state.ActiveOption === item){
+                            if (this.state.ActiveOption === item) {
                                 styleTab = "tabActive"
                             }
-                            return(
+                            let number = ''
+                            switch (item) {
+                                case "PRODUCT":
+                                    if (prodCount === 0) {
+                                        return null
+                                    }
+                                    number = '('+prodCount+')'
+                                    break;
+                                case "GROWTH CONDITIONS":
+                                    if (gwcCount === 0) {
+                                        return null
+                                    }
+                                    number = '('+gwcCount+')'
+                                    break;
+                                default:
+                                    break;
+                            }
+                            return (
                                 <div key={item} className="tabContent">
-                                    <Button id={item} className={styleTab} label={item} onClick={this.onClick}/>
+                                    <Button id={item} className={styleTab} label={`${number}${item}`} onClick={this.onClick} />
                                 </div>
                             )
                         })
                     }
                 </nav>
                 <>
-                {
+                    {
                         TabSelector(this.state.ActiveOption, idGene)
-                }
+                    }
                 </>
-                    
+
             </>
-         );
+        );
     }
 }
 
-function TabSelector(item, idGene){
+function TabSelector(item, idGene) {
     switch (item) {
         case "DESCRIPTION":
             return <GnDescription geneID={idGene} />
