@@ -1,10 +1,9 @@
 import React from 'react';
 import Search from './pages/Search'
-//import GeneTest from './pages/gene/Index'
-import Gene from './pages/Gene'
+import Gene from './pages/gene/GeneHome'
 import Home from './pages/Home'
 import Layout from './pages/components/layout/Layout'
-import Error from './pages/Error'
+import Error from './pages/error/Error'
 import UiComponents from './pages/UiComponents'
 import {
   BrowserRouter as Router,
@@ -26,9 +25,6 @@ function App() {
         </Route>
         <Route path="/search">
           <Search />
-        </Route>
-        <Route path="/gene">
-          <Gene />
         </Route>
         <Route path={["/gene/:id/:site/:section","/gene/:id/:site","/gene/:id","/gene",]}>
           <Gene />
