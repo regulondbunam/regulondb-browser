@@ -1,61 +1,75 @@
 import React, { useState } from 'react';
+import ToolTip from '../../../components/ui-components/infoDisplay/toolTip/ToolTip'
+import {IconButton} from '../../../components/ui-components/basicInput/Buttons'
+import Style from './Phrase.module.css'
 
 const Phrase = ({
     term,
+    style,
     phraseData
 }) => {
     const [visible, setVisible] = useState(false)
-    let styleTerm = { margin: "0" }
-    if (visible) {
-        styleTerm = {
-            cursor: "help",
-            margin: "0",
-            boxShadow: "0px 0px 5px 2px #ffccdd inset",
-            float: "left"
-        }
-    } else {
-        styleTerm = { margin: "0", cursor: "help", float: "left" }
-    }
-    if (phraseData !== undefined) {
-        return (
-            <>
-                <p style={styleTerm} onContextMenu={(event) => {
-                    //console.log(event)
-                    event.preventDefault();
-                    setVisible(!visible)
-                }}
-                >
-                    {term}
-                </p>
-                {
-                    visible
-                        ? <div id={phraseData.pmid} style={StyleTooltip}>
-                            <h3>{phraseData.name}</h3>
-                            <p>{phraseData.phrases[0].phrase}</p>
-                        </div>
-                        : null
-                }
-            </>
+    const [idphrase, setidPhrase] = useState(0)
+    const [ancla, setAncla] = useState(false)
+    const styleTip = {position: "absolute", padding: '15px', boxShadow: "5px 5px 5px 0px rgba(0,0,0,0.5)", backgroundColor: '#f4f5f5'}
+    //console.log(phraseData)
 
-        );
+    const TipPhrase = () => {
+        if(phraseData === undefined){
+            return <></>
+        }
+        //console.log(phraseData)
+        const phrase = phraseData.phrases[idphrase]
+        const nPhrases = phraseData.phrases.length
+        let pagControl = <></>
+        if(nPhrases>1){
+            let arrwStyleL = {}
+            let arrwStyleR = {}
+            console.log(nPhrases,"-",idphrase)
+            if(nPhrases-1 === idphrase){arrwStyleR = {display: 'none'}}
+            if(idphrase === 0){arrwStyleL = {display: 'none'}}
+            pagControl = <> <IconButton onClick={()=>{setidPhrase(idphrase-1)}} style={arrwStyleL} icon="keyboard_arrow_left" className={Style.phraseIconButton}/>
+                            <IconButton onClick={()=>{setidPhrase(idphrase+1)}} style={arrwStyleR} icon='keyboard_arrow_right' className={Style.phraseIconButton}/>
+                        </>
+        }
+        let pinStyle = {}
+        if(ancla){
+            pinStyle = {color: "#000000",backgroundColor:"#CC9900"}
+        }
+        return(
+            <div style={styleTip} onMouseLeave={()=>{if(!ancla){setVisible(false)}}}>
+                <div className={Style.phraseHeader}>
+                    <div style={{width: '60%'}}>
+                    <b>{phraseData.name}</b>
+                    </div>
+                    <div className="phraseTipControl">
+                        <IconButton  icon='help' className={Style.phraseIconButton} />
+                        <IconButton onClick={()=>{setAncla(!ancla)}} style={pinStyle}  icon='push_pin' className={Style.phraseIconButton}/>
+                        <IconButton onClick={()=>{setVisible(false)}} icon='clear' className={Style.phraseIconButton}/>
+                    </div>
+                </div>
+                <div className="phraseBody">
+                    <p>{phrase.phrase}</p>
+                </div>
+                <div className="phraseFooter">
+                    {pagControl}
+                </div>
+            </div>
+        )
     }
+
+
+
     return (
-        <p style={styleTerm} onContextMenu={(event) => {
-            //console.log(event)
-            event.preventDefault();
-        }}
-        >
+        <ToolTip style={style} Tip={TipPhrase} autoShow={false} display={visible}>
+            <div style={{cursor:'help'}} 
+            onContextMenu={(e)=>{e.preventDefault();setVisible(!visible)}}
+            >
             {term}
-        </p>
+            </div>
+        </ToolTip>
     )
 
-}
-
-const StyleTooltip = {
-    backgroundColor: "#fff8a6",
-    position: "absolute",
-    marginTop: "15px",
-    boxShadow: "10px 10px 5px 0px rgba(0,0,0,0.75)"
 }
 
 export default Phrase;

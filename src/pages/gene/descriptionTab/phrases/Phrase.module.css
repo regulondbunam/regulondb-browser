@@ -1,0 +1,10 @@
+.phraseHeader{
+    display: flex;
+    align-items: center;
+}
+
+.phraseIconButton{
+    color: white;
+    background-color: black;
+    float: left;
+}

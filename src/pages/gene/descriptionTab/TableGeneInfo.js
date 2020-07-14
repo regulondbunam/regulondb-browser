@@ -2,9 +2,11 @@ import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import Gene from '../../components/apollo/GeneCollection'
 import {GetPhrase} from '../../components/apollo/PhraseCollection'
-import Modal from '../../components/ui-components/infoDisplay/Modal/Modal'
+import Modal from '../../components/ui-components/infoDisplay/modal/Modal'
 import Sequence from '../../components/sequence/Sequence'
 import Phrase from './phrases/Phrase'
+//import ToolTip from '../../components/ui-components/infoDisplay/toolTip/ToolTip'
+
 
 const TableGeneInfo = ({
     idGene
@@ -69,13 +71,21 @@ const TableGeneInfo = ({
                                             </tr>
                                         )
                                     case 'sequence':
-                                        return sequenceGene(geneData['name'], geneData[key], key, "gene", true)
+                                        return (sequenceGene(geneData['name'], geneData[key], key, "gene", true))
                                     case 'gcContent':
                                         return (
                                             <tr key={key}>
                                                 <td style={{ fontWeight: "bold" }}>{`${key}:`}</td>
                                                 <td dangerouslySetInnerHTML={{ __html: `${geneData[key]}%` }}></td>
                                             </tr>
+                                        )
+                                    case 'strand':
+                                        return (
+                                            <tr key={key}>
+                                                <td style={{ fontWeight: "bold" }}>{`${key}:`}</td>
+                                                <td> <Phrase style={{float: "left", margin: "0"}} phraseData={phraseTest} term={geneData[key]}/></td>
+                                            </tr>
+                                             
                                         )
                                     default:
                                         return (
@@ -131,9 +141,9 @@ function GenomePosition(size, leftEndPosition, rightEndPosition, phraseL, phrase
         <tr key={size}>
             <td style={{ fontWeight: "bold" }}>genome position(nucleotides):</td>
             <td className="phraseContent">
-            <Phrase phraseData={phraseL} term={leftEndPosition}/> 
+            <Phrase style={{float: "left", margin: "0"}} phraseData={phraseL} term={leftEndPosition}/> 
             <p style={{float: "left", margin: "0"}}>&nbsp;{"-->"}&nbsp;</p>
-            <Phrase phraseData={phraseR} term={rightEndPosition}/> 
+            <Phrase style={{float: "left", margin: "0"}} phraseData={phraseR} term={rightEndPosition}/> 
             </td>
         </tr>
     )
@@ -160,3 +170,15 @@ function sequenceGene(gene, sequence, key, header, countElements) {
 
 //dangerouslySetInnerHTML={{ __html: sequenceF}}
 export default TableGeneInfo;
+
+const phraseTest = {
+    name: "Hi! i'm a phrase",
+    value: 1234,
+    pmid: '1232123',
+    phrases: [
+        {phrase: "Hi i'm a first phrase", phraseID: "RDBPHRASESA0007", evidence: "EV-COMP"},
+        {phrase: "Hi i'm a second phrase", phraseID: "RDBPHRASESA0007", evidence: "EV-COMP"},
+        {phrase: "Hi i'm a other phrase", phraseID: "RDBPHRASESA0007", evidence: "EV-COMP"},
+        {phrase: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", phraseID: "RDBPHRASESA0007", evidence: "EV-COMP"},
+    ]
+}

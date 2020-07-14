@@ -1,6 +1,6 @@
 import React from 'react';
 import Search from './pages/Search'
-import GeneTest from './pages/gene/Index'
+//import GeneTest from './pages/gene/Index'
 import Gene from './pages/Gene'
 import Home from './pages/Home'
 import Layout from './pages/components/layout/Layout'

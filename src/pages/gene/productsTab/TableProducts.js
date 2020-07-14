@@ -1,7 +1,7 @@
 import React from 'react';
 import { GeneProducts } from '../../components/apollo/GeneCollection';
 import { useQuery } from '@apollo/react-hooks';
-import Modal from '../../components/ui-components/infoDisplay/Modal/Modal';
+import Modal from '../../components/ui-components/infoDisplay/modal/Modal';
 import Sequence from '../../components/sequence/Sequence';
 
 const TableProducts = ({

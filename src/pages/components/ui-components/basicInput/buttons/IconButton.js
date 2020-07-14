@@ -112,6 +112,7 @@ export default class IconButton extends Component {
     render() {
         const {
             active,
+            className,
             icon,
             style,
             iconStyle
@@ -120,7 +121,7 @@ export default class IconButton extends Component {
                 <>
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
                     rel="stylesheet" />
-                <button style={style} className={selectStyle(active)} onClick={this.handleOnClickLink}>
+                <button style={style} className={selectStyle(active,className)} onClick={this.handleOnClickLink}>
                     <i className="material-icons" style={iconStyle}>{icon}</i>
                 </button>
                 </>
@@ -129,8 +130,8 @@ export default class IconButton extends Component {
     }
 }
 
-function selectStyle (active) {
-    let styleClass = Styles.iconButton+" "+Styles.default
+function selectStyle (active,className) {
+    let styleClass = className+" "+Styles.iconButton+" "+Styles.default
     active
     ? styleClass += " "
     : styleClass += " "+Styles.disabled
