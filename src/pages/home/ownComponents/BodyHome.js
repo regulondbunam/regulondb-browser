@@ -1,6 +1,6 @@
 import React from 'react';
-import Card from '../ui-components/infoDisplay/card/Card'
-import {CountGenes} from '../apollo/Statistics'
+import Card from '../../components/ui-components/infoDisplay/card/Card'
+import {CountGenes} from '../../components/apollo/Statistics'
 
 const BodyHome = () => {
     return (

@@ -1,7 +1,7 @@
 import React from 'react';
-import Cover from '../ui-components/regulonDB-web/Cover'
-import SearchTool from '../search/SearchTool'
-import LinksInfo from './linksCover.json'
+import Cover from '../../components/ui-components/regulonDB-web/Cover'
+import SearchTool from '../../components/search/SearchTool'
+import LinksInfo from '../resources/linksCover.json'
 
 
 const urlVideCover = 'https://dl.dropboxusercontent.com/s/x0j4yfd20cov0bh/Bacteria%20Animation%2020.mp4?dl=0'
@@ -29,8 +29,8 @@ const CoverHome = () => {
                             )
                         })
                     }
-                    
                 </div>
+                <br/>
             </Cover>
         </>
      );
@@ -41,6 +41,7 @@ const styleBox = {
 }
 
 const styleSubtitle = {
+    margin: "0",
     fontFamily: "verdana",
     fontSize: "3vmin",
     textShadow: "1px 1px 2px #000000",

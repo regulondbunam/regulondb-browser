@@ -26,6 +26,7 @@
 }
 
 .coverTitle{
+    margin: "0";
     font-size: 6vmin;
     font-family: sans-serif;
     font-weight: bold;

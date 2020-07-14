@@ -6,7 +6,6 @@ import {
   } from "react-router-dom";
 
 const GeneHome = () => {
-  console.log(useParams())
     const idGene = useParams().id;
     const site = useParams().site;
     const section = useParams().section;
@@ -17,7 +16,7 @@ const GeneHome = () => {
     return ( 
         <>
         {Cover()}
-        </>
+        </>  
      );
 }
  
