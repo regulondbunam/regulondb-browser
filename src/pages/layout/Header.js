@@ -1,12 +1,12 @@
 import React from 'react';
-import Image from '../ui-components/infoDisplay/media/Image'
-import SearchTool from '../search/SearchTool'
+import Image from '../components/ui-components/infoDisplay/media/Image'
+import SearchTool from '../components/search/SearchTool'
 import { withRouter } from 'react-router-dom';
 
 const log = 'https://dl.dropboxusercontent.com/s/enusst8em5oxcah/RegulonLogo.png?dl=0'
 
 const Header = ({
-    location
+    location,
 }) => {
     const isHome = location.pathname === "/home" || location.pathname === "/"
     return (

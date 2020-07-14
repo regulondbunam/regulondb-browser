@@ -2,7 +2,7 @@ import React from 'react';
 import Search from './pages/Search'
 import Gene from './pages/gene/GeneHome'
 import Home from './pages/home/Home'
-import Layout from './pages/components/layout/Layout'
+import Layout from './pages/layout/Layout'
 import Error from './pages/error/Error'
 import UiComponents from './pages/UiComponents'
 import {

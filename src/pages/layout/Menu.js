@@ -1,6 +1,6 @@
 import React from 'react';
-import MainMenu from '../ui-components/regulonDB-web/MainMenu'
-import MenuData from '../../../mainmenu.json'
+import MainMenu from '../components/ui-components/regulonDB-web/MainMenu'
+import MenuData from './resources/mainmenu.json'
 
 const menuData = MenuData.mainmenu
 
