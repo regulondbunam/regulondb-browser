@@ -11,7 +11,6 @@ const Phrase = ({
     const [visible, setVisible] = useState(false)
     const [idphrase, setidPhrase] = useState(0)
     const [ancla, setAncla] = useState(false)
-    const styleTip = {position: "absolute", padding: '15px', boxShadow: "5px 5px 5px 0px rgba(0,0,0,0.5)", backgroundColor: '#f4f5f5'}
     //console.log(phraseData)
 
     const TipPhrase = () => {
@@ -37,7 +36,7 @@ const Phrase = ({
             pinStyle = {color: "#000000",backgroundColor:"#CC9900"}
         }
         return(
-            <div style={styleTip} onMouseLeave={()=>{if(!ancla){setVisible(false)}}}>
+            <div className={Style.phraseTip} onMouseLeave={()=>{if(!ancla){setVisible(false)}}}>
                 <div className={Style.phraseHeader}>
                     <div style={{width: '60%'}}>
                     <b>{phraseData.name}</b>

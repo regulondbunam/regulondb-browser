@@ -58,7 +58,7 @@
     border-radius: 50%;
     border: none;
     outline: none;
-
+    background-color: black;
     font-size: 2vw;
     color: white;
 }
