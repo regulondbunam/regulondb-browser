@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import CoverSearch from './components/search/CoverSearch'
-import ResultSearch from './components/search/ResultSearch'
+import CoverSearch from './ownComponents/CoverSearch'
+import ResultSearch from './ResultSearch'
 
 const Search = ({
     location

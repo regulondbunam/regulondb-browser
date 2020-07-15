@@ -1,5 +1,5 @@
 import React from 'react';
-import Search from './pages/Search'
+import Search from './pages/search/SearchHome'
 import Gene from './pages/gene/GeneHome'
 import Home from './pages/home/Home'
 import Layout from './pages/layout/Layout'

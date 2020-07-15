@@ -1,6 +1,6 @@
 import React from 'react';
-import SearchTool from './SearchTool'
-import Spinner from '../loading/Spinner'
+import SearchTool from '../../components/search/SearchTool'
+import Spinner from '../../components/loading/Spinner'
 
 export default function CoverSearch(menssage, state) {
     switch (state) {
