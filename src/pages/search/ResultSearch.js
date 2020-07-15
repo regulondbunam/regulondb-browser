@@ -1,34 +1,31 @@
 import React, { Component} from 'react';
 import CoverSearch from './ownComponents/CoverSearch'
-//import { SearchGene } from '../components/apollo/GeneCollection'
-//import { useQuery } from '@apollo/react-hooks';
 import Button from '../components/ui-components/basicInput/Buttons'
-//import Genes from '../components/search/results/Genes'
-import GeneResults from './GeneResults'
-//import Gene from '../components/apollo/GeneCollection';
+import GeneResults from '../components/search/GeneResults'
 
 const colecciones = ["Genes", "Gensor Unit", "Operon", "Regulon", "Sigmulon", "sRNA", "Grow Conditions"]
 
 
 class ResultState extends Component {
-    state = { nFound: 0, nGene: 0 };
+    state = { nGene: 0 };
 
     addnGene=(count = 0)=>{
         console.log("hi")
         this.setState({
             nGene: count,
-            nFound: this.state.nFound + count
         })
     }
+
+
 
     render() {
         const {
             search
         } = this.props
         const {
-            nFound,
             nGene
         } = this.state
+        const nFound = nGene+0
         return (
             <>
                 {

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import {SearchGene} from '../components/apollo/GeneCollection'
+import Gene from './tabs/Genes'
+import {SearchGene} from '../apollo/GeneCollection'
 import { useQuery } from '@apollo/react-hooks';
 
 const GeneResults = ({
@@ -12,7 +13,7 @@ const GeneResults = ({
     })
     useEffect(()=>{
         if(data!==undefined){
-            console.log(data.getGenesBy.pagination.totalResults)
+            //console.log(data.getGenesBy.pagination.totalResults)
             const nResults = data.getGenesBy.pagination.totalResults
             resoultsFound(nResults)
         }
@@ -28,8 +29,7 @@ const GeneResults = ({
         const nResults = data.getGenesBy.pagination.totalResults
         if(nResults>0){
             return(
-                <>
-                </>
+                <Gene data={data.getGenesBy.data} search={search} />
             )
         }else{
             return <>no results</>
