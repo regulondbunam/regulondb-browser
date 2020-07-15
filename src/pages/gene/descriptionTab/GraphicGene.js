@@ -14,14 +14,16 @@ const GraphicGene = ({
 }) => {
     let imge = useRef(null)
     const [zoom, setZoom] = useState(false)
-    const [viewHelp, setviewHelp] = useState(false)
-
+    let iconZoom = '<<>>'
+    if(zoom){
+        iconZoom = '>><<'
+    }
     return (
         <table>
             <tbody>
                 <tr>
                     <td>
-                        <div style={{ textAlign: "center", position: "relative", left: "30%", width: "100%" }}>
+                        <div style={{float: "right"}}>
                             <IconButton style={{ float: 'left' }} icon="add" onClick={() => {
                                 imge.current.zoomIn(1)
                             }} />
@@ -31,11 +33,12 @@ const GraphicGene = ({
                             <IconButton style={{ float: 'left' }} icon="remove" onClick={() => {
                                 imge.current.zoomOut(1)
                             }} />
+                            <IconButton style={{ float: 'left' }} iconStyle={{fontFamily: "monospace", fontSize: "14px", fontWeight: 'bold'}} icon={iconZoom} onClick={() => { setZoom(!zoom) }} />
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td style={{ padding: "0" }}>
+                    <td>
                         <div style={{ textAlign: "center", overflow: 'hidden' }}>
                             <PanZoom
                                 ref={imge}
@@ -55,16 +58,8 @@ const GraphicGene = ({
                 </tr>
                 <tr>
                     <td>
-                        <div style={{ textAlign: "center", position: "relative", left: "30%", width: "100%" }}>
-                            <IconButton style={{ float: 'left' }} icon="code" onClick={() => { setZoom(!zoom) }} />
-                            <IconButton icon="help" onClick={() => { setviewHelp(!viewHelp)}} />
-                            {
-                                viewHelp
-                                ?<Modal collapsed={false}>
-                                    <GetFile urlFile={urlFile} />
-                                </Modal>
-                                :null
-                            }
+                        <div style={{float: "right"}}>
+                        <Modal title={"what is this diagram?"}><GetFile urlFile={urlFile} /></Modal>
                         </div>
                     </td>
                 </tr>
@@ -75,6 +70,8 @@ const GraphicGene = ({
 
 
 
+const styleIconB = {
 
+}
 
 export default GraphicGene;
