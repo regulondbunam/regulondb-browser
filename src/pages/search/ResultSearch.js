@@ -1,6 +1,5 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import CoverSearch from './ownComponents/CoverSearch'
-import Button from '../components/ui-components/basicInput/Buttons'
 import GeneResults from '../components/search/GeneResults'
 
 const colecciones = ["Genes", "Gensor Unit", "Operon", "Regulon", "Sigmulon", "sRNA", "Grow Conditions"]
@@ -9,8 +8,8 @@ const colecciones = ["Genes", "Gensor Unit", "Operon", "Regulon", "Sigmulon", "s
 class ResultState extends Component {
     state = { nGene: 0 };
 
-    addnGene=(count = 0)=>{
-        console.log("hi")
+    addnGene = (count = 0) => {
+        //console.log("hi")
         this.setState({
             nGene: count,
         })
@@ -25,27 +24,27 @@ class ResultState extends Component {
         const {
             nGene
         } = this.state
-        const nFound = nGene+0
+        const nFound = nGene + 0
         return (
             <>
                 {
                     CoverSearch(`Results for: ${search} (${nFound})`, 'search')
                 }
-                <div>
+                <article style={{paddingTop: "5px"}}>
                     {
                         colecciones.map((item) => {
                             return (
                                 <div key={item} style={{ paddingRight: "2%", float: "left" }}>
                                     {
                                         item !== "Genes"
-                                            ? <Button className="aButton aDisabled" active={false} style={bbtnStyle} label={item} />
-                                            : <Button className="aButton" style={bbtnStyle} label={item + "(" + nGene + ") "} />
+                                            ? <p className="aBase">{`${item} (0)`}</p>
+                                            : <p className="aBase" >{`${item} (${nGene})`}</p>
                                     }
                                 </div>
                             )
                         })
                     }
-                </div>
+                </article>
             </>
         );
     }
@@ -57,31 +56,27 @@ class ResultSearch extends Component {
         this.resultState = React.createRef();
     }
 
-    _UpdateResultState = (count) =>{
+    _UpdateResultState = (count) => {
         console.log(this.resultState.current)
         this.resultState.current.addnGene(count)
     }
 
 
-    render() { 
+    render() {
         const {
             search
         } = this.props
         return (
             <>
-                <ResultState search={search} ref={this.resultState} />
+                    <ResultState search={search} ref={this.resultState} />
                 <article>
-                <GeneResults search={search} resoultsFound={this._UpdateResultState} />
+                    <GeneResults search={search} resoultsFound={this._UpdateResultState} />
                 </article>
-                
+
             </>
         );
     }
 }
- 
 
-const bbtnStyle = {
-    fontSize: "14px",
-}
 
 export default ResultSearch;
