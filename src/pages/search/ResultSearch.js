@@ -70,7 +70,10 @@ class ResultSearch extends Component {
         return (
             <>
                 <ResultState search={search} ref={this.resultState} />
+                <article>
                 <GeneResults search={search} resoultsFound={this._UpdateResultState} />
+                </article>
+                
             </>
         );
     }

@@ -19,7 +19,7 @@ const ResultsGene = ({
                 <table >
                     <thead>
                         <tr>
-                            <td> </td>
+                            <th> Genes </th>
                         </tr>
                     </thead>
                     <tbody>

@@ -166,14 +166,11 @@ query getGeneShineDalgarno($advancedSearch: String!) {
 // Search Gene
 
 export class SearchGene {
-  constructor(searchTerm) {
+  constructor(searchTerm,limit=50,page=0) {
     this.searchTerm = searchTerm
-    this.query = GENE_SEARCH
-  }
-}
-const GENE_SEARCH = gql`
+    this.query = gql`
 query SearchGenes($search: String!){
-    getGenesBy(limit:50 page:0 search:$search)
+    getGenesBy(limit:${limit} page:${page} search:$search)
     {
       data {
       geneInfo {
@@ -193,6 +190,9 @@ query SearchGenes($search: String!){
     }
   }
 `
+  }
+}
+
 //Gene Products Info
 
 export class GeneProducts {
