@@ -69,9 +69,4 @@ const GraphicGene = ({
 }
 
 
-
-const styleIconB = {
-
-}
-
 export default GraphicGene;

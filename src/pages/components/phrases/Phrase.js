@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ToolTip from '../../../components/ui-components/infoDisplay/toolTip/ToolTip'
-import {IconButton} from '../../../components/ui-components/basicInput/Buttons'
+import ToolTip from '../ui-components/infoDisplay/toolTip/ToolTip'
+import {IconButton} from '../ui-components/basicInput/Buttons'
 import Style from './Phrase.module.css'
 
 const Phrase = ({

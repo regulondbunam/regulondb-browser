@@ -4,7 +4,7 @@ import Gene from '../../components/apollo/GeneCollection'
 import {GetPhrase} from '../../components/apollo/PhraseCollection'
 import Modal from '../../components/ui-components/infoDisplay/modal/Modal'
 import Sequence from '../../components/sequence/Sequence'
-import Phrase from './phrases/Phrase'
+import Phrase from '../../components/phrases/Phrase'
 //import ToolTip from '../../components/ui-components/infoDisplay/toolTip/ToolTip'
 
 
