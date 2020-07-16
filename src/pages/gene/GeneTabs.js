@@ -3,11 +3,12 @@ import Button from '../components/ui-components/basicInput/Buttons'
 import GnDescription from './GeneDescription'
 import GnProducts from './GeneProduct'
 import GnGrowthC from './GeneGrowthConditions'
+import GnAllInfo from './GeneAllInfo'
 
-const sections = ['DESCRIPTION', 'PRODUCT', 'GROWTH CONDITIONS']
+const sections = ['ALL','DESCRIPTION', 'PRODUCT', 'GROWTH CONDITIONS']
 
 class GeneTabs extends Component {
-    state = { ActiveOption: "DESCRIPTION" }
+    state = { ActiveOption: 'ALL' }
 
     onClick = (event) => {
         this.setState({ ActiveOption: event.target.id })
@@ -49,7 +50,7 @@ class GeneTabs extends Component {
                             }
                             return (
                                 <div key={item} className="tabContent">
-                                    <Button id={item} className={styleTab} label={`${number}${item}`} onClick={this.onClick} />
+                                    <Button id={item} className={styleTab} label={`${item}${number}`} onClick={this.onClick} />
                                 </div>
                             )
                         })
@@ -74,6 +75,8 @@ function TabSelector(item, idGene) {
             return <GnProducts geneID={idGene} />
         case "GROWTH CONDITIONS":
             return <GnGrowthC geneID={idGene} />
+        case "ALL":
+            return <GnAllInfo idGene={idGene} />
         default:
             return <h3>Select a tab option</h3>
     }
