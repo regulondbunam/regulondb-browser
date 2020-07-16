@@ -86,7 +86,7 @@ const TabGrowthConditions = ({
 }
 
 function DetailDifference(control, experimental) {
-    console.log(experimental)
+    //console.log(experimental)
     try {
         const controlSections = control.split('|')
         const experimentalSections = experimental.split('|')

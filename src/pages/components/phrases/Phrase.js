@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ToolTip from '../ui-components/infoDisplay/toolTip/ToolTip'
 import {IconButton} from '../ui-components/basicInput/Buttons'
 import Style from './Phrase.module.css'
+import Cursor from './resources/cursorIcon.png'
 
 const Phrase = ({
     term,
@@ -60,11 +61,17 @@ const Phrase = ({
 
 
     return (
-        <ToolTip style={style} Tip={TipPhrase} autoShow={false} display={visible}>
-            <div style={{cursor:'help'}} 
-            onContextMenu={(e)=>{e.preventDefault();setVisible(!visible)}}
-            >
+        <ToolTip style={style} TipBox={TipPhrase} autoShow={false} display={visible}>
+            <div>
             {term}
+            {
+                phraseData === undefined
+                ?<></>
+                :<div style={{cursor:`url(${Cursor}), auto`, width: "100%", height: '2px', backgroundColor: '#72A7C7'}}
+                onClick={()=>{setVisible(!visible)}}
+                ></div>
+            }
+            
             </div>
         </ToolTip>
     )

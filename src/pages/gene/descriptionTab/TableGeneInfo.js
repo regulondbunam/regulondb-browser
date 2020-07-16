@@ -5,7 +5,7 @@ import {GetPhrase} from '../../components/apollo/PhraseCollection'
 import Modal from '../../components/ui-components/infoDisplay/modal/Modal'
 import Sequence from '../../components/sequence/Sequence'
 import Phrase from '../../components/phrases/Phrase'
-//import ToolTip from '../../components/ui-components/infoDisplay/toolTip/ToolTip'
+import ToolTip from '../../components/ui-components/infoDisplay/toolTip/ToolTip'
 
 
 const TableGeneInfo = ({
@@ -82,7 +82,7 @@ const TableGeneInfo = ({
                                     case 'strand':
                                         return (
                                             <tr key={key}>
-                                                <td style={{ fontWeight: "bold" }}>{`${key}:`}</td>
+                                                <td style={{ fontWeight: "bold" }}><ToolTip tip='strand'>{`${key}:`}</ToolTip></td>
                                                 <td> <Phrase style={{float: "left", margin: "0"}} phraseData={phraseTest} term={geneData[key]}/></td>
                                             </tr>
                                              
@@ -90,7 +90,7 @@ const TableGeneInfo = ({
                                     default:
                                         return (
                                             <tr key={key}>
-                                                <td style={{ fontWeight: "bold" }}>{`${key}:`}</td>
+                                                <td style={{ fontWeight: "bold" }}><ToolTip tip={`termino ${key}`} >{`${key}:`}</ToolTip></td>
                                                 <td dangerouslySetInnerHTML={{ __html: geneData[key] }}></td>
                                             </tr>
                                         )

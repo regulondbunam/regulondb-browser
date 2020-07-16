@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import Styles from './ToolTip.module.css'
 
 const ToolTip = ({
     autoShow = true,
     children,
-    Tip = TipDefault,
+    TipBox = TipDefault,
+    tip = '',
     display = false,
     style = {}
 }) => {
@@ -14,7 +16,7 @@ const ToolTip = ({
                 {children}
                 {
                     show
-                    ?<Tip/>
+                    ?<TipBox>{tip}</TipBox>
                     :null
                 }
             </div> 
@@ -25,7 +27,7 @@ const ToolTip = ({
                 {children}
                 {
                     display
-                    ?<Tip/>
+                    ?<TipBox>{tip}</TipBox>
                     :null
                 }
             </div> 
@@ -34,11 +36,10 @@ const ToolTip = ({
     
 }
 
-const TipDefault = () => {
-    const style = {position: "absolute", padding: '10px', boxShadow: "5px 5px 5px 0px rgba(0,0,0,0.5)", backgroundColor: '#f4f5f5'}
+const TipDefault = ({children}) => {
     return ( 
-        <div style={style}>
-            hi! i'm a toolTip
+        <div className={Styles.tooltip}>
+            {children}
         </div>
      );
 }
