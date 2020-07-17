@@ -21,7 +21,7 @@ const GeneResults = ({
         }
     })
     if(loading){
-        return <>Lodaing...</>
+        return <>Loading...</>
     }
     if(error){
         console.log(error)

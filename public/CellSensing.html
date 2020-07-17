@@ -1,0 +1,1727 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<!-- saved from url=(0071)http://regulondb.ccg.unam.mx/menu/about_regulondb/cellsensing/index.jsp -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        
+        <title>RegulonDB 10.7: Cell Sensing</title>       
+        <link href="./CellSensing_files/styleSheetRegulonDBV5.css" rel="stylesheet" type="text/css">
+        <style type="text/css">
+            <!--
+            .style1 {
+                    font-size: large;
+                    font-weight: bold;
+            }
+            .style2 {
+                    font-size: 24px;
+                    font-weight: bold;
+            }
+            -->
+        </style>   
+    </head>
+
+    <body cz-shortcut-listen="true">
+        
+
+
+<!-- 
+/**
+ *
+ * @name header (headerWebSite)
+ * @author ljmuniz
+ *          jsgarcia (nueva estructura)  2012/11/09
+ * @version 1.0
+ * @Created  2008/04/15 17:48:32
+ * @description Pagina que despliega el menu de la aplicacion y el combo de busquedas.
+ * @requirements 
+ * @category 
+ * @environment 
+ * @language java
+ *
+ */
+-->
+
+
+
+
+
+
+<!--<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+
+
+    <link rel="shortcut icon" href="http://regulondb.ccg.unam.mx/images/icon/favicon.ico">
+
+    
+    
+    <!--<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">-->
+
+    <script language="JavaScript" type="text/JavaScript" src="./CellSensing_files/SelectAll.js"></script>
+    <script language="javascript" type="text/JavaScript" src="./CellSensing_files/tip.js"></script>
+    <script language="javascript" type="text/JavaScript" src="./CellSensing_files/tools.js"></script>
+    <script language="JavaScript" type="text/JavaScript" src="./CellSensing_files/regulondb_menu.js"></script>
+    <script language="JavaScript" type="text/JavaScript" src="./CellSensing_files/mm_menu.js"></script>
+    <script language="Javascript" type="text/JavaScript" src="./CellSensing_files/showMenu.js"></script>
+
+    <link href="./CellSensing_files/regulondbCSS.css" rel="stylesheet" type="text/css">
+    <link href="./CellSensing_files/styleSheetRegulonDBV5.css" rel="stylesheet" type="text/css">
+
+    
+    <link type="text/css" rel="stylesheet" href="./CellSensing_files/style.css"> <!-- Para central panel home  -->
+    <link type="text/css" rel="stylesheet" href="./CellSensing_files/style_distr.css"><!-- Para central panel menu   -->
+    <!--
+    ToolTips code
+    -->
+
+ 
+    <script type="text/javascript">
+    //alert(document.URL);
+    </script>
+
+    
+    <script> 
+        function send_form(){ 
+           document.form.submit() 
+        } 
+    </script> 
+
+
+ <!-- pleaseWait(); -->
+    <!--<DIV id="prepage" style="position:absolute; font-family:arial; font-size:16; left:250px; top:326px; background-color:white; layer-background-color:white; height:100%; width:581px;"> 
+            <TABLE width=100%><TR><TD><div align="center"><img src="images/indicator_medium.gif" width="32" height="32"></div></TD></TR>
+            <TR>
+                <TD><div align="center"><B>Loading ...  Please wait!</B></div></TD>
+        </TR>
+            </TABLE>
+    </DIV> -->
+    
+
+
+        
+
+
+<title> RegulonDB </title>
+
+<meta name="keywords" content="RegulonDB, Regulon DB, regulondb.ccg.unam.mx, Transcriptional regulation in Escherichia coli, Transcriptional regulatory network in E. coli, Operon organization, Genetic regulation, high-level integration of gene regulation, genetic sensory response units, GUs, bacterial gene regulation, gene regulation model of Escherichia coli K-12, growth conditions in Escherichia coli K-12, database on transcriptional regulation in Escherichia coli, motif clustering, coexpression of genes, Escherichia coli str. K-12 substr. MG1655, MG1655 strain, Manual curation of gene regulation, small RNAs in Escherichia coli K-12, position-weight matrices of transcription factors, regulatory transcription factors, regulatory interactions, promoter regulation, transcription initiation in E. coli, sigma factors">
+
+                
+                
+      <script language="JavaScript1.2">mmLoadMenus();</script><span id="menuContainer"><div id="menuLayer0" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 122px; height: 33px;">
+  <div id="menuLite0" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 33px; width: 122px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg0" style="position: absolute; left: 0px; top: 0px; height: 33px; width: 122px;">
+<div id="menuItem0" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 122px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText0" style="position:absolute;left:4px;top:2px;color:#2C5656;">Licenses&nbsp;</div>
+<div id="menuItemHilite0" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Licenses&nbsp;</div></div><div id="menuItem1" style="position: absolute; left: 0px; top: 17px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 122px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText1" style="position:absolute;left:4px;top:2px;color:#2C5656;">Citing conditions&nbsp;</div>
+<div id="menuItemHilite1" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Citing conditions&nbsp;</div></div>	  <div id="focusItem0" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer1" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 119px; height: 16px;">
+  <div id="menuLite1" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 16px; width: 119px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg1" style="position: absolute; left: 0px; top: 0px; height: 16px; width: 119px;">
+<div id="menuItem2" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 119px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText2" style="position:absolute;left:4px;top:2px;color:#2C5656;">Project glossary&nbsp;</div>
+<div id="menuItemHilite2" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Project glossary&nbsp;</div></div>	  <div id="focusItem1" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer2" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 151px; height: 84px;">
+  <div id="menuLite2" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 84px; width: 151px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg2" style="position: absolute; left: 0px; top: 0px; height: 84px; width: 151px;">
+<div id="menuItem3" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 151px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText3" style="position:absolute;left:4px;top:2px;color:#2C5656;"> Terms and conditions&nbsp;</div>
+<div id="menuItemHilite3" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;"> Terms and conditions&nbsp;</div><div id="childMenu3" style="position: absolute; left: 140px; top: 4.5px;"><img src="./CellSensing_files/black_arrow_right.gif"></div>
+</div><div id="menuItem4" style="position: absolute; left: 0px; top: 17px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 151px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText4" style="position:absolute;left:4px;top:2px;color:#2C5656;"> Tutorial&nbsp;</div>
+<div id="menuItemHilite4" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;"> Tutorial&nbsp;</div><div id="childMenu4" style="position: absolute; left: 140px; top: 4.5px;"><img src="./CellSensing_files/black_arrow_right.gif"></div>
+</div><div id="menuItem5" style="position: absolute; left: 0px; top: 34px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 151px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText5" style="position:absolute;left:4px;top:2px;color:#2C5656;">Mirror Sites&nbsp;</div>
+<div id="menuItemHilite5" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Mirror Sites&nbsp;</div></div><div id="menuItem6" style="position: absolute; left: 0px; top: 51px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 151px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText6" style="position:absolute;left:4px;top:2px;color:#2C5656;">RegulonDB Flowcharts&nbsp;</div>
+<div id="menuItemHilite6" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">RegulonDB Flowcharts&nbsp;</div></div><div id="menuItem7" style="position: absolute; left: 0px; top: 68px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 151px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText7" style="position:absolute;left:4px;top:2px;color:#2C5656;">Demos&nbsp;</div>
+<div id="menuItemHilite7" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Demos&nbsp;</div></div>	  <div id="focusItem2" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer3" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 175px; height: 16px;">
+  <div id="menuLite3" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 16px; width: 175px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg3" style="position: absolute; left: 0px; top: 0px; height: 16px; width: 175px;">
+<div id="menuItem8" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 175px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText8" style="position:absolute;left:4px;top:2px;color:#2C5656;">Genome&nbsp;browser&nbsp;</div>
+<div id="menuItemHilite8" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Genome&nbsp;browser&nbsp;</div></div>	  <div id="focusItem3" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer4" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 220px; height: 169px;">
+  <div id="menuLite4" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 169px; width: 220px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg4" style="position: absolute; left: 0px; top: 0px; height: 169px; width: 220px;">
+<div id="menuItem9" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 220px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText9" style="position:absolute;left:4px;top:2px;color:#2C5656;"> Genome&nbsp;Zoom-Tool&nbsp;</div>
+<div id="menuItemHilite9" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;"> Genome&nbsp;Zoom-Tool&nbsp;</div><div id="childMenu9" style="position: absolute; left: 209px; top: 4.5px;"><img src="./CellSensing_files/black_arrow_right.gif"></div>
+</div><div id="menuItem10" style="position: absolute; left: 0px; top: 17px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 220px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText10" style="position:absolute;left:4px;top:2px;color:#2C5656;">RegulonDB Overviews&nbsp;</div>
+<div id="menuItemHilite10" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">RegulonDB Overviews&nbsp;</div></div><div id="menuItem11" style="position: absolute; left: 0px; top: 34px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 220px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText11" style="position:absolute;left:4px;top:2px;color:#2C5656;">RSA&nbsp;tools&nbsp;</div>
+<div id="menuItemHilite11" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">RSA&nbsp;tools&nbsp;</div></div><div id="menuItem12" style="position: absolute; left: 0px; top: 51px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 220px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText12" style="position:absolute;left:4px;top:2px;color:#2C5656;">GETools&nbsp;</div>
+<div id="menuItemHilite12" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">GETools&nbsp;</div></div><div id="menuItem13" style="position: absolute; left: 0px; top: 68px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 220px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText13" style="position:absolute;left:4px;top:2px;color:#2C5656;">RegulonDB Textpresso Search&nbsp;</div>
+<div id="menuItemHilite13" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">RegulonDB Textpresso Search&nbsp;</div></div><div id="menuItem14" style="position: absolute; left: 0px; top: 85px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 220px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText14" style="position:absolute;left:4px;top:2px;color:#2C5656;">Promoter Analysis Tools&nbsp;</div>
+<div id="menuItemHilite14" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Promoter Analysis Tools&nbsp;</div></div><div id="menuItem15" style="position: absolute; left: 0px; top: 102px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 220px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText15" style="position:absolute;left:4px;top:2px;color:#2C5656;">Web Services&nbsp;</div>
+<div id="menuItemHilite15" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Web Services&nbsp;</div></div><div id="menuItem16" style="position: absolute; left: 0px; top: 119px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 220px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText16" style="position:absolute;left:4px;top:2px;color:#2C5656;">Transcriptional Regulatory NetWork&nbsp;</div>
+<div id="menuItemHilite16" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Transcriptional Regulatory NetWork&nbsp;</div></div><div id="menuItem17" style="position: absolute; left: 0px; top: 136px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 220px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText17" style="position:absolute;left:4px;top:2px;color:#2C5656;">DrawingTracesTools&nbsp;</div>
+<div id="menuItemHilite17" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">DrawingTracesTools&nbsp;</div></div><div id="menuItem18" style="position: absolute; left: 0px; top: 153px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 220px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText18" style="position:absolute;left:4px;top:2px;color:#2C5656;">Tracks (GBrowse)&nbsp;</div>
+<div id="menuItemHilite18" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Tracks (GBrowse)&nbsp;</div></div>	  <div id="focusItem4" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer5" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 239px; height: 50px;">
+  <div id="menuLite5" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 50px; width: 239px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg5" style="position: absolute; left: 0px; top: 0px; height: 50px; width: 239px;">
+<div id="menuItem19" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 239px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText19" style="position:absolute;left:4px;top:2px;color:#2C5656;">Data&nbsp;Sets&nbsp;</div>
+<div id="menuItemHilite19" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Data&nbsp;Sets&nbsp;</div></div><div id="menuItem20" style="position: absolute; left: 0px; top: 17px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 239px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText20" style="position:absolute;left:4px;top:2px;color:#2C5656;">Computational&nbsp;Predictions&nbsp;</div>
+<div id="menuItemHilite20" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Computational&nbsp;Predictions&nbsp;</div></div><div id="menuItem21" style="position: absolute; left: 0px; top: 34px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 239px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText21" style="position:absolute;left:4px;top:2px;color:#2C5656;">Full&nbsp;Version&nbsp;(Registration&nbsp;Required)&nbsp;</div>
+<div id="menuItemHilite21" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Full&nbsp;Version&nbsp;(Registration&nbsp;Required)&nbsp;</div></div>	  <div id="focusItem5" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer6" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 175px; height: 33px;">
+  <div id="menuLite6" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 33px; width: 175px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg6" style="position: absolute; left: 0px; top: 0px; height: 33px; width: 175px;">
+<div id="menuItem22" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 175px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText22" style="position:absolute;left:4px;top:2px;color:#2C5656;">New&nbsp;database&nbsp;features&nbsp;</div>
+<div id="menuItemHilite22" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">New&nbsp;database&nbsp;features&nbsp;</div></div><div id="menuItem23" style="position: absolute; left: 0px; top: 17px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 175px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText23" style="position:absolute;left:4px;top:2px;color:#2C5656;">Latest&nbsp;database&nbsp;summary&nbsp;</div>
+<div id="menuItemHilite23" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Latest&nbsp;database&nbsp;summary&nbsp;</div></div>	  <div id="focusItem6" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer7" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 137px; height: 33px;">
+  <div id="menuLite7" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 33px; width: 137px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg7" style="position: absolute; left: 0px; top: 0px; height: 33px; width: 137px;">
+<div id="menuItem24" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 137px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText24" style="position:absolute;left:4px;top:2px;color:#2C5656;">RegulonDB&nbsp;papers&nbsp;</div>
+<div id="menuItemHilite24" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">RegulonDB&nbsp;papers&nbsp;</div></div><div id="menuItem25" style="position: absolute; left: 0px; top: 17px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 137px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText25" style="position:absolute;left:4px;top:2px;color:#2C5656;">Related&nbsp;papers&nbsp;</div>
+<div id="menuItemHilite25" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Related&nbsp;papers&nbsp;</div></div>	  <div id="focusItem7" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer8" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 137px; height: 16px;">
+  <div id="menuLite8" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 16px; width: 137px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg8" style="position: absolute; left: 0px; top: 0px; height: 16px; width: 137px;">
+<div id="menuItem26" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 137px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText26" style="position:absolute;left:4px;top:2px;color:#2C5656;">Database&nbsp;summary&nbsp;</div>
+<div id="menuItemHilite26" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Database&nbsp;summary&nbsp;</div></div>	  <div id="focusItem8" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer9" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 162px; height: 50px;">
+  <div id="menuLite9" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 50px; width: 162px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg9" style="position: absolute; left: 0px; top: 0px; height: 50px; width: 162px;">
+<div id="menuItem27" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 162px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText27" style="position:absolute;left:4px;top:2px;color:#2C5656;">RegulonDB&nbsp;developers&nbsp;</div>
+<div id="menuItemHilite27" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">RegulonDB&nbsp;developers&nbsp;</div></div><div id="menuItem28" style="position: absolute; left: 0px; top: 17px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 162px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText28" style="position:absolute;left:4px;top:2px;color:#2C5656;">Collaborators&nbsp;</div>
+<div id="menuItemHilite28" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Collaborators&nbsp;</div></div><div id="menuItem29" style="position: absolute; left: 0px; top: 34px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 162px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText29" style="position:absolute;left:4px;top:2px;color:#2C5656;">Advisors&nbsp;</div>
+<div id="menuItemHilite29" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Advisors&nbsp;</div></div>	  <div id="focusItem9" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer10" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 149px; height: 220px;">
+  <div id="menuLite10" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 220px; width: 149px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg10" style="position: absolute; left: 0px; top: 0px; height: 220px; width: 149px;">
+<div id="menuItem30" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 149px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText30" style="position:absolute;left:4px;top:2px;color:#2C5656;">What&nbsp;is&nbsp;RegulonDB?&nbsp;</div>
+<div id="menuItemHilite30" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">What&nbsp;is&nbsp;RegulonDB?&nbsp;</div></div><div id="menuItem31" style="position: absolute; left: 0px; top: 17px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 149px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText31" style="position:absolute;left:4px;top:2px;color:#2C5656;"> What's&nbsp;new&nbsp;</div>
+<div id="menuItemHilite31" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;"> What's&nbsp;new&nbsp;</div><div id="childMenu31" style="position: absolute; left: 138px; top: 4.5px;"><img src="./CellSensing_files/black_arrow_right.gif"></div>
+</div><div id="menuItem32" style="position: absolute; left: 0px; top: 34px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 149px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText32" style="position:absolute;left:4px;top:2px;color:#2C5656;">Annotation&nbsp;Process&nbsp;</div>
+<div id="menuItemHilite32" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Annotation&nbsp;Process&nbsp;</div></div><div id="menuItem33" style="position: absolute; left: 0px; top: 51px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 149px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText33" style="position:absolute;left:4px;top:2px;color:#2C5656;"> Publications&nbsp;</div>
+<div id="menuItemHilite33" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;"> Publications&nbsp;</div><div id="childMenu33" style="position: absolute; left: 138px; top: 4.5px;"><img src="./CellSensing_files/black_arrow_right.gif"></div>
+</div><div id="menuItem34" style="position: absolute; left: 0px; top: 68px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 149px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText34" style="position:absolute;left:4px;top:2px;color:#2C5656;"> RegulonDB&nbsp;History&nbsp;</div>
+<div id="menuItemHilite34" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;"> RegulonDB&nbsp;History&nbsp;</div><div id="childMenu34" style="position: absolute; left: 138px; top: 4.5px;"><img src="./CellSensing_files/black_arrow_right.gif"></div>
+</div><div id="menuItem35" style="position: absolute; left: 0px; top: 85px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 149px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText35" style="position:absolute;left:4px;top:2px;color:#2C5656;">Funding&nbsp;</div>
+<div id="menuItemHilite35" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Funding&nbsp;</div></div><div id="menuItem36" style="position: absolute; left: 0px; top: 102px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 149px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText36" style="position:absolute;left:4px;top:2px;color:#2C5656;">Evidence Clasification&nbsp;</div>
+<div id="menuItemHilite36" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Evidence Clasification&nbsp;</div></div><div id="menuItem37" style="position: absolute; left: 0px; top: 119px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 149px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText37" style="position:absolute;left:4px;top:2px;color:#2C5656;">CellSensing&nbsp;</div>
+<div id="menuItemHilite37" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">CellSensing&nbsp;</div></div><div id="menuItem38" style="position: absolute; left: 0px; top: 136px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 149px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText38" style="position:absolute;left:4px;top:2px;color:#2C5656;"> Credits&nbsp;</div>
+<div id="menuItemHilite38" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;"> Credits&nbsp;</div><div id="childMenu38" style="position: absolute; left: 138px; top: 4.5px;"><img src="./CellSensing_files/black_arrow_right.gif"></div>
+</div><div id="menuItem39" style="position: absolute; left: 0px; top: 153px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 149px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText39" style="position:absolute;left:4px;top:2px;color:#2C5656;">Additional&nbsp;Resources&nbsp;</div>
+<div id="menuItemHilite39" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Additional&nbsp;Resources&nbsp;</div></div><div id="menuItem40" style="position: absolute; left: 0px; top: 170px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 149px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText40" style="position:absolute;left:4px;top:2px;color:#2C5656;">Internal Links&nbsp;</div>
+<div id="menuItemHilite40" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Internal Links&nbsp;</div></div><div id="menuItem41" style="position: absolute; left: 0px; top: 187px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 149px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText41" style="position:absolute;left:4px;top:2px;color:#2C5656;">Contact&nbsp;us&nbsp;</div>
+<div id="menuItemHilite41" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Contact&nbsp;us&nbsp;</div></div><div id="menuItem42" style="position: absolute; left: 0px; top: 204px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 149px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText42" style="position:absolute;left:4px;top:2px;color:#2C5656;">Submit&nbsp;Data&nbsp;</div>
+<div id="menuItemHilite42" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Submit&nbsp;Data&nbsp;</div></div>	  <div id="focusItem10" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer11" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 177px; height: 33px;">
+  <div id="menuLite11" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 33px; width: 177px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg11" style="position: absolute; left: 0px; top: 0px; height: 33px; width: 177px;">
+<div id="menuItem43" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 177px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText43" style="position:absolute;left:4px;top:2px;color:#2C5656;">Relative distance to promoter&nbsp;</div>
+<div id="menuItemHilite43" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Relative distance to promoter&nbsp;</div></div><div id="menuItem44" style="position: absolute; left: 0px; top: 17px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 177px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText44" style="position:absolute;left:4px;top:2px;color:#2C5656;">Relative distance to gene&nbsp;</div>
+<div id="menuItemHilite44" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Relative distance to gene&nbsp;</div></div>	  <div id="focusItem11" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer12" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 177px; height: 33px;">
+  <div id="menuLite12" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 33px; width: 177px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg12" style="position: absolute; left: 0px; top: 0px; height: 33px; width: 177px;">
+<div id="menuItem45" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 177px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText45" style="position:absolute;left:4px;top:2px;color:#2C5656;">Relative distance to promoter&nbsp;</div>
+<div id="menuItemHilite45" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Relative distance to promoter&nbsp;</div></div><div id="menuItem46" style="position: absolute; left: 0px; top: 17px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 177px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText46" style="position:absolute;left:4px;top:2px;color:#2C5656;">Relative distance to gene&nbsp;</div>
+<div id="menuItemHilite46" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Relative distance to gene&nbsp;</div></div>	  <div id="focusItem12" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer13" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 37px; height: 33px;">
+  <div id="menuLite13" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 33px; width: 37px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg13" style="position: absolute; left: 0px; top: 0px; height: 33px; width: 37px;">
+<div id="menuItem47" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 37px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText47" style="position:absolute;left:4px;top:2px;color:#2C5656;">Text&nbsp;</div>
+<div id="menuItemHilite47" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Text&nbsp;</div></div><div id="menuItem48" style="position: absolute; left: 0px; top: 17px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 37px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText48" style="position:absolute;left:4px;top:2px;color:#2C5656;">Fasta&nbsp;</div>
+<div id="menuItemHilite48" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Fasta&nbsp;</div></div>	  <div id="focusItem13" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer14" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 177px; height: 33px;">
+  <div id="menuLite14" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 33px; width: 177px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg14" style="position: absolute; left: 0px; top: 0px; height: 33px; width: 177px;">
+<div id="menuItem49" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 177px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText49" style="position:absolute;left:4px;top:2px;color:#2C5656;"> DNA binding sites&nbsp;</div>
+<div id="menuItemHilite49" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;"> DNA binding sites&nbsp;</div><div id="childMenu49" style="position: absolute; left: 166px; top: 4.5px;"><img src="./CellSensing_files/black_arrow_right.gif"></div>
+</div><div id="menuItem50" style="position: absolute; left: 0px; top: 17px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 177px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText50" style="position:absolute;left:4px;top:2px;color:#2C5656;">TFBSs arrangements&nbsp;</div>
+<div id="menuItemHilite50" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">TFBSs arrangements&nbsp;</div></div>	  <div id="focusItem14" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer15" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 178px; height: 84px;">
+  <div id="menuLite15" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 84px; width: 178px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg15" style="position: absolute; left: 0px; top: 0px; height: 84px; width: 178px;">
+<div id="menuItem51" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 178px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText51" style="position:absolute;left:4px;top:2px;color:#2C5656;">TFBSs arrangements&nbsp;</div>
+<div id="menuItemHilite51" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">TFBSs arrangements&nbsp;</div></div><div id="menuItem52" style="position: absolute; left: 0px; top: 17px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 178px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText52" style="position:absolute;left:4px;top:2px;color:#2C5656;">DNA binding sites&nbsp;</div>
+<div id="menuItemHilite52" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">DNA binding sites&nbsp;</div></div><div id="menuItem53" style="position: absolute; left: 0px; top: 34px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 178px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText53" style="position:absolute;left:4px;top:2px;color:#2C5656;"> Graphs-TF&nbsp;</div>
+<div id="menuItemHilite53" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;"> Graphs-TF&nbsp;</div><div id="childMenu53" style="position: absolute; left: 167px; top: 4.5px;"><img src="./CellSensing_files/black_arrow_right.gif"></div>
+</div><div id="menuItem54" style="position: absolute; left: 0px; top: 51px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 178px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText54" style="position:absolute;left:4px;top:2px;color:#2C5656;"> Graphs-TF and coregulators&nbsp;</div>
+<div id="menuItemHilite54" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;"> Graphs-TF and coregulators&nbsp;</div><div id="childMenu54" style="position: absolute; left: 167px; top: 4.5px;"><img src="./CellSensing_files/black_arrow_right.gif"></div>
+</div><div id="menuItem55" style="position: absolute; left: 0px; top: 68px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 178px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText55" style="position:absolute;left:4px;top:2px;color:#2C5656;"> Export&nbsp;</div>
+<div id="menuItemHilite55" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;"> Export&nbsp;</div><div id="childMenu55" style="position: absolute; left: 167px; top: 4.5px;"><img src="./CellSensing_files/black_arrow_right.gif"></div>
+</div>	  <div id="focusItem15" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer16" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 178px; height: 16px;">
+  <div id="menuLite16" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 16px; width: 178px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg16" style="position: absolute; left: 0px; top: 0px; height: 16px; width: 178px;">
+<div id="menuItem56" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 178px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText56" style="position:absolute;left:4px;top:2px;color:#2C5656;">Export&nbsp;</div>
+<div id="menuItemHilite56" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Export&nbsp;</div></div>	  <div id="focusItem16" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer17" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 178px; height: 16px;">
+  <div id="menuLite17" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 16px; width: 178px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg17" style="position: absolute; left: 0px; top: 0px; height: 16px; width: 178px;">
+<div id="menuItem57" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 178px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText57" style="position:absolute;left:4px;top:2px;color:#2C5656;">Export&nbsp;</div>
+<div id="menuItemHilite57" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Export&nbsp;</div></div>	  <div id="focusItem17" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer18" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 177px; height: 33px;">
+  <div id="menuLite18" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 33px; width: 177px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg18" style="position: absolute; left: 0px; top: 0px; height: 33px; width: 177px;">
+<div id="menuItem58" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 177px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText58" style="position:absolute;left:4px;top:2px;color:#2C5656;">CellDesigner xml format&nbsp;</div>
+<div id="menuItemHilite58" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">CellDesigner xml format&nbsp;</div></div><div id="menuItem59" style="position: absolute; left: 0px; top: 17px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 177px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText59" style="position:absolute;left:4px;top:2px;color:#2C5656;">CellDesigner sbml format&nbsp;</div>
+<div id="menuItemHilite59" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">CellDesigner sbml format&nbsp;</div></div>	  <div id="focusItem18" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer19" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 178px; height: 16px;">
+  <div id="menuLite19" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 16px; width: 178px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg19" style="position: absolute; left: 0px; top: 0px; height: 16px; width: 178px;">
+<div id="menuItem60" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 178px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText60" style="position:absolute;left:4px;top:2px;color:#2C5656;"> Export&nbsp;</div>
+<div id="menuItemHilite60" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;"> Export&nbsp;</div><div id="childMenu60" style="position: absolute; left: 167px; top: 4.5px;"><img src="./CellSensing_files/black_arrow_right.gif"></div>
+</div>	  <div id="focusItem19" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer20" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 122px; height: 33px;">
+  <div id="menuLite20" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 33px; width: 122px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg20" style="position: absolute; left: 0px; top: 0px; height: 33px; width: 122px;">
+<div id="menuItem61" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 122px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText61" style="position:absolute;left:4px;top:2px;color:#2C5656;">COLOMBOS&nbsp;</div>
+<div id="menuItemHilite61" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">COLOMBOS&nbsp;</div></div><div id="menuItem62" style="position: absolute; left: 0px; top: 17px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 122px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText62" style="position:absolute;left:4px;top:2px;color:#2C5656;">M3D&nbsp;</div>
+<div id="menuItemHilite62" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">M3D&nbsp;</div></div>	  <div id="focusItem20" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer21" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 55px; height: 16px;">
+  <div id="menuLite21" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 16px; width: 55px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg21" style="position: absolute; left: 0px; top: 0px; height: 16px; width: 55px;">
+<div id="menuItem63" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 55px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText63" style="position:absolute;left:4px;top:2px;color:#2C5656;">Text&nbsp;</div>
+<div id="menuItemHilite63" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Text&nbsp;</div></div>	  <div id="focusItem21" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer22" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 120px; height: 16px;">
+  <div id="menuLite22" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 16px; width: 120px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg22" style="position: absolute; left: 0px; top: 0px; height: 16px; width: 120px;">
+<div id="menuItem64" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 120px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText64" style="position:absolute;left:4px;top:2px;color:#2C5656;"> Regulated gene(s)&nbsp;</div>
+<div id="menuItemHilite64" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;"> Regulated gene(s)&nbsp;</div><div id="childMenu64" style="position: absolute; left: 109px; top: 4.5px;"><img src="./CellSensing_files/black_arrow_right.gif"></div>
+</div>	  <div id="focusItem22" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer23" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 118px; height: 33px;">
+  <div id="menuLite23" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 33px; width: 118px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg23" style="position: absolute; left: 0px; top: 0px; height: 33px; width: 118px;">
+<div id="menuItem65" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 118px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText65" style="position:absolute;left:4px;top:2px;color:#2C5656;"> Gene Expression&nbsp;</div>
+<div id="menuItemHilite65" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;"> Gene Expression&nbsp;</div><div id="childMenu65" style="position: absolute; left: 107px; top: 4.5px;"><img src="./CellSensing_files/black_arrow_right.gif"></div>
+</div><div id="menuItem66" style="position: absolute; left: 0px; top: 17px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 118px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText66" style="position:absolute;left:4px;top:2px;color:#2C5656;"> Export&nbsp;</div>
+<div id="menuItemHilite66" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;"> Export&nbsp;</div><div id="childMenu66" style="position: absolute; left: 107px; top: 4.5px;"><img src="./CellSensing_files/black_arrow_right.gif"></div>
+</div>	  <div id="focusItem23" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer24" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 132px; height: 33px;">
+  <div id="menuLite24" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 33px; width: 132px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg24" style="position: absolute; left: 0px; top: 0px; height: 33px; width: 132px;">
+<div id="menuItem67" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 132px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText67" style="position:absolute;left:4px;top:2px;color:#2C5656;">TF binding site TFBSs&nbsp;</div>
+<div id="menuItemHilite67" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">TF binding site TFBSs&nbsp;</div></div><div id="menuItem68" style="position: absolute; left: 0px; top: 17px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 132px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText68" style="position:absolute;left:4px;top:2px;color:#2C5656;">Regulatory Phrases&nbsp;</div>
+<div id="menuItemHilite68" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;">Regulatory Phrases&nbsp;</div></div>	  <div id="focusItem24" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+<div id="menuLayer25" style="position: absolute; z-index: 1; left: -300px; top: -300px; visibility: hidden; color: rgb(66, 63, 118); width: 115px; height: 16px;">
+  <div id="menuLite25" style="position: absolute; z-index: 1; left: 0px; top: 0px; height: 16px; width: 115px;" onmouseout="mouseoutMenu();">
+	 <div id="menuFg25" style="position: absolute; left: 0px; top: 0px; height: 16px; width: 115px;">
+<div id="menuItem69" style="position: absolute; left: 0px; top: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; width: 115px; height: 17px; background-color: rgb(232, 232, 232); visibility: inherit; cursor: pointer;"><div id="menuItemText69" style="position:absolute;left:4px;top:2px;color:#2C5656;"> Regulation by TF&nbsp;</div>
+<div id="menuItemHilite69" style="position:absolute;left:4px;top:2px;color:#1291CD;visibility:hidden;"> Regulation by TF&nbsp;</div><div id="childMenu69" style="position: absolute; left: 104px; top: 4.5px;"><img src="./CellSensing_files/black_arrow_right.gif"></div>
+</div>	  <div id="focusItem25" style="position: absolute; left: 0px; top: -30px;" onclick="onMenuItemAction(null,this);">&nbsp;</div>
+   </div>
+  </div>
+</div>
+</span>
+
+        
+        <script>
+
+            function visualizar(idFormulario) {
+                document.formContact.url.defaultValue = document.URL.toString();
+                document.formContact.url.value=document.URL.toString();
+
+                document.formContact.action="/menu/about_regulondb/contact_us/index.jsp";
+                //document.formContact.action="/menu/about_regulondb/contact_us/index.jsp";
+                popup();
+
+                document.formContact.submit();
+            }
+            function popup() {
+                var opciones='left=100,top=600,width=600,height=600,scrollbars=yes,directories=no,status=no,toolbar=no,menubar=no,location=no';
+                window.open('/menu/about_regulondb/contact_us/index.jsp','popup',opciones);
+                //window.open('/menu/about_regulondb/contact_us/index.jsp','popup',opciones);
+
+            }
+                    
+        </script>
+    
+
+    
+        <script src="./CellSensing_files/urchin.js" type="text/javascript">
+        </script>
+        <script type="text/javascript">
+            _uacct = "UA-2862700-2";
+            urchinTracker();
+        </script>
+    
+<br><br>
+        
+        <center>
+              <span class="title"><b>Cell Sensing</b></span>
+        </center>
+    <br><br>
+
+    <div class="centerDivExplorer">
+    <div class="centerDiv">
+    
+        <table width="100%" border="0">
+          <tbody><tr>
+            <td colspan="2">
+                <center>
+                <div class="NormalText1">Internal sensing machinery directs the activity of
+                    the regulatory network in <i>Escherichia coli</i>
+                </div>
+                </center>
+                <center spry:hover="labelGray">
+                    <p>
+                        <b>Agustino Martinez-Antonio, Sarath Chandra Janga, Heladia Salgado &amp;
+                    Julio Collado-Vides</b>        
+                    </p>
+                    <p align="left">
+                        <b class="labelGray">Summary</b><br>
+                    </p>
+                    <p align="justify" class="NormalText">
+                        Individual cells need to have a constant monitoring of their environmental composition. They need to discern and synchronize
+                        transcriptional responses in according to variations in external and internal
+                        conditions. To achieve this level of coordination,
+                        metabolites and chemical compounds are used by the cell as messages
+                        to know the composition of these environments.
+                        These signals act as control elements for the activity of transcription
+                        factors (TF), which enable the cell to reciprocate with a
+                        specific transcriptional response to environmental changes. Here we
+                        outline how the <em>E. coli</em> TF repertoire is responding to
+                        external or internal conditions based on the cellular location of the
+                        signals affecting them; if the signal is outside the periplasm,
+                        then the TF affected is sensing an external condition. On the other
+                        hand, if the signal is produced or synthesized within the cell
+                        (inside the membrane), then the TF affected is sensing an internal condition.
+                        We classify 121 TFs according to their response
+                        to external, internal or both conditions. We find that the global transcriptional
+                        regulation is directed by the internal class of
+                        sensing since: i) The internal class controls most of the regulons,
+                        ii) TFs of external and hybrid classes are mostly regulated by
+                        TFs from the internal class, iii) The internal class has the highest
+                        frequency of co-regulation and iv) Most of the global
+                        regulators belong to the internal class of sensing. This simple classification
+                        of TFs will facilitate to study experimentally and
+                        theoretically how the cell partitions its regulatory network to sense
+                        different stimuli while coordinating its regulatory response
+                        to extracellular and intracellular changes. 
+                    </p>
+                    <p align="left" class="labelGray">
+                        <b>Supplementary data accompanying the paper</b> 
+                    </p>
+              </center>
+        
+          
+              <ol class="linkBlue">
+                <li class="linkBlue">
+                  <div align="left">
+                      <a href="http://regulondb.ccg.unam.mx/menu/about_regulondb/cellsensing/index.jsp#fig0" class="linkBlue"> Definitions used in the manuscript describing the
+                      classification of sensing systems.</a>
+                  </div>
+                </li>
+                <li class="linkBlue">
+                    <a href="http://regulondb.ccg.unam.mx/menu/about_regulondb/cellsensing/index.jsp#fig1" class="linkBlue">Tables showing the classification of the regulatory
+                      network of <i>E.coli </i>into different systems of sensing(classes and
+                sub-classes) as described in this paper<i>.</i></a> 
+                </li>
+                <li class="linkBlue">
+                    <a href="http://regulondb.ccg.unam.mx/menu/about_regulondb/cellsensing/index.jsp#fig2" class="linkBlue">Supplementary Figure 2 showing the <i>Escherichia
+                coli</i> transcriptional regulatory network for sensing the environment.</a>
+                </li>
+                <li class="linkBlue">
+                    <a href="http://regulondb.ccg.unam.mx/menu/about_regulondb/cellsensing/index.jsp#fig3" class="linkBlue">Supplementary Figure 3 showing the overlap between
+                  the regulated genes,TUs and Operons among the different classes of sensing-Internal,External
+                and Hybrid</a> 
+                </li>
+                <li class="linkBlue">
+                  <a href="http://regulondb.ccg.unam.mx/menu/about_regulondb/cellsensing/index.jsp#fig4" class="linkBlue">Supplementary Figure 4 showing the use of signal
+                  metabolites by TFs. One signal one TF (A), One signal interacting with
+                  more than one TF (B) and one TF responding to more than one signal (C). </a><span class="linkBlue"><a href="http://regulondb.ccg.unam.mx/menu/about_regulondb/cellsensing/index.jsp#fig5">Analysis
+                of transcription factors by the Number of signals is also discussed.</a></span>
+                </li>
+              </ol>
+          
+         
+            
+              <center spry:hover="labelGray">
+                <p>&nbsp;  </p>
+                <hr>
+                <p>
+                    <a name="fig0"></a>
+                </p>
+                <p class="labelGray">
+                            1. Definitions used in the manuscript describing the classification
+                of sensing systems are shown below in the supplementary figure 1. For detailed
+                description of the classes, please look to figure 1 and the text accompanying
+                the paper. 
+                </p>
+       
+                 
+        <table bgcolor="#ffffcc" width="100%">
+            <tbody>
+                <tr>
+                    <td>
+                        <center>
+                            <p class="labelGray">
+                                <b><font size="+1">BOX 1. Definitions used</font></b>                  
+                            </p>
+                        </center>
+                        <p class="labelGray">
+                            <b>TF (Transcription Factor).</b> 
+                        </p>
+                        <blockquote>
+                            <p class="NormalText">Transcription factor has been considered for a long
+                            time, as "two-head" molecule (as Francois Jacob called it); one head
+                            is the DNA-binding site domain and the other the allosteric site to
+                            which a metabolite or environmental signal binds not-covalently. A TF
+                            might be differentiated as comprised of two-components where the sensor
+                            module is part of a different protein (as in two-component systems) or
+                            by one-component where the sensor and the regulatory domain
+                            (DNA-binding) are in the same protein. 
+                            </p>
+                        </blockquote>
+                        <p>
+                            <br>
+                            <b class="labelGray">TF gene</b>.&nbsp; 
+                        </p>
+                        <blockquote class="NormalText"> Gene that encodes for a DNA-binding transcription factor protein. </blockquote>
+                        <p>
+                            <br>
+                            <b class="labelGray">Effector gene.</b> 
+                        </p>
+                        <blockquote>
+                            <p class="NormalText">A gene whose product makes the effector signal
+                              available: It could be a membrane sensor of a two-component system, a
+                              sensing/binding/transporter or an enzyme that synthesizes the
+                              corresponding effector metabolite. 
+                            </p>
+                          <br>
+                          &nbsp;
+                            
+                        <div align="center">
+                            <img src="./CellSensing_files/BOX_1_Definitions_used.GIF" border="0" height="400" width="835">
+                        </div>
+                                
+                        </blockquote>
+                        <b class="labelGray">Transcriptional sensing system.</b>
+                        <blockquote>
+                            <p>
+                              <span class="NormalText">
+                                A transcriptional sensing system combines the
+                                transcriptional regulation of genes in according to the availability of
+                                environmental stimuli or physiological cellular state (exogenous and
+                                endogenous conditions). In addition to TF, a transcriptional sensing
+                                system is constituted by an effector gene and a corresponding metabolic
+                                or environmental signal. The effector gene may or may not be directly
+                                regulated by their corresponding TF (forming a regulatory circuit in
+                                the former case). 
+                              </span>
+                            </p>
+                        </blockquote>
+                        <blockquote>
+                            <p>
+                                <span class="NormalText"><strong>TF classes and sub-classes for transcriptional sensing systems </strong> depending on the cellular location of the effector signals directly sensed. </span>
+                            </p>
+                            <p>
+                                <span class="NormalText"><strong><em>I. For sensing exogenous or environmental stimuli </em></strong></span>
+                            </p>
+                            <p>
+                                <span class="NormalText">Sub-classes: </span>
+                            </p>
+                            <p>
+                                <span class="NormalText"><strong>E-TC</strong>.
+                              Include TFs forming part of two-component systems, the signals are
+                              sensed by the sensor component (most of them located in the bacterial
+                              periplasm). </span>
+                            </p>
+                            <p>
+                                <span class="NormalText"><strong>E-TM</strong>. Include TFs sensing
+                              transportable metabolites; these TFs work in close connection with
+                              transport systems that sense/introduce specific metabolites from the
+                              milieu. The metabolites bound/sensed by this kind of TF are not anymore
+                              modified by the cell metabolism except those modifications inherent to
+                              the transport events (e.g. phosphorylation). </span>
+                            </p>
+                            <p>
+                                <span class="NormalText"><strong><em>II. For sensing endogenous or intracellular stimuli </em></strong></span>
+                            </p>
+                            <p>
+                                <span class="NormalText">Sub-classes: </span>
+                            </p>
+                            <p>
+                                <span class="NormalText"><strong>I-SM</strong>.
+                              Include TFs binding/sensing metabolites generated by the cellular
+                              metabolism; by enzymatic reactions (sugar, nucleotides, cofactors, etc)
+                              or generated as byproducts of biochemical reactions (e.g. redox
+                              potential).</span>
+                            </p>
+                            <p>
+                                <span class="NormalText"><strong>I-DB</strong>. Include DNA-bending TFs
+                              for nucleoid or chromosome remodeling and compaction, the activity of
+                              this kind of TF is not directly affected by signal effectors but
+                              possibly by DNA supercoiling or macromolecular crowding. </span>
+                            </p>
+                            <p>
+                                <span class="NormalText"><strong><em>III. Hybrid systems for sensing metabolites from both endogenous and exogenous origin </em></strong></span>
+                            </p>
+                            <p>
+                                <span class="NormalText"><strong>H. </strong>Includes
+                              hybrid TFs, thus named because both bind/sense metabolites  produced by
+                              the cell and transported from the milieu (mostly for sensing amino
+                              acids that in addition to be synthesized by the cell can be transported
+                              into the cell from the milieu). </span>
+                            </p>
+                            <p>&nbsp;</p>
+                        </blockquote>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+         
+                                  
+                                  
+                <p>
+                    <a name="fig1"></a> 
+                </p>
+                <p align="left" class="labelGray">
+                    2. The classification of the regulatory network of <i class="labelGray">E.coli </i>in
+                  different systems of sensing as described in this paper 
+                </p>
+                <p align="left">
+                  <span class="NormalText">In these Tables, we show the systems involving TFs for sensing environment
+                  signals in <i>Escherichia coli </i>K-12. The file is divided into three
+                  parts(to obtain the file in flat file format click <a href="http://www.ccg.unam.mx/Computational_Genomics/regulondb/CellSensing/classification.txt">here</a>);
+                  in the first part are those TFs sensing extracellular signals; E-TC and
+                  E-TM. In the second  are those TFs for hybrid systems (H) whose signals
+                  are both,transported and synthesized by the cell. In the third part are
+                  those systems for sensing endogenous signals (I-SM) and those for DNA-bending
+                (I-DB). Data obtained from RegulonDB<sup>3</sup> , TransportDB<sup>4</sup> and EcoCyC<sup>5</sup> databases(References at the bottom). </span>
+                </p>
+                <h2 class="Subtitle">*&nbsp; External sensing</h2>
+                <h2 class="Subtitle"> A) External-Two-component systems (E-TC), (29 TFs)</h2>
+                <table class="tableData">
+                  <tbody>
+                    <tr>
+                      <th valign="top" width="15%">TF (response regulator)&nbsp;</th>
+                      <th valign="top" width="13%">Signal gene (response sensor)&nbsp;</th>
+                      <th valign="top" width="27%">Functional Class*&nbsp;</th>
+                      <th valign="top" width="26%">Putative function&nbsp;</th>
+                      <th valign="top" width="19%">Putative signal&nbsp;</th>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">ArcA&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">ArcB&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Global regulatory functions: Global regulatory
+                        functions&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Sensor of aerobic and anaerobic growth conditions&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">Membrane quinones (reduced oxygen)&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">AtoC&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">AtoS&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Degradation of small molecules: Fatty acids&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Regulation of genes involved in acetoacetate
+                        metabolism&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">Acetoacetate?&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">BaeR&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">BaeS&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Global regulatory functions: Global regulatory
+                        functions&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Regulation of genes for an efflux pump increasing
+                        resistance to some antibiotics, drag resistance&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">unknown&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">BasR&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">BasS&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Macromolecule synthesis, modification: RNA synthesis,
+                        modification, DNA transcription&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Iron (Fe) response&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">Fe+++?&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">CitB&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">CitA&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Some information, but not classifiable: Not
+                        classified (included putative assignments)&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Regulation of citrate assimilation&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">Citrate?&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">CpxR&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">CpxA&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Global regulatory functions: Global regulatory
+                        functions&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Cell envelope stress response, biofilm, motility,
+                        and chemotaxis.&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">Changes in cell envelope structure&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">CreB&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">CreC&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Global regulatory functions: Global regulatory
+                        functions&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Catabolic regulation&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">Growth on certain carbon sources such as glucose&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">CusR&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">CusS&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Some information, but not classifiable: Not
+                        classified (included putative assignments)&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Copper ion efflux system&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">Copper?&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">DcuR&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">DcuS&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Energy metabolism, carbon: Anaerobic respiration&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Activation of the fumarate-succinate antiporter
+                        genes, in anaerobic conditions.&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">Fumarate-Succinate?&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">DpiA&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">DipB&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Some information, but not classifiable: Not
+                        classified (included putative assignments)&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">System for citrate utilization&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">Citrate?&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">EvgA&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">EvgS&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Some information, but not classifiable: Not
+                        classified (included putative assignments)&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Confers multi-drug resistance, drag resistance.&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">Unknown&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">KdpE&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">KdpD&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Global regulatory functions: Global regulatory
+                        functions&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Regulation of the high-affinity potassium transport
+                        system, and the low cell turgor pressure.&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">Turgor pressure&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">NarL&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">NarX&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Energy metabolism, carbon: Anaerobic respiration&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Anaerobic respiration and fermentation in response
+                        to the electron acceptor nitrate. (Nitrogen metabolism)&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">Nitrate or nitrite&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">NarP&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">NarQ&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Energy metabolism, carbon: Anaerobic respiration&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Anaerobic respiration and fermentation in response
+                        to the electron acceptor nitrite and nitrate. (Nitrogen metabolism)&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">Nitrate or nitrite&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">OmpR&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">EnvZ&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Global regulatory functions: Global regulatory
+                        functions&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Response in the osmotic pressure.&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">External osmolarity&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">PhoB&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">PhoR&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Global regulatory functions: Global regulatory
+                        functions&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Regulate phosphate assimilation&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">External inorganic phosphate&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">PhoP&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">PhoQ&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Global regulatory functions: Global regulatory
+                        functions&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Regulation of phosphate regulon, by the synthesis
+                        of an acid phosphatase&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">Mg++ and low concentrations of extracellular
+                        divalent cations.&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">QseB&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">QseC&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Some information, but not classifiable: Not
+                        classified (included putative assignments)&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Quorum sensing system and transcriptional regulation
+                        of FlhDC&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">Furanones?&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">RcsB&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">RcsC&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Cell envelop: Surface polysaccharides and antigens&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Expression of the capsular polysaccharide synthesis,
+                        and ftsZ expression.&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">Possibly osmotic upshift&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">RstA&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">RstB&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Global regulatory functions: Global regulatory
+                        functions&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Over-expression confers multi-drug resistance&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">Unknown&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">TorR&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">TorS&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Energy metabolism, carbon: Anaerobic respiration&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">trimethylamine metabolism&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">Trimethylamine N-oxide (TMAO)&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">UhpA&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">UhpB&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Transport/binding proteins: MFS family&nbsp;
+                          <p></p></td>
+                      <td width="26%" valign="top" class="NormalText">Controls the synthesis of the hexose phosphate
+                        uptake&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">External concentrations of glucose-6-phosphate
+                        or 2-deoxyglucose-6-phosphate&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">UvrY&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">BarA&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Global regulatory functions: Global regulatory
+                        functions&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">The regulated genes are not well-identified,
+                        oxidative stress resistance&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">Probably associated to hydrogen peroxide-mediated
+                        stress.?&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">YedW/&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">YedV&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Some information, but not classifiable: Not
+                        classified (included putative assignments)&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Overproduction causes a drug resistance phenotype&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">unknown&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">YehT&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">YehU&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Some information, but not classifiable: Not
+                        classified (included putative assignments)&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Potassium transport&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">Potassium?&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">YfhK&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">YfhA&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Unknown proteins, no known homologs: Unknown
+                        function&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Potassium transport&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">Potassium?&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">YgiX&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">YgiY&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Some information, but not classifiable: Not
+                        classified (included putative assignments)&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">This system could be similar to NarLX. Nitrogen
+                        metabolism.&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">unknown&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">YpdB&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">YpdA&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Some information, but not classifiable: Not
+                        classified (included putative assignments)&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Unknown&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">unknown&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">ZraR&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">ZraS&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Energy metabolism, carbon: Fermentation&nbsp;
+                          <p></p></td>
+                      <td width="26%" valign="top" class="NormalText">This system probably senses high periplasmic
+                        Zn2+ and Pb2+ concentrations.&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">Zn2+ or Pb2+ ?&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">?/RssB&nbsp;</td>
+                      <td width="13%" valign="top" class="NormalText">Sensor codified alone in one TU together with
+                        3 other genes&nbsp;</td>
+                      <td width="27%" valign="top" class="NormalText">Macromolecule degradation: Degradation of proteins,
+                        peptides, glycoproteins&nbsp;</td>
+                      <td width="26%" valign="top" class="NormalText">Regulates the stability of the sigmaS&nbsp;</td>
+                      <td width="19%" valign="top" class="NormalText">Unknown&nbsp;</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p align="left" class="labelGray">B). External sensing using transported metabolites ( E-TM ), (28 TFs)</p>
+                <table class="tableData">
+                  <tbody>
+                    <tr>
+                      <th width="15%">TF&nbsp;</th>
+                      <th width="40%">Signal transporters of metabolites&nbsp;</th>
+                      <th width="44%">Signal metabolite&nbsp;</th>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">AgaR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">agaWDVBC&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">GalNAc or GalN&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">AllR (ybbU)&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">YbbW&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Allantoin&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">ArsR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">ArsAB&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">As, Cd(II)&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">AscG&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">AscF&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Arbutin, salicin, and cellobiose (glucosides)&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">BetI&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">BetT&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Choline&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">BglJ&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">BglF, AscF, BglH&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">�-glucosides (arbutin 6P, salicin)&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">CaiF&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">CaiT, YeaV&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Carnitine&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">CelD&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">CelABC&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Arbutin, salicin, and cellobiose&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">CueR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">YbaT&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Cu++&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">CynR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">CynX, YeaN&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Cyanate&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">ExuR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">ExuT&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Hexuronate&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">FecR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">FecABCDE&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Ferric citrate/dicitrate&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">FucR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">FucP, BglH&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Fucose&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">Fur&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">FhuACDB, fecBCDE&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Fe, Mn&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">GatR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">GatABC&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Galactitol 1P&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">GutM&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">SrlAB (gutAB)&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Glucitol/sorbitol&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">GutR (SrlR)&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">SrlAB (gutAB)&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Glucitol/sorbitol&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">ModE&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">ModABC&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Molybdate&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">MtlR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">MtlA, CmtAB&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Mannitol&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">NanR (yhcK)&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">NanT&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Sialic acid&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">NhaR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">NhaAB, YgcE, ChaA&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Na, pH&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">PhnF&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">PhnECD&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Alkyl-phosphonate&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">RhaR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">RhaT&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Rhamnose&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">RhaS&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">RhaT&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Rhamnose&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">UidR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">UidB&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Glucuronides&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">XapR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">XapB&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Xanthosine&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">XylR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">XylEFGH&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Xylose&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="15%" valign="top" class="NormalText">ZntR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">ZnuABC&nbsp;</td>
+                      <td width="44%" valign="top" class="NormalText">Zn(II)&nbsp;</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p align="left" class="labelGray">*&nbsp; <b>Hybrid systems (H). </b>Sensing external and internal signals
+                (33 TFs)</p>
+                <table class="tableData">
+                  <tbody>
+                    <tr>
+                      <th><!--width="69" >-->TFs&nbsp;</th>
+                      <th><!--width="186" >-->Signal transporters genes&nbsp;</th>
+                      <th><!--width="338" >-->Signal enzymatic genes&nbsp;</th>
+                      <th> <!--width="181" >-->Signal metabolites (synthesized and transported)&nbsp;</th>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">AllS* (ybbS)&nbsp;</td>
+                      <td valign="top" class="NormalText">MenD (YjcG SSS transporter&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>GlcB </b>, <b>AceB </b>(malate synthase); <b>GhrAB </b>(glyoxylate
+                        reductase); <b>AceA </b>(isocitrate lyase). <b>AllA </b>(ureidoglycolate
+                        hydrolase). Glycolate dehydrogenase. <b>Eda </b>(malate synthase). ). <b>IlvB </b>(2-hydroxyglutarate
+                        synthase)&nbsp;
+                      </td>
+                      <td valign="top" class="NormalText">Glyoxylate&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">Arac&nbsp;</td>
+                      <td valign="top" class="NormalText">AraEFGH, YdeA, YjjK&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>AraA </b>(L-arabinose isomerase)&nbsp;</td>
+                      <td valign="top" class="NormalText">Arabinose&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">ArgR&nbsp;</td>
+                      <td valign="top" class="NormalText">AniC, HisQPMT, ArtIJMQP.&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>ArgH </b>( argininosuccinate lyase)&nbsp;</td>
+                      <td valign="top" class="NormalText">Arginine&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">AsnC&nbsp;</td>
+                      <td valign="top" class="NormalText">AnsP (APC transporter)&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>asnB </b>(asparagine synthase B); <b>asnA </b>(aspartate--ammonia-ligase).&nbsp;</td>
+                      <td valign="top" class="NormalText">Asparagine&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">CysB&nbsp;</td>
+                      <td valign="top" class="NormalText">Sbp, CysAUWPT;&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>pspE </b>, <b>glpE </b>( thiosulfate sulfurtransferase)&nbsp;</td>
+                      <td valign="top" class="NormalText">Thiosulfate&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">CytR&nbsp;</td>
+                      <td valign="top" class="NormalText">NupCG.&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>udk </b>( cytidine kinase); <b>cdd </b>(cytidine
+                        deaminase)&nbsp;</td>
+                      <td valign="top" class="NormalText">Cytidine&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">DsdC&nbsp;</td>
+                      <td valign="top" class="NormalText">CycA, SdaC, TdcC&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>SerB </b>(phosphoserine phosphatase); <b>CysE </b>, <b>CysK </b>(cysteine synthase): <b>EntF </b>(serine activating enzyme); <b>YdfG </b>(3-hydroxy
+                        acid dehydrogenase)&nbsp;</td>
+                      <td valign="top" class="NormalText">Serine&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">GalR*&nbsp;</td>
+                      <td valign="top" class="NormalText">MglABC, galP, bglH&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>lacZ </b>( beta-galactosidase); <b>galM </b>(aldose-1-epimerase)&nbsp;</td>
+                      <td valign="top" class="NormalText">Galactose&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">GalS&nbsp;</td>
+                      <td valign="top" class="NormalText">MglABC, galP, bglH&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>lacZ </b>( beta-galactosidase); <b>galM </b>(aldose-1-epimerase)&nbsp;</td>
+                      <td valign="top" class="NormalText">Galactose&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">GcvA&nbsp;</td>
+                      <td valign="top" class="NormalText">cycA (serine/alanine/glycine APC transporter)&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>glyA </b>(glycine hydroxymethyltransferase)
+                        formylTHF biosynthesis; <b>kbl </b>(2-amino-3-ketobutyrate CoA ligase). <b>GcvP </b>(glycine
+                        dehydrogenase). <b>ItaC </b>L-allo-threonine aldolase.&nbsp;</td>
+                      <td valign="top" class="NormalText">Glycine&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">GcvR&nbsp;</td>
+                      <td valign="top" class="NormalText">cycA (serine/alanine/glycine APC transporter)&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>glyA </b>(glycine hydroxymethyltransferase)
+                        formylTHF biosynthesis; <b>kbl </b>(2-amino-3-ketobutyrate CoA ligase). <b>GcvP </b>(glycine
+                        dehydrogenase). <b>ItaC </b>L-allo-threonine aldolase.&nbsp;</td>
+                      <td valign="top" class="NormalText">Glycine&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">GlcC&nbsp;</td>
+                      <td valign="top" class="NormalText">GlcA&nbsp;</td>
+                      <td valign="top" class="NormalText"><a name="OLE_LINK1"></a><b>AldA </b>(aldehyde
+                        dehydrogenase) . <b>GhrAB </b>(glyoxylate reductase A and B). <b>Gph </b>(phosphoglycolate
+                        phosphatase)&nbsp;</td>
+                      <td valign="top" class="NormalText">Glycolate&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">GlpR&nbsp;</td>
+                      <td valign="top" class="NormalText">GlpT, UgpABEC;&nbsp;</td>
+                      <td valign="top" class="NormalText">glpK (glycerol kinase), ugpQ (glycerophosphoryl
+                        diester phosphodiesterase, cytoplasmic), GpsA (glycerol-3-phosphate dehydrogenase)&nbsp;</td>
+                      <td valign="top" class="NormalText">Glycerol-3P&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">GntR&nbsp;</td>
+                      <td valign="top" class="NormalText">GntPTU, IdnT&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>idnO </b>(5-keto-D-gluconate 5-reductase). <b>GhrB </b>(2-ketoaldonate
+                        reductase).&nbsp;</td>
+                      <td valign="top" class="NormalText">Gluconate&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">IdnR&nbsp;</td>
+                      <td valign="top" class="NormalText">IndT.&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>GhrB </b>(2-ketoaldonate reductase)&nbsp;</td>
+                      <td valign="top" class="NormalText">L-idonate or 5-ketogluconate&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">LctR&nbsp;</td>
+                      <td valign="top" class="NormalText">LctP, GlcA.&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>AldAB </b>(aldehyde dehydrogenase A and B)&nbsp;</td>
+                      <td valign="top" class="NormalText">Lactate&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">Lrp&nbsp;</td>
+                      <td valign="top" class="NormalText">LivKMHGFJ, BrnQ.&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>TyrB </b>(aromatic amino acid transaminase); <b>IlvE </b>(branched
+                        chain amino acid aminotransferase)&nbsp;</td>
+                      <td valign="top" class="NormalText">Alanine, Leucine&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">LysR&nbsp;</td>
+                      <td valign="top" class="NormalText">ArgT, HisQMP, LysP, CadB.&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>FrlB </b>(fructoselysine 6-phosphate deglycase). <b>LysA </b>(diaminopimelate
+                        decarboxylase)&nbsp;</td>
+                      <td valign="top" class="NormalText">Lysine&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">MelR&nbsp;</td>
+                      <td valign="top" class="NormalText">MelB.&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>MelA </b>(a-galactosidase);&nbsp;</td>
+                      <td valign="top" class="NormalText">Melibiose&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">MhpR&nbsp;</td>
+                      <td valign="top" class="NormalText">MhpT, HcaT.&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>HcaEFCD </b>(3-phenylpropionate dioxygenase
+                        system)&nbsp;</td>
+                      <td valign="top" class="NormalText">3-phenylpropionate&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">TdcA&nbsp;</td>
+                      <td valign="top" class="NormalText">TdcC&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>ThrC </b>(threonine synthase)&nbsp;</td>
+                      <td valign="top" class="NormalText">Threonine&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">TdcR&nbsp;</td>
+                      <td valign="top" class="NormalText">TdcC.&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>ThrC </b>(threonine synthase)&nbsp;</td>
+                      <td valign="top" class="NormalText">Threonine&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">TetR&nbsp;</td>
+                      <td valign="top" class="NormalText">&nbsp;</td>
+                      <td valign="top" class="NormalText">&nbsp;</td>
+                      <td valign="top" class="NormalText">Tetracycline-Mg2+&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">TreR&nbsp;</td>
+                      <td valign="top" class="NormalText">TreB, crr.&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>TreE </b>, <b>OstB </b>(trehalose phosphatase)&nbsp;</td>
+                      <td valign="top" class="NormalText">Trehalose&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">TrpR&nbsp;</td>
+                      <td valign="top" class="NormalText">Mtr, TnaB, aroP&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>TrpAB </b>tryptophan synthase, protein A
+                        and B. <b>SolA </b>N-methyltryptophan oxidase&nbsp;</td>
+                      <td valign="top" class="NormalText">Tryptophan&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">TyrR&nbsp;</td>
+                      <td valign="top" class="NormalText">PheP, AroP, TyrP&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>TyrB </b>( aromatic-amino-acid transaminase)&nbsp;</td>
+                      <td valign="top" class="NormalText">Tyrosine, phenylalanine, tryptophan&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">FhlA&nbsp;</td>
+                      <td valign="top" class="NormalText">FolAB&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>FolE </b>( GTP cyclohydrolase I) folate biosynthesis; <b>purU </b>(formyltetrahydrofolate
+                        deformylase) formylTHF biosynthesis; <b>pflB </b>(pyruvate formate-lyase), <b>tdcE </b>(pyruvate formate-lyase 4); <b>ribA </b>(GTP cyclohydrolase
+                        II); <b>ribB </b>(3,4-dihydroxy-2-butanone 4-phosphate synthase). <b>Def </b>(peptide deformylase). <b>YfdW </b>(formyl-CoA transferase).</td>
+                      <td valign="top" class="NormalText">Formate&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">RbsR</td>
+                      <td valign="top" class="NormalText">RbsABCD,YjcXVW</td>
+                      <td valign="top" class="NormalText"><b>RihABC</b> ( ribonucleoside hydrolase 123)&nbsp;</td>
+                      <td valign="top" class="NormalText">Ribose</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">RpiR (AlsR)&nbsp;</td>
+                      <td valign="top" class="NormalText">RbsABC, AlsABC&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>RihABC</b> (ribonuceloside hydrolases 1, 2 and 3)&nbsp;</td>
+                      <td valign="top" class="NormalText">Ribose</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">NagC&nbsp;</td>
+                      <td valign="top" class="NormalText">NagE, ManXYZ&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>NanE</b> (N-acetylmannosamine-6-P epimerase)&nbsp;</td>
+                      <td valign="top" class="NormalText">GlcNac-6P&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">CadC&nbsp;</td>
+                      <td valign="top" class="NormalText">CadB&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>CadA</b> (lysine decarboxylase), <b>ldcC</b> (lysine
+                        decarboxylase 2)&nbsp;</td>
+                      <td valign="top" class="NormalText">Cadaverine&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">SdiA&nbsp;</td>
+                      <td valign="top" class="NormalText">RhtB</td>
+                      <td valign="top" class="NormalText">2-dehydropantoyl-lactone reductase (B-specific)&nbsp;</td>
+                      <td valign="top" class="NormalText">Furanones</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">PutA</td>
+                      <td valign="top" class="NormalText">ProPY, PutP, ProVXW, YjcG&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>ProC</b> (pyrroline-5-carboxylate-reductase)&nbsp;</td>
+                      <td valign="top" class="NormalText">Proline&nbsp;</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h2 align="left" class="labelGray">*&nbsp; TFs for internal sensing</h2>
+                &nbsp;
+                <h2 align="left" class="labelGray"> *&nbsp; Using internal synthesized signals (I-SM), (26 TFs)</h2>
+                <table class="tableData">
+                  <tbody>
+                    <tr>
+                      <th width="10%">TFs&nbsp;</th>
+                      <th width="40%">Enzymes (in black)&nbsp;</th>
+                      <th width="28%">Product of&nbsp;</th>
+                      <th width="21%">Signal metabolite (synthesized)&nbsp;</th>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">BirA&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText"><b>BioD </b>(dethiobitin synthase); <b>BioB </b>(biotin
+                        synthase)&nbsp;</td>
+                      <td width="28%" valign="top" class="NormalText">From fatty acid biosynthesis and biotin biosynthesis
+                        I.&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">Biotin 5P&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">Cbl&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText"><b>CysH </b>(3'-phospho-adenylylsulfate reductase)&nbsp;</td>
+                      <td width="28%" valign="top" class="NormalText">From sulfate assimilation pathway&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">Adenosine 5PS&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">CRP&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText"><b>CyaA </b>(adenylate cyclase)&nbsp;</td>
+                      <td width="28%" valign="top" class="NormalText">From ATP&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">cAMP&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">DeoR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText"><b>DeoABD </b>( deoxyribose-phosphate aldolase)&nbsp;</td>
+                      <td width="28%" valign="top" class="NormalText">From ribose phosphate degradation&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">Deoxyribose 5P&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">DnaA&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText"><b>PykF, PykK </b>(pyruvate kinase I and II
+                        ) glycolisis; <b>AtpB </b>, <b>AtpF </b>, <b>AtpE </b>, <b>AtpD </b>, <b>AtpG </b>, <b>AtpA </b>, <b>AtpH </b>, <b>AtpC </b>(ATP synthase); <b>SucD </b>(succinate
+                        dehydrogenase) krebs cycle; <b>TdcD </b>, <b>AckA </b>(proponate kinase
+                        I and II) threonine degradation.&nbsp;</td>
+                      <td width="28%" valign="top" class="NormalText">From phosphoenolpyruvate, succinyl-CoA, ropionyl-P
+                        and ADP. From multiple pathways&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">ATP&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">FadR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText"><b>FadABIJ </b>(fatty acid oxidation complex); <b>FadK </b>(acyl-CoA
+                        synthetase), <b>FadD </b>(fatty acyl-CoA synthetase). Fatty acid oxidation
+                        complex.&nbsp;</td>
+                      <td width="28%" valign="top" class="NormalText">From fatty acid degradation pathway&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">Acyl CoA&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">FarR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText"><b>FadABIJ </b>(fatty acid oxidation complex); <b>FadK </b>(acyl-CoA
+                        synthetase), <b>FadD </b>(fatty acyl-CoA synthetase). Fatty acid oxidation
+                        complex.&nbsp;</td>
+                      <td width="28%" valign="top" class="NormalText">From fatty acid degradation pathway&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">Acyl CoA&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">FruR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText"><b>pfkA </b>(6-phosphofructokinase-1); <b>pfkB </b>(6-phosphofructokinase-2); <b>fruK </b>(1-phosphofructokinase).&nbsp;</td>
+                      <td width="28%" valign="top" class="NormalText">From glycolysis, and mannitol and sorbitol degradation.&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">Fructose 1,6BP,&nbsp;
+                      <p></p></td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">IciA&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText"><b>PykF, PykK </b>(pyruvate kinase I and II
+                        ) glycolisis; <b>AtpB </b>, <b>AtpF </b>, <b>AtpE </b>, <b>AtpD </b>, <b>AtpG </b>, <b>AtpA </b>, <b>AtpH </b>, <b>AtpC </b>(ATP synthase); <b>SucD </b>(succinate
+                        dehydrogenase) krebs cycle; <b>TdcD </b>, <b>AckA </b>(proponate kinase
+                        I and II) threonine degradation.&nbsp;</td>
+                      <td width="28%" valign="top" class="NormalText">From phosphoenolpyruvate, succinyl-CoA, ropionyl-P
+                        and ADP. From multiple pathways.&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">ATP&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">IclR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText"><b>Pps </b>(phosphoenolpyruvate synthase), <b>Pck </b>(phosphoenlopyruvate
+                        corboxykinase), <b>Eno </b>(enolase), <b>Ppc </b>(phosphoenolpyruvate carboxylase)&nbsp;</td>
+                      <td width="28%" valign="top" class="NormalText">From gluconeogenesis, glycolysis, mixed acid
+                        fermentation and anaerobic respiration.&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">Phosphoenolpyruvate&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">IlvY&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">IlvC (acetohydroxy acid isomeroreductase); IlvBIGHNM
+                        (acetohydroxybutanoate synthase) -convergent.&nbsp;</td>
+                      <td width="28%" valign="top" class="NormalText">From isoleucine biosynthesis&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">a-Acetohydroxybutyrate&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="NormalText">LacI&nbsp;</td>
+                      <td valign="top" class="NormalText"><b>LacYZ </b>(b-galactosidase, isomerase).&nbsp;</td>
+                      <td valign="top" class="NormalText">From lactose&nbsp;</td>
+                      <td valign="top" class="NormalText">Allolactose&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">LeuO&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText"><b>Gpp </b>(guanosine-5'-triphosphate,3'-diphosphate
+                        pyrophosphatase); <b>RelA </b>, <b>SpoT </b>( ppGpp synthetase I and II)&nbsp;</td>
+                      <td width="28%" valign="top" class="NormalText">From ppGpp biosynthesis&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">ppGpp&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">MalT&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText"><b>MalZ </b>(Maltodextrin glucosidase); <b>MalQ </b>(amylomaltase)&nbsp;</td>
+                      <td width="28%" valign="top" class="NormalText">From glycogen degradation&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">Maltotriose&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">MetJ&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText"><b>MetK </b>(s-Adenosylmethionine synthetase);&nbsp;</td>
+                      <td width="28%" valign="top" class="NormalText">From S-adenosylmethionine biosynthesis.&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">s-Adenosylmethionine&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">MetR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText"><b>MetC </b>(cystathionine-beta-lyase). <b>MalY </b>(cystathionine
+                        b-liase). <b>YagD </b>(mmuM-homocysteine methyltransferase)&nbsp;</td>
+                      <td width="28%" valign="top" class="NormalText">From methionine bios�ntesis&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">Homocysteine&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">PaaX&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText"><b>PaaK </b>(phenylacetate-CoA ligase). <b>FeaB </b>(phenylacetaldehyde
+                        dehydrogenase)&nbsp;</td>
+                      <td width="28%" valign="top" class="NormalText">From phenylacetate degradation&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">Phenylacetic-CoA&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">PdhR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">
+                        <b>MhpE </b>(4-hydroxy-2-ketovalerate aldolase); <b>Dld </b>(D-lactate
+                        dehydrogenase); <b>LldD </b>(L-lactate dehydrogenase [cytochrome]); <b>DadA </b>(D-amino acid dehydrogenase); <b>GarL </b>(alpha-dehydro-beta-deoxy-D-glucarate
+                        aldolase); <b>EntB </b>(isochorismatase); <b>PabC </b>(aminodeoxychorismate
+                        lyase); <b>DgoA </b>(2-dehydro-3-deoxyphosphogalactonate aldolase); <b>MaeB </b>(malic
+                        enzyme, NADP+-linked); <b>MetC </b>, <b>TnaA </b>(L-cysteine desulfhydrase); <b>tdcG </b>, <b>SdaA, SdaB </b>(L-serine deaminase 3); <b>MenD </b>(SHCHC synthase); <b>PrpB </b>(2-methylisocitrate lyase); <b>nanA </b>(N-acetylneuraminate
+                        lyase); <b>: trpE , trpD </b>(anthranilate synthetase); <b>UbiC </b>(chorismate
+                        pyruvate lyase). <b>Eda </b>(2-keto-3-deoxy-6-phosphogluconate aldolase). <b>SfcA </b>(malic enzyme). <b>PykF </b>, <b>PykK </b>(pyruvate kinase I and II). <b>MetC </b>(cystathionine-beta-lyase). <b>MalY </b>(cystathionine b-liase). <b>UbiC </b>(chorismate pyruvate lyase).&nbsp;
+                      </td>
+                      <td width="28%" valign="top" class="NormalText">From �-D-glucuronide, propionate, alanine,
+                        glucarate, galactonate, glyoxylate, serine and Tryptophan degradation.
+                        From aerobic, anaerobic respiration and mixed acid fermentation. From biosynthesis
+                        of ubiquinone, tryptophan, menaquinone, methionine, folate, enterobactin,
+                        etc. In 26 pathways.&nbsp;
+                      </td>
+                      <td width="21%" valign="top" class="NormalText">Pyruvate&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">PurR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText"><b>DeoD </b>(inosine phosphorylase). <b>Ade </b>(cryptic
+                        adenine deaminase). <b>RihC </b>(ribonucleoside hydrolase 3). <b>Hpt </b>(hypoxanthine
+                        phosphoribosyltransferase)&nbsp;</td>
+                      <td width="28%" valign="top" class="NormalText">From salvage pathways of adenine, hypoxanthine,
+                        and their nucleosides.&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">Hypoxanthine&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">WbrA&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText"><b>SsuD </b>(alkanesulfonate monooxugenase); <b>RibF </b>(riboflavin
+                        kinase)&nbsp;</td>
+                      <td width="28%" valign="top" class="NormalText">From riboflavin, FMN and FAD biosynthesis. In
+                        two pathways.&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">Flavin mononucleotide (FMN)&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">FNR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">&nbsp;</td>
+                      <td width="28%" valign="top" class="NormalText">&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">Oxide-reduction&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">OxyR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">&nbsp;</td>
+                      <td width="28%" valign="top" class="NormalText">&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">Oxide-reduction&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">SoxR&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">&nbsp;</td>
+                      <td width="28%" valign="top" class="NormalText">Divergent to the TU codifying for SoxS&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">Oxide-reduction&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">NtrC (glnG)&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">NtrB (GlnD). Two components.&nbsp;</td>
+                      <td width="28%" valign="top" class="NormalText">Sense low concentrations of ammonia in the cytoplasm&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">Glutamine levels&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">Ada&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText">&nbsp;</td>
+                      <td width="28%" valign="top" class="NormalText">Auto-methylation&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">Methyl group&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="10%" valign="top" class="NormalText">LexA&nbsp;</td>
+                      <td width="40%" valign="top" class="NormalText"><b>&nbsp;</b></td>
+                      <td width="28%" valign="top" class="NormalText">Auto-activated&nbsp;</td>
+                      <td width="21%" valign="top" class="NormalText">DNA damage&nbsp;</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p align="left"><br>
+                  <span class="labelGray">&nbsp; B) TFs for DNA-bending ( <b>I-DB </b>), (4 TFs)</span></p>
+                <table class="tableData">
+                  <tbody>
+                    <tr>
+                      <td valign="top" width="10%">FIS&nbsp;</td>
+                      <td valign="top" width="40%"><b>&nbsp;</b></td>
+                      <td valign="top" width="28%">&nbsp;</td>
+                      <td valign="top" width="21%">DNA-bending protein&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" width="10%">IHF&nbsp;</td>
+                      <td valign="top" width="40%"><b>&nbsp;</b></td>
+                      <td valign="top" width="28%">&nbsp;</td>
+                      <td valign="top" width="21%">DNA-bending protein&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" width="10%">HU&nbsp;</td>
+                      <td valign="top" width="40%"><b>&nbsp;</b></td>
+                      <td valign="top" width="28%">&nbsp;</td>
+                      <td valign="top" width="21%">DNA-bending protein&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" width="10%">HNS&nbsp;</td>
+                      <td valign="top" width="40%"><b>&nbsp;</b></td>
+                      <td valign="top" width="28%">&nbsp;</td>
+                      <td valign="top" width="21%">DNA-bending protein&nbsp;</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <hr>
+                <p align="left"><a name="fig2"></a> </p>
+                <p align="left" class="labelGray">
+                  3. Supplementary Figure 2 shows the <i>Escherichia coli </i>transcriptional
+                  regulatory network for sensing the extracellular and intracellular environment.You
+                  can also view this figure in <a href="http://www.ccg.unam.mx/Computational_Genomics/regulondb/CellSensing/sup-fig2.pdf">pdf</a> format 
+                </p>
+                <p align="left" class="NormalText">
+                  In the upper part and from left to right, in green, are those TFs corresponding
+                  to the extracellular class of sensing; in light green, are those TFs from
+                  two-component systems (E-TC) and in dark green, are those TFs using exogenous
+                  metabolites transported into the cells by transport systems (E-TM). In
+                  light blue are those TFs corresponding to hybrid system of sensing (H);
+                  i.e those TFs using metabolites synthesized inside the cell and incorporated
+                  from the milieu, resembling mechanism from E-TM and I-SM sub-classes. For
+                  TFs for internal sensing; in dark blue are those TFs for DNA-bending or
+                  chromatin architectural TFs, they do not sense metabolites directly. In
+                  pink are those TFs for sensing intracellular conditions using endogenous
+                  signals synthesized inside the cell or sensing the internal cellular redox-state.
+                  Finally, in light orange are those TFs without metabolites or un known
+                  mechanisms to modulate their activities. Global TFs<sup>6</sup> (ArcA,
+                  Lrp, Hns, IHF, FIS, FNR and CRP) are at the top level. The connections:
+                  green lines represent activation; red, repression; blue, dual (activation
+                  and repression). The loops in the TFs represent auto-regulation positive, negative
+                  or dual represented as by the line codes. In yellow (low) are those genes
+                  which do not code for TF products. Abbreviations: S, substrate; E, enzyme
+                  and P, product. 
+                </p>
+                <p align="center" class="NormalText"><img src="./CellSensing_files/Extracellular_Sensing.png" height="720" width="960"></p>
+                <hr>
+                <p><a name="fig3"></a> </p>
+                <p align="left" class="labelGray">4. Figure 3 shows the overlap between  regulated genes,TUs and
+                  Operons among the different classes of sensing-Internal,External and Hybrid.It
+                  can be seen that in each case more than 75% of the machinery is regulated
+                  by the internal sensing class. The numbers indicate the absolute number
+                  of elements in each class being regulated by each class of TFs (in parenthesis
+                  are the percentages of each class of elements). Abbreviations: I, internal
+                  class of sensing; E, external class of sensing; H, hybrid systems as described
+                  in Box 1. 
+                </p>
+                <p align="center"><img src="./CellSensing_files/overlap.png" height="720" width="960"></p>
+                <hr>
+                <p align="left">
+                    <a name="fig4"></a><span class="labelGray">5.&nbsp;Interaction of signal
+                    metabolites with Transcription Factors</span>
+                </p> 
+                <br>
+                <p align="left" class="NormalText">
+                    We analyzed the TFs by the number of signal effectors in order to know
+                    the flexibility of the transcriptional machinery to adapt to environmental
+                    changes. Currently, there are 139 known TFs regulating 1058 genes with
+                    some experimental evidence in <em>E. coli</em>.  of the Total of TFs, 120 (86%) could
+                    be classified into one of the three classes of sensing proposed in the
+                    paper and presented in the tables before. Of the classifiable TFs, in 77
+                    TFs there is a one-to-one relation between TF and the metabolite (Figure
+                    4a). When a TF responds to  metabolite (13 TFs), these metabolites
+                    have structural similarity and the TF has a different transcriptional response
+                    depending on the metabolite used (Figure 4b). For instance, TyrR can interact
+                    with three aromatic amino acids and ATP, and it is able to acquire more than
+                    one homomultimeric conformation; it  can bind to strong sites by itself, or
+                    with tyrosine bound, binds to weak sites for repression, while phenylalanine
+                    and tryptophan are used mostly to activate transcription by binding only
+                    to strong sites in the DNA<sup>7</sup>. On the other hand, some metabolites
+                    regulate the activity of more than one TF (15 TFs, Figure 4c). In such
+                    cases there could be a differential binding to the TFs depending on the
+                    availability of the metabolite; as is known for galactose, where GalS is
+                    active in high concentrations of galactose and GalR (higher affinity) is
+                    active when the availability of galactose is low in the milieu<sup>8</sup>. 
+                </p>
+                <p align="center" class="NormalText"><img src="./CellSensing_files/Metabolites_TF.png" height="479" width="461"></p>
+                <p align="left" class="NormalText">
+                    Other 5 TFs do not respond precisely to one metabolite,
+                    such as FNR, SoxR, OxyR (modifying their conformation depending on the
+                    redox potential in the cell) and Ada and LexA (sensing the damage on DNA
+                    strands). There are 4 TFs; IHF, FIS, HU and HNS which do not  respond
+                    directly to signal effectors (but through their regulation by  TFs, those responding
+                    to signals). Finally, of 7 TFs forming part of two component systems (external
+                    class) we do not have knowledge about their sensed signals.
+                </p>
+                <hr>
+                <h2 class="Subtitle"> References</h2>
+                <h3 align="left"> 
+                    1.<span class="NormalText"> Wall, M.E. <i>, et al. </i>(2004) Design of gene circuits: lessons from
+                    bacteria. <i>Nat Rev Genet </i>5, 34-42</span>
+                </h3>
+                <h3 align="left" class="NormalText"> 2. Ulrich, L.E. <i>, et al. </i>(2005) One-component systems dominate signal
+                    transduction in prokaryotes. <i>Trends Microbiol </i>13, 52-56
+                </h3>
+                <h3 align="left" class="NormalText"> 3. Salgado, H. <i>, et al. </i>(2004) RegulonDB (version 4.0): transcriptional
+                    regulation, operon organization and growth conditions in Escherichia coli
+                    K-12. <i>Nucleic Acids Res </i>32 Database issue, D303-306
+                </h3>
+                <h3 align="left" class="NormalText"> 4. Ren, Q. <i>, et al. </i>(2004) TransportDB: a relational database of
+                    cellular membrane transport systems. <i>Nucleic Acids Res </i>32 Database
+                    issue, D284-288
+                </h3>
+                <h3 align="left" class="NormalText"> 5. Keseler, I.M. <i>, et al. </i>(2005) EcoCyc: a comprehensive database
+                    resource for <em>Escherichia coli</em>. <i>Nucleic Acids Res </i>33 Database Issue,
+                    D334-337
+                </h3>
+                <h3 align="left" class="NormalText"> 6. Martinez-Antonio, A., and Collado-Vides, J. (2003) Identifying global
+                    regulators in transcriptional regulatory networks in bacteria. <i>Curr
+                    Opin Microbiol </i>6, 482-489
+                </h3>
+                <h3 align="left" class="NormalText"> 7. Pittard, J. <i>, et al. </i>(2005) The TyrR regulon. <i>Mol Microbiol </i>55,
+                    16-26
+                </h3>
+                <h3 align="left" class="NormalText"> 8. Geanacopoulos, M., and Adhya, S. (1997) Functional characterization
+                    of roles of GalR and GalS as regulators of the gal regulon. <i>J Bacteriol </i>179,
+                    228-234
+                </h3>
+            <hr>
+
+            <p class="rights">For Questions/Comments/Data requests, please mail: <a href="mailto:agustino@ccg.unam.mx">agustino@ccg.unam.mx</a>      /<a href="mailto:ssarath@ccg.unam.mx">sarath@ccg.unam.mx</a> / <a href="mailto:collado@ccg.unam.mx">collado@ccg.unam.mx</a>
+              <!-- Start of StatCounter Code -->
+                <script type="text/javascript">
+                    var sc_project=2746682; 
+                    var sc_invisible=0; 
+                    var sc_partition=27; 
+                    var sc_security="5160bf14"; 
+                </script>
+                <script type="text/javascript" src="./CellSensing_files/counter_xhtml.js">
+
+                </script>
+            </p>
+            <p>&nbsp;</p>
+            </center>
+        </td>
+        </tr>
+        </tbody></table>
+    </div>
+    </div>
+    <br>
+    <br>
+
+
+
+    <title> RegulonDB </title>
+    
+
+
+
+
+ <div id="footer">
+		<div id="spacer">
+    	</div>
+        <div id="logos">
+                <a target="_blank" href="http://www.unam.mx/" class="logoss logo_1"></a>
+                <a target="_blank" href="http://www.ccg.unam.mx/" class="logoss logo_2"></a>
+                <a target="_blank" href="http://www.nih.gov/" class="logoss logo_3"></a>
+                <a target="_blank" href="http://www.conacyt.gob.mx/" class="logoss logo_4"></a>
+                <a href="http://regulondb.ccg.unam.mx/menu/about_regulondb/contact_us/index.jsp" class="cont">Contact us</a>
+                <a href="http://regulondb.ccg.unam.mx/menu/about_regulondb/funding/index.jsp" class="cont">Funding</a>
+                <a href="http://regulondb.ccg.unam.mx/menu/download/full_version/terms_and_conditions.jsp" class="cont">Terms &amp; conditions</a>
+                <a href="http://regulondb.ccg.unam.mx/menu/using_regulondb/terms_and_conditions/citing_conditions/index.jsp" class="cont">How to cite</a>
+        </div>
+        <div id="script" align="center">
+        <form name="formContact" action="http://regulondb.ccg.unam.mx/menu/about_regulondb/contact_us/index.jsp" method="get" target="popup" id="contact_us">
+        <strong>�1998-2020</strong>, CCG/UNAM All Rights Reserved.
+        RegulonDB is free for academic/noncommercial use. <br> RegulonDB 10.7, 05/04/2020. Our curation knowledge is currently mapped to the GenBank Reference Sequence for <em>E. coli </em>K12.<br>Version NC_000913.3  GI:556503834.
+        <input type="hidden" name="url" value="">
+        <input type="hidden" name="popPup" value="yes">
+        Send your comments to the RegulonDB Team <a href="http://regulondb.ccg.unam.mx/menu/about_regulondb/cellsensing/index.jsp#" onclick="javascript:visualizar();return false;" class="linkOrange"> <strong>HERE</strong></a>
+        </form>
+    	</div> 
+    </div>
+    
+
+
+
+
+   
+   
+    
+    <div class="statcounter">
+        <a class="statcounter" href="http://www.statcounter.com/" target="_blank">
+            <img src="./CellSensing_files/StatCounter.gif" alt="StatCounter - Free Web Tracker and Counter" border="0">
+        </a>
+    </div>
+    <noscript>
+        <div class="statcounter">
+            <a class="statcounter" href="http://www.statcounter.com/">
+                <img class="statcounter"
+                src="http://c28.statcounter.com/2746682/0/5160bf14/0/" alt="free hit
+                counter" />
+            </a>
+        </div>
+    </noscript>
+    <!-- End of StatCounter Code -->
+
+    
+</body></html>
