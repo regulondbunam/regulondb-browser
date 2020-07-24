@@ -90,7 +90,7 @@ const TableGeneInfo = ({
                                     default:
                                         return (
                                             <tr key={key}>
-                                                <td style={{ fontWeight: "bold" }}><ToolTip tip={`termino ${key}`} >{`${key}:`}</ToolTip></td>
+                                                <td style={{ fontWeight: "bold" }}><ToolTip tip={`termino hola esta es una descripcion con muchas palabras nose que mas poner xD ${key}`} >{`${key}:`}</ToolTip></td>
                                                 <td dangerouslySetInnerHTML={{ __html: geneData[key] }}></td>
                                             </tr>
                                         )

@@ -14,6 +14,8 @@ const GeneDescription = ({
     return (
         <>
         <nav style={{overflow: 'hidden'}} >
+            <br/>
+            <br/>
         <GraphicGene idGene={geneID} />
         </nav>
         <article>

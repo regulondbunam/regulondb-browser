@@ -115,14 +115,15 @@ export default class IconButton extends Component {
             className,
             icon,
             style,
-            iconStyle
+            iconStyle,
+            iconClassName = '',
         } = this.props;
             return (
                 <>
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
                     rel="stylesheet" />
                 <button style={style} className={selectStyle(active,className)} onClick={this.handleOnClickLink}>
-                    <i className="material-icons" style={iconStyle}>{icon}</i>
+                    <i className={`material-icons ${iconClassName}`} style={iconStyle}>{icon}</i>
                 </button>
                 </>
             )  

@@ -15,30 +15,35 @@ const GraphicGene = ({
     let imge = useRef(null)
     const [zoom, setZoom] = useState(false)
     let iconZoom = '<<>>'
-    if(zoom){
+    if (zoom) {
         iconZoom = '>><<'
     }
     return (
         <table>
             <tbody>
                 <tr>
+                    <td></td>
                     <td>
-                        <div style={{float: "right"}}>
-                            <IconButton style={{ float: 'left' }} icon="add" onClick={() => {
-                                imge.current.zoomIn(1)
-                            }} />
-                            <IconButton style={{ float: 'left' }} icon="fullscreen_exit" onClick={() => {
-                                imge.current.reset()
-                            }} />
-                            <IconButton style={{ float: 'left' }} icon="remove" onClick={() => {
-                                imge.current.zoomOut(1)
-                            }} />
-                            <IconButton style={{ float: 'left' }} iconStyle={{fontFamily: "monospace", fontSize: "14px", fontWeight: 'bold'}} icon={iconZoom} onClick={() => { setZoom(!zoom) }} />
+                        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}} >
+                            <div>
+                                <IconButton style={{ float: 'left' }} icon="add" onClick={() => {
+                                    imge.current.zoomIn(1)
+                                }} />
+                                <IconButton style={{ float: 'left' }} icon="fullscreen_exit" onClick={() => {
+                                    imge.current.reset()
+                                }} />
+                                <IconButton style={{ float: 'left' }} iconStyle={{ fontFamily: "monospace", fontSize: "14px", fontWeight: 'bold' }} icon={iconZoom} onClick={() => { setZoom(!zoom) }} />
+                                <IconButton style={{ float: 'left' }} icon="remove" onClick={() => {
+                                    imge.current.zoomOut(1)
+                                }} />
+                            </div>
                         </div>
+
                     </td>
+                    <td></td>
                 </tr>
                 <tr>
-                    <td>
+                    <td colSpan="3">
                         <div style={{ textAlign: "center", overflow: 'hidden' }}>
                             <PanZoom
                                 ref={imge}
@@ -57,9 +62,9 @@ const GraphicGene = ({
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <div style={{float: "right"}}>
-                        <Modal title={"what is this diagram?"}><GetFile urlFile={urlFile} /></Modal>
+                    <td colSpan="3">
+                        <div style={{ float: "right" }}>
+                            <Modal title={"what is this diagram?"}><GetFile urlFile={urlFile} /></Modal>
                         </div>
                     </td>
                 </tr>
