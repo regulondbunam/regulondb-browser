@@ -1,20 +1,51 @@
 import React from 'react';
-import TableProducts from './productsTab/TableProducts'
+import {TableProductInfo} from './productsTab/TableProducts'
+import TableProductExternalID from './productsTab/TableProductExternalID'
+import { GeneProducts } from '../components/apollo/GeneCollection';
+import { useQuery } from '@apollo/react-hooks';
 
-const GeneProducts = ({
+const GeneProduct = ({
     geneID
 }) => {
-    return ( 
-        <>
-        <article>
-        <h1>Product information</h1>
-        <TableProducts idGene={geneID} />
-        </article>
-        <aside>
-            
-        </aside>
-        </>
-     );
+    const productsS = new GeneProducts(geneID)
+    const advancedSearch = productsS.advancedSearch
+    const { data, loading, error } = useQuery(productsS.query, {
+        variables: { advancedSearch }
+    })
+    //console.log(data)
+    //console.log(error)
+    if (loading) { return <>Loading...</> }
+    if (error) { return <>Server error </> }
+    try {
+        const products = data.getGenesBy.data[0].products
+        return (
+            <>
+            <article>
+            <h1>Product information</h1>
+            </article>
+                {
+                    products.map((product) => {
+                        return (
+                            <React.Fragment key={product.name} >
+                                <article >
+                                <h2 dangerouslySetInnerHTML={{ __html: product.name }} style={{ margin: '0' }}/>
+                                {TableProductInfo(product)}
+                            </article>
+                             <aside>
+                                 <TableProductExternalID externalCrossReferences={product.externalCrossReferences} />
+                             </aside>
+                            </React.Fragment>
+                            
+                        )
+                    })
+                }
+            </>
+        )
+    } catch (error) {
+        console.log(error)
+        return <></>
+    }
+    
 }
  
-export default GeneProducts;
+export default GeneProduct;

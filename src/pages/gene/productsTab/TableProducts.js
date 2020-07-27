@@ -1,49 +1,10 @@
 import React from 'react';
-import { GeneProducts } from '../../components/apollo/GeneCollection';
-import { useQuery } from '@apollo/react-hooks';
+import ModalER from '../../components/utiles/ModalEvidenceRef'
 import Modal from '../../components/ui-components/infoDisplay/modal/Modal';
 import Sequence from '../../components/sequence/Sequence';
 
-const TableProducts = ({
-    idGene
-}) => {
-    const productsS = new GeneProducts(idGene)
-    const advancedSearch = productsS.advancedSearch
-    const { data, loading, error } = useQuery(productsS.query, {
-        variables: { advancedSearch }
-    })
-    //console.log(data)
-    //console.log(error)
-    if (loading) { return <>Loading...</> }
-    if (error) { return <>Server error </> }
-    try {
-        const products = data.getGenesBy.data[0].products
-        return (
-            <>
-                {
-                    products.map((product) => {
-                        return (
-                            <div style={{ width: "80%" }} key={product.name}>
-                                <h2 dangerouslySetInnerHTML={{ __html: product.name }} style={{ margin: '0' }}/>
-                                {TableProductInfo(product)}
-                            </div>
-                        )
-                    })
-                }
-            </>
-        )
 
-    } catch (error) {
-        return (
-            <>
-                Client error
-            </>
-        );
-    }
-
-}
-
-function TableProductInfo(product) {
+export function TableProductInfo(product) {
     return (
         <table key={`${product.name}-tableInfo`}>
             <tbody>
@@ -65,7 +26,21 @@ function TableProductInfo(product) {
                             case 'externalCrossReferences':
                                 return null
                             case 'evidenceReferences':
-                                return null
+                                return (
+                                    <React.Fragment key={`${key}_${product['name']}`}>
+                                    <br/>
+                                    <tr><th colSpan="2">{`${product['name']} Evidence and References`}</th></tr>
+                                    {
+                                    product[key].map((evi) => {
+                                        return (
+                                            <tr key={evi.referenceCitation} className="trClickable">
+                                                <td colSpan="2"><ModalER classNameModal="citation" title={evi.referenceCitation} evidenceReference={evi} /></td>
+                                            </tr>
+                                        )
+                                    })
+                                    }
+                                    </React.Fragment>
+                                )
                             case 'sequence':
                                 return sequence(product['name'], product[key], key)
                             default:
@@ -147,5 +122,3 @@ function sequence(gene, sequence, key) {
         </tr>
     )
 }
-
-export default TableProducts;
