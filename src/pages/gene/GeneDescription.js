@@ -6,10 +6,12 @@ import TableContext from './descriptionTab/TableContext'
 //import TableShineDalgarno from './descriptionTab/TableShineDalgarno'
 import TableGeneExternalID from './descriptionTab/TableGeneExternalID'
 import GraphicGene from './descriptionTab/GraphicGene'
+import TableEviRef from './descriptionTab/TableReferences'
 
 
 const GeneDescription = ({
-    geneID
+    geneID,
+    showER = true
 }) => {
     return (
         <>
@@ -30,7 +32,13 @@ const GeneDescription = ({
             <TableRegulators idGene={geneID} />
             <h2>Context</h2>
             <TableContext idGene={geneID} />
-            
+            <br/>
+            {
+                showER
+                ?<><h1>Evidence and References</h1>
+                <TableEviRef idGene={geneID} /></>
+                :<></>
+            }
         </article>
         <aside>
             <div style={{paddingTop: "25px"}}>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { ContextInfo } from '../../components/apollo/GeneCollection'
 import Modal from '../../components/ui-components/infoDisplay/modal/Modal'
+import ModalEviRef from '../../components/utiles/ModalEvidenceRef'
 //import { useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 
@@ -71,21 +72,12 @@ const TableContext = ({
 }
 
 function EvidenceReferencesDisplay(evidenceReferences) {
-    let styleStrong = {}
     return evidenceReferences.map((evd) => {
-        if(evd.evidenceType === "Strong"){
-            styleStrong = {fontWeight: "bold"}
-        }
-        const evdref = `
-            <h2>Evidence</h1>
-            <h1>${evd.evidenceCode}: ${evd.evidenceName}</h1>
-            <h3>${evd.evidenceType}</h3>
-            <h2>Reference:</h2>
-            <h2><a href="${evd.referenceURL}" target="_blank" rel="noopener noreferrer" >View Refence</a></h2>
-            <p class="citation">${evd.referenceCitation}</p>
-        `
+        const title=`${evd.evidenceCode}(${evd.evidenceType})`
         return (
-            <td key={evd.evidenceCode}><Modal className="aBase" style={styleStrong} title={evd.evidenceCode + " (" + evd.evidenceType + ")"} info={evdref}></Modal></td>
+            <td key={evd.evidenceCode}>
+                <ModalEviRef title={title} evidenceReference={evd} />
+            </td>
         )
     })
 

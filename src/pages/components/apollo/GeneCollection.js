@@ -36,6 +36,36 @@ query getGeneInfo($advancedSearch: String!){
   }
 `
 
+// Gene EvidenceReferences
+export class EvidenceReferences {
+  constructor(id) {
+    this.advancedSearch = `${id}[geneInfo.id]`
+    this.query = GENE_ER
+  }
+}
+
+const GENE_ER = gql`
+query getGeneInfoEvidence($advancedSearch: String!){
+  getGenesBy(limit:1 page: 0 advancedSearch:$advancedSearch)
+    {
+      data{
+        geneInfo{
+          id
+          evidenceReferences{
+            evidenceName
+            evidenceCode
+            evidenceType
+            referenceURL
+            referenceCitation
+            referenceId
+          }
+        }
+      }
+    }
+  
+  }
+`
+
 // Gene Operon Info
 
 export class OperonInfo {

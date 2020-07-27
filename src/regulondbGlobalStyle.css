@@ -223,8 +223,8 @@ th {
 }
 
 .citation{
+	font-family: var(--fontFamily-cita);
 	font-size: 10px;
-	color: var(--color-grey2);
 }
 
 .tabHeader{

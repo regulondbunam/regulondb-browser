@@ -8,7 +8,7 @@ const GeneAllInfo = ({
 }) => {
     return (
         <>
-        <GnDescription geneID={idGene} />
+        <GnDescription geneID={idGene} showER={false} />
         <br/>
         <GnProducts geneID={idGene} />
         <br/>

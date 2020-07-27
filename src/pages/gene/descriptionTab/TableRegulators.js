@@ -46,9 +46,7 @@ const TableRegulators = ({
                             })
                         }
                         <div style={{ float: "none", height: "50px" }}>
-                            <br />
                         </div>
-                        <br />
                     </>
                 );
             } else {
