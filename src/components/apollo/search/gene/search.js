@@ -35,14 +35,13 @@ const Search = ({
             script={[
                 helmetJsonLdProp({
                     "@context": "https://schema.org",
-                    "@type": "Person",
-                    name: "Grace Hopper",
-                    alternateName: "Grace Brewster Murray Hopper",
-                    alumniOf: {
-                        "@type": "CollegeOrUniversity",
-                        name: ["Yale University", "Vassar College"],
-                    },
-                    knowsAbout: ["Compilers", "Computer Science"],
+                    "@type": "WebSite",
+                    url: "http://35.175.246.117:3000/search/",
+                    potentialAction: {
+                        "@type": "SearchAction",
+                        "target": "http://35.175.246.117:3000/search/{search_term_string}",
+                        "query-input": "required name=search_term_string"
+                      }
                 }),
             ]}
         />
