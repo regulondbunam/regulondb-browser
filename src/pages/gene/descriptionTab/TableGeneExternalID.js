@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalDataBases } from '../../../components/apollo/GeneCollection'
+import { ExternalDataBases } from '../../../components/apollo/GeneQuery'
 //import { useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 

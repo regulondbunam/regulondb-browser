@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../../resources/image/RegulonLogo.png'
 import Image from '../ui-components/infoDisplay/media/Image'
-import SearchTool from '../search/SearchTool'
+import SearchTool from '../apollo/search/SearchTool'
 import { withRouter } from 'react-router-dom';
 
 

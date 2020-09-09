@@ -1,5 +1,5 @@
 import React from 'react';
-import MarckStr from '../../../components/utiles/MarkStr'
+import MarckStr from '../../../../components/utiles/MarkStr'
 import { useHistory } from 'react-router-dom';
 
 
@@ -24,7 +24,7 @@ const ResultsGene = ({
                     </thead>
                     <tbody>
                         {data.map((gen) => {
-                            const gene = gen.geneInfo
+                            const gene = gen.gene
                             const prod = gen.products
                             let products = ""
                             products += prod.map((product) => {

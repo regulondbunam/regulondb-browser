@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import Gene from '../../../components/apollo/GeneCollection'
+import Gene from '../../../components/apollo/GeneQuerys'
 import {GetPhrase} from '../../../components/apollo/PhraseCollection'
 import Modal from '../../../components/ui-components/infoDisplay/modal/Modal'
 import Sequence from '../../../components/sequence/Sequence'

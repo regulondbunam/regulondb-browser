@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import GeneSearch from '../../components/apollo/search/gene/search'
 import CoverSearch from './ownComponents/CoverSearch'
-import GeneResults from '../../components/search/GeneResults'
+import GeneResults from '../../components/apollo/search/GeneResults'
+import Search from '../../components/apollo/search/gene/search';
 
 const colecciones = ["Genes", "Gensor Unit", "Operon", "Regulon", "Sigmulon", "sRNA", "Grow Conditions"]
 
@@ -61,6 +63,10 @@ class ResultSearch extends Component {
         this.resultState.current.addnGene(count)
     }
 
+    _UpdateResoltsData = (data) => {
+        console.log(data)
+    }
+
 
     render() {
         const {
@@ -70,7 +76,7 @@ class ResultSearch extends Component {
             <>
                     <ResultState search={search} ref={this.resultState} />
                 <article>
-                    <GeneResults search={search} resoultsFound={this._UpdateResultState} />
+                    <GeneSearch search={search} limit={50} page={0} resoultsFound={this._UpdateResultState} resoultsData={this._UpdateResoltsData} />
                 </article>
 
             </>

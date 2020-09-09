@@ -2,54 +2,85 @@ import { gql } from 'apollo-boost';
 
 // Gene Info
 
-export default class Gene {
-  constructor(id) {
-    this.advancedSearch = `${id}[geneInfo.id]`
-    this.query = GENE_INFO
-  }
-}
 
-const GENE_INFO = gql`
-query getGeneInfo($advancedSearch: String!){
-  getGenesBy(limit:1 page: 0 advancedSearch:$advancedSearch)
+export default class GeneQuerys{
+  constructor(id){
+    this.id = id
+  }
+  
+  querySearch(search, limit = 100, page = 0) {
+    return gql`
     {
-      data{
-        geneInfo{
-          id
-          name
-          synonyms
-          leftEndPosition
-          rightEndPosition
-          centisomePosition
-          strand
-          sequence
-          gcContent
-          note
-          type
+        getGenesBy(limit:${limit} page:${page} search:"${search}")
+        {
+          data {
+          gene {
+              id
+              name
+              synonyms
+              note   
+            }
+            products{
+              name
+              id
+            }
         }
-        products{
-          name
+        pagination{
+          totalResults
+        }
         }
       }
-    }
-  
+    `
   }
-`
+
+  queryInfo(id){
+    const advancedSearch = `${id}[gene.id]`
+    return gql`
+    query getGene($advancedSearch: String!){
+      getGenesBy(limit:1 page: 0 advancedSearch:${advancedSearch})
+        {
+          data{
+            gene{
+              id
+              name
+              synonyms
+              leftEndPosition
+              rightEndPosition
+              centisomePosition
+              strand
+              sequence
+              gcContent
+              note
+              type
+            }
+            products{
+              id
+              name
+            }
+          }
+        }
+      
+      }
+    `
+  }
+
+
+}
 
 // Gene EvidenceReferences
 export class EvidenceReferences {
   constructor(id) {
-    this.advancedSearch = `${id}[geneInfo.id]`
+    this.advancedSearch = `${id}[gene.id]`
     this.query = GENE_ER
   }
 }
 
 const GENE_ER = gql`
-query getGeneInfoEvidence($advancedSearch: String!){
+query getGeneEvidence($advancedSearch: String!){
   getGenesBy(limit:1 page: 0 advancedSearch:$advancedSearch)
     {
       data{
-        geneInfo{
+        gene{
           id
           evidenceReferences{
             evidenceName
@@ -70,7 +101,7 @@ query getGeneInfoEvidence($advancedSearch: String!){
 
 export class OperonInfo {
   constructor(idGene) {
-    this.advancedSearch = `${idGene}[geneInfo.id]`
+    this.advancedSearch = `${idGene}[gene.id]`
     this.query = GENE_OPERON
   }
 }
@@ -112,7 +143,7 @@ query getGeneOperon($advancedSearch: String!){
 
 export class RegulatorInfo {
   constructor(idGene) {
-    this.advancedSearch = `${idGene}[geneInfo.id]`
+    this.advancedSearch = `${idGene}[gene.id]`
     this.query = GENE_REGULATOR
   }
 }
@@ -138,7 +169,7 @@ query getGeneRegulator($advancedSearch: String!){
 
 export class ContextInfo {
   constructor(idGene) {
-    this.advancedSearch = `${idGene}[geneInfo.id]`
+    this.advancedSearch = `${idGene}[gene.id]`
     this.query = GENE_CONTEXT
   }
 }
@@ -173,7 +204,7 @@ query getGeneContext($advancedSearch: String!) {
 
 export class ShineDalgarno {
   constructor(idGene) {
-    this.advancedSearch = `${idGene}[geneInfo.id]`
+    this.advancedSearch = `${idGene}[gene.id]`
     this.query = GENE_SHINEDALGARNO
   }
 }
@@ -196,30 +227,8 @@ query getGeneShineDalgarno($advancedSearch: String!) {
 // Search Gene
 
 export class SearchGene {
-  constructor(searchTerm,limit=50,page=0) {
+  constructor(searchTerm, limit = 50, page = 0) {
     this.searchTerm = searchTerm
-    this.query = gql`
-query SearchGenes($search: String!){
-    getGenesBy(limit:${limit} page:${page} search:$search)
-    {
-      data {
-      geneInfo {
-          id
-          name
-          synonyms
-          note   
-        }
-        products{
-          name
-          regulatorId
-        }
-    }
-    pagination{
-      totalResults
-    }
-    }
-  }
-`
   }
 }
 
@@ -227,7 +236,7 @@ query SearchGenes($search: String!){
 
 export class GeneProducts {
   constructor(idGene) {
-    this.advancedSearch = `${idGene}[geneInfo.id]`
+    this.advancedSearch = `${idGene}[gene.id]`
     this.query = GENE_PRODUCTS
   }
 }
@@ -277,7 +286,7 @@ query getGeneProducts($advancedSearch: String!) {
 
 export class ExternalDataBases {
   constructor(idGene) {
-    this.advancedSearch = `${idGene}[geneInfo.id]`
+    this.advancedSearch = `${idGene}[gene.id]`
     this.query = GENE_EXTERNAL
   }
 }
@@ -285,7 +294,7 @@ const GENE_EXTERNAL = gql`
 query getGeneExternal($advancedSearch: String!) {
   getGenesBy(limit: 1, page: 0, advancedSearch: $advancedSearch) {
     data {
-      geneInfo{
+      gene{
         id
         externalCrossReferences{
           name
@@ -299,7 +308,7 @@ query getGeneExternal($advancedSearch: String!) {
 
 export class GrowthConditions {
   constructor(idGene) {
-    this.advancedSearch = `${idGene}[geneInfo.id]`
+    this.advancedSearch = `${idGene}[gene.id]`
     this.query = GENE_GROWTHCONDITIONS
   }
 }

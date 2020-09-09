@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Gene from './tabs/Genes'
-import {SearchGene} from '../apollo/GeneCollection'
+import GeneQuerys from '../querys/GeneQuerys'
 import { useQuery } from '@apollo/react-hooks';
 
 const GeneResults = ({
@@ -9,10 +9,8 @@ const GeneResults = ({
 }) => {
     const [limit] = useState(50)
     const [page] = useState(0)
-    let searchGene = new SearchGene(search, limit, page)
-    const { data, loading, error } = useQuery(searchGene.query, {
-        variables: { search }
-    })
+    const geneQuery = new GeneQuerys()
+    const { data, loading, error } = useQuery(geneQuery.querySearch(search,limit,page))
     useEffect(()=>{
         if(data!==undefined){
             //console.log(data.getGenesBy.pagination.totalResults)

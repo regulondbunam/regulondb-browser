@@ -1,6 +1,6 @@
 import React from 'react';
 import Cover from '../../../components/ui-components/regulonDB-web/Cover'
-import SearchTool from '../../../components/search/SearchTool'
+import SearchTool from '../../../components/apollo/search/SearchTool'
 import LinksInfo from '../resources/linksCover.json'
 
 

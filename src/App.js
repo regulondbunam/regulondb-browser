@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from './components/layout/Layout'
 import Search from './pages/search/SearchHome'
-import Gene from './pages/gene/GeneHome'
+//import Gene from './pages/gene/GeneHome'
 import Home from './pages/home/Home'
 import Error from './pages/error/Error'
 import Testing from './pages/Testing'
@@ -26,9 +26,7 @@ function App() {
         <Route path="/search">
           <Search />
         </Route>
-        <Route path={["/gene/:id/:site/:section","/gene/:id/:site","/gene/:id","/gene",]}>
-          <Gene />
-        </Route>
+        
         <Route path="/Testing">
           <Testing />
         </Route>
@@ -46,5 +44,7 @@ export default App;
 
 
 /**
-      
+      <Route path={["/gene/:id/:site/:section","/gene/:id/:site","/gene/:id","/gene",]}>
+          <Gene />
+        </Route>
  */

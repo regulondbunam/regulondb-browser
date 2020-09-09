@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import Texbox from '../ui-components/basicInput/Text'
-import Button from '../ui-components/basicInput/Buttons';
+import Texbox from '../../ui-components/basicInput/Text'
+import Button from '../../ui-components/basicInput/Buttons';
 import { useHistory } from 'react-router-dom';
 
 
