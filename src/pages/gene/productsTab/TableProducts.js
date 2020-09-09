@@ -1,7 +1,7 @@
 import React from 'react';
-import ModalER from '../../components/utiles/ModalEvidenceRef'
-import Modal from '../../components/ui-components/infoDisplay/modal/Modal';
-import Sequence from '../../components/sequence/Sequence';
+import ModalER from '../../../components/utiles/ModalEvidenceRef'
+import Modal from '../../../components/ui-components/infoDisplay/modal/Modal';
+import Sequence from '../../../components/sequence/Sequence';
 
 
 export function TableProductInfo(product) {

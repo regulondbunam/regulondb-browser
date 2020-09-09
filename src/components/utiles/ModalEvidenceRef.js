@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from '../ui-components/infoDisplay/modal/Modal'
+import Modal from '../../components/ui-components/infoDisplay/modal/Modal'
 
 const ModalER = ({
     evidenceReference,

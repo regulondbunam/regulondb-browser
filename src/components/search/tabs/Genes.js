@@ -1,5 +1,5 @@
 import React from 'react';
-import MarckStr from '../../utiles/MarkStr'
+import MarckStr from '../../../components/utiles/MarkStr'
 import { useHistory } from 'react-router-dom';
 
 

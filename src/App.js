@@ -1,8 +1,8 @@
 import React from 'react';
+import Layout from './components/layout/Layout'
 import Search from './pages/search/SearchHome'
 import Gene from './pages/gene/GeneHome'
 import Home from './pages/home/Home'
-import Layout from './pages/layout/Layout'
 import Error from './pages/error/Error'
 import Testing from './pages/Testing'
 import {
@@ -43,3 +43,8 @@ function App() {
 }
 
 export default App;
+
+
+/**
+      
+ */

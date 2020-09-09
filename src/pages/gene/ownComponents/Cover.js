@@ -1,5 +1,5 @@
 import React from 'react';
-import Spinner from '../../components/loading/Spinner'
+import Spinner from '../../../components/loading/Spinner'
 
 export default function CoverSearch(menssage, state) {
     switch (state) {

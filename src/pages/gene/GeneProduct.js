@@ -1,7 +1,7 @@
 import React from 'react';
 import {TableProductInfo} from './productsTab/TableProducts'
 import TableProductExternalID from './productsTab/TableProductExternalID'
-import { GeneProducts } from '../components/apollo/GeneCollection';
+import { GeneProducts } from '../../components/apollo/GeneCollection';
 import { useQuery } from '@apollo/react-hooks';
 
 const GeneProduct = ({

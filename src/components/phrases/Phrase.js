@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ToolTip from '../ui-components/infoDisplay/toolTip/ToolTip'
-import { IconButton } from '../ui-components/basicInput/Buttons'
+import ToolTip from '../../components/ui-components/infoDisplay/toolTip/ToolTip'
+import { IconButton } from '../../components/ui-components/BasicInput'
 import Style from './Phrase.module.css'
 import Cursor from './resources/cursorIcon.png'
 

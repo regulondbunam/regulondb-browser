@@ -1,5 +1,5 @@
 import React from 'react';
-import Cover from '../components/ui-components/regulonDB-web/Cover';
+import Cover from '../../components/ui-components/regulonDB-web/Cover';
 import {withRouter} from 'react-router-dom';
 
 

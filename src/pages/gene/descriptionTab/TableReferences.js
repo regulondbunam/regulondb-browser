@@ -1,6 +1,6 @@
 import React from 'react';
-import { EvidenceReferences } from '../../components/apollo/GeneCollection'
-import ModalER from '../../components/utiles/ModalEvidenceRef'
+import { EvidenceReferences } from '../../../components/apollo/GeneCollection'
+import ModalER from '../../../components/utiles/ModalEvidenceRef'
 import { useQuery } from '@apollo/react-hooks';
 
 const TableReferences = ({

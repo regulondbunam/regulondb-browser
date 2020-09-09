@@ -1,11 +1,11 @@
 import React, { useState, useRef } from 'react';
-import Image from '../../components/ui-components/infoDisplay/media/Image'
+import Image from '../../../components/ui-components/infoDisplay/media/Image'
 import img from '../../../img/gene_context.png'
 import imgZ from '../../../img/gene_zoom.png'
-import { IconButton } from '../../components/ui-components/basicInput/Buttons'
+import { IconButton } from '../../../components/ui-components/basicInput/Buttons'
 import { PanZoom } from 'react-easy-panzoom'
-import GetFile from '../../components/staticComponets/GetFile'
-import Modal from '../../components/ui-components/infoDisplay/modal/Modal'
+import GetFile from '../../../components/staticComponets/GetFile'
+import Modal from '../../../components/ui-components/infoDisplay/modal/Modal'
 
 const urlFile = 'https://dl.dropboxusercontent.com/s/g0nas12g9yddrkr/images_context_help.html?dl=0'
 

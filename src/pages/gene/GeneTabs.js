@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Button from '../components/ui-components/basicInput/Buttons'
+import Button from '../../components/ui-components/basicInput/Buttons'
 import GnDescription from './GeneDescription'
 import GnProducts from './GeneProduct'
 import GnGrowthC from './GeneGrowthConditions'

@@ -1,5 +1,5 @@
 import React from 'react';
-import { OperonInfo } from '../../components/apollo/GeneCollection'
+import { OperonInfo } from '../../../components/apollo/GeneCollection'
 import { useQuery } from '@apollo/react-hooks';
 import { useHistory } from 'react-router-dom';
 

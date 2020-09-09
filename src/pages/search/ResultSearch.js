@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CoverSearch from './ownComponents/CoverSearch'
-import GeneResults from '../components/search/GeneResults'
+import GeneResults from '../../components/search/GeneResults'
 
 const colecciones = ["Genes", "Gensor Unit", "Operon", "Regulon", "Sigmulon", "sRNA", "Grow Conditions"]
 
