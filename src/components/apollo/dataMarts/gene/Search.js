@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 //import { Person } from "schema-dts";
 import { helmetJsonLdProp } from "react-schemaorg";
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet-async';
 import GeneQuerys from '../../querys/GeneQuerys'
 import { useQuery } from '@apollo/react-hooks';
 
@@ -24,28 +24,40 @@ const Search = ({
     })
 
     if(loading){
-        return <>Loading...</>
+        return <></>
     }
     if(error){
         console.log(error)
-        return <>Server error</>
+        return <></>
     }
-    return (
-        <Helmet
+    try {
+        const searchData = data.getGenesBy.data
+        const genes = searchData.map((item)=>{
+            return {'@type':'Gene','name':item.gene.name,'id':item.gene.id}
+        })
+        //console.log(genes)
+        return (
+            <Helmet
             script={[
                 helmetJsonLdProp({
-                    "@context": "https://schema.org",
-                    "@type": "WebSite",
-                    url: "http://35.175.246.117:3000/search/",
-                    potentialAction: {
-                        "@type": "SearchAction",
-                        "target": "http://35.175.246.117:3000/search/{search_term_string}",
-                        "query-input": "required name=search_term_string"
-                      }
+                    "@context": {
+                        "scheme": "http://schema.org/",
+                        "bs": "http://bioschema.org/"
+                      },
+                    "@type": "FindAction",
+                    "agent": {
+                      "@type": "Organization",
+                      "name": "RegulonDB-SearchTool"
+                    },
+                    "object": genes
                 }),
-            ]}
-        />
-    );
+              ]}
+            />
+        );
+    } catch (error) {
+        return <></>
+    }
+    
 }
 
 export default Search;

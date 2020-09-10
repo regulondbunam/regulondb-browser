@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import {
-  BrowserRouter
-} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 import { ApolloProvider } from '@apollo/react-hooks';
 import client from './config/apollo'
 import './regulondbGlobalStyle.css'
 import * as serviceWorker from './serviceWorker';
+import { HelmetProvider } from 'react-helmet-async';
 
 ReactDOM.render(
+  <HelmetProvider>
   <BrowserRouter>
     <React.StrictMode>
       <ApolloProvider client={client}>
@@ -17,6 +17,7 @@ ReactDOM.render(
       </ApolloProvider>
     </React.StrictMode>
   </BrowserRouter>
+  </HelmetProvider>
   ,
   document.getElementById('root')
 );

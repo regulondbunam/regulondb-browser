@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import GeneSearch from '../../components/apollo/search/gene/search'
+import GeneSearch from '../../components/apollo/dataMarts/gene/Search'
+import GenesTable from './ownComponents/GenesTable'
 import CoverSearch from './ownComponents/CoverSearch'
-import GeneResults from '../../components/apollo/search/GeneResults'
-import Search from '../../components/apollo/search/gene/search';
 
 const colecciones = ["Genes", "Gensor Unit", "Operon", "Regulon", "Sigmulon", "sRNA", "Grow Conditions"]
 
@@ -11,7 +10,6 @@ class ResultState extends Component {
     state = { nGene: 0 };
 
     addnGene = (count = 0) => {
-        //console.log("hi")
         this.setState({
             nGene: count,
         })
@@ -56,15 +54,17 @@ class ResultSearch extends Component {
     constructor(props) {
         super(props);
         this.resultState = React.createRef();
+        this.genesTable = React.createRef();
     }
 
     _UpdateResultState = (count) => {
-        console.log(this.resultState.current)
+        //console.log(this.resultState.current)
         this.resultState.current.addnGene(count)
     }
 
     _UpdateResoltsData = (data) => {
-        console.log(data)
+        //console.log(this.genesTable)
+        this.genesTable.current.addData(data)
     }
 
 
@@ -76,8 +76,9 @@ class ResultSearch extends Component {
             <>
                     <ResultState search={search} ref={this.resultState} />
                 <article>
-                    <GeneSearch search={search} limit={50} page={0} resoultsFound={this._UpdateResultState} resoultsData={this._UpdateResoltsData} />
+                    <GenesTable ref={this.genesTable} search={search} />
                 </article>
+                <GeneSearch search={search} limit={50} page={0} resoultsFound={this._UpdateResultState} resoultsData={this._UpdateResoltsData} />
 
             </>
         );

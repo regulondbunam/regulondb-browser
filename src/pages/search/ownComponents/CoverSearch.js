@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchTool from '../../../components/apollo/search/SearchTool'
+import SearchTool from '../../../components/apollo/searchTool/SearchTool'
 import Spinner from '../../../components/loading/Spinner'
 
 export default function CoverSearch(menssage, state) {

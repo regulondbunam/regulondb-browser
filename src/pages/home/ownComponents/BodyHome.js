@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from '../../../components/ui-components/infoDisplay/card/Card'
-import {CountGenes} from '../../../components/apollo/Statistics'
+
 
 const BodyHome = () => {
     return (
@@ -22,7 +22,7 @@ const BodyHome = () => {
             }}>
                 <Card type="icon" width="100%" icon={"analytics"} iconDivStyle={{ padding: "26px", margin: "auto" }} iconStyle={{ fontSize: "55px" }}>
                     <h1>Sumary</h1>
-                    <p>Genes: {CountGenes()}</p>
+                    <p>Genes: maybe 46700 :s</p>
                 </Card>
             </div>
 
