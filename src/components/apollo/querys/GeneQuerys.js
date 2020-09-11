@@ -3,12 +3,28 @@ import { gql } from 'apollo-boost';
 // Gene Info
 
 
-export default class GeneQuerys{
-  constructor(id){
+export default class GeneQuerys {
+  constructor(id) {
     this.id = id
+    this.advancedSearchID = '[gene.id]'
   }
-  
-  querySearch(search, limit = 100, page = 0) {
+
+  queryGetMetadata(){
+    return gql`
+    {
+      __type(name:"Gene"){
+        name
+        description
+        fields{
+          name
+          description
+        }
+      }
+    }
+    `
+  }
+
+  querySearch(search, limit = 10, page = 0) {
     return gql`
     {
         getGenesBy(limit:${limit} page:${page} search:"${search}")
@@ -33,7 +49,33 @@ export default class GeneQuerys{
     `
   }
 
-  queryInfo(id){
+  queryGetGeneById(id = '') {
+    const advancedSearch = `${id}${this.advancedSearchID}`
+    //console.log(advancedSearch)
+    return gql`
+    {
+      getGenesBy(limit: 1, page: 0, advancedSearch: "${advancedSearch}") {
+        data {
+          gene {
+            name
+          }
+          products {
+            name
+          }
+          growthConditions {
+            effect
+          }
+        }
+        pagination {
+        totalResults
+      }
+      }
+      
+    }
+    `
+  }
+
+  queryInfo(id) {
     const advancedSearch = `${id}[gene.id]`
     return gql`
     query getGene($advancedSearch: String!){
@@ -223,14 +265,6 @@ query getGeneShineDalgarno($advancedSearch: String!) {
   }
 }
 `
-
-// Search Gene
-
-export class SearchGene {
-  constructor(searchTerm, limit = 50, page = 0) {
-    this.searchTerm = searchTerm
-  }
-}
 
 //Gene Products Info
 

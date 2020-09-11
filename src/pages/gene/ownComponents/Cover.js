@@ -1,7 +1,7 @@
 import React from 'react';
 import Spinner from '../../../components/loading/Spinner'
 
-export default function CoverSearch(menssage, state) {
+export default function CoverGene(menssage, state) {
     switch (state) {
         case 'loading':
             return (
@@ -24,7 +24,7 @@ export default function CoverSearch(menssage, state) {
         default:
             return (
                     <div style={styleTitle}>
-                        <h1 style={{ color: "#ffffff" }}>Genes</h1>
+                        <h1 style={{ color: "#ffffff" }}>{menssage}</h1>
                     </div>
             )
     }

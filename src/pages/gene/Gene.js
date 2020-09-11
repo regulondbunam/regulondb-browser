@@ -2,30 +2,10 @@ import React from 'react';
 import Cover from './ownComponents/Cover'
 import Title from './ownComponents/TitleGene'
 import GeneTabs from './GeneTabs'
-import { useQuery } from '@apollo/react-hooks';
-import { gql } from "apollo-boost";
 
-const GetGeneName = gql`
-query countGenes($advancedSearch: String!){
-  getGenesBy(limit:1 page: 0 advancedSearch:$advancedSearch)
-    {
-        data{
-            geneInfo{
-                name
-            }
-            products{
-                name
-            }
-            growthConditions{
-                effect
-            }
-        }
-    }
-  
-  }
-`
+ 
 
-const GeneSearch = ({
+const Gene = ({
     idGene,
     site,
     section
@@ -71,5 +51,3 @@ const GeneSearch = ({
 
     
 }
- 
-export default GeneSearch;
