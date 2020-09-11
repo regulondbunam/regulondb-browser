@@ -7,28 +7,52 @@ const colecciones = ["Genes", "Gensor Unit", "Operon", "Regulon", "Sigmulon", "s
 
 
 class ResultState extends Component {
-    state = { nGene: 0 };
+    state = { nGene: 0, status: 'sleep' };
 
-    addnGene = (count = 0) => {
+    setStatus = (status) => {
+        console.log(status)
+        this.setState({
+            status: status
+        })
+    }
+
+    setContGene = (count = 0) => {
         this.setState({
             nGene: count,
         })
     }
-
-
 
     render() {
         const {
             search
         } = this.props
         const {
-            nGene
+            nGene,
+            status
         } = this.state
-        const nFound = nGene + 0
+        //console.log(status)
+        let msj = ''
+        let st = 'search'
+        switch (status) {
+            case 'loading':
+                msj = `Consulting ${search} data`
+                st = 'loading'
+                break;
+            case 'done':
+                msj = `Search results for ${search} (${nGene})`
+                if(nGene+0 < 1){
+                    msj = 'We did not find any results'
+                    st = 'error'
+                }
+                break;
+            default:
+                break;
+        }
+
         return (
             <>
                 {
-                    CoverSearch(`Results for: ${search} (${nFound})`, 'search')
+                    CoverSearch(msj, st)
                 }
                 <article style={{paddingTop: "5px"}}>
                     {
@@ -57,9 +81,12 @@ class ResultSearch extends Component {
         this.genesTable = React.createRef();
     }
 
-    _UpdateResultState = (count) => {
-        //console.log(this.resultState.current)
-        this.resultState.current.addnGene(count)
+    _UpdateResoltsState = (status) =>{
+        this.resultState.current.setStatus(status)
+    }
+
+    _UpdateResultCount = (count) => {
+        this.resultState.current.setContGene(count)
     }
 
     _UpdateResoltsData = (data) => {
@@ -78,7 +105,11 @@ class ResultSearch extends Component {
                 <article>
                     <GenesTable ref={this.genesTable} search={search} />
                 </article>
-                <GeneSearch search={search} limit={50} page={0} resoultsFound={this._UpdateResultState} resoultsData={this._UpdateResoltsData} />
+                <GeneSearch search={search} limit={50} page={0} 
+                    status={this._UpdateResoltsState}
+                    resoultsFound={this._UpdateResultCount}
+                    resoultsData={this._UpdateResoltsData}
+                />
 
             </>
         );

@@ -16,25 +16,27 @@ export const ValidateId = ({
     useEffect(() => {
         if (loading) {
             status('loading')
+        } else {
+            if (data !== undefined) {
+                //console.log(data.getGenesBy.pagination.totalResults)
+                const resoults = data.getGenesBy.pagination.totalResults
+                if (resoults === 1) {
+                    isValidate(true)
+                    resoultsData(data.getGenesBy.data)
+                    status('done')
+                } else {
+                    isValidate(false)
+                    resoultsData({})
+                    status('not found')
+                }
+
+            }
         }
         if (error) {
             status('error')
             console.log(error)
         }
-        if (data !== undefined) {
-            //console.log(data.getGenesBy.pagination.totalResults)
-            const resoults = data.getGenesBy.pagination.totalResults
-            if (resoults === 1) {
-                isValidate(true)
-                resoultsData(data.getGenesBy.data)
-                status('done')
-            } else {
-                isValidate(false)
-                resoultsData({})
-                status('not found')
-            }
 
-        }
     })
     if (loading) {
         return <></>
@@ -57,7 +59,7 @@ export const ValidateId = ({
                                 "scheme": "http://schema.org/",
                                 "bs": "http://bioschema.org/"
                             },
-                            "@type": "FindAction",
+                            "@type": "Gene",
                             "agent": {
                                 "@type": "Organization",
                                 "name": "RegulonDB-GeneInformation"
@@ -79,16 +81,26 @@ const Search = ({
     limit = 50,
     page = 0,
     resoultsFound = () => { },
-    resoultsData = () => { }
+    resoultsData = () => { },
+    status = () => { }
 }) => {
     const geneQuery = new GeneQuerys()
     const { data, loading, error } = useQuery(geneQuery.querySearch(search, limit, page))
     useEffect(() => {
-        if (data !== undefined) {
-            //console.log(data.getGenesBy.pagination.totalResults)
-            const nResults = data.getGenesBy.pagination.totalResults
-            resoultsFound(nResults)
-            resoultsData(data.getGenesBy.data)
+        if (loading) {
+            status('loading')
+        }else{
+            if (data !== undefined) {
+                console.log(search)
+                //console.log(data.getGenesBy.pagination.totalResults)
+                const nResults = data.getGenesBy.pagination.totalResults
+                resoultsFound(nResults)
+                resoultsData(data.getGenesBy.data)
+                status('done')
+            }
+        }
+        if (error) {
+            status('error')
         }
     })
 

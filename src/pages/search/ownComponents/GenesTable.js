@@ -1,23 +1,23 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import MarckStr from '../../../components/utiles/MarkStr'
 import { Link } from 'react-router-dom';
 
 class GenesTable extends Component {
     state = { data: [] };
 
-    addData = (data = []) =>{
-        this.setState({data: data})
+    addData = (data = []) => {
+        this.setState({ data: data })
     }
 
-    render() { 
+    render() {
         const {
             search
         } = this.props
         const {
             data
         } = this.state
-        if(data.length>1){
-            console.log(data)
+        if (data.length > 1) {
+            //console.log(data)
             try {
                 return (
                     <div style={{ width: "80%", height: "100%" }}>
@@ -38,22 +38,24 @@ class GenesTable extends Component {
                                         )
                                     })
                                     let text = `${gene.name} gene; `
-                                    if(gene.synonyms.length> 0){
+                                    if (gene.synonyms.length > 0) {
                                         text += `synonyms: ${gene.synonyms}; `
                                     }
-                                    
-                                    if(prod.length > 0){
+
+                                    if (prod.length > 0) {
                                         text += `products: ${products}`
                                     }
                                     //console.log(text)
                                     return (
-            
+
                                         <tr key={gene.id} className="trClickable">
-                                            <Link to={"/gene/" + gene.id}>
-                                            <td dangerouslySetInnerHTML={{ __html: MarckStr(search, text) }}></td>
-                                            </Link>
+                                                <td>
+                                                <Link to={"/gene/" + gene.id}>
+                                                    <p dangerouslySetInnerHTML={{ __html: MarckStr(search, text) }}></p>
+                                                    </Link>
+                                                </td>
                                         </tr>
-            
+
                                     )
                                 })
                                 }
@@ -68,14 +70,14 @@ class GenesTable extends Component {
         }
         return (
             <table >
-                            <thead>
-                                <tr>
-                                    <th> Genes Loading ... </th>
-                                </tr>
-                            </thead>
+                <thead>
+                    <tr>
+                        <th> Genes Loading ... </th>
+                    </tr>
+                </thead>
             </table>
         )
     }
 }
- 
+
 export default GenesTable;

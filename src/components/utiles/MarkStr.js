@@ -11,7 +11,7 @@ export default function Mark(search, text) {
             text = text.slice(0,index)+'<b>'+text.slice(index,text.length)
             return(`${index},${end}`)
         }).join(',')
-        console.log(af)
+        //console.log(af)
         return text
     } catch (error) {
         console.log(error)
