@@ -6,17 +6,17 @@ const styleTitle = {
 }
 
 export default function Title(geneName, geneID, products) {
+    const propd = products.map((product)=>{
+        return   `${product.name} `
+    })
     return (
         <div style={styleTitle}>
-            <h1 style={{ color: "var(--color-accentB)", margin: "0", float: "left" }}>Gene &nbsp;</h1>
-            <h1 style={{ margin: "0", float: "left" }}>{geneName}&nbsp;&nbsp;&nbsp;</h1>
-            <h1 style={{ margin: "0" }}
-            dangerouslySetInnerHTML={{__html: products.map((product)=>{
-                return   `${product.name} `
-            })}}>
-                
+            Gene
+            <br/>
+            <h1 style={{ margin: "0", float: "left"}}
+            dangerouslySetInnerHTML={{__html: `${geneName} ${propd}`}}>
             </h1>
-            <h3 style={{ margin: "0", fontSize: "9px" }}>{geneID}</h3>
+            <br/>
         </div>
     )
 

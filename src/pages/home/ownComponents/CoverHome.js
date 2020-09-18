@@ -11,7 +11,7 @@ const links = LinksInfo.links
 const CoverHome = () => {
     return ( 
         <>
-            <Cover title="RegulonDB database" coverType="video" source={urlVideCover} >
+            <Cover title="RegulonDB Browser Database" coverType="video" source={urlVideCover} >
                 <h2 style={styleSubtitle}>
                 Escherichia coli K-12 <br/>
                 Transcriptional Regulatory Network

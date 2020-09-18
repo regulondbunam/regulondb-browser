@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 //import { Person } from "schema-dts";
 import { helmetJsonLdProp } from "react-schemaorg";
 import { Helmet } from 'react-helmet-async';
@@ -49,7 +49,10 @@ export const ValidateId = ({
         if (data.getGenesBy.pagination.totalResults === 1) {
             const searchData = data.getGenesBy.data
             const gene = searchData.map((item) => {
-                return { '@type': 'Gene', 'name': item.gene.name, 'id': item.gene.id }
+                return { 
+                    '@type': 'Gene', 
+                    'name': item.gene.name, 
+                    'id': item.gene.id }
             })
             return (
                 <Helmet
@@ -114,7 +117,10 @@ const Search = ({
     try {
         const searchData = data.getGenesBy.data
         const genes = searchData.map((item) => {
-            return { '@type': 'Gene', 'name': item.gene.name, 'id': item.gene.id }
+            return { 
+                '@type': 'Gene', 
+                'name': item.gene.name, 
+                'id': item.gene.id }
         })
         //console.log(genes)
         return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import { RegulatorInfo } from '../../../components/apollo/GeneCollection'
+import { RegulatorInfo } from '../../../components/apollo/querys/GeneQuerys'
 import { useHistory } from 'react-router-dom';
 
 const TableRegulators = ({
@@ -29,6 +29,7 @@ const TableRegulators = ({
             if (regulators.length > 0) {
                 return (
                     <>
+                    <div style={{ float: "none", height: "50px" }}>
                         {
                             regulators.map((item) => {
                                 return (
@@ -45,7 +46,7 @@ const TableRegulators = ({
                                 )
                             })
                         }
-                        <div style={{ float: "none", height: "50px" }}>
+                        
                         </div>
                     </>
                 );

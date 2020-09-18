@@ -69,6 +69,7 @@ import PropTypes from 'prop-types';
 
 
 const Image = ({
+  title,
     urlImage,
     width,
     height,
@@ -99,7 +100,7 @@ const Image = ({
     return ( 
         item.map(item => {
             return <React.Fragment key={`img-${item.id}`}>
-              <img  width={item.width} height={item.height} style={item.style} src={item.img} alt={item.alt} title={item.title} />
+              <img width={item.width} height={item.height} style={item.style} src={item.img} alt={item.alt} title={item.title} />
             </React.Fragment>
           })
 

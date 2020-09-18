@@ -2,9 +2,9 @@ import React from 'react';
 import TableGeneInfo from './descriptionTab/TableGeneInfo'
 import TableOperon from './descriptionTab/TableOperon'
 import TableRegulators from './descriptionTab/TableRegulators'
-import TableContext from './descriptionTab/TableContext'
+//import TableContext from './descriptionTab/TableContext'
 //import TableShineDalgarno from './descriptionTab/TableShineDalgarno'
-import TableGeneExternalID from './descriptionTab/TableGeneExternalID'
+//import TableGeneExternalID from './descriptionTab/TableGeneExternalID'
 import GraphicGene from './descriptionTab/GraphicGene'
 import TableEviRef from './descriptionTab/TableReferences'
 
@@ -21,29 +21,25 @@ const GeneDescription = ({
         <GraphicGene idGene={geneID} />
         </nav>
         <article>
-            <h1>Gene Information</h1>
+            <h2>Gene Information</h2>
             <TableGeneInfo idGene={geneID} />
             <br/>
-            <h1>Gene Regulation</h1>
-            <h2>Operon Arrangement</h2>
+            <h2>Gene Regulation</h2>
+            <h3> &nbsp; Operon Arrangement</h3>
             <TableOperon idGene={geneID} />
             <br/>
-            <h2>Regulators</h2>
+            <h3> &nbsp; Regulators</h3>
             <TableRegulators idGene={geneID} />
-            <h2>Context</h2>
-            <TableContext idGene={geneID} />
             <br/>
             {
                 showER
-                ?<><h1>Evidence and References</h1>
+                ?<><h2>Evidence and References</h2>
                 <TableEviRef idGene={geneID} /></>
                 :<></>
             }
         </article>
         <aside>
-            <div style={{paddingTop: "25px"}}>
-            <TableGeneExternalID idGene={geneID}/>
-            </div>
+            
             
         </aside>
         </>
@@ -54,6 +50,19 @@ const GeneDescription = ({
 /*
 <h1>ShineDalgarno</h1>
             <TableShineDalgarno idGene={geneID}/>
+
+            
+            
+            <br/>
+            <h3>Context</h3>
+            <TableContext idGene={geneID} />
+            
+
+        aside
+
+            <div style={{paddingTop: "25px"}}>
+            <TableGeneExternalID idGene={geneID}/>
+            </div>
             
             
  */

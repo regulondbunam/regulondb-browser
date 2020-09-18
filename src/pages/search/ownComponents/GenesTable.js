@@ -24,7 +24,7 @@ class GenesTable extends Component {
                         <table >
                             <thead>
                                 <tr>
-                                    <th> Genes </th>
+                                    <th><h2 style={{color: '#ffffff'}}>Genes</h2></th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Cover from './ownComponents/Cover'
 import Title from './ownComponents/TitleGene'
+import GeneTabs from './GeneTabs'
 import { ValidateId } from '../../components/apollo/dataMarts/gene/Search'
 import {
   useParams
@@ -10,7 +11,17 @@ const GeneHome = () => {
   const idGene = useParams().id;
   const site = useParams().site;
   const section = useParams().section;
-  //console.log(idGene, "/", site, "/", section)
+  console.log(idGene, "/", site, "/", section)
+
+  if(idGene === undefined){
+    return(
+      <>
+      {
+        Cover("Genes Information Page")
+      }
+      </>
+    )
+  }
 
   return <Home idGene={idGene} site={site} section={section} />
 }
@@ -20,7 +31,6 @@ export default GeneHome;
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.body = React.createRef();
     this.genCover = React.createRef();
   }
 
@@ -34,7 +44,6 @@ class Home extends Component {
   _updateData = (data) => {
     if (data !== undefined || data !== {} || []) {
       this.genCover.current.setData(data)
-      this.body.current.setData(this.props.idGene)
     }
 
   }
@@ -50,8 +59,7 @@ class Home extends Component {
 
     return (
       <>
-        <GenCover ref={this.genCover} />
-        <Body ref={this.body} site={site} section={section} />
+        <GenCover id={idGene} ref={this.genCover} site={site} section={section} />
         <ValidateId id={idGene}
           status={this._updateStatus}
           resoultsData={this._updateData}
@@ -75,7 +83,9 @@ class GenCover extends Component {
   }
   render() {
     const {
-      id
+      id,
+      section,
+      site
     } = this.props
     const {
       data,
@@ -83,6 +93,7 @@ class GenCover extends Component {
       genValid
     } = this.state
     let msg = ''
+    console.log(status)
     switch (status) {
       case 'loading':
         msg = `Loading ${id} ID information, please wait`
@@ -96,7 +107,12 @@ class GenCover extends Component {
             const gwc = data[0].growthConditions
             const geneName = data[0].gene.name
             const products = data[0].products
-            return (<>{Title(geneName, id, products)}</>)
+            return (
+            <>
+            {Title(geneName, id, products)}
+            <GeneTabs idGene={id} prodCount={products.length} gwcCount={gwc.length} section={section} site={site}/>
+            </>
+            )
           } catch (error) {
             msg = 'Sorry we have technical difficulties, please try again later'
             return (<>
@@ -107,43 +123,15 @@ class GenCover extends Component {
           msg = `Sorry we couldn't find the identifier: ${id}`
           return <>{Cover(msg, 'error')}</>
         }
+      case 'not found':
+        msg = `Sorry, we could not find the ${id} identifier on the Genes site`
+          return <>{Cover(msg, 'error')}</>
       default:
         break;
     }
     return (<>
       {Cover(msg, status)}
     </>)
-  }
-}
-
-class Body extends Component {
-  state = { id: null, status: 'sleep', genValid: false }
-  
-  setData = (id) => {
-    this.setState({ id: id })
-  }
-
-  render() {
-    const {
-      id,
-      status,
-      genValid
-    } = this.state
-
-    switch (status) {
-      case 'loading':
-        return (
-          <>Loading...</>
-        )
-      case 'done':
-        if (genValid) {
-          return (<h1>{id}</h1>)
-        }
-        break
-      case 'sleep':
-      default:
-        return (<></>)
-    }
   }
 }
 

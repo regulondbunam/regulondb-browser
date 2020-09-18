@@ -12,7 +12,7 @@ const Header = ({
     return (
         <header style={StyleHeader}>
             <div style={StyleSide}>
-                <Image id={"logoRegulon"} urlImage={logo} imgStyle={{ maxWidth: "239px", maxHeight: "48px" }} />
+                <Image id={"logoRegulon"} imgTitle="RegulonDB logo" imgAlt="Logo of Regulon DB" urlImage={logo} imgStyle={{ maxWidth: "239px", maxHeight: "48px" }} />
             </div>
             <div style={StyleSideB}>
                 {

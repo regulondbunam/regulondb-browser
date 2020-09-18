@@ -52,8 +52,8 @@ const GraphicGene = ({
 
                                 {
                                     zoom
-                                        ? <Image id={idGene} urlImage={imgZ} imgStyle={{ maxWidth: "100%", height: "120px" }} />
-                                        : <Image id={idGene} urlImage={img} imgStyle={{ maxWidth: "100%", height: "120px" }} />
+                                        ? <Image imgTitle="DTT-DATA" imgAlt="Context Gene" id={idGene} urlImage={imgZ} imgStyle={{ maxWidth: "100%", height: "120px" }} />
+                                        : <Image imgTitle="DTT-DATA" imgAlt="Context Gene" id={idGene} urlImage={img} imgStyle={{ maxWidth: "100%", height: "120px" }} />
                                 }
 
                             </PanZoom>

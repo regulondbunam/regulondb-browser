@@ -75,11 +75,11 @@ export default class GeneQuerys {
     `
   }
 
-  queryInfo(id) {
+  queryGeneInfo(id) {
     const advancedSearch = `${id}[gene.id]`
     return gql`
-    query getGene($advancedSearch: String!){
-      getGenesBy(limit:1 page: 0 advancedSearch:${advancedSearch})
+    {
+      getGenesBy(limit:1 page: 0 advancedSearch:"${advancedSearch}")
         {
           data{
             gene{
@@ -163,7 +163,7 @@ query getGeneOperon($advancedSearch: String!){
               name
               type
             }
-            promoter{
+            promoters{
               id
               name
             }

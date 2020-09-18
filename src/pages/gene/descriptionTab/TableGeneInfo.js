@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import Gene from '../../../components/apollo/GeneQuerys'
-import {GetPhrase} from '../../../components/apollo/PhraseCollection'
+import Querys from '../../../components/apollo/querys/GeneQuerys'
+import {GetPhrase} from '../../../components/apollo/querys/PhraseQuerys'
 import Modal from '../../../components/ui-components/infoDisplay/modal/Modal'
 import Sequence from '../../../components/sequence/Sequence'
 import Phrase from '../../../components/phrases/Phrase'
@@ -11,13 +11,10 @@ import ToolTip from '../../../components/ui-components/infoDisplay/toolTip/ToolT
 const TableGeneInfo = ({
     idGene
 }) => {
-    const gene = new Gene(idGene)
+    const query = new Querys(idGene)
     const phrase = new GetPhrase(idGene)
     const id = phrase.id
-    const advancedSearch = gene.advancedSearch
-    const { data, loading, error } = useQuery(gene.query, {
-        variables: { advancedSearch }
-    })
+    const { data, loading, error } = useQuery(query.queryGeneInfo(idGene))
     const pharaseData = useQuery(phrase.query,{
         skip: !data,
         variables: {id}
@@ -41,7 +38,7 @@ const TableGeneInfo = ({
             console.log("no phrase data")
         }
         
-        const geneData = data.getGenesBy.data[0].geneInfo
+        const geneData = data.getGenesBy.data[0].gene
         const products = data.getGenesBy.data[0].products
         const leftEndPosition = geneData["leftEndPosition"]
         const rightEndPosition = geneData["rightEndPosition"]

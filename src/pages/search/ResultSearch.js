@@ -35,7 +35,7 @@ class ResultState extends Component {
         let st = 'search'
         switch (status) {
             case 'loading':
-                msj = `Consulting ${search} data`
+                msj = `Searching ${search} Information`
                 st = 'loading'
                 break;
             case 'done':

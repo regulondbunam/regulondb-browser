@@ -12,7 +12,7 @@ const BodyHome = () => {
                 padding: "10px"
             }}>
                 <Card type="icon" width="100%" icon={"access_time"} iconDivStyle={{ padding: "26px", margin: "auto" }} iconStyle={{ fontSize: "55px" }}>
-                    <h1>RegulonDB-Browser</h1>
+                    <h2>RegulonDB-Browser</h2>
                     <p>VERSION: alpha-0.0.22</p>
                 </Card>
             </div>
@@ -21,7 +21,7 @@ const BodyHome = () => {
                 padding: "10px"
             }}>
                 <Card type="icon" width="100%" icon={"analytics"} iconDivStyle={{ padding: "26px", margin: "auto" }} iconStyle={{ fontSize: "55px" }}>
-                    <h1>Sumary</h1>
+                    <h2>Sumary</h2>
                     <p>Genes: maybe 46700 :s</p>
                 </Card>
             </div>

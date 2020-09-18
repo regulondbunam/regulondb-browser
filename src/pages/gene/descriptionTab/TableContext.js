@@ -1,5 +1,5 @@
 import React from 'react';
-import { ContextInfo } from '../../../components/apollo/GeneCollection'
+import { ContextInfo } from '../../../components/apollo/querys/GeneQuerys'
 import Modal from '../../../components/ui-components/infoDisplay/modal/Modal'
 import ModalEviRef from '../../../components/utiles/ModalEvidenceRef'
 //import { useHistory } from 'react-router-dom';

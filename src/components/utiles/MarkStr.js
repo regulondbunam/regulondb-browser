@@ -1,6 +1,7 @@
 export default function Mark(search, text) {
     try {
         const srchArray = search.split(' ')
+        // eslint-disable-next-line no-unused-vars
         const af = srchArray.map((word)=>{
             const index = text.toLowerCase().indexOf(word.toLowerCase())
             const end = word.length+index

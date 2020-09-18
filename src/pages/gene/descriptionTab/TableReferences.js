@@ -1,5 +1,5 @@
 import React from 'react';
-import { EvidenceReferences } from '../../../components/apollo/GeneCollection'
+import { EvidenceReferences } from '../../../components/apollo/querys/GeneQuerys'
 import ModalER from '../../../components/utiles/ModalEvidenceRef'
 import { useQuery } from '@apollo/react-hooks';
 
@@ -15,7 +15,7 @@ const TableReferences = ({
     if (loading) { return <>Loading...</> }
     if (error) {
         console.log(error)
-        return <>server error...</>
+        return <>not yet implemented</>
     }
     try {
         console.log(data.getGenesBy.data[0].geneInfo.evidenceReferences)
@@ -50,7 +50,7 @@ const TableReferences = ({
         );
     } catch (error) {
         console.log(error)
-        return <>client error...</>
+        return <>not yet implemented</>
     }
 }
 

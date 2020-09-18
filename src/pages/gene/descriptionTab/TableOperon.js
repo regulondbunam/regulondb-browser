@@ -1,5 +1,5 @@
 import React from 'react';
-import { OperonInfo } from '../../../components/apollo/GeneCollection'
+import { OperonInfo } from '../../../components/apollo/querys/GeneQuerys'
 import { useQuery } from '@apollo/react-hooks';
 import { useHistory } from 'react-router-dom';
 
@@ -48,19 +48,19 @@ function TableOperon({
                         {
                             arrangement.map((item) => {
                                 //console.log("item: ", item)
-                                const promoter = item.promoter
-                                const regulator = item.regulator
-                                const tu = item.transcriptionUnit
+                                const promoter = item?.promoters
+                                const regulator = item?.regulator
+                                const tu = item?.transcriptionUnit
                                 return (
-                                    <tr key={promoter.id} className="trClickable" onClick={() => { history.push("/tu/" + tu.id) }} >
+                                    <tr key={tu?.id} className="trClickable" onClick={() => { history.push("/tu/" + tu?.id) }} >
                                         <td>{
-                                            tu.name
+                                            tu?.name
                                         }</td>
                                         <td>{
-                                            `${promoter.name}`
+                                            `${promoter?.name}`
                                         }</td>
                                         <td>{
-                                            `${regulator.name}${convertType(regulator.type)}`
+                                            `${regulator?.name}${convertType(regulator?.type)}`
                                         }</td>
 
                                     </tr>
@@ -72,6 +72,7 @@ function TableOperon({
             </div>
         )
     } catch (error) {
+        console.log(error)
         return <>no data </>
     }
 
