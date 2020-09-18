@@ -1,7 +1,7 @@
 import React from 'react';
 import {TableProductInfo} from './productsTab/TableProducts'
 import TableProductExternalID from './productsTab/TableProductExternalID'
-import { GeneProducts } from '../../components/apollo/GeneCollection';
+import { GeneProducts } from '../../components/apollo/querys/GeneQuerys';
 import { useQuery } from '@apollo/react-hooks';
 
 const GeneProduct = ({
@@ -21,14 +21,14 @@ const GeneProduct = ({
         return (
             <>
             <article>
-            <h1>Product information</h1>
+            <h2>Product information</h2>
             </article>
                 {
                     products.map((product) => {
                         return (
                             <React.Fragment key={product.name} >
                                 <article >
-                                <h2 dangerouslySetInnerHTML={{ __html: product.name }} style={{ margin: '0' }}/>
+                                <h3 dangerouslySetInnerHTML={{ __html: product.name }} style={{ margin: '0' }}/>
                                 {TableProductInfo(product)}
                             </article>
                              <aside>

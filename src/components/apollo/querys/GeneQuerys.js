@@ -279,16 +279,18 @@ query getGeneProducts($advancedSearch: String!) {
   getGenesBy(limit: 1, page: 0, advancedSearch: $advancedSearch) {
     data {
       products {
+        id
         name
-        synonyms
-        regulatorId
-        sequence
-        isoelectricPoint
-        molecularWeight
-        cellularLocation
-        anticodon
-        note
         type
+        sequence
+        note
+        molecularWeight
+        isoelectricPoint
+        cellularLocations
+        anticodon
+        synonyms
+        isRegulator
+        regulonId
         motifs {
           leftEndPosition
           rightEndPosition
@@ -298,17 +300,24 @@ query getGeneProducts($advancedSearch: String!) {
           note
         }
         externalCrossReferences {
-          id
-          name
+          externalCrossReferenceId
+          externalCrossReferenceName
+          objectId
           url
         }
-        evidenceReferences {
-          evidenceName
-          evidenceCode
-          evidenceType
-          referenceId
-          referenceURL
-          referenceCitation
+        citations {
+          evidence{
+            id
+            name
+            code
+            type
+          }
+          publication{
+            id
+            pmid
+            citation
+            url
+          }
         }
       }
     }

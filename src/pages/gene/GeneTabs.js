@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../../components/ui-components/basicInput/Buttons'
 import GnDescription from './GeneDescription'
-//import GnProducts from './GeneProduct'
+import GnProducts from './GeneProduct'
 //import GnGrowthC from './GeneGrowthConditions'
 //import GnAllInfo from './GeneAllInfo'
 
@@ -70,18 +70,15 @@ function TabSelector(item, idGene) {
     switch (item) {
         case "description":
             return <GnDescription geneID={idGene} />
+        case "product":
+            return <GnProducts geneID={idGene} />
         default:
             return <h2>Select a tab option</h2>
     }
 }
 /*
-TabSelector(this.state.ActiveOption, idGene)
-function TabSelector(item, idGene) {
-    switch (item) {
-        case "DESCRIPTION":
-            return <GnDescription geneID={idGene} />
-        case "PRODUCT":
-            return <GnProducts geneID={idGene} />
+
+        
         case "GROWTH CONDITIONS":
             return <GnGrowthC geneID={idGene} />
         case "ALL":

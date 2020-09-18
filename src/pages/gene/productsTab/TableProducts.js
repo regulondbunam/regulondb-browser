@@ -11,10 +11,6 @@ export function TableProductInfo(product) {
                 {
                     Object.keys(product).map((key, index) => {
                         const test = key.match(/^_/)
-                        if (key === 'motifs') {
-                            //console.log('motif')
-                            return Motifs(motifE)
-                        }
                         if (product[key] === null || product[key].length <= 0 || test !== null) {
                             return null
                         }
@@ -22,7 +18,7 @@ export function TableProductInfo(product) {
                             case "name":
                                 return null
                             case "motifs":
-                                return Motifs(motifE)
+                                return Motifs(product['motifs'])
                             case 'externalCrossReferences':
                                 return null
                             case 'evidenceReferences':
@@ -57,25 +53,6 @@ export function TableProductInfo(product) {
         </table>
     )
 }
-
-const motifE = [
-    {
-        leftEndPosition: 1234,
-        rightEndPosition: 5632,
-        sequence: "ESNITSTLNISQQTLKIQKF",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        type: "alF",
-        note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-    },
-    {
-        leftEndPosition: 1234,
-        rightEndPosition: 5632,
-        sequence: "HKNSQLCFSHNQFKIMQLILKNKNESNITSTLNISQQTLKIQKFNIMYKLKLRRMSDIVTLGITSY",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        type: "alF",
-        note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-    }
-]
 
 function Motifs(motifs) {
     return (
