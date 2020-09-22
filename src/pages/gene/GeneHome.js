@@ -11,7 +11,7 @@ const GeneHome = () => {
   const idGene = useParams().id;
   const site = useParams().site;
   const section = useParams().section;
-  console.log(idGene, "/", site, "/", section)
+  //console.log(idGene, "/", site, "/", section)
 
   if(idGene === undefined){
     return(
@@ -93,7 +93,7 @@ class GenCover extends Component {
       genValid
     } = this.state
     let msg = ''
-    console.log(status)
+    //console.log(status)
     switch (status) {
       case 'loading':
         msg = `Loading ${id} ID information, please wait`

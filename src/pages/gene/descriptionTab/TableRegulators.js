@@ -27,19 +27,26 @@ const TableRegulators = ({
             //console.log(data.getGenesBy.data[0].regulation.regulators)
             const regulators = data.getGenesBy.data[0].regulation.regulators
             if (regulators.length > 0) {
+                let unique = [...new Set(regulators)]
+                let duplicates = unique.map(value => [value, regulators.filter(str => str === value).length]);
+                console.log(duplicates)
                 return (
                     <>
                     <div style={{ float: "none", height: "50px" }}>
                         {
-                            regulators.map((item) => {
+                            duplicates.map((comp) => {
+                                let item = comp[0]
+                                if(comp[1] === 2 ){
+                                    item['function'] = 'dual'
+                                }
                                 return (
-                                    <div key={item.id}
+                                    <div key={`${item.id}`}
                                         style={{ float: "left", paddingRight: "2%" }}
                                         
                                     >
                                         <p className="aBase" 
                                         onClick={() => { history.push("/regulator/" + item.id) }}>
-                                            {item.name}({convertType(item.type)})
+                                            {item.name}({convertType(item.function)})
                                         </p>
                                        
                                     </div>
@@ -67,7 +74,7 @@ function convertType(type){
         case "repressor":
             return "-"
         default:
-            return ""
+            return "(+)(-)"
     }
 }
 

@@ -199,6 +199,7 @@ query getGeneRegulator($advancedSearch: String!){
           id
           name
           type
+          function
         }
       }
       }

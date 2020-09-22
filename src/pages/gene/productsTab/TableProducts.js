@@ -73,10 +73,14 @@ function Motifs(motifs) {
                         <tbody>
                         {
                             motifs.map((motif) => {
-                                return <tr key={motif.sequence}>
+                                return <tr key={`${motif.sequence}-${motif.leftEndPosition}`}>
                                     <td>{motif.type}</td>
                                     <td>{`${motif.leftEndPosition}-->${motif.rightEndPosition}`}</td>
-                                    <td dangerouslySetInnerHTML={{ __html: motif.sequence }}></td>
+                                    <td>{ 
+                                        motif.sequence.length>10
+                                        ?sequence(motif.position,motif.sequence,'view sequence')
+                                        :motif.sequence
+                                    }</td>
                                 </tr>
                             })
                         }

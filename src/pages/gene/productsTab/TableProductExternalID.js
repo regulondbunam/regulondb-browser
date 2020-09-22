@@ -19,7 +19,7 @@ const TableProductExternalID = ({
                         return(
                             <tr key={`${index}_${item.id}_`}>
                                 <td>
-                                <a  href={item.url} target="_blank" rel="noopener noreferrer">{item.name}</a>
+                                <a  href={item.url} target="_blank" rel="noopener noreferrer">{item.externalCrossReferenceName}</a>
                                 </td>
                             </tr>
                         )
