@@ -11,8 +11,8 @@
             "options": [
                 {
                     "id": "dtt-browsing",
-                    "title": "Drawing Traces Tool",
-                    "state": "disabled",
+                    "title": "Drawing Traces Tool (coming soon)",
+                    "state": "soon",
                     "link" : "/dtt"
                 },
                 {
