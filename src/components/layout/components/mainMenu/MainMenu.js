@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MenuBody from './MainMenuBody'
-import Button, { IconButton } from '../../basicInput/Buttons'
+import Button, { IconButton } from '../../../ui-components/basicInput/Buttons'
+
 
 class MainMenu extends Component {
     state = { idPressed: "", isPressed: false }
@@ -145,9 +146,10 @@ const styleMenu = {
     paddingRight: "1%"
 }
 const styleMenuButton = {
-    fontSize: "18px",
+    fontSize: "14px",
+    width: '110px',
     height: "60px",
-    fontFamily: "sans-serif"
+    fontFamily: "Arial"
 }
 
 

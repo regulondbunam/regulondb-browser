@@ -1,13 +1,19 @@
 import React from 'react';
-import MainMenu from '../ui-components/regulonDB-web/MainMenu'
-import MenuData from './resources/mainmenu.json'
+import MainMenu from './components/mainMenu/MainMenu'
+import MenuData from '../../config/layout/menu/menu.conf'
+import {isMobile} from 'react-device-detect'
 
-const menuData = MenuData.mainmenu
+const menuData = MenuData.menu
 
 const Menu = () => {
     return (
         <nav style={{float: "none"}}>
-            <MainMenu menuData={menuData} />
+            {
+                isMobile
+                ?null
+                :<MainMenu menuData={menuData} />
+            }
+            
         </nav>
      );
 }

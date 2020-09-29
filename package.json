@@ -12,6 +12,7 @@
     "graphql": "^15.1.0",
     "node-fetch": "^2.6.0",
     "react": "^16.13.1",
+    "react-device-detect": "^1.13.1",
     "react-dom": "^16.13.1",
     "react-easy-panzoom": "^0.4.4",
     "react-helmet-async": "^1.0.6",

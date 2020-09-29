@@ -29,7 +29,7 @@ const TableRegulators = ({
             if (regulators.length > 0) {
                 let unique = [...new Set(regulators)]
                 let duplicates = unique.map(value => [value, regulators.filter(str => str === value).length]);
-                console.log(duplicates)
+                //console.log(duplicates)
                 return (
                     <>
                     <div style={{ float: "none", height: "50px" }}>

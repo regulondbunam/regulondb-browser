@@ -6,17 +6,17 @@ const MenuBody = ({ menuData, id, close }) => {
     return (
         <div style={styleMenuBody} >
             {
-                content.map((Item) => {
-                    switch (Item.type) {
+                content.map((item) => {
+                    switch (item.type) {
                         case "SUBMENU":
                             return (
-                                <div key={Item.id} style={styleSubmenu}>
-                                    <a href={Item.link} style={styleSubTitle}>{Item.title}</a>
+                                <div key={item.id} style={styleSubmenu}>
+                                    <a href={item.link} style={styleSubTitle}>{item.title}</a>
                                     {
-                                        Item.options.map((Item) => {
+                                        item.options.map((itemm) => {
                                             return (
-                                                <div key={Item.id} style={{ paddingTop: "5%", paddingBottom: "5%" }}>
-                                                    <a style={styleLink} target={Item.target} href={Item.link}>{Item.title}</a>
+                                                <div key={itemm.id} style={{ paddingTop: "5%", paddingBottom: "5%" }}>
+                                                    <a style={setStyleLink(itemm.id,itemm.state)} target={itemm.target} href={itemm.link}>{itemm.title}</a>
                                                 </div>
                                             )
                                         })
@@ -24,8 +24,9 @@ const MenuBody = ({ menuData, id, close }) => {
                                 </div>
                             )
                         case "LINK":
-                            return (<div key={Item.id} style={styleSubmenu}>
-                                <a style={styleLink} target={Item.target} href={Item.link}>{Item.title}</a>
+                            return (
+                            <div key={item.id} style={styleSubmenu}>
+                                <a style={setStyleLink(item.id,item.state)} target={item.target} href={item.link}>{item.title}</a>
                             </div>)
                         case "CARD":
                             return (<div></div>)
@@ -41,6 +42,30 @@ const MenuBody = ({ menuData, id, close }) => {
 
         </div>
     );
+}
+
+const setStyleLink = (id,state) => {
+    switch (state) {
+        case 'enabled':
+            return {
+                textDecoration: "none",
+                fontSize: "16",
+                fontFamily: "sans-serif",
+                color: "#ffffff"
+            }
+        case 'disabled':
+            return{
+                textDecoration: "none",
+                fontSize: "16",
+                fontFamily: "sans-serif",
+                color: "#999999"
+            }
+        default:
+            console.log(`link "${id}" status not defined`)
+            return {
+                display: "null"
+            }
+    }
 }
 
 const styleSubmenu = {
@@ -65,10 +90,4 @@ const styleSubTitle = {
     color: "#1F3D4E"
 }
 
-const styleLink = {
-    textDecoration: "none",
-    fontSize: "16",
-    fontFamily: "sans-serif",
-    color: "#ffffff"
-}
 export default MenuBody

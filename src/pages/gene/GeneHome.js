@@ -104,6 +104,7 @@ class GenCover extends Component {
       case 'done':
         if (genValid && data != null) {
           try {
+            console.log(data)
             const gwc = data[0].growthConditions
             const geneName = data[0].gene.name
             const products = data[0].products

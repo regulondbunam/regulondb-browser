@@ -1,6 +1,6 @@
 import FastaFormat from './FastaFormat'
 import GenBankFormat from './GenBankFormat'
-import CountElements from './CountElements'
+//import CountElements from './CountElements'
 
 function sequence(
     gene,
@@ -11,7 +11,7 @@ function sequence(
 ) {
     let seq
     if (countElements) {
-        console.log(CountElements(sequence))
+       // console.log(CountElements(sequence))
         header += ` f`
     }
     switch (format) {
