@@ -9,7 +9,7 @@ export default class GeneQuerys {
     this.advancedSearchID = '[gene.id]'
   }
 
-  queryGetMetadata(){
+  queryGetMetadata() {
     return gql`
     {
       __type(name:"Gene"){
@@ -83,17 +83,18 @@ export default class GeneQuerys {
         {
           data{
             gene{
+              bnumber
               id
               name
-              synonyms
               leftEndPosition
               rightEndPosition
-              centisomePosition
               strand
               sequence
               gcContent
+              centisomePosition
               note
               type
+              synonyms
             }
             products{
               id
@@ -103,6 +104,25 @@ export default class GeneQuerys {
         }
       
       }
+    `
+  }
+
+  queryGeneMultifun(id){
+    const advancedSearch = `${id}[gene.id]`
+    return gql`
+    {
+      getGenesBy(limit:1 page: 0 advancedSearch:"${advancedSearch}"){
+        data{
+          gene{
+            multifunTerms{
+              id
+              label
+              name
+            }
+          }
+        }
+      }
+    }
     `
   }
 

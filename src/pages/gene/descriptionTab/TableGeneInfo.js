@@ -19,6 +19,9 @@ const TableGeneInfo = ({
         skip: !data,
         variables: {id}
     })
+    const metaData = useQuery(query.queryGetMetadata,{
+        skip: !data
+    })
 
     if (loading || pharaseData.loading) {
         return <p>loading...</p>
@@ -27,6 +30,7 @@ const TableGeneInfo = ({
         return <p>error</p>
     }
     try {
+        console.log(metaData)
         //console.log(pharaseData.data.getPhraseOf[0])
         //console.log(data.getGenesBy.data[0].geneInfo)
         let Genephrase = {}
@@ -85,6 +89,7 @@ const TableGeneInfo = ({
                                              
                                         )
                                     default:
+                                        console.log(`key:${key}_${typeof(geneData[key])}`)
                                         return (
                                             <tr key={key}>
                                                 <td style={{ fontWeight: "bold" }}><ToolTip tip={`termino hola esta es una descripcion con muchas palabras nose que mas poner xD ${key}`} >{`${key}:`}</ToolTip></td>
