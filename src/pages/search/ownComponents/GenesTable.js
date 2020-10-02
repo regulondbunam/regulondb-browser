@@ -16,7 +16,7 @@ class GenesTable extends Component {
         const {
             data
         } = this.state
-        if (data.length > 1) {
+        if (data.length > 0) {
             //console.log(data)
             try {
                 return (
@@ -67,6 +67,17 @@ class GenesTable extends Component {
                 console.log(error)
                 return <>estructural data error</>
             }
+        }
+        if(data.length === 0 ){
+            return (
+                <table >
+                    <thead>
+                        <tr>
+                            <th> no Genes results </th>
+                        </tr>
+                    </thead>
+                </table>
+            )
         }
         return (
             <table >

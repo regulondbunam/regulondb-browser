@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import Querys from '../../../components/apollo/querys/GeneQuerys'
-import {GetPhrase} from '../../../components/apollo/querys/PhraseQuerys'
+import { GetPhrase } from '../../../components/apollo/querys/PhraseQuerys'
 import Modal from '../../../components/ui-components/infoDisplay/modal/Modal'
 import Sequence from '../../../components/sequence/Sequence'
 import Phrase from '../../../components/phrases/Phrase'
@@ -15,12 +15,9 @@ const TableGeneInfo = ({
     const phrase = new GetPhrase(idGene)
     const id = phrase.id
     const { data, loading, error } = useQuery(query.queryGeneInfo(idGene))
-    const pharaseData = useQuery(phrase.query,{
+    const pharaseData = useQuery(phrase.query, {
         skip: !data,
-        variables: {id}
-    })
-    const metaData = useQuery(query.queryGetMetadata,{
-        skip: !data
+        variables: { id }
     })
 
     if (loading || pharaseData.loading) {
@@ -30,7 +27,6 @@ const TableGeneInfo = ({
         return <p>error</p>
     }
     try {
-        console.log(metaData)
         //console.log(pharaseData.data.getPhraseOf[0])
         //console.log(data.getGenesBy.data[0].geneInfo)
         let Genephrase = {}
@@ -41,12 +37,14 @@ const TableGeneInfo = ({
         } catch (error) {
             console.log("no phrase data")
         }
-        
+
         const geneData = data.getGenesBy.data[0].gene
+        const multifun = geneData.multifunTerms
         const products = data.getGenesBy.data[0].products
         const leftEndPosition = geneData["leftEndPosition"]
         const rightEndPosition = geneData["rightEndPosition"]
         const size = sizeGene(leftEndPosition, rightEndPosition)
+        console.log(geneData)
         return (
             <div style={{ width: "80%" }}>
                 <table >
@@ -61,8 +59,8 @@ const TableGeneInfo = ({
                             if (test === null) {
                                 switch (key) {
                                     case 'leftEndPosition':
-                                        const phraseL = findInArray('leftEndPosition',phraseProps)
-                                        const phraseR = findInArray('rightEndPosition',phraseProps)
+                                        const phraseL = findInArray('leftEndPosition', phraseProps)
+                                        const phraseR = findInArray('rightEndPosition', phraseProps)
                                         return GenomePosition(size, leftEndPosition, rightEndPosition, phraseL, phraseR)
                                     case 'rightEndPosition':
                                         return (
@@ -84,12 +82,12 @@ const TableGeneInfo = ({
                                         return (
                                             <tr key={key}>
                                                 <td style={{ fontWeight: "bold" }}><ToolTip tip='strand'>{`${key}:`}</ToolTip></td>
-                                                <td> <Phrase style={{float: "left", margin: "0"}} phraseData={phraseTest} term={geneData[key]}/></td>
+                                                <td> <Phrase style={{ float: "left", margin: "0" }} phraseData={phraseTest} term={geneData[key]} /></td>
                                             </tr>
-                                             
+
                                         )
                                     default:
-                                        console.log(`key:${key}_${typeof(geneData[key])}`)
+                                        //console.log(`key:${key}_${typeof(geneData[key])}`)
                                         return (
                                             <tr key={key}>
                                                 <td style={{ fontWeight: "bold" }}><ToolTip tip={`termino hola esta es una descripcion con muchas palabras nose que mas poner xD ${key}`} >{`${key}:`}</ToolTip></td>
@@ -101,10 +99,13 @@ const TableGeneInfo = ({
                             return null
                         })
                         }
-                            {
-                                products.length>0?ShowProducts(products):null
-                            }
-                        
+                        {
+                            products.length > 0 ? ShowProducts(products) : null
+                        }
+                        {
+                            multifun.length > 0 ? ShowMultifunTerms(multifun) : null
+                        }
+
                     </tbody>
                 </table>
             </div>
@@ -116,22 +117,47 @@ const TableGeneInfo = ({
 
 }
 
-function findInArray(propertie,properties){
+function findInArray(propertie, properties) {
     return properties.find(element => element.name === propertie)
 }
 
-function ShowProducts(products){
-    return(
+function ShowMultifunTerms(multifun) {
+    return (
+        <tr>
+            <td style={{ fontWeight: "bold" }}>MultifunTerms:</td>
+            <td>
+                <table>
+                    <tbody>
+                        
+                        {
+                            multifun.map((fun) => {
+                                return (
+                                    <React.Fragment key={fun.id} >
+                                        <tr style={{ fontWeight: "bold" }} dangerouslySetInnerHTML={{ __html: fun.name }} />
+                                        <tr dangerouslySetInnerHTML={{ __html: fun.label }} />
+                                    </React.Fragment>
+                                )
+                            })
+                        }
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    )
+}
+
+function ShowProducts(products) {
+    return (
         <tr>
             <td style={{ fontWeight: "bold" }}>products:</td>
             <td>
-            {
-                products.map((product)=>{
-                    return(
-                    <p key={`${products.name}-infoTable`} className="aBase">{product.name}</p>
-                    )
-                })
-            }
+                {
+                    products.map((product) => {
+                        return (
+                            <p key={`${products.name}-infoTable`} className="aBase">{product.name}</p>
+                        )
+                    })
+                }
             </td>
         </tr>
     )
@@ -143,9 +169,9 @@ function GenomePosition(size, leftEndPosition, rightEndPosition, phraseL, phrase
         <tr key={size}>
             <td style={{ fontWeight: "bold" }}>genome position(nucleotides):</td>
             <td className="phraseContent">
-            <Phrase style={{float: "left", margin: "0"}} phraseData={phraseL} term={leftEndPosition}/> 
-            <p style={{float: "left", margin: "0"}}>&nbsp;{"-->"}&nbsp;</p>
-            <Phrase style={{float: "left", margin: "0"}} phraseData={phraseR} term={rightEndPosition}/> 
+                <Phrase style={{ float: "left", margin: "0" }} phraseData={phraseL} term={leftEndPosition} />
+                <p style={{ float: "left", margin: "0" }}>&nbsp;{"-->"}&nbsp;</p>
+                <Phrase style={{ float: "left", margin: "0" }} phraseData={phraseR} term={rightEndPosition} />
             </td>
         </tr>
     )
@@ -163,8 +189,8 @@ function sequenceGene(gene, sequence, key, header, countElements) {
         <tr key={key}>
             <td style={{ fontWeight: "bold" }}>{`${key}:`}</td>
             <td className="sequence" >
-                <Modal className="aBase" title={"Fasta Format"} info={Sequence(gene, sequence, "fasta","gene", true)}></Modal>
-                <Modal className="aBase" title={"genbank Format"} info={Sequence(gene, sequence, "genbank","gene",true)}></Modal>
+                <Modal className="aBase" title={"Fasta Format"} info={Sequence(gene, sequence, "fasta", "gene", true)}></Modal>
+                <Modal className="aBase" title={"genbank Format"} info={Sequence(gene, sequence, "genbank", "gene", true)}></Modal>
             </td>
         </tr>
     )
@@ -178,9 +204,9 @@ const phraseTest = {
     value: 1234,
     pmid: '1232123',
     phrases: [
-        {phrase: "Hi i'm a first phrase", phraseID: "RDBPHRASESA0007", evidence: "EV-COMP"},
-        {phrase: "Hi i'm a second phrase", phraseID: "RDBPHRASESA0007", evidence: "EV-COMP"},
-        {phrase: "Hi i'm a other phrase", phraseID: "RDBPHRASESA0007", evidence: "EV-COMP"},
-        {phrase: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", phraseID: "RDBPHRASESA0007", evidence: "EV-COMP"},
+        { phrase: "Hi i'm a first phrase", phraseID: "RDBPHRASESA0007", evidence: "EV-COMP" },
+        { phrase: "Hi i'm a second phrase", phraseID: "RDBPHRASESA0007", evidence: "EV-COMP" },
+        { phrase: "Hi i'm a other phrase", phraseID: "RDBPHRASESA0007", evidence: "EV-COMP" },
+        { phrase: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", phraseID: "RDBPHRASESA0007", evidence: "EV-COMP" },
     ]
 }

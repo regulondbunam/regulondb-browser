@@ -95,6 +95,11 @@ export default class GeneQuerys {
               note
               type
               synonyms
+              multifunTerms{
+                id
+                label
+                name
+              }
             }
             products{
               id
@@ -361,7 +366,9 @@ query getGeneExternal($advancedSearch: String!) {
       gene{
         id
         externalCrossReferences{
-          name
+          externalCrossReferenceId
+          externalCrossReferenceName
+          objectId
           url
         }
       }

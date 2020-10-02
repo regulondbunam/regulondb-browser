@@ -96,6 +96,7 @@ const Search = ({
             if (data !== undefined) {
                 console.log(search)
                 //console.log(data.getGenesBy.pagination.totalResults)
+                //console.log(data.getGenesBy.data)
                 const nResults = data.getGenesBy.pagination.totalResults
                 resoultsFound(nResults)
                 resoultsData(data.getGenesBy.data)

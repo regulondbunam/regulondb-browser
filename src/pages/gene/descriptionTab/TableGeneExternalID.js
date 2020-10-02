@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalDataBases } from '../../../components/apollo/GeneQuery'
+import { ExternalDataBases } from '../../../components/apollo/querys/GeneQuerys'
 //import { useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 
@@ -19,8 +19,8 @@ const TableGeneExternalID = ({
         return <>error server</>
     }
     try {
-        //console.log(data.getGenesBy.data[0].geneInfo.externalCrossReferences)
-        const exCR = data.getGenesBy.data[0].geneInfo.externalCrossReferences
+        console.log(data.getGenesBy.data[0].gene.externalCrossReferences)
+        const exCR = data.getGenesBy.data[0].gene.externalCrossReferences
         return ( 
             <>
             <table>
@@ -33,9 +33,9 @@ const TableGeneExternalID = ({
                     {
                         exCR.map((item)=>{
                             return(
-                                <tr key={`${item.url}`}>
+                                <tr key={`${item.externalCrossReferenceId}`}>
                                     <td>
-                                    <a  href={item.url} target="_blank" rel="noopener noreferrer">{item.name}</a>
+                                    <a  href={item.url} target="_blank" rel="noopener noreferrer">{item.externalCrossReferenceName}</a>
                                     </td>
                                 </tr>
                             )
@@ -46,6 +46,7 @@ const TableGeneExternalID = ({
             </>
          );
     } catch (error) {
+        console.error(error)
         return ( 
             <>clientError</>
          );
