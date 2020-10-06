@@ -58,7 +58,7 @@ const setStyleLink = (id,state) => {
                 textDecoration: "none",
                 fontSize: "16",
                 fontFamily: "sans-serif",
-                color: "#999999"
+                color: "#ffffff"
             }
         case 'soon':
             return{

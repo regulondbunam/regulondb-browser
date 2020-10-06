@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../resources/image/RegulonLogo.png'
+import logo from '../../resources/image/layout/header/RegulonLogo.png'
 import Image from '../ui-components/infoDisplay/media/Image'
 import SearchTool from '../apollo/searchTool/SearchTool'
 import { withRouter } from 'react-router-dom';
@@ -19,7 +19,7 @@ const Header = ({
                    !isHome
                    ? <SearchTool styleBox={styleBox} styleButton={styleButton} />
                    : <>
-                       <a className="aAccent" href="/TermsConditions">Terms & conditions</a>
+                       <a className="aAccent" href="/TermsConditions">Terms and conditions</a>
                        <a className="aAccent" href="/Contact" style={{ paddingLeft: "10px" }} >Contact US</a>
                        <a className="aAccent" href="/Funding" style={{ paddingLeft: "10px" }} >Funding</a>
                    </>
