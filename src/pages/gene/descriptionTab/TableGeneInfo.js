@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
+import citsSearch from '../../../components/utiles/citsSearch'
 import Querys from '../../../components/apollo/querys/GeneQuerys'
 import { GetPhrase } from '../../../components/apollo/querys/PhraseQuerys'
 import Modal from '../../../components/ui-components/infoDisplay/modal/Modal'
@@ -9,6 +10,7 @@ import ToolTip from '../../../components/ui-components/infoDisplay/toolTip/ToolT
 
 
 const TableGeneInfo = ({
+    allCitations=[],
     idGene
 }) => {
     const query = new Querys(idGene)
@@ -35,16 +37,18 @@ const TableGeneInfo = ({
             Genephrase = pharaseData.data.getPhraseOf[0]
             phraseProps = Genephrase.properties
         } catch (error) {
-            console.log("no phrase data")
+            //console.log("no phrase data")
         }
 
         const geneData = data.getGenesBy.data[0].gene
         const multifun = geneData.multifunTerms
+        const citations = geneData.citations
+        const note = geneData.note
         const products = data.getGenesBy.data[0].products
         const leftEndPosition = geneData["leftEndPosition"]
         const rightEndPosition = geneData["rightEndPosition"]
         const size = sizeGene(leftEndPosition, rightEndPosition)
-        console.log(geneData)
+        //console.log(geneData)
         return (
             <div style={{ width: "80%" }}>
                 <table >
@@ -86,6 +90,10 @@ const TableGeneInfo = ({
                                             </tr>
 
                                         )
+                                    case 'citations':
+                                    case 'note':
+                                    case 'multifunTerms':
+                                        return null
                                     default:
                                         //console.log(`key:${key}_${typeof(geneData[key])}`)
                                         return (
@@ -100,10 +108,13 @@ const TableGeneInfo = ({
                         })
                         }
                         {
-                            products.length > 0 ? ShowProducts(products) : null
+                            products.length > 0 ? ShowProducts(products, idGene) : null
                         }
                         {
                             multifun.length > 0 ? ShowMultifunTerms(multifun) : null
+                        }
+                        {
+                            citations.length > 0 ? ShowNoteCitations(note,citations, allCitations) : null
                         }
 
                     </tbody>
@@ -121,7 +132,20 @@ function findInArray(propertie, properties) {
     return properties.find(element => element.name === propertie)
 }
 
+function ShowNoteCitations(note,citations, allCitations){
+    //console.log(citations)
+    //console.log(note)
+    citsSearch(allCitations,citations,note)
+    return (
+        <tr>
+            <td style={{ fontWeight: "bold" }}>note:</td>
+            
+        </tr>
+    )
+}
+
 function ShowMultifunTerms(multifun) {
+    //console.log(multifun)
     return (
         <tr>
             <td style={{ fontWeight: "bold" }}>MultifunTerms:</td>
@@ -146,7 +170,7 @@ function ShowMultifunTerms(multifun) {
     )
 }
 
-function ShowProducts(products) {
+function ShowProducts(products, idGene) {
     return (
         <tr>
             <td style={{ fontWeight: "bold" }}>products:</td>

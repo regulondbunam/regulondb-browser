@@ -2,6 +2,7 @@ import React from 'react';
 import TableGeneInfo from './descriptionTab/TableGeneInfo'
 import TableOperon from './descriptionTab/TableOperon'
 import TableRegulators from './descriptionTab/TableRegulators'
+
 //import TableContext from './descriptionTab/TableContext'
 //import TableShineDalgarno from './descriptionTab/TableShineDalgarno'
 import TableGeneExternalID from './descriptionTab/TableGeneExternalID'
@@ -10,6 +11,7 @@ import GraphicGene from './descriptionTab/GraphicGene'
 
 
 const GeneDescription = ({
+    allCitations = [],
     geneID,
     showER = true
 }) => {
@@ -22,7 +24,7 @@ const GeneDescription = ({
             </nav>
             <article>
                 <h2>Gene Information</h2>
-                <TableGeneInfo idGene={geneID} />
+                <TableGeneInfo idGene={geneID} allCitations={allCitations}/>
                 <br />
                 <h2>Gene Regulation</h2>
                 <h3> &nbsp; Operon Arrangement</h3>

@@ -65,10 +65,24 @@ export default class GeneQuerys {
           growthConditions {
             effect
           }
+          allCitations{
+            evidence{
+              id
+              name
+              code
+              type
+            }
+            publication{
+              id
+              pmid
+              citation
+              url
+            }
+          }
         }
         pagination {
-        totalResults
-      }
+          totalResults
+        }
       }
       
     }
@@ -99,6 +113,20 @@ export default class GeneQuerys {
                 id
                 label
                 name
+              }
+              citations{
+                evidence{
+                  id
+                  name
+                  code
+                  type
+                }
+                publication{
+                  id
+                  pmid
+                  citation
+                  url
+                }
               }
             }
             products{

@@ -105,13 +105,14 @@ class GenCover extends Component {
         if (genValid && data != null) {
           try {
             //console.log(data)
+            const allCitations = data[0].gene.allCitations
             const gwc = data[0].growthConditions
             const geneName = data[0].gene.name
             const products = data[0].products
             return (
             <>
             {Title(geneName, id, products)}
-            <GeneTabs idGene={id} prodCount={products.length} gwcCount={gwc.length} section={section} site={site}/>
+            <GeneTabs allCitations={allCitations}  idGene={id} prodCount={products.length} gwcCount={gwc.length} section={section} site={site}/>
             </>
             )
           } catch (error) {

@@ -9,6 +9,7 @@ const sites = ['all','description', 'product', 'growthconditions']
 
 const GeneTabs = (
     {
+        allCitations = [],
         prodCount,
         gwcCount,
         section = '',
@@ -54,7 +55,7 @@ const GeneTabs = (
                 </nav>
                 <>
                     {
-                        TabSelector(tab, idGene)
+                        TabSelector(tab, idGene, allCitations)
                     }
                 </>
 
@@ -66,10 +67,10 @@ export default GeneTabs;
 
 
 
-function TabSelector(item, idGene) {
+function TabSelector(item, idGene, allCitations) {
     switch (item) {
         case "description":
-            return <GnDescription geneID={idGene} />
+            return <GnDescription geneID={idGene} allCitations={allCitations} />
         case "product":
             return <GnProducts geneID={idGene} />
         default:
