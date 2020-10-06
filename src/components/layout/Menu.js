@@ -1,6 +1,6 @@
 import React from 'react';
 import MainMenu from './components/mainMenu/MainMenu'
-import MenuData from '../../config/layout/menu/menu.conf'
+import MenuData from '../../conf/layout/menu/menu.conf'
 import {isMobile} from 'react-device-detect'
 
 const menuData = MenuData.menu

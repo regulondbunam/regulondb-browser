@@ -1,9 +1,10 @@
 import ApolloClient from 'apollo-boost';
+import conf from './conf.json'
 
 
 // url web service GraphQL
 const client = new ApolloClient({
-    uri: 'https://regulonws-api.herokuapp.com/graphql',
+    uri: conf.graphQlUrl,
   });
 
 

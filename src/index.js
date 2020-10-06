@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
 import { ApolloProvider } from '@apollo/react-hooks';
-import client from './config/apollo'
+import client from './conf/apollo'
 import './regulondbGlobalStyle.css'
 import * as serviceWorker from './serviceWorker';
 import { HelmetProvider } from 'react-helmet-async';
