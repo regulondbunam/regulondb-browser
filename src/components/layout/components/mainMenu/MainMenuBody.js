@@ -15,7 +15,7 @@ const MenuBody = ({ menuData, id, close }) => {
                                     {
                                         item.options.map((itemm) => {
                                             return (
-                                                <div key={itemm.id} style={{ paddingTop: "5%", paddingBottom: "5%" }}>
+                                                <div key={itemm.id} style={{ paddingTop: "5%", paddingBottom: "1%" }}>
                                                     <a style={setStyleLink(itemm.id,itemm.state)} target={itemm.target} href={itemm.link}>{itemm.title}</a>
                                                 </div>
                                             )

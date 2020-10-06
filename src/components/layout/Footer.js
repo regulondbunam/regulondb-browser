@@ -56,6 +56,11 @@ const Footer = () => {
                                         </p>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <br/>
+                    </td>
+                </tr>
             </tbody>
         </table>
 
