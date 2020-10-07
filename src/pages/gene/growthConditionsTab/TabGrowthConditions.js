@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import { GrowthConditions } from '../../../components/apollo/GeneCollection'
+import { GrowthConditions } from '../../../components/apollo/querys/GeneQuerys'
 
 const TabGrowthConditions = ({
     idGene
@@ -21,6 +21,8 @@ const TabGrowthConditions = ({
         //console.log(data.getGenesBy.data[0].growthConditions)
         const growthc = data.getGenesBy.data[0].growthConditions
         return (
+            <>
+            <h2>Growth Conditions</h2>
             <table>
                 <thead>
                     <tr>
@@ -78,6 +80,7 @@ const TabGrowthConditions = ({
                     }
                 </tbody>
             </table>
+            </>
         );
     } catch (error) {
         console.log(error)

@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import Button from '../../components/ui-components/basicInput/Buttons'
 import GnDescription from './GeneDescription'
 import GnProducts from './GeneProduct'
+import AllCits from '../../components/cits/Cits'
 //import GnGrowthC from './GeneGrowthConditions'
-//import GnAllInfo from './GeneAllInfo'
+import GnAllInfo from './GeneAllInfo'
 
 const sites = ['all','description', 'product', 'growthconditions']
 
@@ -57,6 +58,9 @@ const GeneTabs = (
                     {
                         TabSelector(tab, idGene, allCitations)
                     }
+                    {
+                        AllCits(allCitations,false,true,true)
+                    }
                 </>
 
             </>
@@ -73,6 +77,8 @@ function TabSelector(item, idGene, allCitations) {
             return <GnDescription geneID={idGene} allCitations={allCitations} />
         case "product":
             return <GnProducts geneID={idGene} />
+        case "all":
+            return <GnAllInfo idGene={idGene} allCitations={allCitations}/>
         default:
             return <h2>Select a tab option</h2>
     }

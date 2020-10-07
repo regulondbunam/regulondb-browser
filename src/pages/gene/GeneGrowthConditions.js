@@ -7,7 +7,6 @@ const GeneReferences = ({
     return ( 
         <>
         <article>
-        <h1>Growth Conditions</h1>
         <TabGC idGene={geneID}/>
         </article>
         <aside>

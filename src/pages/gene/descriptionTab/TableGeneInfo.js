@@ -159,7 +159,8 @@ function ShowCitations(note, citations, allCitations) {
     //citsSearch(allCitations, citations, note)
     return (
         <tr>
-            <td colSpan="2">
+            <td style={{ fontWeight: "bold" }}>references:</td>
+            <td>
                 {AllCitations(citations)}
             </td>
         </tr>

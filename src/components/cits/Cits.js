@@ -5,9 +5,12 @@ export default function AllCitations(allCitations,small=true,title=false,index=f
     // [i]autor., et al. año [evidence]
     return (
         <>
-           {title?<h2>Publications and Evidences</h2>:null}
+           
             <table>
                 <tbody>
+                    <tr>
+                    {title?<h2>References and Evidences</h2>:null}
+                    </tr>
                     {
                         allCitations.map((cit,indx) => {
                             const publication = cit.publication
@@ -37,7 +40,12 @@ export function Citation(cit) {
     const eviCode = cit.evidence?.code
     const id = publication?.id
     const citation = publication?.citation.split(',')
-    console.log(citation)
-    return `${citation[0]}., et al. ${citation[citation.length-2]}, [${()=>{}}]`
+    const code = () =>{
+        if(eviCode){
+            return `[${eviCode}]`
+        }
+        return ''
+    }
+    return `${citation[0]}., et al. ${citation[citation.length-2]}, ${code()}`
     // [i]autor., et al. año [evidence]
 }
