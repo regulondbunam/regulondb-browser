@@ -23,7 +23,6 @@ const Footer = () => {
                         <table>
                             <tbody>
                                 <tr>
-                                    <td>
                                         {
                                             imgs.map((image, id) => {
                                                 return (
@@ -33,7 +32,6 @@ const Footer = () => {
                                                 )
                                             })
                                         }
-                                    </td>
                                     <td>
                                     </td>
                                     <td style={{ textAlign: 'right', color: '#666666' }}>

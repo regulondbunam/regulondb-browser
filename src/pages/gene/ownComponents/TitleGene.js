@@ -13,7 +13,7 @@ export default function Title(geneName, geneID, products) {
         <div style={styleTitle}>
             Gene
             <br/>
-            <h1 style={{ margin: "0", float: "left"}}
+            <h1 style={{ margin: "0"}}
             dangerouslySetInnerHTML={{__html: `${geneName} ${propd}`}}>
             </h1>
             <br/>

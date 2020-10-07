@@ -109,6 +109,7 @@ class GenCover extends Component {
             const gwc = data[0].growthConditions
             const geneName = data[0].gene.name
             const products = data[0].products
+            //console.log(allCitations)
             return (
             <>
             {Title(geneName, id, products)}

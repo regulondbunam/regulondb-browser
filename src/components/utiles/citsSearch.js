@@ -2,8 +2,10 @@
 export default function(allCitations, citations, text){
     let cits =''
     try {
-        //let cits = new RegExp(/\|.*?\|/, text)
+        const re = /\|.*?\|/
+        cits = re.exec(text)
     console.log(cits)
+    console.log(citations)
     } catch (error) {
         console.log("util")
     }
