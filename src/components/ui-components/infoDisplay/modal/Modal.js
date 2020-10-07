@@ -26,9 +26,8 @@ export default class Modal extends Component {
             onClick={(event)=>{this._onCollapsed(true,event)}}
             className={this.props.className}
             style = {this.props.style}
-            >
-                {title}
-            </button>
+            dangerouslySetInnerHTML={{__html: title}}
+            />
         )
     }
 
