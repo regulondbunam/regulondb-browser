@@ -32,6 +32,7 @@ const TableRegulators = ({
                 //console.log(duplicates)
                 return (
                     <>
+                    <h3> &nbsp; Regulators</h3>
                     <div style={{ float: "none", height: "50px" }}>
                         {
                             duplicates.map((comp) => {

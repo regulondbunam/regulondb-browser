@@ -30,7 +30,6 @@ const GeneDescription = ({
                 <h3> &nbsp; Operon Arrangement</h3>
                 <TableOperon idGene={geneID} />
                 <br />
-                <h3> &nbsp; Regulators</h3>
                 <TableRegulators idGene={geneID} />
                 <br />
                 {

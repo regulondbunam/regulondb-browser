@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import citsSearch from '../../../components/utiles/citsSearch'
+//import citsSearch from '../../../components/utiles/citsSearch'
+import AllCitations from '../../../components/cits/Cits'
 import Querys from '../../../components/apollo/querys/GeneQuerys'
 import { GetPhrase } from '../../../components/apollo/querys/PhraseQuerys'
 import Modal from '../../../components/ui-components/infoDisplay/modal/Modal'
@@ -10,7 +11,7 @@ import ToolTip from '../../../components/ui-components/infoDisplay/toolTip/ToolT
 
 
 const TableGeneInfo = ({
-    allCitations=[],
+    allCitations = [],
     idGene
 }) => {
     const query = new Querys(idGene)
@@ -114,7 +115,10 @@ const TableGeneInfo = ({
                             multifun.length > 0 ? ShowMultifunTerms(multifun) : null
                         }
                         {
-                            citations.length > 0 ? ShowNoteCitations(note,citations, allCitations) : null
+                            note?ShowNote(note, allCitations):null
+                        }
+                        {
+                            citations.length > 0 ? ShowCitations(note, citations, allCitations) : null
                         }
 
                     </tbody>
@@ -132,14 +136,32 @@ function findInArray(propertie, properties) {
     return properties.find(element => element.name === propertie)
 }
 
-function ShowNoteCitations(note,citations, allCitations){
-    //console.log(citations)
-    //console.log(note)
-    citsSearch(allCitations,citations,note)
+function ShowNote(note, allCitations){
     return (
         <tr>
-            <td style={{ fontWeight: "bold" }}>note:</td>
-            
+                        {
+                            note
+                            ? <td style={{ fontWeight: "bold" }}>note:</td>
+                            : null
+                        }
+                        {
+                            note
+                            ?<td dangerouslySetInnerHTML={{ __html: note }} />
+                            :null
+                        }
+                        </tr>
+    )
+}
+
+function ShowCitations(note, citations, allCitations) {
+    //console.log(citations)
+    //console.log(note)
+    //citsSearch(allCitations, citations, note)
+    return (
+        <tr>
+            <td colSpan="2">
+                {AllCitations(citations)}
+            </td>
         </tr>
     )
 }
@@ -152,7 +174,7 @@ function ShowMultifunTerms(multifun) {
             <td>
                 <table>
                     <tbody>
-                        
+
                         {
                             multifun.map((fun) => {
                                 return (
