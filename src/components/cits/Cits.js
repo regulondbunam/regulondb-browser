@@ -1,10 +1,9 @@
 import React from 'react';
 import ModalER from '../utiles/ModalEvidenceRef'
 
-let his = []
-
 export default function AllCitations(allCitations,small=true,title=false,index=false,) {
     // [i]autor., et al. año [evidence]
+    //console.log(allCitations)
     return (
         <>
            
@@ -17,13 +16,8 @@ export default function AllCitations(allCitations,small=true,title=false,index=f
                         
                         allCitations.map((cit,indx) => {
                             const publication = cit.publication
-                            
-                            if(his.indexOf(publication.id)!==-1){
-                                return null
-                            }
-                            his.push(publication.id)
                             return(
-                                <tr key={publication.id}>
+                                <tr key={`${indx}-${publication.id}`}>
                                     <td>
                                         {index?`[${indx+1}]`:null}
                                         <ModalER 
