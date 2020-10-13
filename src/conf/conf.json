@@ -1,5 +1,0 @@
-{
-    "appName": "RegulonDB Browser",
-    "version": "0.0.3",
-    "graphQlUrl": "https://regulonws-api.herokuapp.com/graphql"
-}

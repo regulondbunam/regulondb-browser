@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from '../../../components/ui-components/infoDisplay/card/Card'
-import conf from '../../../conf/conf.json'
+import conf from '../../../conf/info.json'
 
 
 const BodyHome = () => {
