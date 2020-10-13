@@ -1,6 +1,8 @@
 import React from 'react';
 import ModalER from '../utiles/ModalEvidenceRef'
 
+let his = []
+
 export default function AllCitations(allCitations,small=true,title=false,index=false,) {
     // [i]autor., et al. año [evidence]
     return (
@@ -12,8 +14,14 @@ export default function AllCitations(allCitations,small=true,title=false,index=f
                     <td>{title?<h2>References and Evidences</h2>:null}</td>
                     </tr>
                     {
+                        
                         allCitations.map((cit,indx) => {
                             const publication = cit.publication
+                            
+                            if(his.indexOf(publication.id)!==-1){
+                                return null
+                            }
+                            his.push(publication.id)
                             return(
                                 <tr key={publication.id}>
                                     <td>
@@ -26,6 +34,8 @@ export default function AllCitations(allCitations,small=true,title=false,index=f
                                     </td>
                                 </tr>
                             )
+                            
+                            
                         })
                     }
                 </tbody>
@@ -35,8 +45,8 @@ export default function AllCitations(allCitations,small=true,title=false,index=f
     )
 }
 
-export function refCitation(allCitations,citations,index=true,small=true,title=false){
-
+export function relCitation(allCitations,citations,index=true,small=true,title=false){
+    
 }
 
 export function Citation(cit,small=true) {
@@ -44,7 +54,7 @@ export function Citation(cit,small=true) {
     const publication = cit.publication
     const evidence = cit.evidence
     const eviCode = evidence?.code
-    const id = publication?.id
+    //const id = publication?.id
     const citation = publication?.citation.split(',')
     const code = () =>{
         if(eviCode){

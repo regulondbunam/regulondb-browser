@@ -24,21 +24,30 @@ export function TableProductInfo(product) {
                             case 'evidenceReferences':
                                 return (
                                     <React.Fragment key={`${key}_${product['name']}`}>
-                                    <br/>
-                                    <tr><th colSpan="2">{`${product['name']} Evidence and References`}</th></tr>
-                                    {
-                                    product[key].map((evi) => {
-                                        return (
-                                            <tr key={evi.referenceCitation} className="trClickable">
-                                                <td colSpan="2"><ModalER classNameModal="citation" title={evi.referenceCitation} evidenceReference={evi} /></td>
-                                            </tr>
-                                        )
-                                    })
-                                    }
+                                        <br />
+                                        <tr><th colSpan="2">{`${product['name']} Evidence and References`}</th></tr>
+                                        {
+                                            product[key].map((evi) => {
+                                                return (
+                                                    <tr key={evi.referenceCitation} className="trClickable">
+                                                        <td colSpan="2"><ModalER classNameModal="citation" title={evi.referenceCitation} evidenceReference={evi} /></td>
+                                                    </tr>
+                                                )
+                                            })
+                                        }
                                     </React.Fragment>
                                 )
                             case 'sequence':
-                                return sequence(product['name'], product[key], key)
+                                return (
+                                    <tr key={`${product.name}-trInfo-${key}`}>
+                                        <td style={{ fontWeight: "bold" }}>{`${key}:`}</td>
+                                        <td>
+                                        {
+                                            sequence(product['name'], product[key])
+                                        }
+                                        </td>
+                                    </tr>
+                                )
                             default:
                                 return (
                                     <tr key={`${product.name}-trInfo-${key}`}>
@@ -71,35 +80,41 @@ function Motifs(motifs) {
                             </tr>
                         </thead>
                         <tbody>
-                        {
-                            motifs.map((motif) => {
-                                return <tr key={`${motif.sequence}-${motif.leftEndPosition}`}>
-                                    <td>{motif.type}</td>
-                                    <td>{`${motif.leftEndPosition}-->${motif.rightEndPosition}`}</td>
-                                    <td>{ 
-                                        motif.sequence.length>10
-                                        ?sequence(motif.position,motif.sequence,'view sequence')
-                                        :motif.sequence
-                                    }</td>
-                                </tr>
-                            })
-                        }
-                    </tbody>
-                    </table> 
+                            {
+                                motifs.map((motif, idex) => {
+                                    return <tr key={`${motif.sequence}-${idex}`}>
+                                        <td>{motif.type}</td>
+                                        <td>{`${notNull(motif.leftEndPosition)}-->${notNull(motif.rightEndPosition)}`}
+
+                                        </td>
+                                        <td>{
+                                            motif.sequence.length > 10
+                                                ? sequence(motif.position, motif.sequence, 'view sequence')
+                                                : motif.sequence
+                                        }</td>
+                                    </tr>
+                                })
+                            }
+                        </tbody>
+                    </table>
                 </td>
             </tr>
         </React.Fragment>
     )
 }
 
-function sequence(gene, sequence, key) {
+function sequence(gene, sequence) {
     return (
-        <tr key={`${key}-Sequence`}>
-            <td style={{ fontWeight: "bold" }}>{`${key}:`}</td>
-            <td className="sequence" >
-                <Modal className="aBase" title={"Fasta Format"} info={Sequence(gene, sequence, "fasta")}></Modal>
-                <Modal className="aBase" title={"genbank Format"} info={Sequence(gene, sequence, "genbank")}></Modal>
-            </td>
-        </tr>
+        <div>
+            <Modal className="aBase" title={"Fasta Format"} info={Sequence(gene, sequence, "fasta")}></Modal>
+            <Modal className="aBase" title={"genbank Format"} info={Sequence(gene, sequence, "genbank")}></Modal>
+        </div>
     )
+}
+
+function notNull(data){
+    if(data){
+        return data
+    }
+    return("")
 }
