@@ -72,11 +72,12 @@ export default GeneTabs;
 
 
 function TabSelector(item, idGene, allCitations) {
+    
     switch (item) {
         case "description":
             return <GnDescription geneID={idGene} allCitations={allCitations} />
         case "product":
-            return <GnProducts geneID={idGene} />
+            return <GnProducts geneID={idGene} allCitations={allCitations} />
         case "all":
             return <GnAllInfo idGene={idGene} allCitations={allCitations}/>
         default:

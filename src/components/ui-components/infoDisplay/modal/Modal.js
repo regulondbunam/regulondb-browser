@@ -51,7 +51,7 @@ export default class Modal extends Component {
             //buttons,
             info,
             //getValue,
-            title,
+            title
         } = this.props
         const {
             collapsed

@@ -5,7 +5,8 @@ import { GeneProducts } from '../../components/apollo/querys/GeneQuerys';
 import { useQuery } from '@apollo/react-hooks';
 
 const GeneProduct = ({
-    geneID
+    geneID,
+    allCitations
 }) => {
     const productsS = new GeneProducts(geneID)
     const advancedSearch = productsS.advancedSearch
@@ -29,7 +30,7 @@ const GeneProduct = ({
                             <React.Fragment key={product.name} >
                                 <article >
                                 <h3 dangerouslySetInnerHTML={{ __html: product.name }} style={{ margin: '0' }}/>
-                                {TableProductInfo(product)}
+                                {TableProductInfo(product,allCitations)}
                             </article>
                              <aside>
                                  <TableProductExternalID externalCrossReferences={product.externalCrossReferences} />

@@ -3,7 +3,7 @@ import React from 'react';
 const TableProductExternalID = ({
     externalCrossReferences
 }) => {
-    console.log(externalCrossReferences)
+    //console.log(externalCrossReferences)
     return ( 
         <table>
             <thead>

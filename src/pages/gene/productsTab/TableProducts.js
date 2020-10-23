@@ -2,9 +2,10 @@ import React from 'react';
 import ModalER from '../../../components/utiles/ModalEvidenceRef'
 import Modal from '../../../components/ui-components/infoDisplay/modal/Modal';
 import Sequence from '../../../components/sequence/Sequence';
+import Notes from '../../../components/cits/Notes'
 
 
-export function TableProductInfo(product) {
+export function TableProductInfo(product,allCitations) {
     return (
         <table key={`${product.name}-tableInfo`}>
             <tbody>
@@ -45,6 +46,15 @@ export function TableProductInfo(product) {
                                         {
                                             sequence(product['name'], product[key])
                                         }
+                                        </td>
+                                    </tr>
+                                )
+                            case 'note':
+                                return(
+                                    <tr key={`${product.name}-trInfo-${key}`}>
+                                        <td style={{ fontWeight: "bold" }}>{`${key}:`}</td>
+                                        <td>
+                                        <Notes allCitations={allCitations} note={product[key]} />
                                         </td>
                                     </tr>
                                 )

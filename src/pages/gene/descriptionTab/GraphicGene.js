@@ -1,8 +1,8 @@
 import React, { useState,  } from 'react';
-//import Image from '../../../components/ui-components/infoDisplay/media/Image'
-//import img from '../../../img/gene_context.png'
-//import imgZ from '../../../img/gene_zoom.png'
+import Querys from '../../../components/apollo/querys/GeneQuerys'
+import { useQuery } from '@apollo/react-hooks';
 import { IconButton } from '../../../components/ui-components/basicInput/Buttons'
+import Canvas from '../../../components/miniDTT/Canvas'
 //import { PanZoom } from 'react-easy-panzoom'
 import GetFile from '../../../components/staticComponets/GetFile'
 import Modal from '../../../components/ui-components/infoDisplay/modal/Modal'
@@ -12,8 +12,10 @@ const urlFile = ''
 const GraphicGene = ({
     idGene
 }) => {
-    //let imge = useRef(null)
+    const query = new Querys(idGene)
+    const { data, loading, error } = useQuery(query.queryGeneDrawInfo(idGene))
     const [zoom, setZoom] = useState(false)
+    const idElement = 'drawPlace01'
     let iconZoom = '<<>>'
     if (zoom) {
         iconZoom = '>><<'
@@ -38,7 +40,6 @@ const GraphicGene = ({
                                 }} />
                             </div>
                         </div>
-
                     </th>
                     <td></td>
                 </tr>
@@ -46,10 +47,10 @@ const GraphicGene = ({
                 <tbody>
                 <tr>
                     <td colSpan="3">
-                        <div style={{border:'1px solid black', textAlign: "center", overflow: 'hidden' }}>
-                            <br/>
-                            <br/>
-                            <br/>
+                        <div id={idElement} style={{border:'1px solid black', textAlign: "center", overflow: 'hidden'}}>
+                            {
+                                loadDraw(data,loading,error,idElement,`geneDraw${idGene}`)
+                            }
                         </div>
 
                     </td>
@@ -66,8 +67,24 @@ const GraphicGene = ({
     );
 }
 
-
 export default GraphicGene;
+
+function loadDraw(data,loading,error,idElement,idCanvas){
+    if(loading){
+        return <>Loading...</>
+    }
+    if(error){
+        return <>Error</>
+    }
+    try {
+        const geneticElemets = data.getGenesBy.data
+        //console.log(geneticElemets)
+        return <Canvas geneticElements={geneticElemets} idElement={idElement} idCanvas={idCanvas} />
+    } catch (error) {
+        console.log(error)
+        return <>erro to draw</>
+    }
+}
 
 /**
  * <PanZoom

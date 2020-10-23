@@ -4,13 +4,14 @@ import GnProducts from './GeneProduct'
 import GnGrowthC from './GeneGrowthConditions'
 
 const GeneAllInfo = ({
-    idGene
+    idGene,
+    allCitations
 }) => {
     return (
         <>
         <GnDescription geneID={idGene} showER={false} />
         <br/>
-        <GnProducts geneID={idGene} />
+        <GnProducts geneID={idGene} allCitations={allCitations} />
         <br/>
         <GnGrowthC geneID={idGene} />
         </>

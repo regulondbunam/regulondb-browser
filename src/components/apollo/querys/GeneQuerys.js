@@ -89,6 +89,28 @@ export default class GeneQuerys {
     `
   }
 
+  queryGeneDrawInfo(id) {
+    const advancedSearch = `${id}[gene.id]`
+    return gql`
+    {
+      getGenesBy(limit:1 page: 0 advancedSearch:"${advancedSearch}")
+        {
+          data{
+            gene{
+              id
+              name
+              leftEndPosition
+              rightEndPosition
+              strand
+              type
+            }
+          }
+        }
+      
+      }
+    `
+  }
+
   queryGeneInfo(id) {
     const advancedSearch = `${id}[gene.id]`
     return gql`
@@ -140,7 +162,7 @@ export default class GeneQuerys {
     `
   }
 
-  queryGeneMultifun(id){
+  queryGeneMultifun(id) {
     const advancedSearch = `${id}[gene.id]`
     return gql`
     {
