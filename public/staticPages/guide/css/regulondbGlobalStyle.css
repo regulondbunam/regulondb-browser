@@ -1,0 +1,252 @@
+/*
+This is a css for regulonDB Browser site, 
+it contains the definition of global styles titles, paragraphs, font, color palette among others.
+
+Ver: 0.0.25
+*/
+
+/*elements HTML*/
+
+/*Variables*/
+
+/*color palette*/
+:root{
+	--color-blue1: #1F3D4E;
+	--color-blue2: #32617D;
+	--color-blue3: #3D779B;
+	--color-blue4: #72A7C7;
+	--color-blue5: #cadce7;
+	--color-grey1: #373737;
+	--color-grey2: #666666;
+	--color-grey3: #999999;
+	--color-grey3A: #99999999;
+	--color-grey4: #D5D5D7;
+	--color-grey5: #F4F5F5;
+	--color-rest: #FFFFFF;
+	--color-accentA: #C93A1D;
+	--color-accentAA: #C93A1D99;
+	--color-accentB: #CC9900;
+}
+/*font family */
+:root{
+	--fontFamily-principal: sans-serif;
+	--fontFamily-option: Arial, Helvetica, sans-serif;
+	--fontFamily-simpleText: "Times New Roman", Times, serif;
+	--fontFamily-sequence:  'Courier New',Courier,monospace;
+	
+}
+
+/*all site*/
+* {
+  box-sizing: border-box;
+}
+
+body{
+	padding-top: 1%;
+	background-color: var(--color-rest);
+    font-family: var(--fontFamily-principal);
+    margin: 0px;
+}
+
+/*Titles*/
+
+:root{
+	--color-title: var(--color-blue2);
+	--color-subtitle: var(--color-grey2);
+	--font-title: var(--fontFamily-principal);
+	--fontStyle-title: normal;
+	--fontWeight: bold;
+	--lineHeight-title: normal;
+}
+
+h1 {
+	font-size: 24px;
+	font-family: var(--font-title);
+	font-style: var(--fontStyle-title);
+	font-weight: var(--fontWeight);
+	line-height: var(--fontWeight);
+	color: var(--color-title)
+}
+
+h2 {
+	font-size: 20px;
+	font-family: var(--font-title);
+	font-style: var(--fontStyle-title);
+	font-weight: var(--fontWeight);
+	line-height: var(--fontWeight);
+	color: var(--color-subtitle)
+}
+
+h3 {
+	font-size: 18px;
+	font-family: var(--font-title);
+	font-style: var(--fontStyle-title);
+	font-weight: var(--fontWeight);
+	line-height: var(--fontWeight);
+	color: var(--color-subtitle)
+}
+h3 {
+	font-size: 18px;
+	font-family: var(--font-title);
+	font-style: var(--fontStyle-title);
+	font-weight: var(--fontWeight);
+	line-height: var(--fontWeight);
+	color: var(--color-subtitle)
+}
+
+
+/* p */
+
+p {
+	font-family: var(--fontFamily-principal); 
+	font-size: 16px;
+	font-style: normal;
+	line-height: normal; 
+	color: var(--color-grey2);
+	font-weight: normal;
+}
+
+:root{
+	--a-fontFamily: var(--fontFamily-principal);
+	--a-fontSize: 14px;
+	--a-fontStyle: normal;
+	--a-fontWeight: normal;
+	--a-line: normal;
+	--a-colorS: var(--color-blue4);
+}
+
+
+.aBase{
+	font-family: var(--a-fontFamily); 
+	font-style: var(--a-fontStyle);
+	font-weight: var(--a-fontWeight); 
+	line-height: var(--a-line); 
+	text-decoration: underline;
+	color: var(--a-colorS);
+	cursor: pointer;
+	background-color: transparent;
+	border: 0px solid #000000;
+}
+
+.aAccent{
+	color: var(--color-accentB) !important;
+}
+
+a {
+	font-family: var(--a-fontFamily); 
+	font-size: var(--a-fontSize);
+	font-style: var(--a-fontStyle);
+	font-weight: var(--a-fontWeight); 
+	line-height: var(--a-line); 
+	color: var(--a-colorS);
+	cursor: pointer;
+}
+
+a:link {
+	font-family: var(--fontFamily-principal);  
+	color: var(--color-blue4);
+}
+
+a:visited {
+	font-family: var(--fontFamily-principal);  
+	color: var(--color-blue4);
+}
+
+/*TABLES*/
+
+table{
+    font-family: arial, sans-serif;
+    color: rgb(39, 39, 39);
+    border-collapse: collapse;
+  }
+  
+td, th {
+	/*border-bottom: 1px solid #ddd;*/
+    text-align: left;
+    padding: 10px;
+  }
+
+td {
+	font-size: 14px;
+}
+
+th {
+	background-color: var(--color-blue4);
+	color: var(--color-rest);
+}
+  
+/*tr:nth-child(even) {
+	background-color: var(--color-grey5);
+  }*/
+
+.trClickable:hover{
+	background-color: var(--color-grey5);
+	cursor: pointer;
+}
+/*Body div*/
+
+.bodyDiv{
+	padding: 3% 10% 5% 10%
+}
+
+/*Features*/
+
+.sequence{
+	font-family: var(--fontFamily-sequence);
+	font-size: 16px;
+}
+
+.citation{
+	font-size: 10px;
+	color: var(--color-grey2);
+}
+
+.tabHeader{
+	background-color: var(--color-grey5);
+	padding-left: 10%;
+	-webkit-box-shadow: inset -1px -10px 0px -6px var(--color-blue2);
+	-moz-box-shadow: inset -1px -10px 0px -6px var(--color-blue2);
+	box-shadow: inset -1px -10px 0px -6px var(--color-blue2);
+	display: flow-root;
+}
+
+.tabContent{
+	float: left;
+	padding-right: 1%;
+	font-size: 12px;
+}
+
+.tab {
+	background-color: var(--color-rest);
+	color: var(--color-grey1);
+	border-top:1px solid var(--color-grey2);
+border-right:1px solid var(--color-grey2);
+border-bottom:3px solid var(--color-blue2);
+border-left:1px solid var(--color-grey2);
+}
+
+.tabActive{
+	background-color: var(--color-rest);
+	color: var(--color-blue3);
+	font-weight: bold;
+	-webkit-box-shadow: inset 0px 3px 0px 3px var(--color-blue2);
+	-moz-box-shadow: inset 0px 3px 0px 3px var(--color-blue2);
+	box-shadow: inset 0px 3px 0px 3px var(--color-blue2);
+}
+
+.tabActive:hover{
+	background-color: var(--color-grey5);
+	-webkit-box-shadow: inset 0px 3px 0px 3px var(--color-blue2);
+	-moz-box-shadow: inset 0px 3px 0px 3px var(--color-blue2);
+	box-shadow: inset 0px 3px 0px 3px var(--color-blue2);
+}
+
+.divA:hover{
+	cursor: pointer;
+	-webkit-box-shadow: inset 2px 3px 13px 1px var(--color-blue4);
+	-moz-box-shadow: inset 2px 3px 13px 1px var(--color-blue4);
+	box-shadow: inset 2px 3px 13px 1px var(--color-blue4);
+}
+
+/* Particular Styles features */
+

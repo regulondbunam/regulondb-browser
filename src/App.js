@@ -3,8 +3,9 @@ import Layout from './components/layout/Layout'
 import Search from './pages/search/SearchHome'
 import Gene from './pages/gene/GeneHome'
 import Home from './pages/home/Home'
+import Guide from './pages/guide/index'
 import Error from './pages/error/Error'
-import Testing from './pages/Testing'
+import Testing from './pages/test/Testing'
 import {
   BrowserRouter as Router,
   Switch,
@@ -28,6 +29,9 @@ function App() {
         </Route>
         <Route path={["/gene/:id/:site/:section","/gene/:id/:site","/gene/:id","/gene",]}>
           <Gene />
+        </Route>
+        <Route path="/guide">
+          <Guide />
         </Route>
         <Route path="/Testing">
           <Testing />
