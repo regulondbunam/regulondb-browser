@@ -3,6 +3,7 @@ import ModalER from '../../../components/utiles/ModalEvidenceRef'
 import Modal from '../../../components/ui-components/infoDisplay/modal/Modal';
 import Sequence from '../../../components/sequence/Sequence';
 import Notes from '../../../components/cits/Notes'
+import ReactTooltip from 'react-tooltip'
 
 
 export function TableProductInfo(product,allCitations) {
@@ -54,7 +55,8 @@ export function TableProductInfo(product,allCitations) {
                                     <tr key={`${product.name}-trInfo-${key}`}>
                                         <td style={{ fontWeight: "bold" }}>{`${key}:`}</td>
                                         <td>
-                                        <Notes allCitations={allCitations} note={product[key]} />
+                                            <div dangerouslySetInnerHTML={{__html: Notes(allCitations,product[key])}} />
+                                        <ReactTooltip type="light" border={true} />
                                         </td>
                                     </tr>
                                 )

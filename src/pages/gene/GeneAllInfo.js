@@ -9,11 +9,11 @@ const GeneAllInfo = ({
 }) => {
     return (
         <>
-        <GnDescription geneID={idGene} showER={false} />
+        <GnDescription geneID={idGene} allCitations={allCitations} showER={false} />
         <br/>
         <GnProducts geneID={idGene} allCitations={allCitations} />
         <br/>
-        <GnGrowthC geneID={idGene} />
+        <GnGrowthC geneID={idGene} allCitations={allCitations} />
         </>
     );
 

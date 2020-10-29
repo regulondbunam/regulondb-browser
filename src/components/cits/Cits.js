@@ -70,8 +70,8 @@ export function relCitation(allCitations, idCit, index = true, small = true) {
 
 export function Citation(cit, small = true) {
     //W->weak S->strong
-    const publication = cit.publication
-    const evidence = cit.evidence
+    const publication = cit?.publication
+    const evidence = cit?.evidence
     const eviCode = evidence?.code
     //const id = publication?.id
     const citation = publication?.citation.split(',')

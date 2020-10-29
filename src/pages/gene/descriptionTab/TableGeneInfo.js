@@ -8,6 +8,8 @@ import Modal from '../../../components/ui-components/infoDisplay/modal/Modal'
 import Sequence from '../../../components/sequence/Sequence'
 import Phrase from '../../../components/phrases/Phrase'
 import ToolTip from '../../../components/ui-components/infoDisplay/toolTip/ToolTip'
+import Notes from '../../../components/cits/Notes'
+import ReactTooltip from 'react-tooltip'
 
 
 const TableGeneInfo = ({
@@ -56,11 +58,9 @@ const TableGeneInfo = ({
                     <tbody>
                         {Object.keys(geneData).map((key, index) => {
                             const test = key.match(/^_/)
-                            if (geneData[key] === null || geneData[key].length <= 0) {
+                            if (geneData[key] === null || geneData[key].length <= 1) {
                                 return null
                             }
-                            // console.log(`${key}: ${geneData[key]}`)
-                            // console.log(geneData[key])
                             if (test === null) {
                                 switch (key) {
                                     case 'leftEndPosition':
@@ -91,8 +91,17 @@ const TableGeneInfo = ({
                                             </tr>
 
                                         )
-                                    case 'citations':
                                     case 'note':
+                                        return (
+                                            <tr key={`${key}-geneInfo-${key}`}>
+                                                <td style={{ fontWeight: "bold" }}>{`${key}:`}</td>
+                                                <td>
+                                                    <div dangerouslySetInnerHTML={{ __html: Notes(allCitations, geneData[key]) }} />
+                                                    <ReactTooltip type="light" border={true} />
+                                                </td>
+                                            </tr>
+                                        )
+                                    case 'citations':
                                     case 'multifunTerms':
                                         return null
                                     default:
@@ -115,9 +124,6 @@ const TableGeneInfo = ({
                             multifun.length > 0 ? ShowMultifunTerms(multifun) : null
                         }
                         {
-                            note?ShowNote(note, allCitations):null
-                        }
-                        {
                             citations.length > 0 ? ShowCitations(note, citations, allCitations) : null
                         }
 
@@ -134,23 +140,6 @@ const TableGeneInfo = ({
 
 function findInArray(propertie, properties) {
     return properties.find(element => element.name === propertie)
-}
-
-function ShowNote(note, allCitations){
-    return (
-        <tr>
-                        {
-                            note
-                            ? <td style={{ fontWeight: "bold" }}>note:</td>
-                            : null
-                        }
-                        {
-                            note
-                            ?<td dangerouslySetInnerHTML={{ __html: note }} />
-                            :null
-                        }
-                        </tr>
-    )
 }
 
 function ShowCitations(note, citations, allCitations) {

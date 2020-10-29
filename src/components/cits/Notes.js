@@ -1,12 +1,6 @@
-import React from 'react';
 import {relCitation} from './Cits'
-import ReactTooltip from 'react-tooltip'
 
-
-const note = ({
-    allCitations,
-    note
-}) => {
+const Note = (allCitations,note) => {
     let cit =''
     let newNote = note
     let partNote = []
@@ -32,22 +26,9 @@ const note = ({
     } catch (error) {
         console.log("util")
     }
-    return ( 
-        <>
-        {
-            partNote.map((n,index)=>{
-                return(
-                    <React.Fragment key={`${cits[index]}-i${index}`}>
-                        <p style={{fontSize: '14px', float: 'left'}} dangerouslySetInnerHTML={{__html: `${n} ${relCitation(allCitations,cits[index])}`}} />
-                        <ReactTooltip type="light" border={true} />
-                    </React.Fragment>
-                    
-                )
-            })
-        }
-        
-        </>
-     );
+    return partNote.map((n,index)=>{
+                return `${n} ${relCitation(allCitations,cits[index])}`
+            }).join('')
 }
  
-export default note;
+export default Note;

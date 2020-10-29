@@ -72,7 +72,6 @@ export default GeneTabs;
 
 
 function TabSelector(item, idGene, allCitations) {
-    
     switch (item) {
         case "description":
             return <GnDescription geneID={idGene} allCitations={allCitations} />

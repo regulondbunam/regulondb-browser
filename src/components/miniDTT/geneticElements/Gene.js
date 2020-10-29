@@ -12,13 +12,13 @@ export default class Gene extends Component {
         geneticData,
         canvasData,
       } = this.props
-      console.log(canvasData)
+      //console.log(canvasData)
       DrawGene({canvas:canvas, id:id,strand: geneticData.strand, axisX:canvasData.ax, axisY:canvasData.ay, name:name})
     }
   
     componentDidMount(){
       const canvas = this.props.canvasData
-      console.log(canvas)
+      //console.log(canvas)
       if(canvas.canvas){
         this.DrawGene(canvas.canvas)
         ReactTooltip.rebuild()
