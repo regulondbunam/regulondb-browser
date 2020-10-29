@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import ReactMarkdown from "react-markdown";
 
 
 const Content = (
     { url }
 ) => {
-    const [htmlFile, sethtmlFile] = useState('<p>Loading...</p>')
+    const ext = url.split('.')
+    const [markdown, setmarkdown] = useState('<p>Loading...</p>')
     useEffect(() => {
         //console.log(url)
         let xhr = new XMLHttpRequest();
@@ -14,12 +16,20 @@ const Content = (
         xhr.onloadend = () => {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200 || xhr.status === 0) {
-                    sethtmlFile(xhr.responseText)
+                    setmarkdown(xhr.responseText)
                 }
             }
         }
     })
-    return <div dangerouslySetInnerHTML={{ __html: htmlFile }} />
+    return (
+        <>
+        {
+            ext[ext.length-1] === 'md'
+            ?<ReactMarkdown allowDangerousHtml source={markdown} />
+            :<div dangerouslySetInnerHTML={{__html: markdown}}  />
+        }
+        </>
+    )
 }
 
 export default Content;

@@ -11,11 +11,34 @@ output:
     self_contained: yes
 ---
 
-<center><h1>Gene local context Help</h1></center>
-<h2>Image of the gene local context</h2>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "images_context_help",
+        "description": "description",
+        "creator": {
+          "@type" : "Organization",
+          "url" : "http://regulondb.ccg.unam.mx/",
+          "name": "RegulonDB"
+        },
+        "audienceType": "All",
+        "inLanguage": "English",
+        "publisher": {
+          "@type": "NGO",        
+          "name": "RegulonDB"
+          }, 
+        "license": "MIT",
+        "keywords": ["keyword", "keyword"],
+        "url": "http://regulondb.ccg.unam.mx/"
+}
+</script>
+
+<center><h2>Gene local context Help</h2></center>
+<h3>Image of the gene local context</h3>
 The figure Gene Local Context shows the genomic region surrounding the query gene.
 The coordinates of this region are displayed at the ends of the figure. The image shows all RegulonDB objects contained within this region; the meaning of all graphic features can be found at:<br>
-<a href="./code-colores-for-objects-of-regulondb.html" target="_blank">Graphic code for objects and colors</a> 
+<a href="./code-colores-for-objects-of-regulondb.md" target="_blank">Graphic code for objects and colors</a> 
 <br> <br> Object properties in the image:<br><br>
 
 <b>a)	Orientation.</b> The objects are drawn depending on their strand
@@ -36,7 +59,7 @@ The coordinates of this region are displayed at the ends of the figure. The imag
 <b>e)	Navigation.</b> Clicking on a gene that is displayed in the figure, the user 
                             can navigate to the page describing the selected gene. 
 <br>
-<h2>Buttons</h2>
+<h3>Buttons</h3>
 Three buttons allow you to zoom in (+), zoom out (-), and expand 5? region (<<>>). 
 <br><br>
             The + and - buttons allow you to zoom in and zoom out, respectively by clicking on the button located above the image of the gene 

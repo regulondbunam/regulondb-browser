@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Content from './content'
 import { withRouter } from 'react-router-dom';
+import ReactMarkdown from "react-markdown";
 
 
 
@@ -8,18 +9,20 @@ const Guide = (
     { location }
 ) => {
     let url = ''
-    let urlIndex = 'staticPages/guide/index.html'
-    const urlContent = 'staticPages'
+    let urlIndex = 'staticPages/guide/index.md'
+    const urlContent = 'staticPages/guide/'
     const path = location.pathname
     const paths = path.split('/').length
     if (paths > 3) {
-        //console.log(paths)
+        //console.log(path)
         url = '../'.repeat(paths - 1) + urlContent + path
         urlIndex = '../'.repeat(paths - 1)+urlIndex
+        console.log(url)
+        console.log(urlIndex)
     }else{
         urlIndex = '../'+urlIndex
     }
-    const [index, setIndex] = useState('<p>Loading...</p>')
+    const [markdown, setIndex] = useState('<p>Loading...</p>')
 
     useEffect(() => {
         console.log(urlIndex)
@@ -42,14 +45,14 @@ const Guide = (
                 <thead>
                     <tr>
                         <th colSpan="2">
-                            <h1 style={{ textAlign: 'center' }}>ReguolnDB Guides</h1>
+                            <h1 style={{ textAlign: 'center' }}>RegulonDB Browser Guides</h1>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td style={{width: '20%'}}>
-                            <div dangerouslySetInnerHTML={{ __html: index }} />
+                            <ReactMarkdown source={markdown} />
                         </td>
                         <td>
                             <Content url={url} />
@@ -62,3 +65,20 @@ const Guide = (
 }
 
 export default withRouter(Guide);
+
+/*
+---
+title: ""
+--author: "RegulonDB Team"
+--date: '02/07/2020'
+output:
+  html_document:
+    fig_caption: yes
+    highlight: zenburn
+    includes:
+    css: ./css/regulondbGlobalStyle.css
+    self_contained: yes
+---
+
+
+*/

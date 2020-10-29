@@ -1,22 +1,7 @@
----
-title: ""
---author: "RegulonDB Team"
---date: '02/07/2020'
-output:
-  html_document:
-    fig_caption: yes
-    highlight: zenburn
-    includes:
-    css: ./css/regulondbGlobalStyle.css
-    self_contained: yes
----
 
-<center><h1>RegulonDB Guide</h1></center>
-
-<div class="tabContent">
 1. Searching
    1. By term
-      1. [Gene](./Searching/ByTerm/Gene/images_context_help.html)
+      1. [Gene](/guides/Searching/ByTerm/Gene/images_context_help.md)
       2. Gensor Unit
       3. Growth Conditions
       4. Operon
@@ -25,10 +10,10 @@ output:
       7. sRNA
    2. Browsing
       1. Coexpression Browser 
-      2. [Gensor Unit Groups](./Searching/Browsing/GensorUnitGroups/gensor-unit-groups.html)
+      2. [Gensor Unit Groups](/guides/Searching/Browsing/GensorUnitGroups/gensor-unit-groups.html)
       3. Microbial Condition Ontology Browser
       4. TF-Matrix Browser
-      5. [Transcription Factor Browser](./Searching/Browsing/TranscriptionFactorBrowser/transcription-factor-browser-of-regulondb.html)
+      5. [Transcription Factor Browser](/guides/Searching/Browsing/TranscriptionFactorBrowser/transcription-factor-browser-of-regulondb.html)
       6. Transcription Factor Family Browser
    3. Web services
       1. API
@@ -91,5 +76,3 @@ output:
         1. [RegulonDB Developers](./AboutUs/developers-of-regulondb.html)
         2. [Collaboratos](./AboutUs/developers-of-regulondb.html#collaborator-of-regulondb)
         3. [Advisors](./AboutUs/developers-of-regulondb.html#advisors-of-regulondb)
-
-</div>

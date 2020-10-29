@@ -30,7 +30,7 @@ function App() {
         <Route path={["/gene/:id/:site/:section","/gene/:id/:site","/gene/:id","/gene",]}>
           <Gene />
         </Route>
-        <Route path="/guide">
+        <Route path={["/guide","/guides"]}>
           <Guide />
         </Route>
         <Route path="/Testing">

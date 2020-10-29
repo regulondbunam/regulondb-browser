@@ -12,6 +12,7 @@ const Canvas = ({
     dnaPosL = 0,
     dnaPosR = 100,
     geneticElements = [],
+    //nombre de gen + context
     diagramDescription = 'a adn diagram',
     constenUrl,
     license = "regulonDB Browser",
