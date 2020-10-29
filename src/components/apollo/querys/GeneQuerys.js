@@ -77,6 +77,7 @@ export default class GeneQuerys {
               pmid
               citation
               url
+              year
             }
           }
         }

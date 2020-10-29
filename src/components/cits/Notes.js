@@ -1,5 +1,7 @@
 import React from 'react';
 import {relCitation} from './Cits'
+import ReactTooltip from 'react-tooltip'
+
 
 const note = ({
     allCitations,
@@ -35,19 +37,15 @@ const note = ({
         {
             partNote.map((n,index)=>{
                 return(
-                    <p style={{float: 'left'}} key={`${cits[index]}-i${index}`}>
-                        <p style={{fontSize: '14px', float: 'left'}} dangerouslySetInnerHTML={{__html: n}} />
-                        <p style={{float: 'left'}}>
-                        {
-                            relCitation(allCitations,cits[index])
-                        }
-                        </p>
-                        
-                    </p>
+                    <React.Fragment key={`${cits[index]}-i${index}`}>
+                        <p style={{fontSize: '14px', float: 'left'}} dangerouslySetInnerHTML={{__html: `${n} ${relCitation(allCitations,cits[index])}`}} />
+                        <ReactTooltip type="light" border={true} />
+                    </React.Fragment>
                     
                 )
             })
         }
+        
         </>
      );
 }
