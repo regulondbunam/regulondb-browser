@@ -7,11 +7,10 @@ export default function CoverSearch(menssage, state) {
         case 'loading':
             return (
                 <>
-                    <Spinner>
+                    <Spinner/>
                     <div style={styleTitle}>
                         <h1 style={{ color: "#ffffff" }}>{menssage}</h1>
                     </div>
-                    </Spinner>
                 </>
             )
         case 'search':
