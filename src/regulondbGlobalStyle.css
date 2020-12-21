@@ -2,7 +2,7 @@
 This is a css for regulonDB Browser site, 
 it contains the definition of global styles titles, paragraphs, font, color palette among others.
 
-Ver: 0.0.25
+Ver: 0.0.26
 */
 
 /*elements HTML*/
@@ -30,7 +30,7 @@ Ver: 0.0.25
 }
 /*font family */
 :root{
-	--fontFamily-principal: sans-serif;
+	--fontFamily-principal: Arial, sans-serif;
 	--fontFamily-option: Arial, Helvetica, sans-serif;
 	--fontFamily-simpleText: "Times New Roman", Times, serif;
 	--fontFamily-cita: "Times New Roman", Times;
@@ -46,23 +46,29 @@ Ver: 0.0.25
 body{
 	padding-top: 1%;
 	background-color: var(--color-rest);
-    font-family: var(--fontFamily-principal);
+	font-family: var(--fontFamily-principal);
+	font-size: 12px;
     margin: 0px;
 }
 
-/* Layout Site*/
-
-section:after {
-	content: "";
-	clear: both;
-	display: table;
+footer {
+	bottom: 0;
+	width: 100%;
+	height: 40px;
   }
+/* Layout Site*/
+section{
+	padding: 0% 0% 0% 0% !important;
+}
 
 article{
 	float: left;
 	padding: 0% 0% 2% 10%;
-	width: 80%;
-	
+	width: 80%;	
+}
+
+.articleHome{
+	padding: 0% 0% 0% 0% !important;
 }
 
 aside{
@@ -87,7 +93,17 @@ h1 {
 	font-style: var(--fontStyle-title);
 	font-weight: var(--fontWeight);
 	line-height: var(--fontWeight);
-	color: var(--color-title)
+	color: var(--color-title);
+	margin-top: 0;
+}
+
+.h1-cover{
+	font-size: 24px;
+	font-family: var(--font-title);
+	font-style: var(--fontStyle-title);
+	font-weight: var(--fontWeight);
+	line-height: var(--fontWeight);
+	color: var(--color-rest)	
 }
 
 h2 {
@@ -177,6 +193,23 @@ a:visited {
 
 /*TABLES*/
 
+.tableContent-th-title{
+	color: #666666;
+    border-bottom: 1px solid #72A7C7;
+    text-align: inherit;
+}
+
+.tableContent-th-subtitle{
+	color: #999999;
+    text-align: inherit;
+}
+
+.tableContent_td_content{
+    border-bottom: 1px solid #999999;
+    text-align: inherit;
+}
+
+
 table{
 	width: 100%;
     font-family: arial, sans-serif;
@@ -185,7 +218,6 @@ table{
   }
   
 td, th {
-	/*border-bottom: 1px solid #ddd;*/
 	font-size: 14px;
 	text-align: left;
 	color: var(--color-grey2);
@@ -196,10 +228,6 @@ td {
 	vertical-align: top;
 }
 
-th {
-	background-color: var(--color-blue4);
-	color: var(--color-rest);
-}
   
 /*tr:nth-child(even) {
 	background-color: var(--color-grey5);
@@ -227,45 +255,7 @@ th {
 	font-size: 10px;
 }
 
-.tabHeader{
-	background-color: var(--color-grey5);
-	padding-left: 10%;
-	-webkit-box-shadow: inset -1px -10px 0px -6px var(--color-blue2);
-	-moz-box-shadow: inset -1px -10px 0px -6px var(--color-blue2);
-	box-shadow: inset -1px -10px 0px -6px var(--color-blue2);
-	display: flow-root;
-}
 
-.tabContent{
-	float: left;
-	padding-right: 1%;
-	font-size: 12px;
-}
-
-.tab {
-	background-color: var(--color-rest);
-	color: var(--color-grey1);
-	border-top:1px solid var(--color-grey2);
-border-right:1px solid var(--color-grey2);
-border-bottom:3px solid var(--color-blue2);
-border-left:1px solid var(--color-grey2);
-}
-
-.tabActive{
-	background-color: var(--color-rest);
-	color: var(--color-blue3);
-	font-weight: bold;
-	-webkit-box-shadow: inset 0px 3px 0px 3px var(--color-blue2);
-	-moz-box-shadow: inset 0px 3px 0px 3px var(--color-blue2);
-	box-shadow: inset 0px 3px 0px 3px var(--color-blue2);
-}
-
-.tabActive:hover{
-	background-color: var(--color-grey5);
-	-webkit-box-shadow: inset 0px 3px 0px 3px var(--color-blue2);
-	-moz-box-shadow: inset 0px 3px 0px 3px var(--color-blue2);
-	box-shadow: inset 0px 3px 0px 3px var(--color-blue2);
-}
 
 .divA:hover{
 	cursor: pointer;

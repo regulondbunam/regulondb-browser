@@ -1,5 +1,5 @@
 import React from 'react';
-import ModalER from '../utiles/ModalEvidenceRef'
+import ModalER from '../ui-components/web/components/utiles/ModalEvidenceRef'
 
 
 export default function AllCitations(allCitations, small = true, title = false, index = false,) {
@@ -20,10 +20,10 @@ export default function AllCitations(allCitations, small = true, title = false, 
                             return (
                                 <tr key={`${indx}-${publication.id}`}>
                                     <td>
-                                        {index ? `[${indx + 1}]` : null}
+                                        {index ?`[${indx + 1}]` : null}
                                         <ModalER
                                             classNameModal="citation"
-                                            title={Citation(cit, small)}
+                                            title={`${Citation(cit, small)}`}
                                             cit={cit}
                                         />
                                     </td>
@@ -35,7 +35,8 @@ export default function AllCitations(allCitations, small = true, title = false, 
                     }
                 </tbody>
             </table>
-
+            <br/>
+            <br/>
         </>
     )
 }
@@ -69,6 +70,7 @@ export function relCitation(allCitations, idCit, index = true, small = true) {
 }
 
 export function Citation(cit, small = true) {
+    
     //W->weak S->strong
     const publication = cit?.publication
     const evidence = cit?.evidence
@@ -86,7 +88,7 @@ export function Citation(cit, small = true) {
         return ''
     }
     if (small) {
-        return `${citation[0]}., et al. ${year} ${code()}`
+        return `${citation[0]}., et al. ${year?year:''} ${code()}`
     }
     return `${publication?.citation}, ${code()}`
     // [i]autor., et al. año [evidence]

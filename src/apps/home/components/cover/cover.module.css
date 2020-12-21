@@ -1,0 +1,30 @@
+.coverSize{
+    height: 45vh;
+    width: 100%;
+}
+
+.coverComponent{
+    position: absolute;
+    left: 0;
+    color: white;
+}
+.coverComponentGlass{
+    position: absolute;
+    top: 0;
+    background-color: #000000;
+}
+
+.coverComponentContent{
+    z-index: 1;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 5% 0 2% 10%;
+    position: absolute;
+    top: 0;
+    height: 45vh;
+}
+
+.coverComponentBackground{
+    z-index: -1;
+    max-height: 45vh;
+}

@@ -1,4 +1,4 @@
-# [Software name]
+# RegulonDB Browser website
 
 
 

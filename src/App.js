@@ -1,54 +1,36 @@
-import React from 'react';
-import Layout from './components/layout/Layout'
-import Search from './pages/search/SearchHome'
-import Gene from './pages/gene/GeneHome'
-import Home from './pages/home/Home'
-import Guide from './pages/guide/index'
-import Error from './pages/error/Error'
-import Testing from './pages/test/Testing'
 import {
-  BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
+import Layout from './layout/layout'
+import Home from './apps/home/home'
+import Search from './apps/search/search'
+import Gene from './apps/gene/gene'
+import Error from './error/e404/error'
 
 
 function App() {
   return (
-    <Router>
-      <Layout >
+    <Layout>
       <Switch>
-        <Route exact path="/">
-            <Home />
-        </Route>
-        <Route path="/home">
+      <Route exact path={"/"}>
           <Home />
         </Route>
-        <Route path="/search">
+        <Route path={"/home"}>
+          <Home />
+        </Route>
+        <Route path={"/search"}>
           <Search />
         </Route>
         <Route path={["/gene/:id/:site/:section","/gene/:id/:site","/gene/:id","/gene",]}>
           <Gene />
         </Route>
-        <Route path={["/guide","/guides"]}>
-          <Guide />
-        </Route>
-        <Route path="/Testing">
-          <Testing />
-        </Route>
         <Route path="*">
           <Error />
         </Route>
       </Switch>
-      </Layout >
-    </Router>
-
+    </Layout>
   );
 }
 
 export default App;
-
-
-/**
-      
- */

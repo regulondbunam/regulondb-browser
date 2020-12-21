@@ -24,6 +24,27 @@ export default class GeneQuerys {
     `
   }
 
+  queryDrawData(id = ''){
+    const advancedSearch = `${id}[gene.id]`
+    return gql`
+    {
+      getGenesBy(limit:1 page: 0 advancedSearch:"${advancedSearch}")
+        {
+          data{
+            gene{
+              id
+              name
+              leftEndPosition
+              rightEndPosition
+              strand
+            }
+          }
+        }
+      
+      }
+    `
+  }
+
   querySearch(search, limit = 10, page = 0) {
     return gql`
     {
