@@ -54,7 +54,7 @@ const Table = ({
                         return(
                             <tr  key={`tr-key-table-${index}-${id}`} >
                                 <td>
-                                    <a assistentValue={`elemento encontrado ${str}` } style={{color:'#666666'}} href={`${href_base}${row['id']}`} dangerouslySetInnerHTML={{__html: Mark(keyword,str)}} />
+                                    <a assistentvalue={`elemento encontrado ${str}` } style={{color:'#666666'}} href={`${href_base}${row['id']}`} dangerouslySetInnerHTML={{__html: Mark(keyword,str)}} />
                                 </td> 
                             </tr>
                         )

@@ -18,7 +18,7 @@ const Graph = ({ id_gene }) => {
       const gene_data = data?.getGenesBy?.data[0].gene;
       const id_drawPlace = `_draw_place_${gene_data?.id}`
       return (
-        <table>
+        <table >
           <thead>
             <tr>
               <td></td>

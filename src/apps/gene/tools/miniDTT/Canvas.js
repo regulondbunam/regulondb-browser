@@ -26,7 +26,8 @@ const Canvas = ({
         if (drawPlace && newCanvas === null) {
             newCanvas = DrawCanva(idElement, idCanvas, drawPlace.clientWidth, 200)
             newCanvas.attr({
-                'alt': diagramDescription
+                'alt': diagramDescription,
+                'assistentvalue':`DTT Object, ${diagramDescription}`
               })
               //console.log(newCanvas)
             if (!canvas) {

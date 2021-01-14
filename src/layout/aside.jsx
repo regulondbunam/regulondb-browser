@@ -10,7 +10,7 @@ const Aside = () => {
               <thead>
                   <tr>
                       <th style={{backgroundColor: "#3D779B"}}>
-                      <h3 style={{ color: "white" }}>Assistance Tool</h3>
+                      <h3 style={{ color: "white" }}>Relational Tool</h3>
                       </th>
                   </tr>
               </thead>

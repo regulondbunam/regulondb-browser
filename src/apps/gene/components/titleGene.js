@@ -10,7 +10,7 @@ export default function Title(geneName, geneID, products) {
             <br/>
             Gene
             <br/>
-            <h1 style={{ margin: "0"}} className={'h1-cover'}
+            <h1 assistentvalue={`${geneName} gene page...`} style={{ margin: "0"}} className={'h1-cover'}
             dangerouslySetInnerHTML={{__html: `${geneName} ${propd}`}}>
             </h1>
             <br/>
