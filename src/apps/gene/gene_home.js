@@ -1,4 +1,3 @@
-import { Cover } from '../../components/ui-components/index'
 const Home = () => {
     return (
         <>

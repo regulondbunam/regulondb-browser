@@ -145,8 +145,4 @@ function stateTabs(id, products, gwc) {
   return tab_conf;
 }
 
-function selectTab(site){
-
-}
-
 export default Gene;
