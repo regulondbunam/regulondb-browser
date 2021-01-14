@@ -63,7 +63,7 @@ export function relCitation(allCitations, idCit, index = true, small = true) {
             const publication = fullCit?.publication?.citation
             const url = fullCit?.publication?.url
             // 
-            return `<a data-tip='${publication}' target="_blank" rel="noopener noreferrer" href="${url}">[${index}]${Citation(fullCit, small)}</a>&nbsp;`
+            return `<a class='citation' data-tip='${publication}' target="_blank" rel="noopener noreferrer" href="${url}">[${index}]${Citation(fullCit, small)}</a>&nbsp;`
         }).join(' ')
     )
 

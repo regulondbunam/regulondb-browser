@@ -10,7 +10,7 @@ import ReactTooltip from 'react-tooltip'
 export function TableProductInfo(product,allCitations) {
     const citations = product?.citations
     return (
-        <table key={`${product.name}-tableInfo`} id={`${product.id}`}>
+        <table key={`${product.name}-tableInfo`} id={`${product.id}`} style={{width: 'auto'}} >
             <tbody>
                 {
                     Object.keys(product).map((key, index) => {
@@ -88,7 +88,7 @@ function ShowCitations(citations, allCitations) {
     //citsSearch(allCitations, citations, note)
     return (
         <tr>
-            <td style={{ fontWeight: "bold" }}>references:</td>
+            <td style={{ fontWeight: "bold" }}>evidences and references:</td>
             <td>
                 {AllCitations(citations)}
             </td>
@@ -100,22 +100,22 @@ function Motifs(motifs) {
     return (
         <React.Fragment key={"showMotifs"}>
             <tr >
-                <td colSpan="2" style={{ fontWeight: "bold", backgroundColor: "#D5D5D7" }}>Motifs:</td>
+                <td style={{ fontWeight: "bold" }} colSpan="2" >Motifs:</td>
             </tr>
             <tr>
                 <td colSpan="2">
                     <table>
                         <thead>
                             <tr>
-                                <th style={{ backgroundColor: "#D5D5D7" }}>Type</th>
-                                <th style={{ backgroundColor: "#D5D5D7" }}>Position</th>
-                                <th style={{ backgroundColor: "#D5D5D7" }}>Sequence</th>
+                                <th>Type</th>
+                                <th>Position</th>
+                                <th>Sequence</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
                                 motifs.map((motif, idex) => {
-                                    return <tr key={`${motif.sequence}-${idex}`}>
+                                    return <tr key={`${motif.sequence}-${idex}`} className="tableContent_td_content">
                                         <td>{motif.type}</td>
                                         <td>{`${notNull(motif.leftEndPosition)}-->${notNull(motif.rightEndPosition)}`}
 
