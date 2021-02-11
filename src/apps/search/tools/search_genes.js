@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import GeneSearch from "../../gene/webService/gene_services";
+import GeneSearch from "../../gene/webServices/gene_search";
 import Table from "../components/result_table";
 
 const SearchGenes = ({

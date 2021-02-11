@@ -4,20 +4,43 @@
 
 - ## Installation instructions
 
-[Describe installation instructions of the software.]
+[to install]
 
-1. Step 1
+1. Step 1 download repository
 Execute:
 
 ```shell
-$ command
+git clone https://github.com/regulondbunam/RegulonDB-Browser.git
 ```
-2. Step 2
-3. Step x
+2. 
+Entra al directorio del proyecto
 
 ```shell
-$ command
+cd Regulon-Browser
 ```
+
+3. Step 3 URL Web Services
+You need the url of RegulonDB's grapQL service, you can find more information at 
+https://github.com/regulondbunam/GraphQL-api/tree/Web_Service_Development 
+
+once you have the url of the web service run the following configuration command, to run it you must be positioned in the root of the project
+
+```shell
+printf '{ "graphQlUrl": "https://regulonws-api.herokuapp.com/graphql"}' > src/webServices/apollo.conf.json
+```
+
+4. Step 4 Install
+
+```shell
+npm install
+```
+
+5. Run Aplication
+
+```shell
+npm run build
+```
+
 
 
 - ### Expected Directory Structure 
