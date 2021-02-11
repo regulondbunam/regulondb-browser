@@ -6,7 +6,7 @@ import Layout from './layout/layout'
 import Home from './apps/home/home'
 import Search from './apps/search/search'
 import Gene from './apps/gene/gene'
-//import Error from './error/e404/error'
+import Error from './apps/error/e404/error'
 
 
 function App() {
@@ -25,19 +25,12 @@ function App() {
         <Route path={["/gene/:id/:site/:section","/gene/:id/:site","/gene/:id","/gene",]}>
           <Gene />
         </Route>
+        <Route path="*">
+          <Error />
+        </Route>
       </Switch>
     </Layout>
   );
 }
 
 export default App;
-
-/**
-
-        
-        
-        <Route path="*">
-          <Error />
-        </Route>
-      </Switch>
- */
