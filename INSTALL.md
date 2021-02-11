@@ -41,7 +41,9 @@ npm install
 npm run build
 ```
 
-
+```shell
+serve -s build
+```
 
 - ### Expected Directory Structure 
 
