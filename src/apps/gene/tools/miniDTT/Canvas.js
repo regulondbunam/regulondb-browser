@@ -92,6 +92,7 @@ function Draw(canvas, geneticElements, idElement,dnaPosL,dnaPosR){
                 default:
                     return null
             }
+            return null
         })
     }
     return null

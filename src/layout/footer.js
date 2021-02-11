@@ -1,6 +1,6 @@
-import {Image} from '../components/ui-components/index'
-import conf from '../conf/layout/footer.conf.json'
-import {Schema, ImageObject} from '../conf/schemas/schemas'
+import {Image} from '../components/ui-components/ui_components'
+import conf from './conf/footer.conf.json'
+import {Schema, ImageObject} from '../components/schemas/schemas'
 
 
 const logos = conf.logos

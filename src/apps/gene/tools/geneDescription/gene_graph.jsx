@@ -1,7 +1,8 @@
+import React from "react";
 import Dtt from "../miniDTT/dtt";
-import {IconButton} from '../../../../components/ui-components/index'
+import { IconButton } from "../../../../components/ui-components/ui_components";
 import { useQuery } from "@apollo/react-hooks";
-import Querys from "../../../../components/apollo/querys/GeneQuerys";
+import Querys from "../../webServices/GeneQuerys";
 
 const Graph = ({ id_gene }) => {
   const query = new Querys(id_gene);
@@ -16,9 +17,9 @@ const Graph = ({ id_gene }) => {
   if (data) {
     try {
       const gene_data = data?.getGenesBy?.data[0].gene;
-      const id_drawPlace = `_draw_place_${gene_data?.id}`
+      const id_drawPlace = `_draw_place_${gene_data?.id}`;
       return (
-        <table >
+        <table>
           <thead>
             <tr>
               <td></td>
@@ -27,7 +28,7 @@ const Graph = ({ id_gene }) => {
                   style={{
                     display: "flex",
                     justifyContent: "center",
-                    alignItems: "center",
+                    alignItems: "center"
                   }}
                 >
                   <div>
@@ -50,9 +51,9 @@ const Graph = ({ id_gene }) => {
                       iconStyle={{
                         fontFamily: "monospace",
                         fontSize: "14px",
-                        fontWeight: "bold",
+                        fontWeight: "bold"
                       }}
-                      icon={'<<>>'}
+                      icon={"<<>>"}
                       onClick={() => {
                         //setZoom(!zoom);
                       }}
@@ -78,22 +79,16 @@ const Graph = ({ id_gene }) => {
                   style={{
                     border: "1px solid black",
                     textAlign: "center",
-                    overflow: "hidden",
+                    overflow: "hidden"
                   }}
                 >
-                  {loadDraw(
-                    gene_data,
-                    id_drawPlace,
-                    `geneDraw${id_gene}`
-                  )}
+                  {loadDraw(gene_data, id_drawPlace, `geneDraw${id_gene}`)}
                 </div>
               </td>
             </tr>
             <tr>
               <td colSpan="3">
-                <div style={{ float: "right" }}>
-                  
-                </div>
+                <div style={{ float: "right" }}></div>
               </td>
             </tr>
           </tbody>
@@ -108,15 +103,21 @@ const Graph = ({ id_gene }) => {
 
 export default Graph;
 
-
-function loadDraw(gene_data,id_drawPlace, idCanvas){
-    
-    try {
-        const posLeft = gene_data?.leftEndPosition - 1000
-    const posRight = gene_data?.rightEndPosition + 1000
-        return <Dtt posLeft={posLeft} posRight={posRight}  id_drawPlace={id_drawPlace} idCanvas={idCanvas} gene_data={gene_data} />
-    } catch (error) {
-        console.log(error)
-        return <>erro to draw</>
-    }
+function loadDraw(gene_data, id_drawPlace, idCanvas) {
+  try {
+    const posLeft = gene_data?.leftEndPosition - 1000;
+    const posRight = gene_data?.rightEndPosition + 1000;
+    return (
+      <Dtt
+        posLeft={posLeft}
+        posRight={posRight}
+        id_drawPlace={id_drawPlace}
+        idCanvas={idCanvas}
+        gene_data={gene_data}
+      />
+    );
+  } catch (error) {
+    console.log(error);
+    return <>erro to draw</>;
+  }
 }

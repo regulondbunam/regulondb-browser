@@ -1,6 +1,6 @@
 import Cover from './components/cover/cover'
 import SearchTool from '../search/tools/search_box'
-import LinksInfo from './setup/linksCover.json'
+import LinksInfo from './conf/linksCover.json'
 
 const links = LinksInfo.links
 

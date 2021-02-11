@@ -1,24 +1,24 @@
 import React, { useEffect } from "react";
 import { SVG } from "@svgdotjs/svg.js";
 
-export default function App() {
-  const idCanvas = "amva1290EF";
+export default function App({ key = "unknow" }) {
+  const idCanvas = `canva-${key}`;
   useEffect(() => {
-    let drawPlace = document.getElementById("loading");
+    let drawPlace = document.getElementById(key);
     let canvas = document.getElementById(idCanvas);
     if (drawPlace && canvas === null) {
       const width = drawPlace.clientWidth;
-      const height = drawPlace.clientHeight;
-      canvas = SVG().addTo(`#loading`).size(width, height).id(idCanvas);
+      const height = drawPlace.clientHeight / 2;
+      canvas = SVG().addTo(`#${key}`).size(width, height).id(idCanvas);
       let azucar = "#3D779B";
       let a = "#5AB2E8";
       let t = "#7798AC";
       let g = "#A0CCE8";
       let c = "#295069";
-      let duration = 5000;
-      let size = 23;
+      let duration = 8000;
+      let size = 10;
       let space = 2;
-      const n = width / (size + space)+5;
+      const n = width / (size + space) + 5;
       for (let i = -2; i < n; i++) {
         let b1 = SelectAmino(a, t, c, g);
         let b2 = Par(b1, a, t, c, g);
@@ -34,23 +34,25 @@ export default function App() {
           .fill(b1)
           .rx(20)
           .ry(20);
-          let c2 = canvas.circle(size).move(x, ym).fill(azucar);
-          let r2 = canvas
-            .rect(size / 2, ym / 2)
-            .move(x + size / 2 / 2, ym - ym / 2)
-            .fill(b2)
-            .rx(20)
-            .ry(20);
-        let group = canvas.group()
-        group.add(r1)
-        group.add(r2)
-        group.add(c1)
-        group.add(c2)
-        group.animate({
+        let c2 = canvas.circle(size).move(x, ym).fill(azucar);
+        let r2 = canvas
+          .rect(size / 2, ym / 2)
+          .move(x + size / 2 / 2, ym - ym / 2)
+          .fill(b2)
+          .rx(20)
+          .ry(20);
+        let group = canvas.group();
+        group.add(r1);
+        group.add(r2);
+        group.add(c1);
+        group.add(c2);
+        group
+          .animate({
             duration: duration,
             delay: delay,
             times: 500
-          }).rotate(360)
+          })
+          .rotate(360);
       }
       /*
       let txt = canvas.text("Loading...");
@@ -73,11 +75,22 @@ export default function App() {
     }
     return function cleanup() {
       if (canvas !== null) {
-        canvas.remove()
+        canvas.remove();
       }
-    }
+    };
   });
-  return <div id="loading" style={{ height: "200px", width: "100%", position: 'absolute', left: '0', zIndex: '-1' }}></div>;
+  return (
+    <div
+      id={key}
+      style={{
+        height: "200px",
+        width: "100%",
+        position: "absolute",
+        left: "0",
+        zIndex: "-1"
+      }}
+    ></div>
+  );
 }
 
 function SelectAmino(a, t, c, g) {

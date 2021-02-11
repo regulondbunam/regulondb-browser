@@ -1,4 +1,4 @@
-import{ Card }from '../../components/ui-components/index'
+import{ Card }from '../../components/ui-components/ui_components'
 
 const BodyHome = ({
     overviwes,

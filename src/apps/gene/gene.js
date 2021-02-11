@@ -1,13 +1,14 @@
+import React from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { ValidateId } from "../../components/apollo/dataMarts/gene/gene_search";
+import { ValidateId } from "./webServices/gene_search";
 import Home from "./gene_home";
-import { Cover, Tabs } from "../../components/ui-components/index";
+import { Cover, Tabs } from "../../components/ui-components/ui_components";
 import Title from "./components/titleGene";
 import AllCits from "../../components/cits/Cits";
-import Description from "./tools/geneDescription/gene_description"
-import Products from './tools/geneProducts/gene_products'
-import All from './tools/geneAll/gene_all'
+import Description from "./tools/geneDescription/gene_description";
+import Products from "./tools/geneProducts/gene_products";
+import All from "./tools/geneAll/gene_all";
 
 const Gene = () => {
   const id = useParams().id;
@@ -37,21 +38,31 @@ const Gene = () => {
             const products = _data[0].products;
             return (
               <>
-                {Title(geneName, id, products)}
-                <Tabs 
-                  tabsInfo={stateTabs(id, products, gwc)} 
-                  tabs={
-                      [
-                      <All id_gene={id} id={`tab-all`} all_citations={allCitations}/>,
-                      <Description id_gene={id} id={`tab-description`} all_citations={allCitations} />,
-                      <Products id_gene={id} id={`tab-products`} all_citations={allCitations} />
-                    ]
-                  }
-                  tabSelect={()=>{
-                    if(site){
-                      return `tab-${site}`
+                {Title(geneName, id, products, _data[0])}
+                <Tabs
+                  tabsInfo={stateTabs(id, products, gwc)}
+                  tabs={[
+                    <All
+                      id_gene={id}
+                      id={`tab-all`}
+                      all_citations={allCitations}
+                    />,
+                    <Description
+                      id_gene={id}
+                      id={`tab-description`}
+                      all_citations={allCitations}
+                    />,
+                    <Products
+                      id_gene={id}
+                      id={`tab-products`}
+                      all_citations={allCitations}
+                    />
+                  ]}
+                  tabSelect={() => {
+                    if (site) {
+                      return `tab-${site}`;
                     }
-                    return 'tab-all'
+                    return "tab-all";
                   }}
                 />
                 <article>{AllCits(allCitations, false, true, true)}</article>
@@ -110,23 +121,23 @@ const tab_conf = [
   {
     id: "tab-all",
     name: "ALL",
-    disabled: false,
+    disabled: false
   },
   {
     id: "tab-description",
     name: "Description",
-    disabled: false,
+    disabled: false
   },
   {
     id: "tab-products",
     name: "Products",
-    disabled: false,
+    disabled: false
   },
   {
     id: "tab-gwc",
     name: "Growth Conditions",
-    disabled: true,
-  },
+    disabled: true
+  }
 ];
 
 function stateTabs(id, products, gwc) {

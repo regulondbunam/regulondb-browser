@@ -1,5 +1,5 @@
 import React from 'react';
-import ModalER from '../ui-components/web/components/utiles/ModalEvidenceRef'
+import ModalER from "../ui-components/web/components/utiles/ModalEvidenceRef";
 
 
 export default function AllCitations(allCitations, small = true, title = false, index = false,) {

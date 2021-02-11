@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
 import { ApolloProvider } from '@apollo/react-hooks';
-import Client from './conf/apollo/apollo_client';
+import Client from './webServices/apollo_client';
 import './regulondbGlobalStyle.css';
 
 const main = document.getElementById('root');

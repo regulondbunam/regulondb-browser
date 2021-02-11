@@ -3,10 +3,6 @@ import Header from './header'
 import Menu from './menu'
 import Footer from './footer'
 import Aside from './aside'
-import { useRef } from 'react';
-
-
-
 
 const Layout = ({
     location,

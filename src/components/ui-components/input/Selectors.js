@@ -1,5 +1,4 @@
-import CheckBox from './selectors/CheckBox'
-import RadioButtonGroup from './selectors/RadioButtonGroup'
-import CheckBoxGroup from './selectors/CheckBoxGroup'
+import RadioButtonGroup from "./selectors/radio_button_group";
+import CheckBoxGroup from "./selectors/check_box_group";
 
-export {RadioButtonGroup, CheckBoxGroup, CheckBox}
+export { RadioButtonGroup, CheckBoxGroup };

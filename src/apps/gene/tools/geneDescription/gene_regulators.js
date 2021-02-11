@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import { RegulatorInfo } from '../../../../components/apollo/querys/GeneQuerys'
+import { RegulatorInfo } from '../../webServices/GeneQuerys'
 import { useHistory } from 'react-router-dom';
 
 const TableRegulators = ({

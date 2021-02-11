@@ -8,14 +8,14 @@ export default function SpinnerError() {
     let canvas = document.getElementById(idCanvas);
     if (drawPlace && canvas === null) {
       const width = drawPlace.clientWidth;
-      const height = drawPlace.clientHeight;
+      const height = drawPlace.clientHeight / 2;
       canvas = SVG().addTo(`#loading`).size(width, height).id(idCanvas);
       let azucar = "#3D779B";
       let a = "#5AB2E8";
       let t = "#7798AC";
       let g = "#A0CCE8";
       let c = "#295069";
-      let size = 23;
+      let size = 10;
       let space = 2;
       const n = width / (size + space) + 5;
       for (let i = -2; i < n; i++) {
@@ -55,7 +55,7 @@ export default function SpinnerError() {
         let group2 = canvas.group();
         group2.add(r2);
         group2.add(c2);
-        group2.move(x, ym - ym/2);
+        group2.move(x, ym - ym / 2);
         group2
           .animate({
             duration: dura,
@@ -68,12 +68,23 @@ export default function SpinnerError() {
     }
     return function cleanup() {
       if (canvas !== null) {
-        canvas.remove()
+        canvas.remove();
       }
-    }
+    };
   });
 
-  return <div id="loading" style={{ height: "200px", width: "100%", position: 'absolute', left: '0', zIndex: '-1' }}></div>;
+  return (
+    <div
+      id="loading"
+      style={{
+        height: "200px",
+        width: "100%",
+        position: "absolute",
+        left: "0",
+        zIndex: "-1"
+      }}
+    ></div>
+  );
 }
 
 function getRot(size) {

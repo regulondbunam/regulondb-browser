@@ -1,0 +1,24 @@
+{
+    "logos":[
+        {
+            "id":"log_regulonDB",
+            "title":"RegulonDB logo",
+            "description":"RegulonDB representative logo",
+            "url":"./media/img/logos/regulonDB.png"
+        }
+    ],
+    "links":[
+        {
+            "name":"Terms and conditions",
+            "url":"/TermsConditions"
+        },
+        {
+            "name":"Contact Us",
+            "url":"/Contact"
+        },
+        {
+            "name":"Funding",
+            "url":"/funding"
+        }
+    ]
+}

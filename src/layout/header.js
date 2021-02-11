@@ -1,9 +1,7 @@
-import {Image} from '../components/ui-components/index'
+import {Image} from '../components/ui-components/ui_components'
 import SearchTool from '../apps/search/tools/search_box'
-import {Schema, ImageObject} from '../conf/schemas/schemas'
-
-
-const urlLogo = './media/img/logos/regulonDB.png'
+import {Schema, ImageObject} from '../components/schemas/schemas'
+import conf from './conf/header.conf.json'
 
 const Header = ({
     isHome,
@@ -12,8 +10,8 @@ const Header = ({
     return (
         <header style={StyleHeader}>
             <div style={StyleSide}>
-                <Image id={"logoRegulon"} imgTitle="RegulonDB logo" imgAlt="Logo of RegulonDB" urlImage={`${urlPage}${urlLogo}`} imgStyle={{ maxWidth: "239px", maxHeight: "48px" }} />
-                <Schema jsonLd={ImageObject({name: "RegulonDB logo", description:"Logo of RegulonDB", url:`${urlPage}${urlLogo}`, representativeOfPage: "true"})}/>
+                <Image id={conf.logos[0].id} imgTitle={conf.logos[0].title} imgAlt={conf.logos[0].description} urlImage={`${urlPage}${conf.logos[0].url}`} imgStyle={{ maxWidth: "239px", maxHeight: "48px" }} />
+                <Schema jsonLd={ImageObject({name: conf.logos[0].title, description:conf.logos[0].description, url:`${urlPage}${conf.logos[0].url}`, representativeOfPage: "true"})}/>
             </div>
             <div style={StyleSideB}>
                 {

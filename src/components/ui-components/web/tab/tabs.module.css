@@ -1,5 +1,4 @@
 .tabHeader {
-  background-color: #99999999;
   width: 100%;
   padding-left: 10%;
   -webkit-box-shadow: inset -1px -10px 0px -6px var(--color-blue2);
@@ -13,4 +12,3 @@
   padding-right: 1%;
   font-size: 12px;
 }
-
