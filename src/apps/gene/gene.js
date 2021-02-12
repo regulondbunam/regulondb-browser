@@ -147,6 +147,7 @@ function stateTabs(id, products, gwc) {
     switch (tab.name) {
       case "Products":
         tab.name = `Products (${n_products})`;
+        tab.disabled = n_products < 1
         break;
       default:
         break;

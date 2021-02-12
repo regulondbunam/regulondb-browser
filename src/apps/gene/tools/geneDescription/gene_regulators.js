@@ -62,10 +62,10 @@ const TableRegulators = ({
                 return (<></>)
             }
         } catch (error) {
-
+            console.log(error)
+            return <></>
         }
     }
-
 }
 
 function convertType(type){

@@ -18,6 +18,7 @@ const Graph = ({ id_gene }) => {
     try {
       const gene_data = data?.getGenesBy?.data[0].gene;
       const id_drawPlace = `_draw_place_${gene_data?.id}`;
+      if(gene_data?.leftEndPosition){
       return (
         <table>
           <thead>
@@ -94,6 +95,7 @@ const Graph = ({ id_gene }) => {
           </tbody>
         </table>
       );
+                }
     } catch (e) {
       console.log(e);
     }
@@ -104,20 +106,22 @@ const Graph = ({ id_gene }) => {
 export default Graph;
 
 function loadDraw(gene_data, id_drawPlace, idCanvas) {
-  try {
-    const posLeft = gene_data?.leftEndPosition - 1000;
-    const posRight = gene_data?.rightEndPosition + 1000;
-    return (
-      <Dtt
-        posLeft={posLeft}
-        posRight={posRight}
-        id_drawPlace={id_drawPlace}
-        idCanvas={idCanvas}
-        gene_data={gene_data}
-      />
-    );
-  } catch (error) {
-    console.log(error);
-    return <>erro to draw</>;
-  }
+    try {
+      const posLeft = gene_data?.leftEndPosition - 1000;
+      const posRight = gene_data?.rightEndPosition + 1000;
+      return (
+        <Dtt
+          posLeft={posLeft}
+          posRight={posRight}
+          id_drawPlace={id_drawPlace}
+          idCanvas={idCanvas}
+          gene_data={gene_data}
+        />
+      );
+    } catch (error) {
+      console.log(error);
+      return <>erro to draw</>;
+    }
+
+  
 }
