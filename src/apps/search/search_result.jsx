@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Cover } from "../../components/ui-components/ui_components";
 import SearchGenes from "./tools/search_genes";
-import conf from "./conf/search.conf.json"
 
-const SearchResults = ({ keyword }) => {
+const SearchResults = ({ keyword, conf }) => {
   const [_genFound, set_geneFound] = useState();
   const [_state, set_state] = useState("");
   let state = _state;
@@ -59,7 +58,7 @@ function CollectionIndex(collections, nGene) {
           {collections.map((collection) => {
             return (
               <td key={`collections_${collection}`}>
-                <a href={`#table${collection}`}>{`${collection} (${nGene})`}</a>
+                <a href={`#table_${collection}`}>{`${collection} (${nGene})`}</a>
               </td>
             );
           })}

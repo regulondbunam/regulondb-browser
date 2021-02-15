@@ -1,0 +1,14 @@
+{
+    "title":"Search Tool",
+    "description": "<p>Welcome to the regulonDB search tool, from here, with a simple search you will be able to find your favorite gene ;)<br>You can search genes by name or product or both with the words OR or AND Example:<br>\"araC AND arabinose\"<br>\"araC OR transcriptional regulator\"</p>",
+    "searchTip": "Example: “araC AND arabinose”, “araC transcriptional regulator",
+    "collections":[
+        "Genes",
+        "Gensor Unit",
+        "Operon",
+        "Regulon",
+        "Sigmulon",
+        "sRNA",
+        "Grow Conditions"
+      ]
+}

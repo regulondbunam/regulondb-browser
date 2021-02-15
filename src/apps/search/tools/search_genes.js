@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import GeneSearch from "../../gene/webServices/gene_search";
+import GeneSearch from "../webServices/search_ws_gene";
 import Table from "../components/result_table";
 
 const SearchGenes = ({
@@ -43,7 +43,7 @@ const SearchGenes = ({
       <Table
         keyword={keyword}
         fieldOrder="name"
-        id={"geneTable"}
+        id={"table_Genes"}
         data={dataFormat(_data)}
         title={`Genes(${_n})`}
         href_base={"/gene/"}
