@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React ,{ useState } from "react";
 import GeneSearch from "../webServices/search_ws_gene";
 import Table from "../components/result_table";
 
