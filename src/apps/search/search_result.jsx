@@ -50,18 +50,35 @@ const SearchResults = ({ keyword, conf }) => {
   );
 };
 
+
 function CollectionIndex(collections, nGene) {
   return (
     <table style={{ width: "100%" }}>
       <tbody>
         <tr>
-          {collections.map((collection) => {
-            return (
-              <td key={`collections_${collection}`}>
-                <a href={`#table_${collection}`}>{`${collection} (${nGene})`}</a>
-              </td>
-            );
-          })}
+          <tr>
+            <td key={`collections_Genes`}>
+              <a href={`#table_Genes`}>{`Genes (${nGene})`}</a>&nbsp;
+            </td>
+            <td key={`collections_Operones`}>
+              <a href={`#table_Operon`}>{`Operones (0)`}</a>&nbsp;
+            </td>
+            <td key={`collections_Operones`}>
+              <a href={`#table_Operon`}>{`Gensor Unit (0)`}</a>&nbsp;
+            </td>
+            <td key={`collections_Operones`}>
+              <a href={`#table_Operon`}>{`Regulon (0)`}</a>&nbsp;
+            </td>
+            <td key={`collections_Operones`}>
+              <a href={`#table_Operon`}>{`Sigmulon (0)`}</a>&nbsp;
+            </td>
+            <td key={`collections_Operones`}>
+              <a href={`#table_Operon`}>{`sRNA (0)`}</a>&nbsp;
+            </td>
+            <td key={`collections_Operones`}>
+              <a href={`#table_Operon`}>{`Grow Conditions (0)`}</a>&nbsp;
+            </td>
+          </tr>
         </tr>
       </tbody>
     </table>
