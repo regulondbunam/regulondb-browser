@@ -15,7 +15,7 @@ export function Cover({ children, state, id = "AC0ver023", menssage }) {
       }
       return (
         <div style={styleCover}>
-          <Spinner key={id} />
+          <Spinner id={id} />
           <div id={id} className={Style.cover + " " + Style.anm}>
             {menssage}
             {children}
@@ -28,7 +28,7 @@ export function Cover({ children, state, id = "AC0ver023", menssage }) {
       }
       return (
         <div style={styleCover}>
-          <SpinnerError key={id} />
+          <SpinnerError id={id} />
           <div id={id} className={Style.cover + " " + Style.error}>
             {menssage}
             {children}

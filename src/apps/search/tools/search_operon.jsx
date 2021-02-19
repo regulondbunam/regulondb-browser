@@ -1,9 +1,8 @@
 import React ,{ useState } from "react";
-import GeneSearch from "../webServices/search_ws_gene";
+import Search from "../webServices/search_ws_operon";
 import Table from "../components/result_table";
-import { SpinnerCircle } from "../../../components/ui-components/ui_components";
 
-const SearchGenes = ({
+const SearchOperon = ({
   keyword = "",
   geneFounds = () => {
     return 0;
@@ -18,10 +17,9 @@ const SearchGenes = ({
 }) => {
   const [_data, set_data] = useState();
   const [_n, set_n] = useState(0);
-  const [_state, set_state] = useState('sleep')
   return (
     <>
-      <GeneSearch
+      <Search
         search={keyword}
         limit={100}
         status={(status) => {
@@ -30,7 +28,6 @@ const SearchGenes = ({
             set_n(0);
             geneFounds(0);
           }
-          set_state(status)
           geneStatus(status);
         }}
         resoultsFound={(n) => {
@@ -42,56 +39,30 @@ const SearchGenes = ({
           geneData(data);
         }}
       />
-      {
-        displayState(_state,keyword,_data,_n)
-      }
+      <Table
+        keyword={keyword}
+        fieldOrder="name"
+        id={"table_Operon"}
+        data={dataFormat(_data)}
+        title={`Operons(${_n})`}
+        href_base={"/operon/"}
+      />
     </>
   );
 };
 
-export default SearchGenes;
-
-function displayState(state,keyword,data,n){
-
-  switch (state) {
-    case "error":
-      return <>oops... an error has occurred</>
-    case "loading":
-      return <div>
-        Loading Genes
-        <SpinnerCircle />
-      </div>
-    default:
-      return <Table
-      keyword={keyword}
-      fieldOrder="name"
-      id={"table_Genes"}
-      data={dataFormat(data)}
-      title={`Genes(${n})`}
-      href_base={"/gene/"}
-    />
-  }
-
-}
-
+export default SearchOperon;
 
 function dataFormat(data) {
   //console.log(data)
   let rows = [];
   if (data) {
     data.map((doc) => {
-      const id = doc?.gene?.id;
-      const syns = doc?.gene?.synonyms;
-      const prod = doc?.products;
-      const pro = prod
-        .map((p) => {
-          return p.name;
-        })
-        .join(",");
+      const id = doc?.id;
+      const tus = doc?.transcriptionUnits;
       const d = {
-        name: `${doc?.gene?.name} gene`,
-        syn: syns.join(", "),
-        prod: pro,
+        name: `${doc?.operon?.name} operon`,
+        tus: `contains ## genes organized in ${tus.length} TUs`,
         id: id
       };
       rows.push(d);
@@ -104,12 +75,8 @@ function dataFormat(data) {
       field: "name"
     },
     {
-      label: "synonyms",
-      field: "syn"
-    },
-    {
-      label: "products",
-      field: "prod"
+      label: "tus",
+      field: "tus"
     },
     {
       label: "id",

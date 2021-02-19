@@ -8,6 +8,8 @@ import Layout from './layout/layout'
 import Home from './apps/home/home'
 import Search from './apps/search/search'
 import Gene from './apps/gene/gene'
+import Operon from './apps/operon/operon'
+
 import Error from './apps/error/e404/error'
 
 
@@ -28,6 +30,9 @@ function App() {
         </Route>
         <Route path={["/gene/:id/:site/:section","/gene/:id/:site","/gene/:id","/gene",]}>
           <Gene />
+        </Route>
+        <Route path={["/operon/:id/:site/:section","/operon/:id/:site","/operon/:id","/operon",]}>
+          <Operon />
         </Route>
         <Route path="*">
           <Error />
