@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import { HashRouter } from 'react-router-dom'
 import { ApolloProvider } from '@apollo/react-hooks';
 import Client from './webServices/apollo_client';
 import './regulondbGlobalStyle.css';
@@ -12,9 +12,11 @@ const renderOrHydrate = main.innerHTML.trim().length ? 'hydrate' : 'render';
 
 ReactDOM[renderOrHydrate](
   <React.StrictMode>
-        <ApolloProvider client={Client}>
-          <App />
-        </ApolloProvider>
+    <HashRouter>
+      <ApolloProvider client={Client}>
+        <App />
+      </ApolloProvider>
+    </HashRouter>
   </React.StrictMode>,
   main
 );
