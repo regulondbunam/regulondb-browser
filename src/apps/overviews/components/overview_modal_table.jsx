@@ -7,7 +7,6 @@ const ModalTable = ({ datos }) => {
   let row = [];
 
   objectsRelated.map((obj) => {
-    console.log(obj)
     row.push({
       data: obj?.name,
       more: <a href={`/gene/${obj?._id}`}>more info ...</a>

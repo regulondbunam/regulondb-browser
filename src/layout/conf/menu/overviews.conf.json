@@ -6,7 +6,7 @@
         {
             "id": "iocs",
             "title": "Integrated Overview",
-            "link": "/inteOverview",
+            "link": "/overviews",
             "state": "disabled",
             "type": "LINK"
         },

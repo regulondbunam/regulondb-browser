@@ -36,9 +36,6 @@ function App() {
         <Route path={"/overviews/:id"}>
           <Overviews />
         </Route>
-        <Route path={"*"}>
-          <Overviews />
-        </Route>
         <Route path="*">
           <Error />
         </Route>

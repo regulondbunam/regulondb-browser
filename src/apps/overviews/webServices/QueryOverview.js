@@ -1,8 +1,7 @@
 import {gql} from 'apollo-boost';
 
 export function getOverview(id){
-  
-    console.log(id);
+
 return gql`
 {
 getOverview(_id :"${id}"){
