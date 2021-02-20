@@ -9,6 +9,7 @@ import Home from './apps/home/home'
 import Search from './apps/search/search'
 import Gene from './apps/gene/gene'
 import Error from './apps/error/e404/error'
+import Overviews from './apps/overviews/overviews'
 
 
 function App() {
@@ -28,6 +29,15 @@ function App() {
         </Route>
         <Route path={["/gene/:id/:site/:section","/gene/:id/:site","/gene/:id","/gene",]}>
           <Gene />
+        </Route>
+        <Route exact path={"/overviews"}>
+          <Overviews />
+        </Route>
+        <Route path={"/overviews/:id"}>
+          <Overviews />
+        </Route>
+        <Route path={"*"}>
+          <Overviews />
         </Route>
         <Route path="*">
           <Error />

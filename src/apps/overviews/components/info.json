@@ -1,0 +1,12 @@
+{
+  "getAllObjectInfo": [
+    {
+      "_id": "RDBECOLIOV00002",
+      "queryName": "PromotersByGene",
+      "objectType": "gene",
+      "graph": {
+        "title": "Number of Transcription Factors per Gene"
+      }
+    }
+  ]
+}

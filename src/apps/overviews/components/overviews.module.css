@@ -1,0 +1,29 @@
+.container_graphic,
+.container_table {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.description {
+  margin: 30px auto;
+}
+.float {
+  display: block;
+  position: relative;
+}
+.label_y {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  transform: rotate(-90deg);
+  margin-left: -30px;
+  margin-top: 30%;
+}
+.barGraphic {
+  margin-left: 400px;
+}
+
+.label_x {
+  justify-content: center;
+  text-align: center;
+}
