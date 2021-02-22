@@ -143,6 +143,7 @@ p {
 	color: var(--color-grey2);
 	font-weight: normal;
 	margin: 0;
+	text-align: justify
 }
 
 :root{
