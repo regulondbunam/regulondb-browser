@@ -30,10 +30,10 @@ function TableOperon({
             <div>
                 <div
                     style={{ float: "left", paddingRight: "2%" }}
-                    
+
                 >
-                    <p style={{ fontWeight: "bold", margin: "0", float: "left"}}>{'Operon name:'}&nbsp;</p>
-                    <p className="aBase" onClick={() => { history.push("/operon/" + id) }} style={{margin: "0", float: "left"}}>{name}</p>
+                    <p style={{ fontWeight: "bold", margin: "0", float: "left" }}>{'Operon name:'}&nbsp;</p>
+                    <p className="aBase" onClick={() => { history.push("/operon/" + id) }} style={{ margin: "0", float: "left" }}>{name}</p>
                 </div>
 
                 <table>
@@ -54,13 +54,13 @@ function TableOperon({
                                 return (
                                     <tr key={tu?.id} className="trClickable tableContent_td_content" onClick={() => { history.push("/tu/" + tu?.id) }} >
                                         <td>{
-                                            tu?.name
+                                            validateStr(tu?.name)
                                         }</td>
                                         <td>{
-                                            `${promoter?.name}`
+                                            validateStr(promoter?.name)
                                         }</td>
                                         <td>{
-                                            `${regulator?.name}${convertType(regulator?.type)}`
+                                            `${validateStr(regulator?.name)}${convertType(regulator?.type)}`
                                         }</td>
 
                                     </tr>
@@ -77,6 +77,10 @@ function TableOperon({
     }
 
 
+}
+function validateStr(str = undefined) {
+    if (str) return str;
+    return ""
 }
 
 function convertType(type) {

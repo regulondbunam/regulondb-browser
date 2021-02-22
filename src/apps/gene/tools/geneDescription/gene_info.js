@@ -104,12 +104,7 @@ const TableGeneInfo = ({ allCitations = [], idGene }) => {
                       <tr key={key}>
                         <td style={{ fontWeight: "bold" }}>{`${key}:`}</td>
                         <td>
-                          {" "}
-                          <Phrase
-                            style={{ float: "left", margin: "0" }}
-                            phraseData={phraseTest}
-                            term={geneData[key]}
-                          />
+                        {geneData[key]}
                         </td>
                       </tr>
                     );
@@ -298,6 +293,7 @@ function sequenceGene(gene, sequence, key, header, countElements) {
 //dangerouslySetInnerHTML={{ __html: sequenceF}}
 export default TableGeneInfo;
 
+/*
 const phraseTest = {
   name: "Hi! i'm a phrase",
   value: 1234,
@@ -326,3 +322,4 @@ const phraseTest = {
     }
   ]
 };
+*/
