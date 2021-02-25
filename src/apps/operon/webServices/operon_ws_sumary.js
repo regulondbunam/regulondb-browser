@@ -67,5 +67,17 @@ const Statistics = [
             sites: 1,
             transcriptionFactors: 1,
         }
+    },
+    {
+        id: "01233F4",
+        name: "tu_name3",
+        statistics: {
+            regulators: 1,
+            regulatoryInteractions: 1,
+            promoters: 1,
+            genes: 1,
+            sites: 1,
+            transcriptionFactors: 1,
+        }
     }
 ]

@@ -9,6 +9,7 @@ export const Info = ({ id }) => {
     const [_validId, set_validId] = useState();
     const [_state, set_state] = useState();
     let title = "Operon Information";
+    let nTUs = 0
     let showTabs = false
     if (id) {
         switch (_state) {
@@ -20,9 +21,18 @@ export const Info = ({ id }) => {
                 break;
             case "done":
                 if (_validId && _data != null) {
-                    //console.log(_data[0]?.operon?.name)
+                    //console.log(_data)
+                    nTUs = _data[0]?.transcriptionUnits
                     title = _data[0]?.operon?.name;
                     showTabs = true
+                    return (
+                        <div>
+                            <Title title={title} state={_state} data={_data} />
+                            {
+                                showTabs ? <Tabs idOperon={id} nTUs={nTUs.length} /> : <></>
+                            }
+                        </div>
+                    )
                 } else {
                     title = `Sorry we couldn't find the identifier: ${id}`
                 }
@@ -37,9 +47,6 @@ export const Info = ({ id }) => {
         return (
             <div>
                 <Title title={title} state={_state} data={_data} />
-                {
-                    showTabs ? <Tabs idOperon={id} /> : <></>
-                }
                 <ValidateId id={id}
                     resoultsData={(data) => { set_data(data) }}
                     status={(state) => { set_state(state) }}

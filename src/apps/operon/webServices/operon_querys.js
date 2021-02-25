@@ -8,6 +8,9 @@ export function validateID(id) {
             operon{
               name
             }
+            transcriptionUnits{
+              id
+            }
           }
           pagination{
             totalResults
@@ -32,6 +35,20 @@ export function getStatisticsTU(id) {
             sites
             transcriptionFactors
           }
+        }
+      }
+    }
+    }`
+}
+
+export function getTUs(id) {
+  return gql`{
+    getOperonBy(search: "${id}"){
+      data{
+        id
+        transcriptionUnits{
+          id
+          name
         }
       }
     }

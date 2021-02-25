@@ -28,7 +28,7 @@ export const Tabs = ({
         //console.log(tab.props?.id )
         //console.log(_tab)
         if (tab.props?.id === _tab) {
-          return <div key={`tabContent_${_tab}_CCDFG`}>{tab}</div>;
+          return <article key={`tabContent_${_tab}_CCDFG`}>{tab}</article>;
         }
         return null;
       })}

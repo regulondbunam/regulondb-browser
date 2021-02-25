@@ -7,7 +7,7 @@ export const Sumary = ({
     const [_data, set_data] = useState();
     const [_state, set_state] = useState();
     let loading = false;
-    console.log(_data)
+    //console.log(_data)
     switch (_state) {
         case "loading":
             loading = true
@@ -39,10 +39,10 @@ function SumaryTable(data) {
             {
                 data.map((tu) => {
                     return (
-                        <table key={`sumary_tu_${tu.id}`} style={{ tableLayout: "fixed", width: "auto" }}>
+                        <table key={`sumary_tu_${tu.id}`} style={{ tableLayout: "fixed", width: "auto", float:"left", display: "inline-block" }}>
                             <thead>
                                 <tr>
-                                    <th>{tu.name}</th>
+                                    <th style={{textAlign: "center"}}>{tu.name}</th>
                                 </tr>
                             </thead>
                             <tbody>
