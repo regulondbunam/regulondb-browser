@@ -1,7 +1,8 @@
 import React from 'react'
 import { useParams } from "react-router-dom";
-import { Cover, Tabs } from "../../components/ui-components/ui_components";
+import { Cover } from "../../components/ui-components/ui_components";
 import Home from "./operon_home"
+import Info from "./operon_info"
 import conf from './conf/operon.conf.json'
 
 const Operon = () => {
@@ -9,18 +10,7 @@ const Operon = () => {
     //const site = useParams().site;
 
     if(id){
-        return (
-            <div>
-                <Cover>
-                    <h1>{conf.title}</h1>
-                </Cover>
-                <Tabs />
-                <article>
-                    operon content 
-                </article>
-            </div>
-        )
-
+        return <Info id={id} />
     }else{
         return (
             <div>

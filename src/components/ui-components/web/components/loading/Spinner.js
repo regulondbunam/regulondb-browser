@@ -121,7 +121,8 @@ function Par(amn, a, t, c, g) {
 }
 
 function CAMINAR(canvas, width) {
-  let n = Math.floor(Math.random() * (1000 - 1)) + 1;
+  let n = Math.floor(Math.random() * (10000 - 1)) + 1;
+  //let n = 12
   if (n === 12) {
     let image = canvas.image("https://i.imgur.com/XJQeaix.gif");
     image.move(width, -50);
