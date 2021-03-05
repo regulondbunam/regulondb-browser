@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { Tabs } from '../../../components/ui-components/web/tab/tabs';
 import {GetTUs} from '../webServices/operon_ws_TUs'
+import TU from "./operon_TU"
 
 const TUs = ({idOperon}) => {
     const [_data, set_data] = useState();
@@ -34,23 +35,32 @@ const TUs = ({idOperon}) => {
 export default TUs
 
 function TU_tabs(data){
-    console.log(data)
-    
+    //console.log(data)
     return(
         <div>
             <article>
             <h2>Transcription Units</h2>
             </article>
-            <Tabs tabsInfo={formInfoTabs(data.transcriptionUnits)} />
+            <Tabs tabSelect={data.transcriptionUnits[0].id} tabsInfo={formInfoTabs(data.transcriptionUnits)} tabs={formTUTabs(data.transcriptionUnits)} />
         </div>
     )
 }
 
+function formTUTabs(tus){
+    //console.log(tus)
+    const tabsInfo = tus.map((tu)=>{
+        return <TU  id={tu?.id} idOperon={tu?.id} name={`${tu.name} - ${tu?.promoter?.name}`} />
+    })
+    console.log(tabsInfo)
+    return tabsInfo
+}
+
 function formInfoTabs(tus){
+    //console.log(tus)
     const tabsInfo = tus.map((tu)=>{
         return {
-            "id": tu.id,
-            "name": tu.name,
+            "id": tu?.id,
+            "name": `${tu.name} - ${tu?.promoter?.name}`,
             "disabled": false
         }
     })

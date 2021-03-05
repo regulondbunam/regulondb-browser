@@ -50,6 +50,10 @@ export function getTUs(id) {
         transcriptionUnits{
           id
           name
+          promoter{
+            id
+            name
+          }
         }
       }
     }
