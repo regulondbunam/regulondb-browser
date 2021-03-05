@@ -39,16 +39,21 @@ function SumaryTable(data) {
             {
                 data.map((tu) => {
                     return (
-                        <table key={`sumary_tu_${tu.id}`} style={{ tableLayout: "fixed", width: "auto", float:"left", display: "inline-block" }}>
+                        <table key={`sumary_tu_${tu.id}`} style={{ tableLayout: "fixed", width: "auto", float: "left", display: "inline-block" }}>
                             <thead>
                                 <tr>
-                                    <th style={{textAlign: "center"}}>{tu.name}</th>
+                                    <th style={{ textAlign: "center" }}>{`${tu.name}- ${tu?.promoter?.name}`}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    Object.keys(tu.statistics).map(function(key) {
-                                        return(
+                                    Object.keys(tu.statistics).map(function (key) {
+                                        const test = key.match(/^_/);
+                                        //console.log(test)
+                                        if (tu.statistics[key] === null || tu.statistics[key].length <= 1 || test !== null) {
+                                            return null;
+                                        }
+                                        return (
                                             <tr key={`sumary_statistics_${tu.id}_${key}`}>
                                                 <td>{key}</td>
                                                 <td>{tu.statistics[key]}</td>

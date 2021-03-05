@@ -30,7 +30,7 @@ export const searchOperon = (search, limit = 10, page = 0)=>{
     {
         getOperonBy(limit:${limit} page:${page} search:"${search}"){
           data{
-            id
+            _id
             operon{
               name
             }

@@ -14,10 +14,10 @@ export const GetSumaryByTU = ({
         if (loading) {
             status('loading')
         } else {
-            //console.log(data.getOperonBy.pagination.totalResults)
 
             if (data !== undefined) {
-                const resoults = Statistics
+               // console.log(data?.getOperonBy.data[0].transcriptionUnits)
+                const resoults = data?.getOperonBy.data[0].transcriptionUnits
                 resoultsData(resoults)
                 status('done')
             }

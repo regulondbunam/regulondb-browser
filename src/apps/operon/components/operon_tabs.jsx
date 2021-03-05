@@ -1,20 +1,30 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Tabs } from "../../../components/ui-components/ui_components";
 import conf from "../conf/operon.conf.json"
 import Description from "../tools/operon_description"
 import All from "./operon_all"
+import TUs from '../tools/operon_TUs'
 
 
 
 export const Tab = ({ idOperon, nTUs = 0 }) => {
+    const [_ntu, set_ntu] = useState(undefined)
+    useEffect(() => {
+        if(!_ntu){
+            set_ntu(`${conf.tabs.TU.name} (${nTUs}) `)
+        }
+    },[_ntu, nTUs])
     const descTab = conf.tabs.description
-    conf.tabs.TU.name = `${conf.tabs.TU.name} (${nTUs}) `
+    if(_ntu){
+        conf.tabs.TU.name = _ntu
     return (
         <Tabs tabsObj={conf.tabs}
             tabSelect={descTab.id}
             tabs={FormTabs(nTUs, idOperon)}
         />
     )
+    }
+    return <></>
 }
 
 export default Tab
@@ -39,15 +49,22 @@ function FormTabs(nTUs, idOperon) {
                     />
                 )
             case conf.tabs.TU.id:
-                if(nTUs>0){
+                if(nTUs<=0){
                     return(
                         <></>
                     )
                 }
-                break;
+                return (
+                    <TUs
+                        idOperon={idOperon}
+                        id={conf.tabs.TU.id}
+                        conf={conf.tabs.TU}
+                    />
+                )
             default:
-                break;
+                return(
+                    <></>
+                )
         }
-        return tu.name
     })
 }

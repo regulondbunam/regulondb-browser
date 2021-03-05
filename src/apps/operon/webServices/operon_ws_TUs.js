@@ -16,7 +16,7 @@ export const GetTUs = ({
         } else {
 
             if (data !== undefined) {
-                const resoults = {}
+                const resoults = data.getOperonBy.data[0]
                 resoultsData(resoults)
                 status('done')
             }

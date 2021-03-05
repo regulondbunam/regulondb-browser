@@ -3,7 +3,7 @@ import Sumary from './operon_sumary'
 
 export const Description = ({ idOperon, conf, isTUviews = true }) => {
     return (
-        <>
+        <article>
             <h2>Operon Description</h2>
             <br />
             <div dangerouslySetInnerHTML={{ __html: conf.description }} />
@@ -19,7 +19,7 @@ export const Description = ({ idOperon, conf, isTUviews = true }) => {
                     : null
             }
 
-        </>
+        </article>
     )
 }
 

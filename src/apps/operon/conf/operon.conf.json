@@ -1,36 +1,43 @@
 {
-    "title":"Operon Information...",
-    "description": "<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
-    "tabs":{
-        "all":{
-            "id": "tab-all",
-            "name": "ALL",
-            "description":"<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
-            "disabled": false
-          },
-          "description": {
-            "id": "tab-description",
-            "name": "Description",
-            "description":"<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
-            "disabled": false
-          },
-          "TU":{
-            "id": "tab-tus",
-            "name": "Transcription Units",
-            "description":"<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
-            "disabled": false
-          },
-          "tfGene":{
-            "id": "tab-tf-gene",
-            "name": "Regulation\nTF-Gene",
-            "description":"<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
-            "disabled": true
-          },
-          "srnaGene":{
-            "id": "tab-srna-gene",
-            "name": "Regulation\nsRNA-Gene",
-            "description":"<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
-            "disabled": true
-          }
+  "title": "Operon Information...",
+  "description": "<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
+  "tabs": {
+    "all": {
+      "id": "tab-all",
+      "name": "Main",
+      "description": "<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
+      "disabled": false
+    },
+    "description": {
+      "id": "tab-description",
+      "name": "Description",
+      "description": "<p>orem ipsum dolor sit amet, <br/> consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
+      "sections": {
+        "sumary": {
+          "id": "tab-description",
+          "name": "Sumary",
+          "description": "<p>orem ipsum dolor sit amet, <br/> consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>"
+        }
+      },
+      "disabled": false
+    },
+    "TU": {
+      "id": "tab-tus",
+      "name": "Transcription Units",
+      "description": "<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
+      "disabled": false
+    },
+    "tfGene": {
+      "id": "tab-tf-gene",
+      "name": "Regulation\nTF-Gene",
+      "description": "<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
+      "disabled": true
+    },
+    "srnaGene": {
+      "id": "tab-srna-gene",
+      "name": "Regulation\nsRNA-Gene",
+      "description": "<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
+      "disabled": true
     }
+  }
 }

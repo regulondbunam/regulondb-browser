@@ -7,8 +7,10 @@ export const All = ({ idOperon }) => {
     const allTab = conf.tabs.all
     return (
         <>
-            <h2>Operon all info</h2>
-            <div dangerouslySetInnerHTML={{__html: allTab.description}} />
+            <article>
+                <h2>{allTab.name}</h2>
+                <div dangerouslySetInnerHTML={{ __html: allTab.description }} />
+            </article>
             <Description
                 idOperon={idOperon}
                 id={descTab.id}

@@ -58,7 +58,7 @@ function dataFormat(data) {
   let rows = [];
   if (data) {
     data.map((doc) => {
-      const id = doc?.id;
+      const id = doc?._id;
       const tus = doc?.transcriptionUnits;
       const d = {
         name: `${doc?.operon?.name} operon`,

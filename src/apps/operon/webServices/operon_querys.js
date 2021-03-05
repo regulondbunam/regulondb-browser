@@ -4,7 +4,7 @@ export function validateID(id) {
   return gql`{
         getOperonBy(search: "${id}"){
           data{
-            id
+            _id
             operon{
               name
             }
@@ -23,16 +23,17 @@ export function getStatisticsTU(id) {
   return gql`{
     getOperonBy(search: "${id}"){
       data{
-        id
+        _id
         transcriptionUnits{
           id
           name
+          promoter{
+            id
+            name
+          }
           statistics{
-            regulators
-            regulatoryInteractions
-            promoters
-            genes
             sites
+            genes
             transcriptionFactors
           }
         }
@@ -45,7 +46,7 @@ export function getTUs(id) {
   return gql`{
     getOperonBy(search: "${id}"){
       data{
-        id
+        _id
         transcriptionUnits{
           id
           name
