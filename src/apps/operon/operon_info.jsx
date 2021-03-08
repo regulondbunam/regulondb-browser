@@ -3,6 +3,8 @@ import { Cover } from "../../components/ui-components/ui_components";
 import { ValidateId } from "./webServices/operon_ws_validate";
 import Title from './components/operon_title'
 import Tabs from "./components/operon_tabs";
+//import conf from './conf/operon.conf.json'
+//const info = conf.pages.operon_info
 
 export const Info = ({ id }) => {
     const [_data, set_data] = useState();

@@ -1,43 +1,95 @@
 {
-  "title": "Operon Information...",
-  "description": "<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
-  "tabs": {
-    "all": {
-      "id": "tab-all",
-      "name": "Main",
-      "description": "<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
-      "disabled": false
-    },
-    "description": {
-      "id": "tab-description",
-      "name": "Description",
+  "pages": {
+    "operon_main": {
+      "id": "page_main",
+      "title": "Operon",
       "description": "<p>orem ipsum dolor sit amet, <br/> consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
-      "sections": {
-        "sumary": {
-          "id": "tab-description",
-          "name": "Sumary",
-          "description": "<p>orem ipsum dolor sit amet, <br/> consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>"
-        }
+      "conf": {
+        "listOperons": true
+      }
+    },
+    "operon_info": {
+      "id": "operon_data",
+      "conf": {
+        "tabSelect": "tab-all"
       },
-      "disabled": false
-    },
-    "TU": {
-      "id": "tab-tus",
-      "name": "Transcription Units",
-      "description": "<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
-      "disabled": false
-    },
-    "tfGene": {
-      "id": "tab-tf-gene",
-      "name": "Regulation\nTF-Gene",
-      "description": "<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
-      "disabled": true
-    },
-    "srnaGene": {
-      "id": "tab-srna-gene",
-      "name": "Regulation\nsRNA-Gene",
-      "description": "<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
-      "disabled": true
+      "tabs": {
+        "all": {
+          "id": "tab-all",
+          "name": "All",
+          "description": "<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
+          "disabled": false
+        },
+        "description": {
+          "id": "tab-description",
+          "name": "Description",
+          "title": "Operon Description",
+          "description": "<p>description </p>",
+          "sections": {
+            "sumary": {
+              "id": "section-sumary",
+              "title": "Sumary",
+              "description": "<p>description...</p>"
+            },
+            "graphic":{
+              "id": "section-graphic",
+              "title": "General Context",
+              "description": "<p>description...</p>"
+            },
+            "TUs":{
+              "id": "section-tus",
+              "title": "Transcription Units",
+              "description": "<p>description...</p>"
+            }
+          },
+          "disabled": false
+        },
+        "TUs": {
+          "id": "tab-tus",
+          "name": "Transcription Units",
+          "description": "<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
+          "sections": {
+            "tu_description": {
+              "id": "tu-description",
+              "title": "Transcription unit",
+              "description": "<p>description...</p>"
+            },
+            "tu_genes": {
+              "id": "tu-genes",
+              "title": "Genes",
+              "description": "<p>description...</p>"
+            },
+            "tu_promoter": {
+              "id": "tu-promoter",
+              "title": "Promoter",
+              "description": "<p>description...</p>"
+            },
+            "tu_terminator": {
+              "id": "tu-terminator",
+              "title": "Terminator",
+              "description": "<p>description...</p>"
+            },
+            "tu_bindingsites": {
+              "id": "tu-TFBindingSites",
+              "title": "Transcription Factor Binding Sites",
+              "description": "<p>description...</p>"
+            }
+          },
+          "disabled": false
+        },
+        "tfGene": {
+          "id": "tab-tf-gene",
+          "name": "Regulation\nTF-Gene",
+          "description": "<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
+          "disabled": true
+        },
+        "srnaGene": {
+          "id": "tab-srna-gene",
+          "name": "Regulation\nsRNA-Gene",
+          "description": "<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
+          "disabled": true
+        }
+      }
     }
   }
 }

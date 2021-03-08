@@ -1,22 +1,22 @@
 import React, {useEffect, useState} from 'react'
 import { Tabs } from "../../../components/ui-components/ui_components";
-import conf from "../conf/operon.conf.json"
+import confJSON from "../conf/operon.conf.json"
 import Description from "../tools/operon_description"
 import All from "./operon_all"
 import TUs from '../tools/operon_TUs'
 
-
+const conf = confJSON?.pages?.operon_info
 
 export const Tab = ({ idOperon, nTUs = 0 }) => {
     const [_ntu, set_ntu] = useState(undefined)
     useEffect(() => {
         if(!_ntu){
-            set_ntu(`${conf.tabs.TU.name} (${nTUs}) `)
+            set_ntu(`${conf?.tabs?.TUs?.name} (${nTUs}) `)
         }
     },[_ntu, nTUs])
-    const descTab = conf.tabs.description
+    const descTab = conf?.tabs?.description
     if(_ntu){
-        conf.tabs.TU.name = _ntu
+        conf.tabs.TUs.name = _ntu
     return (
         <Tabs tabsObj={conf.tabs}
             tabSelect={descTab.id}
@@ -48,7 +48,7 @@ function FormTabs(nTUs, idOperon) {
                         conf={conf.tabs.description}
                     />
                 )
-            case conf.tabs.TU.id:
+            case conf?.tabs?.TUs?.id:
                 if(nTUs<=0){
                     return(
                         <></>
@@ -57,8 +57,8 @@ function FormTabs(nTUs, idOperon) {
                 return (
                     <TUs
                         idOperon={idOperon}
-                        id={conf.tabs.TU.id}
-                        conf={conf.tabs.TU}
+                        id={conf?.tabs?.TUs?.id}
+                        conf={conf?.tabs?.TUs}
                     />
                 )
             default:

@@ -15,10 +15,10 @@ const Operon = () => {
         return (
             <div>
                 <Cover>
-                    <h1>{conf.title}</h1>
+                    <h1>{conf?.pages?.operon_main.title}</h1>
                 </Cover>
                 <article>
-                    <Home conf={conf} />
+                    <Home conf={conf?.pages?.operon_main} />
                 </article>
             </div>
         )

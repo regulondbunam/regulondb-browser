@@ -1,6 +1,8 @@
 import React from 'react'
-import conf from '../conf/operon.conf.json'
+import confJSON from '../conf/operon.conf.json'
 import Description from '../tools/operon_description'
+
+const conf = confJSON?.pages?.operon_info
 
 export const All = ({ idOperon }) => {
     const descTab = conf.tabs.description
