@@ -15,7 +15,6 @@ export const Tab = ({ idOperon, nTUs = 0 }) => {
             set_ntu(`${conf?.tabs?.TUs?.name} (${nTUs}) `)
         }
     },[_ntu, nTUs])
-    const descTab = conf?.tabs?.description
     if(_ntu){
         conf.tabs.TUs.name = _ntu
     return (

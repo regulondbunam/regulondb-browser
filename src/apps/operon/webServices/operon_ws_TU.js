@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { getTU_description } from "./operon_querys"
 import { useQuery } from '@apollo/react-hooks';
 
-export const DataTU_description = ({
+export const DataTUdescription = ({
     id = '',
     status = () => { },
     resoultsData = () => { },
@@ -16,6 +16,7 @@ export const DataTU_description = ({
         } else {
 
             if (data !== undefined) {
+                console.log(data.getOperonBy.data[0])
                 const resoults = data.getOperonBy.data[0]
                 resoultsData(resoults)
                 status('done')
@@ -28,6 +29,7 @@ export const DataTU_description = ({
 
     })
     if (loading) {
+        //console.log("loading",id)
         return <></>
     }
     if (error) {

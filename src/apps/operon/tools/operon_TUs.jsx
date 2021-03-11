@@ -15,7 +15,7 @@ const TUs = ({idOperon, conf}) => {
         case "error":
             return <>error</>
         case "done":
-            return <>{TU_tabs(_data,conf)}</>
+            return <>{TU_tabs(_data,conf,idOperon)}</>
         default:
             break
     }
@@ -37,7 +37,7 @@ const TUs = ({idOperon, conf}) => {
 
 export default TUs
 
-function TU_tabs(data,conf){
+function TU_tabs(data,conf,idOperon){
     const sections_conf = conf?.sections
     //console.log(data)
     return(
@@ -47,15 +47,15 @@ function TU_tabs(data,conf){
             <br/>
             <div dangerouslySetInnerHTML={{__html: conf?.description}} />
             </article>
-            <Tabs tabSelect={data.transcriptionUnits[0].id} tabsInfo={formInfoTabs(data.transcriptionUnits)} tabs={formTUTabs(data.transcriptionUnits,sections_conf)} />
+            <Tabs tabSelect={data.transcriptionUnits[0].id} tabsInfo={formInfoTabs(data.transcriptionUnits)} tabs={formTUTabs(data.transcriptionUnits,sections_conf,idOperon)} />
         </div>
     )
 }
 
-function formTUTabs(tus, sections_conf){
+function formTUTabs(tus, sections_conf,idOperon){
     //console.log(tus)
     const tabsInfo = tus.map((tu)=>{
-        return <TU conf={sections_conf}  id={tu?.id} idOperon={tu?.id} name={`${tu.name} - ${tu?.promoter?.name}`} />
+        return <TU conf={sections_conf}  id={tu?.id} idOperon={idOperon} name={`${tu.name} - ${tu?.promoter?.name}`} />
     })
     return tabsInfo
 }
