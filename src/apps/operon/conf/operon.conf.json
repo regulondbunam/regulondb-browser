@@ -31,7 +31,7 @@
               "title": "Sumary",
               "description": "<p>description...</p>"
             },
-            "graphic":{
+            "general_context":{
               "id": "section-graphic",
               "title": "General Context",
               "description": "<p>description...</p>"
@@ -47,6 +47,7 @@
         "TUs": {
           "id": "tab-tus",
           "name": "Transcription Units",
+          "title": "Transcription Units",
           "description": "<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
           "sections": {
             "tu_description": {
