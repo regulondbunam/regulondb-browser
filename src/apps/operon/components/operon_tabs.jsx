@@ -6,6 +6,7 @@ import All from "./operon_all"
 import TUs from '../tools/operon_TUs'
 
 const conf = confJSON?.pages?.operon_info
+const tabSelect = confJSON?.pages?.operon_info?.conf?.tabSelect
 
 export const Tab = ({ idOperon, nTUs = 0 }) => {
     const [_ntu, set_ntu] = useState(undefined)
@@ -19,7 +20,7 @@ export const Tab = ({ idOperon, nTUs = 0 }) => {
         conf.tabs.TUs.name = _ntu
     return (
         <Tabs tabsObj={conf.tabs}
-            tabSelect={descTab.id}
+            tabSelect={tabSelect}
             tabs={FormTabs(nTUs, idOperon)}
         />
     )

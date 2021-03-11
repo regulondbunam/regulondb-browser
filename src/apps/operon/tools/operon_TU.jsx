@@ -2,8 +2,10 @@ import React from 'react'
 
 export const operon_TU = ({
     idOperon,
-    name
+    conf,
+    name,
 }) => {
+    console.log(conf)
     if(idOperon){
         return (
             <article>

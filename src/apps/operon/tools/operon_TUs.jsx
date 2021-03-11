@@ -3,7 +3,8 @@ import { Tabs } from '../../../components/ui-components/web/tab/tabs';
 import {GetTUs} from '../webServices/operon_ws_TUs'
 import TU from "./operon_TU"
 
-const TUs = ({idOperon}) => {
+const TUs = ({idOperon, conf}) => {
+    //console.log(conf)
     const [_data, set_data] = useState();
     const [_state, set_state] = useState();
     let loading = false;
@@ -14,13 +15,15 @@ const TUs = ({idOperon}) => {
         case "error":
             return <>error</>
         case "done":
-            return <>{TU_tabs(_data)}</>
+            return <>{TU_tabs(_data,conf)}</>
         default:
             break
     }
     return (
         <div>
-            <h2>Transcription Units</h2>
+            <h2>{conf?.title}</h2>
+            <br/>
+            <div dangerouslySetInnerHTML={{__html: conf?.description}} />
             {
                 loading ? <>loading...</> : null
             }
@@ -34,24 +37,26 @@ const TUs = ({idOperon}) => {
 
 export default TUs
 
-function TU_tabs(data){
+function TU_tabs(data,conf){
+    const sections_conf = conf?.sections
     //console.log(data)
     return(
         <div>
             <article>
-            <h2>Transcription Units</h2>
+            <h2>{conf?.title}</h2>
+            <br/>
+            <div dangerouslySetInnerHTML={{__html: conf?.description}} />
             </article>
-            <Tabs tabSelect={data.transcriptionUnits[0].id} tabsInfo={formInfoTabs(data.transcriptionUnits)} tabs={formTUTabs(data.transcriptionUnits)} />
+            <Tabs tabSelect={data.transcriptionUnits[0].id} tabsInfo={formInfoTabs(data.transcriptionUnits)} tabs={formTUTabs(data.transcriptionUnits,sections_conf)} />
         </div>
     )
 }
 
-function formTUTabs(tus){
+function formTUTabs(tus, sections_conf){
     //console.log(tus)
     const tabsInfo = tus.map((tu)=>{
-        return <TU  id={tu?.id} idOperon={tu?.id} name={`${tu.name} - ${tu?.promoter?.name}`} />
+        return <TU conf={sections_conf}  id={tu?.id} idOperon={tu?.id} name={`${tu.name} - ${tu?.promoter?.name}`} />
     })
-    console.log(tabsInfo)
     return tabsInfo
 }
 
