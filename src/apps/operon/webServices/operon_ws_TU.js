@@ -16,8 +16,8 @@ export const DataTUdescription = ({
         } else {
 
             if (data !== undefined) {
-                console.log(data.getOperonBy.data[0])
-                const resoults = data.getOperonBy.data[0]
+                //console.log(data.getOperonBy.data[0].transcriptionUnits)
+                const resoults = data.getOperonBy.data[0].transcriptionUnits
                 resoultsData(resoults)
                 status('done')
             }

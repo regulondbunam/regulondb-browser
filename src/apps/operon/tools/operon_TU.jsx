@@ -2,6 +2,7 @@ import React from 'react'
 import {TUdescription} from './tu/TU_description'
 
 export const operon_TU = ({
+    id,
     idOperon,
     conf,
     name,
@@ -12,7 +13,7 @@ export const operon_TU = ({
         return (
             <article>
                 <h2>{`${conf_description.title} ${name}`}</h2>
-                <TUdescription idOperon={idOperon} />
+                <TUdescription idOperon={idOperon} idTU={id} />
             </article>
         )
     }
