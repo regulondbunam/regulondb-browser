@@ -100,7 +100,7 @@ export function getTU_description(id) {
 }
 
 export function getTU_genes(idTU) {
-  return`
+  return gql`
   {
     getOperonBy(advancedSearch:"${idTU}[transcriptionUnits.id]") {
       data {

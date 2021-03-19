@@ -56,7 +56,7 @@ function Description({ data, idTU }) {
                              notNull(tu?.firstGene,
                                 <tr>
                                 <td style={{ fontWeight: "bold" }}>firstGene</td>
-                                <td>{tu?.firstGene?.gene_name}</td>
+                                <td><a style={{paddingRight: '10px'}} key={`link_gene${tu?.firstGene?.gene_id}`} href={`/gene/${tu?.firstGene?.gene_id}`} >{tu?.firstGene?.gene_name}</a></td>
                                 </tr>
                                 )
                         }
