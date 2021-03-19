@@ -117,3 +117,35 @@ export function getTU_genes(idTU) {
   }
   `
 }
+
+export function getTU_promoter(idTU) {
+  return gql`
+  {
+    getOperonBy(advancedSearch:"${idTU}[transcriptionUnits.id]") {
+      data {
+        _id
+        transcriptionUnits {
+          id
+          promoter{
+            id
+            name
+            note
+            synonyms
+            bindsSigmaFactor{
+              sigmaFactor_id
+              sigmaFactor_name
+            }
+            transcriptionStartSite{
+              leftEndPosition
+              rightEndPosition
+              range
+              type
+            }
+            sequence
+          }
+        }
+      }
+    }
+  }
+  `
+}

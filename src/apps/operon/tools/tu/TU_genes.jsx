@@ -34,7 +34,7 @@ export const TUgenes = ({idTU}) => {
 function Genes({data,idTU}) {
     try {
         const tu = data.find(element => element.id === idTU);
-        console.log(tu)
+        //console.log(tu)
         return(
             <>
             {
