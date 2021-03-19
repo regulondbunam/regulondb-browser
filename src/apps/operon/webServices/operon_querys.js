@@ -99,10 +99,10 @@ export function getTU_description(id) {
   `
 }
 
-function getTU_genes(idTU) {
+export function getTU_genes(idTU) {
   return`
   {
-    getOperonBy(search: "RDBECOLIOPC00011") {
+    getOperonBy(advancedSearch:"${idTU}[transcriptionUnits.id]") {
       data {
         _id
         transcriptionUnits {

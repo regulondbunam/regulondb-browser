@@ -1,5 +1,6 @@
 import React from 'react'
 import {TUdescription} from './tu/TU_description'
+import {TUgenes} from './tu/TU_genes'
 
 export const operon_TU = ({
     id,
@@ -8,12 +9,16 @@ export const operon_TU = ({
     name,
 }) => {
     const conf_description = conf?.tu_description
-    //console.log(conf)
+    const conf_genes = conf?.tu_genes
     if(idOperon){
         return (
             <article>
-                <h2>{`${conf_description.title} ${name}`}</h2>
-                <TUdescription idOperon={idOperon} idTU={id} />
+                <h2>{conf_description?.title}</h2>
+                <p dangerouslySetInnerHTML={{__html: conf_description?.description}} />
+                <TUdescription idTU={id} />
+                <h2>{conf_genes?.title}</h2>
+                <p dangerouslySetInnerHTML={{__html: conf_genes?.description}} />
+                <TUgenes idTU={id}/>
             </article>
         )
     }

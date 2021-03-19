@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { DataTUdescription } from '../../webServices/operon_ws_TU'
 
-export const TUdescription = ({ idOperon, idTU }) => {
+export const TUdescription = ({ idTU }) => {
     const [_data, set_data] = useState();
     const [_state, set_state] = useState();
     //let loading = false;
@@ -17,11 +17,11 @@ export const TUdescription = ({ idOperon, idTU }) => {
         default:
             break
     }
-    if (idOperon) {
+    if (idTU) {
         return (
             <div>
                 loading...
-                <DataTUdescription id={idOperon}
+                <DataTUdescription id={idTU}
                     resoultsData={(data) => { set_data(data) }}
                     status={(state) => { set_state(state) }}
                 />
@@ -34,16 +34,16 @@ export const TUdescription = ({ idOperon, idTU }) => {
 function Description({ data, idTU }) {
     try {
         const tu = data.find(element => element.id === idTU);
-        console.log(tu)
         return (
             <>
-                <p dangerouslySetInnerHTML={{ __html: tu.note }} />
-                <table>
+                <h3>{tu?.name}</h3>
+                <p dangerouslySetInnerHTML={{ __html: tu?.note }} />
+                <table style={{ tableLayout: "fixed", width: "auto" }} >
                     <tbody>
                         {
-                            notNull(tu.synonyms,
+                            notNull(tu?.synonyms,
                             <tr>
-                            <td>Synonyms</td>
+                            <td style={{ fontWeight: "bold" }}>synonyms</td>
                             <td>{
                                 tu.synonyms.map((s)=>{
                                     return ` ${s}`
@@ -53,7 +53,12 @@ function Description({ data, idTU }) {
                             )
                         }
                         {
-
+                             notNull(tu?.firstGene,
+                                <tr>
+                                <td style={{ fontWeight: "bold" }}>firstGene</td>
+                                <td>{tu?.firstGene?.gene_name}</td>
+                                </tr>
+                                )
                         }
                         <tr>
                             <td></td>

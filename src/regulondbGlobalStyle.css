@@ -108,6 +108,7 @@ h1 {
 
 h2 {
 	font-size: 20px;
+	margin-bottom: 10px;
 	font-family: var(--font-title);
 	font-style: var(--fontStyle-title);
 	font-weight: var(--fontWeight);
@@ -117,14 +118,7 @@ h2 {
 
 h3 {
 	font-size: 18px;
-	font-family: var(--font-title);
-	font-style: var(--fontStyle-title);
-	font-weight: var(--fontWeight);
-	line-height: var(--fontWeight);
-	color: var(--color-subtitle)
-}
-h3 {
-	font-size: 18px;
+	margin-bottom: 5px;
 	font-family: var(--font-title);
 	font-style: var(--fontStyle-title);
 	font-weight: var(--fontWeight);

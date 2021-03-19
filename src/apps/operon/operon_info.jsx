@@ -20,7 +20,7 @@ export const Info = ({ id }) => {
                 break;
             case "error":
                 title = "Sorry we have technical difficulties, please try again later";
-                break;
+                return showTitle(title, _state, _data)
             case "done":
                 if (_validId && _data != null) {
                     //console.log(_data)
@@ -37,18 +37,19 @@ export const Info = ({ id }) => {
                     )
                 } else {
                     title = `Sorry we couldn't find the identifier: ${id}`
+                    return showTitle(title, _state, _data)
                 }
-                break;
             case "not found":
                 title = `Sorry we couldn't find the identifier: ${id}`
-                break;
+                return showTitle(title, _state, _data)
             default:
                 title = "error state: " + _state;
-                break;
         }
         return (
             <div>
-                <Title title={title} state={_state} data={_data} />
+                {
+                    showTitle(title, _state, _data)
+                }
                 <ValidateId id={id}
                     resoultsData={(data) => { set_data(data) }}
                     status={(state) => { set_state(state) }}
@@ -70,3 +71,11 @@ export const Info = ({ id }) => {
 }
 
 export default Info
+
+function showTitle(title, _state, _data) {
+    return (
+        <div>
+            <Title title={title} state={_state} data={_data} />
+        </div>
+    )    
+}
