@@ -63,7 +63,7 @@ export function getTUs(id) {
 export function getTU_description(id) {
   return gql`
   {
-    getOperonBy(search: "${id}"){
+    getOperonBy(advancedSearch:"${id}[transcriptionUnits.id]"){
       data{
         _id
         transcriptionUnits{
@@ -96,5 +96,24 @@ export function getTU_description(id) {
       }
     }
     }
+  `
+}
+
+function getTU_genes(idTU) {
+  return`
+  {
+    getOperonBy(search: "RDBECOLIOPC00011") {
+      data {
+        _id
+        transcriptionUnits {
+          id
+          genes{
+            name
+            id
+          }
+        }
+      }
+    }
+  }
   `
 }
