@@ -13,8 +13,8 @@ export const Tabs = ({
   const [_tab, set_tab] = useState(tabSelect);
 
   const headerStyle = {
-    "-webkit-box-shadow": "inset -1px -10px 0px -6px "+lineColor,
-    "-moz-box-shadow": "inset -1px -10px 0px -6px "+lineColor,
+    "WebkitBoxShadow": "inset -1px -10px 0px -6px "+lineColor,
+    "MozBoxShadow": "inset -1px -10px 0px -6px "+lineColor,
     boxShadow: "inset -1px -10px 0px -6px "+lineColor,
     backgroundColor: backgroundColor
   }

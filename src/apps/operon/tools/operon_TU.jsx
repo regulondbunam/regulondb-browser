@@ -2,6 +2,7 @@ import React from 'react'
 import {TUdescription} from './tu/TU_description'
 import {TUgenes} from './tu/TU_genes'
 import {TUpromoter} from './tu/TU_promoter'
+import {TUTerminators} from './tu/TU_terminator'
 
 export const operon_TU = ({
     id,
@@ -29,8 +30,10 @@ export const operon_TU = ({
                 <TUpromoter idTU={id}/>
                 <h2>{conf_terminator?.title}</h2>
                 <p dangerouslySetInnerHTML={{__html: conf_terminator?.description}} />
+                <TUTerminators idTU={id} />
                 <h2>{conf_bindingsites?.title}</h2>
                 <p dangerouslySetInnerHTML={{__html: conf_bindingsites?.description}} />
+                
             </article>
         )
     }

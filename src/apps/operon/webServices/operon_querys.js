@@ -157,6 +157,7 @@ export function getTU_terminators(idTU) {
       data {
         _id
         transcriptionUnits {
+          id
           terminators {
             _id
             sequence
