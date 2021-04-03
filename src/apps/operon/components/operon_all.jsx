@@ -1,6 +1,7 @@
 import React from 'react'
 import confJSON from '../conf/operon.conf.json'
 import Description from '../tools/operon_description'
+import TUs from '../tools/operon_TUs'
 
 const conf = confJSON?.pages?.operon_info
 
@@ -19,6 +20,11 @@ export const All = ({ idOperon }) => {
                 conf={descTab}
                 isTUviews={false}
             />
+            <TUs
+                        idOperon={idOperon}
+                        id={conf?.tabs?.TUs?.id}
+                        conf={conf?.tabs?.TUs}
+                    />
         </>
     )
 }

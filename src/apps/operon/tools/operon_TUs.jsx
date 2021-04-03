@@ -47,7 +47,7 @@ function TU_tabs(data,conf,idOperon){
             <br/>
             <div dangerouslySetInnerHTML={{__html: conf?.description}} />
             </article>
-            <Tabs tabSelect={data.transcriptionUnits[0].id} tabsInfo={formInfoTabs(data.transcriptionUnits)} tabs={formTUTabs(data.transcriptionUnits,sections_conf,idOperon)} />
+            <Tabs backgroundColor="#ffffff" lineColor="#99999999" tabSelect={data.transcriptionUnits[0].id} tabsInfo={formInfoTabs(data.transcriptionUnits)} tabs={formTUTabs(data.transcriptionUnits,sections_conf,idOperon)} />
         </div>
     )
 }

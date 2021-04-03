@@ -149,3 +149,21 @@ export function getTU_promoter(idTU) {
   }
   `
 }
+
+export function getTU_terminators(idTU) {
+  return gql`
+  {
+    getOperonBy(advancedSearch: "RDBECOLITUC01986[transcriptionUnits.id]") {
+      data {
+        _id
+        transcriptionUnits {
+          terminators {
+            _id
+            sequence
+          }
+        }
+      }
+    }
+  }
+  `
+}

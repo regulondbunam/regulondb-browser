@@ -7,21 +7,47 @@ export const Tabs = ({
   tabsObj = undefined,
   tabSelect = "01",
   tabs = [<div id="01">contenido 1 </div>, <div id="02"> contenido 2 </div>],
-  backgroundColor = "#d5e2ead7"
+  backgroundColor = "#d5e2ead7",
+  lineColor = "#32617D"
 }) => {
   const [_tab, set_tab] = useState(tabSelect);
+
+  const headerStyle = {
+    "-webkit-box-shadow": "inset -1px -10px 0px -6px "+lineColor,
+    "-moz-box-shadow": "inset -1px -10px 0px -6px "+lineColor,
+    boxShadow: "inset -1px -10px 0px -6px "+lineColor,
+    backgroundColor: backgroundColor
+  }
+
+  const style_Tab = {
+    backgroundColor: "#ffffff",
+    color: "#373737",
+    borderTop: "1px solid #666666",
+    borderRight: "1px solid #666666",
+    borderBottom: "3px solid "+lineColor,
+    borderLeft: "1px solid #666666"
+  };
+  
+  const style_TabActive = {
+    backgroundColor: "#ffffff",
+    color: "#3D779B",
+    fontWeight: "bold",
+    borderTop: "3px solid "+lineColor,
+    borderRight: "2px solid "+lineColor,
+    borderLeft: "2px solid "+lineColor
+  };
 
   return (
     <div>
       <nav
         className={Style.tabHeader}
-        style={{ backgroundColor: backgroundColor }}
+        style={headerStyle}
       >
         {
-          arrayTabs(tabsInfo,_tab,set_tab)
+          arrayTabs(tabsInfo,_tab,set_tab, style_TabActive, style_Tab)
         }
         {
-          objTabs(tabsObj,_tab,set_tab)
+          objTabs(tabsObj,_tab,set_tab,style_TabActive, style_Tab)
         }
       </nav>
       {tabs.map((tab) => {
@@ -36,7 +62,7 @@ export const Tabs = ({
   );
 };
 
-function objTabs(tabsObj, _tab, set_tab) {
+function objTabs(tabsObj, _tab, set_tab, style_TabActive, style_Tab) {
   if(tabsObj){
     return <>
     {
@@ -69,7 +95,7 @@ function objTabs(tabsObj, _tab, set_tab) {
   }
 }
 
-function arrayTabs(tabsInfo, _tab, set_tab) {
+function arrayTabs(tabsInfo, _tab, set_tab, style_TabActive, style_Tab) {
   if(tabsInfo){
     return <>
     {
@@ -101,20 +127,4 @@ function arrayTabs(tabsInfo, _tab, set_tab) {
   }
 }
 
-const style_Tab = {
-  backgroundColor: "#ffffff",
-  color: "#373737",
-  borderTop: "1px solid #666666",
-  borderRight: "1px solid #666666",
-  borderBottom: "3px solid #32617D",
-  borderLeft: "1px solid #666666"
-};
 
-const style_TabActive = {
-  backgroundColor: "#ffffff",
-  color: "#3D779B",
-  fontWeight: "bold",
-  borderTop: "3px solid #32617D",
-  borderRight: "2px solid #32617D",
-  borderLeft: "2px solid #32617D"
-};

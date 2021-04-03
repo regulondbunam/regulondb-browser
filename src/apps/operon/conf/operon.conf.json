@@ -23,23 +23,23 @@
         "description": {
           "id": "tab-description",
           "name": "Description",
-          "title": "Operon Description",
-          "description": "<p>description </p>",
+          "title": "Description",
+          "description": "",
           "sections": {
             "sumary": {
               "id": "section-sumary",
               "title": "Sumary",
-              "description": "<p>description...</p>"
+              "description": ""
             },
             "general_context":{
               "id": "section-graphic",
               "title": "General Context",
-              "description": "<p>description...</p>"
+              "description": ""
             },
             "TUs":{
               "id": "section-tus",
               "title": "Transcription Units",
-              "description": "<p>description...</p>"
+              "description": ""
             }
           },
           "disabled": false
@@ -53,27 +53,27 @@
             "tu_description": {
               "id": "tu-description",
               "title": "Transcription unit",
-              "description": "<p>description...</p>"
+              "description": ""
             },
             "tu_genes": {
               "id": "tu-genes",
               "title": "Genes",
-              "description": "<p>description...</p>"
+              "description": ""
             },
             "tu_promoter": {
               "id": "tu-promoter",
               "title": "Promoter",
-              "description": "<p>description...</p>"
+              "description": ""
             },
             "tu_terminator": {
               "id": "tu-terminator",
               "title": "Terminator",
-              "description": "<p>description...</p>"
+              "description": ""
             },
             "tu_bindingsites": {
               "id": "tu-TFBindingSites",
               "title": "Transcription Factor Binding Sites",
-              "description": "<p>description...</p>"
+              "description": ""
             }
           },
           "disabled": false

@@ -12,6 +12,8 @@ export const operon_TU = ({
     const conf_description = conf?.tu_description
     const conf_genes = conf?.tu_genes
     const conf_promoter = conf?.tu_promoter
+    const conf_terminator = conf?.tu_terminator
+    const conf_bindingsites = conf?.tu_bindingsites
 
     if(idOperon){
         return (
@@ -25,6 +27,10 @@ export const operon_TU = ({
                 <h2>{conf_promoter?.title}</h2>
                 <p dangerouslySetInnerHTML={{__html: conf_promoter?.description}} />
                 <TUpromoter idTU={id}/>
+                <h2>{conf_terminator?.title}</h2>
+                <p dangerouslySetInnerHTML={{__html: conf_terminator?.description}} />
+                <h2>{conf_bindingsites?.title}</h2>
+                <p dangerouslySetInnerHTML={{__html: conf_bindingsites?.description}} />
             </article>
         )
     }
