@@ -1,8 +1,47 @@
 import React, { useEffect } from 'react';
 //import { helmetJsonLdProp } from "react-schemaorg";
 //import { Helmet } from 'react-helmet-async';
-import { getTU_description, getTU_genes, getTU_promoter, getTU_terminators } from "./operon_querys"
+import { getTU_description, getTU_genes, getTU_promoter, getTU_terminators, getTU_rBS } from "./operon_querys"
 import { useQuery } from '@apollo/react-hooks';
+
+export const DataTUrBS = ({
+    id = '',
+    status = () => { },
+    resoultsData = () => { },
+}) => {
+    const { data, loading, error } = useQuery(getTU_rBS(id))
+    useEffect(() => {
+        if (loading) {
+            status('loading')
+        } else {
+
+            if (data !== undefined) {
+                //console.log(data.getOperonBy.data[0].transcriptionUnits)
+                const resoults = data.getOperonBy.data[0].transcriptionUnits
+                resoultsData(resoults)
+                status('done')
+            }
+        }
+        if (error) {
+            status('error')
+            console.log(error)
+        }
+
+    })
+    if (loading) {
+        //console.log("loading",id)
+        return <></>
+    }
+    if (error) {
+        console.log(error)
+        return <></>
+    }
+    try {
+        // Structed data
+    } catch (error) {
+    }
+    return (<></>);
+}
 
 export const DataTUterminators = ({
     id = '',

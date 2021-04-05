@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { DataTUterminators } from '../../webServices/operon_ws_TU'
 
 export const TUTerminators = ({ idTU }) => {
+    // eslint-disable-next-line no-unused-vars
     const [_data, set_data] = useState();
     const [_state, set_state] = useState();
     //let loading = false;
@@ -13,7 +14,7 @@ export const TUTerminators = ({ idTU }) => {
         case "error":
             return <>error</>
         case "done":
-            console.log(_data)
+            //console.log(_data)
             return <Terminators idTU={idTU} data={termiExample} />
         default:
             break
@@ -34,7 +35,7 @@ export const TUTerminators = ({ idTU }) => {
 
 function Terminators({ idTU, data }) {
     const tu = data.find(element => element.id === "idTest");
-    console.log(tu)
+    //console.log(tu)
     return (
         <>
         {

@@ -168,3 +168,40 @@ export function getTU_terminators(idTU) {
   }
   `
 }
+export function getTU_rBS(idTU) {
+  return gql`
+  {
+    getOperonBy(search: "RDBECOLIOPC00801") {
+      data {
+        _id
+        transcriptionUnits {
+          regulatorBindingSites {
+            function
+            regulator {
+              _id
+              name
+              function
+            }
+            regulatoryInteractions {
+              _id
+              function
+              centerPosition
+              note
+              mechanism
+              regulatorySite {
+                _id
+                absolutePosition
+                leftEndPosition
+                length
+                note
+                rightEndPosition
+                sequence
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  `
+}

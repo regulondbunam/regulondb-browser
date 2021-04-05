@@ -3,6 +3,7 @@ import {TUdescription} from './tu/TU_description'
 import {TUgenes} from './tu/TU_genes'
 import {TUpromoter} from './tu/TU_promoter'
 import {TUTerminators} from './tu/TU_terminator'
+import {TUrBS} from './tu/TU_rBS'
 
 export const operon_TU = ({
     id,
@@ -33,7 +34,7 @@ export const operon_TU = ({
                 <TUTerminators idTU={id} />
                 <h2>{conf_bindingsites?.title}</h2>
                 <p dangerouslySetInnerHTML={{__html: conf_bindingsites?.description}} />
-                
+                <TUrBS idTU={id} />
             </article>
         )
     }
