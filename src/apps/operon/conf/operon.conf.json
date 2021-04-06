@@ -34,12 +34,34 @@
             "general_context":{
               "id": "section-graphic",
               "title": "General Context",
-              "description": ""
+              "description": "",
+              "graphicMetaData": {
+                "@context": "https://schema.org",
+                "@type": "ImageObject",
+                "creator": "creator",
+                "description": "description",
+                "name": "name {transcriptionUnits.name}",
+                "representativeOfPage": "representativeOfPage",
+                "publisher": "publisher",
+                "license": "license",
+                "url": "url"
+            }
             },
             "TUs":{
               "id": "section-tus",
               "title": "Transcription Units",
-              "description": ""
+              "description": "",
+              "graphicMetaData": {
+                "@context": "https://schema.org",
+                "@type": "ImageObject",
+                "creator": "creator",
+                "description": "description",
+                "name": "name {transcriptionUnits.name}",
+                "representativeOfPage": "representativeOfPage",
+                "publisher": "publisher",
+                "license": "license",
+                "url": "url"
+            }
             }
           },
           "disabled": false
@@ -52,8 +74,19 @@
           "sections": {
             "tu_description": {
               "id": "tu-description",
-              "title": "Transcription unit",
-              "description": ""
+              "title": "Transcription Unit {transcriptionUnits.name}",
+              "description": "",
+              "graphicMetaData": {
+                "@context": "https://schema.org",
+                "@type": "ImageObject",
+                "creator": "creator",
+                "description": "description",
+                "name": "name {transcriptionUnits.name}",
+                "representativeOfPage": "representativeOfPage",
+                "publisher": "publisher",
+                "license": "license",
+                "url": "url"
+            }
             },
             "tu_genes": {
               "id": "tu-genes",
