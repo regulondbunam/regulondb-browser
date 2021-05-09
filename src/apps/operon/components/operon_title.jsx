@@ -6,7 +6,7 @@ export const Title = ({title = "",state}) => {
     return (
         <div>
             <Cover state={state}>
-                operon
+                {state?"operon":""}
                     <h1>{title}</h1>
             </Cover>
         </div>
