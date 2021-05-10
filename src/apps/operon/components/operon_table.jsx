@@ -1,8 +1,5 @@
 import React from "react";
 import Style from "./table.module.css";
-import Mark, {
-  MarckScore
-} from "../../../components/ui-components/web/components/utiles/MarkStr";
 
 const Table = ({
   id = "idtable",
@@ -25,31 +22,6 @@ const Table = ({
             </th>
           </tr>
         ) : null}
-        {rows.map((row, index) => {
-          const str = columns
-            .map((item) => {
-              return item.field !== "id" ? row[item.field] : null;
-            })
-            .join(",");
-          const score = MarckScore(keyword, row[fieldOrder]);
-          if (score >= 100) {
-            return (
-              <tr key={`tr-key-table-${index}-${id}`}>
-                <th
-                  colSpan={columns.length}
-                  className={Style.resultTable_th_subtitle}
-                >
-                  <a
-                    style={{ color: "#666666" }}
-                    href={`${href_base}${row["id"]}`}
-                    dangerouslySetInnerHTML={{ __html: Mark(keyword, str) }}
-                  />
-                </th>
-              </tr>
-            );
-          }
-          return null;
-        })}
       </thead>
       <tbody>
         {rows.map((row, index) => {
@@ -65,7 +37,7 @@ const Table = ({
                   assistentvalue={`elemento encontrado ${str}`}
                   style={{ color: "#666666" }}
                   href={`${href_base}${row["id"]}`}
-                  dangerouslySetInnerHTML={{ __html: Mark(keyword, str) }}
+                  dangerouslySetInnerHTML={{ __html: str }}
                 />
               </td>
             </tr>

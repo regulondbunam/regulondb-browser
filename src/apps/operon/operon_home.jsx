@@ -17,7 +17,7 @@ const Home = ({ conf }) => {
             limit={_limit}
             setLimit={(limit) => { set_limit(limit); set_state("loading")}}
           />
-          <Table data={dataFormat(_data)} />
+          <Table data={dataFormat(_data)} title="Operons" />
         </div>
       )
       //<Table data={dataFormat(_data)} />
@@ -68,9 +68,9 @@ class Description extends React.Component {
   }
 
   handleChange(event) {
-    let limit = event.target.value
+    let limit = parseInt(event.target.value,10)
     console.log(limit)
-    if(limit<=0){
+    if(limit<=0 || !limit){
       this.setState({value:0})
     }else{
       this.props.setLimit(limit);
@@ -104,7 +104,7 @@ function dataFormat(data) {
   let rows = [];
   if (data) {
     data.map((doc) => {
-      console.log(doc)
+      //console.log(doc)
       const id = doc?._id;
       const tus = doc?.transcriptionUnits;
       const d = {
