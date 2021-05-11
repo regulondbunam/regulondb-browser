@@ -4,9 +4,11 @@ import Table from './components/operon_table'
 
 const Home = ({ conf }) => {
   const [_data, set_data] = useState();
+  // eslint-disable-next-line no-unused-vars
   const [_find, set_find] = useState();
   const [_state, set_state] = useState();
-  const [_limit, set_limit] = useState(5);
+  const [_limit, set_limit] = useState(50);
+  // eslint-disable-next-line no-unused-vars
   const [_page, set_page] = useState(0);
   if (_state === "done") {
     if (_data != null) {
@@ -17,7 +19,7 @@ const Home = ({ conf }) => {
             limit={_limit}
             setLimit={(limit) => { set_limit(limit); set_state("loading")}}
           />
-          <Table data={dataFormat(_data)} title="Operons" />
+          <Table data={dataFormat(_data)} title="Operons" href_base="/operon/" />
         </div>
       )
       //<Table data={dataFormat(_data)} />
