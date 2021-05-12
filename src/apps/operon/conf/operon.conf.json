@@ -17,6 +17,7 @@
         "all": {
           "id": "tab-all",
           "name": "All",
+          "title": "All",
           "description": "<p>descripcion de All Tab</p>",
           "disabled": false
         },

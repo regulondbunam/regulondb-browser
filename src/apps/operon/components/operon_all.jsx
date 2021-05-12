@@ -11,7 +11,7 @@ export const All = ({ idOperon }) => {
     return (
         <>
             <article>
-                <h2>{allTab.name}</h2>
+                <h2>{allTab.title}</h2>
                 <div dangerouslySetInnerHTML={{ __html: allTab.description }} />
             </article>
             <Description
