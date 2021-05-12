@@ -7,6 +7,7 @@ import { useQuery } from '@apollo/react-hooks';
 
 export const ValidateId = ({
     id = '',
+    idType,
     status = () => { },
     isValidate = () => { },
     resoultsData = () => { },
