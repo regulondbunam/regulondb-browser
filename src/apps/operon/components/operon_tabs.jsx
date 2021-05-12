@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Tabs } from "../../../components/ui-components/ui_components";
-import confJSON from "../conf/operon.conf.json"
 import Description from "../tools/operon_description"
 import All from "./operon_all"
 import TUs from '../tools/operon_TUs'
