@@ -1,35 +1,37 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { Tabs } from "../../../components/ui-components/ui_components";
 import confJSON from "../conf/operon.conf.json"
 import Description from "../tools/operon_description"
 import All from "./operon_all"
 import TUs from '../tools/operon_TUs'
 
-const conf = confJSON?.pages?.operon_info
-const tabSelect = confJSON?.pages?.operon_info?.conf?.tabSelect
 
-export const Tab = ({ idOperon, nTUs = 0 }) => {
+
+export const Tab = ({ idOperon, nTUs = 0, confJSON }) => {
     const [_ntu, set_ntu] = useState(undefined)
+    const conf = confJSON?.pages?.operon_info
+    const tabSelect = confJSON?.pages?.operon_info?.conf?.tabSelect
+    
     useEffect(() => {
-        if(!_ntu){
+        if (!_ntu) {
             set_ntu(`${conf?.tabs?.TUs?.name} (${nTUs}) `)
         }
-    },[_ntu, nTUs])
-    if(_ntu){
+    }, [_ntu, nTUs, conf])
+    if (_ntu) {
         conf.tabs.TUs.name = _ntu
-    return (
-        <Tabs tabsObj={conf.tabs}
-            tabSelect={tabSelect}
-            tabs={FormTabs(nTUs, idOperon)}
-        />
-    )
+        return (
+            <Tabs tabsObj={conf.tabs}
+                tabSelect={tabSelect}
+                tabs={FormTabs(nTUs, idOperon, conf)}
+            />
+        )
     }
     return <></>
 }
 
 export default Tab
 
-function FormTabs(nTUs, idOperon) {
+function FormTabs(nTUs, idOperon, conf) {
     return Object.keys(conf.tabs).map(function (key) {
         const tu = conf.tabs[key];
         switch (tu.id) {
@@ -49,8 +51,8 @@ function FormTabs(nTUs, idOperon) {
                     />
                 )
             case conf?.tabs?.TUs?.id:
-                if(nTUs<=0){
-                    return(
+                if (nTUs <= 0) {
+                    return (
                         <></>
                     )
                 }
@@ -62,7 +64,7 @@ function FormTabs(nTUs, idOperon) {
                     />
                 )
             default:
-                return(
+                return (
                     <></>
                 )
         }
