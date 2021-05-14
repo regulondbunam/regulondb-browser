@@ -6,13 +6,13 @@ import Conf from './conf/confRaw.conf'
 //import conf from './conf/operon.conf.json'
 //const info = conf.pages.operon_info
 
-export const Info = ({ id, idType, nTUs, showTabs }) => {
+export const Info = ({ id, tuId, tabStatus, idType, nTUs, showTabs }) => {
     const [_conf, set_conf] = useState()
 
     if (id && _conf) {
         return (
             <div>
-                <Tabs idOperon={id} nTUs={nTUs} confJSON={_conf} />
+                <Tabs tuId={tuId} tabStatus={tabStatus} idOperon={id} nTUs={nTUs} confJSON={_conf} />
             </div>
         )
 

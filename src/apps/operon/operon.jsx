@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ValidateId } from "./webServices/operon_ws_validate";
 import { SearchTU } from "./webServices/operon_ws_TU"
 import Title from './components/operon_title'
@@ -50,8 +50,12 @@ const Operon = () => {
         let showTabs = true
         return (
             <div>
-                <Title title={title} state={_state} data={_data} />
-                <Info id={_operonId} tuId={_tuId} nTUs={nTUs.length} showTabs={showTabs} />
+                <Title title={title} data={_data} />
+                <Info id={_operonId} 
+                    tuId={_tuId} 
+                    nTUs={nTUs.length} 
+                    showTabs={showTabs} 
+                />
             </div>
         )
     }

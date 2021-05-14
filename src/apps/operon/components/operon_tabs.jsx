@@ -6,16 +6,21 @@ import TUs from '../tools/operon_TUs'
 
 
 
-export const Tab = ({ idOperon, nTUs = 0, confJSON }) => {
+export const Tab = ({ idOperon, tuId, nTUs = 0, confJSON }) => {
     const [_ntu, set_ntu] = useState(undefined)
     const conf = confJSON?.pages?.operon_info
-    const tabSelect = confJSON?.pages?.operon_info?.conf?.tabSelect
+    let tabSelect = confJSON?.pages?.operon_info?.conf?.tabSelect
+    if(tuId){
+        tabSelect = conf?.tabs?.TUs?.id
+    }
+    
     
     useEffect(() => {
         if (!_ntu) {
             set_ntu(`${conf?.tabs?.TUs?.name} (${nTUs}) `)
         }
     }, [_ntu, nTUs, conf])
+
     if (_ntu) {
         conf.tabs.TUs.name = _ntu
         return (
