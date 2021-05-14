@@ -12,17 +12,23 @@ const Operon = () => {
     const [_validId, set_validId] = useState();
     const [_state, set_state] = useState();
     const [_testId, set_testId] = useState();
+    const [_operonId, set_operonId] = useState();
+    const [_tuId, set_tuId] = useState();
+
     const id = useParams().id;
     let title = conf?.pages?.operon_main.title;
+
     useEffect(() => {
         if (!_testId) {
             let operonER = /RDBECOLIOP/gm
             let tuER = /RDBECOLITU/gm
             if (operonER.test(id)) {
                 set_testId("operon")
+                set_operonId(id)
             } else {
                 if (tuER.test(id)) {
                     set_testId("tu")
+                    set_tuId(id)
                 } else {
                     set_testId("nan")
                 }
@@ -30,28 +36,31 @@ const Operon = () => {
 
         }
     }, [id, _testId])
-    if (id) {
-        if (_testId && _testId !== "nan") {
-            if (_state === "done") {
-                if (_validId && _data != null) {
-                    //console.log(_data)
-                    let nTUs = _data[0]?.transcriptionUnits
-                    title = _data[0]?.operon?.name;
-                    let showTabs = true
-                    return (
-                        <div>
-                            <Title title={title} state={_state} data={_data} />
-                            <Info id={id} nTUs={nTUs.length} showTabs={showTabs} />
-                        </div>
-                    )
-                } else {
-                    title = `Sorry we couldn't find the identifier: ${id}`
-                    return <Title title={title} state="error" />
-                }
-            }
-            if(_testId === "tu"){
-                return <TUredirect id={id} />
-            }
+    if(!id){
+        return home_default(title)
+    }
+    if (_data) {
+        if(!_validId){
+            title = `Sorry we couldn't find the identifier: ${id}`
+            return <Title title={title} state="error" />
+        }
+        //console.log(_data)
+        let nTUs = _data[0]?.transcriptionUnits
+        title = _data[0]?.operon?.name;
+        let showTabs = true
+        return (
+            <div>
+                <Title title={title} state={_state} data={_data} />
+                <Info id={_operonId} tuId={_tuId} nTUs={nTUs.length} showTabs={showTabs} />
+            </div>
+        )
+    }
+    if (_testId) {
+        if (_testId === "nan") {
+            title = `Sorry we couldn't find the identifier: ${id}`
+            return <Title title={title} state="error" />
+        }
+        if(_operonId){
             return (
                 <div>
                     {
@@ -64,7 +73,7 @@ const Operon = () => {
                             ? <Title title={title} state="error" />
                             : ""
                     }
-                    <ValidateId id={id}
+                    <ValidateId id={_operonId}
                         resoultsData={(data) => { set_data(data) }}
                         status={(state) => { set_state(state) }}
                         isValidate={(isGood) => { set_validId(isGood) }}
@@ -72,27 +81,28 @@ const Operon = () => {
                 </div>
             )
         }
-        if (_testId === "nan") {
-            title = `Sorry... id ${id} is not valid.`
+        if(_tuId){
             return (
                 <div>
-                    <Title title={title} state="error" />
+                    {
+                        _state === "loading"
+                            ? <Title title={title} state="loading" />
+                            : ""
+                    }
+                    {
+                        _state === "error"
+                            ? <Title title={title} state="error" />
+                            : ""
+                    }
+                    <TUredirect id={id} 
+                        operonId={(operonId)=>{set_operonId(operonId)}}
+                        status={(state)=>{set_state(state)}}
+                    />
                 </div>
             )
         }
-        title = `Wait...`
-        return (
-            <div>
-                <Title title={title} state="loading" />
-            </div>
-        )
-        /*
-        
-        
-        */
-    } else {
-        return home_default(title)
     }
+    return <></>
 
 }
 
@@ -109,16 +119,26 @@ function home_default(title) {
     )
 }
 
-function TUredirect({id}){
+function TUredirect({ id, operonId, status }) {
     const [_data, set_data] = useState();
     const [_state, set_state] = useState();
 
-    if(_state === "done"){
-        return <Redirect to={`/operon/${_data}/TU/${id}`} />
+    useEffect(() => {
+        if (_state === "done") {
+            operonId(_data)
+            status(_state)
+        }
+        if(_state === "loading" || _state === "error"){
+            status(_state)
+        }
+    })
+
+    if (_state === "done") {
+        return <></>
     }
-    if(_state === "error"){
-        return null
+    if (_state === "error") {
+        return <></>
     }
 
-    return <SearchTU id={id} status={(state)=>{set_state(state)}} resoultsData={(data)=>{set_data(data)}} />
+    return <SearchTU id={id} status={(state) => { set_state(state) }} resoultsData={(data) => { set_data(data) }} />
 }
