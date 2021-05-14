@@ -37,7 +37,7 @@ function Terminators({ idTU, data }) {
     const tu = data.find(element => element.id === "idTest");
     //console.log(tu)
     return (
-        <>
+        <div style={{marginLeft: "5%"}}>
         {
             tu.terminators.map((terminator)=>{
                 return(
@@ -62,7 +62,7 @@ function Terminators({ idTU, data }) {
                 )
             })
         }
-        </>
+        </div>
     )
 }
 

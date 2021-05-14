@@ -47,7 +47,7 @@ const SwitchView = ({idTU,data}) => {
     }
 
     return (
-        <>
+        <div style={{marginLeft: "5%"}}>
         <select value={_view} onChange={(event)=>{set_view(event.target.value)}}>
             <option value="by site">By Site</option>
             <option value="full info">Full info</option>
@@ -55,7 +55,7 @@ const SwitchView = ({idTU,data}) => {
           {
               swt(_view)
           }
-        </>
+        </div>
     )
 }
 

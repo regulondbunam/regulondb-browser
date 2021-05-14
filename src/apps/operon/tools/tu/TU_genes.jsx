@@ -36,13 +36,13 @@ function Genes({data,idTU}) {
         const tu = data.find(element => element.id === idTU);
         //console.log(tu)
         return(
-            <>
+            <div style={{marginLeft: "5%"}}>
             {
                 tu.genes.map((gene)=>{
                     return <a style={{paddingRight: '10px'}} key={`link_gene${gene.id}`} href={`/gene/${gene.id}`} >{gene.name}</a>
                 })
             }
-            </>
+            </div>
         )
     } catch (error) {
         

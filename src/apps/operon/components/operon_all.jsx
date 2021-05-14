@@ -12,7 +12,7 @@ export const All = ({ idOperon }) => {
         <>
             <article>
                 <h2>{allTab.title}</h2>
-                <div dangerouslySetInnerHTML={{ __html: allTab.description }} />
+                <div style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{ __html: allTab.description }} />
             </article>
             <Description
                 idOperon={idOperon}

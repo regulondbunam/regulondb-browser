@@ -23,7 +23,7 @@ const TUs = ({idOperon, conf}) => {
         <div>
             <h2>{conf?.title}</h2>
             <br/>
-            <div dangerouslySetInnerHTML={{__html: conf?.description}} />
+            <div style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{__html: conf?.description}} />
             {
                 loading ? <>loading...</> : null
             }
@@ -45,7 +45,7 @@ function TU_tabs(data,conf,idOperon){
             <article>
             <h2>{conf?.title}</h2>
             <br/>
-            <div dangerouslySetInnerHTML={{__html: conf?.description}} />
+            <div style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{__html: conf?.description}} />
             </article>
             <Tabs backgroundColor="#ffffff" lineColor="#99999999" tabSelect={data.transcriptionUnits[0].id} tabsInfo={formInfoTabs(data.transcriptionUnits)} tabs={formTUTabs(data.transcriptionUnits,sections_conf,idOperon)} />
         </div>

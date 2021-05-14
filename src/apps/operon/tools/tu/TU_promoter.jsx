@@ -36,7 +36,7 @@ function Genes({ data, idTU }) {
         const tu = data.find(element => element.id === idTU);
         //console.log(tu)
         return (
-            <>
+            <div style={{marginLeft: "5%"}}>
                 <h3>{tu?.promoter?.name}</h3>
                 {
                     notNull(tu?.promoter?.note,
@@ -94,7 +94,7 @@ function Genes({ data, idTU }) {
                         </tr>
                     </tbody>
                 </table>
-            </>
+            </div>
         )
     } catch (error) {
 

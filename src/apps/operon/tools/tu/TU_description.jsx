@@ -37,7 +37,8 @@ function Description({ data, idTU }) {
         return (
             <>
                 <h3>{tu?.name}</h3>
-                <p dangerouslySetInnerHTML={{ __html: tu?.note }} />
+                <p style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{ __html: tu?.note }} />
+                <div style={{marginLeft: "5%"}} >
                 <table style={{ tableLayout: "fixed", width: "auto" }} >
                     <tbody>
                         {
@@ -65,6 +66,8 @@ function Description({ data, idTU }) {
                         </tr>
                     </tbody>
                 </table>
+                </div>
+                
             </>
         )
     } catch (error) {
