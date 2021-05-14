@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import { ValidateId } from "./webServices/operon_ws_validate";
+import { SearchTU } from "./webServices/operon_ws_TU"
 import Title from './components/operon_title'
 import Home from "./operon_home"
 import Info from "./operon_info"
@@ -32,7 +33,6 @@ const Operon = () => {
     if (id) {
         if (_testId && _testId !== "nan") {
             if (_state === "done") {
-
                 if (_validId && _data != null) {
                     //console.log(_data)
                     let nTUs = _data[0]?.transcriptionUnits
@@ -41,13 +41,16 @@ const Operon = () => {
                     return (
                         <div>
                             <Title title={title} state={_state} data={_data} />
-                            <Info id={id} nTUs={nTUs.length} idType={_testId} showTabs={showTabs} />
+                            <Info id={id} nTUs={nTUs.length} showTabs={showTabs} />
                         </div>
                     )
                 } else {
                     title = `Sorry we couldn't find the identifier: ${id}`
                     return <Title title={title} state="error" />
                 }
+            }
+            if(_testId === "tu"){
+                return <TUredirect id={id} />
             }
             return (
                 <div>
@@ -104,4 +107,18 @@ function home_default(title) {
             </article>
         </div>
     )
+}
+
+function TUredirect({id}){
+    const [_data, set_data] = useState();
+    const [_state, set_state] = useState();
+
+    if(_state === "done"){
+        return <Redirect to={`/operon/${_data}/TU/${id}`} />
+    }
+    if(_state === "error"){
+        return null
+    }
+
+    return <SearchTU id={id} status={(state)=>{set_state(state)}} resoultsData={(data)=>{set_data(data)}} />
 }

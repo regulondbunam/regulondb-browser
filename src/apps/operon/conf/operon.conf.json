@@ -3,7 +3,7 @@
     "operon_main": {
       "id": "page_main",
       "title": "Operon Site",
-      "description": "<p>Lorem ipsum dolor sit amet, <br/> consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
+      "description": "<p>Description of operon home page</p>",
       "conf": {
         "listOperons": true
       }
@@ -18,14 +18,14 @@
           "id": "tab-all",
           "name": "All",
           "title": "All",
-          "description": "<p>descripcion de All Tab</p>",
+          "description": "<p>Description of the all tab</p>",
           "disabled": false
         },
         "description": {
           "id": "tab-description",
           "name": "Description",
           "title": "Description",
-          "description": "",
+          "description": "Operon Description tab description",
           "sections": {
             "sumary": {
               "id": "section-sumary",
@@ -41,7 +41,7 @@
                 "@type": "ImageObject",
                 "creator": "creator",
                 "description": "description",
-                "name": "name {transcriptionUnits.name}",
+                "name": "name",
                 "representativeOfPage": "representativeOfPage",
                 "publisher": "publisher",
                 "license": "license",
@@ -57,7 +57,7 @@
                 "@type": "ImageObject",
                 "creator": "creator",
                 "description": "description",
-                "name": "name {transcriptionUnits.name}",
+                "name": "name",
                 "representativeOfPage": "representativeOfPage",
                 "publisher": "publisher",
                 "license": "license",
@@ -75,14 +75,14 @@
           "sections": {
             "tu_description": {
               "id": "tu-description",
-              "title": "Transcription Unit {transcriptionUnits.name}",
+              "title": "Transcription Unit",
               "description": "",
               "graphicMetaData": {
                 "@context": "https://schema.org",
                 "@type": "ImageObject",
                 "creator": "creator",
                 "description": "description",
-                "name": "name {transcriptionUnits.name}",
+                "name": "name",
                 "representativeOfPage": "representativeOfPage",
                 "publisher": "publisher",
                 "license": "license",

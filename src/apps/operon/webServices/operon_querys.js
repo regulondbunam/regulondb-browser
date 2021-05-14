@@ -1,5 +1,26 @@
 import { gql } from "apollo-boost";
 
+export function validateTUID(id) {
+  return gql`
+  {
+    getOperonBy(advancedSearch: "${id}[transcriptionUnits.id]") {
+      data {
+        _id
+        operon {
+          name
+        }
+        transcriptionUnits {
+          id
+        }
+      }
+      pagination {
+        totalResults
+      }
+    }
+  }
+  `
+}
+
 export function validateID(id) {
   return gql`{
         getOperonBy(search: "${id}"){

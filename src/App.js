@@ -34,6 +34,9 @@ function App() {
         <Route path={["/operon/:id/:site/:section","/operon/:id/:site","/operon/:id","/operon",]}>
           <Operon />
         </Route>
+        <Route path={["/tu/:id","/tu",]}>
+          <Operon />
+        </Route>
         <Route path="*">
           <Error />
         </Route>
