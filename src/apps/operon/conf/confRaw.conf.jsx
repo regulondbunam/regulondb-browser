@@ -19,7 +19,7 @@ const Conf = ({setConf}) => {
                 }
             }
         }else{
-            console.log(file)
+            //console.log(file)
             setConf(file)
         }
             

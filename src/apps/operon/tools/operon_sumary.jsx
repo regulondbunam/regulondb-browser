@@ -34,19 +34,38 @@ export const Sumary = ({
 }
 
 function SumaryTable(data) {
+    console.log(data)
     return (
-        <>
+        <div style={{marginLeft: "5%"}}>
+        <table style={{ tableLayout: "fixed", width: "auto", float: "left", display: "inline-block" }}>
+            <tbody>
             {
-                data.map((tu) => {
+                Object.keys(data).map(function (key) {
+                    const test = key.match(/^_/);
+                    //console.log(test)
+                    if (data[key] === null || data[key].length <= 1 || test !== null) {
+                        return null;
+                    }
                     return (
-                        <table key={`sumary_tu_${tu.id}`} style={{ tableLayout: "fixed", width: "auto", float: "left", display: "inline-block" }}>
-                            <thead>
-                                <tr>
-                                    <th style={{ textAlign: "center" }}>{`${tu.name}- ${tu?.promoter?.name}`}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
+                        <tr key={`sumary_statistics_${key}`}>
+                            <td style={{ fontWeight: "bold" }}>{key}</td>
+                            <td>{data[key]}</td>
+                        </tr>
+                    )
+                })
+            }
+            </tbody>
+        </table>
+            
+        </div>
+    )
+}
+
+export default Sumary
+
+/*
+
+{
                                     Object.keys(tu.statistics).map(function (key) {
                                         const test = key.match(/^_/);
                                         //console.log(test)
@@ -61,13 +80,5 @@ function SumaryTable(data) {
                                         )
                                     })
                                 }
-                            </tbody>
-                        </table>
-                    )
-                })
-            }
-        </>
-    )
-}
 
-export default Sumary
+*/

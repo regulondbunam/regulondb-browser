@@ -42,25 +42,20 @@ export function validateID(id) {
 
 export function getStatisticsTU(id) {
   return gql`{
-    getOperonBy(search: "${id}"){
+    getOperonBy(search:"RDBECOLIOPC02543"){
       data{
         _id
-        transcriptionUnits{
-          id
+        operon{
           name
-          promoter{
-            id
-            name
-          }
           statistics{
-            sites
             genes
-            transcriptionFactors
+            promoters
+            transcriptionUnit
           }
         }
       }
     }
-    }`
+  }`
 }
 
 export function getTUs(id) {
