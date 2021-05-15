@@ -3,7 +3,6 @@ import {DataTUrBS} from '../../webServices/operon_ws_TU'
 import { RBSbyStite } from "./rBS_byStite";
 
 export const TUrBS = ({ idTU }) => {
-    // eslint-disable-next-line no-unused-vars
     const [_data, set_data] = useState();
     const [_state, set_state] = useState();
     //let loading = false;
@@ -16,7 +15,7 @@ export const TUrBS = ({ idTU }) => {
             return <>error</>
         case "done":
             //console.log(_data)
-            return <SwitchView idTU={idTU} data={dataE} />
+            return <SwitchView idTU={idTU} data={_data} />
         default:
             break
     }
