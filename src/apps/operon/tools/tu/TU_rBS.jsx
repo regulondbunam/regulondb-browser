@@ -41,7 +41,7 @@ const SwitchView = ({idTU,data}) => {
             case "by site":
                 return <RBSbyStite data={data} />
             default:
-                return <>no valid option</>
+                return <></>
         }
     }
 
@@ -59,6 +59,7 @@ const SwitchView = ({idTU,data}) => {
 }
 
 
+// eslint-disable-next-line no-unused-vars
 const dataE = [
     {
         type: "proximal",
