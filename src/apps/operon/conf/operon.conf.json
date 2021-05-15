@@ -71,7 +71,7 @@
           "id": "tab-tus",
           "name": "Transcription Units",
           "title": "Transcription Units",
-          "description": "<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>",
+          "description": "<p>desciption TUs</p>",
           "sections": {
             "tu_description": {
               "id": "tu-description",
