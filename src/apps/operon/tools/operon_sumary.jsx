@@ -34,7 +34,7 @@ export const Sumary = ({
 }
 
 function SumaryTable(data) {
-    console.log(data)
+    //console.log(data)
     return (
         <div style={{marginLeft: "5%"}}>
         <table style={{ tableLayout: "fixed", width: "auto", float: "left", display: "inline-block" }}>

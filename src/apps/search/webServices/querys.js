@@ -33,6 +33,11 @@ export const searchOperon = (search, limit = 10, page = 0)=>{
             _id
             operon{
               name
+              statistics{
+                genes
+                promoters
+                transcriptionUnit
+              }
             }
             transcriptionUnits{
               name

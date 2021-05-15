@@ -45,7 +45,7 @@ function Genes({data,idTU}) {
             </div>
         )
     } catch (error) {
-        
+        console.log(error)
     }
     return <>no id</>
 }

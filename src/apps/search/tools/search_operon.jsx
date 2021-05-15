@@ -58,11 +58,13 @@ function dataFormat(data) {
   let rows = [];
   if (data) {
     data.map((doc) => {
+      console.log(doc)
       const id = doc?._id;
       const tus = doc?.transcriptionUnits;
+      const stadistics = doc?.operon?.statistics
       const d = {
         name: `${doc?.operon?.name} operon`,
-        tus: `contains ## genes organized in ${tus.length} TUs`,
+        tus: `contains ${stadistics.genes} genes organized in ${tus.length} TUs`,
         id: id
       };
       rows.push(d);

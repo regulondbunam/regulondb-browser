@@ -17,7 +17,7 @@ export const GetSumaryByTU = ({
 
             if (data !== undefined) {
                // console.log(data?.getOperonBy.data[0].transcriptionUnits)
-               console.log(data)
+               //console.log(data)
                 const resoults = data?.getOperonBy.data[0].operon.statistics
                 resoultsData(resoults)
                 status('done')
