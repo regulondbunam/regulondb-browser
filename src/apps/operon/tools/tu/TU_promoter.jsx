@@ -28,7 +28,8 @@ export const TUpromoter = ({ idTU }) => {
             </div>
         )
     }
-    return <>no id</>
+    console.error("TU_promoter no id")
+    return <>no - id</>
 }
 
 function Genes({ data, idTU }) {
@@ -99,7 +100,7 @@ function Genes({ data, idTU }) {
     } catch (error) {
 
     }
-    return <>no id</>
+    return <>no promoters</>
 }
 
 function notNull(data, element) {

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { DataTUterminators } from '../../webServices/operon_ws_TU'
 
 export const TUTerminators = ({ idTU }) => {
-    // eslint-disable-next-line no-unused-vars
     const [_data, set_data] = useState();
     const [_state, set_state] = useState();
     //let loading = false;
@@ -15,7 +14,7 @@ export const TUTerminators = ({ idTU }) => {
             return <>error</>
         case "done":
             //console.log(_data)
-            return <Terminators idTU={idTU} data={termiExample} />
+            return <Terminators idTU={idTU} data={_data} />
         default:
             break
     }
@@ -36,36 +35,46 @@ export const TUTerminators = ({ idTU }) => {
 function Terminators({ idTU, data }) {
     const tu = data.find(element => element.id === "idTest");
     //console.log(tu)
-    return (
-        <div style={{marginLeft: "5%"}}>
-        {
-            tu.terminators.map((terminator)=>{
-                return(
-                    <div key={`terminator_${terminator._id}`}>
-                        <h3>{terminator?.transcriptionTerminationSite?.type}</h3>
-                        <table style={{ tableLayout: "fixed", width: "auto" }}>
-                            <tbody>
-                                <tr >
-                                    <td style={{ fontWeight: "bold" }} >LeftPos</td><td>{terminator?.transcriptionTerminationSite?.leftEndPosition}</td>
-                                    <td style={{ fontWeight: "bold" }} >RightPos</td><td>{terminator?.transcriptionTerminationSite?.rightEndPosition}</td>
-                                </tr>
-                                <tr>
-                                    <td style={{ fontWeight: "bold" }}>sequence</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colSpan="4" >{terminator?.sequence}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                )
-            })
-        }
-        </div>
-    )
+    if (tu) {
+        return (
+            <div style={{ marginLeft: "5%" }}>
+                {
+                    tu.terminators.map((terminator) => {
+                        //console.log(terminator)
+                        if (terminator) {
+                            return (
+                                <div key={`terminator_${terminator._id}`}>
+                                    <h3>{terminator?.transcriptionTerminationSite?.type}</h3>
+                                    <table style={{ tableLayout: "fixed", width: "auto" }}>
+                                        <tbody>
+                                            <tr >
+                                                <td style={{ fontWeight: "bold" }} >LeftPos</td><td>{terminator?.transcriptionTerminationSite?.leftEndPosition}</td>
+                                                <td style={{ fontWeight: "bold" }} >RightPos</td><td>{terminator?.transcriptionTerminationSite?.rightEndPosition}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style={{ fontWeight: "bold" }}>sequence</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan="4" >{terminator?.sequence}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            )
+                        }
+                        return null
+                    })
+                }
+            </div>
+        )
+    } else {
+        return <>no terminators</>
+    }
+
 }
 
+// eslint-disable-next-line no-unused-vars
 const termiExample = [
     {
         "id": "idTest",

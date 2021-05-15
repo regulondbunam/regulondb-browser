@@ -81,7 +81,7 @@ function Description({ data, idTU }) {
 }
 
 function notNull(data,element) {
-    console.log(data)
+    //console.log(data)
     if (data === null || data.length < 1 || data === "" || data === undefined  ) {
         return null
     }
