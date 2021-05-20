@@ -190,12 +190,86 @@ export function getTU_terminators(idTU) {
   `
 }
 export function getTU_rBS(idTU) {
+  //console.log(idTU)
   return gql`
   {
-    getOperonBy(search: "RDBECOLIOPC00801") {
-      data {
+    getOperonBy(advancedSearch: "${idTU}[transcriptionUnits.id]") {
+    	data {
         _id
         transcriptionUnits {
+          id
+          genes{
+            id
+            name
+            regulatorBindingSites {
+              function
+              regulator {
+                _id
+                name
+                function
+              }
+              regulatoryInteractions {
+                _id
+                function
+                centerPosition
+                note
+                mechanism
+                regulatorySite {
+                  _id
+                  absolutePosition
+                  leftEndPosition
+                  length
+                  note
+                  rightEndPosition
+                  sequence
+                }
+              }
+            }
+          }
+          promoter{
+            id
+            regulatorBindingSites{
+              function
+            regulator {
+              _id
+              name
+              function
+            }
+              regulatoryInteractions {
+              _id
+              function
+              centerPosition
+              note
+              mechanism
+              citations {
+                publication {
+                  id
+                  authors
+                  pmid
+                  citation
+                  url
+                  title
+                  year
+                }
+                evidence {
+                  id
+                  name
+                  code
+                  type
+                }
+              }
+              regulatorySite {
+                _id
+                absolutePosition
+                leftEndPosition
+                length
+                note
+                rightEndPosition
+                sequence
+              }
+            }
+            }
+          }
           regulatorBindingSites {
             function
             regulator {
