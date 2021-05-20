@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Component } from 'react'
 import { IconButton } from '../../../../components/ui-components/ui_components'
+import {RowInfo} from './bs_compnents/fullInfo_Rows'
 
 
 const styleIconButton = {
@@ -8,7 +9,7 @@ const styleIconButton = {
     float: "left"
 }
 
-const thStyle = { fontWeight: "bold" }
+const thStyle = { fontWeight: "bold",fontSize: "10px" }
 
 const tbTitle = {
     fontWeight: "bold",
@@ -17,11 +18,10 @@ const tbTitle = {
     fontSize: "10px",
 }
 
-
 export class RBSbyFull extends Component {
     constructor(props) {
         super(props);
-        this.state = { _order: this.props.data?.promoter };
+        this.state = { _order: this.props.data?.promoter};
     }
 
     set_order = () => {
@@ -50,8 +50,9 @@ export class RBSbyFull extends Component {
 
     render() {
         const {
-            _order
+            _order,
         } = this.state
+        
         if (_order) {
             return (
                 <div>
@@ -70,13 +71,16 @@ export class RBSbyFull extends Component {
                                                 }
                                                 {
                                                     index === _order.length - 1
-                                                        ? <IconButton icon="arrow_downward" onClick={()=>{this.toDown(index, _order)}} disabled style={styleIconButton} iconStyle={{ fontSize: "14px" }} />
-                                                        : <IconButton icon="arrow_downward" onClick={()=>{this.toDown(index, _order)}} style={styleIconButton} iconStyle={{ fontSize: "14px" }} />
+                                                        ? <IconButton icon="arrow_downward" onClick={() => { this.toDown(index, _order) }} disabled style={styleIconButton} iconStyle={{ fontSize: "14px" }} />
+                                                        : <IconButton icon="arrow_downward" onClick={() => { this.toDown(index, _order) }} style={styleIconButton} iconStyle={{ fontSize: "14px" }} />
                                                 }
 
                                             </th>
                                         </tr>
                                     </thead>
+                                    <tbody>
+                                        <RowInfo bs={bs}/>
+                                    </tbody>
                                 </table>
                             )
                         })
@@ -90,4 +94,6 @@ export class RBSbyFull extends Component {
 
 
 export default RBSbyFull
+
+
 
