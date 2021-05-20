@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {DataTUrBS} from '../../webServices/operon_ws_TU'
 import { RBSbyStite } from "./rBS_byStite";
+import RBSbyFull from './rBS_fullInfo'
 
 export const TUrBS = ({ idTU }) => {
     const [_data, set_data] = useState();
@@ -41,7 +42,7 @@ const SwitchView = ({idTU,data}) => {
             case "by site":
                 return <RBSbyStite data={data} />
             default:
-                return <></>
+                return <RBSbyFull data={data} />
         }
     }
 
