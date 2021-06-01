@@ -45,6 +45,7 @@ export const SearchTU = ({
 
 export const DataTUrBS = ({
     id = '',
+    bs_class = "",
     status = () => { },
     resoultsData = () => { },
 }) => {
@@ -55,10 +56,24 @@ export const DataTUrBS = ({
         } else {
 
             if (data !== undefined) {
-                //console.log(data.getOperonBy.data[0].transcriptionUnits)
+                //console.log(data.getOperonBy.data[0].transcriptionUnits[0])
                 //OrganizeBindigSites(data.getOperonBy.data[0].transcriptionUnits,id)
-                const resoults = OrganizeBindigSites(data.getOperonBy.data[0].transcriptionUnits,id)
-                resoultsData(resoults)
+                //const resoults = OrganizeBindigSites(data.getOperonBy.data[0].transcriptionUnits,id)
+                switch (bs_class) {
+                    case "genes":
+                        resoultsData(data.getOperonBy.data[0].transcriptionUnits[0].genes)
+                        break;
+                    case "promoter":
+                        resoultsData(data.getOperonBy.data[0].transcriptionUnits[0].promoter)
+                        break;
+                    case "regulator":
+                        resoultsData(data.getOperonBy.data[0].transcriptionUnits[0].regulatorBindingSites)
+                        break;
+                    default:
+                        resoultsData(data.getOperonBy.data[0].transcriptionUnits[0])
+                        break;
+                }
+
                 status('done')
             }
         }
@@ -214,9 +229,9 @@ export const DataTUdescription = ({
         } else {
 
             if (data !== undefined) {
-                //console.log(data.getOperonBy.data[0].transcriptionUnits)
-                const resoults = data.getOperonBy.data[0].transcriptionUnits
-                resoultsData(resoults)
+                // console.log(data.getOperonBy.data[0].transcriptionUnits)
+                //const resoults = data.getOperonBy.data[0].transcriptionUnits
+                resoultsData(data.getOperonBy.data[0].transcriptionUnits)
                 status('done')
             }
         }
@@ -241,7 +256,7 @@ export const DataTUdescription = ({
     return (<></>);
 }
 
-function OrganizeBindigSites(transcriptionUnits,idTU) {
+function OrganizeBindigSites(transcriptionUnits, idTU) {
     const tu = transcriptionUnits.find(element => element.id === idTU);
     //console.log(tu)
     let BindigSites = {
@@ -266,16 +281,16 @@ function OrganizeBindigSites(transcriptionUnits,idTU) {
         })
     }*/
     const arrayPromoterBS = tu?.promoter?.regulatorBindingSites
-    if(arrayPromoterBS){
-        arrayPromoterBS.map((promoter)=>{
+    if (arrayPromoterBS) {
+        arrayPromoterBS.map((promoter) => {
             const rbs = promoter?.regulatoryInteractions
             //console.log(promoter)
-            if(rbs){
-                rbs.map((rb)=>{
+            if (rbs) {
+                rbs.map((rb) => {
                     BindigSites.promoter.push(rb)
                     return null
                 })
-                
+
             }
             return null
         })

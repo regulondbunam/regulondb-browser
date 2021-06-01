@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { IconButton } from '../../../../../components/ui-components/ui_components'
+//import { IconButton } from '../../../../../components/ui-components/ui_components'
 
 const thStyle = { fontWeight: "bold" }
 
@@ -10,12 +10,15 @@ const styleIconButton = {
 }
 
 export function RowInfo({bs}) {
+    const _viewInfo = true
+    /*
     const [_viewInfo, set_viewInfo] = useState(true)
 
     let viewInfo = "expand_less"
         if (!_viewInfo) {
             viewInfo = "expand_more"
         }
+    */
     return (
         <tr>
             <td colSpan="3">
@@ -29,7 +32,7 @@ export function RowInfo({bs}) {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td style={{fontSize: "10px"}}>{bs?.function}</td>
+                                    <td>{bs?.function}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -37,9 +40,11 @@ export function RowInfo({bs}) {
                 }
 
             </td>
+            {/*}
             <td>
                 <IconButton icon={viewInfo} onClick={() => { set_viewInfo(!_viewInfo) }} style={styleIconButton} iconStyle={{ fontSize: "14px" }} />
             </td>
+            {*/}
         </tr>
     )
 }

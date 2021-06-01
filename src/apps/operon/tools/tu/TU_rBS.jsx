@@ -20,6 +20,7 @@ export const TUrBS = ({ idTU }) => {
         default:
             break
     }
+    //
     if (idTU) {
         return (
             <div>
@@ -27,6 +28,7 @@ export const TUrBS = ({ idTU }) => {
                 <DataTUrBS id={idTU}
                     resoultsData={(data) => { set_data(data) }}
                     status={(state) => { set_state(state) }}
+                    bs_class="promoter"
                 />
             </div>
         )

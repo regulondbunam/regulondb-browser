@@ -1,14 +1,16 @@
-import React, { useState, useEffect, Component } from 'react'
-import { IconButton } from '../../../../components/ui-components/ui_components'
+import React, {Component } from 'react'
+//import { IconButton } from '../../../../components/ui-components/ui_components'
 import {RowInfo} from './bs_compnents/fullInfo_Rows'
 
 
+// eslint-disable-next-line no-unused-vars
 const styleIconButton = {
     width: "20px",
     height: "20px",
     float: "left"
 }
 
+// eslint-disable-next-line no-unused-vars
 const thStyle = { fontWeight: "bold",fontSize: "10px" }
 
 const tbTitle = {
@@ -52,7 +54,7 @@ export class RBSbyFull extends Component {
         const {
             _order,
         } = this.state
-        
+        console.log(_order)
         if (_order) {
             return (
                 <div>
@@ -62,8 +64,10 @@ export class RBSbyFull extends Component {
                             return (
                                 <table key={`Table_bsFull_${bs?._id}_${index}`}>
                                     <thead>
+                                        
                                         <tr>
                                             <th style={tbTitle} colSpan="3" >{bs?._id}</th>
+                                            {/*}
                                             <th >
                                                 {
                                                     index === 0
@@ -77,6 +81,7 @@ export class RBSbyFull extends Component {
                                                 }
 
                                             </th>
+                                            {*/}
                                         </tr>
                                     </thead>
                                     <tbody>
