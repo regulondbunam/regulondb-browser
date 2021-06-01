@@ -1,6 +1,13 @@
 import React, {useState} from 'react'
 import { IconButton } from '../../../../../components/ui-components/ui_components'
 
+const thStyle = { fontWeight: "bold" }
+
+const styleIconButton = {
+    width: "20px",
+    height: "20px",
+    float: "left"
+}
 
 export function RowInfo({bs}) {
     const [_viewInfo, set_viewInfo] = useState(true)

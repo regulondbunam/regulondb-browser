@@ -19,7 +19,7 @@
           "name": "All",
           "title": "All",
           "description": "<p>Description of the all tab</p>",
-          "disabled": false
+          "disabled": true
         },
         "description": {
           "id": "tab-description",

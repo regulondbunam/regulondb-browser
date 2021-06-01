@@ -5,6 +5,7 @@ let url = "https://raw.githubusercontent.com/regulondbunam/RegulonDB-Browser/ope
 
 const Conf = ({setConf}) => {
     const [file,set_file] = useState()
+    
     useEffect(() => {
         if(!file){
             let xhr = new XMLHttpRequest();

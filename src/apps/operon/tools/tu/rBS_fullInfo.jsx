@@ -58,6 +58,7 @@ export class RBSbyFull extends Component {
                 <div>
                     {
                         _order.map((bs, index) => {
+                            console.log(bs)
                             return (
                                 <table key={`Table_bsFull_${bs?._id}_${index}`}>
                                     <thead>
@@ -80,6 +81,11 @@ export class RBSbyFull extends Component {
                                     </thead>
                                     <tbody>
                                         <RowInfo bs={bs}/>
+                                        <tr>
+                                            <td>
+                                                {bs?.regulatorySite?.sequence}
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             )
