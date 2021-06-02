@@ -7,7 +7,7 @@ export const RBSbyStite = ({ data, type = "" }) => {
         case "gene":
             data = data.genes
             if (data) {
-                console.log(data)
+                //console.log(data)
                 return (
                     <div>
                         {

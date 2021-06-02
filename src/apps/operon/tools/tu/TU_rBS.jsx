@@ -15,7 +15,7 @@ export const TUrBS = ({ idTU }) => {
         case "error":
             return <>error</>
         case "done":
-            console.log(_data)
+            //console.log(_data)
             return <SwitchView idTU={idTU} data={_data} />
         default:
             break
@@ -65,31 +65,3 @@ const SwitchView = ({idTU,data}) => {
     )
 }
 
-
-// eslint-disable-next-line no-unused-vars
-const dataE = [
-    {
-        type: "proximal",
-        "Transcription Factor": "CRP-cAMP",
-        "Function": "activator",
-        "Promoter": "glnAp1",
-        "LeftPos": 1000,
-        "RightPos": 1500,
-        "Central Rel-Pos": -71.5,
-        "sequence": "ttcctgacttAAGCGGCGCTGGTTATCCATcggagccatc",
-        "Growth Conditions": "nd",
-        "Evidence References": "---"
-    },
-    {
-        type: "proximal",
-        "Transcription Factor": "CRP-cAMP",
-        "Function": "represor",
-        "Promoter": "glnAp1",
-        "LeftPos": 1000,
-        "RightPos": 1500,
-        "Central Rel-Pos": -71.5,
-        "sequence": "ttcgacgtgctagctagctttAAGCGGCACTTGCAGCTGGTTATCCATccgcgtactgacggagccatc",
-        "Growth Conditions": "nd",
-        "Evidence References": "---"
-    }
-]

@@ -20,8 +20,8 @@ export function MarkSequence(sequence) {
             });
         }
     })
-
-    const width = sequence.length * 10
+    if(sequence !== null){
+        const width = sequence.length * 10
     return (
         
         <div
@@ -36,6 +36,11 @@ export function MarkSequence(sequence) {
         >
         </div>
     );
+    }
+    return(
+        <div></div>
+    )
+    
 }
 
 
