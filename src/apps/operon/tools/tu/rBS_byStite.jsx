@@ -1,14 +1,26 @@
 import React from 'react'
-import {MarkSequence} from './bs_compnents/mkSequence'
+import { MarkSequence } from './bs_compnents/mkSequence'
 //import AllCitations from '../../../../components/cits/Cits'
 
 export const RBSbyStite = ({ data, type = "" }) => {
     switch (type) {
-        case "genes":
-           data = data.genes
-           return rbsTable()
+        case "gene":
+            data = data.genes
+            if (data) {
+                console.log(data)
+                return (
+                    <div>
+                        {
+                            data.map(gene => {
+                                return (rbsTable(gene, `Gene: ${gene.name}`, gene.id))
+                            })
+                        }
+                    </div>
+                )
+            }
+            return <>no gene</>
         case "promoter":
-            return rbsTable(data.promoter, `Promoter: ${data.promoter.name}`)
+            return rbsTable(data.promoter, `Promoter: ${data.promoter.name}`, data.promoter.id)
         case "regulator":
             data = data.regulatorBindingSites
             break;
@@ -19,49 +31,52 @@ export const RBSbyStite = ({ data, type = "" }) => {
 
 }
 
-function rbsTable(data,name) {
+function rbsTable(data, name, key) {
     const rbs = data?.regulatorBindingSites
-    console.log(data)
-    const sites = orderRIS(rbs)
-    return (
-        <table>
-            <thead>
-                <tr>
-                <th style={tbTitle} colSpan="9" >{name}</th>
-                </tr>
-                <tr>
-                    <th style={tbTitle} colSpan="2" >Regulator</th>
-                    <th></th>
-                    <th style={tbTitle} colSpan="6" >Regulatory Interactions</th>
-                </tr>
-                <tr>
-                    <th style={thStyle} >Name</th>
-                    <th style={thStyle} >Function</th>
-                    <th></th>
-                    <th style={thStyle} >Center Position</th>
-                    <th style={thStyle} >Absolute Position</th>
-                    <th style={thStyle} >LeftPos</th>
-                    <th style={thStyle} >RightPos</th>
-                    <th style={thStyle} >Sequence</th>
-                    <th style={thStyle} >Evidence and References</th>
-                </tr>
-            </thead>
-            <tbody>
-                {
-                    sites.map((site, index) => {
-                        return (
-                            <tr key={`tr-bs-${index}-${site[7]}<${index}`} >
-                                {site.map((dt, i) => {
-                                    return <td key={`td-bs-<${index}-${i}`} >{dt}</td>
-                                })}
+    //console.log(data)
+    if (rbs.length > 0) {
+        const sites = orderRIS(rbs)
+        return (
+            <table key={`table-rbs-${key}`}>
+                <thead>
+                    <tr>
+                        <th style={tbTitle} colSpan="9" >{name}</th>
+                    </tr>
+                    <tr>
+                        <th style={tbTitle} colSpan="2" >Regulator</th>
+                        <th></th>
+                        <th style={tbTitle} colSpan="6" >Regulatory Interactions</th>
+                    </tr>
+                    <tr>
+                        <th style={thStyle} >Name</th>
+                        <th style={thStyle} >Function</th>
+                        <th></th>
+                        <th style={thStyle} >Center Position</th>
+                        <th style={thStyle} >Absolute Position</th>
+                        <th style={thStyle} >LeftPos</th>
+                        <th style={thStyle} >RightPos</th>
+                        <th style={thStyle} >Sequence</th>
+                        <th style={thStyle} >Evidence and References</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        sites.map((site, index) => {
+                            return (
+                                <tr key={`tr-bs-${index}-${site[7]}<${index}`} >
+                                    {site.map((dt, i) => {
+                                        return <td key={`td-bs-<${index}-${i}`} >{dt}</td>
+                                    })}
 
-                            </tr>
-                        )
-                    })
-                }
-            </tbody>
-        </table>
-    )
+                                </tr>
+                            )
+                        })
+                    }
+                </tbody>
+            </table>
+        )
+    }
+    return <></>
 }
 
 function orderRIS(rbs) {
@@ -83,7 +98,7 @@ function orderRIS(rbs) {
             sites.push(site)
             return null
         })
-        
+
         return null
     })
 

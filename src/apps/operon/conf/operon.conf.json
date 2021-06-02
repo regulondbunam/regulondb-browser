@@ -16,10 +16,10 @@
       "tabs": {
         "all": {
           "id": "tab-all",
-          "name": "All Hola",
+          "name": "All",
           "title": "All",
           "description": "<p>Description of the all tab</p>",
-          "disabled": true
+          "disabled": false
         },
         "description": {
           "id": "tab-description",

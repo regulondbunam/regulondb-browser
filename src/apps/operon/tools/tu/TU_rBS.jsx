@@ -15,7 +15,7 @@ export const TUrBS = ({ idTU }) => {
         case "error":
             return <>error</>
         case "done":
-            //console.log(_data)
+            console.log(_data)
             return <SwitchView idTU={idTU} data={_data} />
         default:
             break
@@ -42,7 +42,10 @@ const SwitchView = ({idTU,data}) => {
         switch (_view) {
             case "by site":
                 return (
-                    <RBSbyStite data={data} type="promoter"/>
+                    <>
+                        <RBSbyStite data={data} type="promoter"/>
+                        <RBSbyStite data={data} type="gene"/>
+                    </>
                 )
             default:
                 return <RBSbyFull data={data} />
