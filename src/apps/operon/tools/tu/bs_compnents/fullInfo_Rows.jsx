@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { MarkSequenceWithPositions } from "./mkSequence";
 //import { IconButton } from '../../../../../components/ui-components/ui_components'
 
 // eslint-disable-next-line no-unused-vars
@@ -55,7 +56,7 @@ export function RowInfo(formatData) {
                                             <td colSpan="2" >Function: {data?.function}</td>
                                         </tr>
                                         <tr >
-                                            <td colSpan="2" >{data?.sequenceInfo?.sequence}</td>
+                                            <td colSpan="2" ><MarkSequenceWithPositions sequenceInfo={data?.sequenceInfo} /></td>
                                         </tr>
                                         <tr >
                                             <td>Center Position: {data?.center}</td>
@@ -71,6 +72,8 @@ export function RowInfo(formatData) {
         }
     } catch (error) {
         console.error("error despliegue de sitios: ", error)
+        return <>error</>
+        
     }
     return <>hola</>
 }
