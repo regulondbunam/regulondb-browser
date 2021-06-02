@@ -228,6 +228,7 @@ export function getTU_rBS(idTU) {
           }
           promoter{
             id
+            name
             regulatorBindingSites{
               function
             regulator {

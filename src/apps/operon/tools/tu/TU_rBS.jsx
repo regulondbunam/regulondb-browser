@@ -28,7 +28,6 @@ export const TUrBS = ({ idTU }) => {
                 <DataTUrBS id={idTU}
                     resoultsData={(data) => { set_data(data) }}
                     status={(state) => { set_state(state) }}
-                    bs_class="promoter"
                 />
             </div>
         )
@@ -42,7 +41,9 @@ const SwitchView = ({idTU,data}) => {
     function swt(view) {
         switch (_view) {
             case "by site":
-                return <RBSbyStite data={data} />
+                return (
+                    <RBSbyStite data={data} type="promoter"/>
+                )
             default:
                 return <RBSbyFull data={data} />
         }
