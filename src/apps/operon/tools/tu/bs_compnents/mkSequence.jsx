@@ -11,33 +11,27 @@ export function MarkSequence(sequence) {
             const width = drawPlace.clientWidth;
             canvas = SVG().addTo(`#seq-${sequence}`).size(width, 30).id(`cav-${sequence}`);
             let px = 0
+            // eslint-disable-next-line
             const seq = [].map.call(sequence, function (x) {
                 canvas.rect(10, 16).fill(sequenceColor[x]).move(px, 0)
                 canvas.text(x)
-                .font({ size: '16px', family: "'Courier New',Courier,monospace" }).move(px, 0)
+                .font({ size: '16px', family: "'Courier New',Courier,monospace", weight: "700" }).move(px, 0)
                 px += 10
             });
-            /*
-            let height = 30;
-            let canva = d3.select(`#seq-${sequence}`)
-                .append("svg")
-                .attr("height", height)
-                .attr("width", 200);
-            canva.append("text")
-                .style("font-size", "9px")
-                .style("font-family", "'Courier New',Courier,monospace")
-                .text("g");
-                */
         }
     })
 
+    const width = sequence.length * 10
     return (
+        
         <div
             id={`seq-${sequence}`}
             style={{
                 height: "20px",
-                width: "500px",
-                left: "0"
+                width: width,
+                left: "0",
+                overflowY: "hidden",
+                overflowX: "auto"
             }}
         >
         </div>
