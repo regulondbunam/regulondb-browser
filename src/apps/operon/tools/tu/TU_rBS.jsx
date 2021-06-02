@@ -48,7 +48,7 @@ const SwitchView = ({idTU,data}) => {
                     </>
                 )
             default:
-                return <RBSbyFull data={data} />
+                return <RBSbyFull data={data} type="promoter" />
         }
     }
 
