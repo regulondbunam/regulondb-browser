@@ -142,22 +142,46 @@ export function getTU_promoter(idTU) {
         _id
         transcriptionUnits {
           id
-          promoter{
+          promoter {
             id
             name
-            note
-            synonyms
-            bindsSigmaFactor{
+            bindsSigmaFactor {
               sigmaFactor_id
               sigmaFactor_name
+              citations {
+                evidence {
+                  id
+                  name
+                  code
+                  type
+                }
+                publication {
+                  id
+                  authors
+                  pmid
+                  citation
+                  url
+                  title
+                  year
+                }
+              }
             }
-            transcriptionStartSite{
+            note
+            boxes {
+              leftEndPosition
+              rightEndPosition
+              sequence
+              type
+            }
+            score
+            sequence
+            synonyms
+            transcriptionStartSite {
               leftEndPosition
               rightEndPosition
               range
               type
             }
-            sequence
           }
         }
       }

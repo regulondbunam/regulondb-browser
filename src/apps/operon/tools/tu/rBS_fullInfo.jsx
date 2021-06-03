@@ -1,5 +1,3 @@
-import { CollectionsOutlined } from '@material-ui/icons'
-import { format } from 'd3-format'
 import React, { Component } from 'react'
 //import { IconButton } from '../../../../components/ui-components/ui_components'
 import { RowInfo } from './bs_compnents/fullInfo_Rows'

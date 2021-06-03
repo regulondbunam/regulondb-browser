@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { MarkSequenceWithPositions } from "./mkSequence";
 //import { IconButton } from '../../../../../components/ui-components/ui_components'
 
