@@ -200,6 +200,24 @@ export function getTU_terminators(idTU) {
           id
           terminators {
             _id
+            class
+            citations {
+              evidence {
+                id
+                name
+                code
+                type
+              }
+              publication {
+                id
+                authors
+                pmid
+                citation
+                url
+                title
+                year
+              }
+            }
             sequence
             transcriptionTerminationSite{
               type

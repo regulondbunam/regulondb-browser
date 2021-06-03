@@ -256,6 +256,7 @@ export const DataTUdescription = ({
     return (<></>);
 }
 
+// eslint-disable-next-line no-unused-vars
 function OrganizeBindigSites(transcriptionUnits, idTU) {
     const tu = transcriptionUnits.find(element => element.id === idTU);
     //console.log(tu)

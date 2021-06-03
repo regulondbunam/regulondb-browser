@@ -23,7 +23,7 @@ const tbTitle = {
 }
 
 export function RowInfo(formatData) {
-    console.log(formatData)
+    //console.log(formatData)
     //const _viewInfo = true
     /*
     const [_viewInfo, set_viewInfo] = useState(true)

@@ -13,7 +13,7 @@ export const TUTerminators = ({ idTU }) => {
         case "error":
             return <>error</>
         case "done":
-            //console.log(_data)
+            console.log(_data)
             return <Terminators idTU={idTU} data={_data} />
         default:
             break
@@ -33,7 +33,7 @@ export const TUTerminators = ({ idTU }) => {
 }
 
 function Terminators({ idTU, data }) {
-    const tu = data.find(element => element.id === "idTest");
+    const tu = data.find(element => element.id === idTU);
     //console.log(tu)
     if (tu) {
         return (
