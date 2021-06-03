@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { DataTUterminators } from '../../webServices/operon_ws_TU'
+import {MarkSequenceTerminator} from './terminator_components/mkSequence'
 
 export const TUTerminators = ({ idTU }) => {
     const [_data, set_data] = useState();
@@ -13,7 +14,7 @@ export const TUTerminators = ({ idTU }) => {
         case "error":
             return <>error</>
         case "done":
-            console.log(_data)
+            //console.log(_data)
             return <Terminators idTU={idTU} data={_data} />
         default:
             break
@@ -45,7 +46,7 @@ function Terminators({ idTU, data }) {
                             return (
                                 <div key={`terminator_${terminator._id}`}>
                                     <h3>{terminator?.transcriptionTerminationSite?.type}</h3>
-                                    <table style={{ tableLayout: "fixed", width: "auto" }}>
+                                    <table>
                                         <tbody>
                                             <tr >
                                                 <td style={{ fontWeight: "bold" }} >LeftPos</td><td>{terminator?.transcriptionTerminationSite?.leftEndPosition}</td>
@@ -56,7 +57,16 @@ function Terminators({ idTU, data }) {
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td colSpan="4" >{terminator?.sequence}</td>
+                                                <td colSpan="4" >
+                                                    <MarkSequenceTerminator 
+                                                    sequenceInfo={{
+                                                        sequence: terminator?.sequence,
+                                                        posL: terminator?.transcriptionTerminationSite?.leftEndPosition,
+                                                        posR: terminator?.transcriptionTerminationSite?.rightEndPosition
+                                                        }}
+                                                    id={terminator._id}
+                                                    />
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -73,6 +83,13 @@ function Terminators({ idTU, data }) {
     }
 
 }
+/**
+ * sequenceInfo: {
+                            sequence: rs?.sequence,
+                            posL: rs?.leftEndPosition,
+                            posR: rs?.rightEndPosition
+                        },
+ */
 
 // eslint-disable-next-line no-unused-vars
 const termiExample = [
