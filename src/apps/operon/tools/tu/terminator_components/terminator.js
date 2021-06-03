@@ -61,6 +61,11 @@ export default function DrawTerminador({
         rotate: 180
       });
     }
+    group.attr({
+      "data-tip": "",
+      "data-for": `${canva.node?.id}-${id}`
+    });
+  
   
     return {
       canva: canva,

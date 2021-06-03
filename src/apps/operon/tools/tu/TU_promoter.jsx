@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { DataTUpromoter } from '../../webServices/operon_ws_TU'
+import { MarkSequencePromoter } from './promoter_components/mkSequence'
 
 export const TUpromoter = ({ idTU }) => {
     const [_data, set_data] = useState();
@@ -37,14 +38,14 @@ function Genes({ data, idTU }) {
         const tu = data.find(element => element.id === idTU);
         //console.log(tu)
         return (
-            <div style={{marginLeft: "5%"}}>
+            <div style={{ marginLeft: "5%" }}>
                 <h3>{tu?.promoter?.name}</h3>
                 {
                     notNull(tu?.promoter?.note,
                         <p dangerouslySetInnerHTML={{ __html: tu?.promoter?.note }} />
                     )
                 }
-                <table style={{ tableLayout: "fixed", width: "auto" }} >
+                <table>
                     <tbody>
                         {
                             notNull(tu?.promoter?.id,
@@ -85,14 +86,26 @@ function Genes({ data, idTU }) {
                         {
                             notNull(tu?.promoter?.sequence,
                                 <tr>
-                                    <td style={{ fontWeight: "bold" }}>Sequence</td>
-                                    <td>{tu?.promoter?.sequence}</td>
+                                    <td colSpan="2" style={{ fontWeight: "bold" }}>Sequence</td>
                                 </tr>
                             )
                         }
-                        <tr>
-                            <td></td>
-                        </tr>
+                        {
+                            notNull(tu?.promoter?.sequence,
+                                <tr>
+                                    <td colSpan="2" >
+                                        <div
+                                            style={{
+                                                width: "100%",
+                                                overflow: "auto"
+                                            }}
+                                        >
+                                            <MarkSequencePromoter sequence={tu?.promoter?.sequence} id={tu?.promoter?.id} />
+                                        </div>
+                                    </td>
+                                </tr>
+                            )
+                        }
                     </tbody>
                 </table>
             </div>
