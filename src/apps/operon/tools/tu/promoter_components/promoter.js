@@ -11,7 +11,7 @@ export default function DrawPromoter({
     if (!canva ) {
       return null;
     }
-    console.log(heigth)
+   // console.log(heigth)
 
     // draw body
     //const body = canva.path("M 0 0 V " + -heigth + " H " + arrowSize + " V");

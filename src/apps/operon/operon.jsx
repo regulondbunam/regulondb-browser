@@ -54,7 +54,7 @@ const Operon = () => {
                 <Info id={_operonId} 
                     tuId={_tuId} 
                     nTUs={nTUs.length} 
-                    showTabs={showTabs} 
+                    showTabs={showTabs}
                 />
             </div>
         )
