@@ -1,4 +1,7 @@
-import GetInfoByOperon from "./querys/operon/operon_info"
+import GetArrangement from './operon/operon_arrangement'
+import GetCitations from "./operon/operon_citations";
+import GetInfo from './operon/operon_info'
+import GetStatistics from './operon/operon_statisitics'
+import ValidateID from './operon/operon_validate'
 
-
-export {GetInfoByOperon}
+export {GetArrangement, GetCitations, GetInfo, GetStatistics, ValidateID}
