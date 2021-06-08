@@ -11,7 +11,7 @@ import Gene from './apps/gene/gene'
 import Operon from './apps/operon/operon'
 
 import Error from './apps/error/e404/error'
-
+import Testing from './apps/error/testing/operon/operon_testing'
 
 function App() {
   return (
@@ -36,6 +36,9 @@ function App() {
         </Route>
         <Route path={["/tu/:id","/tu",]}>
           <Operon />
+        </Route>
+        <Route path={["/app/testing",]}>
+          <Testing />
         </Route>
         <Route path="*">
           <Error />
