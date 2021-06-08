@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {DataTUrBS} from '../../webServices/operon_ws_TU'
+import { GetBindingSites } from '../../webServices/tu_ws'
 import { RBSbyStite } from "./rBS_byStite";
 import RBSbyFull from './rBS_fullInfo'
 
@@ -25,7 +25,7 @@ export const TUrBS = ({ idTU }) => {
         return (
             <div>
                 loading...
-                <DataTUrBS id={idTU}
+                <GetBindingSites id_operon={idTU}
                     resoultsData={(data) => { set_data(data) }}
                     status={(state) => { set_state(state) }}
                 />

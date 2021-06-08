@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { GetSumaryByTU } from '../webServices/operon_ws_sumary'
+import { GetStatistics } from '../webServices/operon_ws'
 
 export const Sumary = ({
     idOperon
@@ -24,7 +24,7 @@ export const Sumary = ({
             {
                 loading ? <>loading...</> : null
             }
-            <GetSumaryByTU id={idOperon}
+            <GetStatistics id={idOperon}
                 resoultsData={(data) => { set_data(data) }}
                 status={(state) => { set_state(state) }}
             />

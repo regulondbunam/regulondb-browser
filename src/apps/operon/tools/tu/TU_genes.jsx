@@ -1,4 +1,4 @@
-import { DataTuGenes } from '../../webServices/operon_ws_TU'
+import { GetGenes } from '../../webServices/tu_ws'
 import React, {useState} from 'react'
 
 export const TUgenes = ({idTU}) => {
@@ -21,7 +21,7 @@ export const TUgenes = ({idTU}) => {
         return (
             <div>
                 loading...
-                <DataTuGenes id={idTU}
+                <GetGenes id={idTU}
                     resoultsData={(data) => { set_data(data) }}
                     status={(state) => { set_state(state) }}
                 />

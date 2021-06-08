@@ -6,10 +6,10 @@ import { useQuery } from '@apollo/react-hooks';
 import { Citations } from '../citations'
 import {FirstGene} from './FirstGene'
 
-export function query(id_operon) {
+export function query(id_tu) {
     return gql`
     {
-        getOperonBy(search:"${id_operon}"){
+        getOperonBy(advancedSearch: "${id_tu}[transcriptionUnits.id]"{
             data{
                 _id
                 transcriptionUnits{
@@ -19,6 +19,7 @@ export function query(id_operon) {
                     synonyms
                     ${FirstGene}
                     ${Citations}
+                }
             }
             pagination{
                 totalResults
@@ -29,12 +30,12 @@ export function query(id_operon) {
     `
 }
 
-const GetInfo = ({
-    id_operon = '',
+const ValidateID = ({
+    id_tu = '',
     status = () => { },
     resoultsData = () => { },
 }) => {
-    const { data, loading, error } = useQuery(query(id_operon))
+    const { data, loading, error } = useQuery(query(id_tu))
     useEffect(() => {
         if (loading) {
             status('loading')
@@ -73,4 +74,4 @@ const GetInfo = ({
     return (<></>);
 }
 
-export default GetInfo;
+export default ValidateID;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { DataTUpromoter } from '../../webServices/operon_ws_TU'
+import { GetPromoter } from '../../webServices/tu_ws'
 import { MarkSequencePromoter } from './promoter_components/mkSequence'
 
 export const TUpromoter = ({ idTU }) => {
@@ -22,7 +22,7 @@ export const TUpromoter = ({ idTU }) => {
         return (
             <div>
                 loading...
-                <DataTUpromoter id={idTU}
+                <GetPromoter id={idTU}
                     resoultsData={(data) => { set_data(data) }}
                     status={(state) => { set_state(state) }}
                 />

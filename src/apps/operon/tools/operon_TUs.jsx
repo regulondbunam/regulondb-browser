@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { Tabs } from '../../../components/ui-components/web/tab/tabs';
-import {GetTUs} from '../webServices/operon_ws_TUs'
+import { GetInfo } from '../webServices/tu_ws'
 import TU from "./operon_TU"
 
 const TUs = ({idOperon, conf}) => {
@@ -27,7 +27,7 @@ const TUs = ({idOperon, conf}) => {
             {
                 loading ? <>loading...</> : null
             }
-            <GetTUs id={idOperon}
+            <GetInfo id={idOperon}
                 resoultsData={(data) => { set_data(data) }}
                 status={(state) => { set_state(state) }}
             />

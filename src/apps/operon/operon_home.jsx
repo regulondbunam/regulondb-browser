@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AllOperon from "./webServices/allOperon_ws"
+import {GetInfo} from "./webServices/operon_ws"
 import Table from './components/operon_table'
 
 const Home = ({ conf }) => {
@@ -33,7 +33,7 @@ const Home = ({ conf }) => {
   }
   return (
     <div>
-      <AllOperon
+      <GetInfo
         resoultsData={(data) => { set_data(data) }}
         resoultsFound={(find) => { set_find(find) }}
         status={(state) => { set_state(state) }}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { DataTUdescription } from '../../webServices/operon_ws_TU'
+import { GetInfo } from '../../webServices/tu_ws'
 
 export const TUdescription = ({ idTU }) => {
     const [_data, set_data] = useState();
@@ -21,7 +21,7 @@ export const TUdescription = ({ idTU }) => {
         return (
             <div>
                 loading...
-                <DataTUdescription id={idTU}
+                <GetInfo id={idTU}
                     resoultsData={(data) => { set_data(data) }}
                     status={(state) => { set_state(state) }}
                 />

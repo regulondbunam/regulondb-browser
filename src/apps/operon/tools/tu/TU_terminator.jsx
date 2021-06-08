@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { DataTUterminators } from '../../webServices/operon_ws_TU'
+import { GetTerminators } from '../../webServices/tu_ws'
 import {MarkSequenceTerminator} from './terminator_components/mkSequence'
 
 export const TUTerminators = ({ idTU }) => {
@@ -23,7 +23,7 @@ export const TUTerminators = ({ idTU }) => {
         return (
             <div>
                 loading...
-                <DataTUterminators id={idTU}
+                <GetTerminators id={idTU}
                     resoultsData={(data) => { set_data(data) }}
                     status={(state) => { set_state(state) }}
                 />

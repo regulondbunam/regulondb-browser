@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { DNAfeatures } from "./operon_view/dnaFeaturesGL/dna_features";
-import { GetInfoByOperon } from '../webServices/operon_ws_info'
+import { GetInfo } from '../webServices/tu_ws'
 
 const OperonSection = ({idOperon}) => {
     const [_data, set_data] = useState();
@@ -31,7 +31,7 @@ const OperonSection = ({idOperon}) => {
             {
                 loading ? <>loading...</> : null
             }
-            <GetInfoByOperon id={idOperon}
+            <GetInfo id_operon={idOperon}
                 resoultsData={(data) => { set_data(data) }}
                 status={(state) => { set_state(state) }}
             />

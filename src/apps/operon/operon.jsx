@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from "react-router-dom";
-import { ValidateId } from "./webServices/operon_ws_validate";
-import { SearchTU } from "./webServices/operon_ws_TU"
+import { ValidateID } from "./webServices/operon_ws";
+import { ValidateID as TUvalidateID } from "./webServices/tu_ws"
 import Title from './components/operon_title'
 import Home from "./operon_home"
 import Info from "./operon_info"
@@ -77,7 +77,7 @@ const Operon = () => {
                             ? <Title title={title} state="error" />
                             : ""
                     }
-                    <ValidateId id={_operonId}
+                    <ValidateID id={_operonId}
                         resoultsData={(data) => { set_data(data) }}
                         status={(state) => { set_state(state) }}
                         isValidate={(isGood) => { set_validId(isGood) }}
@@ -144,5 +144,5 @@ function TUredirect({ id, operonId, status }) {
         return <></>
     }
 
-    return <SearchTU id={id} status={(state) => { set_state(state) }} resoultsData={(data) => { set_data(data) }} />
+    return <TUvalidateID id_tu={id} status={(state) => { set_state(state) }} resoultsData={(data) => { set_data(data) }} />
 }
