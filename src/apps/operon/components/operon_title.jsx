@@ -2,11 +2,11 @@ import React from 'react'
 import { Cover} from "../../../components/ui-components/ui_components";
 
 
-export const Title = ({title = "",state}) => {
+export const Title = ({title = "",state,isInfo = false}) => {
     return (
         <div>
             <Cover state={state}>
-                {state?"operon":""}
+                {isInfo?"operon":""}
                     <h1>{title}</h1>
             </Cover>
         </div>

@@ -1,5 +1,5 @@
-import React, { useEffect} from 'react';
-import { gql } from "apollo-boost";
+import React, { useEffect, useState} from 'react';
+import { gql } from "@apollo/client";
 import { helmetJsonLdProp } from "react-schemaorg";
 import { Helmet } from 'react-helmet-async';
 import { useQuery } from '@apollo/react-hooks';
@@ -25,44 +25,47 @@ export function query(id_operon) {
 
 const ValidateId = ({
     id_operon = '',
-    idType,
     status = () => { },
     isValidate = () => { },
     resoultsData = () => { },
 }) => {
+    const [_res, set_res] = useState(false);
     const { data, loading, error } = useQuery(query(id_operon))
 
     useEffect(() => {
         if (loading) {
             status('loading')
         } else {
-            //console.log(data.getOperonBy.pagination.totalResults)
-            
-            if (data !== undefined) {
-                const resoults = data.getOperonBy.pagination.totalResults
-                if (resoults === 1) {
-                    isValidate(true)
-                    resoultsData(data.getOperonBy.data)
-                    status('done')
+            if (data && !_res) {
+                set_res(true)
+                if (data.getOperonBy.pagination.totalResults === 1) {
+                    try {
+                        console.log(data.getOperonBy.data)
+                        resoultsData(data.getOperonBy.data)
+                        status('done')
+                        isValidate(true)
+                    } catch (error) {
+                        status('error')
+                        console.error(error)
+                    }
                 } else {
-                    isValidate(false)
                     resoultsData({})
+                    isValidate(false)
                     status('not found')
                 }
-
             }
         }
         if (error) {
             status('error')
-            console.log(error)
+            console.error(error)
         }
+    },[loading, error, status, data, _res, resoultsData, isValidate])
 
-    })
     if (loading) {
         return <></>
     }
     if (error) {
-        console.log(error)
+        console.log("operon_ws_validate",error)
         return <></>
     }
     try {

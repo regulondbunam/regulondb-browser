@@ -50,7 +50,7 @@ const Operon = () => {
         let showTabs = true
         return (
             <div>
-                <Title title={title} data={_data} />
+                <Title title={title} data={_data} isInfo={true} />
                 <Info id={_operonId} 
                     tuId={_tuId} 
                     nTUs={nTUs.length} 
@@ -77,7 +77,7 @@ const Operon = () => {
                             ? <Title title={title} state="error" />
                             : ""
                     }
-                    <ValidateID id={_operonId}
+                    <ValidateID id_operon={_operonId}
                         resoultsData={(data) => { set_data(data) }}
                         status={(state) => { set_state(state) }}
                         isValidate={(isGood) => { set_validId(isGood) }}

@@ -45,7 +45,7 @@ const GetAllOperon = ({
         } else {
             if (data && !_res) {
                 set_res(true)
-                if (data.getAllOperon.pagination.totalResults > 1) {
+                if (data.getAllOperon.pagination.totalResults >= 1) {
                     try {
                         //console.log(data.getAllOperon.data)
                         resoultsData(data.getAllOperon.data)
