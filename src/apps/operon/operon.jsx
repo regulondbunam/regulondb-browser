@@ -37,7 +37,7 @@ const Operon = () => {
         }
     }, [id, _testId])
     if(!id){
-        return home_default(title)
+        return <Home title={title} conf={conf?.pages?.operon_main} />
     }
     if (_data) {
         if(!_validId){
@@ -111,17 +111,6 @@ const Operon = () => {
 }
 
 export default Operon
-
-function home_default(title) {
-    return (
-        <div>
-            <Title title={title} />
-            <article>
-                <Home conf={conf?.pages?.operon_main} />
-            </article>
-        </div>
-    )
-}
 
 function TUredirect({ id, operonId, status }) {
     const [_data, set_data] = useState();

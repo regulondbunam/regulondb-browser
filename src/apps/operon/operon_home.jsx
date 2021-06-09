@@ -1,8 +1,23 @@
 import React, { useState } from "react";
 import { GetAll } from "./webServices/operon_ws"
 import Table from './components/operon_table'
+import Title from './components/operon_title'
 
-const Home = ({ conf }) => {
+function Home({title,conf}){
+
+  const [_state, set_state] = useState("done");
+
+  return(
+    <div>
+            <Title title={title} state={_state} />
+            <article>
+                <Body conf={conf} setState={state=>{set_state(state)}} />
+            </article>
+        </div>
+  )
+}
+
+const Body = ({ conf, setState }) => {
   const [_data, set_data] = useState();
   // eslint-disable-next-line no-unused-vars
   const [_find, set_find] = useState();
@@ -36,7 +51,7 @@ const Home = ({ conf }) => {
         <GetAll
           resoultsData={(data) => { set_data(data) }}
           resoultsFound={(find) => { set_find(find) }}
-          status={(state) => { set_state(state) }}
+          status={(state) => { set_state(state); setState(state) }}
           limit={_limit} page={_page}
         />
         <Description
