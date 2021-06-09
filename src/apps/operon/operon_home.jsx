@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {GetInfo} from "./webServices/operon_ws"
+import { GetAll } from "./webServices/operon_ws"
 import Table from './components/operon_table'
 
 const Home = ({ conf }) => {
@@ -17,7 +17,7 @@ const Home = ({ conf }) => {
           <Description
             conf={conf}
             limit={_limit}
-            setLimit={(limit) => { set_limit(limit); set_state("loading")}}
+            setLimit={(limit) => { set_limit(limit); set_state("loading") }}
           />
           <Table data={dataFormat(_data)} title="Operons" href_base="/operon/" />
         </div>
@@ -30,34 +30,36 @@ const Home = ({ conf }) => {
         </div>
       )
     }
-  }
-  return (
-    <div>
-      <GetInfo
-        resoultsData={(data) => { set_data(data) }}
-        resoultsFound={(find) => { set_find(find) }}
-        status={(state) => { set_state(state) }}
-        limit={_limit} page={_page}
-      />
-      <Description
-        conf={conf}
-        limit={_limit}
-        setLimit={(limit) => { set_limit(limit) }}
-      />
-      {
-        _state==="loading"
-        ?"loading"
-        :""
-      }
-      {
-        _state==="error"
-        ?"error"
-        :""
-      }
-      
-    </div>
+  } else {
+    return (
+      <div>
+        <GetAll
+          resoultsData={(data) => { set_data(data) }}
+          resoultsFound={(find) => { set_find(find) }}
+          status={(state) => { set_state(state) }}
+          limit={_limit} page={_page}
+        />
+        <Description
+          conf={conf}
+          limit={_limit}
+          setLimit={(limit) => { set_limit(limit) }}
+        />
+        {
+          _state === "loading"
+            ? "loading"
+            : ""
+        }
+        {
+          _state === "error"
+            ? "error"
+            : ""
+        }
 
-  );
+      </div>
+
+    );
+  }
+
 };
 
 export default Home;
@@ -65,19 +67,19 @@ export default Home;
 class Description extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: this.props.limit}
+    this.state = { value: this.props.limit }
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
-    let limit = parseInt(event.target.value,10)
-    console.log(limit)
-    if(limit<=0 || !limit){
-      this.setState({value:0})
-    }else{
+    let limit = parseInt(event.target.value, 10)
+    //console.log(limit)
+    if (limit <= 0 || !limit) {
+      this.setState({ value: 0 })
+    } else {
       this.props.setLimit(limit);
     }
-    
+
   }
 
   render() {

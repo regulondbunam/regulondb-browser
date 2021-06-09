@@ -1,28 +1,31 @@
-import React, { useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 //import { Person } from "schema-dts";
-import { helmetJsonLdProp } from "react-schemaorg";
-import { Helmet } from 'react-helmet-async';
+//import { helmetJsonLdProp } from "react-schemaorg";
+//import { Helmet } from 'react-helmet-async';
 import { useQuery } from '@apollo/react-hooks';
-import { gql } from "apollo-boost";
+import { gql } from "@apollo/client";
 
 export function query(limit, page) {
-  return gql`{
+    return gql`{
     getAllOperon(limit: ${limit}, page: ${page}) {
-      data {
-        _id
-        operon {
-          name
-          statistics{
-            genes
-            promoters
-            transcriptionUnit
-          }
+        data {
+            _id
+            operon {
+                name
+                statistics{
+                    genes
+                    promoters
+                    transcriptionUnit
+                }
+            }
+            transcriptionUnits{
+                id
+                name
+            }
+        }  
+        pagination {
+            totalResults
         }
-        transcriptionUnits{
-          id
-          name
-        }
-      }
     }
   }`
 }
@@ -34,24 +37,37 @@ const GetAllOperon = ({
     resoultsData = () => { },
     status = () => { }
 }) => {
+    const [_res, set_res] = useState(false);
     const { data, loading, error } = useQuery(query(limit, page))
     useEffect(() => {
         if (loading) {
             status('loading')
-        }else{
-            if (data !== undefined) {
-                //console.log(data.getAllOperon.data)
-                //const nResults = data.getGenesBy.pagination.totalResults
-                //resoultsFound(nResults)
-                resoultsData(data.getAllOperon.data)
-                status('done')
+        } else {
+            if (data && !_res) {
+                set_res(true)
+                if (data.getAllOperon.pagination.totalResults > 1) {
+                    try {
+                        //console.log(data.getAllOperon.data)
+                        resoultsData(data.getAllOperon.data)
+                        status('done')
+                    } catch (error) {
+                        status('error')
+                        console.error(error)
+                    }
+                } else {
+                    resoultsData({})
+                    status('not found')
+                }
             }
         }
         if (error) {
             status('error')
+            console.error(error)
         }
-    })
-
+    },[loading, error, status, data, _res, resoultsData])
+    if(data){
+        return <></>
+    }
     if (loading) {
         return <></>
     }
@@ -59,37 +75,7 @@ const GetAllOperon = ({
         console.log(error)
         return <></>
     }
-    try {
-        const searchData = data.getAllOperon.data
-        const operon = searchData.map((item) => {
-            return { 
-                '@type': 'Operon', 
-                'name': item?.operon?.name, 
-                'id': item?._id }
-        })
-        //console.log(operon)
-        return (
-            <Helmet
-                script={[
-                    helmetJsonLdProp({
-                        "@context": {
-                            "scheme": "http://schema.org/",
-                            "bs": "http://bioschema.org/"
-                        },
-                        "@type": "FindAction",
-                        "agent": {
-                            "@type": "Organization",
-                            "name": "RegulonDB-SearchTool"
-                        },
-                        "object": operon
-                    }),
-                ]}
-            />
-        );
-    } catch (error) {
-        return <></>
-    }
-
+    return (<></>);
 }
 
 export default GetAllOperon;
