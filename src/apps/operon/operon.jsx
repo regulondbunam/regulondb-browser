@@ -36,27 +36,25 @@ const Operon = () => {
 
         }
     }, [id, _testId])
-    if(!id){
+    if (!id) {
         return <Home title={title} conf={conf?.pages?.operon_main} />
     }
     if (_data) {
-        if(!_validId){
+        if (!_validId) {
             title = `Sorry we couldn't find the identifier: ${id}`
             return <Title title={title} state="error" />
         }
         //console.log(_data)
         let nTUs = _data[0]?.transcriptionUnits
         title = _data[0]?.operon?.name;
-        let showTabs = true
+        //let showTabs = true
         return (
-            <div>
-                <Title title={title} data={_data} isInfo={true} />
-                <Info id={_operonId} 
-                    tuId={_tuId} 
-                    nTUs={nTUs.length} 
-                    showTabs={showTabs}
-                />
-            </div>
+            <Info id={_operonId}
+                tuId={_tuId}
+                nTUs={nTUs.length}
+                title={title}
+                data={_data}
+            />
         )
     }
     if (_testId) {
@@ -64,7 +62,7 @@ const Operon = () => {
             title = `Sorry we couldn't find the identifier: ${id}`
             return <Title title={title} state="error" />
         }
-        if(_operonId){
+        if (_operonId) {
             return (
                 <div>
                     {
@@ -85,7 +83,7 @@ const Operon = () => {
                 </div>
             )
         }
-        if(_tuId){
+        if (_tuId) {
             return (
                 <div>
                     {
@@ -98,9 +96,9 @@ const Operon = () => {
                             ? <Title title={title} state="error" />
                             : ""
                     }
-                    <TUredirect id={id} 
-                        operonId={(operonId)=>{set_operonId(operonId)}}
-                        status={(state)=>{set_state(state)}}
+                    <TUredirect id={id}
+                        operonId={(operonId) => { set_operonId(operonId) }}
+                        status={(state) => { set_state(state) }}
                     />
                 </div>
             )
@@ -121,7 +119,7 @@ function TUredirect({ id, operonId, status }) {
             operonId(_data)
             status(_state)
         }
-        if(_state === "loading" || _state === "error"){
+        if (_state === "loading" || _state === "error") {
             status(_state)
         }
     })

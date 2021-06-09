@@ -6,8 +6,9 @@ import TUs from '../tools/operon_TUs'
 
 
 
-export const Tab = ({ idOperon, tuId, nTUs = 0, confJSON }) => {
-    const [_ntu, set_ntu] = useState(undefined)
+export const Tab = ({ idOperon, tuId, nTUs = 0, confJSON, setState }) => {
+
+    const [_nametu, set_nametu] = useState(undefined)
     const conf = confJSON?.pages?.operon_info
     let tabSelect = confJSON?.pages?.operon_info?.conf?.tabSelect
     if(tuId){
@@ -16,13 +17,13 @@ export const Tab = ({ idOperon, tuId, nTUs = 0, confJSON }) => {
     
     
     useEffect(() => {
-        if (!_ntu) {
-            set_ntu(`${conf?.tabs?.TUs?.name} (${nTUs}) `)
+        if (!_nametu) {
+            set_nametu(`${conf?.tabs?.TUs?.name} (${nTUs}) `)
         }
-    }, [_ntu, nTUs, conf])
+    }, [_nametu, nTUs, conf])
 
-    if (_ntu) {
-        conf.tabs.TUs.name = _ntu
+    if (_nametu) {
+        conf.tabs.TUs.name = _nametu
         return (
             <Tabs tabsObj={conf.tabs}
                 tabSelect={tabSelect}
@@ -52,6 +53,7 @@ function FormTabs(nTUs, idOperon, conf) {
                         idOperon={idOperon}
                         id={conf.tabs.description.id}
                         conf={conf.tabs.description}
+                        
                     />
                 )
             case conf?.tabs?.TUs?.id:
