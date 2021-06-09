@@ -40,7 +40,7 @@ const ValidateId = ({
                 set_res(true)
                 if (data.getOperonBy.pagination.totalResults === 1) {
                     try {
-                        console.log(data.getOperonBy.data)
+                        //console.log(data.getOperonBy.data)
                         resoultsData(data.getOperonBy.data)
                         status('done')
                         isValidate(true)
