@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import { DNAfeatures } from "./operon_view/dnaFeaturesGL/dna_features";
-import { GetInfo } from '../webServices/tu_ws'
+import { DNAfeatures } from "../operon_view/dnaFeaturesGL/dna_features";
+import { GetInfo } from '../../webServices/operon_ws'
 
 const OperonSection = ({idOperon}) => {
     const [_data, set_data] = useState();
@@ -47,7 +47,6 @@ function viewer(infoDraw){
     
   return (
     <div id="section_Operon">
-      <h2>Operon</h2>
       <div id="operon_Draw">
         <DNAfeatures
           id_drawPlace="operon_Draw"
@@ -87,7 +86,7 @@ function operon(id,name,posL,posR,strand){
         rightEndPosition: posR,
         strand: strand,
         objectRGBColor: "255,167,89",
-        tooltip: `<p> d: ${id}  </p> <br/> Operon: ${name} <br/> leftEndPosition: ${posL} <br/> rightEndPosition: ${posR}  ` 
+        tooltip: `<p> id: ${id}  </p> <br/> Operon: ${name} <br/> leftEndPosition: ${posL} <br/> rightEndPosition: ${posR}  ` 
       }
 }
 

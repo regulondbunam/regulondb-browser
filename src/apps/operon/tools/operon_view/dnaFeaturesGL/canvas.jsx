@@ -19,8 +19,8 @@ const Canvas = ({
   dnaFeatures_data = [],
   id_drawPlace,
   id_canvas,
-  height = 500,
-  dna_pos = 250
+  height = 200,
+  dna_pos = 100
 }) => {
   const [_height, set_height] = useState(height);
   const [_y, setY] = useState(dna_pos);
@@ -303,7 +303,7 @@ function levels(dnaFeatures_data = []) {
   return level;
 }
 
-export function DrawCanva(id_drawPlace, id_canvas, width = 100, height = 200) {
+export function DrawCanva(id_drawPlace, id_canvas, width = 100, height = 100) {
   return SVG().addTo(`#${id_drawPlace}`).size(width, height).id(id_canvas);
 }
 export function rgb_to_rgbFormat(rgb = "0,0,0") {

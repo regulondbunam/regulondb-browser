@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { gql } from "apollo-boost";
 //import { helmetJsonLdProp } from "react-schemaorg";
 //import { Helmet } from 'react-helmet-async';
@@ -9,18 +9,18 @@ export function query(id_operon) {
   return gql`
     {
       getOperonBy(search: "${id_operon}") {
-          data {
-            _id
-            operon {
-              id
-              name
-              ${RegulationPositions}
-              strand
-            }
+        data {
+          _id
+          operon {
+            id
+            name
+            ${RegulationPositions}
+            strand
           }
-          pagination {
-            totalResults
-          }
+        }
+        pagination {
+          totalResults
+        }
       }
     }
     `
@@ -31,12 +31,14 @@ const GetInfo = ({
   status = () => { },
   resoultsData = () => { },
 }) => {
+  const [_res, set_res] = useState(false);
   const { data, loading, error } = useQuery(query(id_operon))
   useEffect(() => {
     if (loading) {
       status('loading')
     }
-    if (data) {
+    if (data && !_res) {
+      set_res(true)
       if (data.getOperonBy.pagination.totalResults === 1) {
         try {
           resoultsData(data.getOperonBy.data[0].operon)
@@ -55,7 +57,7 @@ const GetInfo = ({
       console.log(error)
     }
 
-  })
+  },[loading, error, status, data, _res, resoultsData])
   if (loading) {
     return <></>
   }

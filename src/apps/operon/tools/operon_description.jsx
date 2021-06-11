@@ -1,6 +1,6 @@
 import React from 'react'
 import Sumary from './description/des_sumary'
-import Context from './operon_generalContext'
+import Context from './description/des_generalContext'
 
 
 export const Description = ({ idOperon, conf, isTUviews = true }) => {
@@ -20,6 +20,7 @@ export const Description = ({ idOperon, conf, isTUviews = true }) => {
                 <Sumary idOperon={idOperon} />
             </div>
             <h3>{context.title}</h3>
+            <Context idOperon={idOperon} />
             <br />
             <div style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{ __html: context.description }} />
             {
@@ -33,7 +34,7 @@ export const Description = ({ idOperon, conf, isTUviews = true }) => {
 }
 
 
-//<Context idOperon={idOperon} />
+//
 export default Description
 
 function ViewTus({TUsConf}) {
