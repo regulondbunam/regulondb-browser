@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { gql } from "apollo-boost";
 //import { helmetJsonLdProp } from "react-schemaorg";
 //import { Helmet } from 'react-helmet-async';
@@ -12,6 +12,10 @@ export function query(id_operon) {
         getOperonBy(search: "${id_operon}") {
             data {
                 _id
+                operon{
+                    id
+                    strand
+                }
                 transcriptionUnits {
                     id
                     name
@@ -56,15 +60,18 @@ const GetPromoter = ({
     status = () => { },
     resoultsData = () => { },
 }) => {
+    const [_res, set_res] = useState(false);
     const { data, loading, error } = useQuery(query(id_operon))
     useEffect(() => {
         if (loading) {
             status('loading')
         }
-        if (data) {
+        if (data && !_res) {
+            set_res(true)
             if (data.getOperonBy.pagination.totalResults === 1) {
                 try {
-                    resoultsData(data.getOperonBy.data[0].operon)
+                    //console.log(data)
+                    resoultsData(data.getOperonBy.data[0])
                     status('done')
                 } catch (error) {
                     status('error')
@@ -80,7 +87,7 @@ const GetPromoter = ({
             console.log(error)
         }
 
-    })
+    },[loading, error, status, data, _res, resoultsData])
     if (loading) {
         return <></>
     }

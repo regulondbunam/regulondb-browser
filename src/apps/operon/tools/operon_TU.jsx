@@ -22,19 +22,19 @@ export const operon_TU = ({
             <article>
                 <h2>{conf_description?.title}</h2>
                 <p style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{__html: conf_description?.description}} />
-                <TUdescription idTU={id} />
+                <TUdescription id_tu={id} id_operon={idOperon} />
                 <h2>{conf_genes?.title}</h2>
                 <p style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{__html: conf_genes?.description}} />
-                <TUgenes idTU={id}/>
+                <TUgenes id_tu={id} id_operon={idOperon}/>
                 <h2>{conf_promoter?.title}</h2>
                 <p style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{__html: conf_promoter?.description}} />
-                <TUpromoter idTU={id}/>
+                <TUpromoter id_tu={id} id_operon={idOperon}/>
                 <h2>{conf_terminator?.title}</h2>
                 <p style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{__html: conf_terminator?.description}} />
-                <TUTerminators idTU={id} />
+                <TUTerminators id_tu={id} id_operon={idOperon} />
                 <h2>{conf_bindingsites?.title}</h2>
                 <p style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{__html: conf_bindingsites?.description}} />
-                <TUrBS idTU={id} />
+                <TUrBS id_tu={id} id_operon={idOperon} />
             </article>
         )
     }

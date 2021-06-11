@@ -3,7 +3,7 @@ import { GetBindingSites } from '../../webServices/tu_ws'
 import { RBSbyStite } from "./rBS_byStite";
 import RBSbyFull from './rBS_fullInfo'
 
-export const TUrBS = ({ idTU }) => {
+export const TUrBS = ({ id_tu, id_operon }) => {
     const [_data, set_data] = useState();
     const [_state, set_state] = useState();
     //let loading = false;
@@ -16,16 +16,16 @@ export const TUrBS = ({ idTU }) => {
             return <>error</>
         case "done":
             //console.log(_data)
-            return <SwitchView idTU={idTU} data={_data} />
+            return <SwitchView id_tu={id_tu} data={_data} />
         default:
             break
     }
     //
-    if (idTU) {
+    if (id_tu) {
         return (
             <div>
                 loading...
-                <GetBindingSites id_operon={idTU}
+                <GetBindingSites id_operon={id_operon}
                     resoultsData={(data) => { set_data(data) }}
                     status={(state) => { set_state(state) }}
                 />
@@ -35,21 +35,29 @@ export const TUrBS = ({ idTU }) => {
     return <>no id</>
 }
 
-const SwitchView = ({idTU,data}) => {
+const SwitchView = ({id_tu,data}) => {
     const [_view, set_view] = useState("by site");
 
-    function swt(view) {
-        switch (_view) {
-            case "by site":
-                return (
-                    <>
-                        <RBSbyStite data={data} type="promoter"/>
-                        <RBSbyStite data={data} type="gene"/>
-                    </>
-                )
-            default:
-                return <RBSbyFull data={data} type="promoter" />
+    function swt() {
+        try {
+            //console.log(`data`, data)
+            data = data.transcriptionUnits
+            data = data.find(element => element.id === id_tu);
+            switch (_view) {
+                case "by site":
+                    return (
+                        <>
+                            <RBSbyStite data={data} type="promoter"/>
+                            <RBSbyStite data={data} type="gene"/>
+                        </>
+                    )
+                default:
+                    return <RBSbyFull data={data} type="promoter" />
+            }
+        } catch (error) {
+            console.log(error)
         }
+        return <>error show bs</>
     }
 
     return (
@@ -59,7 +67,7 @@ const SwitchView = ({idTU,data}) => {
             <option value="full info">Full info</option>
           </select>
           {
-              swt(_view)
+              swt()
           }
         </div>
     )

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { GetPromoter } from '../../webServices/tu_ws'
 import { MarkSequencePromoter } from './promoter_components/mkSequence'
 
-export const TUpromoter = ({ idTU }) => {
+export const TUpromoter = ({ id_tu, id_operon }) => {
     const [_data, set_data] = useState();
     const [_state, set_state] = useState();
     //let loading = false;
@@ -14,15 +14,15 @@ export const TUpromoter = ({ idTU }) => {
         case "error":
             return <>error</>
         case "done":
-            return <Genes data={_data} idTU={idTU} />
+            return <Genes data={_data} id_tu={id_tu} />
         default:
             break
     }
-    if (idTU) {
+    if (id_tu) {
         return (
             <div>
                 loading...
-                <GetPromoter id={idTU}
+                <GetPromoter id_operon={id_operon}
                     resoultsData={(data) => { set_data(data) }}
                     status={(state) => { set_state(state) }}
                 />
@@ -33,9 +33,11 @@ export const TUpromoter = ({ idTU }) => {
     return <>no - id</>
 }
 
-function Genes({ data, idTU }) {
+function Genes({ data, id_tu }) {
     try {
-        const tu = data.find(element => element.id === idTU);
+        const strand = data?.operon?.strand
+        data = data.transcriptionUnits
+        const tu = data.find(element => element.id === id_tu);
         //console.log(tu)
         return (
             <div style={{ marginLeft: "5%" }}>
@@ -84,6 +86,14 @@ function Genes({ data, idTU }) {
                             )
                         }
                         {
+                            notNull(strand,
+                                <tr>
+                                    <td style={{ fontWeight: "bold" }}>Strand</td>
+                                    <td>{strand}</td>
+                                </tr>
+                            )
+                        }
+                        {
                             notNull(tu?.promoter?.sequence,
                                 <tr>
                                     <td colSpan="2" style={{ fontWeight: "bold" }}>Sequence</td>
@@ -111,13 +121,17 @@ function Genes({ data, idTU }) {
             </div>
         )
     } catch (error) {
-
+        console.error(error)
     }
     return <>no promoters</>
 }
 
 function notNull(data, element) {
-    if (data === null || data.length < 1 || data === "" || data === undefined) {
+    
+    if(data === undefined){
+        return null
+    }
+    if (data === null || data.length < 1 || data === "") {
         return null
     }
     return element

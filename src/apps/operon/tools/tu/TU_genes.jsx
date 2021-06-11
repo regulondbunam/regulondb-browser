@@ -1,7 +1,7 @@
 import { GetGenes } from '../../webServices/tu_ws'
 import React, {useState} from 'react'
 
-export const TUgenes = ({idTU}) => {
+export const TUgenes = ({id_tu, id_operon}) => {
     const [_data, set_data] = useState();
     const [_state, set_state] = useState();
     //let loading = false;
@@ -13,27 +13,29 @@ export const TUgenes = ({idTU}) => {
         case "error":
             return <>error</>
         case "done":
-            return <Genes data={_data} idTU={idTU} />
+            return <Genes data={_data} id_tu={id_tu} />
         default:
             break
     }
-    if (idTU) {
+    if (id_tu) {
         return (
             <div>
                 loading...
-                <GetGenes id={idTU}
+                <GetGenes id_operon={id_operon}
                     resoultsData={(data) => { set_data(data) }}
                     status={(state) => { set_state(state) }}
                 />
             </div>
         )
     }
-    return <>no id</>
+    return <>no id_tu</>
 }
 
-function Genes({data,idTU}) {
+function Genes({data,id_tu}) {
     try {
-        const tu = data.find(element => element.id === idTU);
+        //console.log(`data`, data)
+        data = data.transcriptionUnits
+        const tu = data.find(element => element.id === id_tu);
         //console.log(tu)
         return(
             <div style={{marginLeft: "5%"}}>

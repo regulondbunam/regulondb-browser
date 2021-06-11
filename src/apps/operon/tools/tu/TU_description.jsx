@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { GetInfo } from '../../webServices/tu_ws'
 
-export const TUdescription = ({ idTU }) => {
+export const TUdescription = ({ id_operon,id_tu }) => {
     const [_data, set_data] = useState();
     const [_state, set_state] = useState();
     //let loading = false;
@@ -13,15 +13,15 @@ export const TUdescription = ({ idTU }) => {
         case "error":
             return <>error</>
         case "done":
-            return <Description data={_data} idTU={idTU} />
+            return <Description data={_data} id_tu={id_tu} />
         default:
             break
     }
-    if (idTU) {
+    if (id_tu) {
         return (
             <div>
                 loading...
-                <GetInfo id={idTU}
+                <GetInfo id_operon={id_operon}
                     resoultsData={(data) => { set_data(data) }}
                     status={(state) => { set_state(state) }}
                 />
@@ -31,9 +31,10 @@ export const TUdescription = ({ idTU }) => {
     return <>no id</>
 }
 
-function Description({ data, idTU }) {
+function Description({ data, id_tu }) {
     try {
-        const tu = data.find(element => element.id === idTU);
+        data = data.transcriptionUnits
+        const tu = data.find(element => element.id === id_tu);
         return (
             <>
                 <h3>{tu?.name}</h3>

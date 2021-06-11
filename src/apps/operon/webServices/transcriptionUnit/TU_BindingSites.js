@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { gql } from "apollo-boost";
 //import { helmetJsonLdProp } from "react-schemaorg";
 //import { Helmet } from 'react-helmet-async';
@@ -8,7 +8,7 @@ import { RegulatorBindigSites } from '../RegulatorBindingSites'
 export function query(id_operon) {
     return gql`
     {
-        getOperonBy(advancedSearch: "${id_operon}") {
+        getOperonBy(search: "${id_operon}") {
             data {
                 _id
                 transcriptionUnits {
@@ -36,7 +36,6 @@ export function query(id_operon) {
 
 const GetBindingSites = ({
     id_operon = '',
-    bs_class = "",
     status = () => { },
     resoultsData = () => { },
 }) => {
@@ -48,20 +47,7 @@ const GetBindingSites = ({
         if (data) {
             if (data.getOperonBy.pagination.totalResults === 1) {
                 try {
-                    switch (bs_class) {
-                        case "genes":
-                            resoultsData(data.getOperonBy.data[0].transcriptionUnits[0].genes)
-                            break;
-                        case "promoter":
-                            resoultsData(data.getOperonBy.data[0].transcriptionUnits[0].promoter)
-                            break;
-                        case "regulator":
-                            resoultsData(data.getOperonBy.data[0].transcriptionUnits[0].regulatorBindingSites)
-                            break;
-                        default:
-                            resoultsData(data.getOperonBy.data[0].transcriptionUnits[0])
-                            break;
-                    }
+                    resoultsData(data.getOperonBy.data[0])
                     status('done')
                 } catch (error) {
                     status('error')

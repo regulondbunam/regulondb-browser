@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { GetTerminators } from '../../webServices/tu_ws'
 import {MarkSequenceTerminator} from './terminator_components/mkSequence'
 
-export const TUTerminators = ({ idTU }) => {
+export const TUTerminators = ({ id_tu, id_operon }) => {
     const [_data, set_data] = useState();
     const [_state, set_state] = useState();
     //let loading = false;
@@ -15,15 +15,15 @@ export const TUTerminators = ({ idTU }) => {
             return <>error</>
         case "done":
             //console.log(_data)
-            return <Terminators idTU={idTU} data={_data} />
+            return <Terminators id_tu={id_tu} data={_data} />
         default:
             break
     }
-    if (idTU) {
+    if (id_tu) {
         return (
             <div>
                 loading...
-                <GetTerminators id={idTU}
+                <GetTerminators id_operon={id_operon}
                     resoultsData={(data) => { set_data(data) }}
                     status={(state) => { set_state(state) }}
                 />
@@ -33,10 +33,11 @@ export const TUTerminators = ({ idTU }) => {
     return <>no id</>
 }
 
-function Terminators({ idTU, data }) {
-    const tu = data.find(element => element.id === idTU);
-    //console.log(tu)
-    if (tu) {
+function Terminators({ id_tu, data }) {
+    try {
+        //console.log(data)
+        data = data.transcriptionUnits
+        const tu = data.find(element => element.id === id_tu);
         return (
             <div style={{ marginLeft: "5%" }}>
                 {
@@ -78,9 +79,10 @@ function Terminators({ idTU, data }) {
                 }
             </div>
         )
-    } else {
-        return <>no terminators</>
+    } catch (error) {
+        console.error(error)
     }
+    return <>error to load terminators</>
 
 }
 /**
