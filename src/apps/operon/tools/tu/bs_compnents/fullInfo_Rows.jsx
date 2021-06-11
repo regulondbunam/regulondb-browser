@@ -56,7 +56,7 @@ export function RowInfo(formatData) {
                                             <td colSpan="2" >Function: {data?.function}</td>
                                         </tr>
                                         <tr >
-                                            <td colSpan="2" ><MarkSequenceWithPositions sequenceInfo={data?.sequenceInfo} /></td>
+                                            <td colSpan="2" ><MarkSequenceWithPositions id={`cav-${data?.idSite}`} sequenceInfo={data?.sequenceInfo} /></td>
                                         </tr>
                                         <tr >
                                             <td>Center Position: {data?.center}</td>

@@ -63,7 +63,7 @@ function rbsTable(data, name, key) {
                     {
                         sites.map((site, index) => {
                             return (
-                                <tr key={`tr-bs-${index}-${site[7]}<${index}`} >
+                                <tr key={`tr-bs-${index}-${site["_id"]}`} >
                                     {site.map((dt, i) => {
                                         return <td key={`td-bs-<${index}-${i}`} >{dt}</td>
                                     })}
@@ -80,20 +80,21 @@ function rbsTable(data, name, key) {
 }
 
 function orderRIS(rbs) {
+    //console.log(`rbs`, rbs)
     let sites = []
     rbs.map(bs => {
         bs?.regulatoryInteractions.map(ri => {
             const rs = ri?.regulatorySite
-            //console.log(ri)
             let site = []
+            site["_id"] = rs?._id
             site.push(bs?.regulator?.name)
-            site.push(bs?.regulator?.function)
+            site.push(ri?.function)
             site.push(" ")
             site.push(ri?.centerPosition)
             site.push(rs?.absolutePosition)
             site.push(rs?.leftEndPosition)
             site.push(rs?.rightEndPosition)
-            site.push(MarkSequence(rs?.sequence))
+            site.push(MarkSequence(`${rs?._id}-${ri?.function}`,rs?.sequence))
             site.push("---")
             sites.push(site)
             return null

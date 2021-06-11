@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react'
 import { SVG } from "@svgdotjs/svg.js";
 
-export function MarkSequence(sequence) {
+export function MarkSequence(id,sequence) {
+    //di_seq_cav-RDBECOLIBSC03351
+    const id_drawPlace = `di_seq_${id}`
+    //console.log(`id_drawPlace`, id_drawPlace)
+    const id_canvas = `cav_${id}`
     useEffect(() => {
-        const drawPlace = document.getElementById(`seq-${sequence}`)
-        let canvas = document.getElementById(`cav-${sequence}`);
+        const drawPlace = document.getElementById(id_drawPlace)
+        let canvas = document.getElementById(id_canvas);
         if (drawPlace && canvas === null) {
             const width = drawPlace.clientWidth;
-            canvas = SVG().addTo(`#seq-${sequence}`).size(width, 30).id(`cav-${sequence}`);
+            canvas = SVG().addTo(`#${id_drawPlace}`).size(width, 30).id(id_canvas);
             let px = 0
             // eslint-disable-next-line
             const seq = [].map.call(sequence, function (x) {
@@ -23,7 +27,7 @@ export function MarkSequence(sequence) {
         return (
 
             <div
-                id={`seq-${sequence}`}
+                id={id_drawPlace}
                 style={{
                     height: "20px",
                     width: width,
@@ -49,14 +53,16 @@ export function MarkSequence(sequence) {
                         },
  */
 
-export function MarkSequenceWithPositions({sequenceInfo}) {
+export function MarkSequenceWithPositions({id,sequenceInfo}) {
     const sequence = sequenceInfo?.sequence, posL = `${sequenceInfo?.posL}`, posR = `${sequenceInfo?.posR}`
+    const id_drawPlace = `di_seq_${id}`
+    const id_canvas = `cav-${id}`
     useEffect(() => {
-        const drawPlace = document.getElementById(`seq-${sequence}`)
-        let canvas = document.getElementById(`cav-${sequence}`);
+        const drawPlace = document.getElementById(id_drawPlace)
+        let canvas = document.getElementById(id_canvas);
         if (drawPlace && canvas === null) {
             const width = drawPlace.clientWidth;
-            canvas = SVG().addTo(`#seq-${sequence}`).size(width, 80).id(`cav-${sequence}`);
+            canvas = SVG().addTo(`#${id_drawPlace}`).size(width, 80).id(id_canvas);
             let px = 0
             let isLine = false
             // eslint-disable-next-line
@@ -91,7 +97,7 @@ export function MarkSequenceWithPositions({sequenceInfo}) {
         return (
 
             <div
-                id={`seq-${sequence}`}
+            id={id_drawPlace}
                 style={{
                     height: "80px",
                     width: "100%",
