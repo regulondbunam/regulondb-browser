@@ -17,15 +17,19 @@ export function query(id_operon) {
                     name
                     note
                     synonyms
+                    promoter {
+                        id
+                        name
+                    }
                     ${FirstGene}
                     ${Citations}
+                }
             }
             pagination{
                 totalResults
             }
-          }
         }
-        }
+    }
     `
 }
 

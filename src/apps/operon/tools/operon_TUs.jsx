@@ -27,7 +27,7 @@ const TUs = ({idOperon, conf}) => {
             {
                 loading ? <>loading...</> : null
             }
-            <GetInfo id={idOperon}
+            <GetInfo id_operon={idOperon}
                 resoultsData={(data) => { set_data(data) }}
                 status={(state) => { set_state(state) }}
             />
