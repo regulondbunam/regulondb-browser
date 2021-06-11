@@ -7,22 +7,12 @@ import Title from './components/operon_title'
 //import conf from './conf/operon.conf.json'
 //const info = conf.pages.operon_info
 
-export const Info = ({ id, tuId, title, nTUs, _data }) => {
-    const [_state, set_state] = useState("loading");
+export const Info = ({ id, tuId, nTUs}) => {
     const [_conf, set_conf] = useState()
-
-    useEffect(() => {
-        if(_state !== "done"){
-            setTimeout(function(){
-                set_state("done")
-            },1000);
-        }
-    })
 
     if (id && _conf) {
         return (
             <div>
-                <Title title={title} data={_data} isInfo={true} state={_state} />
                 <Tabs tuId={tuId} idOperon={id} nTUs={nTUs} confJSON={_conf} />
             </div>
         )

@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import { GetAll } from "./webServices/operon_ws"
 import Table from './components/operon_table'
-import Title from './components/operon_title'
 
-function Home({title,conf}){
-
-  const [_state, set_state] = useState("done");
-
+function Home({title,conf,setState}){
   return(
     <div>
-            <Title title={title} state={_state} />
             <article>
-                <Body conf={conf} setState={state=>{set_state(state)}} />
+                <Body conf={conf} setState={state=>{setState(state)}} />
             </article>
         </div>
   )

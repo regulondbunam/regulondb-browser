@@ -3,7 +3,7 @@ import Style from "./cover.module.css";
 import Spinner from "../components/loading/Spinner";
 import SpinnerError from "../components/loading/SpinnerError";
 
-export function Cover({ children, state, id = "AC0ver023", menssage }) {
+export function Cover({ children, state, id_spinner = "coverxD", menssage }) {
   const styleCover = {
     width: "100%"
   };
@@ -15,21 +15,22 @@ export function Cover({ children, state, id = "AC0ver023", menssage }) {
       }
       return (
         <div style={styleCover}>
-          <Spinner id={id} />
-          <div id={id} className={Style.cover + " " + Style.anm}>
+          <Spinner id={id_spinner} />
+          <div className={Style.cover + " " + Style.anm}>
             {menssage}
             {children}
           </div>
         </div>
       );
+    case "not found":
     case "error":
       if (!menssage) {
         menssage = "oops... an error has occurred";
       }
       return (
         <div style={styleCover}>
-          <SpinnerError id={id} />
-          <div id={id} className={Style.cover + " " + Style.error}>
+          <SpinnerError id={id_spinner} />
+          <div className={Style.cover + " " + Style.error}>
             {menssage}
             {children}
           </div>
@@ -38,7 +39,7 @@ export function Cover({ children, state, id = "AC0ver023", menssage }) {
     default:
       return (
         <div style={styleCover}>
-          <div id={id} className={Style.cover}>
+          <div className={Style.cover}>
             {children}
           </div>
         </div>

@@ -7,8 +7,8 @@ export const DNAfeatures = ({
   id_canvas,
   dnaFeatures_data,
   width = "auto",
-  height = 300,
-  dna_pos = 150
+  height = 200,
+  dna_pos = 100
 }) => {
   dnaFeatures_data = validation(dnaFeatures_data);
   if (dnaFeatures_data) {
