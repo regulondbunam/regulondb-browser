@@ -110,7 +110,7 @@ function Genes({ data, id_tu }) {
                                                 overflow: "auto"
                                             }}
                                         >
-                                            <MarkSequencePromoter sequence={tu?.promoter?.sequence} id={tu?.promoter?.id} />
+                                            <MarkSequencePromoter sequence={tu?.promoter?.sequence} id={tu?.promoter?.id} strand={strand} />
                                         </div>
                                     </td>
                                 </tr>

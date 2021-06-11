@@ -1,7 +1,7 @@
 import React from "react";
 import Style from "./cover.module.css";
-import Spinner from "../components/loading/Spinner";
-import SpinnerError from "../components/loading/SpinnerError";
+//import Spinner from "../components/loading/Spinner";
+//import SpinnerError from "../components/loading/SpinnerError";
 
 export function Cover({ children, state, id_spinner = "coverxD", menssage }) {
   const styleCover = {
@@ -15,7 +15,6 @@ export function Cover({ children, state, id_spinner = "coverxD", menssage }) {
       }
       return (
         <div style={styleCover}>
-          <Spinner id={id_spinner} />
           <div className={Style.cover + " " + Style.anm}>
             {menssage}
             {children}
@@ -29,7 +28,6 @@ export function Cover({ children, state, id_spinner = "coverxD", menssage }) {
       }
       return (
         <div style={styleCover}>
-          <SpinnerError id={id_spinner} />
           <div className={Style.cover + " " + Style.error}>
             {menssage}
             {children}

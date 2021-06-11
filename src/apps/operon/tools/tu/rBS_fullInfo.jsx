@@ -60,7 +60,12 @@ export class RBSbyFull extends Component {
                 }
                 return <>no gene</>
             case "promoter":
-                return RowInfo(formatData(data.promoter, "Promoter"))
+                dta = data.promoter
+                if(dta){
+                    //console.log(data)
+                    return RowInfo(formatData(dta, "Promoter"))
+                }
+                break
             case "regulator":
                 //data = data.regulatorBindingSites
                 break;

@@ -3,6 +3,7 @@ import { MarkSequence } from './bs_compnents/mkSequence'
 //import AllCitations from '../../../../components/cits/Cits'
 
 export const RBSbyStite = ({ data, type = "" }) => {
+    //console.log(data)
     switch (type) {
         case "gene":
             data = data.genes
@@ -18,14 +19,22 @@ export const RBSbyStite = ({ data, type = "" }) => {
                     </div>
                 )
             }
-            return <>no gene</>
+            break;
         case "promoter":
-            return rbsTable(data.promoter, `Promoter: ${data.promoter.name}`, data.promoter.id)
+            
+            data = data.promoter
+            if(data){
+                //console.log(data)
+                return rbsTable(data, `Promoter: ${data?.name}`, data.id)
+            }
+            //console.log(data)
+            break;
+
         case "regulator":
             data = data.regulatorBindingSites
             break;
         default:
-            return <>no type selected</>
+            break;
     }
     return <></>
 

@@ -32,19 +32,14 @@ export default function DrawPromoter({
     group.add(arrow);
   
     // reverse effect
-    /*
+
     if (strand === "reverse") {
       group.transform({
         rotate: 180,
-        translateX: -bodyH,
-        translateY: heigth + 5
       });
-      text.transform({
-        translateY: heigth * 2 + 15,
-        translateX: -bodyH + 5
-      });
+      group.move(ax+5,-40)
     }
-    */
+
     // group.add(text);
     // Toltip
     group.attr({

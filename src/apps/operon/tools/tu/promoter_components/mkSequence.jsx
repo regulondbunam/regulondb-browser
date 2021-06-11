@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import DrawPromoter from "./promoter"
 import { SVG } from "@svgdotjs/svg.js";
 
-export function MarkSequencePromoter({ sequence, id }) {
+export function MarkSequencePromoter({ sequence, id, strand }) {
     useEffect(() => {
         const drawPlace = document.getElementById(`seq-${sequence}`)
         let canvas = document.getElementById(`cav-${sequence}`);
@@ -24,8 +24,14 @@ export function MarkSequencePromoter({ sequence, id }) {
                         // is upercase
                         isLine = true
                         posX = px+5
-                        canvas.line(px+5, 48, px+5, 64).stroke({ color: '#00F', width: 1, linecap: 'round' })
-                        canvas.text(`+1`).font({ size: '16px', family: "'Courier New',Courier,monospace", weight: "700" }).move(px +5, 64)
+                        if (strand === "reverse") {
+                            canvas.line(px+5, 32, px+5, 16).stroke({ color: '#00F', width: 1, linecap: 'round' })
+                            canvas.text(`+1`).font({ size: '16px', family: "'Courier New',Courier,monospace", weight: "700" }).move(px +5, 0)
+                          }else{
+                            canvas.line(px+5, 48, px+5, 64).stroke({ color: '#00F', width: 1, linecap: 'round' })
+                            canvas.text(`+1`).font({ size: '16px', family: "'Courier New',Courier,monospace", weight: "700" }).move(px +5, 64)
+                          }
+                        
                     }
                     if (isLine) {
                         if (sequenceCase[x]) {
@@ -52,7 +58,7 @@ export function MarkSequencePromoter({ sequence, id }) {
                 posX: posX,
                 posY: posY,
                 arrowSize: 15,
-                strand: "forward"
+                strand: strand
             })
             group.front()
             

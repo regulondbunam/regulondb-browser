@@ -10,7 +10,7 @@ export const Title = () => {
         const cover = document.getElementById("div_cover_operon_01")
         if (cover) {
             cover.addEventListener('coverR', function (e) {
-                console.log(`state`, e.detail)
+                //console.log(`state`, e.detail)
                 if (e.detail.state) {
                     set_state(e.detail.state)
                 }
