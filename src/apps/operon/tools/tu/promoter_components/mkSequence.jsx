@@ -26,7 +26,7 @@ export function MarkSequencePromoter({ sequence, id, strand }) {
                         posX = px+5
                         if (strand === "reverse") {
                             canvas.line(px+5, 32, px+5, 16).stroke({ color: '#00F', width: 1, linecap: 'round' })
-                            canvas.text(`+1`).font({ size: '16px', family: "'Courier New',Courier,monospace", weight: "700" }).move(px +5, 0)
+                            canvas.text(`+1`).font({ size: '16px', family: "'Courier New',Courier,monospace", weight: "700" }).move(px, 0)
                           }else{
                             canvas.line(px+5, 48, px+5, 64).stroke({ color: '#00F', width: 1, linecap: 'round' })
                             canvas.text(`+1`).font({ size: '16px', family: "'Courier New',Courier,monospace", weight: "700" }).move(px +5, 64)
