@@ -2,6 +2,7 @@ import React from 'react'
 import confJSON from '../conf/operon.conf.json'
 import Description from '../tools/operon_description'
 import TUs from '../tools/operon_TUs'
+import AllCitations from '../tools/operon_citations'
 
 const conf = confJSON?.pages?.operon_info
 
@@ -12,7 +13,7 @@ export const All = ({ idOperon }) => {
         <>
             <article>
                 <h2>{allTab.title}</h2>
-                <div style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{ __html: allTab.description }} />
+                <div style={{ marginLeft: "5%" }} dangerouslySetInnerHTML={{ __html: allTab.description }} />
             </article>
             <Description
                 idOperon={idOperon}
@@ -21,10 +22,11 @@ export const All = ({ idOperon }) => {
                 isTUviews={false}
             />
             <TUs
-                        idOperon={idOperon}
-                        id={conf?.tabs?.TUs?.id}
-                        conf={conf?.tabs?.TUs}
-                    />
+                idOperon={idOperon}
+                id={conf?.tabs?.TUs?.id}
+                conf={conf?.tabs?.TUs}
+            />
+            <AllCitations idOperon={idOperon} />
         </>
     )
 }
