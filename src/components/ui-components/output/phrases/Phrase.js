@@ -36,61 +36,66 @@ const Phrase = ({
         if (ancla) {
             pinStyle = { color: "#000000", backgroundColor: "#CC9900" }
         }
-        return (
-            <div className={Style.phraseTip} onMouseLeave={() => { if (!ancla) { setVisible(false) } }}>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>
-                                <div>
+        try {
+            return (
+                <div className={Style.phraseTip} onMouseLeave={() => { if (!ancla) { setVisible(false) } }}>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
                                     <div>
-                                        <IconButton onClick={() => { setVisible(false) }} icon='clear' iconStyle={{fontSize: '18px'}} className={Style.phraseIconButton} />
-                                        <IconButton onClick={() => { setAncla(!ancla) }} style={pinStyle} iconStyle={{fontSize: '18px'}} icon='push_pin' className={Style.phraseIconButton} />
+                                        <div>
+                                            <IconButton onClick={() => { setVisible(false) }} icon='clear' iconStyle={{fontSize: '18px'}} className={Style.phraseIconButton} />
+                                            <IconButton onClick={() => { setAncla(!ancla) }} style={pinStyle} iconStyle={{fontSize: '18px'}} icon='push_pin' className={Style.phraseIconButton} />
+                                        </div>
+                                    </div>
+                                </th>
+                                <th>
+    
+                                </th>
+                                <th>
+                                <div style={{display: 'flex', flexDirection: "row-reverse"}}>
+                                    <div>
+                                    <IconButton icon='help' iconStyle={{fontSize: '18px'}} className={Style.phraseIconButton} />
                                     </div>
                                 </div>
-                            </th>
-                            <th>
-
-                            </th>
-                            <th>
-                            <div style={{display: 'flex', flexDirection: "row-reverse"}}>
-                                <div>
-                                <IconButton icon='help' iconStyle={{fontSize: '18px'}} className={Style.phraseIconButton} />
-                                </div>
-                            </div>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td colSpan="3">
-                                <div>
-                                    <div style={{ width: '60%' }}>
-                                        <b>PMID:<a href="/phrases" rel="noopener noreferrer">{` ${phraseData.pmid}`}</a></b>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colSpan="3">
+                                    <div>
+                                        <div style={{ width: '60%' }}>
+                                            <b>PMID:<a href="/phrases" rel="noopener noreferrer">{` ${phraseData.pmid}`}</a></b>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colSpan="3">
-                                <div className="phraseBody">
-                                    <p><a href="/phrases" rel="noopener noreferrer">{`"${phrase.phrase}"`}</a></p>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colSpan="3">
-                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
-                                    <div className="phraseFooter">
-                                        {pagControl}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colSpan="3">
+                                    <div className="phraseBody">
+                                        <p><a href="/phrases" rel="noopener noreferrer">{`"${phrase.phrase}"`}</a></p>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        )
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colSpan="3">
+                                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
+                                        <div className="phraseFooter">
+                                            {pagControl}
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            )    
+        } catch (error) {
+            return <></>
+        }
+        
     }
 
 

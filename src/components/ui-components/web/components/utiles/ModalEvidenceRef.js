@@ -7,6 +7,8 @@ const ModalER = ({
     classNameModal,
     k,
 }) => {
+    let evidence = ""
+    let references = ""
     const evi = cit?.evidence
     const pub = cit?.publication
     const code = evi?.code, name = evi?.name, type = evi?.type, id_evi = evi?.id
@@ -41,10 +43,15 @@ const ModalER = ({
         <Modal className={`aBase ${classNameModal}`} style={styleStrong} title={title} info={eviref} />
      );
     } catch (error) {
-        console.log("edivence error: ",error)
-        return ( <></> );
+        console.log("edivence error: ", error)
+        return (<></>);
     }
-    
+
 }
 
 export default ModalER;
+
+function validateStr(str = undefined) {
+    if (str) return str;
+    return ""
+}

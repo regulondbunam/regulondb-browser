@@ -13,6 +13,7 @@ apollo.conf.json
 
 # production
 /build
+/certificates
 
 # misc
 .DS_Store
