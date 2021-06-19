@@ -23,4 +23,30 @@ export const querySearch = (search, limit = 10, page = 0) => {
         }
       }
     `;
-  }
+}
+
+export const searchOperon = (search, limit = 10, page = 0)=>{
+    return gql`
+    {
+        getOperonBy(limit:${limit} page:${page} search:"${search}"){
+          data{
+            _id
+            operon{
+              name
+              statistics{
+                genes
+                promoters
+                transcriptionUnit
+              }
+            }
+            transcriptionUnits{
+              name
+            }
+          }
+          pagination{
+            totalResults
+          }
+        }
+      }
+    `
+}

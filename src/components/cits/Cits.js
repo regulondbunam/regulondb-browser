@@ -72,12 +72,16 @@ export function relCitation(allCitations, idCit, index = true, small = true) {
 export function Citation(cit, small = true) {
     
     //W->weak S->strong
+    
     const publication = cit?.publication
+    const citation = publication?.citation
     const evidence = cit?.evidence
     const eviCode = evidence?.code
     //const id = publication?.id
-    const citation = publication?.citation.split(',')
+    
+    const authors = publication?.authors
     const year = publication?.year
+    
     const code = () => {
         if (eviCode) {
             if (evidence.type === 'S') {
@@ -88,8 +92,11 @@ export function Citation(cit, small = true) {
         return ''
     }
     if (small) {
-        return `${citation[0]}., et al. ${year?year:''} ${code()}`
+        if(authors[0]){
+            return `${authors[0]}., et al. ${year?year:''} ${code()}`
+        }
+        return `${code()}`.trim()
     }
-    return `${publication?.citation}, ${code()}`
+    return `${citation?`${citation},`:''} ${code()}`
     // [i]autor., et al. año [evidence]
 }

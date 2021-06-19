@@ -1,0 +1,16 @@
+.resultTable_th_title{
+    color: #666666;
+    border-bottom: 1px solid #72A7C7;
+    text-align: inherit;
+}
+
+.resultTable_th_subtitle{
+    color: #666666;
+    border-bottom: 1px solid #999999;
+    text-align: inherit;
+}
+
+.resultTable_td_content{
+    border-bottom: 1px solid #999999;
+    text-align: inherit;
+}

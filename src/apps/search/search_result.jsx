@@ -1,48 +1,61 @@
 import React, { useState } from "react";
 import { Cover } from "../../components/ui-components/ui_components";
 import SearchGenes from "./tools/search_genes";
+import SearchOperon from "./tools/search_operon"
 
 const SearchResults = ({ keyword, conf }) => {
-  const [_genFound, set_geneFound] = useState();
-  const [_state, set_state] = useState("");
-  let state = _state;
+  const [_foundGene, set_foundGene] = useState(0);
+  const [_foundOperon, set_foundOperon] = useState(0);
+  const [_stateGene, set_stateGene] = useState("");
+  const [_stateOperon, set_stateOperon] = useState("");
+  let state = "";
   let title = "Search Tool search result";
-  switch (_state) {
-    case "loading":
-      title = `Searching "${keyword}" Information`;
-      break;
-    case "done":
-      let totalResults = _genFound + 0;
-      title = `Search results for "${keyword}" (${_genFound})`;
-      if (totalResults === 0) {
-        title = "We did not find any results";
-        state = "error";
-      }
-      break;
-    case "error":
-      title = "Sorry we have technical difficulties, please try again later";
-      break;
-    default:
-      break;
+  if (_stateGene === "loading" || _stateOperon === "loading") {
+    title = `Searching "${keyword}" Information`;
+    state = "loading"
+  }
+  if (_stateGene === "done" && _stateOperon === "done") {
+    let totalResults = _foundOperon + _foundGene;
+    title = `Search results for "${keyword}" (${totalResults})`;
+    state = "done"
+    if (totalResults === 0) {
+      title = "We did not find any results";
+      state = "error";
+    }
+  }
+  if (_stateGene === "error" && _stateOperon === "error") {
+    title = "Sorry we have technical difficulties, please try again later";
+    state = "error";
   }
   return (
     <>
-      <Cover state={state}>
+      <Cover state={state} id="SearchResult" >
         <h1 assistentvalue={"Pagina de Resultado de Busqueda"}>{title}</h1>
       </Cover>
       <article>
         <br />
-        {CollectionIndex(conf.collections, _genFound)}
+        {CollectionIndex(_foundGene, _foundOperon)}
         <br />
         <br />
-
         <SearchGenes
           geneStatus={(state) => {
-            set_state(state);
+            set_stateGene(state);
           }}
           keyword={keyword}
           geneFounds={(nGene) => {
-            set_geneFound(nGene);
+            set_foundGene(nGene);
+          }}
+        />
+        <br />
+        <br />
+        <br />
+        <SearchOperon
+          geneStatus={(state) => {
+            set_stateOperon(state);
+          }}
+          keyword={keyword}
+          geneFounds={(nGene) => {
+            set_foundOperon(nGene);
           }}
         />
       </article>
@@ -50,35 +63,17 @@ const SearchResults = ({ keyword, conf }) => {
   );
 };
 
-
-function CollectionIndex(collections, nGene) {
+function CollectionIndex(nGene, nOperon) {
   return (
     <table style={{ width: "100%" }}>
       <tbody>
         <tr>
-          <tr>
-            <td key={`collections_Genes`}>
-              <a href={`#table_Genes`}>{`Genes (${nGene})`}</a>&nbsp;
-            </td>
-            <td key={`collections_Operones`}>
-              <a href={`#table_Operon`}>{`Operones (0)`}</a>&nbsp;
-            </td>
-            <td key={`collections_Operones`}>
-              <a href={`#table_Operon`}>{`Gensor Unit (0)`}</a>&nbsp;
-            </td>
-            <td key={`collections_Operones`}>
-              <a href={`#table_Operon`}>{`Regulon (0)`}</a>&nbsp;
-            </td>
-            <td key={`collections_Operones`}>
-              <a href={`#table_Operon`}>{`Sigmulon (0)`}</a>&nbsp;
-            </td>
-            <td key={`collections_Operones`}>
-              <a href={`#table_Operon`}>{`sRNA (0)`}</a>&nbsp;
-            </td>
-            <td key={`collections_Operones`}>
-              <a href={`#table_Operon`}>{`Grow Conditions (0)`}</a>&nbsp;
-            </td>
-          </tr>
+          <td key={`collections_Genes`}>
+            <a href={`#table_Genes`}>{`Genes (${nGene})`}</a>
+          </td>
+          <td key={`collections_Operones`}>
+                <a href={`#table_Operon`}>{`Operones (${nOperon})`}</a>
+              </td>
         </tr>
       </tbody>
     </table>

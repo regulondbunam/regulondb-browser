@@ -1,7 +1,7 @@
-import React from "react";
-import { useState } from "react";
+import React ,{ useState } from "react";
 import GeneSearch from "../webServices/search_ws_gene";
 import Table from "../components/result_table";
+import { SpinnerCircle } from "../../../components/ui-components/ui_components";
 
 const SearchGenes = ({
   keyword = "",
@@ -18,6 +18,7 @@ const SearchGenes = ({
 }) => {
   const [_data, set_data] = useState();
   const [_n, set_n] = useState(0);
+  const [_state, set_state] = useState('sleep')
   return (
     <>
       <GeneSearch
@@ -29,6 +30,7 @@ const SearchGenes = ({
             set_n(0);
             geneFounds(0);
           }
+          set_state(status)
           geneStatus(status);
         }}
         resoultsFound={(n) => {
@@ -40,19 +42,38 @@ const SearchGenes = ({
           geneData(data);
         }}
       />
-      <Table
-        keyword={keyword}
-        fieldOrder="name"
-        id={"table_Genes"}
-        data={dataFormat(_data)}
-        title={`Genes(${_n})`}
-        href_base={"/gene/"}
-      />
+      {
+        displayState(_state,keyword,_data,_n)
+      }
     </>
   );
 };
 
 export default SearchGenes;
+
+function displayState(state,keyword,data,n){
+
+  switch (state) {
+    case "error":
+      return <>oops... an error has occurred</>
+    case "loading":
+      return <div>
+        Loading Genes
+        <SpinnerCircle />
+      </div>
+    default:
+      return <Table
+      keyword={keyword}
+      fieldOrder="name"
+      id={"table_Genes"}
+      data={dataFormat(data)}
+      title={`Genes(${n})`}
+      href_base={"/gene/"}
+    />
+  }
+
+}
+
 
 function dataFormat(data) {
   //console.log(data)
@@ -68,7 +89,7 @@ function dataFormat(data) {
         })
         .join(",");
       const d = {
-        name: doc?.gene?.name,
+        name: `${doc?.gene?.name} gene`,
         syn: syns.join(", "),
         prod: pro,
         id: id

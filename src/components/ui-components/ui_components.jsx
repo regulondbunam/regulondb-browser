@@ -13,6 +13,8 @@ import { Cover } from "./web/cover/cover";
 import { Tabs } from "./web/tab/tabs";
 import Header from "./web/layout/header";
 
+import SpinnerCircle from "./web/spinners/circle"
+
 export {
   Header,
   Button,
@@ -29,5 +31,6 @@ export {
   Cover,
   Tabs,
   Modal,
-  IntelligentTable
+  IntelligentTable,
+  SpinnerCircle
 };

@@ -11,30 +11,37 @@ const ModalER = ({
     let references = ""
     const evi = cit?.evidence
     const pub = cit?.publication
+    const code = evi?.code, name = evi?.name, type = evi?.type, id_evi = evi?.id
+    const pmid = pub?.pmid ,citation = pub?.citation, id_pub = pub?.id
+    let link = ''
     let styleStrong = {}
     try {
-        if (evi?.type === "Strong") {
-            styleStrong = { fontWeight: "bold" }
-        }
-        if (evi?.code) {
-            evidence = `
-            <h2>Evidence</h1>
-            <h1>${evi?.code}: ${validateStr(evi?.name)}
-            <br>(${validateStr(evi?.type)})
-            </h1>
-            `
-        }
-        if(pub?.citation){
-            references = `
-            <h2>Reference:</h2>
-            <h2><a href="${validateStr(pub?.url)}" target="_blank" rel="noopener noreferrer" >Go to Refence</a></h2>
-            <p>pmid:${validateStr(pub?.pmid)}</p>
-            <p class="citation">${pub?.citation}</p>
+    if (evi?.type === "Strong") {
+        styleStrong = { fontWeight: "bold" }
+    }
+    if(pub?.url){
+        link = `<a href="${pub?.url}" target="_blank" rel="noopener noreferrer" >Go to Refence</a>`
+    }
+    let eviref = ''
+    if(id_evi){
+        eviref += `
+        <h2>Evidence</h1>
+        <h1>${code?`${code}:`:''} ${name?name:''}
+            <br>${type?`(${type})`:''}
+        </h1>
         `
-        }
-        return (
-            <Modal className={`aBase ${classNameModal}`} style={styleStrong} title={title} info={`${evidence} ${references}`} />
-        );
+    }
+    if(id_pub){
+        eviref += `
+            <h2>Reference:</h2>
+            <h2>${link}</h2>
+            <p>${pmid?`pmid: ${pmid}`:''}</p>
+            <p class="citation">${citation?citation:''}</p>
+        `
+    }
+    return ( 
+        <Modal className={`aBase ${classNameModal}`} style={styleStrong} title={title} info={eviref} />
+     );
     } catch (error) {
         console.log("edivence error: ", error)
         return (<></>);

@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { SVG } from "@svgdotjs/svg.js";
 
-export default function App({ key = "unknow" }) {
-  const idCanvas = `canva-${key}`;
+export default function Spinner({ id = "unknow" }) {
+  const idCanvas = `canva-${id}`;
   useEffect(() => {
-    let drawPlace = document.getElementById(key);
+    let drawPlace = document.getElementById(id);
     let canvas = document.getElementById(idCanvas);
     if (drawPlace && canvas === null) {
       const width = drawPlace.clientWidth;
       const height = drawPlace.clientHeight / 2;
-      canvas = SVG().addTo(`#${key}`).size(width, height).id(idCanvas);
+      canvas = SVG().addTo(`#${id}`).size(width, height).id(idCanvas);
       let azucar = "#3D779B";
       let a = "#5AB2E8";
       let t = "#7798AC";
@@ -81,7 +81,7 @@ export default function App({ key = "unknow" }) {
   });
   return (
     <div
-      id={key}
+      id={id}
       style={{
         height: "200px",
         width: "100%",
@@ -121,7 +121,8 @@ function Par(amn, a, t, c, g) {
 }
 
 function CAMINAR(canvas, width) {
-  let n = Math.floor(Math.random() * (1000 - 1)) + 1;
+  let n = Math.floor(Math.random() * (10000 - 1)) + 1;
+  //let n = 12
   if (n === 12) {
     let image = canvas.image("https://i.imgur.com/XJQeaix.gif");
     image.move(width, -50);
