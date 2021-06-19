@@ -2,6 +2,7 @@
 
 #GraphQL configuration
 apollo.conf.json
+package-lock.json
 
 # dependencies
 /node_modules
