@@ -76,7 +76,8 @@ export default function DrawOperon({
       heigth / 2 +
       " z"
   );
-  operon.move(posX, posY);
+  //console.log(posX,posY)
+  operon.attr({ x: posX, y: posY })
   operon.id(id);
   operon.fill(color);
   operon.stroke(stroke);

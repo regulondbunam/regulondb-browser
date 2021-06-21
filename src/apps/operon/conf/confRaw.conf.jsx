@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react'
 
-let url = "https://raw.githubusercontent.com/regulondbunam/RegulonDB-Browser/operon_coupling/src/apps/operon/conf/operon.conf.json"
+let url = "https://raw.githubusercontent.com/regulondbunam/RegulonDB-Browser/master/configuration/apps/operon.conf.json"
 
 const Conf = ({setConf}) => {
     const [file,set_file] = useState()

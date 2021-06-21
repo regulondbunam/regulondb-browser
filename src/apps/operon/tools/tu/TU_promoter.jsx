@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { GetPromoter } from '../../webServices/tu_ws'
 import { MarkSequencePromoter } from './promoter_components/mkSequence'
 
-export const TUpromoter = ({ id_tu, id_operon }) => {
+export const TUpromoter = ({ id_tu, id_operon, conf }) => {
     const [_data, set_data] = useState();
     const [_state, set_state] = useState();
     //let loading = false;
@@ -14,7 +14,7 @@ export const TUpromoter = ({ id_tu, id_operon }) => {
         case "error":
             return <>error</>
         case "done":
-            return <Genes data={_data} id_tu={id_tu} />
+            return <Genes data={_data} id_tu={id_tu} conf={conf} />
         default:
             break
     }
@@ -33,14 +33,17 @@ export const TUpromoter = ({ id_tu, id_operon }) => {
     return <>no - id</>
 }
 
-function Genes({ data, id_tu }) {
+function Genes({ data, id_tu, conf }) {
     try {
         const strand = data?.operon?.strand
         data = data.transcriptionUnits
         const tu = data.find(element => element.id === id_tu);
         //console.log(tu)
         return (
-            <div style={{ marginLeft: "5%" }}>
+            <>
+            <h2>{conf?.title}</h2>
+                <p style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{__html: conf?.description}} />
+                <div style={{ marginLeft: "5%" }}>
                 <h3>{tu?.promoter?.name}</h3>
                 {
                     notNull(tu?.promoter?.note,
@@ -118,7 +121,8 @@ function Genes({ data, id_tu }) {
                         }
                     </tbody>
                 </table>
-            </div>
+            </div> 
+            </>
         )
     } catch (error) {
         console.error(error)

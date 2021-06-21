@@ -22,10 +22,12 @@ const OperonSection = ({idOperon}) => {
                 dna(posL-1000,posR+1000),
                 operon(_data.id,_data.name,posL,posR,_data.strand)
             ]
+            console.log(infoDraw)
             return <>{viewer(infoDraw)}</>
         default:
             break
     }
+    
     return (
         <div>
             {

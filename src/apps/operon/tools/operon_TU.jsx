@@ -20,21 +20,11 @@ export const operon_TU = ({
     if(idOperon){
         return (
             <article>
-                <h2>{conf_description?.title}</h2>
-                <p style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{__html: conf_description?.description}} />
-                <TUdescription id_tu={id} id_operon={idOperon} />
-                <h2>{conf_genes?.title}</h2>
-                <p style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{__html: conf_genes?.description}} />
-                <TUgenes id_tu={id} id_operon={idOperon}/>
-                <h2>{conf_promoter?.title}</h2>
-                <p style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{__html: conf_promoter?.description}} />
-                <TUpromoter id_tu={id} id_operon={idOperon}/>
-                <h2>{conf_terminator?.title}</h2>
-                <p style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{__html: conf_terminator?.description}} />
-                <TUTerminators id_tu={id} id_operon={idOperon} />
-                <h2>{conf_bindingsites?.title}</h2>
-                <p style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{__html: conf_bindingsites?.description}} />
-                <TUrBS id_tu={id} id_operon={idOperon} />
+                <TUdescription id_tu={id} id_operon={idOperon} conf={conf_description} />
+                <TUgenes id_tu={id} id_operon={idOperon}conf={conf_genes} />
+                <TUpromoter id_tu={id} id_operon={idOperon} conf={conf_promoter} />
+                <TUTerminators id_tu={id} id_operon={idOperon} conf={conf_terminator} />
+                <TUrBS id_tu={id} id_operon={idOperon} conf={conf_bindingsites} />
             </article>
         )
     }

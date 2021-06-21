@@ -3,7 +3,7 @@ import { GetBindingSites } from '../../webServices/tu_ws'
 import { RBSbyStite } from "./rBS_byStite";
 import RBSbyFull from './rBS_fullInfo'
 
-export const TUrBS = ({ id_tu, id_operon }) => {
+export const TUrBS = ({ id_tu, id_operon, conf }) => {
     const [_data, set_data] = useState();
     const [_state, set_state] = useState();
     //let loading = false;
@@ -16,7 +16,13 @@ export const TUrBS = ({ id_tu, id_operon }) => {
             return <>error</>
         case "done":
             //console.log(_data)
-            return <SwitchView id_tu={id_tu} data={_data} />
+            return (
+            <>
+            <h2>{conf?.title}</h2>
+                <p style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{__html: conf?.description}} />
+                <SwitchView id_tu={id_tu} data={_data} />
+            </>
+            )
         default:
             break
     }

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { GetTerminators } from '../../webServices/tu_ws'
 import {MarkSequenceTerminator} from './terminator_components/mkSequence'
 
-export const TUTerminators = ({ id_tu, id_operon }) => {
+export const TUTerminators = ({ id_tu, id_operon, conf }) => {
     const [_data, set_data] = useState();
     const [_state, set_state] = useState();
     //let loading = false;
@@ -15,7 +15,13 @@ export const TUTerminators = ({ id_tu, id_operon }) => {
             return <>error</>
         case "done":
             //console.log(_data)
-            return <Terminators id_tu={id_tu} data={_data} />
+            return (
+                <>
+                <h2>{conf?.title}</h2>
+                <p style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{__html: conf?.description}} />
+                <Terminators id_tu={id_tu} data={_data} />
+                </>
+                )
         default:
             break
     }
