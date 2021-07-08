@@ -89,14 +89,6 @@ function Genes({ data, id_tu, conf }) {
                             )
                         }
                         {
-                            notNull(strand,
-                                <tr>
-                                    <td style={{ fontWeight: "bold" }}>Strand</td>
-                                    <td>{strand}</td>
-                                </tr>
-                            )
-                        }
-                        {
                             notNull(tu?.promoter?.sequence,
                                 <tr>
                                     <td colSpan="2" style={{ fontWeight: "bold" }}>Sequence</td>
