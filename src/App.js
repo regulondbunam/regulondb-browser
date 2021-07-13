@@ -9,7 +9,7 @@ import Home from './apps/home/home'
 import Search from './apps/search/search'
 import Gene from './apps/gene/gene'
 import Operon from './apps/operon/operon'
-
+import Doc from "./apps/guide-frontend/doc_ui_cya";
 import Error from './apps/error/e404/error'
 import Testing from './apps/error/testing/operon/operon_testing'
 
@@ -36,6 +36,9 @@ function App() {
         </Route>
         <Route path={["/tu/:id","/tu",]}>
           <Operon />
+        </Route>
+        <Route path={["/started/:site","/started"]} >
+          <Doc />
         </Route>
         <Route path={["/app/testing",]}>
           <Testing />
