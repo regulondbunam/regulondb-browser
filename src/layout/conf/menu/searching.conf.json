@@ -1,0 +1,135 @@
+{
+  "id": "searching_Button",
+  "title": "Search",
+  "type": "MENU",
+  "options": [
+    {
+      "id": "subMenuSearching",
+      "title": "By Term",
+      "link": "/search",
+      "type": "SUBMENU",
+      "options": [
+        {
+          "id": "gene-search",
+          "title": "Gene",
+          "link" : "/gene",
+          "state": "enabled"
+        },
+        {
+          "id": "gensorUnit-search",
+          "title": "Gensor Unit",
+          "state": "disabled",
+          "link" : "/gu"
+        },
+        {
+          "id": "growthConditions-search",
+          "title": "Growth Conditions",
+          "link" : "/growthConditions",
+          "state": "disabled"
+        },
+        {
+          "id": "operon-search",
+          "title": "Operon",
+          "link" : "/operon",
+          "state": "soon"
+        },
+        {
+          "id": "regulon-search",
+          "title": "Regulon",
+          "link" : "/regulon",
+          "state": "soon"
+        },
+        {
+          "id": "sigmulon-search",
+          "title": "Sigmulon",
+          "link" : "/sigmulon",
+          "state": "soon"
+        },
+        {
+          "id": "srna-search",
+          "title": "sRNA",
+          "link" : "/srna",
+          "state": "disabled"
+        }
+      ]
+    },
+    {
+      "id": "browsing_Searching",
+      "title": "Browsing",
+      "link": "/browsing",
+      "type": "SUBMENU",
+      "options": [
+        {
+          "id": "coexpression-browsing",
+          "title": "Coexpression",
+          "state": "disabled",
+          "link" : "/coexpression"
+        },
+        {
+          "id": "gensorUnitGroups-browsing",
+          "title": "Gensor Unit Groups",
+          "state": "disabled",
+          "link" : "/gu/groups"
+        },
+        {
+          "id": "MCOB-browsing",
+          "title": "Microbial Condition Ontology",
+          "state": "disabled",
+          "link" : "/mco"
+        },
+        {
+          "id": "tf-Matrix-browsing",
+          "title": "Transcription Factor",
+          "state": "disabled",
+          "link" : "/tf"
+        },
+        {
+          "id": "tf-Matrix-browsing",
+          "title": "Transcription Factor Family",
+          "state": "disabled",
+          "link" : "/tf/family"
+        },
+        {
+          "id": "tf-Matrix-browsing",
+          "title": "TF-Matrix",
+          "state": "disabled",
+          "link" : "/tf/matrix"
+        }
+      ]
+    },
+    {
+      "id": "wservices",
+      "title": "Web Services",
+      "link": "/ws",
+      "type": "SUBMENU",
+      "options": [
+        {
+          "id": "api-ws",
+          "title": "API",
+          "state": "disabled",
+          "link" : "/ws/api"
+        }
+      ]
+    },
+    {
+      "id": "menu_tutorials",
+      "title": "Tutorials",
+      "link": "/guide",
+      "type": "SUBMENU",
+      "options": [
+        {
+          "id": "gsurdb",
+          "title": "Getting started using RegulonDB",
+          "state": "disabled",
+          "link" : "/tutorial/gettingStarted/regulondb"
+        },
+        {
+          "id": "gsurdb",
+          "title": "Guide",
+          "state": "enabled",
+          "link" : "/guide"
+        }
+      ]
+    }
+  ]
+}

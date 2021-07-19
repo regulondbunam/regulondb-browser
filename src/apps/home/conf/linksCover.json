@@ -1,0 +1,49 @@
+{
+    "links": [
+        {
+            "title": "Regulons",
+            "link": "/Regulons",
+            "type": "LINK"
+        },
+        {
+            "title": "TFBSs",
+            "link": "/TFBSs",
+            "type": "LINK"
+        },
+        {
+            "title": "Genes",
+            "link": "/Gene",
+            "type": "LINK"
+        },
+        {
+            "title": "TUs",
+            "link": "/TranscriptionalUnit",
+            "type": "LINK"
+        },
+        {
+            "title": "Operons",
+            "link": "/Operon",
+            "type": "LINK"
+        },
+        {
+            "title": "Growth Conditions",
+            "link": "/GrowthConditions",
+            "type": "LINK"
+        },
+        {
+            "title": "GUs",
+            "link": "/GeneUnits",
+            "type": "LINK"
+        },
+        {
+            "title": "Sigmas",
+            "link": "/Sigma",
+            "type": "LINK"
+        },
+        {
+            "title": "sRNAs",
+            "link": "/smallRNA",
+            "type": "LINK"
+        }
+    ]
+}
