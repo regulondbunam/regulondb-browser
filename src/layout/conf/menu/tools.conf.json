@@ -12,7 +12,7 @@
                 {
                     "id": "dtt-browsing",
                     "title": "Drawing Traces Tool",
-                    "state": "soon",
+                    "state": "disabled",
                     "link" : "/dtt"
                 },
                 {
@@ -45,7 +45,7 @@
                     "id": "rsaTOols",
                     "title": "RSA Tools",
                     "link" : "http://embnet.ccg.unam.mx/rsat/",
-                    "state": "enabled",
+                    "state": "disabled",
                     "target": "_blank"
                 },
                 {

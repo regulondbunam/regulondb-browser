@@ -31,19 +31,19 @@
           "id": "operon-search",
           "title": "Operon",
           "link" : "/operon",
-          "state": "soon"
+          "state": "enabled"
         },
         {
           "id": "regulon-search",
           "title": "Regulon",
           "link" : "/regulon",
-          "state": "soon"
+          "state": "disabled"
         },
         {
           "id": "sigmulon-search",
           "title": "Sigmulon",
           "link" : "/sigmulon",
-          "state": "soon"
+          "state": "disabled"
         },
         {
           "id": "srna-search",
@@ -126,7 +126,7 @@
         {
           "id": "gsurdb",
           "title": "Guide",
-          "state": "enabled",
+          "state": "disabled",
           "link" : "/guide"
         }
       ]

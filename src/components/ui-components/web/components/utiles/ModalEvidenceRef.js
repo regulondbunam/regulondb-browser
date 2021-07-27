@@ -7,8 +7,8 @@ const ModalER = ({
     classNameModal,
     k,
 }) => {
-    let evidence = ""
-    let references = ""
+   // let evidence = ""
+    //let references = ""
     const evi = cit?.evidence
     const pub = cit?.publication
     const code = evi?.code, name = evi?.name, type = evi?.type, id_evi = evi?.id
@@ -50,8 +50,3 @@ const ModalER = ({
 }
 
 export default ModalER;
-
-function validateStr(str = undefined) {
-    if (str) return str;
-    return ""
-}

@@ -55,7 +55,7 @@
           "id": "F-ui",
           "title": "ui-components",
           "link" : "/webService",
-          "state": "enabled"
+          "state": "disabled"
         },
         {
           "id": "regulondb-browser",
