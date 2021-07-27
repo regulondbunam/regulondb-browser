@@ -7,4 +7,5 @@ import GetTerminators from './transcriptionUnit/TU_terminators'
 import GetBindingSites from "./transcriptionUnit/TU_BindingSites";
 import ValidateID from './transcriptionUnit/TU_validate'
 
+
 export {GetCitations, GetGenes, GetInfo, GetPromoter, GetRegulatorBS, GetTerminators, GetBindingSites, ValidateID}
