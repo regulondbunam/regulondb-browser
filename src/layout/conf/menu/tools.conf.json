@@ -5,14 +5,14 @@
     "options": [
         {
             "id": "subMenuBrosing",
-            "title": "BROWSING",
-            "link": "/browsing",
+            "title": "RegulonDB Tools",
+            "link": "/tools",
             "type": "SUBMENU",
             "options": [
                 {
                     "id": "dtt-browsing",
                     "title": "Drawing Traces Tool",
-                    "state": "soon",
+                    "state": "disabled",
                     "link" : "/dtt"
                 },
                 {
@@ -31,40 +31,13 @@
                     "id": "pwms-browsing",
                     "title": "Clustering for PWMs",
                     "state": "disabled",
-                    "link" : "/clustering_pwms"
-                },
-                {
-                    "id": "TranscriptionFF-browsing",
-                    "title": "Transcription Factor Family Browser",
-                    "state": "disabled",
-                    "link" : "/tffbrowser"
-                },
-                {
-                    "id": "coexpression-browser",
-                    "title": "Coexpression Browser",
-                    "state": "disabled",
-                    "link" : "/coexpression"
-                }
-                
-            ]
-        },
-        {
-            "id": "SunMenuDev",
-            "title": "DEVELOPER",
-            "link": "/developer",
-            "type": "SUBMENU",
-            "options": [
-                {
-                    "id": "api",
-                    "title": "Webservices",
-                    "state": "disabled",
-                    "link": "/ws"
+                    "link": "/clustering_pwms"
                 }
             ]
         },
         {
             "id": "SubMenuExternal",
-            "title": "EXTERNAL",
+            "title": "External Tools",
             "link": "/externalTools",
             "type": "SUBMENU",
             "options": [
@@ -72,7 +45,7 @@
                     "id": "rsaTOols",
                     "title": "RSA Tools",
                     "link" : "http://embnet.ccg.unam.mx/rsat/",
-                    "state": "enabled",
+                    "state": "disabled",
                     "target": "_blank"
                 },
                 {

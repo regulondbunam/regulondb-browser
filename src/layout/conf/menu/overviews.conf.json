@@ -11,13 +11,6 @@
             "type": "LINK"
         },
         {
-            "id": "geuniGro",
-            "title": "Gensor Unit Groups",
-            "link": "/gensorUnitGroups",
-            "state": "disabled",
-            "type": "LINK"
-        },
-        {
             "id": "trans",
             "title": "Transcriptional Regulatory Network",
             "link": "/trn",

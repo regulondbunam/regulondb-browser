@@ -2,47 +2,57 @@ import React, { Component } from 'react';
 
 class CoverVideo extends Component {
 
-  render() {
+
+
+    componentDidMount() {
+
+        function loop(){
+            let video = document.getElementById('video');
+            if(video){
+                ctx.drawImage(video, 0, 0, 640, 360, 0, 0, 640, 360);
+                setTimeout(loop, 1000 / 30);
+            }
+        }
+        let canvas = document.getElementById('cropCvs');
+        if(canvas){
+            var ctx = canvas.getContext('2d');
+            loop();
+        }
+    }
+
+    render() {
 
     const {
-      width,
       height,
-      url
     } = this.props;
 
-    // Datos del Video
-    // dopbox video dl.dropboxusercontent.com
+    const url = `${window.location.origin}/media/videos/ecoli.mp4`
 
-    const item = [
-      {
-        id: 1,
-        video: url,
-        formato: 'video/mp4',
-      }
-    ];
+        const item = {
+            id: 1,
+            video: url,
+            formato: 'video/mp4',
+        };
 
-    return (
-      
-      
-
-      item.map(item => {
-
-        // Es necesario colocar una 'key' a partir de la versión de React JS 16
-        // colocamos el objeto 'id: 1' en <div key={ item.id }  
-
-        return  <div key={ item.id }>
-                  <video width={width} height={height}  autoPlay muted loop>
+        return (
+            <div key={ item.id }>
+                <video
+                    id="video"
+                    height="auto"
+                    width="100%"
+                    autoPlay muted loop
+                    style={{display: "none"}}
+                >
                     <source src={ item.video} type={ item.formato }/>
-                  </video>
-                </div>
-
-
-      })
-
-
-    )
-
-
+                </video>
+                <canvas
+                    id="cropCvs"
+                    height="360"
+                    width="640"
+                    style={{width: "100%", height: height, border: "1px solid black"}}>
+                </canvas>
+            </div>
+        )
   }
 
 };

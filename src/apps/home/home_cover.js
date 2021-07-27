@@ -10,7 +10,7 @@ const CoverHome = ({
     const cover_info = conf?.cover
     return ( 
         <>
-            <Cover coverType={cover_info.type} color={cover_info.color} >
+            <Cover conf={cover_info} coverType={cover_info.type} color={cover_info.color} >
                 <h1 style={styleTitle}>{conf.title}</h1>
                 <h2 style={styleSubtitle} dangerouslySetInnerHTML={{__html: conf.subtitle}} />
                 <br/>
@@ -35,6 +35,7 @@ const CoverHome = ({
      );
 }
 
+// eslint-disable-next-line no-unused-vars
 const styleBox = {
     width: "90%"
 }

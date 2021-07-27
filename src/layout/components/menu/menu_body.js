@@ -57,7 +57,7 @@ const setStyleLink = (id,state) => {
                 textDecoration: "none",
                 fontSize: "16",
                 fontFamily: "sans-serif",
-                color: "#ffffff"
+                color: "#666666"
             }
         case 'soon':
             return{
@@ -67,9 +67,12 @@ const setStyleLink = (id,state) => {
                 color: "#ffffff"
             }
         default:
-            console.log(`link "${id}" status not defined`)
+            console.warn(`link "${id}" status not defined`)
             return {
-                display: "null"
+                textDecoration: "none",
+                fontSize: "16",
+                fontFamily: "sans-serif",
+                color: "#ffffff"
             }
     }
 }

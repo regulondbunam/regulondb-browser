@@ -1,11 +1,11 @@
 {
     "id": "menudownloadset",
-    "title": "Download set",
+    "title": "Releases",
     "type": "MENU",
     "options":[
         {
             "id": "expDatasets",
-            "title": "Experimental Datasets",
+            "title": "Releases and Data Sets",
             "link": "/experimentaldt",
             "state": "disabled",
             "type": "LINK"
