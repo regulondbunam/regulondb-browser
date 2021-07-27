@@ -1,6 +1,6 @@
 import {Image} from '../components/ui-components/ui_components'
 import SearchTool from '../apps/search/tools/search_box'
-import {Schema, ImageObject} from '../components/schemas/schemas'
+import {Schema, ImageObject, WPHeader} from '../components/schemas/schemas'
 import conf from './conf/header.conf.json'
 
 const Header = ({
@@ -9,6 +9,7 @@ const Header = ({
 }) => {
     return (
         <header style={StyleHeader}>
+            <Schema jsonLd={WPHeader({name:"header",description:"description"})} />
             <div style={StyleSide}>
                 <Image id={conf.logos[0].id} imgTitle={conf.logos[0].title} imgAlt={conf.logos[0].description} urlImage={`${urlPage}${conf.logos[0].url}`} imgStyle={{ maxWidth: "239px", maxHeight: "48px" }} />
                 <Schema jsonLd={ImageObject({name: conf.logos[0].title, description:conf.logos[0].description, url:`${urlPage}${conf.logos[0].url}`, representativeOfPage: "true"})}/>

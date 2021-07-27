@@ -2,9 +2,8 @@ import React from 'react'
 //import ReactDOMServer from 'react-dom/server'
 import { helmetJsonLdProp } from "react-schemaorg";
 import { Helmet } from 'react-helmet-async';
-import conf from './schema.conf.json'
 
-export const urlPage = conf.url_page
+export const urlPage = process.env.REACT_APP_DOMAIN_NAME;
 
 export const Schema = ({
     jsonLd = {}
