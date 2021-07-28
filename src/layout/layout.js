@@ -10,7 +10,7 @@ const Layout = ({
 }) => {
     const isHome = location.pathname === "/home" || location.pathname === "/"
     //console.log(window.location.origin)
-    const urlPage = window.location.origin+'/'
+    const urlPage = window.location.origin
     return (
         <>
             <Header urlPage={urlPage} isHome={isHome} />

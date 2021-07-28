@@ -4,25 +4,25 @@
             "id":"log_footer_01",
             "title":"UNAM logo",
             "description":"UNAM's representative logo",
-            "url":"./media/img/logos/UNAM.png"
+            "url":"/media/img/logos/UNAM.png"
         },
         {
             "id":"log_footer_02",
             "title":"CCG logo",
             "description":"Representative logo of the Center for Genomic Sciences",
-            "url":"./media/img/logos/CCG.png"
+            "url":"/media/img/logos/CCG.png"
         },
         {
             "id":"log_footer_03",
             "title":"NIH logo",
             "description":"Representative logo of the National Institutes of Health (NIH) National Center of General Medical Sciences",
-            "url":"./media/img/logos/NIH.png"
+            "url":"/media/img/logos/NIH.png"
         },
         {
             "id":"log_footer_04",
             "title":"CONACYT",
             "description":"Consejo Nacional de Ciencia y Tecnologia (CONACyT)",
-            "url":"./media/img/logos/CONACYT.png"
+            "url":"/media/img/logos/CONACYT.png"
         }
     ],
     "links":[
@@ -43,5 +43,5 @@
             "url":"/funding"
         }
     ],
-    "description": "©1998-2020, CCG/UNAM All Rights Reserved. RegulonDB is free for academic/noncommercial use. RegulonDB 10.7, 05/04/2020. Our curation knowledge is currently mapped to the GenBank Reference Sequence for E. coli K12. Version NC_000913.3 GI:556503834. Send your comments to the RegulonDB Team HERE"
+    "description": "©1998-2021, CCG/UNAM All Rights Reserved. RegulonDB is free for academic/noncommercial use. RegulonDB 10.7, 05/04/2020. Our curation knowledge is currently mapped to the GenBank Reference Sequence for E. coli K12. Version NC_000913.3 GI:556503834. Send your comments to the RegulonDB Team HERE"
 }
