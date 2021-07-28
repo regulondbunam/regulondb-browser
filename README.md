@@ -1,8 +1,7 @@
-# RegulonDB Browser tester
-
+# RegulonDB Browser WebApp
 # Description
 
-RegulonDB Browser Functional Prototype Test 
+RegulonDB Browser 
 
 # Motivation
 
