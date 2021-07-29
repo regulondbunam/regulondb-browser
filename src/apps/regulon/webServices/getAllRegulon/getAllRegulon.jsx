@@ -8,7 +8,7 @@ import { gql } from "@apollo/client";
 export function query(limit, page) {
     return gql`
     {
-        getAllRegulon(limit: 5, page: 0) {
+        getAllRegulon(limit: ${limit}, page: ${page}) {
             data {
                 _id
                 transcriptionFactor{
