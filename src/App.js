@@ -9,6 +9,7 @@ import Home from "./apps/home/home";
 import Search from "./apps/search/search";
 import Gene from "./apps/gene/gene";
 import Operon from "./apps/operon/operon";
+import Regulon from "./apps/regulon/regulon"
 
 function App() {
   return (
@@ -33,6 +34,9 @@ function App() {
                 </Route>
                 <Route path={["/tu/:id","/tu",]}>
                     <Operon />
+                </Route>
+                <Route path={["/regulon/:id/:site/:section","/regulon/:id/:site","/regulon/:id","/regulon",]}>
+                    <Regulon />
                 </Route>
             </Switch>
             </Layout>

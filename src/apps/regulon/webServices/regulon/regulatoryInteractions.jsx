@@ -12,7 +12,7 @@ export function query(id) {
     return gql`
     ${CITATIONS_FIELDS}
     {
-        getRegulonBy(search:"ara"){
+        getRegulonBy(search:"${id}"){
             data{
                 regulatoryInteractions{
                     regulator{
