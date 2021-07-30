@@ -5,7 +5,7 @@ export function formatData(_data,go) {
     //console.log(_data)
     let rows = []
     _data.map((data)=>{
-        console.log(data)
+        //console.log(data)
         let conformations = []
         try {
             conformations = data.transcriptionFactor.conformations.map((conformation)=>{
