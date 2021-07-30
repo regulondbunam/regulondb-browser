@@ -19,11 +19,13 @@ export function Home() {
     const [_title, set_title] = useState("Regulon");
     let history = useHistory();
 
-    function go(id) {
-        history.push(`/regulon/${id}`)
-    }
+    
 
     useEffect(() => {
+        function go(id) {
+            history.push(`/regulon/${id}`)
+        }
+
         if(_data){
             set_dataTable(formatData(_data,go))
         }
@@ -39,7 +41,7 @@ export function Home() {
             });
             COVER.dispatchEvent(COVER_REACTION);
         }
-    },[set_dataTable,_data,_state,_title])
+    },[set_dataTable,_data,_state,_title, history])
 
     if(_data){
         return(
@@ -55,7 +57,7 @@ export function Home() {
     return(
         <div>
             <GetAllRegulon
-                limit={10}
+                limit={0}
                 resoultsFound={(found)=>{set_found(found)}}
                 resoultsData={(data)=>{set_data(data)}}
                 status={(state)=>{set_state(state)}}
