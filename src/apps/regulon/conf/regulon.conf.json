@@ -3,7 +3,7 @@
         "regulon_main": {
             "id": "page_main",
             "title": "Regulon",
-            "description": "<p>Description of regulon home page</p>"
+            "description": "<p>Welcome Regulon Page</p>"
         },
         "regulon_info": {
             "id": "regulon_data",

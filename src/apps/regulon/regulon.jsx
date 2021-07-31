@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import Title from "./components/regulon_title"
 import {Home} from "./regulon_home"
 import ValidateID from './webServices/regulon/validate'
+import CONF from "./conf/regulon.conf.json"
+import Info from './regulon_info';
 
 export default function Regulon() {
     const id = useParams().id;
@@ -10,7 +12,7 @@ export default function Regulon() {
         <>
             <Title/>
             {
-                id ? <Validate id_regulon={id} /> : <Home />
+                id ? <Validate id_regulon={id} /> : <Home conf={CONF?.pages?.regulon_main} />
             }
         </>
     )
@@ -59,9 +61,7 @@ function Validate({id_regulon}) {
 
     if(_data){
         return(
-            <div>
-                {id_regulon}
-            </div>
+            <Info id_regulon={id_regulon} conf={CONF.pages?.regulon_info} />
         )
     }
     return <ValidateID 

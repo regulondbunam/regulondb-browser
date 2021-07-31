@@ -10,13 +10,13 @@ import {useHistory} from "react-router-dom";
     resoultsData = () => { },
     status = () => { }
  */
-export function Home() {
+export function Home({conf}) {
     const [_data, set_data] = useState()
     const [_dataTable, set_dataTable] = useState()
     const [_found, set_found] = useState()
     const [_state, set_state] = useState("done")
     // eslint-disable-next-line no-unused-vars
-    const [_title, set_title] = useState("Regulon");
+    const [_title, set_title] = useState(conf?.title);
     let history = useHistory();
 
     
@@ -47,7 +47,8 @@ export function Home() {
         return(
             <article>
                 <br/>
-                <p>Welcome Regulon, we have found {_found} Regulon </p>
+                <div dangerouslySetInnerHTML={{__html: conf?.description}} />
+                <p>{_found} Regulon </p>
                 <br/>
                 <IntelligentTable data={_dataTable} />
             </article>

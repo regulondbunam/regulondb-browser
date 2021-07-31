@@ -42,7 +42,7 @@ export const Title = () => {
 export default Title
 
 function Conformations({_conformations = []}) {
-    console.log(_conformations)
+    //console.log(_conformations)
     if(!_conformations || _conformations.length === 0){
         return null
     }

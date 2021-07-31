@@ -10,7 +10,7 @@ export function query(id) {
     return gql`
     ${CITATIONS_FIELDS}
     {
-        getRegulonBy(search: "${id}") {
+        getRegulonBy(advancedSearch: "${id}[_id]") {
             data {
                 _id
                 transcriptionFactor {
