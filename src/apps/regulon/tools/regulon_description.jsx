@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import GetTranscriptionFactor from '../webServices/regulon/transcriptionFactor'
 import BasicInfo from './description/basic_info'
+import Conformations from './description/conformations'
 
 export default function Description({id_regulon, conf}) {
 
@@ -21,12 +22,14 @@ export default function Description({id_regulon, conf}) {
     }, [_state])
 
     if(_data){
-        console.log(_data)
+        //console.log(_data)
         return(
             <article>
                 <h2>{conf?.title}</h2>
                 <p dangerouslySetInnerHTML={{__html: conf?.description }} />
                 <BasicInfo tf={_data} />
+                <br/>
+                <Conformations tf={_data}/>
             </article>
         )
     }

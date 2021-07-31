@@ -2,7 +2,7 @@ import React from 'react'
 import RegulonTabs from './components/regulon_tabs'
 
 export default function Info({id_regulon,conf}) {
-    console.log(conf)
+    //console.log(conf)
     if (id_regulon && conf) {
         return (
             <div>
