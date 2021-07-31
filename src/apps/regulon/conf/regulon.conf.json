@@ -1,0 +1,64 @@
+{
+    "pages": {
+        "regulon_main": {
+            "id": "page_main",
+            "title": "Regulon",
+            "description": "<p>Description of regulon home page</p>"
+        },
+        "regulon_info": {
+            "id": "regulon_data",
+            "conf": {
+                "tabSelect": "tab-description"
+            },
+            "tabs": {
+                "all": {
+                    "id": "tab-all",
+                    "name": "All",
+                    "title": "All",
+                    "description": "",
+                    "disabled": false
+                },
+                "description": {
+                    "id": "tab-description",
+                    "name": "Description",
+                    "title": "Description",
+                    "description": "",
+                    "sections": {},
+                    "disabled": false
+                },
+                "regulon": {
+                    "id": "tab-regulon",
+                    "name": "Regulon",
+                    "title": "Regulon",
+                    "description": "",
+                    "disabled": false,
+                    "sections": {
+                        "regulates": {
+                            "id": "regulates-section",
+                            "title": "Regulates",
+                            "description": "..."
+                        },
+                        "gene_ontology": {
+                            "id": "geneOntology-section",
+                            "title": "Gene Ontology",
+                            "description": "..."
+                        },
+                        "multifun": {
+                            "id": "multifun-section",
+                            "title": "Multifun",
+                            "description": "..."
+                        }
+                    }
+                },
+                "tfbs": {
+                    "id": "tab-tfbs",
+                    "name": "TFBSs",
+                    "title": "Transcription Factor Binding Sites",
+                    "description": "",
+                    "sections": {},
+                    "disabled": false
+                }
+            }
+        }
+    }
+}
