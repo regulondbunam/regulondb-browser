@@ -9,7 +9,7 @@ import { gql } from "@apollo/client";
 export function query(id) {
     return gql`
     {
-        getRegulonBy(search: "${id}") {
+        getRegulonBy(advancedSearch: "${id}[_id]") {
             data {
                 _id
                 transcriptionFactor{
@@ -42,11 +42,11 @@ const ValidateID = ({
         }
         if (data && !_res) {
             set_res(true)
-            //if (data.getRegulonBy.pagination.totalResults === 1) {
-            if (true) {
+            if (data.getRegulonBy.pagination.totalResults === 1) {
+            //if (true) {
                 try {
-                    //resoultsData(data.getRegulonBy.data[0])
-                    resoultsData(DTA)
+                    resoultsData(data.getRegulonBy.data[0])
+                    //resoultsData(DTA)
                     status('done')
                 } catch (error) {
                     status('error')
@@ -79,6 +79,7 @@ const ValidateID = ({
 
 export default ValidateID;
 
+// eslint-disable-next-line no-unused-vars
 const DTA  = 
 {
     "_id": "RDBECOLITFC00039",

@@ -34,7 +34,7 @@ function Validate({id_regulon}) {
             break;
             case 'done':
                 if(_data){
-                    console.log(_data)
+                    //console.log(_data)
                     set_title(_data?.transcriptionFactor?.name)
                 }
             break;
@@ -49,7 +49,8 @@ function Validate({id_regulon}) {
                 detail: { 
                     state: _state,
                     title: _title,
-                    isInfo: true
+                    isInfo: true,
+                    data: _data
                 }
             });
             COVER.dispatchEvent(COVER_REACTION);
