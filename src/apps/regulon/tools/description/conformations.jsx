@@ -7,7 +7,7 @@ const thStyle = {
 }
 
 export default function Conformations({tf}) {
-    console.log(tf?.conformations)
+    //console.log(tf?.conformations)
     let conformations = tf?.conformations
 
     if(!conformations){
@@ -33,7 +33,7 @@ export default function Conformations({tf}) {
                         {
                             conformations.map(c =>{
                                 return(
-                                    <tr>
+                                    <tr key={`conformation_${c?.id}_${c?.name}`}>
                                         <td>{c?.name}</td>
                                         <td>{c?.type}</td>
                                         <td>{c?.effectorInteractionType}</td>

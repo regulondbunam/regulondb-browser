@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import GetTranscriptionFactor from '../webServices/regulon/transcriptionFactor'
 import BasicInfo from './description/basic_info'
 import Conformations from './description/conformations'
+import EncodeGenes from './description/encode_genes'
+import EncodeOperon from './description/encode_operon'
 
 export default function Description({id_regulon, conf}) {
 
@@ -22,7 +24,7 @@ export default function Description({id_regulon, conf}) {
     }, [_state])
 
     if(_data){
-        //console.log(_data)
+        console.log(_data)
         return(
             <article>
                 <h2>{conf?.title}</h2>
@@ -30,6 +32,10 @@ export default function Description({id_regulon, conf}) {
                 <BasicInfo tf={_data} />
                 <br/>
                 <Conformations tf={_data}/>
+                <br />
+                <EncodeGenes encodedFrom_gene={_data?.encodedFrom} />
+                <br />
+                <EncodeOperon encodedFrom_gene={_data?.encodedFrom} />
             </article>
         )
     }
