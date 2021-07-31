@@ -26,7 +26,7 @@ export default function Conformations({tf}) {
                             <th style={thStyle} >Type</th>
                             <th style={thStyle} >Effector Interaction Type</th>
                             <th style={thStyle} >Functional Type</th>
-                            <th style={thStyle} >Evidence and References</th>
+                            <th style={thStyle} >Citations</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -4,7 +4,7 @@ import BasicInfo from './description/basic_info'
 import Conformations from './description/conformations'
 import EncodeGenes from './description/encode_genes'
 import EncodeOperon from './description/encode_operon'
-
+import Note from './description/note'
 export default function Description({id_regulon, conf}) {
 
     const [_data, set_data] = useState()
@@ -36,6 +36,8 @@ export default function Description({id_regulon, conf}) {
                 <EncodeGenes encodedFrom_gene={_data?.encodedFrom} />
                 <br />
                 <EncodeOperon encodedFrom_gene={_data?.encodedFrom} />
+                <br />
+                <Note note={_data?.note} />
             </article>
         )
     }

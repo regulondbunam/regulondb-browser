@@ -9,7 +9,6 @@ export default function BasicInfo({ tf }) {
     let sensingClass = tf?.sensingClass
     let connectivityClass = tf?.connectivityClass
     let synonyms = tf?.synonyms
-    
     return (
         <table style={{ marginLeft: "5%", tableLayout: "fixed", width: "auto", float: "left", display: "inline-block" }}>
             <tbody>
