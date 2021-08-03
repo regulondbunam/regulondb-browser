@@ -37,7 +37,7 @@
           "id": "regulon-search",
           "title": "Regulon",
           "link" : "/regulon",
-          "state": "disabled"
+          "state": "enabled"
         },
         {
           "id": "sigmulon-search",

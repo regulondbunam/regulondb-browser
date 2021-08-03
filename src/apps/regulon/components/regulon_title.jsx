@@ -20,7 +20,7 @@ export const Title = () => {
                     set_title(e.detail.title)
                 }
                 if (e.detail.isInfo) {
-                    set_isInfo(true)
+                    set_isInfo(e.detail.isInfo)
                 }
                 if (e.detail.data) {
                     set_data(e.detail.data)
@@ -28,12 +28,12 @@ export const Title = () => {
             }, false);
         }
     }, [])
+    //console.log(_isInfo)
     return (
         <div id={"div_cover_regulon_01"}>
             <Cover id="component_cover_regulon_01" state={_state}>
                 {_isInfo ? "Regulon" : ""}
                 <h1 id="cover_regulon_01" style={{margin: "0px 0px 0px 0px"}} >{_title}</h1>
-                <Conformations _conformations={_data?.transcriptionFactor?.conformations} />
             </Cover>
         </div>
     )
@@ -41,6 +41,7 @@ export const Title = () => {
 
 export default Title
 
+// eslint-disable-next-line no-unused-vars
 function Conformations({_conformations = []}) {
     //console.log(_conformations)
     if(!_conformations || _conformations.length === 0){
