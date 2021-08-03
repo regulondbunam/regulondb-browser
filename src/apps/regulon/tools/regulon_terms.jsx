@@ -20,7 +20,7 @@ export default function Terms({id_regulon, conf}) {
     }, [_state])
 
     if(_data){
-        console.log(id_regulon)
+        //console.log(id_regulon)
         return(
             <div>
                 <h3>Terms</h3>

@@ -82,29 +82,3 @@ const ValidateID = ({
 }
 
 export default ValidateID;
-
-// eslint-disable-next-line no-unused-vars
-const DTA  = 
-{
-    "_id": "RDBECOLITFC00039",
-    "transcriptionFactor": {
-      "name": "AraC",
-      "synonyms": [
-        "AraC"
-      ],
-      "conformations": [
-        {
-          "id": "RDBECOLIPDC03929",
-          "name": "AraC"
-        },
-        {
-          "id": "RDBECOLIRCC00160",
-          "name": "DNA-binding transcriptional dual regulator AraC"
-        },
-        {
-          "id": "RDBECOLIRCC00006",
-          "name": "AraC-L-arabinose DNA-binding transcriptional activator"
-        }
-      ]
-    }
-  }

@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import { ParagraphCitations } from '../../../../components/citations/citations';
+import { CitationCONTEXT } from '../../../../components/citations/citations_provider';
 
 const thStyle = {
     fontWeight: "bold",
@@ -32,13 +34,19 @@ export default function Conformations({tf}) {
                     <tbody>
                         {
                             conformations.map(c =>{
+                                console.log(c?.citations)
                                 return(
                                     <tr key={`conformation_${c?.id}_${c?.name}`}>
                                         <td>{c?.name}</td>
                                         <td>{c?.type}</td>
                                         <td>{c?.effectorInteractionType}</td>
                                         <td>{c?.functionalType}</td>
-                                        <td>evi</td>
+                                        <td>
+                                            <ParagraphCitations 
+                                                CitationCONTEXT={CitationCONTEXT}
+                                                citations={c?.citations} 
+                                            />
+                                        </td>
                                     </tr>
                                 )
                             })
