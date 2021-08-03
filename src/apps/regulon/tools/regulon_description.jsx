@@ -24,7 +24,7 @@ export default function Description({id_regulon, conf}) {
     }, [_state])
 
     if(_data){
-        console.log(_data)
+        //console.log(_data)
         return(
             <article>
                 <h2>{conf?.title}</h2>

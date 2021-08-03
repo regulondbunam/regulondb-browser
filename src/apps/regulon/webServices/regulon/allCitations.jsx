@@ -4,53 +4,30 @@ import React, { useEffect, useState } from 'react';
 //import { Helmet } from 'react-helmet-async';
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from "@apollo/client";
-//import {CITATIONS_FIELDS} from "../fragments/fragments"
+import {CITATIONS_FIELDS} from "../fragments/fragments"
 
-const RegulonGeneOntologyItem = `
-term_id
-name
-genes {
-  gene_id
-  gene_name
-}`
+//const RegulonGeneOntologyItem = ``
 
 export function query(id) {
     return gql`
+    ${CITATIONS_FIELDS}
     {
         getRegulonBy(advancedSearch: "${id}[_id]") {
             data {
                 _id
-                terms {
-                    multifun {
-                        id
-                        name
-                        genes {
-                            gene_id
-                            gene_name
-                        }
-                    }
-                    geneOntology {
-                        cellularComponent {
-                            ${RegulonGeneOntologyItem}
-                        }
-                        molecularFunction{
-                            ${RegulonGeneOntologyItem}
-                        }
-                        biologicalProcess{
-                            ${RegulonGeneOntologyItem}
-                        }
-                    }
+                allCitations{
+                    ...CitationsFields
                 }
             }
             pagination {
                 totalResults
             }
         }
-      }
+    }
     `
 }
 
-const GetTerms = ({
+const GetAllCitations = ({
     id_regulon = '',
     status = () => { },
     resoultsData = () => { },
@@ -65,7 +42,7 @@ const GetTerms = ({
             set_res(true)
             if (data.getRegulonBy.pagination.totalResults === 1) {
                 try {
-                    resoultsData(data.getRegulonBy.data[0].terms)
+                    resoultsData(data.getRegulonBy.data[0].allCitations)
                     status('done')
                 } catch (error) {
                     status('error')
@@ -96,4 +73,4 @@ const GetTerms = ({
     return (<></>);
 }
 
-export default GetTerms;
+export default GetAllCitations;

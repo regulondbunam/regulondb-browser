@@ -11,7 +11,7 @@ import { gql } from "@apollo/client";
 export function query(id) {
     return gql`
     {
-        getRegulonBy(search: "${id}") {
+        getRegulonBy(advancedSearch: "${id}[_id]") {
             data {
                 regulates {
                     genes {
@@ -55,11 +55,6 @@ export function query(id) {
                             }
                         }
                     }     
-                    transcriptionUnits {
-                        id
-                        name
-                        function
-                    } 
                     transcriptionUnits {
                         id
                         name

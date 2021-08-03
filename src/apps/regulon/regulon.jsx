@@ -5,6 +5,7 @@ import {Home} from "./regulon_home"
 import ValidateID from './webServices/regulon/validate'
 import CONF from "./conf/regulon.conf.json"
 import Info from './regulon_info';
+import Citations from './components/citations';
 
 export default function Regulon() {
     const id = useParams().id;
@@ -61,7 +62,11 @@ function Validate({id_regulon}) {
 
     if(_data){
         return(
+            <>
             <Info id_regulon={id_regulon} conf={CONF.pages?.regulon_info} />
+            <Citations id_regulon={id_regulon} />
+            </>
+            
         )
     }
     return <ValidateID 
