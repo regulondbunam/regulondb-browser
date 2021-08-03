@@ -34,7 +34,7 @@ export default function Conformations({tf}) {
                     <tbody>
                         {
                             conformations.map(c =>{
-                                console.log(c?.citations)
+                                //console.log(c?.citations)
                                 return(
                                     <tr key={`conformation_${c?.id}_${c?.name}`}>
                                         <td>{c?.name}</td>

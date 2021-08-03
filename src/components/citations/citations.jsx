@@ -16,7 +16,7 @@ export function TableCitations({ CitationCONTEXT, citations, small = true }) {
 
                         citations.map((cit, indx) => {
                             try {
-                                let index = allCitations.findIndex((citation) => citation === cit)
+                                let index = allCitations.findIndex((citation) => citation?.publication?.id === cit?.publication?.id && citation?.evidence?.id === cit?.evidence?.id)
                                 return (
                                     <tr key={`citation_no_000${index}`}>
                                         <td>
@@ -66,6 +66,41 @@ export function ParagraphCitations({ CitationCONTEXT, citations, small = true })
                     }
                 })
             }
+        </>
+    )
+}
+
+export function TableCitationContext({ CitationCONTEXT, small = false }) {
+    const { allCitations } = useContext(CitationCONTEXT)
+    return (
+        <>
+
+            <table>
+                <tbody>
+                    {
+
+                        allCitations.map((cit, index) => {
+                            try {
+                                return (
+                                    <tr key={`citation_no_000${index}`}>
+                                        <td>
+                                            <Modal
+                                                classNameModal="citation"
+                                                title={`[${index + 1}]${Citation(cit, small)}`}
+                                                cit={cit}
+                                            />
+                                        </td>
+                                    </tr>
+                                )
+                            } catch (error) {
+                                return null
+                            }
+                        })
+                    }
+                </tbody>
+            </table>
+            <br />
+            <br />
         </>
     )
 }

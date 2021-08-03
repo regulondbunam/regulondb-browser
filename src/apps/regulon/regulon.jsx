@@ -6,6 +6,7 @@ import ValidateID from './webServices/regulon/validate'
 import CONF from "./conf/regulon.conf.json"
 import Info from './regulon_info';
 import { CitationsProvider } from '../../components/citations/citations_provider'
+import Citations from './components/regulon_citations';
 
 export default function Regulon() {
     const id = useParams().id;
@@ -64,6 +65,7 @@ function Validate({ id_regulon }) {
         return (
             <CitationsProvider allCitations={_data?.allCitations}>
                 <Info id_regulon={id_regulon} conf={CONF.pages?.regulon_info} />
+                <Citations />
             </CitationsProvider>
 
         )
