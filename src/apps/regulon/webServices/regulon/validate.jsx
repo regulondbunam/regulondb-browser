@@ -4,10 +4,11 @@ import React, { useEffect, useState } from 'react';
 //import { Helmet } from 'react-helmet-async';
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from "@apollo/client";
-//import {CITATIONS_FIELDS} from "../fragments/fragments"
+import {CITATIONS_FIELDS} from "../fragments/fragments"
 
 export function query(id) {
     return gql`
+    ${CITATIONS_FIELDS}
     {
         getRegulonBy(advancedSearch: "${id}[_id]") {
             data {
@@ -19,6 +20,9 @@ export function query(id) {
                         id
                         name
                     }
+                }
+                allCitations{
+                    ...CitationsFields
                 }
             }
             pagination {
