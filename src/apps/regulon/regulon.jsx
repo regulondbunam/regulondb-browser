@@ -1,17 +1,17 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from "react-router-dom";
 import Title from "./components/regulon_title"
-import {Home} from "./regulon_home"
+import { Home } from "./regulon_home"
 import ValidateID from './webServices/regulon/validate'
 import CONF from "./conf/regulon.conf.json"
 import Info from './regulon_info';
-import Citations from './components/citations';
+import { CitationsProvider } from '../../components/citations/citations_provider'
 
 export default function Regulon() {
     const id = useParams().id;
-    return(
+    return (
         <>
-            <Title/>
+            <Title />
             {
                 id ? <Validate id_regulon={id} /> : <Home conf={CONF?.pages?.regulon_main} />
             }
@@ -19,7 +19,7 @@ export default function Regulon() {
     )
 }
 
-function Validate({id_regulon}) {
+function Validate({ id_regulon }) {
     const [_state, set_state] = useState()
     const [_data, set_data] = useState()
     const [_title, set_title] = useState("Regulon")
@@ -28,28 +28,28 @@ function Validate({id_regulon}) {
         switch (_state) {
             case 'error':
                 set_title("Error :(")
-            break;
+                break;
             case 'not found':
                 set_title(`not found ID:${id_regulon}`)
-            break
+                break
             case 'loading':
                 set_title(`Searching information by:${id_regulon}`)
-            break;
+                break;
             case 'done':
-                if(_data){
+                if (_data) {
                     //console.log(_data)
                     set_title(_data?.transcriptionFactor?.name)
                 }
-            break;
+                break;
             default:
                 set_title("... =]")
-            break;
+                break;
         }
         const COVER = document.getElementById("div_cover_regulon_01")
-        if(COVER){
-            const COVER_REACTION = new CustomEvent('coverR',{
+        if (COVER) {
+            const COVER_REACTION = new CustomEvent('coverR', {
                 bubbles: true,
-                detail: { 
+                detail: {
                     state: _state,
                     title: _title,
                     isInfo: true,
@@ -58,20 +58,19 @@ function Validate({id_regulon}) {
             });
             COVER.dispatchEvent(COVER_REACTION);
         }
-    }, [_state,_title,_data,id_regulon])
+    }, [_state, _title, _data, id_regulon])
 
-    if(_data){
-        return(
-            <>
-            <Info id_regulon={id_regulon} conf={CONF.pages?.regulon_info} />
-            <Citations id_regulon={id_regulon} />
-            </>
-            
+    if (_data) {
+        return (
+            <CitationsProvider allCitations={_data?.allCitations}>
+                <Info id_regulon={id_regulon} conf={CONF.pages?.regulon_info} />
+            </CitationsProvider>
+
         )
     }
-    return <ValidateID 
-                id_regulon={id_regulon} 
-                status={(state)=>{set_state(state)}}
-                resoultsData={(data)=>{set_data(data)}}
-            />
+    return <ValidateID
+        id_regulon={id_regulon}
+        status={(state) => { set_state(state) }}
+        resoultsData={(data) => { set_data(data) }}
+    />
 }
