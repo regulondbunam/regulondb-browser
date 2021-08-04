@@ -28,7 +28,7 @@ export function GeneOntology(geneOntology) {
 }
 
 function CellularComponent(cc) {
-    console.log(cc)
+    //console.log(cc)
     if (!cc || cc.length === 0) {
         return null
     }
@@ -125,7 +125,7 @@ function BiologicalProcess(cc) {
 }
 
 function GeneOntologyItem(genes) {
-    console.log(genes)
+    //console.log(genes)
     if (!genes || genes.length === 0) {
         return null
     }
