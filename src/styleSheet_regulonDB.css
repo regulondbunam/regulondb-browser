@@ -231,6 +231,9 @@ td {
 	background-color: var(--color-grey5);
 	cursor: pointer;
 }
+.trShadow:hover{
+	background-color: var(--color-grey5);
+}
 /*Body div*/
 
 .bodyDiv{
