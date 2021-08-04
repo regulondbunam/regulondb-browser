@@ -30,14 +30,14 @@ export default function Description({id_regulon, conf}) {
                 <h2>{conf?.title}</h2>
                 <p dangerouslySetInnerHTML={{__html: conf?.description }} />
                 <BasicInfo tf={_data} />
+                <br />
+                <Note note={_data?.note} />
                 <br/>
                 <Conformations tf={_data}/>
                 <br />
                 <EncodeGenes encodedFrom_gene={_data?.encodedFrom} />
                 <br />
                 <EncodeOperon encodedFrom_gene={_data?.encodedFrom} />
-                <br />
-                <Note note={_data?.note} />
             </article>
         )
     }

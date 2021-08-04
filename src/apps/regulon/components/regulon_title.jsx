@@ -6,6 +6,7 @@ export const Title = () => {
     const [_isInfo, set_isInfo] = useState(false);
     const [_state, set_state] = useState();
     const [_title, set_title] = useState("");
+    // eslint-disable-next-line no-unused-vars
     const [_data, set_data] = useState([]);
 
     useEffect(() => {
