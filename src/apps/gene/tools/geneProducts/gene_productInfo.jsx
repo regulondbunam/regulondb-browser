@@ -7,10 +7,10 @@ import Notes from '../../../../components/cits/Notes'
 import ReactTooltip from 'react-tooltip'
 
 
-export function TableProductInfo(product,allCitations) {
+export function TableProductInfo(product, allCitations) {
     const citations = product?.citations
     return (
-        <table key={`${product.name}-tableInfo`} id={`${product.id}`} style={{width: 'auto'}} >
+        <table key={`${product.name}-tableInfo`} id={`${product.id}`} style={{ width: 'auto' }} >
             <tbody>
                 {
                     Object.keys(product).map((key, index) => {
@@ -46,19 +46,19 @@ export function TableProductInfo(product,allCitations) {
                                     <tr key={`${product.name}-trInfo-${key}`}>
                                         <td style={{ fontWeight: "bold" }}>{`${key}:`}</td>
                                         <td>
-                                        {
-                                            sequence(product['name'], product[key])
-                                        }
+                                            {
+                                                sequence(product['name'], product[key])
+                                            }
                                         </td>
                                     </tr>
                                 )
                             case 'note':
-                                return(
+                                return (
                                     <tr key={`${product.name}-trInfo-${key}`}>
                                         <td style={{ fontWeight: "bold" }}>{`${key}:`}</td>
                                         <td>
-                                            <div dangerouslySetInnerHTML={{__html: Notes(allCitations,product[key])}} />
-                                        <ReactTooltip place="bottom" type="light" border={true} />
+                                            <div dangerouslySetInnerHTML={{ __html: Notes(allCitations, product[key]) }} />
+                                            <ReactTooltip place="bottom" type="light" border={true} />
                                         </td>
                                     </tr>
                                 )
@@ -75,8 +75,8 @@ export function TableProductInfo(product,allCitations) {
                     })
                 }
                 {
-                            citations.length > 0 ? ShowCitations( citations, allCitations) : null
-                        }
+                    //citations.length > 0 ? ShowCitations(citations, allCitations) : null
+                }
             </tbody>
         </table>
     )
@@ -145,9 +145,9 @@ function sequence(gene, sequence) {
     )
 }
 
-function notNull(data){
-    if(data){
+function notNull(data) {
+    if (data) {
         return data
     }
-    return("")
+    return ("")
 }
