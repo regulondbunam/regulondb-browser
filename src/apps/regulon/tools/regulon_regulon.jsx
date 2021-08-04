@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import GetRegulates from '../webServices/regulon/regulates'
+import { Genes } from './regulon/genes'
 import Terms from './regulon_terms'
 
 export default function Regulon({id_regulon, conf}) {
@@ -24,12 +25,8 @@ export default function Regulon({id_regulon, conf}) {
         //console.log(id_regulon)
         return(
             <article>
-                <h3>Regulates</h3>
-                <pre>
-                    {
-                        JSON.stringify(_data,null, 2)
-                    }
-                </pre>
+                <h2>Regulates</h2>
+                <Genes genes={_data?.genes} />
                 <Terms id_regulon={id_regulon} />
             </article>
         )
