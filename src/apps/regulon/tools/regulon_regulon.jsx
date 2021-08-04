@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import GetRegulates from '../webServices/regulon/regulates'
 import { Genes } from './regulon/genes'
+import { Operons } from './regulon/operon'
 import Terms from './regulon_terms'
-
+import { SigmaFactors } from './regulon/sigmaFactors'
+import { TranscriptionUnits } from './regulon/transcriptionUnits'
 export default function Regulon({id_regulon, conf}) {
 
     const [_data, set_data] = useState()
@@ -27,6 +29,9 @@ export default function Regulon({id_regulon, conf}) {
             <article>
                 <h2>Regulates</h2>
                 <Genes genes={_data?.genes} />
+                <Operons operons={_data?.operons} />
+                <SigmaFactors sigmaFactors={_data?.sigmaFactors} />
+                <TranscriptionUnits transcriptionUnits={_data?.transcriptionUnits} />
                 <Terms id_regulon={id_regulon} />
             </article>
         )
