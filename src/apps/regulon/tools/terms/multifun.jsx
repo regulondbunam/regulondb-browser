@@ -16,10 +16,10 @@ export function Multifun(multifun = []) {
         return null
     }
     return (
-        <table style={{margin: "5%"}}>
+        <table style={{ margin: "5%" }}>
             <thead>
                 <tr style={thStyle} >
-                    <th><h4 style={{margin: "0"}} >Multifun</h4></th>
+                    <th><h4 style={{ margin: "0" }} >Multifun</h4></th>
                 </tr>
             </thead>
             <tbody>
@@ -63,7 +63,9 @@ function Genes(genes) {
                 {
                     genes.map(gen => {
                         return (
-                            <Link to={`/gene/${gen?.gene_id}`}>{gen?.gene_name}</Link>
+                            <div key={`geneROI_${gen?.gene_id}`}>
+                                <Link to={`/gene/${gen?.gene_id}`}>{gen?.gene_name}</Link>
+                            </div>
                         )
                     })
                 }
