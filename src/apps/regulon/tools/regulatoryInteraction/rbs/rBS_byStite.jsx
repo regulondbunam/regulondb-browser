@@ -27,7 +27,7 @@ export function RBSbyStite({ rbs = {
                     <th style={thStyle} >LeftPos</th>
                     <th style={thStyle} >RightPos</th>
                     <th style={thStyle} >Sequence</th>
-                    <th style={thStyle} >Evidence and References</th>
+                    <th style={thStyle} >Citations</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,7 +47,7 @@ export function RBSbyStite({ rbs = {
                         {rbs?.rightEndPosition}
                     </td>
                     <td>
-                        {rbs?.sequence}
+                        {MarkSequence(rbs?.id,rbs?.sequence)}
                     </td>
                     <td>
                         evi
