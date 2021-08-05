@@ -26,6 +26,8 @@ export function query(id) {
                         type
                         name
                     }
+                    distanceToPromoter
+                    distanceToFirstGene
                     regulatedGenes{
                         id
                         name
@@ -33,6 +35,9 @@ export function query(id) {
                     regulatoryBindingSites{
                         id
                         function
+                        absolutePosition
+                        leftEndPosition
+                        rightEndPosition
                         sequence
                         strand
                         citations{
