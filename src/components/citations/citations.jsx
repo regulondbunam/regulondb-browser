@@ -72,6 +72,9 @@ export function ParagraphCitations({ CitationCONTEXT, citations, small = true })
 
 export function TableCitationContext({ CitationCONTEXT, small = false }) {
     const { allCitations } = useContext(CitationCONTEXT)
+    if(!allCitations){
+        return null
+    }
     return (
         <>
 

@@ -62,6 +62,9 @@ function Validate({ id_regulon }) {
     }, [_state, _title, _data, id_regulon])
 
     if (_data) {
+        if(_state === "not found"){
+            return null
+        }
         return (
             <CitationsProvider allCitations={_data?.allCitations}>
                 <Info id_regulon={id_regulon} conf={CONF.pages?.regulon_info} />

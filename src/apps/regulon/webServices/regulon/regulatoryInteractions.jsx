@@ -12,7 +12,7 @@ export function query(id) {
     return gql`
     ${CITATIONS_FIELDS}
     {
-        getRegulonBy(search:"${id}"){
+        getRegulonBy(advancedSearch: "${id}[_id]"){
             data{
                 regulatoryInteractions{
                     regulator{
@@ -26,8 +26,6 @@ export function query(id) {
                         type
                         name
                     }
-                    distanceToPromoter
-                    distanceToFirstGene
                     regulatedGenes{
                         id
                         name
@@ -35,9 +33,6 @@ export function query(id) {
                     regulatoryBindingSites{
                         id
                         function
-                        absolutePosition
-                        leftEndPosition
-                        rightEndPosition
                         sequence
                         strand
                         citations{

@@ -24,7 +24,7 @@ export default function Regulon({id_regulon, conf}) {
     }, [_state])
 
     if(_data){
-        console.log(_data)
+        //console.log(_data)
         return(
             <article>
                 <h2>Regulates</h2>

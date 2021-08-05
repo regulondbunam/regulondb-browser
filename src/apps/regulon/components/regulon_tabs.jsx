@@ -2,6 +2,7 @@ import React from 'react'
 import { Tabs } from "../../../components/ui-components/ui_components";
 import Description from '../tools/regulon_description'
 import Regulon from '../tools/regulon_regulon'
+import RInteractions from '../tools/regulon_ri'
 
 
 export default function RegulonTabs({ id_regulon, conf }) {
@@ -44,12 +45,12 @@ function FormTabs(id_regulon, conf) {
                         conf={conf?.tabs?.regulon}
                     />
                 )
-            case conf?.tabs?.tfbs?.id:
+            case conf?.tabs?.ri?.id:
                 return (
-                    <div
+                    <RInteractions
                         id_regulon={id_regulon}
-                        id={conf?.tabs?.TUs?.id}
-                        conf={conf?.tabs?.TUs}
+                        id={conf?.tabs?.ri?.id}
+                        conf={conf?.tabs?.ri}
                     />
                 )
             default:

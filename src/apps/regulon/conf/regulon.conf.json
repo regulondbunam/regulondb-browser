@@ -50,10 +50,10 @@
                         }
                     }
                 },
-                "tfbs": {
-                    "id": "tab-tfbs",
-                    "name": "TFBSs",
-                    "title": "Transcription Factor Binding Sites",
+                "ri": {
+                    "id": "tab-ri",
+                    "name": "Regulatory Interactions",
+                    "title": "Regulatory Interaction",
                     "description": "",
                     "sections": {},
                     "disabled": false
