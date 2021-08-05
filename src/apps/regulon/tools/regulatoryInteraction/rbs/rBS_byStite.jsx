@@ -1,6 +1,7 @@
 import React from 'react'
 import { MarkSequence } from './bs_compnents/mkSequence'
-
+import { ParagraphCitations } from '../../../../../components/citations/citations'
+import { CitationCONTEXT } from '../../../../../components/citations/citations_provider'
 export function RBSbyStite({ rbs = {
     id: "",
     function: "",
@@ -50,7 +51,10 @@ export function RBSbyStite({ rbs = {
                         {MarkSequence(rbs?.id,rbs?.sequence)}
                     </td>
                     <td>
-                        evi
+                    <ParagraphCitations 
+                                                CitationCONTEXT={CitationCONTEXT}
+                                                citations={rbs?.citations} 
+                                            />
                     </td>
                 </tr>
             </tbody>
