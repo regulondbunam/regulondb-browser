@@ -3,7 +3,7 @@ import { Tabs } from "../../../components/ui-components/ui_components";
 import Description from '../tools/regulon_description'
 import Regulon from '../tools/regulon_regulon'
 import RInteractions from '../tools/regulon_ri'
-
+import All from '../tools/regulon_all';
 
 export default function RegulonTabs({ id_regulon, conf }) {
     
@@ -23,7 +23,7 @@ function FormTabs(id_regulon, conf) {
         switch (tab.id) {
             case conf.tabs.all.id:
                 return (
-                    <div
+                    <All
                         id={conf.tabs.all.id}
                         id_regulon={id_regulon}
                     />
