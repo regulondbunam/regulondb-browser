@@ -194,7 +194,7 @@ a:visited {
 }
 
 .tableContent-th-subtitle{
-	color: #999999;
+	border-bottom: 1px solid #999999;
     text-align: inherit;
 }
 
@@ -230,6 +230,9 @@ td {
 .trClickable:hover{
 	background-color: var(--color-grey5);
 	cursor: pointer;
+}
+.trShadow:hover{
+	background-color: var(--color-grey5);
 }
 /*Body div*/
 

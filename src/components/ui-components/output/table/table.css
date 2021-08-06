@@ -119,6 +119,11 @@ ul {
   margin-bottom: 1rem;
 }
 
+.btn-table tr:hover{
+  background-color: var(--color-grey5);
+	cursor: pointer;
+}
+
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
