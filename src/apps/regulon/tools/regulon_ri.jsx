@@ -21,7 +21,7 @@ export default function RInteractions({id_regulon, display_ri = true}) {
     }, [_state])
 
     if (_data) {
-        console.log(_data)
+        //console.log(_data)
         if(_data.length === 0) {
             return null
         }

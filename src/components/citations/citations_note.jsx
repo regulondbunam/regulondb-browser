@@ -58,6 +58,9 @@ export const CitationsNote = (CitationCONTEXT,note) => {
     } catch (error) {
         console.log("util")
     }
+    if(partNote.length === 0){
+        return note
+    }
     return partNote.map((n,index)=>{
                 return `${n} ${relCitation(allCitations,cits[index])}`
             }).join('')

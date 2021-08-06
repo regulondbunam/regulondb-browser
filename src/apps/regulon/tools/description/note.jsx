@@ -20,9 +20,13 @@ export default function Note({note = ""}) {
                         <td>
                         {
                             _display
-                            ?<p dangerouslySetInnerHTML={{__html: CitationsNote(CitationCONTEXT,note)}}/>
+                            ?<div>
+                                <p dangerouslySetInnerHTML={{__html: CitationsNote(CitationCONTEXT,note)}}/>
+                                <ReactTooltip place="bottom" type="light" border={true} />
+                            </div>
                             :<p dangerouslySetInnerHTML={{__html: CitationsNote(CitationCONTEXT,note.substring(0,500))}}/>
                         }
+                        
                         </td>
                     </tr>
                     <tr>
@@ -43,10 +47,6 @@ export default function Note({note = ""}) {
                     </tr>
                 </tbody>
             </table>
-            <div>
-
-            </div>
-            <ReactTooltip place="bottom" type="light" border={true} />
         </div>
     )
 }
