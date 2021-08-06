@@ -16,19 +16,14 @@ export function RBSbyStite({ rbs = {
     return (
         <table>
             <thead>
-                <tr>
-                    <th style={tbTitle} colSpan="2" >Regulator</th>
-                    <th></th>
-                    <th style={tbTitle} colSpan="6" >Regulatory Interactions</th>
-                </tr>
-                <tr>
-                    <th style={thStyle} >Function</th>
-                    <th style={thStyle} >Strand</th>
-                    <th style={thStyle} >Absolute Position</th>
-                    <th style={thStyle} >LeftPos</th>
-                    <th style={thStyle} >RightPos</th>
-                    <th style={thStyle} >Sequence</th>
-                    <th style={thStyle} >Citations</th>
+                <tr style={tbTitle}>
+                    <th  >Function</th>
+                    <th  >Strand</th>
+                    <th  >Absolute Position</th>
+                    <th  >LeftPos</th>
+                    <th  >RightPos</th>
+                    <th  >Sequence</th>
+                    <th  >Citations</th>
                 </tr>
             </thead>
             <tbody>
@@ -90,9 +85,6 @@ function orderRIS(rbs) {
     return sites
 }
 */
-
-
-const thStyle = { fontWeight: "bold" }
 
 const tbTitle = {
     fontWeight: "bold",

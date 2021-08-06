@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react'
 import GetRegulatoryInteractions from '../webServices/regulon/regulatoryInteractions'
 import { RegulatotyInteraction } from './regulatoryInteraction/regulatotyInteraction'
 
-export default function RInteractions({id_regulon}) {
+export default function RInteractions({id_regulon, display_ri = true}) {
 
     const [_data, set_data] = useState()
     const [_state, set_state] = useState()
@@ -30,7 +30,7 @@ export default function RInteractions({id_regulon}) {
                 <h2>Regulatory Interactions</h2>
                 {
                     _data.map(ri=>{
-                        return <RegulatotyInteraction ri={ri} />
+                        return <RegulatotyInteraction ri={ri} display_ri={display_ri} />
                     })
                 }
             </article>
