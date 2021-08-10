@@ -11,29 +11,33 @@ const trStyle = {
     textAlign: "inherit",
 }
 
-export function GeneOntology(geneOntology) {
+export function GeneOntology(geneOntology, showGenes = true) {
+    console.log(geneOntology)
+    if(!geneOntology){
+        return null
+    }
     return (
         <div>
             {
-                CellularComponent(geneOntology?.cellularComponent)
+                CellularComponent(geneOntology?.cellularComponent, showGenes)
             }
             {
-                MolecularFunction(geneOntology?.molecularFunction)
+                MolecularFunction(geneOntology?.molecularFunction, showGenes)
             }
             {
-                BiologicalProcess(geneOntology?.biologicalProcess)
+                BiologicalProcess(geneOntology?.biologicalProcess, showGenes)
             }
         </div>
     )
 }
 
-function CellularComponent(cc) {
+function CellularComponent(cc, showGenes) {
     //console.log(cc)
     if (!cc || cc.length === 0) {
         return null
     }
     return (
-        <table style={{ margin: "5%" }}>
+        <table style={{ margin: "1% 0% 0px 5%" }}>
             <thead>
                 <tr style={thStyle} >
                     <th><h4 style={{ margin: "0" }} >Cellular Component</h4></th>
@@ -46,7 +50,11 @@ function CellularComponent(cc) {
                             <thead>
                                 <tr style={thStyle}>
                                     <th>Name</th>
-                                    <th>Genes</th>
+                                   {
+                                       showGenes
+                                       ?<th>Genes</th>
+                                       :null
+                                   }
                                 </tr>
                             </thead>
                             {
@@ -60,12 +68,12 @@ function CellularComponent(cc) {
     )
 }
 
-function MolecularFunction(cc) {
+function MolecularFunction(cc, showGenes) {
     if (!cc || cc.length === 0) {
         return null
     }
     return (
-        <table style={{ margin: "5%" }}>
+        <table style={{ margin: "1% 0% 0px 5%" }}>
             <thead>
                 <tr style={thStyle} >
                     <th><h4 style={{ margin: "0" }} >Molecular Function</h4></th>
@@ -78,7 +86,11 @@ function MolecularFunction(cc) {
                             <thead>
                                 <tr style={thStyle}>
                                     <th>Name</th>
-                                    <th>Genes</th>
+                                   {
+                                       showGenes
+                                       ?<th>Genes</th>
+                                       :null
+                                   }
                                 </tr>
                             </thead>
                             {
@@ -92,12 +104,12 @@ function MolecularFunction(cc) {
     )
 }
 
-function BiologicalProcess(cc) {
+function BiologicalProcess(cc, showGenes) {
     if (!cc || cc.length === 0) {
         return null
     }
     return (
-        <table style={{ margin: "5%" }}>
+        <table style={{ margin: "1% 0% 0px 5%" }}>
             <thead>
                 <tr style={thStyle} >
                     <th><h4 style={{ margin: "0" }} >Biological Process</h4></th>
@@ -110,7 +122,11 @@ function BiologicalProcess(cc) {
                             <thead>
                                 <tr style={thStyle}>
                                     <th>Name</th>
-                                    <th>Genes</th>
+                                   {
+                                       showGenes
+                                       ?<th>Genes</th>
+                                       :null
+                                   }
                                 </tr>
                             </thead>
                             {
@@ -124,7 +140,7 @@ function BiologicalProcess(cc) {
     )
 }
 
-function GeneOntologyItem(genes) {
+function GeneOntologyItem(genes, showGenes) {
     //console.log(genes)
     if (!genes || genes.length === 0) {
         return null
