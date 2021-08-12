@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from "react-router-dom";
 import { GeneOntology } from '../terms/geneOntology';
+import { Multifun } from '../terms/multifun';
 
 export function Genes({ genes = [] }) {
     //console.log(genes)
@@ -34,11 +35,15 @@ function Gene({ gene }) {
             <div>
                 <table style={{ margin: "1% 0% 0px 5%" }}>
                     <tbody>
-                        <tr>
-                            <td>
-                                <h4 style={{margin: "0"}} >Gene Ontology</h4>
-                            </td>
-                        </tr>
+                        {
+                            gene?.terms?.geneOntology
+                                ? <tr>
+                                    <td>
+                                        <h4 style={{ margin: "0" }} >Gene Ontology</h4>
+                                    </td>
+                                </tr>
+                                : null
+                        }
                         <tr>
                             <td>
                                 {
@@ -50,14 +55,45 @@ function Gene({ gene }) {
                         </tr>
                         <tr>
                             <td>
-                                <button onClick={()=>{
+                                <button onClick={() => {
                                     set_displayGO(!_displayGO)
                                 }} className="aBase">
+                                    {
+                                        _displayGO
+                                            ? "Hide GO Info"
+                                            : "Show GO Info"
+                                    }
+                                </button>
+                            </td>
+                        </tr>
+                        {
+                            gene?.terms?.multifun
+                                ? <tr>
+                                    <td>
+                                        <h4 style={{ margin: "0" }} >Multifun</h4>
+                                    </td>
+                                </tr>
+                                : null
+                        }
+                        <tr>
+                            <td>
                                 {
-                                    _displayGO
-                                    ?"Hide GO Info"
-                                    :"Show GO Info"
+                                    _displayMU
+                                        ? <div style={{ margin: "0% 0% 0px 1%" }} >{Multifun(gene?.terms?.multifun, false)}</div>
+                                        : null
                                 }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button onClick={() => {
+                                    set_displayMu(!_displayMU)
+                                }} className="aBase">
+                                    {
+                                        _displayMU
+                                            ? "Hide Multifun Info"
+                                            : "Show Multifun Info"
+                                    }
                                 </button>
                             </td>
                         </tr>

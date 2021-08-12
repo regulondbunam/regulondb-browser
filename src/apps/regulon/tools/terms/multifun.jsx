@@ -11,17 +11,21 @@ const trStyle = {
     textAlign: "inherit",
 }
 
-export function Multifun(multifun = []) {
+export function Multifun(multifun = [], title = true) {
     if (!multifun || multifun.length === 0) {
         return null
     }
     return (
-        <table style={{ margin: "5%" }}>
-            <thead>
-                <tr style={thStyle} >
-                    <th><h4 style={{ margin: "0" }} >Multifun</h4></th>
-                </tr>
-            </thead>
+        <table style={{ margin: "1% 0% 0px 5%" }}>
+            {
+                title
+                    ? <thead>
+                        <tr style={thStyle} >
+                            <th><h4 style={{ margin: "0" }} >Multifun</h4></th>
+                        </tr>
+                    </thead>
+                    : null
+            }
             <tbody>
                 <tr>
                     <td>

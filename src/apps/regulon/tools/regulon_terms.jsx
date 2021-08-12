@@ -25,11 +25,13 @@ export default function Terms({ id_regulon, conf }) {
         return (
             <div>
                 <h3>Terms</h3>
+                <h4>Multifun</h4>
                 {
                     _data?.multifun
-                        ? Multifun(_data?.multifun)
+                        ? Multifun(_data?.multifun,false)
                         : null
                 }
+                <h4>Gene Ontology</h4>
                 {
                     _data?.geneOntology
                     ? GeneOntology(_data?.geneOntology)

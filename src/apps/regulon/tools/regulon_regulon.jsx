@@ -30,8 +30,8 @@ export default function Regulon({id_regulon, conf}) {
                 <h2>Regulates</h2>
                 <Genes genes={_data?.genes} />
                 <Operons operons={_data?.operons} />
-                <SigmaFactors sigmaFactors={_data?.sigmaFactors} />
                 <TranscriptionUnits transcriptionUnits={_data?.transcriptionUnits} />
+                <SigmaFactors sigmaFactors={_data?.sigmaFactors} />
                 <Terms id_regulon={id_regulon} />
             </article>
         )
