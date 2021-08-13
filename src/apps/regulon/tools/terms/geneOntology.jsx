@@ -12,7 +12,7 @@ const trStyle = {
 }
 
 export function GeneOntology(geneOntology,title=false) {
-    console.log(geneOntology)
+    //console.log(geneOntology)
     if(!geneOntology){
         return null
     }

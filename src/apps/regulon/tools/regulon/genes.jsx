@@ -1,7 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from "react-router-dom";
 import { GeneOntology } from '../terms/geneOntology';
 import { Multifun } from '../terms/multifun';
+import { Modal } from "../../../../components/ui-components/ui_components"
+
+const thStyle = {
+    fontWeight: "bold",
+    borderBottom: "1px solid #72A7C7",
+    textAlign: "inherit",
+}
 
 export function Genes({ genes = [] }) {
     //console.log(genes)
@@ -11,96 +18,78 @@ export function Genes({ genes = [] }) {
     return (
         <div>
             <h3>Genes</h3>
-            {
-                genes.map((gene) => {
-                    console.log(gene)
-                    return <Gene gene={gene} />
-                })
-            }
+            <table style={{ marginLeft: "5%" }}>
+                <thead>
+                    <tr style={thStyle}>
+                        <th>Name</th>
+                        <th>Function</th>
+                        <th>Multifun</th>
+                        <th>Gene Ontology</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        genes.map((gene) => {
+                            //console.log(gene)
+                            return (
+                                <tr key={`regulated_gene_${gene?.id}`} className={"trShadow"} >
+                                    <td>
+                                        <Link to={`/gene/${gene?.id}`}>{gene?.name}</Link>
+                                    </td>
+                                    <td>
+                                        {gene?.function}
+                                    </td>
+                                    <td>{MUinfo(gene)}</td>
+                                    <td>{GOinfo(gene)}</td>
+                                </tr>
+                            )
+                        })
+                    }
+                </tbody>
+
+
+            </table>
+
         </div>
     )
 }
 
-function Gene({ gene }) {
-
-    const [_displayGO, set_displayGO] = useState(false)
-    const [_displayMU, set_displayMu] = useState(false)
-
-    return (
-        <div style={{ marginLeft: "5%" }} key={`regulated_gene_${gene?.id}`}>
-            <Link to={`/gene/${gene?.id}`}><h3 style={{ margin: "3% 0px 3% 0px" }}>{gene?.name}</h3></Link>
-            <p>
-                {`Gene Function: ${gene?.function}`}
-            </p>
+function GOinfo(gene) {
+    if(!gene?.terms?.geneOntology){
+        return null
+    }
+    return(
+        <Modal title={"display GO terms ..."} component={
             <div>
-                <table style={{ margin: "1% 0% 0px 5%" }}>
-                    <tbody>
-                        {
-                            gene?.terms?.geneOntology
-                                ? <tr>
-                                    <td>
-                                        <h4 style={{ margin: "0" }} >Gene Ontology</h4>
-                                    </td>
-                                </tr>
-                                : null
-                        }
-                        <tr>
-                            <td>
-                                {
-                                    _displayGO
-                                        ? <div style={{ margin: "0% 0% 0px 1%" }} >{GeneOntology(gene?.terms?.geneOntology, false)}</div>
-                                        : null
-                                }
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <button onClick={() => {
-                                    set_displayGO(!_displayGO)
-                                }} className="aBase">
-                                    {
-                                        _displayGO
-                                            ? "Hide GO Info"
-                                            : "Show GO Info"
-                                    }
-                                </button>
-                            </td>
-                        </tr>
-                        {
-                            gene?.terms?.multifun
-                                ? <tr>
-                                    <td>
-                                        <h4 style={{ margin: "0" }} >Multifun</h4>
-                                    </td>
-                                </tr>
-                                : null
-                        }
-                        <tr>
-                            <td>
-                                {
-                                    _displayMU
-                                        ? <div style={{ margin: "0% 0% 0px 1%" }} >{Multifun(gene?.terms?.multifun, false)}</div>
-                                        : null
-                                }
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <button onClick={() => {
-                                    set_displayMu(!_displayMU)
-                                }} className="aBase">
-                                    {
-                                        _displayMU
-                                            ? "Hide Multifun Info"
-                                            : "Show Multifun Info"
-                                    }
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h3>{gene?.name}</h3>
+                <p>Gene Ontology</p>
+                {GeneOntology(gene?.terms?.geneOntology,false)}
             </div>
-        </div>
+        }/>
     )
+}
 
+function MUinfo(gene) {
+    if(!gene?.terms?.multifun){
+        return null
+    }
+    let title
+
+    try {
+        title = gene?.terms?.multifun.map((mu)=>{
+            return mu?.name
+        }).join(" ")
+    } catch (error) {
+        
+    }
+
+    return(
+        <Modal title={title?title:"..."} component={
+            <div>
+                <h3>{gene?.name}</h3>
+                <p>Gene Ontology</p>
+                {Multifun(gene?.terms?.multifun, false)}
+            </div>
+        }/>
+    )
 }

@@ -7,8 +7,6 @@ const thStyle = {
     textAlign: "inherit",
 }
 
-let sids =[]
-
 export function SigmaFactors({ sigmaFactors }) {
     if (!sigmaFactors || sigmaFactors.length === 0) {
         return null
@@ -25,7 +23,7 @@ export function SigmaFactors({ sigmaFactors }) {
                 <tbody>
                     {
                         sigmaFactors.map((sigma) => {
-                            console.log(sigma)
+                            //console.log(sigma)
                             return (
                                 <tr key={`sigma_${sigma?.id}-${sigma?.firstGene?.id}`} className={"trShadow"} >
                                     <td style={{ width: "100%" }} >

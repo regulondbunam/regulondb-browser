@@ -5,6 +5,8 @@ import { Operons } from './regulon/operon'
 import Terms from './regulon_terms'
 import { SigmaFactors } from './regulon/sigmaFactors'
 import { TranscriptionUnits } from './regulon/transcriptionUnits'
+import { SpinnerCircle } from '../../../components/ui-components/ui_components'
+
 export default function Regulon({id_regulon, conf}) {
 
     const [_data, set_data] = useState()
@@ -24,7 +26,6 @@ export default function Regulon({id_regulon, conf}) {
     }, [_state])
 
     if(_data){
-        //console.log(_data)
         return(
             <article>
                 <h2>Regulates</h2>
@@ -38,5 +39,13 @@ export default function Regulon({id_regulon, conf}) {
     }
 
 
-    return <GetRegulates id_regulon={id_regulon} status={(state)=>{set_state(state)}} resoultsData={(data)=>{set_data(data)}} />
+    return (
+        <div>
+            <br />
+            <br />
+            loading..
+            <SpinnerCircle />
+            <GetRegulates id_regulon={id_regulon} status={(state)=>{set_state(state)}} resoultsData={(data)=>{set_data(data)}} />
+        </div>
+    )
 }
