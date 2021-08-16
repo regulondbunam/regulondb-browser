@@ -160,9 +160,7 @@ function Genes(genes) {
                 {
                     genes.map(gen => {
                         return (
-                            <div key={`geneROI_${gen?.gene_id}`}>
-                                <Link to={`/gene/${gen?.gene_id}`}>{gen?.gene_name}</Link>
-                            </div>
+                                <Link style={{padding: "left", marginRight: "1%"}} key={`geneROI_${gen?.gene_id}`} to={`/gene/${gen?.gene_id}`}>{gen?.gene_name}</Link>
                         )
                     })
                 }

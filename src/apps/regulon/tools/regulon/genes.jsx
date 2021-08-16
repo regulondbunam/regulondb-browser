@@ -76,9 +76,12 @@ function MUinfo(gene) {
     let title
 
     try {
-        title = gene?.terms?.multifun.map((mu)=>{
+        title = gene?.terms?.multifun.map((mu, idx)=>{
+            if(idx > 1){
+                return null
+            }
             return mu?.name
-        }).join(" ")
+        }).join(", ")
     } catch (error) {
         
     }
