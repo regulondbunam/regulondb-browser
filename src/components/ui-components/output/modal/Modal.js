@@ -31,11 +31,13 @@ export default class Modal extends Component {
         )
     }
 
-    displayModal = (info) => {
+    displayModal = (info,component) => {
         return (
             <div className={Styles.modalComponent} onClick={(event)=>{this._onCollapsed(false,event)}}>
                 <div className={Styles.modalComponentContent} onClick={(event)=>{this._onCollapsed(false,event)}}>
-                <div dangerouslySetInnerHTML={{ __html: info }} onClick={(event)=>{this._onCollapsed(false,event)}}>
+                <div dangerouslySetInnerHTML={{ __html: info }} onClick={(event)=>{this._onCollapsed(false,event)}}/>
+                <div>
+                    {component}
                 </div>
                 <div onClick={(event)=>{this._onCollapsed(false,event)}}>
                     {this.props.children}
@@ -50,6 +52,7 @@ export default class Modal extends Component {
         const {
             //buttons,
             info,
+            component,
             //getValue,
             title
         } = this.props
@@ -63,7 +66,7 @@ export default class Modal extends Component {
                     
                     collapsed
                         ? null
-                        : this.displayModal(info)
+                        : this.displayModal(info,component)
                 }
             </React.Fragment>
         )

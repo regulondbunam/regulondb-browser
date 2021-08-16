@@ -18,23 +18,16 @@ export function SigmaFactors({ sigmaFactors }) {
                 <thead>
                     <tr style={thStyle}>
                         <th>Name</th>
-                        <th>Function</th>
-                        <th>First Gene</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
                         sigmaFactors.map((sigma) => {
+                            //console.log(sigma)
                             return (
-                                <tr key={`sigma_${sigma?.id}`} className={"trShadow"} >
+                                <tr key={`sigma_${sigma?.id}-${sigma?.firstGene?.id}`} className={"trShadow"} >
                                     <td style={{ width: "100%" }} >
                                         <Link to={`/sigma/${sigma?.id}`}><h4 style={{ margin: "2px 0px 2px 0px" }}>{sigma?.name}</h4></Link>
-                                    </td>
-                                    <td style={{ width: "auto" }}>
-                                        {sigma?.function}
-                                    </td>
-                                    <td>
-                                        <Link to={`/gene/${sigma?.firstGene?.id}`}><h4 style={{ margin: "2px 0px 2px 0px" }}>{sigma?.firstGene?.name}</h4></Link>
                                     </td>
                                 </tr>
                             )

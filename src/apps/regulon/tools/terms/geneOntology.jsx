@@ -11,7 +11,11 @@ const trStyle = {
     textAlign: "inherit",
 }
 
-export function GeneOntology(geneOntology) {
+export function GeneOntology(geneOntology,title=false) {
+    //console.log(geneOntology)
+    if(!geneOntology){
+        return null
+    }
     return (
         <div>
             {
@@ -33,7 +37,7 @@ function CellularComponent(cc) {
         return null
     }
     return (
-        <table style={{ margin: "5%" }}>
+        <table style={{ margin: "1% 0% 0px 5%" }}>
             <thead>
                 <tr style={thStyle} >
                     <th><h4 style={{ margin: "0" }} >Cellular Component</h4></th>
@@ -46,7 +50,7 @@ function CellularComponent(cc) {
                             <thead>
                                 <tr style={thStyle}>
                                     <th>Name</th>
-                                    <th>Genes</th>
+                                   <th>Genes</th>
                                 </tr>
                             </thead>
                             {
@@ -65,7 +69,7 @@ function MolecularFunction(cc) {
         return null
     }
     return (
-        <table style={{ margin: "5%" }}>
+        <table style={{ margin: "1% 0% 0px 5%" }}>
             <thead>
                 <tr style={thStyle} >
                     <th><h4 style={{ margin: "0" }} >Molecular Function</h4></th>
@@ -78,7 +82,7 @@ function MolecularFunction(cc) {
                             <thead>
                                 <tr style={thStyle}>
                                     <th>Name</th>
-                                    <th>Genes</th>
+                                   <th>Genes</th>
                                 </tr>
                             </thead>
                             {
@@ -97,7 +101,7 @@ function BiologicalProcess(cc) {
         return null
     }
     return (
-        <table style={{ margin: "5%" }}>
+        <table style={{ margin: "1% 0% 0px 5%" }}>
             <thead>
                 <tr style={thStyle} >
                     <th><h4 style={{ margin: "0" }} >Biological Process</h4></th>
@@ -110,7 +114,7 @@ function BiologicalProcess(cc) {
                             <thead>
                                 <tr style={thStyle}>
                                     <th>Name</th>
-                                    <th>Genes</th>
+                                   <th>Genes</th>
                                 </tr>
                             </thead>
                             {
@@ -156,9 +160,7 @@ function Genes(genes) {
                 {
                     genes.map(gen => {
                         return (
-                            <div key={`geneROI_${gen?.gene_id}`}>
-                                <Link to={`/gene/${gen?.gene_id}`}>{gen?.gene_name}</Link>
-                            </div>
+                                <Link style={{padding: "left", marginRight: "1%"}} key={`geneROI_${gen?.gene_id}`} to={`/gene/${gen?.gene_id}`}>{gen?.gene_name}</Link>
                         )
                     })
                 }
