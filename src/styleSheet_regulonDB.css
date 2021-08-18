@@ -210,6 +210,12 @@ table{
     color: rgb(39, 39, 39);
     border-collapse: collapse;
   }
+
+.thMain {
+    font-weight: bold;
+    border-bottom: 1px solid #72A7C7;
+    text-align: inherit;
+}
   
 td, th {
 	font-size: 14px;
