@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { ParagraphCitations } from '../../../../../components/citations/citations';
+import { CitationCONTEXT } from '../../../../../components/citations/citations_provider';
 
 export default function Table({ data = [] }) {
 
@@ -17,7 +19,7 @@ export default function Table({ data = [] }) {
                     <td colSpan="2" >
                         Distance
                     </td>
-                    <td colSpan="7">
+                    <td colSpan="5">
                         Binding Site
                     </td>
                 </tr>
@@ -39,12 +41,6 @@ export default function Table({ data = [] }) {
                         Function
                     </th>
                     <th>
-                        Strand
-                    </th>
-                    <th>
-                        Absolute Position
-                    </th>
-                    <th>
                         Left Position
                     </th>
                     <th>
@@ -56,6 +52,7 @@ export default function Table({ data = [] }) {
                     <th>
                         Citations
                     </th>
+
                 </tr>
             </thead>
             <tbody>
@@ -69,13 +66,43 @@ export default function Table({ data = [] }) {
                             
                         }
                         return (
-                            <tr >
+                            <tr className="trShadow" >
                                 <td >
                                     {`${name}...`}
                                 </td>
                                 {
                                     Genes(ri?.regulatedGenes)
                                 }
+                                <td>
+                                    {distanceTo(ri?.distanceToFirstGene)}
+                                </td>
+                                <td>
+                                    {distanceTo(ri?.distanceToPromoter)}
+                                </td>
+                                <td>
+                                    {distanceTo(ri?.function)}
+                                </td>
+                                <td>
+                                    {
+                                        distanceTo(ri?.regulatoryBindingSites?.leftEndPosition)
+                                    }
+                                </td>
+                                <td>
+                                    {
+                                        distanceTo(ri?.regulatoryBindingSites?.rightEndPosition)
+                                    }
+                                </td>
+                                <td>
+                                    {
+                                        distanceTo(ri?.regulatoryBindingSites?.sequence)
+                                    }
+                                </td>
+                                <td>
+                                            <ParagraphCitations 
+                                                CitationCONTEXT={CitationCONTEXT}
+                                                citations={ri?.citations} 
+                                            />
+                                </td>
                             </tr>
                         )
                     })
@@ -102,4 +129,11 @@ function Genes(genes) {
         console.log("ri table:", error)
         return null
     }
+}
+
+function distanceTo(distance){
+    if(!distance){
+        return ""
+    }
+    return distance
 }
