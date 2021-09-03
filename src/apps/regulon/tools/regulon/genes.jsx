@@ -90,7 +90,7 @@ function MUinfo(gene) {
         <Modal title={title?title:"..."} component={
             <div>
                 <h3>{gene?.name}</h3>
-                <p>Gene Ontology</p>
+                <p>Multifun</p>
                 {Multifun(gene?.terms?.multifun, false)}
             </div>
         }/>
