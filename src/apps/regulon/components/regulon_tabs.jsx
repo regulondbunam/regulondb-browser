@@ -4,9 +4,10 @@ import Description from '../tools/regulon_description'
 import Regulon from '../tools/regulon_regulon'
 import RInteractions from '../tools/regulon_ri'
 import All from '../tools/regulon_all';
+import RNetwork from '../tools/regulon_rn';
 
 export default function RegulonTabs({ id_regulon, conf }) {
-    
+
     return (
         <Tabs
             tabsObj={conf?.tabs}
@@ -17,7 +18,7 @@ export default function RegulonTabs({ id_regulon, conf }) {
 }
 
 function FormTabs(id_regulon, conf) {
-    
+
     return Object.keys(conf.tabs).map(function (key) {
         const tab = conf.tabs[key];
         switch (tab.id) {
@@ -51,6 +52,14 @@ function FormTabs(id_regulon, conf) {
                         id_regulon={id_regulon}
                         id={conf?.tabs?.ri?.id}
                         conf={conf?.tabs?.ri}
+                    />
+                )
+            case conf?.tabs?.rn?.id:
+                return (
+                    <RNetwork
+                        id_regulon={id_regulon}
+                        id={conf?.tabs?.rn?.id}
+                        conf={conf?.tabs?.rn}
                     />
                 )
             default:

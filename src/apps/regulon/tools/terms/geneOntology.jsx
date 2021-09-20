@@ -11,7 +11,7 @@ const trStyle = {
     textAlign: "inherit",
 }
 
-export function GeneOntology(geneOntology,title=false) {
+export function GeneOntology(geneOntology,displayGenes=true) {
     //console.log(geneOntology)
     if(!geneOntology){
         return null
@@ -19,19 +19,19 @@ export function GeneOntology(geneOntology,title=false) {
     return (
         <div>
             {
-                CellularComponent(geneOntology?.cellularComponent)
+                CellularComponent(geneOntology?.cellularComponent,displayGenes)
             }
             {
-                MolecularFunction(geneOntology?.molecularFunction)
+                MolecularFunction(geneOntology?.molecularFunction,displayGenes)
             }
             {
-                BiologicalProcess(geneOntology?.biologicalProcess)
+                BiologicalProcess(geneOntology?.biologicalProcess,displayGenes)
             }
         </div>
     )
 }
 
-function CellularComponent(cc) {
+function CellularComponent(cc,displayGenes) {
     //console.log(cc)
     if (!cc || cc.length === 0) {
         return null
@@ -50,7 +50,11 @@ function CellularComponent(cc) {
                             <thead>
                                 <tr style={thStyle}>
                                     <th>Name</th>
-                                   <th>Genes</th>
+                                   {
+                                       displayGenes
+                                       ?<th>Genes</th>
+                                       :null
+                                   }
                                 </tr>
                             </thead>
                             {
@@ -64,7 +68,7 @@ function CellularComponent(cc) {
     )
 }
 
-function MolecularFunction(cc) {
+function MolecularFunction(cc,displayGenes) {
     if (!cc || cc.length === 0) {
         return null
     }
@@ -82,7 +86,11 @@ function MolecularFunction(cc) {
                             <thead>
                                 <tr style={thStyle}>
                                     <th>Name</th>
-                                   <th>Genes</th>
+                                   {
+                                       displayGenes
+                                       ?<th>Genes</th>
+                                       :null
+                                   }
                                 </tr>
                             </thead>
                             {
@@ -96,7 +104,7 @@ function MolecularFunction(cc) {
     )
 }
 
-function BiologicalProcess(cc) {
+function BiologicalProcess(cc,displayGenes) {
     if (!cc || cc.length === 0) {
         return null
     }
@@ -114,7 +122,11 @@ function BiologicalProcess(cc) {
                             <thead>
                                 <tr style={thStyle}>
                                     <th>Name</th>
-                                   <th>Genes</th>
+                                   {
+                                       displayGenes
+                                       ?<th>Genes</th>
+                                       :null
+                                   }
                                 </tr>
                             </thead>
                             {
