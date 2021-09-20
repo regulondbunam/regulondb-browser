@@ -57,6 +57,14 @@
                     "description": "",
                     "sections": {},
                     "disabled": false
+                },
+                "rn": {
+                    "id": "tab-rn",
+                    "name": "Regulatory Network",
+                    "title": "Regulatory Network",
+                    "description": "",
+                    "sections": {},
+                    "disabled": false
                 }
             }
         }

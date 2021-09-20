@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import GetRegulates from '../webServices/regulon/regulates'
+import RegulatoryNetwork from '../../../components/regulatoryNetwork/RegulatoryNetwork'
 import { Genes } from './regulon/genes'
 import { Operons } from './regulon/operon'
 import Terms from './regulon_terms'
@@ -29,6 +30,7 @@ export default function Regulon({id_regulon, conf}) {
         return(
             <article>
                 <h2>Regulates</h2>
+                <RegulatoryNetwork id_regulon={id_regulon} />
                 <Genes genes={_data?.genes} />
                 <Operons operons={_data?.operons} />
                 <TranscriptionUnits transcriptionUnits={_data?.transcriptionUnits} />
