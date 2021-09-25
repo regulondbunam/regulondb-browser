@@ -1,5 +1,5 @@
 import React from 'react';
-import Graph from './gene_graph'
+import Graph from '../../../../components/dtt_tool/dttTool'
 import Info from './gene_info'
 import Operon from './gene_operon'
 import Regulators from './gene_regulators'

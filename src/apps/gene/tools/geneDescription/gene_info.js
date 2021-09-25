@@ -166,7 +166,7 @@ function ShowCitations(note, citations, allCitations) {
   //console.log(citations)
   //console.log(note)
   //citsSearch(allCitations, citations, note)
-  console.log(citations)
+  //console.log(citations)
   return (
     <tr>
       <td style={{ fontWeight: "bold" }}>evidence and references:</td>

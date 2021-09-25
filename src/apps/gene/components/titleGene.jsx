@@ -7,7 +7,7 @@ export default function Title(geneName, geneID, products, data) {
       return `${product.name}`;
     })
     .join(" / ");
-  console.log(data);
+  //console.log(data);
   let location = undefined;
   //cellularLocations
   if (data?.products) {
@@ -20,7 +20,7 @@ export default function Title(geneName, geneID, products, data) {
             location += es;
             return null;
           });
-          console.log("loc:", location);
+          //console.log("loc:", location);
         }
       });
     } catch (error) {
