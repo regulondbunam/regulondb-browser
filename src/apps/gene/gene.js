@@ -1,120 +1,125 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { ValidateId } from "./webServices/gene_search";
+import GeneTitle from "./components/gene_title";
 import Home from "./gene_home";
-import { Cover, Tabs } from "../../components/ui-components/ui_components";
-import Title from "./components/titleGene";
+import { ValidateId } from "./webServices/gene_search";
+import { Tabs } from "../../components/ui-components/ui_components";
 import AllCits from "../../components/cits/Cits";
 import Description from "./tools/geneDescription/gene_description";
 import Products from "./tools/geneProducts/gene_products";
 import All from "./tools/geneAll/gene_all";
+/*
+import Title from "./components/titleGene";
 
-const Gene = () => {
-  const id = useParams().id;
+*/
+
+export default function Gene() {
+  const id_gene = useParams().id;
   const site = useParams().site;
   //const section = useParams().section;
-  let title = "Gene Information";
+  return (
+    <>
+      <GeneTitle />
+      {
+        id_gene
+          ? <ValidateGene id_gene={id_gene} site={site}/>
+          : <Home />
+      }
+    </>
+  )
+}
+
+function ValidateGene({ id_gene, site }) {
+  const [_title, set_title] = useState("consulting Gene information")
   const [_data, set_data] = useState();
   const [_validId, set_validId] = useState();
   const [_state, set_state] = useState();
 
-  //console.log(id, "/", site, "/", section);
-  if (id) {
-    switch (_state) {
-      case "loading":
-        title = `Loading ${id} ID information, please wait`;
-        break;
-      case "error":
-        title = "Sorry we have technical difficulties, please try again later";
-        break;
-      case "done":
-        if (_validId && _data != null) {
-          try {
-            //console.log(_data);
-            const allCitations = _data[0].allCitations;
-            const gwc = _data[0].growthConditions;
-            const geneName = _data[0].gene.name;
-            const products = _data[0].products;
-            return (
-              <>
-                {Title(geneName, id, products, _data[0])}
-                <Tabs
-                  tabsInfo={stateTabs(id, products, gwc)}
-                  tabs={[
-                    <All
-                      id_gene={id}
-                      id={`tab-all`}
-                      all_citations={allCitations}
-                    />,
-                    <Description
-                      id_gene={id}
-                      id={`tab-description`}
-                      all_citations={allCitations}
-                    />,
-                    <Products
-                      id_gene={id}
-                      id={`tab-products`}
-                      all_citations={allCitations}
-                    />
-                  ]}
-                  tabSelect={() => {
-                    if (site) {
-                      return `tab-${site}`;
-                    }
-                    return "tab-all";
-                  }}
-                />
-                <article>{AllCits(allCitations, false, true, true)}</article>
-              </>
-            );
-          } catch (error) {
-            title =
-              "Sorry we have technical difficulties, please try again later";
-            return <>{Gcover(title, "error")}</>;
-          }
-        } else {
-          title = `Sorry we couldn't find the identifier: ${id}`;
-          return <>{Gcover(title, "error")}</>;
+  useEffect(() => {
+    const COVER = document.getElementById(`cover_gene_context`)
+    if (COVER) {
+      switch (_state) {
+        case 'error':
+          set_title("Error :(")
+          break;
+        case 'not found':
+          set_title(`not found gene with ID:${id_gene}`)
+          break
+        case 'loading':
+          set_title(`Searching information by:${id_gene}`)
+          break;
+        case 'done':
+          //console.log("hola")
+          set_title("")
+          break;
+        default:
+          set_title("... =]")
+          break;
+      }
+      const COVER_REACTION = new CustomEvent('coverGene', {
+        bubbles: true,
+        detail: {
+          state: _state,
+          title: _title,
+          data: _data
         }
-      case "not found":
-        title = `Sorry, we could not find the ${id} identifier on the Genes site`;
-        return <>{Gcover(title, "error")}</>;
-      default:
-        break;
+      });
+      COVER.dispatchEvent(COVER_REACTION);
     }
-    return (
-      <>
-        {Gcover(title, _state)}
-        <ValidateId
-          id={id}
-          resoultsData={(data) => {
-            set_data(data);
-          }}
-          status={(state) => {
-            set_state(state);
-          }}
-          isValidate={(isValid) => {
-            set_validId(isValid);
-          }}
-        />
-      </>
-    );
-  }
-  return (
-    <>
-      {Gcover(title)}
-      <Home />
-    </>
-  );
-};
+  }, [_state, _data, _title, id_gene])
 
-function Gcover(title, state) {
+  if (_data && _state === "done") {
+    const allCitations = _data.allCitations;
+    const gwc = _data.growthConditions;
+    const products = _data.products;
+    return (
+      <Tabs
+        tabsInfo={stateTabs(id_gene, products, gwc)}
+        tabs={[
+          <All
+            id_gene={id_gene}
+            id={`tab-all`}
+            all_citations={allCitations}
+          />,
+          <Description
+            id_gene={id_gene}
+            id={`tab-description`}
+            all_citations={allCitations}
+          />,
+          <Products
+            id_gene={id_gene}
+            id={`tab-products`}
+            all_citations={allCitations}
+          />
+        ]}
+        tabSelect={() => {
+          if (site) {
+            return `tab-${site}`;
+          }
+          return "tab-all";
+        }}
+      />
+    )
+  }
+
+  if (_state === "error" || _state === "not found") {
+    return null
+  }
+
   return (
-    <Cover state={state}>
-      <h1 className={"h1-cover"}>{title}</h1>
-    </Cover>
-  );
+    <ValidateId
+      id={id_gene}
+      resoultsData={(data) => {
+        set_data(data[0]);
+      }}
+      status={(state) => {
+        set_state(state);
+      }}
+      isValidate={(isValid) => {
+        set_validId(isValid);
+      }}
+    />
+  )
 }
 
 const tab_conf = [
@@ -156,5 +161,3 @@ function stateTabs(id, products, gwc) {
   });
   return tab_conf;
 }
-
-export default Gene;

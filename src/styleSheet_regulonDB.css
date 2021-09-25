@@ -87,6 +87,8 @@ Ver: 0.0.27
   }
   
   h1 {
+	margin-bottom: 10px;
+	margin-top: 10px;
 	font-size: 24px;
 	font-family: var(--font-title);
 	font-style: var(--fontStyle-title);
@@ -108,6 +110,7 @@ Ver: 0.0.27
   h2 {
 	font-size: 20px;
 	margin-bottom: 10px;
+	margin-top: 10px;
 	font-family: var(--font-title);
 	font-style: var(--fontStyle-title);
 	font-weight: var(--fontWeight);
@@ -118,6 +121,7 @@ Ver: 0.0.27
   h3 {
 	font-size: 18px;
 	margin-bottom: 5px;
+	margin-top: 5px;
 	font-family: var(--font-title);
 	font-style: var(--fontStyle-title);
 	font-weight: var(--fontWeight);
@@ -206,7 +210,15 @@ Ver: 0.0.27
 	color: rgb(39, 39, 39);
 	border-collapse: collapse;
   }
+
+  .table_content td {
+	border-bottom: 1px solid var(--color-grey2);
+  }
   
+  .table_content th {
+	border-bottom: 2px solid var(--color-blue3);
+  }
+
   td,
   th {
 	font-size: 14px;
