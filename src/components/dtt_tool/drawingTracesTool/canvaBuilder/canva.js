@@ -5,6 +5,7 @@ export default function canvas(idDrawPlace, idCanvas, dnaFeatures_data, CONF, au
     try {
         const DRAW_PLACE = document.getElementById(idDrawPlace);
         if (!DRAW_PLACE) {
+            console.error("no DrawPlace")
             return null
         }
         DRAW_PLACE.innerHTML = "";

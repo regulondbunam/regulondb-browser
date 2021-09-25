@@ -1,7 +1,8 @@
-import React, {useState} from "react";
-import {SpinnerCircle } from "../ui-components/ui_components";
+import React, { useState, useEffect } from "react";
+import { SpinnerCircle } from "../ui-components/ui_components";
 import GetGeneInfo from "./webServices/getGeneInfo";
 import GetGeneticElements from "./webServices/getGeneticElements";
+import DrawingTracesTool from "./drawingTracesTool/drawing_traces_tool";
 
 const DttTool = ({ id_gene }) => {
 
@@ -9,31 +10,78 @@ const DttTool = ({ id_gene }) => {
     const [_state, set_state] = useState()
     const [_data_dtt, set_data_dtt] = useState()
     const [_state_dtt, set_state_dtt] = useState()
+    const [_posLeft, set_posLeft] = useState()
+    const [_posRight, set_posRight] = useState()
+
+    useEffect(() => {
+        let drawPlace = document.getElementById(`divCanvas_geneContext${id_gene}`)
+        if(drawPlace){
+            DrawingTracesTool(`divCanvas_geneContext${id_gene}`,`idContextCanva${id_gene}`,_data_dtt,id_gene,true)
+            drawPlace.scrollTo(0,150)
+        }
+    }, [id_gene,_data_dtt])
+
 
     if (_data_dtt) {
-        return(
-            <div>
-                HOLA
-            </div>
+        console.log(_data_dtt)
+        return (
+            <table style={{ width: "100%" }}>
+                <thead>
+                    <tr>
+                        <th style={{ textAlign: "center" }}>
+                            <button className="iconButton">
+                                <i className="bx bxs-left-arrow" type="solid" />
+                            </button>
+                            <button className="iconButton">
+                                <i className='bx bxs-zoom-in' ></i>
+                            </button>
+                            <button className="iconButton">
+                                <i className='bx bx-reset' ></i>
+                            </button>
+                            <button className="iconButton"
+                                onClick={()=>{
+
+                                }}
+                            >
+                                <i className='bx bx-expand' ></i>
+                            </button>
+                            <button className="iconButton">
+                                <i className='bx bxs-zoom-out bx-flip-horizontal' ></i>
+                            </button>
+                            <button className="iconButton">
+                                <i className='bx bxs-right-arrow' type="solid"></i>
+                            </button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                        <div style={{overflow: "auto", height: "200px"}} id={`divCanvas_geneContext${id_gene}`}>
+                            
+                        </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         )
     }
 
-    if(_data){
-        console.log(_data)
-        return(
+    if (_data?.leftEndPosition) {
+        return (
             <div>
-            {
-                _state_dtt !== "error"
-                ?<SpinnerCircle />
-                :<div>error to load Drawing Tracces info</div>
-            }
-            <GetGeneticElements 
-            leftEndPosition={_data.leftEndPosition}
-            rightEndPosition={_data.rightEndPosition} 
-                resoultsData={(data)=>{set_data_dtt(data)}}
-                status={(state)=>set_state_dtt(state)}
-            />
-        </div>
+                {
+                    _state_dtt !== "error"
+                        ? <SpinnerCircle />
+                        : <div>error to load Drawing Tracces info</div>
+                }
+                <GetGeneticElements
+                    leftEndPosition={_posLeft}
+                    rightEndPosition={_posRight}
+                    resoultsData={(data) => { set_data_dtt(data) }}
+                    status={(state) => set_state_dtt(state)}
+                />
+            </div>
         )
     }
 
@@ -41,12 +89,21 @@ const DttTool = ({ id_gene }) => {
         <div>
             {
                 _state !== "error"
-                ?<SpinnerCircle />
-                :<div>error to load Drawing Gene Information</div>
+                    ? <SpinnerCircle />
+                    : <div>error to load Drawing Gene Information</div>
             }
-            <GetGeneInfo id_gene={id_gene} 
-                resoultsData={(data)=>{set_data(data)}}
-                status={(state)=>set_state(state)}
+            <GetGeneInfo id_gene={id_gene}
+                resoultsData={(data) => {
+                    set_data(data)
+                    let pleft = data?.leftEndPosition
+                    set_posRight(data?.rightEndPosition+2000)
+                    if (pleft < 1000) {
+                        set_posLeft(0)
+                    } else {
+                        set_posLeft(pleft - 1000)
+                    }
+                }}
+                status={(state) => set_state(state)}
             />
         </div>
     )
