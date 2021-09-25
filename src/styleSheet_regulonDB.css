@@ -2,7 +2,7 @@
 This is a css for regulonDB Browser site, 
 it contains the definition of global styles titles, paragraphs, font, color palette among others.
 
-Ver: 0.0.26
+Ver: 0.0.27
 */
 
 /*elements HTML*/
@@ -10,84 +10,83 @@ Ver: 0.0.26
 /*Variables*/
 
 /*color palette*/
-:root{
-	--color-blue1: #1F3D4E;
-	--color-blue2: #32617D;
-	--color-blue3: #3D779B;
-	--color-blue4: #72A7C7;
+:root {
+	--color-blue1: #1f3d4e;
+	--color-blue2: #32617d;
+	--color-blue3: #3d779b;
+	--color-blue4: #72a7c7;
 	--color-blue5: #cadce7;
 	--color-grey1: #373737;
 	--color-grey2: #666666;
 	--color-grey3: #999999;
 	--color-grey3A: #99999999;
-	--color-grey4: #D5D5D7;
-	--color-grey5: #F4F5F5;
-	--color-rest: #FFFFFF;
-	--color-accentA: #C93A1D;
-	--color-accentAA: #C93A1D99;
-	--color-accentB: #CC9900;
+	--color-grey4: #d5d5d7;
+	--color-grey5: #f4f5f5;
+	--color-rest: #ffffff;
+	--color-accentA: #c93a1d;
+	--color-accentAA: #c93a1d99;
+	--color-accentB: #cc9900;
 	--color-postit: #fff8a6;
-}
-/*font family */
-:root{
+  }
+  /*font family */
+  :root {
 	--fontFamily-principal: Arial, sans-serif;
 	--fontFamily-option: Arial, Helvetica, sans-serif;
 	--fontFamily-simpleText: "Times New Roman", Times, serif;
 	--fontFamily-cita: "Times New Roman", Times;
-	--fontFamily-sequence:  'Courier New',Courier,monospace;
-	
-}
-
-/*all site*/
-* {
-  box-sizing: border-box;
-}
-
-body{
+	--fontFamily-sequence: "Courier New", Courier, monospace;
+  }
+  
+  /*all site*/
+  * {
+	box-sizing: border-box;
+  }
+  
+  body {
 	padding-top: 1%;
 	background-color: var(--color-rest);
 	font-family: var(--fontFamily-principal);
 	font-size: 12px;
-    margin: 0px;
-}
-
-footer {
+	margin: 0px;
+  }
+  
+  footer {
 	bottom: 0;
 	width: 100%;
 	height: 40px;
   }
-/* Layout Site*/
-section{
+  /* Layout Site*/
+  section {
 	padding: 0% 0% 0% 0% !important;
-}
-
-article{
+  }
+  
+  article {
 	float: left;
 	padding: 0% 0% 2% 10%;
-	width: 80%;	
-}
-
-.articleHome{
+	width: 80%;
+  }
+  
+  .articleHome {
 	padding: 0% 0% 0% 0% !important;
-}
-
-aside{
+  }
+  
+  aside {
 	float: left;
 	width: 20%;
-}
-
-/*Titles*/
-
-:root{
+  }
+  
+  /*Titles*/
+  
+  :root {
 	--color-title: var(--color-blue2);
 	--color-subtitle: var(--color-grey2);
 	--font-title: var(--fontFamily-principal);
 	--fontStyle-title: normal;
 	--fontWeight: bold;
 	--lineHeight-title: normal;
-}
-
-h1 {
+  }
+  
+  h1 {
 	font-size: 24px;
 	font-family: var(--font-title);
 	font-style: var(--fontStyle-title);
@@ -95,176 +94,271 @@ h1 {
 	line-height: var(--fontWeight);
 	color: var(--color-title);
 	margin-top: 0;
-}
-
-.h1-cover{
+  }
+  
+  .h1-cover {
 	font-size: 24px;
 	font-family: var(--font-title);
 	font-style: var(--fontStyle-title);
 	font-weight: var(--fontWeight);
 	line-height: var(--fontWeight);
-	color: var(--color-rest)	
-}
-
-h2 {
+	color: var(--color-rest);
+  }
+  
+  h2 {
 	font-size: 20px;
 	margin-bottom: 10px;
 	font-family: var(--font-title);
 	font-style: var(--fontStyle-title);
 	font-weight: var(--fontWeight);
 	line-height: var(--fontWeight);
-	color: var(--color-subtitle)
-}
-
-h3 {
+	color: var(--color-subtitle);
+  }
+  
+  h3 {
 	font-size: 18px;
 	margin-bottom: 5px;
 	font-family: var(--font-title);
 	font-style: var(--fontStyle-title);
 	font-weight: var(--fontWeight);
 	line-height: var(--fontWeight);
-	color: var(--color-subtitle)
-}
-
-
-/* p */
-
-p {
-	font-family: var(--fontFamily-principal); 
+	color: var(--color-subtitle);
+  }
+  
+  /* p */
+  
+  p {
+	font-family: var(--fontFamily-principal);
 	font-size: 14px;
 	font-style: normal;
-	line-height: normal; 
+	line-height: normal;
 	color: var(--color-grey2);
 	font-weight: normal;
 	margin: 0;
-}
-
-:root{
+  }
+  
+  :root {
 	--a-fontFamily: var(--fontFamily-principal);
 	--a-fontSize: 14px;
 	--a-fontStyle: normal;
 	--a-fontWeight: normal;
 	--a-line: normal;
 	--a-colorS: var(--color-blue4);
-}
-
-
-.aBase{
-	font-family: var(--a-fontFamily); 
+  }
+  
+  .aBase {
+	font-family: var(--a-fontFamily);
 	font-style: var(--a-fontStyle);
-	font-weight: var(--a-fontWeight); 
-	line-height: var(--a-line); 
+	font-weight: var(--a-fontWeight);
+	line-height: var(--a-line);
 	text-decoration: underline;
 	color: var(--a-colorS);
 	cursor: pointer;
 	background-color: transparent;
 	border: 0px solid #000000;
-}
-
-.aAccent{
+  }
+  
+  .aAccent {
 	color: var(--color-accentB) !important;
-}
-
-a {
-	font-family: var(--a-fontFamily); 
+  }
+  
+  a {
+	font-family: var(--a-fontFamily);
 	font-size: var(--a-fontSize);
 	font-style: var(--a-fontStyle);
-	font-weight: var(--a-fontWeight); 
-	line-height: var(--a-line); 
+	font-weight: var(--a-fontWeight);
+	line-height: var(--a-line);
 	color: var(--a-colorS);
 	cursor: pointer;
-}
-
-a:link {
-	font-family: var(--fontFamily-principal);  
-	color: var(--color-blue4);
-}
-
-a:visited {
-	font-family: var(--fontFamily-principal);  
-	color: var(--color-blue4);
-}
-
-/*TABLES*/
-
-.tableContent-th-title{
-	color: #666666;
-    border-bottom: 1px solid #72A7C7;
-    text-align: inherit;
-}
-
-.tableContent-th-subtitle{
-	border-bottom: 1px solid #999999;
-    text-align: inherit;
-}
-
-.tableContent_td_content{
-    border-bottom: 1px solid #999999;
-    text-align: inherit;
-}
-
-
-table{
-	width: 100%;
-    font-family: arial, sans-serif;
-    color: rgb(39, 39, 39);
-    border-collapse: collapse;
   }
-
-.thMain {
-    font-weight: bold;
-    border-bottom: 1px solid #72A7C7;
-    text-align: inherit;
-}
   
-td, th {
+  a:link {
+	font-family: var(--fontFamily-principal);
+	color: var(--color-blue4);
+  }
+  
+  a:visited {
+	font-family: var(--fontFamily-principal);
+	color: var(--color-blue4);
+  }
+  
+  /*TABLES*/
+  
+  .tableContent-th-title {
+	color: #666666;
+	border-bottom: 1px solid #72a7c7;
+	text-align: inherit;
+  }
+  
+  .tableContent-th-subtitle {
+	color: #999999;
+	text-align: inherit;
+  }
+  
+  .tableContent_td_content {
+	border-bottom: 1px solid #999999;
+	text-align: inherit;
+  }
+  
+  table {
+	width: 100%;
+	font-family: arial, sans-serif;
+	color: rgb(39, 39, 39);
+	border-collapse: collapse;
+  }
+  
+  td,
+  th {
 	font-size: 14px;
 	text-align: left;
 	color: var(--color-grey2);
-    padding: 2px;
+	padding: 2px;
   }
-
-td {
-	vertical-align: top;
-}
-
   
-/*tr:nth-child(even) {
-	background-color: var(--color-grey5);
-  }*/
-
-.trClickable:hover{
+  td {
+	vertical-align: top;
+  }
+  
+  /*tr:nth-child(even) {
+	  background-color: var(--color-grey5);
+	}*/
+  
+  .trClickable:hover {
 	background-color: var(--color-grey5);
 	cursor: pointer;
-}
-.trShadow:hover{
-	background-color: var(--color-grey5);
-}
-/*Body div*/
-
-.bodyDiv{
-	padding: 3% 10% 5% 10%
-}
-
-/*Features*/
-
-.sequence{
+  }
+  /*Body div*/
+  
+  .bodyDiv {
+	padding: 3% 10% 5% 10%;
+  }
+  
+  /*Features*/
+  
+  .sequence {
 	font-family: var(--fontFamily-sequence);
 	font-size: 16px;
-}
-
-.citation{
+  }
+  
+  .citation {
 	font-family: var(--fontFamily-cita);
 	font-size: 12px;
-}
-
-
-
-.divA:hover{
+  }
+  
+  .divA:hover {
 	cursor: pointer;
 	-webkit-box-shadow: inset 2px 3px 13px 1px var(--color-blue4);
 	-moz-box-shadow: inset 2px 3px 13px 1px var(--color-blue4);
 	box-shadow: inset 2px 3px 13px 1px var(--color-blue4);
-}
-
-/* s */
+  }
+  
+  /*
+  Input Styles
+  */
+  
+  /*Button*/
+  
+  button {
+	border: 1px solid var(--color-blue2);
+	background-color: var(--color-blue2);
+	color: #ffffff;
+	padding: 10px 10px;
+	font-family: Arial;
+	font-size: 14px;
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+	text-align: center;
+  }
+  
+  button:hover {
+	-webkit-box-shadow: 1px 1px 10px 0 #000000;
+	-moz-box-shadow: 1px 1px 10px 0 #000000;
+	box-shadow: 1px 1px 10px 0 #000000;
+  }
+  
+  button:active {
+	background-color: var(--color-blue4);
+  }
+  button:disabled {
+	-webkit-box-shadow: 1px 1px 10px 0 #000000;
+	-moz-box-shadow: 1px 1px 10px 0 #000000;
+	box-shadow: 1px 1px 0px 0 #000000;
+	border: 0px solid var(--color-blue2);
+	background-color: var(--color-grey4);
+	cursor: not-allowed;
+  }
+  
+  .accent {
+	background-color: var(--color-accentA);
+  }
+  
+  .accent:active {
+	background-color: var(--color-accentAA) !important;
+  }
+  
+  .accent:disabled {
+	-webkit-box-shadow: 1px 1px 10px 0 #000000;
+	-moz-box-shadow: 1px 1px 10px 0 #000000;
+	box-shadow: 1px 1px 0px 0 #000000;
+	border: 0px solid var(--color-blue2);
+	background-color: var(--color-grey4);
+	cursor: not-allowed;
+  }
+  
+  /* DropDown */
+  .dropdown {
+	position: relative;
+	display: inline-block;
+  }
+  
+  .dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: var(--color-blue5);
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+  }
+  
+  .dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+  }
+  
+  .dropdown-content a:hover {
+	background-color: var(--color-rest);
+  }
+  
+  .dropdown:hover .dropdown-content {
+	display: block;
+  }
+  
+  /*Icon Button*/
+  
+  .iconButton {
+	background-color: #000000;
+	border: none;
+	color: white;
+	padding: 6px 7px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 2px;
+	cursor: pointer;
+	border-radius: 50%;
+  }
+  
+  /* s */
+  
+  /*
+  version
+  
+  v0.0.27
+  -- add Buttons Styles
+  
+  */
+  

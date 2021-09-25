@@ -64,7 +64,7 @@
                     "title": "Regulatory Network",
                     "description": "",
                     "sections": {},
-                    "disabled": false
+                    "disabled": true
                 }
             }
         }

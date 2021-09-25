@@ -7,7 +7,7 @@
       "label": "data(label)",
       "overlay-padding": "6px",
       "z-index": "10",
-      "color": "white",
+      "color": "#000s",
       "fontSize": 20,
       "text-valign": "center",
       "text-halign": "center"
