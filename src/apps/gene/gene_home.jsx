@@ -79,7 +79,7 @@ function ContorlPagination({
           set_data(undefined)
         }}
       />
-      <Button disabled={true} style={styBtn}
+      <Button disabled={false} style={styBtn}
         onClick={() => {
           set_pag(pagination?.lastPage)
           set_data(undefined)
