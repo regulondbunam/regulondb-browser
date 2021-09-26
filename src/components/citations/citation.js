@@ -1,7 +1,7 @@
 export function Citation(cit, small = true) {
     
     //W->weak S->strong
-    console.log(cit)
+    //console.log(cit)
     const publication = cit?.publication
     const citation = publication?.citation
     const evidence = cit?.evidence

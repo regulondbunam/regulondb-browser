@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Graph from '../../../../components/dtt_tool/dttTool'
 import GetGeneInfo from '../../webServices/getGeneBy/getGeneInfo';
 import { SpinnerCircle } from '../../../../components/ui-components/ui_components';
 import GeneInfo from './gene_info';
+import GeneRegulation from './gene_regulation';
+
 
 
 const Description = ({
-    all_citations = [],
-    id_gene,
-    id
+    id_gene
 }) => {
 
     const [_data, set_data] = useState()
@@ -24,6 +24,7 @@ const Description = ({
                     <h2>Gene Information</h2>
                     <GeneInfo gene={_data} />
                     <h2>Gene Regulation</h2>
+                    <GeneRegulation id_gene={id_gene} />
                 </article>
             </div>
         )
@@ -41,7 +42,6 @@ const Description = ({
                 resoultsData={(data) => { set_data(data) }}
                 status={(state) => { set_state(state) }}
             />
-
         </div>
     )
 }

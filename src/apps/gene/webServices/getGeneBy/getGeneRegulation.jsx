@@ -20,6 +20,7 @@ fragment Regulators on Regulators {
 export function query(id) {
     return gql`
     ${CITATIONS_FIELDS}
+    ${REGULATORS}
     {
         getGenesBy(search: "${id}") {
             data{
@@ -92,7 +93,7 @@ export function query(id) {
     `
 }
 
-const GetGeneInfo = ({
+const GetGeneRegulation = ({
     id_gene = '',
     status = () => { },
     resoultsData = () => { },
@@ -138,4 +139,4 @@ const GetGeneInfo = ({
     return (<></>);
 }
 
-export default GetGeneInfo;
+export default GetGeneRegulation;
