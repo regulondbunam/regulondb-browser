@@ -3,7 +3,7 @@ import React from "react";
 const references = ["ECOCYC", "ecocyc", "REFSEQ", "refseq", "UniProt"];
 
 export default function DropRef(id, externalCrossReferences = []) {
-  console.log(externalCrossReferences);
+  //console.log(externalCrossReferences);
   try {
     if (externalCrossReferences !== []) {
       return (

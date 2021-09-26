@@ -20,10 +20,14 @@ export function relCitation(allCitations, idCit, index = true, small = true) {
     //console.log(allCitations)
     return (
         cits.map((cit) => {
+
             const fullCit = allCitations.find(element => element?.publication?.id === cit)
             const index = allCitations.findIndex(element => element?.publication?.id === cit) + 1
             const publication = fullCit?.publication?.citation
             const url = fullCit?.publication?.url
+            if(!fullCit){
+                return null
+            }
             // 
             return `<a class='citation' data-tip='${publication}' target="_blank" rel="noopener noreferrer" href="${url}">[${index}]${Citation(fullCit, small)}</a>&nbsp;`
         }).join(' ')
@@ -39,8 +43,6 @@ export const CitationsNote = (CitationCONTEXT,note) => {
     let cits = []
     try {
         const re = /\|.*?\|/
-        //const re = /hola/
-        //console.log(note)
         do {
             cit = re.exec(newNote)
             if(cit){
@@ -52,9 +54,6 @@ export const CitationsNote = (CitationCONTEXT,note) => {
                 break
             } 
         }while(true)
-//        console.log(partNote)
-//    console.log("note cit: ",cit)
-//    console.log("all cit: ",allCitations)
     } catch (error) {
         console.log("util")
     }

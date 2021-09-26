@@ -1,53 +1,48 @@
-import React, { useEffect } from 'react';
-import { gql } from "apollo-boost";
+import React, { useEffect, useState } from 'react';
+//import { Person } from "schema-dts";
 //import { helmetJsonLdProp } from "react-schemaorg";
 //import { Helmet } from 'react-helmet-async';
 import { useQuery } from '@apollo/react-hooks';
-import { RegulatorBindigSites } from '../RegulatorBindingSites'
+import { gql } from "@apollo/client";
+//import {CITATIONS_FIELDS} from "../fragments/fragments"
 
-export function query(id_operon) {
+//const RegulonGeneOntologyItem = ``
+
+export function query(id) {
     return gql`
     {
-        getOperonBy(search: "${id_operon}") {
-            data {
-                _id
-                transcriptionUnits {
+        getGenesBy(search: "${id}"){
+            data{
+                gene{
                     id
-                    genes{
-                        id
-                        name
-                        ${RegulatorBindigSites}
-                    }
-                    promoter{
-                        id
-                        name
-                        ${RegulatorBindigSites}
-                    }
-                    ${RegulatorBindigSites}
+                    leftEndPosition
+                    rightEndPosition
                 }
             }
-            pagination{
+            pagination {
                 totalResults
             }
         }
-    }
+      }
     `
 }
 
-const GetBindingSites = ({
-    id_operon = '',
+const GetGeneInfo = ({
+    id_gene = '',
     status = () => { },
     resoultsData = () => { },
 }) => {
-    const { data, loading, error } = useQuery(query(id_operon))
+    const [_res, set_res] = useState(false);
+    const { data, loading, error } = useQuery(query(id_gene))
     useEffect(() => {
         if (loading) {
             status('loading')
         }
-        if (data) {
-            if (data.getOperonBy.pagination.totalResults === 1) {
+        if (data && !_res) {
+            set_res(true)
+            if (data.getGenesBy.pagination.totalResults === 1) {
                 try {
-                    resoultsData(data.getOperonBy.data[0])
+                    resoultsData(data.getGenesBy.data[0].gene)
                     status('done')
                 } catch (error) {
                     status('error')
@@ -63,7 +58,7 @@ const GetBindingSites = ({
             console.log(error)
         }
 
-    })
+    }, [loading, error, status, data, _res, resoultsData])
     if (loading) {
         return <></>
     }
@@ -78,4 +73,4 @@ const GetBindingSites = ({
     return (<></>);
 }
 
-export default GetBindingSites;
+export default GetGeneInfo;

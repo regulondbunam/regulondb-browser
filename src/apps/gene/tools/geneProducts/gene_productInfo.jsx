@@ -2,13 +2,13 @@ import React from 'react';
 import ModalER from '../../../../components/ui-components/web/components/utiles/ModalEvidenceRef'
 import Modal from '../../../../components/ui-components/output/modal/Modal';
 import Sequence from '../../../../components/ui-components/web/components/sequence/Sequence';
-import AllCitations from '../../../../components/cits/Cits'
+//import AllCitations from '../../../../components/cits/Cits'
 import Notes from '../../../../components/cits/Notes'
 import ReactTooltip from 'react-tooltip'
 
 
 export function TableProductInfo(product, allCitations) {
-    const citations = product?.citations
+    //const citations = product?.citations
     return (
         <table key={`${product.name}-tableInfo`} id={`${product.id}`} style={{ width: 'auto' }} >
             <tbody>
@@ -81,7 +81,7 @@ export function TableProductInfo(product, allCitations) {
         </table>
     )
 }
-
+/*
 function ShowCitations(citations, allCitations) {
     //console.log(citations)
     //console.log(note)
@@ -95,7 +95,7 @@ function ShowCitations(citations, allCitations) {
         </tr>
     )
 }
-
+*/
 function Motifs(motifs) {
     return (
         <React.Fragment key={"showMotifs"}>
