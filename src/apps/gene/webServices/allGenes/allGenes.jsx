@@ -9,7 +9,7 @@ function query(limit = 10, page = 0) {
     {
         getAllGenes(limit: ${limit}, page: ${page}) {
             data {
-                _id
+                id
                 gene {
                     name
                     synonyms
