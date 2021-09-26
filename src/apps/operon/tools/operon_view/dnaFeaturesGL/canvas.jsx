@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { SVG } from "@svgdotjs/svg.js";
 import Tooltip from "./tooltip";

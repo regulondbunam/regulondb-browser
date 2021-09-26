@@ -16,6 +16,7 @@ export function Cover({ children, state, id_spinner = "coverxD", menssage }) {
       return (
         <div style={styleCover}>
           <div className={Style.cover + " " + Style.anm}>
+            {menssage}
             {children}
           </div>
         </div>

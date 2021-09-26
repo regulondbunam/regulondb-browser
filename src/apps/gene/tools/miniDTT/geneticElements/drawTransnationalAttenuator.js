@@ -1,50 +1,44 @@
-// TransAtt 0.10.0
+// TransAtt 0.9.0
 /**
  *
- *Falta etiqueta
+ *Falta testear
  */
-import { stroke_validate, font_validate, color_validate } from "./validation";
-import { label } from "./label";
-import config from "./element.conf.json";
-const conf = config.transnationalA;
-
 export default function DrawTransnationalAttenuator({
   id,
   canva,
   anchor,
   dna,
   separation = 0,
-  leftEndPosition = 0,
-  rightEndPosition = 10,
-  labelName = "geneName",
+  posLeft = 0,
+  posRigth = 10,
+  name = "geneName",
   strand = "forward",
   color = "aqua",
   opacity = 1,
-  stroke,
-  font,
-  tooltip = ""
+  stroke = { color: "#000", width: 1, linecap: "round" }
 }) {
-  if (!canva || !dna || !id || leftEndPosition > rightEndPosition) {
+  if (!canva || !dna || !id || posLeft > posRigth) {
     return null;
   }
-  stroke = stroke_validate(stroke, conf.stroke);
-  font = font_validate(font, conf.font);
-  color = color_validate(color, "#00FFFF");
   if (anchor) {
-    leftEndPosition = anchor.leftEndPosition;
-    rightEndPosition = leftEndPosition + 1;
+    posLeft = anchor.posLeft;
+    posRigth = posLeft + 1;
     strand = anchor.strand;
   }
   // atributos
   const dnaX = dna.x,
     dnaY = dna.y,
-    size = rightEndPosition - leftEndPosition,
+    size = posRigth - posLeft,
     widthActive = dna.widthActive,
-    dnaSize = dna.size,
-    x = ((leftEndPosition - dna.leftEndPosition) * widthActive) / dnaSize;
+    dnaSize = dna.Size,
+    x = ((posLeft - dna.posLeft) * widthActive) / dnaSize;
   let sizeP = (size * widthActive) / dnaSize;
-  //scale
-  const proportion = conf.heigth;
+  //escala
+  let heigthActive = dna.forwardActive;
+  if (strand === "reverse") {
+    heigthActive = dna.reverseActive;
+  }
+  const proportion = heigthActive * 0.1;
   //atributos de Cuerpo
   let bodyHeigth = proportion * 3 + separation;
   let bodyFootH = proportion / 4;
@@ -106,13 +100,10 @@ export default function DrawTransnationalAttenuator({
   if (strand === "reverse") {
     group.transform({
       rotate: 180,
-      translateY: bodyHeigth + headH + 1
+      translateY: bodyHeigth + headH,
+      translateX: -sizeP / 2
     });
   }
-  group.attr({
-    "data-tip": "",
-    "data-for": `${canva.node?.id}-${id}`
-  });
   //returns :C
   return {
     id: id,
@@ -124,15 +115,12 @@ export default function DrawTransnationalAttenuator({
     heigth: traH,
     dna: dna,
     separation: separation,
-    leftEndPosition: leftEndPosition,
-    rightEndPosition: rightEndPosition,
-    labelName: labelName,
+    posLeft: posLeft,
+    posRigth: posRigth,
+    name: name,
     strand: strand,
     color: color,
     opacity: color,
-    stroke: stroke,
-    font: font,
-    objectType: "transnational_attenuator",
-    tooltip: tooltip
+    stroke: stroke
   };
 }

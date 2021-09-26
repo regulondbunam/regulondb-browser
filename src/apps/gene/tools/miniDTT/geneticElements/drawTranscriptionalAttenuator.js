@@ -1,50 +1,43 @@
-// TranscripAtt 0.10.0
+// TranscripAtt 0.1.0
 /**
  * Falta testear
  */
-import { stroke_validate, font_validate, color_validate } from "./validation";
-import { label } from "./label";
-import config from "./element.conf.json";
-const conf = config.transcriptionalA;
-
 export default function DrawTransncriptionalAttenuator({
   id,
   canva,
   anchor,
   dna,
-  separation = 0,
-  leftEndPosition = 0,
-  rightEndPosition = 50,
-  labelName = "Name",
+  separation = 20,
+  posLeft = 10,
+  posRigth = 50,
+  name = "Name",
   strand = "forward",
   color = "aqua",
   opacity = 1,
-  stroke,
-  font,
-  tooltip = ""
+  stroke = { color: "#000", width: 1, linecap: "round" }
 }) {
-  if (!canva || !dna || !id || leftEndPosition > rightEndPosition) {
+  if (!canva || !dna || !id || posLeft > posRigth) {
     return null;
   }
-  stroke = stroke_validate(stroke, conf.stroke);
-  font = font_validate(font, conf.font);
-  color = color_validate(color, "#00FFFF");
   if (anchor) {
-    leftEndPosition = anchor.leftEndPosition;
-    rightEndPosition = leftEndPosition + 1;
+    posLeft = anchor.posLeft;
+    posRigth = posLeft + 1;
     strand = anchor.strand;
   }
   // atributos
   const dnaX = dna.x,
     dnaY = dna.y,
-    size = rightEndPosition - leftEndPosition,
+    size = posRigth - posLeft,
     widthActive = dna.widthActive,
-    dnaSize = dna.size,
-    x = ((leftEndPosition - dna.leftEndPosition) * widthActive) / dnaSize;
+    dnaSize = dna.Size,
+    x = ((posLeft - dna.posLeft) * widthActive) / dnaSize;
   let sizeP = (size * widthActive) / dnaSize;
-  //scale
-  const proportion = conf.heigth;
-
+  // scale
+  let heigthActive = dna.forwardActive;
+  if (strand === "reverse") {
+    heigthActive = dna.reverseActive;
+  }
+  const proportion = heigthActive * 0.1;
   // atributos de Cuerpo
   let bodyHeigth = proportion * 2 + separation;
   let bodyFootH = proportion / 4;
@@ -52,32 +45,19 @@ export default function DrawTransncriptionalAttenuator({
   if (sizeP >= proportion) {
     bodyFootW = sizeP / 2 - 6 - proportion / 3;
   }
-
-  let posX = x + dnaX;
-  let posY = dnaY - bodyHeigth - bodyFootH;
+  let bodyX = x + dnaX;
+  let bodyY = dnaY - bodyHeigth - bodyFootH;
   // atributos de Cabezas
-  let headSacale = () => {
-    //return (proportion * 33) / 25 / 33;
-    if (proportion / 25 > 1) {
-      return 1;
-    }
-    return proportion / 25;
-  };
-  let headWidth = () => {
-    //return 46 - ((20 - proportion) * 8) / 10;
-    return headSacale() * 41;
-  };
-  let headHeigth = () => {
-    //return 48 - ((25 - proportion) * 8) / 10;
-    return headSacale() * 55;
-  };
-
-  let heigth = bodyHeigth + headHeigth();
-
+  let headH = proportion;
+  let headX = dnaX + x + sizeP / 2 - headH / 2 - 8;
+  let headY = dnaY - separation - 100;
   // atributos de la linea
   let lineX = x + dnaX + sizeP / 2;
   let lineY = dnaY - bodyHeigth + 5;
 
+  let posX = x;
+  let posY = headY;
+  let transcriH = headH + bodyHeigth;
   // dibujo de  BODY
   const body = canva.path(
     "M 0,0 v " +
@@ -95,7 +75,7 @@ export default function DrawTransncriptionalAttenuator({
       " v " +
       -bodyHeigth
   );
-  body.fill(color).move(posX, posY);
+  body.fill(color).move(bodyX, bodyY);
   body.stroke(stroke);
   body.opacity(opacity);
   // dibujo de HEAD's
@@ -106,37 +86,26 @@ export default function DrawTransncriptionalAttenuator({
     "m 60 110 v 0 c 3.5 -2.4 5.7 -6.6 5.7 -11.1 c -0.09 -7.3 -5.6 -13.2 -12.5 -13.2 v 0 c -6.91559 0.0001 -12.5218 5.94519 -12.5219 13.2788 c 0.0046 4.50501 2.1627 8.70032 5.73214 11.1431 v 0.0122"
   );
   let head = canva.group();
-  let headX = dnaX + x - headWidth() * 0.15;
-  let headY = dnaY - separation - bodyHeigth - headHeigth();
   head.add(head1);
   head.add(head2);
+  head.fill(color).stroke(stroke);
   head.move(headX, headY);
-  head.transform({
-    scale: headSacale(),
-    origin: "center"
-  });
-  head.move(headX, headY);
-  head.fill(color);
-  head.stroke(stroke);
-  head.opacity(opacity);
+
   // dibujo de LINE
   var line = canva.path("m 0 5 V" + bodyHeigth + "");
   line.stroke(stroke).move(lineX, lineY);
-  var group = canva.group();
-  group.add(body);
-  group.add(head);
-  group.add(line);
+
   // reverse effect
   if (strand === "reverse") {
+    var group = canva.group();
+    group.add(body);
+    group.add(head);
+    group.add(line);
     group.transform({
       rotate: 180,
-      translateY: bodyHeigth + headHeigth() * 2
+      translateY: bodyHeigth + headH * 2
     });
   }
-  group.attr({
-    "data-tip": "",
-    "data-for": `${canva.node?.id}-${id}`
-  });
   return {
     id: id,
     canva: canva,
@@ -144,18 +113,15 @@ export default function DrawTransncriptionalAttenuator({
     posX: posX,
     posY: posY,
     sizeP: sizeP,
-    heigth: heigth,
+    heigth: transcriH,
     dna: dna,
     separation: separation,
-    leftEndPosition: leftEndPosition,
-    rightEndPosition: rightEndPosition,
-    labelName: labelName,
+    posLeft: posLeft,
+    posRigth: posRigth,
+    name: name,
     strand: strand,
     color: color,
     opacity: color,
-    stroke: stroke,
-    font: font,
-    objectType: "transcriptional_attenuator",
-    tooltip: tooltip
+    stroke: stroke
   };
 }
