@@ -17,10 +17,19 @@ const DttTool = ({ id, context = "DNA" }) => {
     useEffect(() => {
         let drawPlace = document.getElementById(`divCanvas_${context}Context${id}`)
         if (drawPlace) {
-            DrawingTracesTool(`divCanvas_${context}Context${id}`, `idContextCanva${id}`, _data_dtt, id, true, true)
+            //, , , id, true, true
+            DrawingTracesTool({
+                idDrawPlace: `divCanvas_${context}Context${id}`,
+                idCanvas: `idContextCanva${id}`,
+                dnaFeatures_data: _data_dtt,
+                auto_adjust: true,
+                covered: true,
+                covered_LeftPosition: _posLeft,
+                covered_RightPosition: _posRight
+            })
             drawPlace.scrollTo(0, 150)
         }
-    }, [id, context, _data_dtt])
+    }, [id, context, _data_dtt,_posRight,_posLeft])
 
 
     if (_data_dtt) {
