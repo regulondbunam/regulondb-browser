@@ -4,7 +4,7 @@ import GetGeneInfo from "./webServices/getGeneInfo";
 import GetGeneticElements from "./webServices/getGeneticElements";
 import DrawingTracesTool from "./drawingTracesTool/drawing_traces_tool";
 
-const DttTool = ({ id_gene }) => {
+const DttTool = ({ id, context="DNA" }) => {
 
     const [_data, set_data] = useState()
     const [_state, set_state] = useState()
@@ -14,12 +14,12 @@ const DttTool = ({ id_gene }) => {
     const [_posRight, set_posRight] = useState()
 
     useEffect(() => {
-        let drawPlace = document.getElementById(`divCanvas_geneContext${id_gene}`)
+        let drawPlace = document.getElementById(`divCanvas_${context}Context${id}`)
         if(drawPlace){
-            DrawingTracesTool(`divCanvas_geneContext${id_gene}`,`idContextCanva${id_gene}`,_data_dtt,id_gene,true)
+            DrawingTracesTool(`divCanvas_${context}Context${id}`,`idContextCanva${id}`,_data_dtt,id,true)
             drawPlace.scrollTo(0,150)
         }
-    }, [id_gene,_data_dtt])
+    }, [id, context, _data_dtt])
 
 
     if (_data_dtt) {
@@ -29,13 +29,23 @@ const DttTool = ({ id_gene }) => {
                 <thead>
                     <tr>
                         <th style={{ textAlign: "center" }}>
-                            <button className="iconButton">
+                            <button className="iconButton"
+                                onClick={()=>{
+                                    set_data_dtt(undefined)
+                                    set_data(undefined)
+                                }}
+                            >
                                 <i className="bx bxs-left-arrow" type="solid" />
                             </button>
                             <button className="iconButton">
                                 <i className='bx bxs-zoom-in' ></i>
                             </button>
-                            <button className="iconButton">
+                            <button className="iconButton"
+                                onClick={()=>{
+                                    set_data_dtt(undefined)
+                                    set_data(undefined)
+                                }}
+                            >
                                 <i className='bx bx-reset' ></i>
                             </button>
                             <button className="iconButton"
@@ -57,7 +67,7 @@ const DttTool = ({ id_gene }) => {
                 <tbody>
                     <tr>
                         <td>
-                        <div style={{overflow: "auto", height: "200px"}} id={`divCanvas_geneContext${id_gene}`}>
+                        <div style={{overflow: "auto", height: "200px"}} id={`divCanvas_${context}Context${id}`}>
                             
                         </div>
                         </td>
@@ -84,7 +94,7 @@ const DttTool = ({ id_gene }) => {
             </div>
         )
     }
-
+    
     return (
         <div>
             {
@@ -92,7 +102,7 @@ const DttTool = ({ id_gene }) => {
                     ? <SpinnerCircle />
                     : <div>error to load Drawing Gene Information</div>
             }
-            <GetGeneInfo id_gene={id_gene}
+            <GetGeneInfo id_gene={id}
                 resoultsData={(data) => {
                     set_data(data)
                     let pleft = data?.leftEndPosition
