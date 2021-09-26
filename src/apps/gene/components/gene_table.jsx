@@ -42,7 +42,7 @@ export default function Table(genes = []) {
                             
                         }
                         return(
-                            <tr className="trClickable" key={`table_gene_${gene?._id}`} onClick={()=>{history.push(`/gene/${gene._id}`)}}  >
+                            <tr className="trClickable" key={`table_gene_${gene?.id}`} onClick={()=>{history.push(`/gene/${gene.id}`)}}  >
                                 <td dangerouslySetInnerHTML={{__html: gene?.gene?.name}} />
                                 <td dangerouslySetInnerHTML={{__html: gene?.gene?.synonyms}}/>
                                 <td dangerouslySetInnerHTML={{__html: products}}/>
