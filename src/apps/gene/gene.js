@@ -4,7 +4,7 @@ import GeneTitle from "./components/gene_title";
 import Home from "./gene_home";
 import { ValidateId } from "./webServices/gene_search";
 import { Tabs } from "../../components/ui-components/ui_components";
-import AllCits from "../../components/cits/Cits";
+//import AllCits from "../../components/cits/Cits";
 import Description from "./tools/geneDescription/gene_description";
 import Products from "./tools/geneProducts/gene_products";
 import All from "./tools/geneAll/gene_all";
@@ -32,7 +32,6 @@ export default function Gene() {
 function ValidateGene({ id_gene, site }) {
   const [_title, set_title] = useState("consulting Gene information")
   const [_data, set_data] = useState();
-  const [_validId, set_validId] = useState();
   const [_state, set_state] = useState();
 
   useEffect(() => {
@@ -114,9 +113,6 @@ function ValidateGene({ id_gene, site }) {
       }}
       status={(state) => {
         set_state(state);
-      }}
-      isValidate={(isValid) => {
-        set_validId(isValid);
       }}
     />
   )

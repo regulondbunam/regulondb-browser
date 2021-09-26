@@ -12,7 +12,7 @@ const Description = ({
     return (
         <div id={`tab-description`}>
             <nav>
-                <Graph id_gene={id_gene} />
+                <Graph id={id_gene} context="gene"/>
             </nav>
             <article>
                 <h2 id='geneInfo' >Gene Information</h2>

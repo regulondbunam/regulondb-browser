@@ -7,6 +7,7 @@ const Home = ({ conf }) => {
   const [_data, set_data] = useState()
   const [_pag, set_pag] = useState(0)
   const [_state, set_state] = useState()
+  // eslint-disable-next-line no-unused-vars
   const [_limit, set_limit] = useState(20)
   const [_pagination, set_pagination] = useState()
 
