@@ -23,7 +23,7 @@ export const GeneTitle = ({ id_gene }) => {
             }, false);
         }
     }, [ID_COVER])
-    console.log(_data)
+    //console.log(_data)
     if (_data) {
         //console.log(_data)
         const geneName = _data?.gene?.name

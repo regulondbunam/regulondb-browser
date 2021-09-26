@@ -5,6 +5,7 @@ import Home from "./gene_home";
 import { ValidateId } from "./webServices/gene_search";
 import { Tabs } from "../../components/ui-components/ui_components";
 //import AllCits from "../../components/cits/Cits";
+import { CitationsProvider } from '../../components/citations/citations_provider'
 import Description from "./tools/geneDescription/gene_description";
 import Products from "./tools/geneProducts/gene_products";
 import All from "./tools/geneAll/gene_all";
@@ -72,6 +73,7 @@ function ValidateGene({ id_gene, site }) {
     const gwc = _data.growthConditions;
     const products = _data.products;
     return (
+      <CitationsProvider allCitations={_data?.allCitations}>
       <Tabs
         tabsInfo={stateTabs(id_gene, products, gwc)}
         tabs={[
@@ -98,6 +100,7 @@ function ValidateGene({ id_gene, site }) {
           return "tab-all";
         }}
       />
+      </CitationsProvider>
     )
   }
 

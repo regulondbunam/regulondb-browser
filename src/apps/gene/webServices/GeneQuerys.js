@@ -100,18 +100,20 @@ export default class GeneQuerys {
             effect
           }
           allCitations{
-            evidence{
+            publication {
+              id
+              authors
+              pmid
+              citation
+              url
+              title
+              year
+            }
+            evidence {
               id
               name
               code
               type
-            }
-            publication{
-              id
-              pmid
-              citation
-              url
-              year
             }
           }
         }
