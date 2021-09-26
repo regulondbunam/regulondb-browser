@@ -87,6 +87,8 @@ Ver: 0.0.27
   }
   
   h1 {
+	margin-bottom: 10px;
+	margin-top: 10px;
 	font-size: 24px;
 	font-family: var(--font-title);
 	font-style: var(--fontStyle-title);
@@ -108,6 +110,7 @@ Ver: 0.0.27
   h2 {
 	font-size: 20px;
 	margin-bottom: 10px;
+	margin-top: 10px;
 	font-family: var(--font-title);
 	font-style: var(--fontStyle-title);
 	font-weight: var(--fontWeight);
@@ -118,6 +121,18 @@ Ver: 0.0.27
   h3 {
 	font-size: 18px;
 	margin-bottom: 5px;
+	margin-top: 5px;
+	font-family: var(--font-title);
+	font-style: var(--fontStyle-title);
+	font-weight: var(--fontWeight);
+	line-height: var(--fontWeight);
+	color: var(--color-subtitle);
+  }
+
+  h4 {
+	font-size: 16px;
+	margin-bottom: 5px;
+	margin-top: 5px;
 	font-family: var(--font-title);
 	font-style: var(--fontStyle-title);
 	font-weight: var(--fontWeight);
@@ -135,6 +150,18 @@ Ver: 0.0.27
 	color: var(--color-grey2);
 	font-weight: normal;
 	margin: 0;
+	text-align: justify;
+  }
+
+  .p_accent{
+	font-family: var(--fontFamily-principal);
+	font-size: 16px;
+	font-style: normal;
+	line-height: normal;
+	color: var(--color-grey2);
+	font-weight: bold;
+	margin: 0;
+	text-align: justify;
   }
   
   :root {
@@ -147,6 +174,7 @@ Ver: 0.0.27
   }
   
   .aBase {
+	padding: 0 10px 0 0;
 	font-family: var(--a-fontFamily);
 	font-style: var(--a-fontStyle);
 	font-weight: var(--a-fontWeight);
@@ -199,6 +227,12 @@ Ver: 0.0.27
 	border-bottom: 1px solid #999999;
 	text-align: inherit;
   }
+
+  .table_auto{
+	  table-layout: fixed;
+	  width: auto;
+	  display: inline-block;
+  }
   
   table {
 	width: 100%;
@@ -206,7 +240,27 @@ Ver: 0.0.27
 	color: rgb(39, 39, 39);
 	border-collapse: collapse;
   }
+
+  .table_vertical td {
+	border-left: 2px solid var(--color-grey2);
+	border-right: 2px solid var(--color-grey2);
+
+  }
   
+  .table_vertical th {
+	border-left: 2px solid var(--color-blue3);
+	border-right: 2px solid var(--color-blue3);
+
+  }
+
+  .table_content td {
+	border-bottom: 1px solid var(--color-grey2);
+  }
+  
+  .table_content th {
+	border-bottom: 2px solid var(--color-blue3);
+  }
+
   td,
   th {
 	font-size: 14px;
@@ -342,7 +396,7 @@ Ver: 0.0.27
 	background-color: #000000;
 	border: none;
 	color: white;
-	padding: 6px 7px;
+	padding: 3px 3px 2px 3px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;

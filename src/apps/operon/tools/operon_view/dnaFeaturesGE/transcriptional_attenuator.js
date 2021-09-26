@@ -3,7 +3,7 @@
  * Falta testear
  */
 import { stroke_validate, font_validate, color_validate } from "./validation";
-import { label } from "./label";
+//import { label } from "./label";
 import config from "./element.conf.json";
 const conf = config.transcriptionalA;
 

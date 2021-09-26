@@ -1,7 +1,7 @@
 export function Citation(cit, small = true) {
     
     //W->weak S->strong
-    
+    //console.log(cit)
     const publication = cit?.publication
     const citation = publication?.citation
     const evidence = cit?.evidence
@@ -21,6 +21,9 @@ export function Citation(cit, small = true) {
         return ''
     }
     if (small) {
+        if(!authors){
+            return `${code()}`.trim()
+        }
         if(authors[0]){
             return `${authors[0]}., et al. ${year?year:''} ${code()}`
         }
