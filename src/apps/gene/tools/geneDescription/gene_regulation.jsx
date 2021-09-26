@@ -37,14 +37,6 @@ export default function GeneRegulation({id_gene}) {
                     </>
                     :null
                 }
-                {
-                    _data?.regulators
-                    ?<>
-                    <h3>Regulators</h3>
-                    {Regulators(_data?.regulators)}
-                    </>
-                    :null
-                }
             </div>
         )
     }
