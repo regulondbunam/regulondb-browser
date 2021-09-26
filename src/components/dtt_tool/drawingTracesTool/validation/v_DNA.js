@@ -1,6 +1,6 @@
 import { toInt } from "./utiles";
 
-export function validateDNA(dnaFeatures_data = []) {
+export function validateDNA(dnaFeatures_data = [], covered) {
   if (!dnaFeatures_data || dnaFeatures_data.length === 0) {
     return null;
   }

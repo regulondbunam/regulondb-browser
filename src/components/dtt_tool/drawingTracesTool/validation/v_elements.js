@@ -14,6 +14,12 @@ export function validateElements(dnaFeatures_data = []) {
           return null;
         }
         if (feature?.leftEndPosition && feature?.rightEndPosition) {
+          if(feature?.leftEndPosition.indexOf("+")){
+            feature.cut = "left"
+          }
+          if(feature?.rightEndPosition.indexOf("+")){
+            feature.cut = "right"
+          }
           let leftEndPosition = toInt(feature?.leftEndPosition);
           let rightEndPosition = toInt(feature?.rightEndPosition);
           if (leftEndPosition <= rightEndPosition) {

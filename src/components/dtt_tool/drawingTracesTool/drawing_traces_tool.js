@@ -5,11 +5,11 @@ import canvas from "./canvaBuilder/canva";
 import DNAbuilder from "./dnaBuldier/dna";
 import Draw from "./features_draw/draw";
 
-export default function DrawingTracesTool(idDrawPlace, idCanvas,dnaFeatures_data,draw_name="draw",auto_adjust=false) {
+export default function DrawingTracesTool(idDrawPlace, idCanvas,dnaFeatures_data,draw_name="draw",auto_adjust=false, covered=false) {
     if(!dnaFeatures_data || !idDrawPlace || !idCanvas){
         return null
     }
-    dnaFeatures_data = validation(dnaFeatures_data)
+    dnaFeatures_data = validation(dnaFeatures_data,covered)
     dnaFeatures_data = ordering(dnaFeatures_data)
     const CANVAS = canvas(idDrawPlace,idCanvas,dnaFeatures_data,CONF,auto_adjust)
     if(!CANVAS){

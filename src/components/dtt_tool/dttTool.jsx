@@ -17,7 +17,7 @@ const DttTool = ({ id, context = "DNA" }) => {
     useEffect(() => {
         let drawPlace = document.getElementById(`divCanvas_${context}Context${id}`)
         if (drawPlace) {
-            DrawingTracesTool(`divCanvas_${context}Context${id}`, `idContextCanva${id}`, _data_dtt, id, true)
+            DrawingTracesTool(`divCanvas_${context}Context${id}`, `idContextCanva${id}`, _data_dtt, id, true, true)
             drawPlace.scrollTo(0, 150)
         }
     }, [id, context, _data_dtt])
@@ -48,37 +48,12 @@ const DttTool = ({ id, context = "DNA" }) => {
                             <button className="iconButton"
                                 onClick={() => {
                                     set_data_dtt(undefined)
+                                    set_expand(true)
                                     set_posLeft(_posLeft + zoom)
                                     set_posRight(_posRight - zoom)
                                 }}
                             >
                                 <i className='bx bxs-zoom-in' ></i>
-                            </button>
-                            <button className="iconButton"
-                                onClick={() => {
-                                    set_data_dtt(undefined)
-                                    set_data(undefined)
-                                }}
-                            >
-                                <i className='bx bx-reset' ></i>
-                            </button>
-                            <button className="iconButton"
-                                onClick={() => {
-                                    set_data_dtt(undefined)
-                                    set_expand(!_expand)
-                                    if(!_expand){
-                                        set_posLeft(_data?.leftEndPosition-500)
-                                        set_posRight(_data?.rightEndPosition)
-                                    }else{
-                                        set_data(undefined)
-                                    }
-                                }}
-                            >
-                               {
-                                   !_expand
-                                   ? <i className='bx bx-expand' ></i>
-                                   :<i class='bx bx-exit-fullscreen' ></i>
-                               }
                             </button>
                             <button className="iconButton"
                                  onClick={() => {
@@ -121,6 +96,36 @@ const DttTool = ({ id, context = "DNA" }) => {
                                         />
                                     </div>
                             }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style={{ textAlign: "center" }}>
+                        <button className="iconButton"
+                                onClick={() => {
+                                    set_data_dtt(undefined)
+                                    set_expand(!_expand)
+                                    if(!_expand){
+                                        set_posLeft(_data?.leftEndPosition-500)
+                                        set_posRight(_data?.rightEndPosition)
+                                    }else{
+                                        set_data(undefined)
+                                    }
+                                }}
+                            >
+                               {
+                                   !_expand
+                                   ? <i className='bx bx-expand' ></i>
+                                   :<i class='bx bx-exit-fullscreen' ></i>
+                               }
+                            </button>
+                            <button className="iconButton"
+                                onClick={() => {
+                                    set_data_dtt(undefined)
+                                    set_data(undefined)
+                                }}
+                            >
+                                <i className='bx bx-reset' ></i>
+                            </button>
                         </td>
                     </tr>
                 </tbody>
