@@ -12,7 +12,12 @@ export const Operon = () => {
     return (
         <>
          <Title/>
-         <OperonBody id={id}/>
+         {
+             id
+             ?<OperonBody id={id}/>
+             :<Home conf={conf?.pages?.operon_main}  />
+         }
+         
         </>
     )
 }
