@@ -18,14 +18,12 @@
         "all": {
           "id": "tab-all",
           "name": "All",
-          "title": "All",
-          "description": "<p>Description of the all tab</p>",
           "disabled": false
         },
         "description": {
           "id": "tab-description",
           "name": "Description",
-          "title": "Description",
+          "title": "Operon General Context",
           "description": "Operon Description tab description",
           "sections": {
             "sumary": {

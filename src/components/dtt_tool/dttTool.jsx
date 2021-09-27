@@ -4,9 +4,9 @@ import GetGeneInfo from "./webServices/getGeneInfo";
 import GetGeneticElements from "./webServices/getGeneticElements";
 import DrawingTracesTool from "./drawingTracesTool/drawing_traces_tool";
 
-const DttTool = ({ id, context = "DNA" }) => {
+const DttTool = ({ id, context = "DNA", leftEndPosition, rightEndPosition }) => {
 
-    const [_data, set_data] = useState()
+    const [_data, set_data] = useState({leftEndPosition: leftEndPosition, rightEndPosition: rightEndPosition})
     const [_state, set_state] = useState()
     const [_expand, set_expand] = useState(false)
     const [_data_dtt, set_data_dtt] = useState()

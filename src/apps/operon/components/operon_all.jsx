@@ -8,13 +8,8 @@ const conf = confJSON?.pages?.operon_info
 
 export const All = ({ idOperon }) => {
     const descTab = conf.tabs.description
-    const allTab = conf.tabs.all
     return (
         <>
-            <article>
-                <h2>{allTab.title}</h2>
-                <div style={{ marginLeft: "5%" }} dangerouslySetInnerHTML={{ __html: allTab.description }} />
-            </article>
             <Description
                 idOperon={idOperon}
                 id={descTab.id}
