@@ -27,9 +27,10 @@ const DttTool = ({ id, context = "DNA" }) => {
                 covered_LeftPosition: _posLeft,
                 covered_RightPosition: _posRight
             })
-            drawPlace.scrollTo(0, 150)
+            drawPlace.scrollTo(0, 250)
+            Resizer(drawPlace)
         }
-    }, [id, context, _data_dtt,_posRight,_posLeft])
+    }, [id, context, _data_dtt, _posRight, _posLeft])
 
 
     if (_data_dtt) {
@@ -38,8 +39,8 @@ const DttTool = ({ id, context = "DNA" }) => {
     }
 
     if (_data?.leftEndPosition) {
-        let move = parseInt(`${(_posRight-_posLeft)*0.15}`,10)
-        let zoom = parseInt(`${(_posRight-_posLeft)*0.25}`,10)
+        let move = parseInt(`${(_posRight - _posLeft) * 0.15}`, 10)
+        let zoom = parseInt(`${(_posRight - _posLeft) * 0.25}`, 10)
         return (
             <table style={{ width: "100%" }}>
                 <thead>
@@ -65,7 +66,7 @@ const DttTool = ({ id, context = "DNA" }) => {
                                 <i className='bx bxs-zoom-in' ></i>
                             </button>
                             <button className="iconButton"
-                                 onClick={() => {
+                                onClick={() => {
                                     set_data_dtt(undefined)
                                     set_posLeft(_posLeft - zoom)
                                     set_posRight(_posRight + zoom)
@@ -87,10 +88,10 @@ const DttTool = ({ id, context = "DNA" }) => {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>
+                        <td >
                             {
                                 _data_dtt
-                                    ? <div style={{ overflow: "auto", height: "200px" }} id={`divCanvas_${context}Context${id}`} />
+                                    ? <div style={{ overflow: "auto", height: "200px", resize: "vertical" }} id={`divCanvas_${context}Context${id}`} />
                                     : <div style={{ overflow: "auto", height: "200px" }}>
                                         {
                                             _state_dtt !== "error"
@@ -109,23 +110,28 @@ const DttTool = ({ id, context = "DNA" }) => {
                     </tr>
                     <tr>
                         <td style={{ textAlign: "center" }}>
-                        <button className="iconButton"
+                            <div id="resizer_div" style={{ backgroundColor: "#cadce7", height: "5px", width: "100%" }} ></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style={{ textAlign: "center" }}>
+                            <button className="iconButton"
                                 onClick={() => {
                                     set_data_dtt(undefined)
                                     set_expand(!_expand)
-                                    if(!_expand){
-                                        set_posLeft(_data?.leftEndPosition-500)
+                                    if (!_expand) {
+                                        set_posLeft(_data?.leftEndPosition - 500)
                                         set_posRight(_data?.rightEndPosition)
-                                    }else{
+                                    } else {
                                         set_data(undefined)
                                     }
                                 }}
                             >
-                               {
-                                   !_expand
-                                   ? <i className='bx bx-expand' ></i>
-                                   :<i class='bx bx-exit-fullscreen' ></i>
-                               }
+                                {
+                                    !_expand
+                                        ? <i className='bx bx-expand' ></i>
+                                        : <i class='bx bx-exit-fullscreen' ></i>
+                                }
                             </button>
                             <button className="iconButton"
                                 onClick={() => {
@@ -168,25 +174,22 @@ const DttTool = ({ id, context = "DNA" }) => {
 
 export default DttTool;
 
-/*
-function loadDraw(gene_data, id_drawPlace, idCanvas) {
-    try {
-      const posLeft = gene_data?.leftEndPosition - 1000;
-      const posRight = gene_data?.rightEndPosition + 1000;
-      return (
-        <Dtt
-          posLeft={posLeft}
-          posRight={posRight}
-          id_drawPlace={id_drawPlace}
-          idCanvas={idCanvas}
-          gene_data={gene_data}
-        />
-      );
-    } catch (error) {
-      console.log(error);
-      return <>erro to draw</>;
-    }
+function Resizer(drawPlace) {
+    let resizer = document.getElementById("resizer_div")
+    resizer.style.cursor = 'ns-resize';
+    resizer.addEventListener('mousedown', initResize, false);
 
+    function initResize(e) {
+        window.addEventListener('mousemove', Resize, false);
+        window.addEventListener('mouseup', stopResize, false);
+     }
+     function Resize(e) {
+        drawPlace.style.height = (e.clientY - drawPlace.offsetTop) + 'px';
+     }
+     function stopResize(e) {
+         window.removeEventListener('mousemove', Resize, false);
+         window.removeEventListener('mouseup', stopResize, false);
+     }
 
 }
-*/
+

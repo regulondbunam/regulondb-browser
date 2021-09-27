@@ -33,7 +33,7 @@ export default function canvas(idDrawPlace, idCanvas, dnaFeatures_data, CONF, au
     }
 
     function heightEstimates() {
-        let height = 250
+        let height = 350
         return height*2
     }
 
