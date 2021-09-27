@@ -6,13 +6,13 @@ import DrawingTracesTool from "./drawingTracesTool/drawing_traces_tool";
 
 const DttTool = ({ id, context = "DNA", leftEndPosition, rightEndPosition }) => {
 
-    const [_data, set_data] = useState({leftEndPosition: leftEndPosition, rightEndPosition: rightEndPosition})
+    const [_data, set_data] = useState()
     const [_state, set_state] = useState()
     const [_expand, set_expand] = useState(false)
     const [_data_dtt, set_data_dtt] = useState()
     const [_state_dtt, set_state_dtt] = useState()
-    const [_posLeft, set_posLeft] = useState()
-    const [_posRight, set_posRight] = useState()
+    const [_posLeft, set_posLeft] = useState(leftEndPosition)
+    const [_posRight, set_posRight] = useState(rightEndPosition)
 
     useEffect(() => {
         let drawPlace = document.getElementById(`divCanvas_${context}Context${id}`)
@@ -38,7 +38,7 @@ const DttTool = ({ id, context = "DNA", leftEndPosition, rightEndPosition }) => 
 
     }
 
-    if (_data?.leftEndPosition) {
+    if (_posLeft && _posRight) {
         let move = parseInt(`${(_posRight - _posLeft) * 0.15}`, 10)
         let zoom = parseInt(`${(_posRight - _posLeft) * 0.25}`, 10)
         return (
@@ -115,28 +115,36 @@ const DttTool = ({ id, context = "DNA", leftEndPosition, rightEndPosition }) => 
                     </tr>
                     <tr>
                         <td style={{ textAlign: "center" }}>
-                            <button className="iconButton"
-                                onClick={() => {
-                                    set_data_dtt(undefined)
-                                    set_expand(!_expand)
-                                    if (!_expand) {
-                                        set_posLeft(_data?.leftEndPosition - 500)
-                                        set_posRight(_data?.rightEndPosition)
-                                    } else {
-                                        set_data(undefined)
-                                    }
-                                }}
-                            >
-                                {
-                                    !_expand
-                                        ? <i className='bx bx-expand' ></i>
-                                        : <i class='bx bx-exit-fullscreen' ></i>
-                                }
-                            </button>
+                            {
+                                context === "gene"
+                                    ? <button className="iconButton"
+                                        onClick={() => {
+                                            set_data_dtt(undefined)
+                                            set_expand(!_expand)
+                                            if (!_expand) {
+                                                set_posLeft(_data?.leftEndPosition - 500)
+                                                set_posRight(_data?.rightEndPosition)
+                                            } else {
+                                                set_data(undefined)
+                                            }
+                                        }}
+                                    >
+                                        {
+                                            !_expand
+                                                ? <i className='bx bx-expand' ></i>
+                                                : <i class='bx bx-exit-fullscreen' ></i>
+                                        }
+                                    </button>
+                                    : null
+                            }
                             <button className="iconButton"
                                 onClick={() => {
                                     set_data_dtt(undefined)
                                     set_data(undefined)
+                                    if (context === "operon") {
+                                        set_posLeft(leftEndPosition)
+                                        set_posRight(rightEndPosition)
+                                    }
                                 }}
                             >
                                 <i className='bx bx-reset' ></i>
@@ -146,30 +154,30 @@ const DttTool = ({ id, context = "DNA", leftEndPosition, rightEndPosition }) => 
                 </tbody>
             </table>
         )
+    } else {
+        return (
+            <div>
+                {
+                    _state !== "error"
+                        ? <SpinnerCircle />
+                        : <div>error to load Drawing Gene Information</div>
+                }
+                <GetGeneInfo id_gene={id}
+                    resoultsData={(data) => {
+                        set_data(data)
+                        let pleft = data?.leftEndPosition
+                        set_posRight(data?.rightEndPosition + 2000)
+                        if (pleft < 1000) {
+                            set_posLeft(0)
+                        } else {
+                            set_posLeft(pleft - 1000)
+                        }
+                    }}
+                    status={(state) => set_state(state)}
+                />
+            </div>
+        )
     }
-
-    return (
-        <div>
-            {
-                _state !== "error"
-                    ? <SpinnerCircle />
-                    : <div>error to load Drawing Gene Information</div>
-            }
-            <GetGeneInfo id_gene={id}
-                resoultsData={(data) => {
-                    set_data(data)
-                    let pleft = data?.leftEndPosition
-                    set_posRight(data?.rightEndPosition + 2000)
-                    if (pleft < 1000) {
-                        set_posLeft(0)
-                    } else {
-                        set_posLeft(pleft - 1000)
-                    }
-                }}
-                status={(state) => set_state(state)}
-            />
-        </div>
-    )
 };
 
 export default DttTool;
@@ -182,14 +190,14 @@ function Resizer(drawPlace) {
     function initResize(e) {
         window.addEventListener('mousemove', Resize, false);
         window.addEventListener('mouseup', stopResize, false);
-     }
-     function Resize(e) {
+    }
+    function Resize(e) {
         drawPlace.style.height = (e.clientY - drawPlace.offsetTop) + 'px';
-     }
-     function stopResize(e) {
-         window.removeEventListener('mousemove', Resize, false);
-         window.removeEventListener('mouseup', stopResize, false);
-     }
+    }
+    function stopResize(e) {
+        window.removeEventListener('mousemove', Resize, false);
+        window.removeEventListener('mouseup', stopResize, false);
+    }
 
 }
 

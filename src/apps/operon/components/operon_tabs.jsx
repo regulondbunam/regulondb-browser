@@ -43,6 +43,7 @@ function FormTabs(nTUs, idOperon, conf) {
             case conf.tabs.all.id:
                 return (
                     <All
+                        conf={conf}
                         id={conf.tabs.all.id}
                         idOperon={idOperon}
                     />

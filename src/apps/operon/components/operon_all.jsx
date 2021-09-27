@@ -4,9 +4,7 @@ import Description from '../tools/operon_description'
 import TUs from '../tools/operon_TUs'
 import AllCitations from '../tools/operon_citations'
 
-const conf = confJSON?.pages?.operon_info
-
-export const All = ({ idOperon }) => {
+export const All = ({ idOperon, conf }) => {
     const descTab = conf.tabs.description
     return (
         <>

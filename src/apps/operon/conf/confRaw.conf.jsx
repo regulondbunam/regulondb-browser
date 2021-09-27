@@ -1,9 +1,11 @@
 
 import React, { useEffect, useState } from 'react'
 
-let url = "https://raw.githubusercontent.com/regulondbunam/RegulonDB-Browser/master/configuration/apps/operon.conf.json"
+let urlMst = "https://raw.githubusercontent.com/regulondbunam/RegulonDB-Browser/master/configuration/apps/operon.conf.json"
+let urlDev = "https://raw.githubusercontent.com/regulondbunam/RegulonDB-Browser/OperonUpdate/src/apps/operon/conf/operon.conf.json"
 
 const Conf = ({setConf}) => {
+    const url = urlDev
     const [file,set_file] = useState()
     
     useEffect(() => {

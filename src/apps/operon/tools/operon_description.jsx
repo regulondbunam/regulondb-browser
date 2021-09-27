@@ -12,21 +12,19 @@ export const Description = ({ idOperon, conf, isTUviews = true }) => {
     const [_data, set_data] = useState()
     const [_state, set_state] = useState()
     if (_data && _state === "done") {
-        console.log(_data)
         return (
             <>
-                <article>
+                <div style={{ marginLeft: "10%" }}>
                     <h2>{conf?.title}</h2>
                     <div style={{ marginLeft: "5%" }} dangerouslySetInnerHTML={{ __html: conf.description }} />
-                </article>
+                </div>
                 <nav>
                     <DttTool id={idOperon} context="operon"
                         leftEndPosition={_data.regulationPositions.leftEndPosition}
-                        rightEndPosition={_data.regulationPositions.regulationPositions}
+                        rightEndPosition={_data.regulationPositions.rightEndPosition}
                     />
                 </nav>
                 <article>
-
                     <h3>{sumaryConf?.title}</h3>
                     <div style={{ marginLeft: "5%" }} dangerouslySetInnerHTML={{ __html: sumaryConf?.description }} />
                     <div style={{ overflow: "auto" }}>
@@ -40,7 +38,6 @@ export const Description = ({ idOperon, conf, isTUviews = true }) => {
                             ? <ViewTus TUsConf={TUsConf} />
                             : null
                     }
-
                 </article>
             </>
         )
