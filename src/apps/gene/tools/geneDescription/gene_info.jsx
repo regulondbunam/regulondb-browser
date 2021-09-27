@@ -93,7 +93,7 @@ export default function GeneInfo({ gene }) {
                             gene?.multifunTerms.map(m => {
                                 return (
                                     <div key={`multifun-data-${m.id}`}>
-                                        <Link href={`/multifun/${m.id}`}>{`${m.label}: ${m.name}`}</Link>
+                                        <Link to={`/multifun/${m.id}`}>{`${m.label}: ${m.name}`}</Link>
                                     </div>
                                 )
                             })

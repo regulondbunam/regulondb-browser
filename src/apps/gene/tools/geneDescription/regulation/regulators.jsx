@@ -8,7 +8,7 @@ export default function Regulators(regulators) {
                 regulators.map(regulator=>{
                     return (
                         <div key={`regulator_info_${regulator.id}`}>
-                            <Link  href={`/regulator/${regulator.id}`} >
+                            <Link  to={`/regulator/${regulator.id}`} >
                         {`${regulator?.function} -- ${regulator?.name}, type ${regulator?.type}`}
                     </Link>
                         </div>
