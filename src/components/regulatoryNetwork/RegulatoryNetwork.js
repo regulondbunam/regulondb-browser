@@ -7,7 +7,7 @@ import Style from "./RegulatoryNetwork.module.css";
 import { getNetwork } from "./web_services/queries";
 import { FormatData } from "./web_services/structuringData";
 
-function RegulatoryNetwork({id_regulon= "RDBECOLITFC00123"}) {
+function RegulatoryNetwork({ id_regulon = "RDBECOLITFC00123" }) {
   const [zoom, setZoom] = useState();
   const [layout, setLayout] = useState("grid");
   const [node, setNode] = useState(id_regulon);
@@ -44,7 +44,12 @@ function RegulatoryNetwork({id_regulon= "RDBECOLITFC00123"}) {
   return (
     <div className={Style.conteiner}>
       <div className="App">
-        <Options layout={layout} layoutChange={handleLayoutChange} />
+        <Options
+          layout={layout}
+          layoutChange={handleLayoutChange}
+          nodeChange={handleNodeChange}
+          idRegulon={id_regulon}
+        />
         <Canvas
           zoom={zoom}
           zoomChange={handleZoomChange}

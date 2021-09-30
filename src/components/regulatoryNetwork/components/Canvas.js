@@ -7,10 +7,9 @@ import popper from "cytoscape-popper";
 import dagre from "cytoscape-dagre";
 
 //Assets
-import "./styles/canvas.css";
+import Style from "./styles/Canvas.module.css";
 import networkStyle from "./styles/network.style.json";
-import { HiDownload } from "react-icons/hi";
-import { FaPlus, FaMinus } from "react-icons/fa";
+import "boxicons";
 
 cytoscape.use(svg);
 cytoscape.use(dagre);
@@ -43,6 +42,8 @@ export const Canvas = ({
   };
 
   const cyto = (cy) => {
+    cy.userZoomingEnabled(false);
+
     cy.bind("tap", "node", function (evt) {
       evt.target.data().network !== "Gene" && nodeChange(evt.target.id());
     });
@@ -135,29 +136,29 @@ export const Canvas = ({
   };
 
   return (
-    <div className="canvas">
-      <div className="secondRow">
-        <div className="zoom">
+    <div className={Style.canvas}>
+      <div className={Style.secondRow}>
+        <div className={Style.zoom}>
           <button
             onClick={() =>
               zoom > minZoom ? zoomChange(zoom - 0.2) : zoomChange(minZoom)
             }
           >
-            <FaMinus />
+            <box-icon name="minus" color="#ffffff"></box-icon>
           </button>
           <button
             onClick={() =>
               zoom < maxZoom ? zoomChange(zoom + 0.2) : zoomChange(maxZoom)
             }
           >
-            <FaPlus />
+            <box-icon name="plus-medical" color="#ffffff"></box-icon>
           </button>
         </div>
-        <div className="download dropdown">
+        <div className={`${Style.dropdown} ${Style.download}`}>
           <button id="btn-download">
-            <HiDownload />
+            <box-icon type="solid" name="download" color="#ffffff"></box-icon>
           </button>
-          <div className="dropdown-content">
+          <div className={Style.dropdownContent}>
             <a href="/#" onClick={saveAsPng}>
               Save as PNG
             </a>
