@@ -58,6 +58,9 @@ export function rgb_to_rgbFormat(rgb) {
 }
 
 export function opacity_define(feature) {
+  if(feature?.opacity){
+    return feature?.opacity
+  }
   let op = 1;
   if (feature.OverlapObjects !== []) {
     op = 0.7;

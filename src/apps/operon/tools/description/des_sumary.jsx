@@ -8,7 +8,7 @@ export const Sumary = ({
     const [_data, set_data] = useState();
     const [_state, set_state] = useState();
     if(_data){
-        console.log(_data)
+        //console.log(_data)
         return Statistics(_data)
     }
     return (

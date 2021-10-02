@@ -3,6 +3,8 @@ import { SpinnerCircle } from "../ui-components/ui_components";
 import GetGeneInfo from "./webServices/getGeneInfo";
 import GetGeneticElements from "./webServices/getGeneticElements";
 import DrawingTracesTool from "./drawingTracesTool/drawing_traces_tool";
+import OperonContext from "./context/operon";
+
 
 const DttTool = ({ id, context = "DNA", leftEndPosition, rightEndPosition }) => {
 
@@ -17,20 +19,36 @@ const DttTool = ({ id, context = "DNA", leftEndPosition, rightEndPosition }) => 
     useEffect(() => {
         let drawPlace = document.getElementById(`divCanvas_${context}Context${id}`)
         if (drawPlace) {
+            let dnaFeatures_data = null
+            switch (context.toLowerCase()) {
+                case "operon":
+                    dnaFeatures_data = OperonContext(leftEndPosition,rightEndPosition,_data_dtt)
+                    break;
+                case "gene":
+                    dnaFeatures_data = _data_dtt
+                    break;
+                default:
+                    break;
+            }
             //, , , id, true, true
-            DrawingTracesTool({
-                idDrawPlace: `divCanvas_${context}Context${id}`,
-                idCanvas: `idContextCanva${id}`,
-                dnaFeatures_data: _data_dtt,
-                auto_adjust: true,
-                covered: true,
-                covered_LeftPosition: _posLeft,
-                covered_RightPosition: _posRight
-            })
-            drawPlace.scrollTo(0, 250)
-            Resizer(drawPlace)
+            if(dnaFeatures_data){
+                DrawingTracesTool({
+                    idDrawPlace: `divCanvas_${context}Context${id}`,
+                    idCanvas: `idContextCanva${id}`,
+                    dnaFeatures_data: dnaFeatures_data,
+                    auto_adjust: true,
+                    covered: true,
+                    covered_LeftPosition: _posLeft,
+                    covered_RightPosition: _posRight
+                })
+                drawPlace.scrollTo(0, 250)
+                Resizer(drawPlace)
+            }else{
+                console.error("dtt, no valid context")
+            }
+            
         }
-    }, [id, context, _data_dtt, _posRight, _posLeft])
+    }, [id, context, _data_dtt, _posRight, _posLeft, leftEndPosition, rightEndPosition])
 
 
     if (_data_dtt) {
