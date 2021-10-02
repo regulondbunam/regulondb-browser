@@ -43,6 +43,7 @@ const DttTool = ({ id, context = "DNA", leftEndPosition, rightEndPosition }) => 
         let zoom = parseInt(`${(_posRight - _posLeft) * 0.25}`, 10)
         return (
             <table style={{ width: "100%" }}>
+                <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'/>
                 <thead>
                     <tr>
                         <th style={{ textAlign: "center" }}>
