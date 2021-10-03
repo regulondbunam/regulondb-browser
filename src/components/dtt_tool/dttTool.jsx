@@ -6,13 +6,13 @@ import DrawingTracesTool from "./drawingTracesTool/drawing_traces_tool";
 import OperonContext from "./context/operon";
 
 
-const DttTool = ({ 
-    id, 
-    context = "DNA", 
-    leftEndPosition, 
-    rightEndPosition, 
+const DttTool = ({
+    id,
+    context = "DNA",
+    leftEndPosition,
+    rightEndPosition,
     custom_data_dtt,
-    get_dnaFeatures_data = () =>{ }
+    get_dnaFeatures_data = () => { }
 }) => {
 
     const [_data, set_data] = useState()
@@ -29,21 +29,21 @@ const DttTool = ({
             let dnaFeatures_data = null
             switch (context.toLowerCase()) {
                 case "operon":
-                    dnaFeatures_data = OperonContext(leftEndPosition,rightEndPosition,_data_dtt)
+                    dnaFeatures_data = OperonContext(leftEndPosition, rightEndPosition, _data_dtt)
                     break;
                 case "gene":
                     dnaFeatures_data = _data_dtt
                     break;
                 case "tu":
-                    if(custom_data_dtt){
+                    if (custom_data_dtt) {
                         dnaFeatures_data = custom_data_dtt
                     }
                     break
                 default:
                     break;
             }
-            //, , , id, true, true
-            if(dnaFeatures_data){
+            //console.log(dnaFeatures_data)
+            if (dnaFeatures_data) {
                 get_dnaFeatures_data(dnaFeatures_data)
                 DrawingTracesTool({
                     idDrawPlace: `divCanvas_${context}Context${id}`,
@@ -56,16 +56,16 @@ const DttTool = ({
                 })
                 drawPlace.scrollTo(0, 250)
                 Resizer(drawPlace)
-            }else{
+            } else {
                 console.error("dtt, no valid context")
             }
-            
+
         }
     }, [id, context, _data_dtt, _posRight, _posLeft, leftEndPosition, rightEndPosition, custom_data_dtt, get_dnaFeatures_data])
 
 
     if (custom_data_dtt) {
-        return(
+        return (
             <div style={{ overflow: "auto", height: "200px", resize: "vertical" }} id={`divCanvas_${context}Context${id}`} />
         )
     }
@@ -75,7 +75,6 @@ const DttTool = ({
         let zoom = parseInt(`${(_posRight - _posLeft) * 0.25}`, 10)
         return (
             <table style={{ width: "100%" }}>
-                <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'/>
                 <thead>
                     <tr>
                         <th style={{ textAlign: "center" }}>
@@ -187,8 +186,8 @@ const DttTool = ({
                 </tbody>
             </table>
         )
-    } 
-    if(context.toLowerCase() === "gene"){
+    }
+    if (context.toLowerCase() === "gene") {
         return (
             <div>
                 {
@@ -213,27 +212,28 @@ const DttTool = ({
         )
     }
     return null
-        
+
 };
 
 export default DttTool;
 
 function Resizer(drawPlace) {
     let resizer = document.getElementById("resizer_div")
-    resizer.style.cursor = 'ns-resize';
-    resizer.addEventListener('mousedown', initResize, false);
+    if (resizer) {
+        resizer.style.cursor = 'ns-resize';
+        resizer.addEventListener('mousedown', initResize, false);
 
-    function initResize(e) {
-        window.addEventListener('mousemove', Resize, false);
-        window.addEventListener('mouseup', stopResize, false);
+        function initResize(e) {
+            window.addEventListener('mousemove', Resize, false);
+            window.addEventListener('mouseup', stopResize, false);
+        }
+        function Resize(e) {
+            drawPlace.style.height = (e.clientY - drawPlace.offsetTop) + 'px';
+        }
+        function stopResize(e) {
+            window.removeEventListener('mousemove', Resize, false);
+            window.removeEventListener('mouseup', stopResize, false);
+        }
     }
-    function Resize(e) {
-        drawPlace.style.height = (e.clientY - drawPlace.offsetTop) + 'px';
-    }
-    function stopResize(e) {
-        window.removeEventListener('mousemove', Resize, false);
-        window.removeEventListener('mouseup', stopResize, false);
-    }
-
 }
 

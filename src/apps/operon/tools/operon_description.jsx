@@ -14,10 +14,6 @@ export const Description = ({ idOperon, conf, isTUviews = true }) => {
     if (_data && _state === "done") {
         return (
             <>
-                <div style={{ marginLeft: "10%" }}>
-                    <h2>{conf?.title}</h2>
-                    <div style={{ marginLeft: "5%" }} dangerouslySetInnerHTML={{ __html: conf.description }} />
-                </div>
                 <nav>
                     <DttTool id={idOperon} context="operon"
                         leftEndPosition={_data.regulationPositions.leftEndPosition}

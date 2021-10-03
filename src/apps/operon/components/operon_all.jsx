@@ -1,5 +1,4 @@
 import React from 'react'
-import confJSON from '../conf/operon.conf.json'
 import Description from '../tools/operon_description'
 import TUs from '../tools/operon_TUs'
 import AllCitations from '../tools/operon_citations'

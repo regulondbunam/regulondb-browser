@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react'
 
+// eslint-disable-next-line no-unused-vars
 let urlMst = "https://raw.githubusercontent.com/regulondbunam/RegulonDB-Browser/master/configuration/apps/operon.conf.json"
 let urlDev = "https://raw.githubusercontent.com/regulondbunam/RegulonDB-Browser/OperonUpdate/src/apps/operon/conf/operon.conf.json"
 

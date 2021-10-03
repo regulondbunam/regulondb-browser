@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 //import { Tabs } from "../../../components/ui-components/ui_components";
 import Description from "../tools/operon_description"
-import All from "./operon_all"
 import TUs from '../tools/operon_TUs'
 import GetGeneticElements from '../webServices/getGeneticElements/getGeneticElements'
 import { OperonProvider } from './context/operon_provider'
+import AllCitations from '../tools/operon_citations'
 
 export const Tabs = ({ id_operon, tuId, nTUs = 0, confJSON, setState, data }) => {
 
@@ -31,7 +31,7 @@ export const Tabs = ({ id_operon, tuId, nTUs = 0, confJSON, setState, data }) =>
                             if (_tabSelect === tab?.id) {
                                 cName = "active"
                             }
-                            if(tab.id === conf?.tabs?.TUs?.id && nTUs === 0){
+                            if (tab.id === conf?.tabs?.TUs?.id && nTUs === 0) {
                                 return null
                             }
                             if (tab?.disabled) {
@@ -39,6 +39,7 @@ export const Tabs = ({ id_operon, tuId, nTUs = 0, confJSON, setState, data }) =>
                             }
                             return (
                                 <button
+                                    key={`tab-${tab?.id}`}
                                     className={cName}
                                     onClick={(e) => {
                                         set_tabSelect(tab?.id)
@@ -49,9 +50,9 @@ export const Tabs = ({ id_operon, tuId, nTUs = 0, confJSON, setState, data }) =>
                     }
                 </div>
                 <OperonProvider operonContextElements={_dnaFeatures}>
-                {
-                   Tab(data,id_operon,conf,_tabSelect)
-                }
+                    {
+                        Tab(data, id_operon, conf, _tabSelect)
+                    }
                 </OperonProvider>
             </div>
         )
@@ -60,7 +61,7 @@ export const Tabs = ({ id_operon, tuId, nTUs = 0, confJSON, setState, data }) =>
     return <GetGeneticElements
         leftEndPosition={data.regulationPositions.leftEndPosition}
         rightEndPosition={data.regulationPositions.rightEndPosition}
-        resoultsData={(dtt_data)=>{
+        resoultsData={(dtt_data) => {
             set_dnaFeatures(dtt_data)
         }}
     />
@@ -69,36 +70,45 @@ export const Tabs = ({ id_operon, tuId, nTUs = 0, confJSON, setState, data }) =>
 export default Tabs
 
 
-function Tab(data,id_operon,conf, tabSelect) {
+function Tab(data, id_operon, conf, tabSelect) {
     switch (tabSelect) {
         case conf.tabs.all.id:
-                return (
-                    <All
-                        conf={conf}
-                        id={conf.tabs.all.id}
-                        idOperon={id_operon}
-                    />
-                )
-            case conf.tabs.description.id:
-                return (
+            return (
+                <div id={conf.tabs.all.id}>
                     <Description
                         idOperon={id_operon}
                         id={conf.tabs.description.id}
                         conf={conf.tabs.description}
-
+                        isTUviews={false}
                     />
-                )
-            case conf?.tabs?.TUs?.id:
-                return (
                     <TUs
                         idOperon={id_operon}
                         id={conf?.tabs?.TUs?.id}
                         conf={conf?.tabs?.TUs}
                     />
-                )
-            default:
-                return (
-                    <></>
-                )
+                    <AllCitations idOperon={id_operon} />
+                </div>
+            )
+        case conf.tabs.description.id:
+            return (
+                <Description
+                    idOperon={id_operon}
+                    id={conf.tabs.description.id}
+                    conf={conf.tabs.description}
+
+                />
+            )
+        case conf?.tabs?.TUs?.id:
+            return (
+                <TUs
+                    idOperon={id_operon}
+                    id={conf?.tabs?.TUs?.id}
+                    conf={conf?.tabs?.TUs}
+                />
+            )
+        default:
+            return (
+                <></>
+            )
     }
 }

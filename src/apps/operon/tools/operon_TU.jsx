@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import TUgraph from "./tu/TU_graph"
 import {TUdescription} from './tu/TU_description'
@@ -18,13 +19,12 @@ export const operon_TU = ({
     const conf_promoter = conf?.tu_promoter
     const conf_terminator = conf?.tu_terminator
     const conf_bindingsites = conf?.tu_bindingsites
-    console.log(data_tu)
+    //console.log(data_tu)
     if(data_tu){
         return(
-            <article>
+            <div>
                 <TUgraph data={data_tu} />
-
-            </article>
+            </div>
         )
     }
     return (
