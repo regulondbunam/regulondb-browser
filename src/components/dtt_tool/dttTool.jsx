@@ -6,7 +6,14 @@ import DrawingTracesTool from "./drawingTracesTool/drawing_traces_tool";
 import OperonContext from "./context/operon";
 
 
-const DttTool = ({ id, context = "DNA", leftEndPosition, rightEndPosition }) => {
+const DttTool = ({ 
+    id, 
+    context = "DNA", 
+    leftEndPosition, 
+    rightEndPosition, 
+    custom_data_dtt,
+    get_dnaFeatures_data = () =>{ }
+}) => {
 
     const [_data, set_data] = useState()
     const [_state, set_state] = useState()
@@ -27,11 +34,17 @@ const DttTool = ({ id, context = "DNA", leftEndPosition, rightEndPosition }) => 
                 case "gene":
                     dnaFeatures_data = _data_dtt
                     break;
+                case "tu":
+                    if(custom_data_dtt){
+                        dnaFeatures_data = custom_data_dtt
+                    }
+                    break
                 default:
                     break;
             }
             //, , , id, true, true
             if(dnaFeatures_data){
+                get_dnaFeatures_data(dnaFeatures_data)
                 DrawingTracesTool({
                     idDrawPlace: `divCanvas_${context}Context${id}`,
                     idCanvas: `idContextCanva${id}`,
@@ -48,12 +61,13 @@ const DttTool = ({ id, context = "DNA", leftEndPosition, rightEndPosition }) => 
             }
             
         }
-    }, [id, context, _data_dtt, _posRight, _posLeft, leftEndPosition, rightEndPosition])
+    }, [id, context, _data_dtt, _posRight, _posLeft, leftEndPosition, rightEndPosition, custom_data_dtt, get_dnaFeatures_data])
 
 
-    if (_data_dtt) {
-        //console.log(_data_dtt)
-
+    if (custom_data_dtt) {
+        return(
+            <div style={{ overflow: "auto", height: "200px", resize: "vertical" }} id={`divCanvas_${context}Context${id}`} />
+        )
     }
 
     if (_posLeft && _posRight) {
@@ -173,7 +187,8 @@ const DttTool = ({ id, context = "DNA", leftEndPosition, rightEndPosition }) => 
                 </tbody>
             </table>
         )
-    } else {
+    } 
+    if(context.toLowerCase() === "gene"){
         return (
             <div>
                 {
@@ -197,6 +212,8 @@ const DttTool = ({ id, context = "DNA", leftEndPosition, rightEndPosition }) => 
             </div>
         )
     }
+    return null
+        
 };
 
 export default DttTool;

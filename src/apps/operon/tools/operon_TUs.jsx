@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { Tabs } from '../../../components/ui-components/web/tab/tabs';
-import { GetInfo } from '../webServices/tu_ws'
+import GetTUallInfo from '../webServices/transcriptionUnit/TU_allInfo'
 import TU from "./operon_TU"
 
 const TUs = ({idOperon, conf}) => {
@@ -27,7 +27,7 @@ const TUs = ({idOperon, conf}) => {
             {
                 loading ? <>loading...</> : null
             }
-            <GetInfo id_operon={idOperon}
+            <GetTUallInfo id_operon={idOperon}
                 resoultsData={(data) => { set_data(data) }}
                 status={(state) => { set_state(state) }}
             />
@@ -41,21 +41,19 @@ function TU_tabs(data,conf,idOperon){
     const sections_conf = conf?.sections
     //console.log(data)
     return(
-        <div>
             <article>
             <h2>{conf?.title}</h2>
             <br/>
             <div style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{__html: conf?.description}} />
-            </article>
             <Tabs backgroundColor="#ffffff" lineColor="#99999999" tabSelect={data.transcriptionUnits[0].id} tabsInfo={formInfoTabs(data.transcriptionUnits)} tabs={formTUTabs(data.transcriptionUnits,sections_conf,idOperon)} />
-        </div>
+            </article>
     )
 }
 
 function formTUTabs(tus, sections_conf,idOperon){
     //console.log(tus)
     const tabsInfo = tus.map((tu)=>{
-        return <TU conf={sections_conf}  id={tu?.id} idOperon={idOperon} name={`${tu.name} - ${tu?.promoter?.name}`} />
+        return <TU conf={sections_conf} data_tu={tu}  id={tu?.id}  id_tu={tu?.id} idOperon={idOperon} name={`${tu.name} - ${tu?.promoter?.name}`} />
     })
     return tabsInfo
 }

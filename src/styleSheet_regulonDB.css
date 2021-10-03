@@ -405,6 +405,41 @@ Ver: 0.0.28
 	cursor: pointer;
 	border-radius: 50%;
   }
+  /* tab style */
+
+  .tabs{
+	background-color: #CADCE7;
+	padding-left: 10%;
+  	display: flow-root;
+	width: 100%;
+	padding-right: 1%;
+    box-shadow: inset -1px -10px 0px -6px var(--color-blue1);
+  }
+
+  .tabs button {
+	background-color: #ffffff;
+	margin-right: 1%;
+	color: #373737;
+	border-top: 1px solid #666666;
+	border-right: 1px solid #666666;
+	border-left: 1px solid #666666;
+	border-bottom: 3px solid var(--color-blue1);
+  }
+
+  /* Change background color of buttons on hover */
+  .tabs button:hover {
+	background-color: #ddd;
+  }
+  
+  /* Create an active/current tablink class */
+  .tabs button.active {
+	background-color: #ffffff;
+	color: #3D779B;
+	border-top: 3px solid var(--color-blue1);
+	border-right: 2px solid var(--color-blue1);
+	border-left: 2px solid var(--color-blue1);
+	border-bottom: 3px solid var(--color-rest);
+  }
   
   /* s */
   

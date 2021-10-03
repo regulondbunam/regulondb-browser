@@ -11,6 +11,10 @@ export function query(id_operon) {
                     _id
                     operon{
                         name
+                        regulationPositions {
+                            leftEndPosition
+                            rightEndPosition
+                          }
                     }
                     transcriptionUnits{
                         id
