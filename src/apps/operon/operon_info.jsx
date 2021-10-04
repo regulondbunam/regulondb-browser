@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-
-
 import Tabs from "./components/operon_tabs";
 import Conf from './conf/confRaw.conf'
 

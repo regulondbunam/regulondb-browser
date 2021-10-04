@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from "react-router-dom";
 import { ValidateID } from "./webServices/operon_ws";
 import { ValidateID as TUvalidateID } from "./webServices/tu_ws"
+import { CitationsProvider } from '../../components/citations/citations_provider'
 import Title from './components/operon_title'
 import Home from "./operon_home"
 import Info from "./operon_info"
@@ -11,20 +12,20 @@ export const Operon = () => {
     const id = useParams().id;
     return (
         <>
-         <Title/>
-         {
-             id
-             ?<OperonBody id={id}/>
-             :<Home conf={conf?.pages?.operon_main}  />
-         }
-         
+            <Title />
+            {
+                id
+                    ? <OperonBody id={id} />
+                    : <Home conf={conf?.pages?.operon_main} />
+            }
+
         </>
     )
 }
 
 
-const OperonBody = ({id}) => {
-    
+const OperonBody = ({ id }) => {
+
     const [_data, set_data] = useState();
     const [_validId, set_validId] = useState();
     const [_testId, set_testId] = useState();
@@ -32,28 +33,28 @@ const OperonBody = ({id}) => {
     const [_tuId, set_tuId] = useState();
     const [_title, set_title] = useState();
     const [state, setState] = useState();
-    
+
 
     useEffect(() => {
         const covera = document.getElementById("div_cover_operon_01")
-        if(!_title){
-            if(_data){
+        if (!_title) {
+            if (_data) {
                 if (!_validId) {
                     set_title(`Sorry we couldn't find the identifier: ${id}`)
                 }
                 set_title(_data[0]?.operon?.name)
-            }else{
-                if(_testId === "nan"){
+            } else {
+                if (_testId === "nan") {
                     set_title(`Sorry, this ID does not belong to Operon's collection. ${id}`)
                     setState("error")
                 }
             }
-            
+
         }
-        if(covera){
-            const coverR = new CustomEvent('coverR',{
+        if (covera) {
+            const coverR = new CustomEvent('coverR', {
                 bubbles: true,
-                detail: { 
+                detail: {
                     state: state,
                     title: _title,
                     isInfo: _validId
@@ -73,14 +74,14 @@ const OperonBody = ({id}) => {
                     set_tuId(id)
                 } else {
                     set_testId("nan")
-                    
+
                 }
             }
 
         }
-    }, [id, _testId,state,_title,_validId,_data])
+    }, [id, _testId, state, _title, _validId, _data])
     if (!id) {
-        return <Home conf={conf?.pages?.operon_main} setState={state=>{setState(state);set_title(conf.pages.operon_main.title)}} />
+        return <Home conf={conf?.pages?.operon_main} setState={state => { setState(state); set_title(conf.pages.operon_main.title) }} />
     }
     if (_data) {
         if (!_validId) {
@@ -90,11 +91,14 @@ const OperonBody = ({id}) => {
         //console.log(_data)
         let nTUs = _data[0]?.transcriptionUnits
         return (
-            <Info id={_operonId}
-                tuId={_tuId}
-                nTUs={nTUs.length}
-                data={_data}
-            />
+            <CitationsProvider allCitations={_data[0]?.allCitations} >
+                <Info id={_operonId}
+                    tuId={_tuId}
+                    nTUs={nTUs.length}
+                    data={_data}
+                />
+            </CitationsProvider>
+
         )
     }
     if (_testId) {
@@ -107,7 +111,7 @@ const OperonBody = ({id}) => {
                 <div>
                     <ValidateID id_operon={_operonId}
                         resoultsData={(data) => { set_data(data) }}
-                        status={(state) => {  setState(state) }}
+                        status={(state) => { setState(state) }}
                         isValidate={(isGood) => { set_validId(isGood) }}
                     />
                 </div>

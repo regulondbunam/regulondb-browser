@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { CitationsNote } from '../../../../components/citations/citations_note'
+import {CitationCONTEXT} from '../../../../components/citations/citations_provider'
 
 
 export const TUdescription = ({conf, data_tu, id_tu }) => {
@@ -9,7 +11,7 @@ export const TUdescription = ({conf, data_tu, id_tu }) => {
             <h2>{conf?.title}</h2>
                 <p style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{__html: conf?.description}} />
                 <h3>{data_tu?.name}</h3>
-                <p style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{ __html: data_tu?.note }} />
+                <p style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{ __html: CitationsNote(CitationCONTEXT,data_tu?.note) }} />
                 <div style={{marginLeft: "5%"}} >
                 <table style={{ tableLayout: "fixed", width: "auto" }} >
                     <tbody>

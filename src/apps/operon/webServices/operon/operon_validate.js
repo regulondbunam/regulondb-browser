@@ -19,6 +19,23 @@ export function query(id_operon) {
                     transcriptionUnits{
                         id
                     }
+                    allCitations {
+                        publication {
+                          id
+                          authors
+                          pmid
+                          citation
+                          url
+                          title
+                          year
+                        }
+                        evidence {
+                          id
+                          name
+                          code
+                          type
+                        }
+                      }
                 }
                 pagination{
                     totalResults
