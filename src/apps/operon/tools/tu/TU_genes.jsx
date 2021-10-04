@@ -11,7 +11,7 @@ export const TUgenes = ({conf, data_tu, id_tu}) => {
                 <div style={{ marginLeft: "5%" }}>
                     {
                         data_tu.genes.map((gene) => {
-                            console.log(gene)
+                            //console.log(gene)
                             return <Link key={`link_gene${gene.id}`}
                                 style={{ paddingRight: '10px' }}
                                 to={`/gene/${gene.id}`}
