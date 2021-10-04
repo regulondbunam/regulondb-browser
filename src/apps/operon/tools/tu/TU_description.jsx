@@ -33,7 +33,6 @@ export const TUdescription = ({conf, data_tu, id_tu }) => {
                                     <Link style={{paddingRight: '10px'}} key={`link_gene${data_tu?.firstGene?.gene_id}`} to={`/gene/${data_tu?.firstGene?.gene_id}`}
                                     onMouseEnter={()=>{
                                         let gn = document.getElementById(`${data_tu?.firstGene?.gene_id}#tu_Canva${id_tu}`)
-                                        console.log(`${data_tu?.firstGene?.gene_id}#tu_Canva${id_tu}`)
                                         if(gn){
                                             gn.setAttribute("stroke","#00F");
                                             gn.setAttribute("stroke-width", "5");
@@ -41,7 +40,6 @@ export const TUdescription = ({conf, data_tu, id_tu }) => {
                                     }}
                                     onMouseLeave={()=>{
                                         let gn = document.getElementById(`${data_tu?.firstGene?.gene_id}#tu_Canva${id_tu}`)
-                                        console.log(`${data_tu?.firstGene?.gene_id}#tu_Canva${id_tu}`)
                                         if(gn){
                                             gn.setAttribute("stroke","");
                                             gn.setAttribute("stroke-width", "0");

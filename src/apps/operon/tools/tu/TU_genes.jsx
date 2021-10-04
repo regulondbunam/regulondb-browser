@@ -17,7 +17,6 @@ export const TUgenes = ({conf, data_tu, id_tu}) => {
                                 to={`/gene/${gene.id}`}
                                 onMouseEnter={()=>{
                                     let gn = document.getElementById(`${gene.id}#tu_Canva${id_tu}`)
-                                    console.log(`${gene.id}#tu_Canva${id_tu}`)
                                     if(gn){
                                         gn.setAttribute("stroke","#00F");
                                         gn.setAttribute("stroke-width", "5");
@@ -25,7 +24,6 @@ export const TUgenes = ({conf, data_tu, id_tu}) => {
                                 }}
                                 onMouseLeave={()=>{
                                     let gn = document.getElementById(`${gene.id}#tu_Canva${id_tu}`)
-                                    console.log(`${gene.id}#tu_Canva${id_tu}`)
                                     if(gn){
                                         gn.setAttribute("stroke","");
                                         gn.setAttribute("stroke-width", "0");
