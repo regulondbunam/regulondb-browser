@@ -441,7 +441,13 @@ Ver: 0.0.28
 	border-bottom: 3px solid var(--color-rest);
   }
   
-  /* s */
+  /* div effects */
+
+  div.sticky {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+  }
   
   /*
   history version

@@ -116,7 +116,7 @@ import {
       posY = body_height * 2 + posY;
       
     }
-    let overlapArea = canvas.path(`M ${posX} ${posY+body_height/2} l ${width} 0 l 0 ${body_height}`).fill("none")
+    let overlapArea = canvas.rect(width,body_height).move(posX,posY+body_height/2).fill("none")
     overlapArea.id(id)
     // Toltip
     gene.attr({
