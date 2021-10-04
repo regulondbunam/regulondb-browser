@@ -7,6 +7,7 @@ const TUs = ({idOperon, conf}) => {
     //console.log(conf)
     const [_data, set_data] = useState();
     const [_state, set_state] = useState();
+    
     let loading = false;
     switch (_state) {
         case "loading":

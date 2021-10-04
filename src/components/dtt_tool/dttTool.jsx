@@ -11,8 +11,7 @@ const DttTool = ({
     context = "DNA",
     leftEndPosition,
     rightEndPosition,
-    custom_data_dtt,
-    get_dnaFeatures_data = () => { }
+    custom_data_dtt
 }) => {
 
     const [_data, set_data] = useState()
@@ -44,10 +43,9 @@ const DttTool = ({
             }
             //console.log(dnaFeatures_data)
             if (dnaFeatures_data) {
-                get_dnaFeatures_data(dnaFeatures_data)
                 DrawingTracesTool({
                     idDrawPlace: `divCanvas_${context}Context${id}`,
-                    idCanvas: `idContextCanva${id}`,
+                    idCanvas: `${context}_Canva${id}`,
                     dnaFeatures_data: dnaFeatures_data,
                     auto_adjust: true,
                     covered: true,
@@ -61,7 +59,7 @@ const DttTool = ({
             }
 
         }
-    }, [id, context, _data_dtt, _posRight, _posLeft, leftEndPosition, rightEndPosition, custom_data_dtt, get_dnaFeatures_data])
+    }, [id, context, _data_dtt, _posRight, _posLeft, leftEndPosition, rightEndPosition, custom_data_dtt])
 
 
     if (custom_data_dtt) {

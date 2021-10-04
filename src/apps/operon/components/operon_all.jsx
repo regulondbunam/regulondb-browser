@@ -4,13 +4,13 @@ import TUs from '../tools/operon_TUs'
 import AllCitations from '../tools/operon_citations'
 
 export const All = ({ idOperon, conf }) => {
-    const descTab = conf.tabs.description
+
     return (
         <>
             <Description
                 idOperon={idOperon}
-                id={descTab.id}
-                conf={descTab}
+                id={conf?.tabs?.description?.id}
+                conf={conf?.tabs?.description}
                 isTUviews={false}
             />
             <TUs

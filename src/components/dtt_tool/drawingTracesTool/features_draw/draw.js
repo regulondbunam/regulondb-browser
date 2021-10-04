@@ -4,7 +4,7 @@ import DrawPromoter from "./features/promoter";
 import overlaping from "./overlaping/overlaping";
 import DrawTFBindingSite from "./features/tf_binding_site";
 
-export default function Draw(CANVAS, DNA, dnaFeatures_data = [], CONF) {
+export default function Draw(CANVAS, DNA, dnaFeatures_data = [], CONF, idCanvas) {
     if (!CANVAS || !dnaFeatures_data || !CONF || dnaFeatures_data === []) {
         console.error(
             `Some elements remain to be defined: \n
@@ -23,13 +23,14 @@ export default function Draw(CANVAS, DNA, dnaFeatures_data = [], CONF) {
         if (feature?.objectType === "dna") {
             return null
         }
+        let id = `${feature?._id}#${idCanvas}`
         //console.log(feature)
         switch (feature?.objectType) {
             case "dna":
                 break;
             case "gene":
                 draw = DrawGene({
-                    id: feature?._id,
+                    id: id,
                     canvas: CANVAS,
                     dna: DNA,
                     anchor: feature?.anchor,
@@ -48,7 +49,7 @@ export default function Draw(CANVAS, DNA, dnaFeatures_data = [], CONF) {
                 break;
             case "promoter":
                 draw = DrawPromoter({
-                    id: feature?._id,
+                    id: id,
                     canva: CANVAS,
                     dna: DNA,
                     anchor: feature?.anchor,
@@ -67,7 +68,7 @@ export default function Draw(CANVAS, DNA, dnaFeatures_data = [], CONF) {
                 break;
             case "tf_binding_site":
                 draw = DrawTFBindingSite({
-                    id: feature?._id,
+                    id: id,
                     canva: CANVAS,
                     dna: DNA,
                     anchor: feature?.anchor,

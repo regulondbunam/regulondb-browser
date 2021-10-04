@@ -4,7 +4,7 @@ import { SpinnerCircle } from '../../../components/ui-components/ui_components'
 import DttTool from '../../../components/dtt_tool/dttTool'
 import { GetInfo } from '../webServices/operon_ws'
 
-export const Description = ({ idOperon, conf, isTUviews = true }) => {
+export const Description = ({ id, idOperon, conf, isTUviews = true }) => {
     const sumaryConf = conf?.sections?.sumary
     const context = conf?.sections?.general_context
     const TUsConf = conf?.sections?.TUs
@@ -13,7 +13,7 @@ export const Description = ({ idOperon, conf, isTUviews = true }) => {
     const [_state, set_state] = useState()
     if (_data && _state === "done") {
         return (
-            <>
+            <div id={id}>
                 <nav>
                     <DttTool id={idOperon} context="operon"
                         leftEndPosition={_data.regulationPositions.leftEndPosition}
@@ -35,7 +35,7 @@ export const Description = ({ idOperon, conf, isTUviews = true }) => {
                             : null
                     }
                 </article>
-            </>
+            </div>
         )
     }
     return (
