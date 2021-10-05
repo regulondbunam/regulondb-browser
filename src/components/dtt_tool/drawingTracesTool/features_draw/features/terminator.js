@@ -73,22 +73,23 @@ export default function DrawTerminador({
     const head = canvas.path(
         `m ${posX+sizeP-(-1*width_feet)} ${posY+(height_body)} l 0 1 ${curve}`
     )
-    
-    const group = canvas.group()
-    group.add(feet_left)
-    group.add(feet_right)
-    group.add(body_left)
-    group.add(body_right)
-    group.add(head)
+    canvas.rect(30,25).fill("none").id(id+"/s").move(posX-10,posY+height_body+height_feet)
+    const term = canvas.group()
+    term.add(feet_left)
+    term.add(feet_right)
+    term.add(body_left)
+    term.add(body_right)
+    term.add(head)
+
 
     /*const terminator_canva = canvas.path(
         `m ${posX} ${posY} l ${sizeP} 0 l 0 ${height_feet} l ${width_feet} 0 l 0 ${height_body} ${curve} l 0 ${-1*height_body} L ${posX} ${posY+height_feet} z`
     )*/
-    group.fill("none").stroke(stroke);
+    term.fill("none").stroke(stroke);
     head.id(id)
 
     //tooltip data
-    group.attr({
+    term.attr({
         "data-tip": "",
         "data-for": `${canvas.node?.id}-${id}`
     });

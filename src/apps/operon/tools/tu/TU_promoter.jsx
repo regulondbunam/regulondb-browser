@@ -1,5 +1,7 @@
 import React from 'react'
 import { MarkSequencePromoter } from './promoter_components/mkSequence'
+import { CitationsNote } from '../../../../components/citations/citations_note'
+import {CitationCONTEXT} from '../../../../components/citations/citations_provider'
 
 export const TUpromoter = ({ id_tu, data_tu, conf }) => {
     try {
@@ -29,7 +31,7 @@ export const TUpromoter = ({ id_tu, data_tu, conf }) => {
                     <h3>{data_tu?.promoter?.name}</h3>
                     {
                         notNull(data_tu?.promoter?.note,
-                            <p dangerouslySetInnerHTML={{ __html: data_tu?.promoter?.note }} />
+                            <p dangerouslySetInnerHTML={{ __html: CitationsNote(CitationCONTEXT,data_tu?.promoter?.note) }} />
                         )
                     }
                     <table>

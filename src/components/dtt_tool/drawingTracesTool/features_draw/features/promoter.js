@@ -79,9 +79,10 @@ export default function DrawPromoter({
   }
   const leg = canva.line(x + dnaX, dnaY, x + dnaX, lh).stroke(stroke)
   let promoter = canva.group();
-  canva.rect(arrowW+1,arrowH+font.size+1).fill("none").move(posX,posY).id(`${id}/s`)
+  let rect = canva.rect(arrowW+1,arrowH+font.size+1).fill("none").move(posX,posY).id(`${id}/s`)
   promoter.add(ARROW)
   promoter.add(TEXT)
+  promoter.add(rect)
   promoter.id(id)
   return {
     id: id,

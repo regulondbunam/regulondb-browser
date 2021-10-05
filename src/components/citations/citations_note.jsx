@@ -3,7 +3,6 @@ import { Citation } from './citation'
 
 export function relCitation(allCitations, idCit, small = true) {
     const re = /RDBECOLI(PRC|EVC)[0-9]{5}/
-    console.log(idCit)
     if (!re.exec(idCit)) {
         return ""
     }
@@ -20,8 +19,6 @@ export function relCitation(allCitations, idCit, small = true) {
 
 export const CitationsNote = (CitationCONTEXT, note) => {
     const { allCitations } = useContext(CitationCONTEXT)
-    console.log(allCitations)
-    console.log(note)
     const REX = /\[\s*RDBECOLI(PRC|EVC)[0-9]{5}\]/
     const PP = /(\|CITS:)|\|\./
 
