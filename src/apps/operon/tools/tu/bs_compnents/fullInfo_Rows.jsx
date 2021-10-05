@@ -23,16 +23,6 @@ const tbTitle = {
 }
 
 export function RowInfo(formatData) {
-    //console.log(formatData)
-    //const _viewInfo = true
-    /*
-    const [_viewInfo, set_viewInfo] = useState(true)
-
-    let viewInfo = "expand_less"
-        if (!_viewInfo) {
-            viewInfo = "expand_more"
-        }
-    */
     try {
         if (formatData.length > 0) {
             return (

@@ -62,15 +62,7 @@ export const Tabs = ({ id_operon, tuId, nTUs = 0, confJSON, setState, data }) =>
         leftEndPosition={data.regulationPositions.leftEndPosition}
         rightEndPosition={data.regulationPositions.rightEndPosition}
         resoultsData={(dtt_data)=>{
-            const ids = []
-            try {
-                dtt_data.map(data=>{
-                    ids.push(data)
-                    return null
-                })
-            } catch (error) {
-                
-            }
+            //console.log(dtt_data)
             set_dnaFeatures(dtt_data)
         }}
     />

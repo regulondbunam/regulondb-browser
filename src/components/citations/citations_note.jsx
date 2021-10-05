@@ -21,14 +21,13 @@ export const CitationsNote = (CitationCONTEXT, note) => {
     const { allCitations } = useContext(CitationCONTEXT)
     const REX = /\[\s*RDBECOLI(PRC|EVC)[0-9]{5}\]/
     const PP = /(\|CITS:)|\|\./
-
     if (PP.exec(note)) {
-        do {
+        while (PP.exec(note)){
             note = note.replace(PP, ' ')
-        } while (PP.exec(note));
-        do {
+        };
+        while (REX.exec(note)){
             note = note.replace(REX, relCitation(allCitations, REX.exec(note)[0]))
-        } while (REX.exec(note));
+        };
     }
     return note
 }
