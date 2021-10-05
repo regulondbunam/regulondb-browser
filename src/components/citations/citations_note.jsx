@@ -1,66 +1,37 @@
 import { useContext } from 'react'
 import { Citation } from './citation'
 
-export function relCitation(allCitations, idCit, index = true, small = true) {
-    const re = /RDB[A-Z]*[0-9]*/
-    let cits = []
-    let nidCits = idCit
-    //console.log(idCit)
-    do {
-        let cit = re.exec(nidCits)
-        //console.log(nidCits)
-        if (cit) {
-            cits.push(cit[0])
-            nidCits = nidCits.substring((cit['index'] + cit[0].length), idCit.length)
-            
-        } else {
-            break
-        }
-    } while (true)
-    //console.log(allCitations)
-    return (
-        cits.map((cit) => {
-
-            const fullCit = allCitations.find(element => element?.publication?.id === cit)
-            const index = allCitations.findIndex(element => element?.publication?.id === cit) + 1
-            const publication = fullCit?.publication?.citation
-            const url = fullCit?.publication?.url
-            if(!fullCit){
-                return null
-            }
-            // 
-            return `<a class='citation' data-tip='${publication}' target="_blank" rel="noopener noreferrer" href="${url}">[${index}]${Citation(fullCit, small)}</a>&nbsp;`
-        }).join(' ')
-    )
-
+export function relCitation(allCitations, idCit, small = true) {
+    const re = /RDBECOLI(PRC|EVC)[0-9]{5}/
+    console.log(idCit)
+    if (!re.exec(idCit)) {
+        return ""
+    }
+    const id_cit = re.exec(idCit)[0]
+    const index = allCitations.findIndex(element => element?.publication?.id === id_cit) + 1
+    if (!index) {
+        return ""
+    }
+    const fullCit = allCitations[index]
+    const publication = fullCit?.publication?.citation
+    const url = fullCit?.publication?.url
+    return `<a class='citation' data-tip='${publication}' target="_blank" rel="noopener noreferrer" href="${url}">[${index}]${Citation(fullCit, small)}</a>&nbsp;`
 }
 
-export const CitationsNote = (CitationCONTEXT,note) => {
+export const CitationsNote = (CitationCONTEXT, note) => {
     const { allCitations } = useContext(CitationCONTEXT)
-    let cit =''
-    let newNote = note
-    let partNote = []
-    let cits = []
-    try {
-        const re = /\|.*?\|/
+    console.log(allCitations)
+    console.log(note)
+    const REX = /\[\s*RDBECOLI(PRC|EVC)[0-9]{5}\]/
+    const PP = /(\|CITS:)|\|\./
+
+    if (PP.exec(note)) {
         do {
-            cit = re.exec(newNote)
-            if(cit){
-                //console.log(cit)
-                partNote.push(newNote.substring(0,cit['index']))
-                cits.push(cit[0])
-                newNote = newNote.substring((cit['index']+cit[0].length),newNote.length)
-            }else{
-                break
-            } 
-        }while(true)
-    } catch (error) {
-        console.log("util")
+            note = note.replace(PP, ' ')
+        } while (PP.exec(note));
+        do {
+            note = note.replace(REX, relCitation(allCitations, REX.exec(note)[0]))
+        } while (REX.exec(note));
     }
-    if(partNote.length === 0){
-        return note
-    }
-    return partNote.map((n,index)=>{
-                return `${n} ${relCitation(allCitations,cits[index])}`
-            }).join('')
+    return note
 }
