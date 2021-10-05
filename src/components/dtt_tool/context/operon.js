@@ -12,6 +12,6 @@ export default function OperonContext(leftEndPosition, rightEndPosition, _data_d
         return null
     })
     //console.log(leftEndPosition, rightEndPosition)
-    console.log(dnaFeature_data)
+    //console.log(dnaFeature_data)
     return dnaFeature_data
 }
