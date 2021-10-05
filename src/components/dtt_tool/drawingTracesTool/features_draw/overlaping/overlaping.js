@@ -1,6 +1,7 @@
 import { bsiteRulesOverlaping } from "./bindingSiteRules"
 import { geneRulesOverlaping } from "./geneRules"
 import { promoterRulesOverlaping } from "./promoterRules"
+import { terminatorRulesOverlaping } from "./terminatorRules"
 
 export default function overlaping(draw, drawFeatures = [], CONF) {
     let dom_draw = document.getElementById(draw.id)
@@ -48,6 +49,9 @@ export function overlapCorrection(draw, feature, posY, dnaPriority) {
             break;
         case "tf_binding_site":
             posY = bsiteRulesOverlaping(draw, feature, posY, dnaPriority)
+            break;
+        case "terminator":
+            posY = terminatorRulesOverlaping(draw, feature, posY, dnaPriority)
             break;
         default:
             console.warn(`this feature "${feature.objectType}" no overlaping rules defined`)
