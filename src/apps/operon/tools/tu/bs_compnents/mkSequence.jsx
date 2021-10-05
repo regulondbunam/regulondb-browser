@@ -66,7 +66,6 @@ export function MarkSequenceWithPositions({id,sequenceInfo}) {
             let px = 0
             let isLine = false
             // eslint-disable-next-line
-            //console.log(sequenceInfo)
             const seq = [].map.call(sequence, function (x) {
                 try {
                     canvas.line(px,0,px,80).stroke({ color: '#dbdbdb', width: 1, linecap: 'round' })
