@@ -9,7 +9,7 @@ export function MarkSequence(id,sequence) {
     useEffect(() => {
         const drawPlace = document.getElementById(id_drawPlace)
         let canvas = document.getElementById(id_canvas);
-        if (drawPlace && canvas === null) {
+        if (drawPlace && !canvas) {
             const width = drawPlace.clientWidth;
             canvas = SVG().addTo(`#${id_drawPlace}`).size(width, 30).id(id_canvas);
             let px = 0

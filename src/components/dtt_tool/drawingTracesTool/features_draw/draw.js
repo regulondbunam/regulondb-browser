@@ -70,7 +70,7 @@ export default function Draw(CANVAS, DNA, dnaFeatures_data = [], CONF, idCanvas)
             case "tf_binding_site":
                 draw = DrawTFBindingSite({
                     id: id,
-                    canva: CANVAS,
+                    canvas: CANVAS,
                     dna: DNA,
                     anchor: feature?.anchor,
                     leftEndPosition: feature?.leftEndPosition,

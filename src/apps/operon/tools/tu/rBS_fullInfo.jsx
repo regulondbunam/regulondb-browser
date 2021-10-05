@@ -61,11 +61,9 @@ function Promoter_RBSs(promoter, id_tu) {
                                     <td>{`Linked to Promoter ${promoter?.name}`}</td>
                                 </tr>
                                 <tr>
-                                    <td>
                                         {
-                                            tableRI(regulatoryInteractions)
+                                            tableRI(regulatoryInteractions, id_tu)
                                         }
-                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -100,11 +98,9 @@ function Genes_RBSs(gene, id_tu) {
                                     <td>{`Linked to Gene ${gene?.name}`}</td>
                                 </tr>
                                 <tr>
-                                    <td>
                                         {
-                                            tableRI(regulatoryInteractions)
+                                            tableRI(regulatoryInteractions, id_tu)
                                         }
-                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -115,7 +111,7 @@ function Genes_RBSs(gene, id_tu) {
     )
 }
 
-function tableRI(regulatoryInteractions) {
+function tableRI(regulatoryInteractions, id_tu) {
     return (
         <td>
             {
@@ -123,7 +119,20 @@ function tableRI(regulatoryInteractions) {
                     const rSite = ri?.regulatorySite
                     return (
                         <div style={{ marginLeft: "2%" }} key={`tabe_Rinteraction_${ri?._id}`}
-
+                            onMouseEnter={() => {
+                                let gn = document.getElementById(`${ri?._id}#tu_Canva${id_tu}/s`)
+                                if (gn) {
+                                    gn.setAttribute("stroke", "#00F");
+                                    gn.setAttribute("stroke-width", "2");
+                                }
+                            }}
+                            onMouseLeave={() => {
+                                let gn = document.getElementById(`${ri?._id}#tu_Canva${id_tu}/s`)
+                                if (gn) {
+                                    gn.setAttribute("stroke", "");
+                                    gn.setAttribute("stroke-width", "0");
+                                }
+                            }}
                         >
                             <table className="table_content" >
                                 <thead>
