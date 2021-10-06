@@ -56,9 +56,28 @@ function RBSs(element, id_tu) {
                     {
                         sites.map((site, index) => {
                             return (
-                                <tr key={`tr-bs-${index}-${site["_id"]}`} >
+                                <tr key={`tr-bs-${index}-${site["_id"]}`} 
+                                onMouseEnter={() => {
+                                    let gn = document.getElementById(`${site["ri_id"]}#tu_Canva${id_tu}/s`)
+                                    if (gn) {
+                                        gn.setAttribute("stroke", "#00F");
+                                        gn.setAttribute("stroke-width", "2");
+                                    }
+                                }}
+                                onMouseLeave={() => {
+                                    let gn = document.getElementById(`${site["ri_id"]}#tu_Canva${id_tu}/s`)
+                                    if (gn) {
+                                        gn.setAttribute("stroke", "");
+                                        gn.setAttribute("stroke-width", "0");
+                                    }
+                                }}
+                                >
                                     {site.map((dt, i) => {
-                                        return <td key={`td-bs-<${index}-${i}`} >{dt}</td>
+                                        return (
+                                            <td key={`td-bs-<${index}-${i}`}>
+                                                {dt}
+                                            </td>
+                                        )
                                     })}
 
                                 </tr>
@@ -79,6 +98,7 @@ function orderRIS(rbs) {
             const rs = ri?.regulatorySite
             let site = []
             site["_id"] = rs?._id
+            site["ri_id"] = ri?._id
             site.push(bs?.regulator?.name)
             site.push(ri?.function)
             site.push(" ")
