@@ -4,8 +4,8 @@ import DttTool from '../../../../components/dtt_tool/dttTool'
 
 export default function TUgraph({ data }) {
     const { operonContextElements } = useContext(OperonCONTEXT)
-    //console.log(data)
-    //console.log(operonContextElements)
+    console.log(data)
+    console.log(operonContextElements)
     let custom_dnaFeatures = useMemo(() => {
         try {
             let dnaFeatures = []
@@ -28,7 +28,49 @@ export default function TUgraph({ data }) {
                         }
                         return null
                     case "tf_binding_site":
-                        dnaFeatures.push(element)
+                        try {
+                            const GENES = data?.genes
+                            const PROMOTER = data?.promoter
+                            if(GENES && GENES.length > 0){
+                                GENES.map(gen=>{
+                                    let rbs = gen?.regulatorBindingSites
+                                    if(rbs && rbs.length > 0 ){
+                                        rbs.map(rb=>{
+                                            let ris = rb?.regulatoryInteractions
+                                            if(ris && ris.length > 0 ){
+                                                ris.map(ri=>{
+                                                    if (ri?._id === element._id) {
+                                                        dnaFeatures.push(element)
+                                                    }
+                                                    return null
+                                                })
+                                            }
+                                            return null
+                                        })
+                                    }
+                                    return null
+                                })
+                            }
+                            if(PROMOTER){
+                                let rbs = PROMOTER?.regulatorBindingSites
+                                    if(rbs && rbs.length > 0 ){
+                                        rbs.map(rb=>{
+                                            let ris = rb?.regulatoryInteractions
+                                            if(ris && ris.length > 0 ){
+                                                ris.map(ri=>{
+                                                    if (ri?._id === element._id) {
+                                                        dnaFeatures.push(element)
+                                                    }
+                                                    return null
+                                                })
+                                            }
+                                            return null
+                                        })
+                                    }
+                            }
+                        } catch (error) {
+                            console.error(error)
+                        }
                         break;
                     case "terminator":
                         if(!data?.terminators || data?.terminators.length === 0){
@@ -50,28 +92,7 @@ export default function TUgraph({ data }) {
                 }
                 return null
             })
-            let tu_data = []
-            dnaFeatures.map(feature => {
-                if (feature?.objectType === "tf_binding_site") {
-                    let genes = feature?.relatedGenes
-                    if (genes) {
-                        let flag = false
-                        genes.map(gene => {
-                            if (dnaFeatures.find(f => f?._id === gene.gene_id)) {
-                                flag = true
-                            }
-                            return null
-                        })
-                        if (flag) {
-                            tu_data.push(feature)
-                        }
-                    }
-                    return null
-                }
-                tu_data.push(feature)
-                return null
-            })
-            return tu_data
+            return dnaFeatures
         } catch (error) {
             console.error("TU_graph: ", error)
         }
