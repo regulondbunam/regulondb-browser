@@ -1,5 +1,5 @@
 import React from 'react'
-import { MarkSequence } from './bs_compnents/mkSequence'
+import MarkSequence  from './bs_compnents/mkSequence'
 //import AllCitations from '../../../../components/cits/Cits'
 
 export function RBSbyStite(data_tu, id_tu) {
@@ -86,7 +86,9 @@ function orderRIS(rbs) {
             site.push(rs?.absolutePosition)
             site.push(rs?.leftEndPosition)
             site.push(rs?.rightEndPosition)
-            site.push(MarkSequence(`cav-${ri?._id}-${rs?._id}_${indx}`,rs?.sequence))
+            site.push(<MarkSequence id={`${rs?._id}-${ri?._id}sumarryInfo`} data_sequence={{
+                sequence: rs?.sequence, posL: rs?.leftEndPosition, posR: rs?.rightEndPosition
+            }} />)
             site.push("---")
             sites.push(site)
             return null

@@ -3,7 +3,7 @@ import { RBSbyStite } from "./rBS_byStite";
 import RBS_fullInfo from './rBS_fullInfo'
 
 export const TUrBS = ({ id_tu, data_tu, conf }) => {
-    const [_view, set_view] = useState("fi");
+    const [_view, set_view] = useState("si");
     return (
         <div>
             <h2>{conf?.title}</h2>
@@ -12,13 +12,15 @@ export const TUrBS = ({ id_tu, data_tu, conf }) => {
                     <option value="si">Summary Information</option>
                     <option value="fi">Full Information</option>
                 </select>
-                {view(_view,data_tu,id_tu)}
+                {
+                    View(_view,data_tu, id_tu)
+                }
             </div>
         </div>
     )
 }
 
-function view(value,data_tu,id_tu) {
+function View(value,data_tu,id_tu) {
     switch (value) {
         case "fi":
             return RBS_fullInfo(data_tu, id_tu);

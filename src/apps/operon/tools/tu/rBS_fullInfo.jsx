@@ -1,5 +1,5 @@
 import React from 'react'
-import { MarkSequenceWithPositions } from "./bs_compnents/mkSequence";
+import MkSequence from "./bs_compnents/mkSequence";
 import { CitationsNote } from '../../../../components/citations/citations_note'
 import { CitationCONTEXT } from '../../../../components/citations/citations_provider';
 import { ParagraphCitations } from '../../../../components/citations/citations';
@@ -24,7 +24,7 @@ export default function RBS_full(data_tu, id_tu) {
             }
             {
                 data_tu?.genes
-                    ? GENES.map((gene,indx) => {
+                    ? GENES.map((gene, indx) => {
                         return <div key={`rbss_${gene.id}_${indx}`}>
                             {
                                 Genes_RBSs(gene, id_tu)
@@ -43,7 +43,7 @@ function Promoter_RBSs(promoter, id_tu) {
     return (
         <div>
             {
-                RBS.map((rbs,indx) => {
+                RBS.map((rbs, indx) => {
                     const regulator = rbs?.regulator
                     const regulatoryInteractions = rbs?.regulatoryInteractions
                     if (!regulator || !regulatoryInteractions) {
@@ -79,7 +79,7 @@ function Genes_RBSs(gene, id_tu) {
     return (
         <div>
             {
-                RBS.map((rbs,indx) => {
+                RBS.map((rbs, indx) => {
                     const regulator = rbs?.regulator
                     const regulatoryInteractions = rbs?.regulatoryInteractions
                     if (!regulator || !regulatoryInteractions) {
@@ -114,7 +114,7 @@ function tableRI(regulatoryInteractions, id_tu) {
     return (
         <td>
             {
-                regulatoryInteractions.map((ri,indx) => {
+                regulatoryInteractions.map((ri, indx) => {
                     const rSite = ri?.regulatorySite;
                     return (
                         <div style={{ marginLeft: "2%" }} key={`tabe_Rinteraction_${ri?._id}_${indx}`}
@@ -153,9 +153,14 @@ function tableRI(regulatoryInteractions, id_tu) {
                                                         <tbody>
                                                             <tr>
                                                                 <td>
-                                                                    <MarkSequenceWithPositions id={`cav-${ri?._id}-${rSite?._id}`} sequenceInfo={{
-                                                                        sequence: rSite?.sequence, posL: rSite?.leftEndPosition, posR: rSite?.rightEndPosition
-                                                                    }} />
+
+                                                                    <MkSequence id={`cav-${ri?._id}-${rSite?._id}-fullInfo`} positions={true}
+                                                                        data_sequence={{
+                                                                            sequence: rSite?.sequence, posL: rSite?.leftEndPosition, posR: rSite?.rightEndPosition
+                                                                        }}
+                                                                    />
+
+
                                                                 </td>
                                                             </tr>
                                                             <tr>
