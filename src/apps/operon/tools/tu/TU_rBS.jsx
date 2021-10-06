@@ -4,7 +4,6 @@ import RBS_fullInfo from './rBS_fullInfo'
 
 export const TUrBS = ({ id_tu, data_tu, conf }) => {
     const [_view, set_view] = useState("fi");
-    console.log(_view)
     return (
         <div>
             <h2>{conf?.title}</h2>

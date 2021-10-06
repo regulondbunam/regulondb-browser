@@ -12,8 +12,8 @@ export function RBSbyStite(data_tu, id_tu) {
             }
             {
                 data_tu?.genes
-                    ? GENES.map(gene => {
-                        return <div key={`rbss_${gene.id}`}>
+                    ? GENES.map((gene,indx) => {
+                        return <div key={`rbss_${gene.id}_${indx}`}>
                             {
                                 RBSs(gene, id_tu)
                             }
@@ -75,7 +75,7 @@ function orderRIS(rbs) {
     //console.log(`rbs`, rbs)
     let sites = []
     rbs.map(bs => {
-        bs?.regulatoryInteractions.map(ri => {
+        bs?.regulatoryInteractions.map((ri,indx)=> {
             const rs = ri?.regulatorySite
             let site = []
             site["_id"] = rs?._id
@@ -86,7 +86,7 @@ function orderRIS(rbs) {
             site.push(rs?.absolutePosition)
             site.push(rs?.leftEndPosition)
             site.push(rs?.rightEndPosition)
-            site.push(MarkSequence(`cav-${ri?._id}-${rs?._id}`,rs?.sequence))
+            site.push(MarkSequence(`cav-${ri?._id}-${rs?._id}_${indx}`,rs?.sequence))
             site.push("---")
             sites.push(site)
             return null

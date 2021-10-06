@@ -24,8 +24,8 @@ export default function RBS_full(data_tu, id_tu) {
             }
             {
                 data_tu?.genes
-                    ? GENES.map(gene => {
-                        return <div key={`rbss_${gene.id}`}>
+                    ? GENES.map((gene,indx) => {
+                        return <div key={`rbss_${gene.id}_${indx}`}>
                             {
                                 Genes_RBSs(gene, id_tu)
                             }
@@ -43,14 +43,14 @@ function Promoter_RBSs(promoter, id_tu) {
     return (
         <div>
             {
-                RBS.map(rbs => {
+                RBS.map((rbs,indx) => {
                     const regulator = rbs?.regulator
                     const regulatoryInteractions = rbs?.regulatoryInteractions
                     if (!regulator || !regulatoryInteractions) {
                         return null
                     }
                     return (
-                        <table className="table_content" key={`tabe_regulatorRBS_${regulator?._id}`}>
+                        <table className="table_content" key={`tabe_regulatorRBS_promoter_${regulator?._id}_${indx}`}>
                             <thead>
                                 <tr>
                                     <th>{`Regulator ${regulator.name}, ${regulator.function} `}</th>
@@ -61,9 +61,9 @@ function Promoter_RBSs(promoter, id_tu) {
                                     <td>{`Linked to Promoter ${promoter?.name}`}</td>
                                 </tr>
                                 <tr>
-                                        {
-                                            tableRI(regulatoryInteractions, id_tu)
-                                        }
+                                    {
+                                        tableRI(regulatoryInteractions, id_tu)
+                                    }
                                 </tr>
                             </tbody>
                         </table>
@@ -76,18 +76,17 @@ function Promoter_RBSs(promoter, id_tu) {
 
 function Genes_RBSs(gene, id_tu) {
     const RBS = gene?.regulatorBindingSites
-    //console.log(RBS)
     return (
         <div>
             {
-                RBS.map(rbs => {
+                RBS.map((rbs,indx) => {
                     const regulator = rbs?.regulator
                     const regulatoryInteractions = rbs?.regulatoryInteractions
                     if (!regulator || !regulatoryInteractions) {
                         return null
                     }
                     return (
-                        <table className="table_content" key={`tabe_regulatorRBS_${regulator?._id}`}>
+                        <table className="table_content" key={`tabe_regulatorRBS_${regulator?._id}_${gene.id}`}>
                             <thead>
                                 <tr>
                                     <th>{`Regulator ${regulator.name}, ${regulator.function} `}</th>
@@ -98,9 +97,9 @@ function Genes_RBSs(gene, id_tu) {
                                     <td>{`Linked to Gene ${gene?.name}`}</td>
                                 </tr>
                                 <tr>
-                                        {
-                                            tableRI(regulatoryInteractions, id_tu)
-                                        }
+                                    {
+                                        tableRI(regulatoryInteractions, id_tu)
+                                    }
                                 </tr>
                             </tbody>
                         </table>
@@ -115,10 +114,10 @@ function tableRI(regulatoryInteractions, id_tu) {
     return (
         <td>
             {
-                regulatoryInteractions.map(ri => {
-                    const rSite = ri?.regulatorySite
+                regulatoryInteractions.map((ri,indx) => {
+                    const rSite = ri?.regulatorySite;
                     return (
-                        <div style={{ marginLeft: "2%" }} key={`tabe_Rinteraction_${ri?._id}`}
+                        <div style={{ marginLeft: "2%" }} key={`tabe_Rinteraction_${ri?._id}_${indx}`}
                             onMouseEnter={() => {
                                 let gn = document.getElementById(`${ri?._id}#tu_Canva${id_tu}/s`)
                                 if (gn) {
@@ -146,44 +145,47 @@ function tableRI(regulatoryInteractions, id_tu) {
                                             ? <tr><td>{`Mechanism: ${ri?.mechanism}`}</td></tr>
                                             : null
                                     }
-                                    {
-                                        ri?.regulatorySite
-                                            ? <table>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <MarkSequenceWithPositions id={`cav-${ri?._id}-${rSite?._id}`} sequenceInfo={{
-                                                                sequence: rSite?.sequence, posL: rSite?.leftEndPosition, posR: rSite?.rightEndPosition
-                                                            }} />
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            {`Center Position: ${ri?.centerPosition}, Absolute Position: ${rSite?.absolutePosition}`}
-                                                        </td>
-                                                    </tr>
-                                                    {
-                                                        rSite?.note
-                                                            ? <tr><td> <p dangerouslySetInnerHTML={{ __html: CitationsNote(CitationCONTEXT, rSite?.note) }} /></td></tr>
-                                                            : null
-                                                    }
-                                                    {
-                                                        rSite?.citations
-                                                            ? <tr>
+                                    <tr>
+                                        <td>
+                                            {
+                                                ri?.regulatorySite
+                                                    ? <table>
+                                                        <tbody>
+                                                            <tr>
                                                                 <td>
-                                                                    <p>Regulatory Site Citations</p>
-                                                                    {ParagraphCitations({
-                                                                        CitationCONTEXT: CitationCONTEXT,
-                                                                        citations: rSite?.citations
-                                                                    })}
+                                                                    <MarkSequenceWithPositions id={`cav-${ri?._id}-${rSite?._id}`} sequenceInfo={{
+                                                                        sequence: rSite?.sequence, posL: rSite?.leftEndPosition, posR: rSite?.rightEndPosition
+                                                                    }} />
                                                                 </td>
                                                             </tr>
-                                                            : null
-                                                    }
-                                                </tbody>
-                                            </table>
-                                            : null
-                                    }
+                                                            <tr>
+                                                                <td>
+                                                                    {`Center Position: ${ri?.centerPosition}, Absolute Position: ${rSite?.absolutePosition}`}
+                                                                </td>
+                                                            </tr>
+                                                            {
+                                                                rSite?.note
+                                                                    ? <tr><td> <p dangerouslySetInnerHTML={{ __html: CitationsNote(CitationCONTEXT, rSite?.note) }} /></td></tr>
+                                                                    : null
+                                                            }
+                                                            {
+                                                                rSite?.citations
+                                                                    ? <tr>
+                                                                        <td>
+                                                                            <p>Regulatory Site Citations</p>
+                                                                            {ParagraphCitations({
+                                                                                CitationCONTEXT: CitationCONTEXT,
+                                                                                citations: rSite?.citations
+                                                                            })}
+                                                                        </td>
+                                                                    </tr>
+                                                                    : null
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                    : null
+                                            }
+                                        </td></tr>
                                     {
                                         ri?.note
                                             ? <tr><td> <p dangerouslySetInnerHTML={{ __html: CitationsNote(CitationCONTEXT, ri?.note) }} /></td></tr>
