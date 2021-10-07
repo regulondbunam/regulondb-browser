@@ -16,7 +16,7 @@ export default function DrawTFBindingSite({
     labelName = "Name",
     strand = "forward",
     color = "#fff",
-    opacity = 1,
+    opacity = 0.8,
     stroke,
     font,
     tooltip = "",
@@ -60,7 +60,7 @@ export default function DrawTFBindingSite({
     let posY = dnaY - separation - tfH;
     // draw site
     let tf_binding = canvas.rect(tfW, tfH);
-    tf_binding.move(posX, posY).stroke(stroke).fill(color);
+    tf_binding.move(posX, posY).stroke(stroke).fill(color).opacity(opacity);
     //Text properties
     const textP = label({
         canvas: canvas,

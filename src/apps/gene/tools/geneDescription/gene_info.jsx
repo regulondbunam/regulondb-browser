@@ -9,7 +9,8 @@ import { CitationCONTEXT } from '../../../../components/citations/citations_prov
 export default function GeneInfo({ gene }) {
     let size = gene?.rightEndPosition - gene?.leftEndPosition;
     return (
-        <table className="table_auto table_content" style={{ paddingLeft: '5%' }}>
+        <div style={{ paddingLeft: '5%' }}>
+        <table className="table_auto table_content" >
             <tbody>
                 <tr>
                     <td style={{ fontWeight: "bold" }}>Name:</td>
@@ -38,8 +39,8 @@ export default function GeneInfo({ gene }) {
                     <td>{gene?.leftEndPosition}
                         {
                             gene?.strand === "reverse"
-                                ? <i class='bx bx-left-arrow-alt' ></i>
-                                : <i class='bx bx-right-arrow-alt' ></i>
+                                ? <i className='bx bx-left-arrow-alt' ></i>
+                                : <i className='bx bx-right-arrow-alt' ></i>
                         }
                         {gene?.rightEndPosition}
                     </td>
@@ -75,6 +76,7 @@ export default function GeneInfo({ gene }) {
                         : null
                 }
             </tbody>
+            </table>
             {
                 gene?.note
                     ? <>
@@ -112,7 +114,7 @@ export default function GeneInfo({ gene }) {
                     </div>
                     : null
             }
-        </table>
+        </div>
     )
 }
 

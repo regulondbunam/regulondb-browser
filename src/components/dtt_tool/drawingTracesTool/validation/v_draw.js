@@ -36,6 +36,9 @@ export function color_validate(color, defColor = "#000000") {
 }
 
 export function stroke_define(feature) {
+  if(feature?.stroke){
+    return feature.stroke
+  }
   return {
     color: rgb_to_rgbFormat(feature?.lineRGBColor),
     width: feature?.lineWidth,

@@ -58,7 +58,7 @@ export default function DrawPromoter({
     `m ${posX} ${dnaY-legH} l ${arrowW} 0 l -${arrowH/2} -${arrowH/2} l ${arrowH/2} ${arrowH/2} l -${arrowH/2} ${arrowH/2}`
   );
   ARROW.fill("none");
-  ARROW.stroke(stroke);
+  ARROW.stroke(stroke).opacity(opacity);
   //text
   const TEXT = label({
     canvas: canva,
@@ -77,7 +77,7 @@ export default function DrawPromoter({
     posX = posX-arrowW;
     posY = dnaY+legH-arrowH/2
   }
-  const leg = canva.line(x + dnaX, dnaY, x + dnaX, lh).stroke(stroke)
+  const leg = canva.line(x + dnaX, dnaY, x + dnaX, lh).stroke(stroke).opacity(opacity)
   let promoter = canva.group();
   let rect = canva.rect(arrowW+1,arrowH+font.size+1).fill("none").move(posX,posY).id(`${id}/s`)
   promoter.add(ARROW)

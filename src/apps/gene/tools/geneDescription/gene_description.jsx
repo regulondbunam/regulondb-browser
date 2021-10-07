@@ -14,11 +14,12 @@ const Description = ({
     const [_data, set_data] = useState()
     const [_state, set_state] = useState()
 
+    console.log(_data)
     if (_data && _state === "done") {
         return (
             <div>
                 <nav>
-                    <Graph id={id_gene} context="gene" />
+                    <Graph leftEndPosition={parseInt(_data?.leftEndPosition,10)-500} rightEndPosition={parseInt(_data?.rightEndPosition)+500} id={id_gene} context="gene" />
                 </nav>
                 <article>
                     <h2>Gene Information</h2>

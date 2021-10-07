@@ -82,6 +82,7 @@ export default function Draw(CANVAS, DNA, dnaFeatures_data = [], CONF, idCanvas)
                     color: rgb_to_rgbFormat(feature?.objectRGBColor),
                     tooltip: feature?.tooltip,
                     separation: feature.separation,
+                    opacity: opacity_define(feature),
                     conf: CONF?.tf_binding_site
                 });
                 break;

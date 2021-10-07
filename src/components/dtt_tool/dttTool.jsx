@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { SpinnerCircle } from "../ui-components/ui_components";
-import GetGeneInfo from "./webServices/getGeneInfo";
 import GetGeneticElements from "./webServices/getGeneticElements";
 import DrawingTracesTool from "./drawingTracesTool/drawing_traces_tool";
 import OperonContext from "./context/operon";
+import GeneContext from "./context/gene";
 
 
 const DttTool = ({
@@ -14,8 +14,6 @@ const DttTool = ({
     custom_data_dtt
 }) => {
 
-    const [_data, set_data] = useState()
-    const [_state, set_state] = useState()
     const [_expand, set_expand] = useState(false)
     const [_data_dtt, set_data_dtt] = useState()
     const [_state_dtt, set_state_dtt] = useState()
@@ -31,7 +29,7 @@ const DttTool = ({
                     dnaFeatures_data = OperonContext(leftEndPosition, rightEndPosition, _data_dtt)
                     break;
                 case "gene":
-                    dnaFeatures_data = _data_dtt
+                    dnaFeatures_data = GeneContext(id,_data_dtt)
                     break;
                 case "tu":
                     if (custom_data_dtt) {
@@ -152,29 +150,26 @@ const DttTool = ({
                                             set_data_dtt(undefined)
                                             set_expand(!_expand)
                                             if (!_expand) {
-                                                set_posLeft(_data?.leftEndPosition - 500)
-                                                set_posRight(_data?.rightEndPosition)
+                                                set_posLeft(leftEndPosition - 500)
+                                                set_posRight(rightEndPosition)
                                             } else {
-                                                set_data(undefined)
+                                                set_posLeft(leftEndPosition)
+                                                set_posRight(rightEndPosition)
                                             }
                                         }}
                                     >
                                         {
                                             !_expand
                                                 ? <i className='bx bx-expand' ></i>
-                                                : <i class='bx bx-exit-fullscreen' ></i>
+                                                : <i className='bx bx-exit-fullscreen' ></i>
                                         }
                                     </button>
                                     : null
                             }
                             <button className="iconButton"
                                 onClick={() => {
-                                    set_data_dtt(undefined)
-                                    set_data(undefined)
-                                    if (context === "operon") {
                                         set_posLeft(leftEndPosition)
                                         set_posRight(rightEndPosition)
-                                    }
                                 }}
                             >
                                 <i className='bx bx-reset' ></i>
@@ -185,31 +180,7 @@ const DttTool = ({
             </table>
         )
     }
-    if (context.toLowerCase() === "gene") {
-        return (
-            <div>
-                {
-                    _state !== "error"
-                        ? <SpinnerCircle />
-                        : <div>error to load Drawing Gene Information</div>
-                }
-                <GetGeneInfo id_gene={id}
-                    resoultsData={(data) => {
-                        set_data(data)
-                        let pleft = data?.leftEndPosition
-                        set_posRight(data?.rightEndPosition + 2000)
-                        if (pleft < 1000) {
-                            set_posLeft(0)
-                        } else {
-                            set_posLeft(pleft - 1000)
-                        }
-                    }}
-                    status={(state) => set_state(state)}
-                />
-            </div>
-        )
-    }
-    return null
+    return <></>
 
 };
 

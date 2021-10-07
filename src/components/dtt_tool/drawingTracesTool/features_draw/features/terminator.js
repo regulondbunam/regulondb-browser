@@ -64,15 +64,15 @@ export default function DrawTerminador({
     }
     const feet_left = canvas.path(
         `m ${posX} ${posY} l 0 ${height_feet} l ${-1*width_feet} 0`
-    )
+    ).opacity(opacity)
     const feet_right = canvas.path(
         `m ${posX+sizeP} ${posY} l 0 ${height_feet} l ${width_feet} 0`
-    )
-    const body_left = canvas.line(posX+(-1*width_feet),posY+(height_feet),posX+(-1*width_feet),posY+(height_body))
-    const body_right = canvas.line(posX+sizeP-(-1*width_feet),posY+(height_feet),posX+sizeP-(-1*width_feet),posY+(height_body))
+    ).opacity(opacity)
+    const body_left = canvas.line(posX+(-1*width_feet),posY+(height_feet),posX+(-1*width_feet),posY+(height_body)).opacity(opacity)
+    const body_right = canvas.line(posX+sizeP-(-1*width_feet),posY+(height_feet),posX+sizeP-(-1*width_feet),posY+(height_body)).opacity(opacity)
     const head = canvas.path(
         `m ${posX+sizeP-(-1*width_feet)} ${posY+(height_body)} l 0 1 ${curve}`
-    )
+    ).opacity(opacity)
     canvas.rect(30,25).fill("none").id(id+"/s").move(posX-10,posY+height_body+height_feet)
     const term = canvas.group()
     term.add(feet_left)
