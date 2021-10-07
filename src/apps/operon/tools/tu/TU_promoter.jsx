@@ -6,7 +6,7 @@ import { ParagraphCitations } from '../../../../components/citations/citations';
 import { Link } from 'react-router-dom';
 
 export const TUpromoter = ({ id_tu, data_tu, conf }) => {
-    console.log(data_tu?.promoter)
+    //console.log(data_tu?.promoter)
     try {
         if (!data_tu?.promoter) {
             return null

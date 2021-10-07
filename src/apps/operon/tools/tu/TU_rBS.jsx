@@ -6,7 +6,7 @@ import { CitationCONTEXT } from '../../../../components/citations/citations_prov
 export const TUrBS = ({ id_tu, data_tu, conf }) => {
     const [_view, set_view] = useState("Full Information");
     return (
-        <div style={{ marginLeft: "5%" }}>
+        <article>
             <h2>{conf?.title}</h2>
             <div className="dropdown">
                 <button>{_view}<i className='bx bx-chevron-down'></i></button>
@@ -26,7 +26,7 @@ export const TUrBS = ({ id_tu, data_tu, conf }) => {
                     View(_view, data_tu, id_tu)
                 }
             </div>
-        </div>
+        </article>
     )
 }
 
