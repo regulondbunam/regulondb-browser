@@ -4,7 +4,7 @@
     "subtitle":"Escherichia coli K-12 <br/>Transcriptional Regulatory Network",
     "description": "Escherichia coli K-12 <br/> Transcriptional Regulatory Network",
     "appName": "RegulonDB Browser",
-    "version": "0.5.1",
+    "version": "0.6.0",
     "cover":{
         "type":"video",
         "color":"#32617d",

@@ -7,6 +7,18 @@ import { TUpromoter } from './tu/TU_promoter'
 import { TUTerminators } from './tu/TU_terminator'
 import { TUrBS } from './tu/TU_rBS'
 
+function StyleGraph(isTab) {
+    if (isTab) {
+        return{
+            zIndex: "1"
+        }
+    }
+    return{
+        display: "flex",
+        zIndex: "1"
+    }
+}
+
 
 export const operon_TU = ({
     id_tu,
@@ -24,10 +36,10 @@ export const operon_TU = ({
     if (data_tu) {
         return (
             <div>
-                <div className="sticky" style={{ zIndex: "1" }} >
+                <div className="sticky" style={StyleGraph(isTab)} >
                     {
                         isTab
-                            ? <nav><TUgraph data={data_tu} /></nav>
+                            ? <TUgraph data={data_tu} />
                             : <article>
                                 <TUgraph data={data_tu} />
                             </article>
