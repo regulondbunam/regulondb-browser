@@ -2,7 +2,7 @@ import React from 'react'
 import MarkSequence  from './bs_compnents/mkSequence'
 //import AllCitations from '../../../../components/cits/Cits'
 
-export function RBSbyStite(data_tu, id_tu) {
+export function RBSbyStite(data_tu, id_tu, CitationCONTEXT) {
     const PROMOTER = data_tu?.promoter
     const GENES = data_tu?.genes
     return (

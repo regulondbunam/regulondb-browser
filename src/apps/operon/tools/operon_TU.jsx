@@ -23,7 +23,7 @@ export const operon_TU = ({
     if(data_tu){
         return(
             <div>
-                <div className="sticky">
+                <div className="sticky" style={{zIndex: "1"}} >
                     <TUgraph data={data_tu} />
                 </div>
                 <TUdescription data_tu={data_tu} conf={conf_description} id_tu={id_tu} />
@@ -42,16 +42,3 @@ export const operon_TU = ({
 }
 
 export default operon_TU
-
-/**
- *     if(idOperon){
-        return (
-            <article>
-                
-                
-                
-                
-            </article>
-        )
-    }
- */

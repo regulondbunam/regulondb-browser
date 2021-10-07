@@ -1,11 +1,10 @@
 import React from 'react'
 import MkSequence from "./bs_compnents/mkSequence";
 import { CitationsNote } from '../../../../components/citations/citations_note'
-import { CitationCONTEXT } from '../../../../components/citations/citations_provider';
 import { ParagraphCitations } from '../../../../components/citations/citations';
 //import { IconButton } from '../../../../components/ui-components/ui_components'
 
-
+let CitationCONTEXT
 
 // eslint-disable-next-line no-unused-vars
 const styleIconButton = {
@@ -14,9 +13,10 @@ const styleIconButton = {
     float: "left"
 }
 
-export default function RBS_full(data_tu, id_tu) {
+export default function RBS_full(data_tu, id_tu, Citation_CONTEXT) {
     const PROMOTER = data_tu?.promoter
     const GENES = data_tu?.genes
+    CitationCONTEXT = Citation_CONTEXT
     return (
         <div>
             {
