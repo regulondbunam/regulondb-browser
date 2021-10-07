@@ -4,8 +4,8 @@ import DttTool from '../../../../components/dtt_tool/dttTool'
 
 export default function TUgraph({ data }) {
     const { operonContextElements } = useContext(OperonCONTEXT)
-    console.log(data)
-    console.log(operonContextElements)
+    //console.log(data)
+    //console.log(operonContextElements)
     let custom_dnaFeatures = useMemo(() => {
         try {
             let dnaFeatures = []

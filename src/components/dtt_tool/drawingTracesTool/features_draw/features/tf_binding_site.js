@@ -71,7 +71,7 @@ export default function DrawTFBindingSite({
         font: font,
         text: labelName
     })
-    let sel = canvas.rect(font.size*labelName.length, tfH).move(textP.x(), textP.y()).fill("none").id(id+"/s");
+    let sel = canvas.rect(font.size*labelName.length, tfH-5).move(textP.x(), textP.y()).fill("none").id(id+"/s");
     //group
     const group = canvas.group();
     group.id(id)

@@ -55,7 +55,7 @@ export function ParagraphCitations({ CitationCONTEXT, citations, small = true })
                     try {
                         let index = allCitations.findIndex((citation) => citation?.publication?.id === cit?.publication?.id && citation?.evidence?.id === cit?.evidence?.id)
                         return (
-                            <Modal
+                            <Modal key={`CitaitopnPH_${cit?.publication?.id}_${cit?.evidence?.id}_${indx}`}
                                 classNameModal="citation"
                                 title={`[${index + 1}]${Citation(cit, small)}`}
                                 cit={cit}

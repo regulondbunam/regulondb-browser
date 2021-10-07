@@ -1,9 +1,12 @@
 import React from 'react'
 import { MarkSequencePromoter } from './promoter_components/mkSequence'
 import { CitationsNote } from '../../../../components/citations/citations_note'
-import {CitationCONTEXT} from '../../../../components/citations/citations_provider'
+import { CitationCONTEXT } from '../../../../components/citations/citations_provider'
+import { ParagraphCitations } from '../../../../components/citations/citations';
+import { Link } from 'react-router-dom';
 
 export const TUpromoter = ({ id_tu, data_tu, conf }) => {
+    console.log(data_tu?.promoter)
     try {
         if (!data_tu?.promoter) {
             return null
@@ -31,7 +34,7 @@ export const TUpromoter = ({ id_tu, data_tu, conf }) => {
                     <h3>{data_tu?.promoter?.name}</h3>
                     {
                         notNull(data_tu?.promoter?.note,
-                            <p dangerouslySetInnerHTML={{ __html: CitationsNote(CitationCONTEXT,data_tu?.promoter?.note) }} />
+                            <p dangerouslySetInnerHTML={{ __html: CitationsNote(CitationCONTEXT, data_tu?.promoter?.note) }} />
                         )
                     }
                     <table>
@@ -39,36 +42,34 @@ export const TUpromoter = ({ id_tu, data_tu, conf }) => {
                             {
                                 notNull(data_tu?.promoter?.id,
                                     <tr>
-                                        <td style={{ fontWeight: "bold" }}>ID</td>
-                                        <td>{data_tu?.promoter?.id}</td>
+                                        <td>
+                                            <p style={{ fontWeight: "bold" }}>ID</p>
+                                            <p>{data_tu?.promoter?.id}</p>
+                                        </td>
                                     </tr>
                                 )
                             }
                             {
                                 notNull(data_tu?.promoter?.name,
                                     <tr>
-                                        <td style={{ fontWeight: "bold" }}>Name</td>
-                                        <td>{data_tu?.promoter?.name}</td>
+                                        <td>
+                                            <p style={{ fontWeight: "bold" }}>Name</p>
+                                            <p>{data_tu?.promoter?.name}</p>
+                                        </td>
                                     </tr>
                                 )
                             }
                             {
                                 notNull(data_tu?.promoter?.synonyms,
                                     <tr>
-                                        <td style={{ fontWeight: "bold" }}>synonyms</td>
-                                        <td>{
-                                            data_tu?.promoter?.synonyms.map((s) => {
-                                                return ` ${s}`
-                                            }).join(",")
-                                        }</td>
-                                    </tr>
-                                )
-                            }
-                            {
-                                notNull(data_tu?.promoter?.bindsSigmaFactor,
-                                    <tr>
-                                        <td style={{ fontWeight: "bold" }}>bindsSigmaFactor</td>
-                                        <td>{data_tu?.promoter?.bindsSigmaFactor?.sigmaFactor_name}</td>
+                                        <td>
+                                            <p style={{ fontWeight: "bold" }}>synonyms</p>
+                                            <p>{
+                                                data_tu?.promoter?.synonyms.map((s) => {
+                                                    return ` ${s}`
+                                                }).join(",")
+                                            }</p>
+                                        </td>
                                     </tr>
                                 )
                             }
@@ -95,6 +96,27 @@ export const TUpromoter = ({ id_tu, data_tu, conf }) => {
                                     </tr>
                                 )
                             }
+                            {
+                                notNull(data_tu?.promoter?.citations,
+                                    <tr>
+                                        <td colSpan="2" style={{ fontWeight: "bold" }}>
+                                            <p>Citations: </p>
+                                            <ParagraphCitations CitationCONTEXT={CitationCONTEXT} citations={data_tu?.promoter?.citations} />
+                                        </td>
+                                    </tr>
+                                )
+                            }
+                            {
+                                notNull(data_tu?.promoter?.bindsSigmaFactor,
+                                    <tr>
+                                        <td>
+                                            <p style={{ fontWeight: "bold" }}>Binds sigma factor:</p>
+                                            <p><Link to={`/sigmaFactor/${data_tu?.promoter?.bindsSigmaFactor?.sigmaFactor_id}`} >{data_tu?.promoter?.bindsSigmaFactor?.sigmaFactor_name}</Link></p>
+                                            <p>citations: <ParagraphCitations CitationCONTEXT={CitationCONTEXT} citations={data_tu?.promoter?.bindsSigmaFactor?.citations} /></p>
+                                        </td>
+                                    </tr>
+                                )
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -103,7 +125,7 @@ export const TUpromoter = ({ id_tu, data_tu, conf }) => {
     } catch (error) {
         console.error(error)
     }
-    return <>no promoters</>
+    return <></>
 }
 
 
