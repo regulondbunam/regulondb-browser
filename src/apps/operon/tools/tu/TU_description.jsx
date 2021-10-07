@@ -7,7 +7,7 @@ import {CitationCONTEXT} from '../../../../components/citations/citations_provid
 export const TUdescription = ({conf, data_tu, id_tu }) => {
     try {
         return (
-            <>
+            <article>
             <h2>{conf?.title}</h2>
                 <p style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{__html: conf?.description}} />
                 <h3>{data_tu?.name}</h3>
@@ -59,7 +59,7 @@ export const TUdescription = ({conf, data_tu, id_tu }) => {
                 </table>
                 </div>
                 
-            </>
+            </article>
         )
     } catch (error) {
         console.error(error)

@@ -8,7 +8,7 @@ export const TUTerminators = ({ id_tu, data_tu, conf }) => {
             return null
         }
         return (
-            <div>
+            <div style={{ marginLeft: "5%" }} >
                 <h2>{conf?.title}</h2>
                 <div style={{ marginLeft: "5%" }} >
                     {

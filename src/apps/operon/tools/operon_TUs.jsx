@@ -1,13 +1,13 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Tabs } from '../../../components/ui-components/web/tab/tabs';
 import GetTUallInfo from '../webServices/transcriptionUnit/TU_allInfo'
 import TU from "./operon_TU"
 
-const TUs = ({idOperon, conf}) => {
+const TUs = ({ idOperon, conf, isTab }) => {
     //console.log(conf)
     const [_data, set_data] = useState();
     const [_state, set_state] = useState();
-    
+
     let loading = false;
     switch (_state) {
         case "loading":
@@ -16,7 +16,7 @@ const TUs = ({idOperon, conf}) => {
         case "error":
             return <>error</>
         case "done":
-            return <>{TU_tabs(_data,conf,idOperon)}</>
+            return <>{TU_tabs(_data, conf, idOperon,isTab)}</>
         default:
             break
     }
@@ -36,31 +36,31 @@ const TUs = ({idOperon, conf}) => {
 
 export default TUs
 
-function TU_tabs(data,conf,idOperon){
+function TU_tabs(data, conf, idOperon, isTab = true) {
     const sections_conf = conf?.sections
     //console.log(data)
-    return(
+    return (
+        <div>
             <article>
-            <h2>{conf?.title}</h2>
-            <br/>
-            {//<div style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{__html: conf?.description}} />
-            }
-            <Tabs backgroundColor="#ffffff" lineColor="#99999999" tabSelect={data.transcriptionUnits[0].id} tabsInfo={formInfoTabs(data.transcriptionUnits)} tabs={formTUTabs(data.transcriptionUnits,sections_conf,idOperon)} />
+                <h2>{conf?.title}</h2>
             </article>
+            <Tabs backgroundColor="#ffffff" lineColor="#99999999" tabSelect={data.transcriptionUnits[0].id} tabsInfo={formInfoTabs(data.transcriptionUnits)} tabs={formTUTabs(data.transcriptionUnits,sections_conf,idOperon,isTab)} />
+        </div>
+
     )
 }
 
-function formTUTabs(tus, sections_conf,idOperon){
+function formTUTabs(tus, sections_conf, idOperon, isTab) {
     //console.log(tus)
-    const tabsInfo = tus.map((tu)=>{
-        return <TU conf={sections_conf} data_tu={tu}  id={tu?.id}  id_tu={tu?.id} idOperon={idOperon} name={`${tu.name} - ${tu?.promoter?.name}`} />
+    const tabsInfo = tus.map((tu) => {
+        return <TU conf={sections_conf} data_tu={tu} id={tu?.id} id_tu={tu?.id} idOperon={idOperon} name={`${tu.name} - ${tu?.promoter?.name}`} isTab={isTab} />
     })
     return tabsInfo
 }
 
-function formInfoTabs(tus){
+function formInfoTabs(tus) {
     //console.log(tus)
-    const tabsInfo = tus.map((tu)=>{
+    const tabsInfo = tus.map((tu) => {
         return {
             "id": tu?.id,
             "name": `${tu.name} - ${tu?.promoter?.name}`,

@@ -17,6 +17,7 @@ export const All = ({ idOperon, conf }) => {
                 idOperon={idOperon}
                 id={conf?.tabs?.TUs?.id}
                 conf={conf?.tabs?.TUs}
+                isTab={false}
             />
             <AllCitations idOperon={idOperon} />
         </>

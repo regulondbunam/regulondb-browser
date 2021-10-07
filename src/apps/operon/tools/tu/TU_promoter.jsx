@@ -12,7 +12,7 @@ export const TUpromoter = ({ id_tu, data_tu, conf }) => {
             return null
         }
         return (
-            <div
+            <div style={{ marginLeft: "5%" }}
                 onMouseEnter={() => {
                     let gn = document.getElementById(`${data_tu?.promoter?.id}#tu_Canva${id_tu}/s`)
                     if (gn) {

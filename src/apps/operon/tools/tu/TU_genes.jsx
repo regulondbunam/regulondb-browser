@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 export const TUgenes = ({conf, data_tu, id_tu}) => {
     try {
         return (
-            <>
+            <article>
                 <h2>{conf?.title}</h2>
                 <p style={{ marginLeft: "5%" }} dangerouslySetInnerHTML={{ __html: conf?.description }} />
                 <div style={{ marginLeft: "5%" }}>
@@ -35,7 +35,7 @@ export const TUgenes = ({conf, data_tu, id_tu}) => {
                         })
                     }
                 </div>
-            </>
+            </article>
 
         )
     } catch (error) {
