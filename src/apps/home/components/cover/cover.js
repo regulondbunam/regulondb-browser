@@ -26,7 +26,7 @@ const HomeCover = ({
 
   switch (coverType) {
     case 'video':
-      displayed = Video(conf.url, _height)
+      displayed = Color(source)
       break
     case 'img':
     case 'image':
@@ -69,6 +69,7 @@ function Color(color) {
   )
 }
 
+// eslint-disable-next-line no-unused-vars
 function Video(videoUrl, height) {
   return (
     <CoverVideo url={videoUrl} height={height} />

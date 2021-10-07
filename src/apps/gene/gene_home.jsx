@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import GetAllGenes from "./webServices/allGenes/allGenes";
 import Table from "./components/gene_table";
 import { SpinnerCircle, IconButton, Button } from "../../components/ui-components/ui_components";
-const Home = ({ conf }) => {
+export default function Home({ conf }){
 
   const [_data, set_data] = useState()
   const [_pag, set_pag] = useState(0)
@@ -69,9 +69,6 @@ const Home = ({ conf }) => {
     </article>
   )
 };
-
-export default Home;
-
 
 function ContorlPagination({
   set_pag = () => { },
