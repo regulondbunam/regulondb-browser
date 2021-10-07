@@ -3,11 +3,11 @@
  * Falta etiqueta
  */
 import { stroke_validate, font_validate, color_validate } from "../../validation/v_draw";
-//import { label } from "./label";
+import { label } from "./label";
 
 export default function DrawTFBindingSite({
     id,
-    canva,
+    canvas,
     anchor,
     dna,
     separation = 0,
@@ -16,14 +16,14 @@ export default function DrawTFBindingSite({
     labelName = "Name",
     strand = "forward",
     color = "#fff",
-    opacity = 1,
+    opacity = 0.8,
     stroke,
     font,
     tooltip = "",
     conf,
     features
 }) {
-    if (!canva || !dna || !id | (leftEndPosition > rightEndPosition)) {
+    if (!canvas || !dna || !id | (leftEndPosition > rightEndPosition)) {
         return null;
     }
     stroke = stroke_validate(stroke, conf.stroke);
@@ -59,22 +59,25 @@ export default function DrawTFBindingSite({
     let posX = x + dnaX;
     let posY = dnaY - separation - tfH;
     // draw site
-    let tf_binding = canva.rect(tfW, tfH);
-    tf_binding.move(posX, posY).stroke(stroke).fill(color);
+    let tf_binding = canvas.rect(tfW, tfH);
+    tf_binding.move(posX, posY).stroke(stroke).fill(color).opacity(opacity);
     //Text properties
-    const textP = canva.text(labelName);
-    textP
-        .font({
-            family: "Arial",
-            size: proportion * 9,
-            separation: "middle"
-        })
-        .move(posX + tfH / 10, posY + tfW / 4);
+    const textP = label({
+        canvas: canvas,
+        element_h: tfH,
+        element_w: tfW,
+        element_x: posX,
+        element_y: posY,
+        font: font,
+        text: labelName
+    })
+    let sel = canvas.rect(font.size*labelName.length, tfH-5).move(textP.x(), textP.y()).fill("none").id(id+"/s");
     //group
-    const group = canva.group();
+    const group = canvas.group();
     group.id(id)
     group.add(tf_binding);
     group.add(textP);
+    group.add(sel);
     //strand effect
     if (strand === "reverse") {
         posY = dnaY + separation;
@@ -82,12 +85,12 @@ export default function DrawTFBindingSite({
     }
     group.attr({
         "data-tip": "",
-        "data-for": `${canva.node?.id}-${id}`
+        "data-for": `${canvas.node?.id}-${id}`
     });
 
     return {
         id: id,
-        canva: canva,
+        canvas: canvas,
         draw: group,
         posX: posX,
         posY: posY,

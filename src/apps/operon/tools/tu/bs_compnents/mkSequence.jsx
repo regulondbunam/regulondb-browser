@@ -1,119 +1,95 @@
-import React, { useEffect } from 'react'
+import React, { Component } from 'react'
 import { SVG } from "@svgdotjs/svg.js";
 
-export function MarkSequence(id,sequence) {
-    //di_seq_cav-RDBECOLIBSC03351
-    const id_drawPlace = `di_seq_${id}`
-    //console.log(`id_drawPlace`, id_drawPlace)
-    const id_canvas = `cav_${id}`
-    useEffect(() => {
-        const drawPlace = document.getElementById(id_drawPlace)
-        let canvas = document.getElementById(id_canvas);
-        if (drawPlace && canvas === null) {
-            const width = drawPlace.clientWidth;
-            canvas = SVG().addTo(`#${id_drawPlace}`).size(width, 30).id(id_canvas);
-            let px = 0
-            // eslint-disable-next-line
-            const seq = [].map.call(sequence, function (x) {
-                canvas.rect(10, 16).fill(sequenceColor[x]).move(px, 0)
-                canvas.text(x)
-                    .font({ size: '16px', family: "'Courier New',Courier,monospace", weight: "700" }).move(px, 0)
-                px += 10
-            });
-        }
-    })
-    if (sequence !== null) {
-        const width = sequence.length * 10
-        return (
+export default class MkSequence extends Component {
 
-            <div
-                id={id_drawPlace}
-                style={{
-                    height: "20px",
-                    width: width,
-                    left: "0",
-                    overflowY: "hidden",
-                    overflowX: "auto"
-                }}
-            >
-            </div>
-        );
-    }
-    return (
-        <div></div>
-    )
+    id_drawPlace = `div_seq_${this.props.id}`;
+    id_canvas = `canvas_seq_${this.props.id}`;
+    sequence = this.props.data_sequence?.sequence;
+    width = 0;
 
-}
 
-/**
- * sequenceInfo: {
-                            sequence: rs?.sequence,
-                            posL: rs?.leftEndPosition,
-                            posR: rs?.rightEndPosition
-                        },
- */
-
-export function MarkSequenceWithPositions({id,sequenceInfo}) {
-    const sequence = sequenceInfo?.sequence, posL = `${sequenceInfo?.posL}`, posR = `${sequenceInfo?.posR}`
-    const id_drawPlace = `di_seq_${id}`
-    const id_canvas = `cav-${id}`
-    useEffect(() => {
-        const drawPlace = document.getElementById(id_drawPlace)
-        let canvas = document.getElementById(id_canvas);
-        if (drawPlace && canvas === null) {
-            const width = drawPlace.clientWidth;
-            canvas = SVG().addTo(`#${id_drawPlace}`).size(width, 80).id(id_canvas);
-            let px = 0
-            let isLine = false
-            // eslint-disable-next-line
-            const seq = [].map.call(sequence, function (x) {
-                try {
-                    canvas.line(px,0,px,80).stroke({ color: '#dbdbdb', width: 1, linecap: 'round' })
-                if(sequenceCase[x] && !isLine){
-                    // is upercase
-                    isLine = true
-                    canvas.line(px,16,px,64).stroke({ color: '#00F', width: 1, linecap: 'round' })
-                    canvas.text(`${posL}`).font({ size: '16px', family: "'Courier New',Courier,monospace", weight: "700" }).move(px-(10*(posL.length/2)), 64)
-                }
-                if(isLine){
-                    if(sequenceCase[x]){
-                        canvas.line(px,16,px+10,16).stroke({ color: '#000', width: 1, linecap: 'round' })
-                    }else{
-                        isLine = false
-                        canvas.line(px,16,px,64).stroke({ color: '#00F', width: 1, linecap: 'round' })
-                        canvas.text(`${posR}`).font({ size: '16px', family: "'Courier New',Courier,monospace", weight: "700" }).move(px-(10*(posL.length/2)), 64)
+    componentDidMount() {
+        const drawPlace = document.getElementById(this.id_drawPlace)
+        let canvas = document.getElementById(this.id_canvas);
+        if (drawPlace && !canvas) {
+            if (this.props.positions) {
+                canvas = SVG().addTo(`#${this.id_drawPlace}`).size(this.width, 80).id(this.id_canvas);
+                let px = 0
+                let isLine = false
+                const posL = this.props.data_sequence?.posL;
+                const posR = this.props.data_sequence?.posR;
+                // eslint-disable-next-line
+                const seq = [].map.call(this.sequence, function (x) {
+                    try {
+                        canvas.line(px, 0, px, 80).stroke({ color: '#dbdbdb', width: 1, linecap: 'round' })
+                        if (sequenceCase[x] && !isLine) {
+                            // is upercase
+                            isLine = true
+                            canvas.line(px, 16, px, 64).stroke({ color: '#00F', width: 1, linecap: 'round' })
+                            canvas.text(`${posL}`).font({ size: '16px', family: "'Courier New',Courier,monospace", weight: "700" }).move(px, 64)
+                        }
+                        if (isLine) {
+                            if (sequenceCase[x]) {
+                                canvas.line(px, 16, px + 10, 16).stroke({ color: '#000', width: 1, linecap: 'round' })
+                            } else {
+                                isLine = false
+                                canvas.line(px, 16, px, 64).stroke({ color: '#00F', width: 1, linecap: 'round' })
+                                canvas.text(`${posR}`).font({ size: '16px', family: "'Courier New',Courier,monospace", weight: "700" }).move(px, 64)
+                            }
+                        }
+                        canvas.rect(10, 16).fill(sequenceColor[x]).move(px, 32)
+                        canvas.text(x).font({ size: '16px', family: "'Courier New',Courier,monospace", weight: "700" }).move(px, 32)
+                        px += 10
+                    } catch (error) {
+                        console.error("Error al dibujar secuencia", error)
                     }
-                }
-                canvas.rect(10, 16).fill(sequenceColor[x]).move(px, 32)
-                canvas.text(x).font({ size: '16px', family: "'Courier New',Courier,monospace", weight: "700" }).move(px, 32)
-                px += 10
-                } catch (error) {
-                    console.error("Error al dibujar secuencia",error)
-                }
-            });
+                });
+            } else {
+                canvas = SVG().addTo(`#${this.id_drawPlace}`).size(this.width, 30).id(this.id_canvas);
+                let px=0
+                // eslint-disable-next-line
+                const seq = [].map.call(this.sequence, function (x) {
+                    canvas.rect(10, 16).fill(sequenceColor[x]).move(px, 0)
+                    canvas.text(x)
+                        .font({ size: '16px', family: "'Courier New',Courier,monospace", weight: "700" }).move(px, 0)
+                    px += 10
+                });
+            }
+
         }
-    })
-    if (sequence !== null) {
-        return (
-
-            <div
-            id={id_drawPlace}
-                style={{
-                    height: "80px",
-                    width: "100%",
-                    left: "0",
-                    overflowY: "hidden",
-                    overflowX: "auto"
-                }}
-            >
-            </div>
-        );
     }
-    return (
-        <div></div>
-    )
 
+
+
+
+    render() {
+        if (this.sequence) {
+            this.width = this.sequence.length * 10
+            let height = "20px"
+            if(this.props.positions){
+                height = "80px"
+            }
+            return (
+                <div
+                    id={this.id_drawPlace}
+                    style={{
+                        height: height,
+                        width: this.width,
+                        left: "0",
+                        overflowY: "hidden",
+                        overflowX: "auto"
+                    }}
+                >
+                </div>
+            );
+        }
+        return (
+            <div></div>
+        )
+    }
 }
+
 
 const sequenceCase = {
     A: true,

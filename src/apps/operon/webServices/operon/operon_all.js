@@ -24,7 +24,12 @@ export function query(limit, page) {
             }
         }  
         pagination {
+            limit
+            currentPage
+            firstPage
+            lastPage
             totalResults
+            hasNextPage
         }
     }
   }`
@@ -33,7 +38,7 @@ export function query(limit, page) {
 const GetAllOperon = ({
     limit = 50,
     page = 0,
-    resoultsFound = () => { },
+    pagination = () => { },
     resoultsData = () => { },
     status = () => { }
 }) => {
@@ -49,6 +54,7 @@ const GetAllOperon = ({
                     try {
                         //console.log(data.getAllOperon.data)
                         resoultsData(data.getAllOperon.data)
+                        pagination(data.getAllOperon.pagination)
                         status('done')
                     } catch (error) {
                         status('error')
@@ -64,7 +70,7 @@ const GetAllOperon = ({
             status('error')
             console.error(error)
         }
-    },[loading, error, status, data, _res, resoultsData])
+    },[loading, error, status, data, _res, resoultsData, pagination])
     if(data){
         return <></>
     }

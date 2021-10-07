@@ -1,44 +1,72 @@
 import React, { useState, useEffect } from "react";
 import { SpinnerCircle } from "../ui-components/ui_components";
-import GetGeneInfo from "./webServices/getGeneInfo";
 import GetGeneticElements from "./webServices/getGeneticElements";
 import DrawingTracesTool from "./drawingTracesTool/drawing_traces_tool";
+import OperonContext from "./context/operon";
+import GeneContext from "./context/gene";
 
-const DttTool = ({ id, context = "DNA" }) => {
 
-    const [_data, set_data] = useState()
-    const [_state, set_state] = useState()
+const DttTool = ({
+    id,
+    context = "DNA",
+    leftEndPosition,
+    rightEndPosition,
+    custom_data_dtt
+}) => {
+
     const [_expand, set_expand] = useState(false)
     const [_data_dtt, set_data_dtt] = useState()
     const [_state_dtt, set_state_dtt] = useState()
-    const [_posLeft, set_posLeft] = useState()
-    const [_posRight, set_posRight] = useState()
+    const [_posLeft, set_posLeft] = useState(leftEndPosition)
+    const [_posRight, set_posRight] = useState(rightEndPosition)
 
     useEffect(() => {
         let drawPlace = document.getElementById(`divCanvas_${context}Context${id}`)
         if (drawPlace) {
-            //, , , id, true, true
-            DrawingTracesTool({
-                idDrawPlace: `divCanvas_${context}Context${id}`,
-                idCanvas: `idContextCanva${id}`,
-                dnaFeatures_data: _data_dtt,
-                auto_adjust: true,
-                covered: true,
-                covered_LeftPosition: _posLeft,
-                covered_RightPosition: _posRight
-            })
-            drawPlace.scrollTo(0, 250)
-            Resizer(drawPlace)
+            let dnaFeatures_data = null
+            switch (context.toLowerCase()) {
+                case "operon":
+                    dnaFeatures_data = OperonContext(leftEndPosition, rightEndPosition, _data_dtt)
+                    break;
+                case "gene":
+                    dnaFeatures_data = GeneContext(id,_data_dtt)
+                    break;
+                case "tu":
+                    if (custom_data_dtt) {
+                        dnaFeatures_data = custom_data_dtt
+                    }
+                    break
+                default:
+                    break;
+            }
+            //console.log(dnaFeatures_data)
+            if (dnaFeatures_data) {
+                DrawingTracesTool({
+                    idDrawPlace: `divCanvas_${context}Context${id}`,
+                    idCanvas: `${context}_Canva${id}`,
+                    dnaFeatures_data: dnaFeatures_data,
+                    auto_adjust: true,
+                    covered: true,
+                    covered_LeftPosition: _posLeft,
+                    covered_RightPosition: _posRight
+                })
+                drawPlace.scrollTo(0, 250)
+                Resizer(drawPlace)
+            } else {
+                console.error("dtt, no valid context")
+            }
+
         }
-    }, [id, context, _data_dtt, _posRight, _posLeft])
+    }, [id, context, _data_dtt, _posRight, _posLeft, leftEndPosition, rightEndPosition, custom_data_dtt])
 
 
-    if (_data_dtt) {
-        //console.log(_data_dtt)
-
+    if (custom_data_dtt) {
+        return (
+            <div style={{ overflow: "auto", height: "200px", resize: "vertical" }} id={`divCanvas_${context}Context${id}`} />
+        )
     }
 
-    if (_data?.leftEndPosition) {
+    if (_posLeft && _posRight) {
         let move = parseInt(`${(_posRight - _posLeft) * 0.15}`, 10)
         let zoom = parseInt(`${(_posRight - _posLeft) * 0.25}`, 10)
         return (
@@ -115,28 +143,33 @@ const DttTool = ({ id, context = "DNA" }) => {
                     </tr>
                     <tr>
                         <td style={{ textAlign: "center" }}>
+                            {
+                                context === "gene"
+                                    ? <button className="iconButton"
+                                        onClick={() => {
+                                            set_data_dtt(undefined)
+                                            set_expand(!_expand)
+                                            if (!_expand) {
+                                                set_posLeft(leftEndPosition - 500)
+                                                set_posRight(rightEndPosition)
+                                            } else {
+                                                set_posLeft(leftEndPosition)
+                                                set_posRight(rightEndPosition)
+                                            }
+                                        }}
+                                    >
+                                        {
+                                            !_expand
+                                                ? <i className='bx bx-expand' ></i>
+                                                : <i className='bx bx-exit-fullscreen' ></i>
+                                        }
+                                    </button>
+                                    : null
+                            }
                             <button className="iconButton"
                                 onClick={() => {
-                                    set_data_dtt(undefined)
-                                    set_expand(!_expand)
-                                    if (!_expand) {
-                                        set_posLeft(_data?.leftEndPosition - 500)
-                                        set_posRight(_data?.rightEndPosition)
-                                    } else {
-                                        set_data(undefined)
-                                    }
-                                }}
-                            >
-                                {
-                                    !_expand
-                                        ? <i className='bx bx-expand' ></i>
-                                        : <i class='bx bx-exit-fullscreen' ></i>
-                                }
-                            </button>
-                            <button className="iconButton"
-                                onClick={() => {
-                                    set_data_dtt(undefined)
-                                    set_data(undefined)
+                                        set_posLeft(leftEndPosition)
+                                        set_posRight(rightEndPosition)
                                 }}
                             >
                                 <i className='bx bx-reset' ></i>
@@ -147,49 +180,29 @@ const DttTool = ({ id, context = "DNA" }) => {
             </table>
         )
     }
+    return <></>
 
-    return (
-        <div>
-            {
-                _state !== "error"
-                    ? <SpinnerCircle />
-                    : <div>error to load Drawing Gene Information</div>
-            }
-            <GetGeneInfo id_gene={id}
-                resoultsData={(data) => {
-                    set_data(data)
-                    let pleft = data?.leftEndPosition
-                    set_posRight(data?.rightEndPosition + 2000)
-                    if (pleft < 1000) {
-                        set_posLeft(0)
-                    } else {
-                        set_posLeft(pleft - 1000)
-                    }
-                }}
-                status={(state) => set_state(state)}
-            />
-        </div>
-    )
 };
 
 export default DttTool;
 
 function Resizer(drawPlace) {
     let resizer = document.getElementById("resizer_div")
-    resizer.style.cursor = 'ns-resize';
-    resizer.addEventListener('mousedown', initResize, false);
+    if (resizer) {
+        resizer.style.cursor = 'ns-resize';
+        resizer.addEventListener('mousedown', initResize, false);
 
-    function initResize(e) {
-        window.addEventListener('mousemove', Resize, false);
-        window.addEventListener('mouseup', stopResize, false);
-     }
-     function Resize(e) {
-        drawPlace.style.height = (e.clientY - drawPlace.offsetTop) + 'px';
-     }
-     function stopResize(e) {
-         window.removeEventListener('mousemove', Resize, false);
-         window.removeEventListener('mouseup', stopResize, false);
-     }
-
+        function initResize(e) {
+            window.addEventListener('mousemove', Resize, false);
+            window.addEventListener('mouseup', stopResize, false);
+        }
+        function Resize(e) {
+            drawPlace.style.height = (e.clientY - drawPlace.offsetTop) + 'px';
+        }
+        function stopResize(e) {
+            window.removeEventListener('mousemove', Resize, false);
+            window.removeEventListener('mouseup', stopResize, false);
+        }
+    }
 }
 

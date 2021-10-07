@@ -27,7 +27,7 @@ export const Title = () => {
         <div id={"div_cover_operon_01"}>
             <Cover id="component_cover_operon_01" state={_state}>
                 {_isInfo ? "operon" : ""}
-                <h1 id="cover_operon_01" >{_title}</h1>
+                <h1 id="cover_operon_01" style={{marginBottom: "0"}} >{_title}</h1>
             </Cover>
         </div>
     )

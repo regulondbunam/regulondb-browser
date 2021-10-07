@@ -18,8 +18,17 @@ export default function DrawingTracesTool({
     if(!dnaFeatures_data || !idDrawPlace || !idCanvas){
         return null
     }
-    dnaFeatures_data = validation(dnaFeatures_data,covered,covered_LeftPosition,covered_RightPosition)
+    dnaFeatures_data = validation({
+        idCanvas: idCanvas,
+        dnaFeatures_data: dnaFeatures_data,
+        covered: covered,
+        covered_LeftPosition: covered_LeftPosition,
+        covered_RightPosition: covered_RightPosition
+    })
     dnaFeatures_data = ordering(dnaFeatures_data)
+    if(!dnaFeatures_data){
+        return null
+    }
     const CANVAS = canvas(idDrawPlace,idCanvas,dnaFeatures_data,CONF,auto_adjust)
     if(!CANVAS){
         console.error("build canvas error")
@@ -30,6 +39,6 @@ export default function DrawingTracesTool({
         console.error("build draw dna error")
         return null
     }
-    Draw(CANVAS,DNA,dnaFeatures_data,CONF)
+    Draw(CANVAS,DNA,dnaFeatures_data,CONF,idCanvas)
     //overlaping(dnaFeatures_data,CONF)
 }

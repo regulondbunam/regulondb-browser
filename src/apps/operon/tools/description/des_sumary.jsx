@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { SpinnerCircle } from '../../../../components/ui-components/ui_components';
 import { GetStatistics } from '../../webServices/operon_ws'
 
 export const Sumary = ({
@@ -6,23 +7,16 @@ export const Sumary = ({
 }) => {
     const [_data, set_data] = useState();
     const [_state, set_state] = useState();
-    let loading = false;
-    //console.log(_data)
-    switch (_state) {
-        case "loading":
-            loading = true
-            break;
-        case "error":
-            return <>error</>
-        case "done":
-            return <>{SumaryTable(_data)}</>
-        default:
-            break
+    if(_data){
+        //console.log(_data)
+        return Statistics(_data)
     }
     return (
         <div>
             {
-                loading ? <>loading...</> : null
+                _state !== "error"
+                    ? <SpinnerCircle />
+                    : <div>error to load Statistics</div>
             }
             <GetStatistics id_operon={idOperon}
                 resoultsData={(data) => { set_data(data) }}
@@ -33,35 +27,52 @@ export const Sumary = ({
 
 }
 
-function SumaryTable(data) {
-    //console.log(data)
+export default Sumary
+
+function Statistics(statistics) {
     return (
-        <div style={{marginLeft: "5%"}}>
-        <table style={{ tableLayout: "fixed", width: "auto", float: "left", display: "inline-block" }}>
-            <tbody>
-            {
-                Object.keys(data).map(function (key) {
-                    const test = key.match(/^_/);
-                    //console.log(test)
-                    if (data[key] === null || data[key].length <= 1 || test !== null) {
-                        return null;
+        <table className="table_auto table_vertical" style={{ paddingLeft: '5%' }} >
+            <thead>
+                <tr>
+                    {
+                        statistics?.transcriptionUnit
+                            ? <th>Transcription Unit</th>
+                            : null
                     }
-                    return (
-                        <tr key={`sumary_statistics_${key}`}>
-                            <td style={{ fontWeight: "bold" }}>{key}</td>
-                            <td>{data[key]}</td>
-                        </tr>
-                    )
-                })
-            }
+                    {
+                        statistics?.promoters
+                            ? <th>Promoters</th>
+                            : null
+                    }
+                    {
+                        statistics?.genes
+                            ? <th>Genes</th>
+                            : null
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {
+                        statistics?.transcriptionUnit
+                            ? <td style={{ textAlign: "center" }}>{statistics?.transcriptionUnit}</td>
+                            : null
+                    }
+                    {
+                        statistics?.promoters
+                            ? <td style={{ textAlign: "center" }}>{statistics?.promoters}</td>
+                            : null
+                    }
+                    {
+                        statistics?.genes
+                            ? <td style={{ textAlign: "center" }}>{statistics?.genes}</td>
+                            : null
+                    }
+                </tr>
             </tbody>
         </table>
-            
-        </div>
     )
 }
-
-export default Sumary
 
 /*
 

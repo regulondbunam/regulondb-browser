@@ -1,14 +1,18 @@
+
 import React from 'react'
-import {TUdescription} from './tu/TU_description'
-import {TUgenes} from './tu/TU_genes'
-import {TUpromoter} from './tu/TU_promoter'
-import {TUTerminators} from './tu/TU_terminator'
-import {TUrBS} from './tu/TU_rBS'
+import TUgraph from "./tu/TU_graph"
+import { TUdescription } from './tu/TU_description'
+import { TUgenes } from './tu/TU_genes'
+import { TUpromoter } from './tu/TU_promoter'
+import { TUTerminators } from './tu/TU_terminator'
+import { TUrBS } from './tu/TU_rBS'
+
 
 export const operon_TU = ({
-    id,
-    idOperon,
+    id_tu,
+    data_tu,
     conf,
+    isTab,
     name,
 }) => {
     const conf_description = conf?.tu_description
@@ -16,16 +20,25 @@ export const operon_TU = ({
     const conf_promoter = conf?.tu_promoter
     const conf_terminator = conf?.tu_terminator
     const conf_bindingsites = conf?.tu_bindingsites
-
-    if(idOperon){
+    //console.log(data_tu)
+    if (data_tu) {
         return (
-            <article>
-                <TUdescription id_tu={id} id_operon={idOperon} conf={conf_description} />
-                <TUgenes id_tu={id} id_operon={idOperon}conf={conf_genes} />
-                <TUpromoter id_tu={id} id_operon={idOperon} conf={conf_promoter} />
-                <TUTerminators id_tu={id} id_operon={idOperon} conf={conf_terminator} />
-                <TUrBS id_tu={id} id_operon={idOperon} conf={conf_bindingsites} />
-            </article>
+            <div>
+                <div className="sticky" style={{ zIndex: "1" }} >
+                    {
+                        isTab
+                            ? <nav><TUgraph data={data_tu} /></nav>
+                            : <article>
+                                <TUgraph data={data_tu} />
+                            </article>
+                    }
+                </div>
+                <TUdescription data_tu={data_tu} conf={conf_description} id_tu={id_tu} />
+                <TUgenes data_tu={data_tu} conf={conf_genes} id_tu={id_tu} />
+                <TUpromoter data_tu={data_tu} conf={conf_promoter} id_tu={id_tu} />
+                <TUTerminators data_tu={data_tu} conf={conf_terminator} id_tu={id_tu} />
+                <TUrBS id_tu={id_tu} data_tu={data_tu} conf={conf_bindingsites} />
+            </div>
         )
     }
     return (

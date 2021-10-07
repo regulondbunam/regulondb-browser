@@ -1,55 +1,26 @@
-import React, { useState } from 'react'
-import { GetInfo } from '../../webServices/tu_ws'
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { CitationsNote } from '../../../../components/citations/citations_note'
+import {CitationCONTEXT} from '../../../../components/citations/citations_provider'
 
-export const TUdescription = ({ id_operon,id_tu,conf }) => {
-    const [_data, set_data] = useState();
-    const [_state, set_state] = useState();
-    //let loading = false;
-    //console.log(_data)
-    switch (_state) {
-        case "loading":
-            //loading = true
-            break;
-        case "error":
-            return <>error</>
-        case "done":
-            return <Description data={_data} id_tu={id_tu} conf={conf} />
-        default:
-            break
-    }
-    if (id_tu) {
-        return (
-            <div>
-                loading...
-                <GetInfo id_operon={id_operon}
-                    resoultsData={(data) => { set_data(data) }}
-                    status={(state) => { set_state(state) }}
-                />
-            </div>
-        )
-    }
-    return <>no id</>
-}
 
-function Description({ data, id_tu, conf }) {
+export const TUdescription = ({conf, data_tu, id_tu }) => {
     try {
-        data = data.transcriptionUnits
-        const tu = data.find(element => element.id === id_tu);
         return (
-            <>
+            <article>
             <h2>{conf?.title}</h2>
                 <p style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{__html: conf?.description}} />
-                <h3>{tu?.name}</h3>
-                <p style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{ __html: tu?.note }} />
+                <h3>{data_tu?.name}</h3>
+                <p style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{ __html: CitationsNote(CitationCONTEXT,data_tu?.note) }} />
                 <div style={{marginLeft: "5%"}} >
                 <table style={{ tableLayout: "fixed", width: "auto" }} >
                     <tbody>
                         {
-                            notNull(tu?.synonyms,
+                            notNull(data_tu?.synonyms,
                             <tr>
                             <td style={{ fontWeight: "bold" }}>synonyms</td>
                             <td>{
-                                tu.synonyms.map((s)=>{
+                                data_tu.synonyms.map((s)=>{
                                     return ` ${s}`
                                 }).join(",")
                                 }</td>
@@ -57,10 +28,27 @@ function Description({ data, id_tu, conf }) {
                             )
                         }
                         {
-                             notNull(tu?.firstGene?.gene_id,
+                             notNull(data_tu?.firstGene?.gene_id,
                                 <tr>
                                 <td style={{ fontWeight: "bold" }}>firstGene</td>
-                                <td><a style={{paddingRight: '10px'}} key={`link_gene${tu?.firstGene?.gene_id}`} href={`/gene/${tu?.firstGene?.gene_id}`} >{tu?.firstGene?.gene_name}</a></td>
+                                <td>
+                                    <Link style={{paddingRight: '10px'}} key={`link_gene${data_tu?.firstGene?.gene_id}`} to={`/gene/${data_tu?.firstGene?.gene_id}`}
+                                    onMouseEnter={()=>{
+                                        let gn = document.getElementById(`${data_tu?.firstGene?.gene_id}#tu_Canva${id_tu}`)
+                                        if(gn){
+                                            gn.setAttribute("stroke","#00F");
+                                            gn.setAttribute("stroke-width", "5");
+                                        }
+                                    }}
+                                    onMouseLeave={()=>{
+                                        let gn = document.getElementById(`${data_tu?.firstGene?.gene_id}#tu_Canva${id_tu}`)
+                                        if(gn){
+                                            gn.setAttribute("stroke","");
+                                            gn.setAttribute("stroke-width", "0");
+                                        }
+                                    }}
+                                    >{data_tu?.firstGene?.gene_name}</Link>
+                                    </td>
                                 </tr>
                                 )
                         }
@@ -71,7 +59,7 @@ function Description({ data, id_tu, conf }) {
                 </table>
                 </div>
                 
-            </>
+            </article>
         )
     } catch (error) {
         console.error(error)
@@ -82,6 +70,7 @@ function Description({ data, id_tu, conf }) {
         </>
     )
 }
+
 
 function notNull(data,element) {
     //console.log(data)

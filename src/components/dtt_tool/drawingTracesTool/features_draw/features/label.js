@@ -14,7 +14,6 @@ export function label({
 }) {
   const label = canvas.text(text);
   var fontSize = font.size;
-  font.size = fontSize;
   label.font(font);
   if (!x) {
     x = element_x + element_w / 2 - label.length() / 2;

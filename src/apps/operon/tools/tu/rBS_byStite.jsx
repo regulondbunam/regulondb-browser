@@ -1,55 +1,39 @@
 import React from 'react'
-import { MarkSequence } from './bs_compnents/mkSequence'
+import MarkSequence  from './bs_compnents/mkSequence'
 //import AllCitations from '../../../../components/cits/Cits'
 
-export const RBSbyStite = ({ data, type = "" }) => {
-    //console.log(data)
-    switch (type) {
-        case "gene":
-            data = data.genes
-            if (data) {
-                //console.log(data)
-                return (
-                    <div>
-                        {
-                            data.map(gene => {
-                                return (rbsTable(gene, `Gene: ${gene.name}`, gene.id))
-                            })
-                        }
-                    </div>
-                )
+export function RBSbyStite(data_tu, id_tu, CitationCONTEXT) {
+    const PROMOTER = data_tu?.promoter
+    const GENES = data_tu?.genes
+    return (
+        <div>
+            {
+                RBSs(PROMOTER, id_tu)
             }
-            break;
-        case "promoter":
-            
-            data = data.promoter
-            if(data){
-                //console.log(data)
-                return rbsTable(data, `Promoter: ${data?.name}`, data.id)
+            {
+                data_tu?.genes
+                    ? GENES.map((gene,indx) => {
+                        return <div key={`rbss_${gene.id}_${indx}`}>
+                            {
+                                RBSs(gene, id_tu)
+                            }
+                        </div>
+                    })
+                    : null
             }
-            //console.log(data)
-            break;
-
-        case "regulator":
-            data = data.regulatorBindingSites
-            break;
-        default:
-            break;
-    }
-    return <></>
-
+        </div>
+    )
 }
 
-function rbsTable(data, name, key) {
-    const rbs = data?.regulatorBindingSites
-    //console.log(data)
+function RBSs(element, id_tu) {
+    const rbs = element?.regulatorBindingSites
     if (rbs.length > 0) {
         const sites = orderRIS(rbs)
         return (
-            <table key={`table-rbs-${key}`}>
+            <table key={`table-rbs-${id_tu}-${element.id}`}>
                 <thead>
                     <tr>
-                        <th style={tbTitle} colSpan="9" >{name}</th>
+                        <th style={tbTitle} colSpan="9" >{""}</th>
                     </tr>
                     <tr>
                         <th style={tbTitle} colSpan="2" >Regulator</th>
@@ -72,9 +56,28 @@ function rbsTable(data, name, key) {
                     {
                         sites.map((site, index) => {
                             return (
-                                <tr key={`tr-bs-${index}-${site["_id"]}`} >
+                                <tr key={`tr-bs-${index}-${site["_id"]}`} 
+                                onMouseEnter={() => {
+                                    let gn = document.getElementById(`${site["ri_id"]}#tu_Canva${id_tu}/s`)
+                                    if (gn) {
+                                        gn.setAttribute("stroke", "#00F");
+                                        gn.setAttribute("stroke-width", "2");
+                                    }
+                                }}
+                                onMouseLeave={() => {
+                                    let gn = document.getElementById(`${site["ri_id"]}#tu_Canva${id_tu}/s`)
+                                    if (gn) {
+                                        gn.setAttribute("stroke", "");
+                                        gn.setAttribute("stroke-width", "0");
+                                    }
+                                }}
+                                >
                                     {site.map((dt, i) => {
-                                        return <td key={`td-bs-<${index}-${i}`} >{dt}</td>
+                                        return (
+                                            <td key={`td-bs-<${index}-${i}`}>
+                                                {dt}
+                                            </td>
+                                        )
                                     })}
 
                                 </tr>
@@ -85,17 +88,17 @@ function rbsTable(data, name, key) {
             </table>
         )
     }
-    return <></>
 }
 
 function orderRIS(rbs) {
     //console.log(`rbs`, rbs)
     let sites = []
     rbs.map(bs => {
-        bs?.regulatoryInteractions.map(ri => {
+        bs?.regulatoryInteractions.map((ri,indx)=> {
             const rs = ri?.regulatorySite
             let site = []
             site["_id"] = rs?._id
+            site["ri_id"] = ri?._id
             site.push(bs?.regulator?.name)
             site.push(ri?.function)
             site.push(" ")
@@ -103,7 +106,9 @@ function orderRIS(rbs) {
             site.push(rs?.absolutePosition)
             site.push(rs?.leftEndPosition)
             site.push(rs?.rightEndPosition)
-            site.push(MarkSequence(`${rs?._id}-${ri?.function}`,rs?.sequence))
+            site.push(<MarkSequence id={`${rs?._id}-${ri?._id}sumarryInfo`} data_sequence={{
+                sequence: rs?.sequence, posL: rs?.leftEndPosition, posR: rs?.rightEndPosition
+            }} />)
             site.push("---")
             sites.push(site)
             return null

@@ -375,7 +375,7 @@ Ver: 0.0.28
 	z-index: 1;
   }
   
-  .dropdown-content a {
+  .dropdown-content a button {
 	color: black;
 	padding: 12px 16px;
 	text-decoration: none;
@@ -383,7 +383,23 @@ Ver: 0.0.28
   }
   
   .dropdown-content a:hover {
-	background-color: var(--color-rest);
+	background-color: var(--color-rest); 
+  }
+
+  .dropdown-button {
+	color: black;
+	background-color: var(--color-blue5);
+	padding: 5px 5px;
+	text-decoration: none;
+	display: block;
+	border: 0px solid var(--color-blue2);
+  }
+
+  .dropdown-button:hover {
+	background-color: var(--color-rest) !important; 
+	-webkit-box-shadow: 0px 0px 0px 0 #000000 !important;
+	-moz-box-shadow: 0px 0px 0px 0 #000000 !important;
+	box-shadow: 0px 0px 0px 0 #000000 !important; 
   }
   
   .dropdown:hover .dropdown-content {
@@ -405,8 +421,49 @@ Ver: 0.0.28
 	cursor: pointer;
 	border-radius: 50%;
   }
+  /* tab style */
+
+  .tabs{
+	background-color: #CADCE7;
+	padding-left: 10%;
+  	display: flow-root;
+	width: 100%;
+	padding-right: 1%;
+    box-shadow: inset -1px -10px 0px -6px var(--color-blue1);
+  }
+
+  .tabs button {
+	background-color: #ffffff;
+	margin-right: 1%;
+	color: #373737;
+	border-top: 1px solid #666666;
+	border-right: 1px solid #666666;
+	border-left: 1px solid #666666;
+	border-bottom: 3px solid var(--color-blue1);
+  }
+
+  /* Change background color of buttons on hover */
+  .tabs button:hover {
+	background-color: #ddd;
+  }
   
-  /* s */
+  /* Create an active/current tablink class */
+  .tabs button.active {
+	background-color: #ffffff;
+	color: #3D779B;
+	border-top: 3px solid var(--color-blue1);
+	border-right: 2px solid var(--color-blue1);
+	border-left: 2px solid var(--color-blue1);
+	border-bottom: 3px solid var(--color-rest);
+  }
+  
+  /* div effects */
+
+  div.sticky {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+  }
   
   /*
   history version

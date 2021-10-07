@@ -3,7 +3,8 @@
     "operon_main": {
       "id": "page_main",
       "title": "Operon Site",
-      "description": "<p>Description of operon home page</p>",
+      "subtitle": "All operons",
+      "description": "<p>A functional genetic unit consisting of a complex group of genes capable of exerting regulation of their own expression by means of the substrates with which the proteins encoded by their genes interact.</p>",
       "conf": {
         "listOperons": true
       }
@@ -17,14 +18,12 @@
         "all": {
           "id": "tab-all",
           "name": "All",
-          "title": "All",
-          "description": "<p>Description of the all tab</p>",
           "disabled": false
         },
         "description": {
           "id": "tab-description",
           "name": "Description",
-          "title": "Description",
+          "title": "Operon General Context",
           "description": "Operon Description tab description",
           "sections": {
             "sumary": {

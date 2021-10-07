@@ -11,10 +11,31 @@ export function query(id_operon) {
                     _id
                     operon{
                         name
+                        regulationPositions {
+                            leftEndPosition
+                            rightEndPosition
+                          }
                     }
                     transcriptionUnits{
                         id
                     }
+                    allCitations {
+                        publication {
+                          id
+                          authors
+                          pmid
+                          citation
+                          url
+                          title
+                          year
+                        }
+                        evidence {
+                          id
+                          name
+                          code
+                          type
+                        }
+                      }
                 }
                 pagination{
                     totalResults

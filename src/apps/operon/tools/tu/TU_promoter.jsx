@@ -1,130 +1,137 @@
-import React, { useState } from 'react'
-import { GetPromoter } from '../../webServices/tu_ws'
+import React from 'react'
 import { MarkSequencePromoter } from './promoter_components/mkSequence'
+import { CitationsNote } from '../../../../components/citations/citations_note'
+import { CitationCONTEXT } from '../../../../components/citations/citations_provider'
+import { ParagraphCitations } from '../../../../components/citations/citations';
+import { Link } from 'react-router-dom';
 
-export const TUpromoter = ({ id_tu, id_operon, conf }) => {
-    const [_data, set_data] = useState();
-    const [_state, set_state] = useState();
-    //let loading = false;
-    //console.log(_data)
-    switch (_state) {
-        case "loading":
-            //loading = true
-            break;
-        case "error":
-            return <>error</>
-        case "done":
-            return <Genes data={_data} id_tu={id_tu} conf={conf} />
-        default:
-            break
-    }
-    if (id_tu) {
-        return (
-            <div>
-                loading...
-                <GetPromoter id_operon={id_operon}
-                    resoultsData={(data) => { set_data(data) }}
-                    status={(state) => { set_state(state) }}
-                />
-            </div>
-        )
-    }
-    console.error("TU_promoter no id")
-    return <>no - id</>
-}
-
-function Genes({ data, id_tu, conf }) {
+export const TUpromoter = ({ id_tu, data_tu, conf }) => {
+    //console.log(data_tu?.promoter)
     try {
-        const strand = data?.operon?.strand
-        data = data.transcriptionUnits
-        const tu = data.find(element => element.id === id_tu);
-        //console.log(tu)
+        if (!data_tu?.promoter) {
+            return null
+        }
         return (
-            <>
-            <h2>{conf?.title}</h2>
-                <p style={{marginLeft: "5%"}} dangerouslySetInnerHTML={{__html: conf?.description}} />
+            <div style={{ marginLeft: "5%" }}
+                onMouseEnter={() => {
+                    let gn = document.getElementById(`${data_tu?.promoter?.id}#tu_Canva${id_tu}/s`)
+                    if (gn) {
+                        gn.setAttribute("stroke", "#00F");
+                        gn.setAttribute("stroke-width", "2");
+                    }
+                }}
+                onMouseLeave={() => {
+                    let gn = document.getElementById(`${data_tu?.promoter?.id}#tu_Canva${id_tu}/s`)
+                    if (gn) {
+                        gn.setAttribute("stroke", "");
+                        gn.setAttribute("stroke-width", "0");
+                    }
+                }}
+            >
+                <h2>{conf?.title}</h2>
+                <p style={{ marginLeft: "5%" }} dangerouslySetInnerHTML={{ __html: conf?.description }} />
                 <div style={{ marginLeft: "5%" }}>
-                <h3>{tu?.promoter?.name}</h3>
-                {
-                    notNull(tu?.promoter?.note,
-                        <p dangerouslySetInnerHTML={{ __html: tu?.promoter?.note }} />
-                    )
-                }
-                <table>
-                    <tbody>
-                        {
-                            notNull(tu?.promoter?.id,
-                                <tr>
-                                    <td style={{ fontWeight: "bold" }}>ID</td>
-                                    <td>{tu?.promoter?.id}</td>
-                                </tr>
-                            )
-                        }
-                        {
-                            notNull(tu?.promoter?.name,
-                                <tr>
-                                    <td style={{ fontWeight: "bold" }}>Name</td>
-                                    <td>{tu?.promoter?.name}</td>
-                                </tr>
-                            )
-                        }
-                        {
-                            notNull(tu?.promoter?.synonyms,
-                                <tr>
-                                    <td style={{ fontWeight: "bold" }}>synonyms</td>
-                                    <td>{
-                                        tu?.promoter?.synonyms.map((s) => {
-                                            return ` ${s}`
-                                        }).join(",")
-                                    }</td>
-                                </tr>
-                            )
-                        }
-                        {
-                            notNull(tu?.promoter?.bindsSigmaFactor,
-                                <tr>
-                                    <td style={{ fontWeight: "bold" }}>bindsSigmaFactor</td>
-                                    <td>{tu?.promoter?.bindsSigmaFactor?.sigmaFactor_name}</td>
-                                </tr>
-                            )
-                        }
-                        {
-                            notNull(tu?.promoter?.sequence,
-                                <tr>
-                                    <td colSpan="2" style={{ fontWeight: "bold" }}>Sequence</td>
-                                </tr>
-                            )
-                        }
-                        {
-                            notNull(tu?.promoter?.sequence,
-                                <tr>
-                                    <td colSpan="2" >
-                                        <div
-                                            style={{
-                                                width: "100%",
-                                                overflow: "auto"
-                                            }}
-                                        >
-                                            <MarkSequencePromoter sequence={tu?.promoter?.sequence} id={tu?.promoter?.id} strand={strand} />
-                                        </div>
-                                    </td>
-                                </tr>
-                            )
-                        }
-                    </tbody>
-                </table>
-            </div> 
-            </>
+                    <h3>{data_tu?.promoter?.name}</h3>
+                    {
+                        notNull(data_tu?.promoter?.note,
+                            <p dangerouslySetInnerHTML={{ __html: CitationsNote(CitationCONTEXT, data_tu?.promoter?.note) }} />
+                        )
+                    }
+                    <table>
+                        <tbody>
+                            {
+                                notNull(data_tu?.promoter?.id,
+                                    <tr>
+                                        <td>
+                                            <p style={{ fontWeight: "bold" }}>ID</p>
+                                            <p>{data_tu?.promoter?.id}</p>
+                                        </td>
+                                    </tr>
+                                )
+                            }
+                            {
+                                notNull(data_tu?.promoter?.name,
+                                    <tr>
+                                        <td>
+                                            <p style={{ fontWeight: "bold" }}>Name</p>
+                                            <p>{data_tu?.promoter?.name}</p>
+                                        </td>
+                                    </tr>
+                                )
+                            }
+                            {
+                                notNull(data_tu?.promoter?.synonyms,
+                                    <tr>
+                                        <td>
+                                            <p style={{ fontWeight: "bold" }}>synonyms</p>
+                                            <p>{
+                                                data_tu?.promoter?.synonyms.map((s) => {
+                                                    return ` ${s}`
+                                                }).join(",")
+                                            }</p>
+                                        </td>
+                                    </tr>
+                                )
+                            }
+                            {
+                                notNull(data_tu?.promoter?.sequence,
+                                    <tr>
+                                        <td colSpan="2" style={{ fontWeight: "bold" }}>Sequence</td>
+                                    </tr>
+                                )
+                            }
+                            {
+                                notNull(data_tu?.promoter?.sequence,
+                                    <tr>
+                                        <td colSpan="2" >
+                                            <div
+                                                style={{
+                                                    width: "100%",
+                                                    overflow: "auto"
+                                                }}
+                                            >
+                                                <MarkSequencePromoter sequence={data_tu?.promoter?.sequence} id={data_tu?.promoter?.id} strand={data_tu?.promoter?.strand} />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )
+                            }
+                            {
+                                notNull(data_tu?.promoter?.citations,
+                                    <tr>
+                                        <td colSpan="2" style={{ fontWeight: "bold" }}>
+                                            <p>Citations: </p>
+                                            <ParagraphCitations CitationCONTEXT={CitationCONTEXT} citations={data_tu?.promoter?.citations} />
+                                        </td>
+                                    </tr>
+                                )
+                            }
+                            {
+                                notNull(data_tu?.promoter?.bindsSigmaFactor,
+                                    <tr>
+                                        <td>
+                                            <p style={{ fontWeight: "bold" }}>Binds sigma factor:</p>
+                                            <p><Link to={`/sigmaFactor/${data_tu?.promoter?.bindsSigmaFactor?.sigmaFactor_id}`} >{data_tu?.promoter?.bindsSigmaFactor?.sigmaFactor_name}</Link></p>
+                                            <p>citations: <ParagraphCitations CitationCONTEXT={CitationCONTEXT} citations={data_tu?.promoter?.bindsSigmaFactor?.citations} /></p>
+                                        </td>
+                                    </tr>
+                                )
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         )
     } catch (error) {
         console.error(error)
     }
-    return <>no promoters</>
+    return <></>
 }
 
+
 function notNull(data, element) {
-    
-    if(data === undefined){
+
+    if (data === undefined) {
         return null
     }
     if (data === null || data.length < 1 || data === "") {

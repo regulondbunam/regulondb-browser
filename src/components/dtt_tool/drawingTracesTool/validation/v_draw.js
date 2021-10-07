@@ -36,6 +36,9 @@ export function color_validate(color, defColor = "#000000") {
 }
 
 export function stroke_define(feature) {
+  if(feature?.stroke){
+    return feature.stroke
+  }
   return {
     color: rgb_to_rgbFormat(feature?.lineRGBColor),
     width: feature?.lineWidth,
@@ -58,6 +61,9 @@ export function rgb_to_rgbFormat(rgb) {
 }
 
 export function opacity_define(feature) {
+  if(feature?.opacity){
+    return feature?.opacity
+  }
   let op = 1;
   if (feature.OverlapObjects !== []) {
     op = 0.7;
