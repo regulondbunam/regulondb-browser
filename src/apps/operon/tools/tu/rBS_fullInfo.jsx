@@ -38,8 +38,10 @@ export default function RBS_full(data_tu, id_tu, Citation_CONTEXT) {
 }
 
 function Promoter_RBSs(promoter, id_tu) {
-    const RBS = promoter?.regulatorBindingSites
-    //console.log(RBS)
+    let RBS = promoter?.regulatorBindingSites
+    if(!RBS){
+        return <></>
+    }
     return (
         <div>
             {
