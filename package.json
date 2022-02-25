@@ -9,7 +9,7 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "apollo-boost": "^0.4.9",
-    "boxicons": "^2.0.9",
+    "boxicons": "^2.1.1",
     "cytoscape": "^3.19.1",
     "cytoscape-dagre": "^2.3.2",
     "cytoscape-popper": "^2.0.0",
