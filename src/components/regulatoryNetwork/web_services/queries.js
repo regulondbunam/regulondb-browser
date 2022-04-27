@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 export const getNetwork = (id) => {
   return gql`
     {
-      getNodesOf(object_id: ["${id}"]) {
+      getNodesOf(objectId: ["${id}"]) {
         _id
         name
         type

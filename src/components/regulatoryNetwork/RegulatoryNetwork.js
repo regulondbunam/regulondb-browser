@@ -7,7 +7,7 @@ import Style from "./RegulatoryNetwork.module.css";
 import { getNetwork } from "./web_services/queries";
 import { FormatData } from "./web_services/structuringData";
 
-function RegulatoryNetwork({ id_regulon = "RDBECOLITFC00123" }) {
+function RegulatoryNetwork({ id_regulon }) {
   const [zoom, setZoom] = useState();
   const [layout, setLayout] = useState("grid");
   const [node, setNode] = useState(id_regulon);
