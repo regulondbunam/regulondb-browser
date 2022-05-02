@@ -12,7 +12,7 @@
                 {
                     "id": "dtt-browsing",
                     "title": "Drawing Traces Tool",
-                    "state": "disabled",
+                    "state": "enabled",
                     "link" : "/dtt"
                 },
                 {

@@ -1,8 +1,8 @@
 {
     "title":"The RegulonDB Browser",
     "name": "RegulonDB Browser",
-    "subtitle":"Escherichia coli K-12 <br/>Transcriptional Regulatory Network",
-    "description": "Escherichia coli K-12 <br/> Transcriptional Regulatory Network",
+    "subtitle":"",
+    "description": "",
     "appName": "RegulonDB Browser",
     "version": "0.6.0",
     "cover":{

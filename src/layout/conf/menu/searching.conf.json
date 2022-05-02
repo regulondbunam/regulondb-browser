@@ -60,6 +60,12 @@
       "type": "SUBMENU",
       "options": [
         {
+          "id": "ht-browser",
+          "title": "High Throughput Collection",
+          "state": "enabled",
+          "link" : "/ht"
+        },
+        {
           "id": "coexpression-browsing",
           "title": "Coexpression",
           "state": "disabled",

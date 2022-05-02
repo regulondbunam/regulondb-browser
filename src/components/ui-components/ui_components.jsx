@@ -12,6 +12,7 @@ import { Image, Card, Modal, IntelligentTable } from "./output/output";
 import { Cover } from "./web/cover/cover";
 import { Tabs } from "./web/tab/tabs";
 import Header from "./web/layout/header";
+import TableI from "./output/table/table"
 
 import SpinnerCircle from "./web/spinners/circle"
 
@@ -30,6 +31,7 @@ export {
   Card,
   Cover,
   Tabs,
+  TableI,
   Modal,
   IntelligentTable,
   SpinnerCircle
