@@ -54,7 +54,7 @@ export default function List({ datasetType, experimentType }) {
       try {
         (async () => {
           set_state("loading")
-          await fetch(`${process.env.REACT_APP_PROSSES_SERVICE}wdps/jsontable`, {
+          await fetch(`${process.env.REACT_APP_PROSSES_SERVICE}/jsontable`, {
             method: 'POST',
             headers: {
               'Accept': 'application/json',

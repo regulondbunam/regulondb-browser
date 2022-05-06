@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react'
+import { Link } from 'react-router-dom';
 import { TableI } from "../../../../../../../components/ui-components/ui_components"
 
 export default function TTS({ data }) {
@@ -93,7 +94,7 @@ function linkGenes(genes = []) {
         <div >
             {
                 genes.map((gen) => {
-                    return <a key={gen._id} style={{ marginLeft: "5px" }} href={`http://regulondb.ccg.unam.mx/search?term=${gen.name}&organism=ECK12&type=gene`} target="_blank" rel="noreferrer">{gen.name}</a>
+                    return <Link key={gen._id} style={{ marginLeft: "5px" }} to={`/gene/${gen._id}`} >{gen.name}</Link>    
                 })
             }
         </div>
