@@ -1,6 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import ExternalRef from './externalRef'
 import Note from './note'
+
 export default function TranscriptionFactor({objectsTested}) {
   return (
     <div style={{ marginLeft: "5%" }} id={`dataset_objTested`} >
@@ -14,8 +16,8 @@ export default function TranscriptionFactor({objectsTested}) {
                                 <p>
                                 Genes:
                                 {
-                                    obj.genes.map(gene=>{
-                                        return  <a key={gene._id} style={{ marginLeft: "5px" }} href={`http://regulondb.ccg.unam.mx/search?term=${gene.name}&organism=ECK12&type=gene`} target="_blank" rel="noreferrer">{gene.name}</a>
+                                    obj.genes.map(gen=>{
+                                        return <Link key={gen._id} style={{ marginLeft: "5px" }} to={`/gene/${gen._id}`} >{gen.name}</Link>
                                     })
                                 }
                                 </p>
