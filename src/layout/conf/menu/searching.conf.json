@@ -90,13 +90,13 @@
           "link" : "/tf"
         },
         {
-          "id": "tf-Matrix-browsing",
+          "id": "tf-Matrix-browsing-family",
           "title": "Transcription Factor Family",
           "state": "disabled",
           "link" : "/tf/family"
         },
         {
-          "id": "tf-Matrix-browsing",
+          "id": "tf-Matrix-browsing-mtrix",
           "title": "TF-Matrix",
           "state": "disabled",
           "link" : "/tf/matrix"
@@ -130,7 +130,7 @@
           "link" : "/tutorial/gettingStarted/regulondb"
         },
         {
-          "id": "gsurdb",
+          "id": "gsurdb_guide",
           "title": "Guide",
           "state": "disabled",
           "link" : "/guide"

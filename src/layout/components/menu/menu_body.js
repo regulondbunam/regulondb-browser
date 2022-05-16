@@ -15,7 +15,12 @@ const MenuBody = ({ menuData, id, close }) => {
                                         item.options.map((itemm) => {
                                             return (
                                                 <div key={itemm.id} style={{ paddingTop: "5%", paddingBottom: "1%" }}>
-                                                    <a style={setStyleLink(itemm.id,itemm.state)} target={itemm.target} href={itemm.link}>{itemm.title}</a>
+                                                    {
+                                                        itemm.state !== "disabled" 
+                                                        ?<a style={setStyleLink(itemm.id,itemm.state)} target={itemm.target} href={itemm.link}>{itemm.title}</a>
+                                                        :<p style={setStyleLink(itemm.id,itemm.state)} target={itemm.target} href={itemm.link}>{itemm.title}</p>
+                                                    }
+                                                    
                                                 </div>
                                             )
                                         })
@@ -25,7 +30,11 @@ const MenuBody = ({ menuData, id, close }) => {
                         case "LINK":
                             return (
                             <div key={item.id} style={styleSubmenu}>
-                                <a style={setStyleLink(item.id,item.state)} target={item.target} href={item.link}>{item.title}</a>
+                                {
+                                    item.state !== "disabled"
+                                    ?<p style={setStyleLink(item.id,item.state)} target={item.target} href={item.link}>{item.title}</p>
+                                    :<p style={setStyleLink(item.id,item.state)} target={item.target} href={item.link}>{item.title}</p>
+                                }
                             </div>)
                         case "CARD":
                             return (<div></div>)
