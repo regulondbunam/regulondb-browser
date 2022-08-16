@@ -51,6 +51,8 @@ export default function Motif({ motifs }) {
     return motifSequences;
   }, [motifs]);
 
+  
+
   return (
     <div>
       <div>
@@ -59,14 +61,23 @@ export default function Motif({ motifs }) {
       <div style={{overflow: "auto"}} >
         <div className="motif_head">
           <div className="motif_head_note">Note</div>
-          <div className="motif_head_type">type</div>
-          <div className="motif_head_sequence">sequence</div>
+          <div className="motif_head_type">Position</div>
+          <div className="motif_head_sequence">Sequence</div>
         </div>
         {motifSequences.map((motif, index) => {
+          let positions = "---"
+
+          if(motif.leftEndPosition){
+            if(motif.rightEndPosition === motif.leftEndPosition){
+                positions = motif.leftEndPosition
+            }else{
+              positions = motif.leftEndPosition + "-" + motif.rightEndPosition
+            }
+          }
           return (
             <div key={index} className="motif_row">
               <div className="motif_row_note">{motif.note}</div>
-              <div className="motif_row_type">{motif.type}</div>
+              <div className="motif_row_type">{positions}</div>
               <div className="motif_row_sequence">{motif.sequenceComplete}</div>
             </div>
           );
