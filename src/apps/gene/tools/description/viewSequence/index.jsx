@@ -66,7 +66,7 @@ const GenebankModal = React.forwardRef((props, ref) => {
       const blob = new Blob([e.innerText]);
       const element = document.createElement("a");
       element.href = window.URL.createObjectURL(blob);
-      element.download = `${title}.fasta`;
+      element.download = `${title}.txt`;
       document.body.appendChild(element);
       element.click();
       element.remove();
@@ -123,7 +123,7 @@ const FastaModal = React.forwardRef((props, ref) => {
       const blob = new Blob([e.innerText]);
       const element = document.createElement("a");
       element.href = window.URL.createObjectURL(blob);
-      element.download = `${title}.fasta`;
+      element.download = `${title}.txt`;
       document.body.appendChild(element);
       element.click();
       element.remove();
