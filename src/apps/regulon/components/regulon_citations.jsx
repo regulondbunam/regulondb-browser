@@ -1,6 +1,6 @@
 import React from 'react'
-import { TableCitationContext } from '../../../components/citations/citations'
-import { CitationCONTEXT } from '../../../components/citations/citations_provider'
+import { TableCitationContext } from './citations/citations'
+import { CitationCONTEXT } from './citations/citations_provider'
 
 export default function Citations() {
     return (

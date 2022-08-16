@@ -1,7 +1,7 @@
 import React from 'react'
 import { MarkSequence } from './bs_compnents/mkSequence'
-import { ParagraphCitations } from '../../../../../components/citations/citations'
-import { CitationCONTEXT } from '../../../../../components/citations/citations_provider'
+import { ParagraphCitations } from '../../../components/citations/citations'
+import { CitationCONTEXT } from '../../../components/citations/citations_provider'
 export function RBSbyStite({ rbs = {
     id: "",
     function: "",

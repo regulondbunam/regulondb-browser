@@ -1,6 +1,6 @@
 import React, { useContext, useMemo } from 'react'
 import { OperonCONTEXT } from '../../components/context/operon_provider'
-import DttTool from '../../../../components/dtt_tool/dttTool'
+import DttTool from '../../components/dtt_tool/dttTool'
 
 export default function TUgraph({ data }) {
     const { operonContextElements } = useContext(OperonCONTEXT)

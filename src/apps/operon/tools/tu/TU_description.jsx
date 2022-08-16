@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { CitationsNote } from '../../../../components/citations/citations_note'
-import {CitationCONTEXT} from '../../../../components/citations/citations_provider'
+import { CitationsNote } from '../../components/citations/citations_note'
+import {CitationCONTEXT} from '../../components/citations/citations_provider'
 
 
 export const TUdescription = ({conf, data_tu, id_tu }) => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { gql } from "apollo-boost";
+import { gql } from  "@apollo/client";
 //import { helmetJsonLdProp } from "react-schemaorg";
 //import { Helmet } from 'react-helmet-async';
 import { useQuery } from '@apollo/react-hooks';

@@ -1,5 +1,6 @@
 import Cover from './components/cover/cover'
-import SearchTool from '../search/tools/search_box'
+//import SearchTool from '../search/tools/search_box'
+import InputSearch from '../search/InputSearch'
 import LinksInfo from './conf/linksCover.json'
 
 const links = LinksInfo.links
@@ -15,7 +16,7 @@ const CoverHome = ({
                 <h2 style={styleSubtitle} dangerouslySetInnerHTML={{__html: conf.subtitle}} />
                 <br/>
                 <br/>
-                <SearchTool styleBox={styleBox}/>
+                <InputSearch />
                 <br/>
                 <br/>
                 <div>

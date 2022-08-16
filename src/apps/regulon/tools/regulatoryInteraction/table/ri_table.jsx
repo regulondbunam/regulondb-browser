@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { ParagraphCitations } from '../../../../../components/citations/citations';
-import { CitationCONTEXT } from '../../../../../components/citations/citations_provider';
+import { ParagraphCitations } from '../../../components/citations/citations';
+import { CitationCONTEXT } from '../../../components/citations/citations_provider';
 
 export default function Table({ data = [] }) {
 

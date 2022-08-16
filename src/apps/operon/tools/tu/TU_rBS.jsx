@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { RBSbyStite } from "./rBS_byStite";
 import RBS_fullInfo from './rBS_fullInfo'
-import { CitationCONTEXT } from '../../../../components/citations/citations_provider';
+import { CitationCONTEXT } from '../../components/citations/citations_provider';
 
 export const TUrBS = ({ id_tu, data_tu, conf }) => {
     const [_view, set_view] = useState("Full Information");

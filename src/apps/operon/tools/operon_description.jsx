@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Sumary from './description/des_sumary'
 import { SpinnerCircle } from '../../../components/ui-components/ui_components'
-import DttTool from '../../../components/dtt_tool/dttTool'
+import DttTool from '../components/dtt_tool/dttTool'
 import { GetInfo } from '../webServices/operon_ws'
 
 export const Description = ({ id, idOperon, conf, isTUviews = true }) => {

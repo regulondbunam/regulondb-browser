@@ -1,8 +1,8 @@
 import React from 'react'
 import { MarkSequencePromoter } from './promoter_components/mkSequence'
-import { CitationsNote } from '../../../../components/citations/citations_note'
-import { CitationCONTEXT } from '../../../../components/citations/citations_provider'
-import { ParagraphCitations } from '../../../../components/citations/citations';
+import { CitationsNote } from '../../components/citations/citations_note'
+import { CitationCONTEXT } from '../../components/citations/citations_provider'
+import { ParagraphCitations } from '../../components/citations/citations';
 import { Link } from 'react-router-dom';
 
 export const TUpromoter = ({ id_tu, data_tu, conf }) => {

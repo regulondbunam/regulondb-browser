@@ -5,7 +5,7 @@ import { Home } from "./regulon_home"
 import ValidateID from './webServices/regulon/validate'
 import CONF from "./conf/regulon.conf.json"
 import Info from './regulon_info';
-import { CitationsProvider } from '../../components/citations/citations_provider'
+import { CitationsProvider } from './components/citations/citations_provider'
 
 
 export default function Regulon() {

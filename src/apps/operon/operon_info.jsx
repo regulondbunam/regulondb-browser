@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Tabs from "./components/operon_tabs";
-import Conf from './conf/confRaw.conf'
+import conf from './conf/operon.conf.json'
 
 export const Info = ({ id, data, tuId, nTUs}) => {
-    const [_conf, set_conf] = useState()
 
 
-    if (id && _conf) {
+
+    if (id && conf) {
         return (
             <div>
-                <Tabs tuId={tuId} data={data[0].operon} id_operon={id} nTUs={nTUs} confJSON={_conf} />
+                <Tabs tuId={tuId} data={data[0].operon} id_operon={id} nTUs={nTUs} confJSON={conf} />
             </div>
         )
 
@@ -22,11 +22,6 @@ export const Info = ({ id, data, tuId, nTUs}) => {
             </div>
         )
     }
-    return (
-        <div>
-            <Conf setConf={(conf)=>{set_conf(conf)}} />
-        </div>
-    )
 
 }
 

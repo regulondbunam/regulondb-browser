@@ -1,9 +1,12 @@
-import ApolloClient from 'apollo-boost';
+import {
+    ApolloClient,
+    InMemoryCache,
+  } from "@apollo/client";
 
-// url web service GraphQL
 const client = new ApolloClient({
     uri: process.env.REACT_APP_WEB_SERVICE_URL,
-});
+    cache: new InMemoryCache()
+  });
 
 
 export default client;

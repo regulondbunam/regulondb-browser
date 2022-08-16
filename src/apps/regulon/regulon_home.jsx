@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react'
 import GetAllRegulon from './webServices/getAllRegulon/getAllRegulon'
 import {IntelligentTable} from "../../components/ui-components/ui_components"
 import {formatData} from './components/regulon_formatDataHomeTable'
-import {useHistory} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 /**
  * 
@@ -17,13 +17,12 @@ export function Home({conf}) {
     const [_state, set_state] = useState("done")
     // eslint-disable-next-line no-unused-vars
     const [_title, set_title] = useState(conf?.title);
-    let history = useHistory();
-
+    let navigate = useNavigate();
     
 
     useEffect(() => {
         function go(id) {
-            history.push(`/regulon/${id}`)
+            navigate(`/regulon/${id}`)
         }
 
         if(_data){
@@ -41,7 +40,7 @@ export function Home({conf}) {
             });
             COVER.dispatchEvent(COVER_REACTION);
         }
-    },[set_dataTable,_data,_state,_title, history])
+    },[set_dataTable,_data,_state,_title, navigate])
 
     if(_data){
         return(

@@ -6,7 +6,8 @@ export function validateElements(dnaFeatures_data = []) {
     return null;
   }
   let features = [];
-  dnaFeatures_data.map((feature, inx) => {
+  dnaFeatures_data.map((element, inx) => {
+    let feature = {...element}
     if (feature?._id) {
       if (feature?.objectType) {
         if (!confElements[feature?.objectType]) {

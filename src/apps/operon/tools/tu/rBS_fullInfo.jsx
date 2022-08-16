@@ -1,7 +1,7 @@
 import React from 'react'
 import MkSequence from "./bs_compnents/mkSequence";
-import { CitationsNote } from '../../../../components/citations/citations_note'
-import { ParagraphCitations } from '../../../../components/citations/citations';
+import { CitationsNote } from '../../components/citations/citations_note'
+import { ParagraphCitations } from '../../components/citations/citations';
 //import { IconButton } from '../../../../components/ui-components/ui_components'
 
 let CitationCONTEXT

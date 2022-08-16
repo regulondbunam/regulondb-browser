@@ -1,4 +1,4 @@
-import { gql } from "apollo-boost";
+import { gql } from '@apollo/client';
 
 export const query_GET_PHRASE_OF = gql`query GetPhraseOf($id: [String]){
     getPhraseOf(id: $id){

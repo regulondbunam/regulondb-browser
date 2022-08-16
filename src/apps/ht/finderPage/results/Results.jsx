@@ -118,7 +118,8 @@ function ResultsPanel({ data = [], ht_query = "" }) {
       })
   
       let results = []
-      data.forEach(result => {
+      data.forEach(re => {
+        let result = {...re}
         let match = []
         dataStr.forEach(mstr => {
           let matchText = FormatData(result, mstr?.key, mstr?.location)

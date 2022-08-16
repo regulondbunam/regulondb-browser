@@ -1,6 +1,6 @@
 import React from 'react';
-import { ParagraphCitations } from '../../../../components/citations/citations';
-import { CitationCONTEXT } from '../../../../components/citations/citations_provider';
+import { ParagraphCitations } from '../../components/citations/citations';
+import { CitationCONTEXT } from '../../components/citations/citations_provider';
 
 const thStyle = {
     fontWeight: "bold",

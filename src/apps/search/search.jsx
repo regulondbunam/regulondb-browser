@@ -1,15 +1,16 @@
-import React from "react";
-import Home from "./search_home";
-import SearchResult from "./search_result";
+import React from 'react';
 import { useParams } from "react-router-dom";
-import conf from "./conf/search.conf.json";
+import Main from './main/Main';
+import Results from './results/Results';
 
-const Search = () => {
-  const KEY_WORD = useParams().keyword
-  if(KEY_WORD){
-    return <SearchResult  conf={conf} keyword={KEY_WORD} />;
-  }
-  return <Home  conf={conf}/>;
-};
+function Search() {
+    let { keyword } = useParams() 
+    if (keyword) {
+        return ( 
+            <Results keyword={keyword} />
+         );
+    }
+    return <Main />;
+}
 
 export default Search;

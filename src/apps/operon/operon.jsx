@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from "react-router-dom";
 import { ValidateID } from "./webServices/operon_ws";
 import { ValidateID as TUvalidateID } from "./webServices/tu_ws"
-import { CitationsProvider } from '../../components/citations/citations_provider'
+import { CitationsProvider } from './components/citations/citations_provider'
 import Title from './components/operon_title'
 import Home from "./operon_home"
 import Info from "./operon_info"
@@ -25,7 +25,6 @@ export const Operon = () => {
 
 
 const OperonBody = ({ id }) => {
-
     const [_data, set_data] = useState();
     const [_validId, set_validId] = useState();
     const [_testId, set_testId] = useState();
@@ -83,6 +82,7 @@ const OperonBody = ({ id }) => {
     if (!id) {
         return <Home conf={conf?.pages?.operon_main} setState={state => { setState(state); set_title(conf.pages.operon_main.title) }} />
     }
+    console.log("data", _data)
     if (_data) {
         if (!_validId) {
             document.getElementById("cover_operon_01").innerHTML = `Sorry we couldn't find the identifier: ${id}`
@@ -110,7 +110,7 @@ const OperonBody = ({ id }) => {
             return (
                 <div>
                     <ValidateID id_operon={_operonId}
-                        resoultsData={(data) => { set_data(data) }}
+                        resoultsData={(data) => { console.log(data); set_data(data) }}
                         status={(state) => { setState(state) }}
                         isValidate={(isGood) => { set_validId(isGood) }}
                     />

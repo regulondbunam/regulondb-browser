@@ -1,6 +1,6 @@
 import React,{ useState } from 'react';
-import { CitationCONTEXT } from '../../../../components/citations/citations_provider';
-import {CitationsNote} from '../../../../components/citations/citations_note'
+import { CitationCONTEXT } from '../../components/citations/citations_provider';
+import {CitationsNote} from '../../components/citations/citations_note'
 import ReactTooltip from 'react-tooltip';
 
 export default function Note({note = ""}) {

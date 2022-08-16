@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import AllCits from '../../../components/cits/Cits'
+import AllCits from '../components/cits/Cits'
 import GetAllCitations from '../webServices/citations'
 
 export const AllCitations = ({ idOperon }) => {
