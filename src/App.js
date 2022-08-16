@@ -6,7 +6,7 @@ import {
   Route
 } from "react-router-dom";
 import Home from './apps/home';
-import Search from './apps/search/Search';
+import Search from './apps/search';
 import Gene from './apps/gene';
 import DTT from './apps/dtt/dtt';
 import HT from './apps/ht/HighThroughput';
