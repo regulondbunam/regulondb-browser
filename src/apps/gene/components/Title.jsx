@@ -6,7 +6,7 @@ import "./title.css";
 const IDTitle = "title_cover_geneTool";
 const eventName = "cover_geneTool_event";
 
-export function UpdateTitle({ state, title, message }) {
+export function UpdateTitle({ state, title, message, geneToken }) {
   let detail = {};
   if (state) {
     detail.state = state;
@@ -16,6 +16,9 @@ export function UpdateTitle({ state, title, message }) {
   }
   if (message) {
     detail.message = message;
+  }
+  if (geneToken) {
+    detail.geneToken = geneToken;
   }
 
   const COVER = document.getElementById(IDTitle);
@@ -28,8 +31,9 @@ export function UpdateTitle({ state, title, message }) {
   }
 }
 
-export const Title = ({ title, geneToken }) => {
+export const Title = ({ title }) => {
   const [_state, set_state] = useState();
+  const [geneToken, set_geneToken] = useState();
   const [_title, set_title] = useState(title);
   const [_message, set_message] = useState();
 
@@ -49,6 +53,9 @@ export const Title = ({ title, geneToken }) => {
           if (e.detail.message) {
             set_message(e.detail.message);
           }
+          if (e.detail.geneToken) {
+            set_geneToken(e.detail.geneToken);
+          }
         },
         false
       );
@@ -56,8 +63,8 @@ export const Title = ({ title, geneToken }) => {
   }, []);
   if (!geneToken) {
     return (
-      <div>
-        <Cover id={"component_" + IDTitle} state={_state} message={_message}>
+      <div id={IDTitle} >
+        <Cover state={_state} message={_message}>
           <h1>{_title}</h1>
         </Cover>
       </div>

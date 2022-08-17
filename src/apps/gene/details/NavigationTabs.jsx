@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+
+
 import Style from "./info.module.css";
 
 const backgroundColor = "#d5e2ead7";
@@ -67,23 +69,22 @@ function NavigationTabs({ tabsInfo, tabSelect }) {
                 style={styleTab}
                 onClick={() => {
                   set_tab(tab);
-                  let section = document.getElementById("gene_"+key);
-                  if(section){
+                  let section = document.getElementById("gene_" + key);
+                  if (section) {
                     let rect = section.getBoundingClientRect();
-                    let move = 106
+                    let move = 106;
                     if (window.pageYOffset < 120) {
-                      move = move + 200
+                      move = move + 200;
                     }
                     //console.log(rect.y,window.pageYOffset);
                     window.scroll({
-                      top: rect.y+window.pageYOffset-move,
-                      behavior: 'smooth'
+                      top: rect.y + window.pageYOffset - move,
+                      behavior: "smooth",
                     });
                     /*section.scrollIntoView({
                       behavior: "smooth",
                     });*/
                   }
-                  
                 }}
               >
                 {tab.name}

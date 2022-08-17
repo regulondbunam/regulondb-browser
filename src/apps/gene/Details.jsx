@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useMemo } from "react";
 import { DataCONTEXT } from "../../components/webservices/DataProvider";
-import Title from "./components/Title";
+import { UpdateTitle } from "./components/Title";
 import NavigationTabs from "./details/NavigationTabs";
 import Citations from "./tools/Citations";
 import Description from "./tools/description";
 import Products from "./tools/products";
 import DrawingTracesTool from "../../components/DrawingTracesTool";
-import "./gene.css";
 import DisplayOptions from "./components/DisplayOptions";
+import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 
 
 
@@ -16,11 +16,19 @@ function scrollFunction() {
     document.body.scrollTop > 124 ||
     document.documentElement.scrollTop > 124
   ) {
-    document.getElementById("cover_gene_details").style.top = "0";
+    document.getElementById("cover_gene_detailsA").style.top = "0";
+    document.getElementById("cover_gene_detailsA").style.position = "fixed";
+    let tabsPosition =  document.getElementById("cover_gene_detailsA").clientHeight
+    document.getElementById("cover_gene_details").style.top = `${tabsPosition}px`;
     document.getElementById("cover_gene_details").style.position = "fixed";
     document.getElementById("title_cover_data").style.display = "none";
+    document.getElementById("cover_gene_UpperButton").style.display = "initial";
   } else {
+    document.getElementById("cover_gene_UpperButton").style.display = "none";
     let coverPosition = 124 - document.documentElement.scrollTop;
+    document.getElementById("cover_gene_detailsA").style.position = "initial";
+    document.getElementById("cover_gene_detailsA").style.top =
+      coverPosition + "px";
     document.getElementById("cover_gene_details").style.position = "initial";
     document.getElementById("cover_gene_details").style.top =
       coverPosition + "px";
@@ -48,8 +56,6 @@ var observer = new IntersectionObserver(
 
 function Details() {
 
-  
-
   const { _data } = useContext(DataCONTEXT);
   console.log("_data", _data);
 
@@ -70,6 +76,7 @@ function Details() {
       window.onscroll = function () {};
     };
   }, []);
+
   const geneToken = useMemo(() => {
     let token = {};
     let tabsInfo = {
@@ -116,13 +123,25 @@ function Details() {
       name: "Citations",
     };
     token.tabsInfo = tabsInfo;
+    UpdateTitle({ geneToken: token });
     return token;
   }, [_data]);
   return (
     <div>
       <DisplayOptions />
       <div className="cover_gene" id="cover_gene_details">
-        <Title geneToken={geneToken} />
+          <button
+            className="iconButton"
+            id="cover_gene_UpperButton"
+            onClick={() => {
+              window.scroll({
+                top: 0,
+                behavior: "smooth",
+              });
+            }}
+          >
+            <KeyboardDoubleArrowUpIcon />
+          </button>
         <NavigationTabs
           tabsInfo={geneToken.tabsInfo}
           tabSelect={"description"}

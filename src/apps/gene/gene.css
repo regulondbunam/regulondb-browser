@@ -1,3 +1,8 @@
+#cover_gene_UpperButton{
+  display: none;
+  position: absolute;
+}
+
 .cover_gene{
     overflow: hidden;
     width: 100%;
