@@ -5,11 +5,11 @@ import TableView from "./Table";
 import { UpdateTitle } from "../components/Title";
 import WebServices from "../../../components/webservices/WebServices";
 
-function Gene({ keyword }) {
+function Gene({ keyword, limit = 10 }) {
   const [_genes, set_genes] = useState();
   const [_genesState, set_genesState] = useState();
   const [_geneTablePage, set_geneTablePage] = useState(0);
-  const [_geneTableLimit, set_geneTableLimit] = useState(10);
+  const [_geneTableLimit, set_geneTableLimit] = useState(limit);
 
   if (_genesState === "loading") {
     UpdateTitle({ state: "loading" });
@@ -70,6 +70,8 @@ function Gene({ keyword }) {
           limit={_geneTableLimit}
           page={_geneTablePage}
           setLimit={(limit) => {
+            limit === -1 && (limit = 1)
+            //console.log("setLimit", limit); -> All -1
             set_geneTableLimit(limit);
             set_genes(undefined);
           }}

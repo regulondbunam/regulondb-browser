@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { DataProvider } from "../../components/webservices/DataProvider";
 import Details from "./Details";
+import Home from "./Home";
 import Title, { UpdateTitle } from "./components/Title";
 import "./gene.css";
 
@@ -40,7 +41,7 @@ function Gene() {
        <div className="cover_gene" id="cover_gene_detailsA" >
         <Title title={"Gene"} />
        </div>
-      {!geneId && <div>no id</div>}
+       {!geneId && <Home />}
       {id && (
         <DataProvider
           datamart_name="getGenesBy"
