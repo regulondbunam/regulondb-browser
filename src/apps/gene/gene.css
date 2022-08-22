@@ -3,6 +3,14 @@
   position: absolute;
 }
 
+.feedback_tool{
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  width: 100%;
+  top: 256px;
+}
+
 .cover_gene{
     overflow: hidden;
     width: 100%;

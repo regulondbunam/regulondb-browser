@@ -8,13 +8,16 @@ import Products from "./tools/products";
 import DrawingTracesTool from "../../components/DrawingTracesTool";
 import DisplayOptions from "./components/DisplayOptions";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
+import { Feedback } from "./components/Feedback";
 
 function scrollFunction() {
   if (
     document.body.scrollTop > 124 ||
     document.documentElement.scrollTop > 124
   ) {
+    //feedbackTool
     document.getElementById("cover_gene_detailsA").style.top = "0";
+    document.getElementById("feedbackTool").style.top = `0`;
     document.getElementById("cover_gene_detailsA").style.position = "fixed";
     let tabsPosition = document.getElementById(
       "cover_gene_detailsA"
@@ -25,7 +28,9 @@ function scrollFunction() {
     document.getElementById("cover_gene_details").style.position = "fixed";
     document.getElementById("title_cover_data").style.display = "none";
     document.getElementById("cover_gene_UpperButton").style.display = "initial";
+    //document.getElementById("feedbackTool").style.display = "initial";
   } else {
+    document.getElementById("feedbackTool").style.top = `256px`;
     document.getElementById("cover_gene_UpperButton").style.display = "none";
     let coverPosition = 124 - document.documentElement.scrollTop;
     document.getElementById("cover_gene_detailsA").style.position = "initial";
@@ -152,6 +157,9 @@ function Details() {
         >
           <KeyboardDoubleArrowUpIcon />
         </button>
+        <div className="feedback_tool" id="feedbackTool">
+         <Feedback/>
+        </div>
         <NavigationTabs
           tabsInfo={geneToken.tabsInfo}
           tabSelect={"description"}

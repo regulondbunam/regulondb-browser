@@ -17,6 +17,10 @@ const DisplayOptions = () => {
         set_viewOptions(!_viewOptions);
     }
 
+    const onAlert = () => {
+      alert("This functionality is not yet implemented")
+    }
+
     const list = () => (
         <Box
           sx={{ width: 250 }}
@@ -25,7 +29,7 @@ const DisplayOptions = () => {
         >
           <List>
           <ListItem disablePadding>
-                <ListItemButton>
+                <ListItemButton onClick={onAlert} >
                   <ListItemIcon>
                     <PictureAsPdfIcon/>
                   </ListItemIcon>
@@ -33,7 +37,7 @@ const DisplayOptions = () => {
                 </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
-                <ListItemButton>
+                <ListItemButton onClick={onAlert}>
                   <ListItemIcon>
                     <CodeIcon/>
                   </ListItemIcon>
@@ -41,7 +45,7 @@ const DisplayOptions = () => {
                 </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
-                <ListItemButton>
+                <ListItemButton onClick={onAlert}>
                   <ListItemIcon>
                     <FontDownloadIcon/>
                   </ListItemIcon>
