@@ -12,7 +12,9 @@ function Gene() {
   let { geneId } = useParams();
 
   useEffect(() => {
+    
     if (!geneId) {
+      console.log(`geneId`, geneId);
       UpdateTitle({ title: "Gene" });
     } else {
       switch (_state) {

@@ -9,8 +9,6 @@ import DrawingTracesTool from "../../components/DrawingTracesTool";
 import DisplayOptions from "./components/DisplayOptions";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 
-
-
 function scrollFunction() {
   if (
     document.body.scrollTop > 124 ||
@@ -18,8 +16,12 @@ function scrollFunction() {
   ) {
     document.getElementById("cover_gene_detailsA").style.top = "0";
     document.getElementById("cover_gene_detailsA").style.position = "fixed";
-    let tabsPosition =  document.getElementById("cover_gene_detailsA").clientHeight
-    document.getElementById("cover_gene_details").style.top = `${tabsPosition}px`;
+    let tabsPosition = document.getElementById(
+      "cover_gene_detailsA"
+    ).clientHeight;
+    document.getElementById(
+      "cover_gene_details"
+    ).style.top = `${tabsPosition}px`;
     document.getElementById("cover_gene_details").style.position = "fixed";
     document.getElementById("title_cover_data").style.display = "none";
     document.getElementById("cover_gene_UpperButton").style.display = "initial";
@@ -55,7 +57,6 @@ var observer = new IntersectionObserver(
 );
 
 function Details() {
-
   const { _data } = useContext(DataCONTEXT);
   console.log("_data", _data);
 
@@ -74,6 +75,7 @@ function Details() {
     }
     return function cleanup() {
       window.onscroll = function () {};
+      UpdateTitle({ title: "Gene", geneToken: undefined });
     };
   }, []);
 
@@ -111,6 +113,14 @@ function Details() {
           token.locations = geneData.products
             .map((product) => product.cellularLocations.join(", "))
             .join(", ");
+        } else {
+          token.products = "";
+          token.locations = "";
+          tabsInfo.products = {
+            id: 3,
+            name: `no products`,
+            disabled: true,
+          };
         }
       }
       geneData.gene.externalCrossReferences &&
@@ -130,28 +140,29 @@ function Details() {
     <div>
       <DisplayOptions />
       <div className="cover_gene" id="cover_gene_details">
-          <button
-            className="iconButton"
-            id="cover_gene_UpperButton"
-            onClick={() => {
-              window.scroll({
-                top: 0,
-                behavior: "smooth",
-              });
-            }}
-          >
-            <KeyboardDoubleArrowUpIcon />
-          </button>
+        <button
+          className="iconButton"
+          id="cover_gene_UpperButton"
+          onClick={() => {
+            window.scroll({
+              top: 0,
+              behavior: "smooth",
+            });
+          }}
+        >
+          <KeyboardDoubleArrowUpIcon />
+        </button>
         <NavigationTabs
           tabsInfo={geneToken.tabsInfo}
           tabSelect={"description"}
         />
       </div>
-      <DrawingTracesTool context="gene"
+      <DrawingTracesTool
+        context="gene"
         id={_data.data[0]._id}
         leftEndPosition={_data.data[0].gene.leftEndPosition - 1000}
-        rightEndPosition={_data.data[0].gene.rightEndPosition + 1000}  
-       />
+        rightEndPosition={_data.data[0].gene.rightEndPosition + 1000}
+      />
       <article>
         <div id="gene_description" className="description">
           <Description
@@ -161,10 +172,12 @@ function Details() {
         </div>
         <br />
         <div id="gene_products" className="products">
-          <Products
-            products={_data.data[0].products}
-            allCitations={_data.data[0].allCitations}
-          />
+          {!geneToken.tabsInfo.products.disabled && (
+            <Products
+              products={_data.data[0].products}
+              allCitations={_data.data[0].allCitations}
+            />
+          )}
         </div>
         <div id="gene_citation" className="citation">
           <Citations AllCitations={_data.data[0].allCitations} />
