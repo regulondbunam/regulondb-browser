@@ -1,5 +1,4 @@
 import React, { useMemo } from "react";
-import { useEffect } from "react";
 import "./motif.css";
 
 function cleanMotifs(motifs) {
@@ -21,28 +20,36 @@ function cleanMotifs(motifs) {
 
 export default function Motif({ motifs, sequence }) {
   let motifs_n = cleanMotifs(motifs);
-
+/*
   useEffect(() => {
     motifs_n.forEach((motif) => {
       let id = `motif_${motif.leftEndPosition}_${motif.rightEndPosition}`;
-      let span = document.getElementById(id);
-      if (span) {
-        span.addEventListener(
-          `view_${id}`,
-          function (e) {
-            if (e.detail.over) {
-              span.style.backgroundColor = "red";
-            }else{
-              span.style.backgroundColor = "initial";
-            }
-            
-          },
-          false
-        );
+      let spans = document.getElementsByClassName(id);
+      //console.log("spns",id);
+      try {
+        if (Array.isArray(spans)) {
+          spans.forEach(span => {
+            span.addEventListener(
+              `view_${id}`,
+              function (e) {
+                if (e.detail.over) {
+                  span.style.backgroundColor = "#cadce7";
+                }else{
+                  span.style.backgroundColor = "initial";
+                }
+                
+              },
+              false
+            );
+          });
+        }
+      } catch (error) {
+        console.error("assign view event error",error);
       }
+      
     });
   }, [motifs_n]);
-
+*/
   const formatSequence = useMemo(() => {
     let size = sequence.length;
     const spaceNumber = size.toString().length;
@@ -55,30 +62,21 @@ export default function Motif({ motifs, sequence }) {
         count += 1;
         innerCount += 1;
         line = "";
-
+/*
         let motifStart = motifs_n.filter(
           (motif) => motif.leftEndPosition === count
         );
         if (motifStart) {
+          let spansClose = ""
           let spans = motifStart
             .map((motif) => {
               let id = `motif_${motif.leftEndPosition}_${motif.rightEndPosition}`;
-              return `<span id="${id}">`;
+              spansClose +="</span>"
+              return `<span class="${id}">`;
             })
             .join("");
-          x = `${spans}${x}`;
-        }
-        let motifEnd = motifs_n.filter(
-          (motif) => motif.rightEndPosition === count
-        );
-        if (motifEnd) {
-          let spans = motifEnd
-            .map((motif) => {
-              return `</span>`;
-            })
-            .join("");
-          x = `${x}${spans}`;
-        }
+          x = `${spans}${x}${spansClose}`;
+        }*/
         //
         if (count === 1) {
           // console.log(spaceNumber)
@@ -101,7 +99,7 @@ export default function Motif({ motifs, sequence }) {
       })
       .join("");
     return sequenceFormat;
-  }, [sequence, motifs_n]);
+  }, [sequence]);
 
   return (
     <div>
@@ -121,7 +119,7 @@ export default function Motif({ motifs, sequence }) {
         <table>
           <thead>
             <tr>
-              <th>Type</th>
+              <th>Data Source</th>
               <th>Positions</th>
               <th>Notes</th>
               <th>Sequence</th>
@@ -144,35 +142,57 @@ export default function Motif({ motifs, sequence }) {
                 className="tr_motif"
                   key={`${id}_${index}`}
                   onMouseEnter={() => {
-                    const SEQUENCE = document.getElementById(id);
-                    if (SEQUENCE) {
-                      const SEQUENCE_REACTION = new CustomEvent(`view_${id}`,{
-                        bubbles: true,
-                        detail: {over: true},
-                      });
-                      SEQUENCE.dispatchEvent(SEQUENCE_REACTION);
+                    /*
+                    const SEQUENCES = document.getElementsByClassName(id);
+                    try {
+                      if (Array.isArray(SEQUENCES)) {
+                        const SEQUENCE_REACTION = new CustomEvent(`view_${id}`,{
+                          bubbles: true,
+                          detail: {over: true},
+                        });
+                        SEQUENCES.forEach(SEQUENCE => {
+                          SEQUENCE.dispatchEvent(SEQUENCE_REACTION);
+                        });
+                      }
+                    } catch (error) {
+                      console.error("e: ",error);
                     }
+                    */
                   }}
                   onMouseLeave={()=>{
-                    const SEQUENCE = document.getElementById(id);
-                    if (SEQUENCE) {
-                      const SEQUENCE_REACTION = new CustomEvent(`view_${id}`,{
-                        bubbles: true,
-                        detail: {over: false},
-                      });
-                      SEQUENCE.dispatchEvent(SEQUENCE_REACTION);
+                    /*
+                    const SEQUENCES = document.getElementsByClassName(id);
+                    try {
+                      if (Array.isArray(SEQUENCES)) {
+                        const SEQUENCE_REACTION = new CustomEvent(`view_${id}`,{
+                          bubbles: true,
+                          detail: {over: false},
+                        });
+                        SEQUENCES.forEach(SEQUENCE => {
+                          SEQUENCE.dispatchEvent(SEQUENCE_REACTION);
+                        });
+                      }
+                    } catch (error) {
+                      console.error("e: ",error);
                     }
+                    */
                   }}
                 >
-                  <td>{motif.type}</td>
+                  {
+                    motif?.type ? (<td>{motif.type}</td>) : (<td></td>)
+                  }
                   <td>{positions}</td>
                   <td>{motif.note}</td>
                   <td>
-                    <button className="aBase" style={{ fontSize: "10px" }}>
+                    <button className="aBase" style={{ fontSize: "10px", color: "black" }}
+                      onClick={()=>{
+                        navigator.clipboard.writeText(motif.sequence);
+                      }}
+                    >
                       copy sequence
                     </button>
                     <div style={{ display: "none" }}>
-                      <p id={`sequence_${id}`} className="p_sequence">
+                      <p id={`sequence_${index}_${id}`} className="p_sequence">
                         {motif.sequence}
                       </p>
                     </div>
