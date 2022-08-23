@@ -175,6 +175,7 @@ function Details() {
           <Description
             gene={_data.data[0].gene}
             regulation={_data.data[0].regulation}
+            allCitations={_data.data[0].allCitations}
           />
         </div>
         <br />

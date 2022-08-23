@@ -1,4 +1,3 @@
-import { useContext } from 'react'
 import { Citation } from './citation'
 
 export function relCitation(allCitations, idCit, small = true) {

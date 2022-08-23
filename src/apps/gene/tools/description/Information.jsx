@@ -9,10 +9,15 @@ import IconButton from "@mui/material/IconButton";
 import Switch from "@mui/material/Switch";
 import Phrase from "./phrases";
 import ViewSequence from "./viewSequence";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { CitationsNote } from "../../../../components/citations/citations_note";
 
 const label = { inputProps: { "aria-label": "enable phrases" } };
 
-export default function Information({ gene }) {
+export default function Information({ gene, allCitations }) {
   const [_show, set_show] = React.useState(true);
   const [_viewPhrases, set_viewPhrases] = React.useState(false);
 
@@ -21,6 +26,7 @@ export default function Information({ gene }) {
   };
 
   let size = gene?.rightEndPosition - gene?.leftEndPosition;
+
 
   return (
     <Paper>
@@ -124,6 +130,24 @@ export default function Information({ gene }) {
                     <td>{gene?.centisomePosition}</td>
                   </tr>
                 )}
+                {gene?.note && (
+                <tr>
+                  <td colSpan={2}>
+                    <Accordion>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel2a-content"
+                        id="panel2a-header"
+                      >
+                      <p style={{ fontWeight: "bold" }} >Notes</p>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <p dangerouslySetInnerHTML={{__html: CitationsNote(allCitations,gene.note)}} />
+                      </AccordionDetails>
+                    </Accordion>
+                  </td>
+                </tr>
+            )}
               </tbody>
             </table>
           </div>

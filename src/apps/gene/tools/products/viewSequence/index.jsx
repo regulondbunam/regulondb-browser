@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
+//import FormGroup from "@mui/material/FormGroup";
+//import FormControlLabel from "@mui/material/FormControlLabel";
+//import Switch from "@mui/material/Switch";
 import {
   FastaSequence,
   GenebankSequence,
@@ -58,7 +59,7 @@ const GenebankModal = React.forwardRef((props, ref) => {
     const { sequence, title, onView = () => {} } = props;
   const [_color, set_color] = React.useState(false);
 
-  const color = () => set_color(!_color);
+  //const color = () => set_color(!_color);
 
   const download = () => {
     let e = document.getElementById("rdb_p_sequence");
@@ -109,7 +110,7 @@ const FastaModal = React.forwardRef((props, ref) => {
   const { sequence, title, onView = () => {} } = props;
   const [_color, set_color] = React.useState(false);
 
-  const color = () => set_color(!_color);
+  //const color = () => set_color(!_color);
 
   const download = () => {
     let e = document.getElementById("rdb_p_sequence");
