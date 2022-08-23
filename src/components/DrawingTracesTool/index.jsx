@@ -13,9 +13,12 @@ import ZoomOutMapIcon from "@mui/icons-material/ZoomOutMap";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
-import ImageIcon from '@mui/icons-material/Image';
-import LandscapeIcon from '@mui/icons-material/Landscape';
-import Divider from '@mui/material/Divider';
+import ImageIcon from "@mui/icons-material/Image";
+import LandscapeIcon from "@mui/icons-material/Landscape";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import { ReImg } from "reimg";
 
 const DrawingTracesTool = ({
@@ -35,7 +38,7 @@ const DrawingTracesTool = ({
 
   let drawPlaceId = `divCanvas_${context}Context${id}`;
   let drawPlaceName = `${context}_${id}`;
-  let canvaId = `canvaGE_${id}`
+  let canvaId = `canvaGE_${id}`;
   let move = parseInt(`${(_posRight - _posLeft) * 0.15}`, 10);
   let zoom = parseInt(`${(_posRight - _posLeft) * 0.25}`, 10);
   let variables = {
@@ -56,21 +59,21 @@ const DrawingTracesTool = ({
           height: height,
         });
         //console.log(_geneticElements);
-        let A = []
-        if(context === "gene"){
-          _geneticElements.forEach(element => {
-            let a = {...element}
-            if(element.objectType === "gene"){
+        let A = [];
+        if (context === "gene") {
+          _geneticElements.forEach((element) => {
+            let a = { ...element };
+            if (element.objectType === "gene") {
               a.onClick = () => {
                 navigate("/gene/" + element._id, { replace: false });
-              }
+              };
             }
-            A.push(a)
+            A.push(a);
           });
-        }else{
-          A = _geneticElements
+        } else {
+          A = _geneticElements;
         }
-        
+
         drawGenes.draw(A, _posLeft, _posRight);
         /*setTimeout(function () {
           set_geneticElements(undefined);
@@ -79,118 +82,141 @@ const DrawingTracesTool = ({
         }, 100);*/
       }
     }
-  }, [context, canvaId, id, move, navigate, _geneticElements, drawPlaceId, _posLeft, _posRight]);
+  }, [
+    context,
+    canvaId,
+    id,
+    move,
+    navigate,
+    _geneticElements,
+    drawPlaceId,
+    _posLeft,
+    _posRight,
+  ]);
 
-  
+
+  let aviso = "The Drawing Traces Tool is still under development so some elements may not be displayed properly, please if you detect any problem download the generated image and report it in the User Feedback section. "
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th style={{ textAlign: "center" }}>
-            <button
-              className={Style.iconButton}
-              onClick={() => {
-                set_geneticElements(undefined);
-                set_posLeft(_posLeft - move);
-                set_posRight(_posRight - move);
-              }}
-            >
-              <ArrowLeftIcon sx={{ color: "white" }} />
-            </button>
-            <button
-              className={Style.iconButton}
-              onClick={() => {
-                set_geneticElements(undefined);
-                set_expand(true);
-                set_posLeft(_posLeft + zoom);
-                set_posRight(_posRight - zoom);
-              }}
-            >
-              <ZoomInIcon sx={{ color: "white" }} />
-            </button>
-            <button
-              className={Style.iconButton}
-              onClick={() => {
-                set_geneticElements(undefined);
-                set_posLeft(_posLeft - zoom);
-                set_posRight(_posRight + zoom);
-              }}
-            >
-              <ZoomOutIcon sx={{ color: "white" }} />
-            </button>
-            <button
-              className={Style.iconButton}
-              onClick={() => {
-                set_geneticElements(undefined);
-                set_posLeft(_posLeft + move);
-                set_posRight(_posRight + move);
-              }}
-            >
-              <ArrowRightIcon sx={{ color: "white" }} />
-            </button>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            {!_geneticElements && (
-              <WebServices
-                datamart_name="getGeneticElementsFromInterval"
-                variables={variables}
-                getData={(data) => {
-                  set_geneticElements(data.GE);
+    <div>
+      <div style={{ position: "absolute" }}>
+        <h2 style={{ fontSize: "10px", float: "left" }}>Drawing Traces Tool</h2>
+        <Tooltip title={aviso}>
+          <WarningAmberIcon fontSize="small" color="warning" />
+        </Tooltip>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th style={{ textAlign: "center" }}>
+              <button
+                className={Style.iconButton}
+                onClick={() => {
+                  set_geneticElements(undefined);
+                  set_posLeft(_posLeft - move);
+                  set_posRight(_posRight - move);
                 }}
+              >
+                <ArrowLeftIcon sx={{ color: "white" }} />
+              </button>
+              <button
+                className={Style.iconButton}
+                onClick={() => {
+                  set_geneticElements(undefined);
+                  set_expand(true);
+                  set_posLeft(_posLeft + zoom);
+                  set_posRight(_posRight - zoom);
+                }}
+              >
+                <ZoomInIcon sx={{ color: "white" }} />
+              </button>
+              <button
+                className={Style.iconButton}
+                onClick={() => {
+                  set_geneticElements(undefined);
+                  set_posLeft(_posLeft - zoom);
+                  set_posRight(_posRight + zoom);
+                }}
+              >
+                <ZoomOutIcon sx={{ color: "white" }} />
+              </button>
+              <button
+                className={Style.iconButton}
+                onClick={() => {
+                  set_geneticElements(undefined);
+                  set_posLeft(_posLeft + move);
+                  set_posRight(_posRight + move);
+                }}
+              >
+                <ArrowRightIcon sx={{ color: "white" }} />
+              </button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              {!_geneticElements && (
+                <WebServices
+                  datamart_name="getGeneticElementsFromInterval"
+                  variables={variables}
+                  getData={(data) => {
+                    set_geneticElements(data.GE);
+                  }}
+                />
+              )}
+              <div
+                style={{ height: `${height}px`, width: "100%" }}
+                id={drawPlaceId}
               />
-            )}
-            <div
-              style={{ height: `${height}px`, width: "100%" }}
-              id={drawPlaceId}
-            />
-          </td>
-        </tr>
-        <tr>
-          <td style={{ textAlign: "center" }}>
-            {context === "gene" ? (
+            </td>
+          </tr>
+          <tr>
+            <td style={{ textAlign: "center" }}>
+              {context === "gene" ? (
+                <button
+                  className="iconButton"
+                  onClick={() => {
+                    set_geneticElements(undefined);
+                    set_expand(!_expand);
+                    if (!_expand) {
+                      set_posLeft(leftEndPosition - 500);
+                      set_posRight(rightEndPosition);
+                    } else {
+                      set_posLeft(leftEndPosition);
+                      set_posRight(rightEndPosition);
+                    }
+                  }}
+                >
+                  {!_expand ? <ZoomInMapIcon /> : <ZoomOutMapIcon />}
+                </button>
+              ) : null}
               <button
                 className="iconButton"
                 onClick={() => {
                   set_geneticElements(undefined);
-                  set_expand(!_expand);
-                  if (!_expand) {
-                    set_posLeft(leftEndPosition - 500);
-                    set_posRight(rightEndPosition);
-                  } else {
-                    set_posLeft(leftEndPosition);
-                    set_posRight(rightEndPosition);
-                  }
+                  set_posLeft(leftEndPosition);
+                  set_posRight(rightEndPosition);
                 }}
               >
-                {!_expand ? <ZoomInMapIcon /> : <ZoomOutMapIcon />}
+                <RestartAltIcon sx={{ color: "white" }} />
               </button>
-            ) : null}
-            <button
-              className="iconButton"
-              onClick={() => {
-                set_geneticElements(undefined);
-                set_posLeft(leftEndPosition);
-                set_posRight(rightEndPosition);
-              }}
-            >
-              <RestartAltIcon sx={{ color: "white" }} />
-            </button>
-            <DownloadOptions drawPlaceId={drawPlaceId} canvaId={canvaId} name={drawPlaceName} />
-          </td>
-        </tr>
-      </tbody>
-    </table>
+              <DownloadOptions
+                drawPlaceId={drawPlaceId}
+                canvaId={canvaId}
+                name={drawPlaceName}
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   );
 };
 
 export default DrawingTracesTool;
 
-function DownloadOptions({drawPlaceId, canvaId, name}) {
+function DownloadOptions({ drawPlaceId, canvaId, name }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -206,7 +232,7 @@ function DownloadOptions({drawPlaceId, canvaId, name}) {
     ReImg.fromSvg(svg).toCanvas(function (canvas) {
       let url = canvas.toDataURL("image/png");
       let link = document.createElement("a");
-      link.download = name+".png";
+      link.download = name + ".png";
       link.href = url;
       link.click();
     });
@@ -216,7 +242,7 @@ function DownloadOptions({drawPlaceId, canvaId, name}) {
     const svg = document.getElementById(drawPlaceId).innerHTML;
     const blob = new Blob([svg.toString()]);
     const element = document.createElement("a");
-    element.download = name+".svg";
+    element.download = name + ".svg";
     element.href = window.URL.createObjectURL(blob);
     element.click();
     element.remove();
@@ -236,42 +262,40 @@ function DownloadOptions({drawPlaceId, canvaId, name}) {
         PaperProps={{
           elevation: 0,
           sx: {
-            overflow: 'visible',
-            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+            overflow: "visible",
+            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
             mt: 1.5,
-            '& .MuiAvatar-root': {
+            "& .MuiAvatar-root": {
               width: 32,
               height: 32,
               ml: -0.5,
               mr: 1,
             },
-            '&:before': {
+            "&:before": {
               content: '""',
-              display: 'block',
-              position: 'absolute',
+              display: "block",
+              position: "absolute",
               top: 0,
               right: 14,
               width: 10,
               height: 10,
-              bgcolor: 'background.paper',
-              transform: 'translateY(-50%) rotate(45deg)',
+              bgcolor: "background.paper",
+              transform: "translateY(-50%) rotate(45deg)",
               zIndex: 0,
             },
           },
         }}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={_downloadPNG} > 
+        <MenuItem onClick={_downloadPNG}>
           <ImageIcon /> PNG file
         </MenuItem>
-        <MenuItem onClick={_downloadSVG} >
+        <MenuItem onClick={_downloadSVG}>
           <LandscapeIcon /> SVG file
         </MenuItem>
         <Divider />
-        <MenuItem onClick={_downloadSVG} >
-          Data JSON
-        </MenuItem>
+        <MenuItem onClick={_downloadSVG}>Data JSON</MenuItem>
       </Menu>
     </React.Fragment>
   );

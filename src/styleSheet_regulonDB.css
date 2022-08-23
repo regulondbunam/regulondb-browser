@@ -163,6 +163,11 @@ Ver: 0.0.28
 	margin: 0;
 	text-align: justify;
   }
+
+  .p_sequence {
+	font-family: var(--fontFamily-sequence);
+	font-size: 14px;
+  }
   
   :root {
 	--a-fontFamily: var(--fontFamily-principal);

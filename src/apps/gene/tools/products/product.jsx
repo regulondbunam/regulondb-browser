@@ -152,7 +152,7 @@ export default function Product({ product, allCitations }) {
             allCitations={allCitations}
           />
         )}
-        {product?.motifs && <Motifs motifs={product.motifs} />}
+        {product?.motifs && <Motifs motifs={product.motifs} sequence={product.sequence} />}
       </div>
     </div>
   );

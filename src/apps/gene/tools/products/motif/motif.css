@@ -1,3 +1,11 @@
+.tr_motif:hover{
+    background-color: #72a7c7;
+}
+.motif_sequence{
+    max-height: 300px;
+    overflow: auto;
+}
+
 .motif_row_sequence{
     font-family: "Courier New", Courier, monospace;
     white-space: nowrap;

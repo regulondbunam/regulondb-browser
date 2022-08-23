@@ -42,6 +42,9 @@ export default function DrawTfBindingSite({
   //attributes
   const tfBindingSite_x = ((leftEndPosition - dna.leftEndPosition) * dna.widthActive) / dna.size;
   let tfBindingSite_width = ((rightEndPosition - leftEndPosition) * dna.widthActive) / dna.size;
+  if(tfBindingSite_width > 100){
+    tfBindingSite_width = ((30) * dna.widthActive) / dna.size;
+  }
   // scale
   let proportion = tfBindingSite_dp.height;
   if (height) {
