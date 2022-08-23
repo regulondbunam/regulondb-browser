@@ -12,6 +12,7 @@
 }
 
 .cover_gene{
+  z-index: 1;
     overflow: hidden;
     width: 100%;
 }

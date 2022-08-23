@@ -17,8 +17,7 @@ export function relCitation(allCitations, idCit, small = true) {
     return `<a class='citation' data-tip='${publication}' target="_blank" rel="noopener noreferrer" href="${url}">[${index}]${Citation(fullCit, small)}</a>&nbsp;`
 }
 
-export const CitationsNote = (CitationCONTEXT, note) => {
-    const { allCitations } = useContext(CitationCONTEXT)
+export const CitationsNote = (allCitations, note) => {
     const REX = /\[\s*RDBECOLI(PRC|EVC)[0-9]{5}\]/
     const PP = /(\|CITS:)|\|\./
     if (PP.exec(note)) {

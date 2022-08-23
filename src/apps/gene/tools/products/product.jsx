@@ -3,6 +3,12 @@ import { ParagraphCitations } from "../../../../components/citations";
 import GeneOntologyTerms from "./geneOntologyTerms";
 import Motifs from "./motif";
 import ViewSequence from "./viewSequence";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { CitationsNote } from "../../../../components/citations/citations_note";
 
 export default function Product({ product, allCitations }) {
   return (
@@ -22,7 +28,12 @@ export default function Product({ product, allCitations }) {
             {product?.sequence && (
               <tr>
                 <td style={{ fontWeight: "bold" }}>Sequence:</td>
-                <td><ViewSequence sequence={product.sequence} title={`Product_${product.name}_sequence`}  /></td>
+                <td>
+                  <ViewSequence
+                    sequence={product.sequence}
+                    title={`Product_${product.name}_sequence`}
+                  />
+                </td>
               </tr>
             )}
             {product?.molecularWeight && (
@@ -57,16 +68,22 @@ export default function Product({ product, allCitations }) {
             )}
 
             {product?.note && (
-              <>
                 <tr>
-                  <td colSpan={2} style={{ fontWeight: "bold" }}>
-                    Note
+                  <td colSpan={2}>
+                    <Accordion>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel2a-content"
+                        id="panel2a-header"
+                      >
+                      <p style={{ fontWeight: "bold" }} >Notes</p>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <p dangerouslySetInnerHTML={{__html: CitationsNote(allCitations,product.note)}} />
+                      </AccordionDetails>
+                    </Accordion>
                   </td>
                 </tr>
-                <tr>
-                  <td colSpan={2}> show note </td>
-                </tr>
-              </>
             )}
             {product?.externalCrossReferences.length > 0 && (
               <>
@@ -136,7 +153,7 @@ export default function Product({ product, allCitations }) {
             allCitations={allCitations}
           />
         )}
-        {product?.motifs && (<Motifs motifs={product.motifs} />)}
+        {product?.motifs && <Motifs motifs={product.motifs} />}
       </div>
     </div>
   );
