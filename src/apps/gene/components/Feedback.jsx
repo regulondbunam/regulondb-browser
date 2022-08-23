@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-target-blank */
+/* eslint-disable jsx-a11y/iframe-has-title */
 import React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";

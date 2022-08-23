@@ -8,7 +8,6 @@ import Products from "./tools/products";
 import DrawingTracesTool from "../../components/DrawingTracesTool";
 import DisplayOptions from "./components/DisplayOptions";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
-import { Feedback } from "./components/Feedback";
 
 function scrollFunction() {
   if (

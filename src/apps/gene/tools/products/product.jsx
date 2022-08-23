@@ -2,6 +2,7 @@ import React from "react";
 import { ParagraphCitations } from "../../../../components/citations";
 import GeneOntologyTerms from "./geneOntologyTerms";
 import Motifs from "./motif";
+import ViewSequence from "./viewSequence";
 
 export default function Product({ product, allCitations }) {
   return (
@@ -21,7 +22,7 @@ export default function Product({ product, allCitations }) {
             {product?.sequence && (
               <tr>
                 <td style={{ fontWeight: "bold" }}>Sequence:</td>
-                <td>Fasta and Genbank</td>
+                <td><ViewSequence sequence={product.sequence} title={`Product_${product.name}_sequence`}  /></td>
               </tr>
             )}
             {product?.molecularWeight && (
