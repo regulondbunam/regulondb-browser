@@ -17,7 +17,7 @@ function scrollFunction() {
   ) {
     //feedbackTool
     document.getElementById("cover_gene_detailsA").style.top = "0";
-    document.getElementById("feedbackTool").style.top = `0`;
+    document.getElementById("feedbackTool").style.top = `0px`;
     document.getElementById("cover_gene_detailsA").style.position = "fixed";
     let tabsPosition = document.getElementById(
       "cover_gene_detailsA"
@@ -30,7 +30,7 @@ function scrollFunction() {
     document.getElementById("cover_gene_UpperButton").style.display = "initial";
     //document.getElementById("feedbackTool").style.display = "initial";
   } else {
-    document.getElementById("feedbackTool").style.top = `256px`;
+    document.getElementById("feedbackTool").style.top = `150px`;
     document.getElementById("cover_gene_UpperButton").style.display = "none";
     let coverPosition = 124 - document.documentElement.scrollTop;
     document.getElementById("cover_gene_detailsA").style.position = "initial";
@@ -144,7 +144,9 @@ function Details() {
   return (
     <div>
       <DisplayOptions />
+      
       <div className="cover_gene" id="cover_gene_details">
+      
         <button
           className="iconButton"
           id="cover_gene_UpperButton"
@@ -157,9 +159,7 @@ function Details() {
         >
           <KeyboardDoubleArrowUpIcon />
         </button>
-        <div className="feedback_tool" id="feedbackTool">
-         <Feedback/>
-        </div>
+        
         <NavigationTabs
           tabsInfo={geneToken.tabsInfo}
           tabSelect={"description"}
@@ -196,3 +196,7 @@ function Details() {
 }
 
 export default Details;
+ /*
+ 
+
+ */
