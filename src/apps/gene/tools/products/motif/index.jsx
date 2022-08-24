@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { SequenceSelection } from "./sequence";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import { Highlight } from "./Highlight";
+import { Printable } from "./Printable";
 import "./motif.css";
 
 function cleanMotifs(motifs) {
@@ -17,89 +23,51 @@ function cleanMotifs(motifs) {
       newMotifs.push(motif);
     }
   });
+  newMotifs = newMotifs.sort((a, b) => {
+    return a.leftEndPosition - b.leftEndPosition;
+  });
   return newMotifs;
 }
 
 export default function Motif({ motifs, sequence }) {
-  const [_leftEndPosition, set_leftEndPosition] = useState(-1)
-  const [_rightEndPosition, set_rightEndPosition] = useState(-1)
+  
+  const [_display, set_display] = useState("Highlight");
+
+  const handleChange = (event) => {
+    set_display(event.target.value);
+  };
+
   let motifs_n = cleanMotifs(motifs);
 
   return (
     <div>
       <div>
         <h4>Motif</h4>
+        <Box sx={{ minWidth: "120px" }}>
+          <FormControl sx={{ minWidth: "120px" }} size="small">
+            <InputLabel id="demo-simple-select-label">
+              Select Display Type
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={_display}
+              label="Select Display Type"
+              onChange={handleChange}
+            >
+              <MenuItem value={"Highlight"}>Highlight</MenuItem>
+              <MenuItem value={"Printable"}>Printable</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
       </div>
       <div>
-        <div className="motif_sequence">
-          <p className="p_accent">sequence product:</p>
-          <SequenceSelection sequence={sequence} leftEndPosition={_leftEndPosition} rightEndPosition={_rightEndPosition} />
-        </div>
-      </div>
-      <div style={{ overflow: "auto", maxHeight: "300px" }}>
-        <table>
-          <thead>
-            <tr>
-              <th>Type</th>
-              <th>Positions</th>
-              <th>Notes</th>
-              <th>Sequence</th>
-              <th>dataSource</th>
-            </tr>
-          </thead>
-          <tbody>
-            {motifs_n.map((motif, index) => {
-              let positions = "---";
-              if (motif.leftEndPosition) {
-                if (motif.rightEndPosition === motif.leftEndPosition) {
-                  positions = motif.leftEndPosition;
-                } else {
-                  positions =
-                    motif.leftEndPosition + "-" + motif.rightEndPosition;
-                }
-              }
-              let id = `motif_${motif.id}`;
-              return (
-                <tr
-                className="tr_motif"
-                  key={`${id}_${index}`}
-                  onMouseEnter={() => {
-                    set_leftEndPosition(motif.leftEndPosition)
-                    set_rightEndPosition(motif.rightEndPosition)
-                  }}
-                  onMouseLeave={()=>{
-                    set_leftEndPosition(-1)
-                    set_rightEndPosition(-1)
-                  }}
-                >
-                  {
-                    motif?.type ? (<td>{motif.type}</td>) : (<td></td>)
-                  }
-                  <td>{positions}</td>
-                  <td>{motif.note}</td>
-                  <td>
-                    <button className="aBase" style={{ fontSize: "10px", color: "black" }}
-                      onClick={(e)=>{
-                        navigator.clipboard.writeText(motif.sequence);
-                        alert(`the sequence ${motif.sequence} has been copied to the clipboard`)
-                      }}
-                    >
-                      copy sequence
-                    </button>
-                    <div style={{ display: "none" }}>
-                      <p id={`sequence_${index}_${id}`} className="p_sequence">
-                        {motif.sequence}
-                      </p>
-                    </div>
-                  </td>
-                  {
-                    motif?.dataSource ? (<td>{motif.dataSource}</td>) : (<td></td>)
-                  }
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        {
+          _display === "Highlight" && (<Highlight motifs={motifs_n} sequence={sequence} />)
+        }
+        {
+          _display === "Printable" && (<Printable motifs={motifs_n} sequence={sequence} />)
+        }
       </div>
     </div>
   );
