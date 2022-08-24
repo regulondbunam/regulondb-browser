@@ -1,4 +1,5 @@
-import React, { useMemo } from "react";
+import React, { useState } from "react";
+import { SequenceSelection } from "./sequence";
 import "./motif.css";
 
 function cleanMotifs(motifs) {
@@ -9,6 +10,7 @@ function cleanMotifs(motifs) {
         (d) =>
           d.leftEndPosition === motif.leftEndPosition &&
           d.rightEndPosition === motif.rightEndPosition &&
+          d.id === motif.id &&
           d.type === motif.type
       )
     ) {
@@ -19,87 +21,9 @@ function cleanMotifs(motifs) {
 }
 
 export default function Motif({ motifs, sequence }) {
+  const [_leftEndPosition, set_leftEndPosition] = useState(-1)
+  const [_rightEndPosition, set_rightEndPosition] = useState(-1)
   let motifs_n = cleanMotifs(motifs);
-/*
-  useEffect(() => {
-    motifs_n.forEach((motif) => {
-      let id = `motif_${motif.leftEndPosition}_${motif.rightEndPosition}`;
-      let spans = document.getElementsByClassName(id);
-      //console.log("spns",id);
-      try {
-        if (Array.isArray(spans)) {
-          spans.forEach(span => {
-            span.addEventListener(
-              `view_${id}`,
-              function (e) {
-                if (e.detail.over) {
-                  span.style.backgroundColor = "#cadce7";
-                }else{
-                  span.style.backgroundColor = "initial";
-                }
-                
-              },
-              false
-            );
-          });
-        }
-      } catch (error) {
-        console.error("assign view event error",error);
-      }
-      
-    });
-  }, [motifs_n]);
-*/
-  const formatSequence = useMemo(() => {
-    let size = sequence.length;
-    const spaceNumber = size.toString().length;
-    let count = 0,
-      innerCount = 0,
-      line = "";
-    let sequenceFormat = sequence
-      .split("")
-      .map((x, index) => {
-        count += 1;
-        innerCount += 1;
-        line = "";
-/*
-        let motifStart = motifs_n.filter(
-          (motif) => motif.leftEndPosition === count
-        );
-        if (motifStart) {
-          let spansClose = ""
-          let spans = motifStart
-            .map((motif) => {
-              let id = `motif_${motif.leftEndPosition}_${motif.rightEndPosition}`;
-              spansClose +="</span>"
-              return `<span class="${id}">`;
-            })
-            .join("");
-          x = `${spans}${x}${spansClose}`;
-        }*/
-        //
-        if (count === 1) {
-          // console.log(spaceNumber)
-          for (let i = 0; i < spaceNumber - index.toString().length; i++) {
-            line += "&nbsp;";
-          }
-          return `\t${line}${index + 1} ${x}`;
-        }
-        if (count === 60) {
-          count = 0;
-          innerCount = 0;
-          return `${x}<br>`;
-        }
-        if (innerCount === 10) {
-          innerCount = 0;
-          return `${x} `;
-        }
-
-        return x;
-      })
-      .join("");
-    return sequenceFormat;
-  }, [sequence]);
 
   return (
     <div>
@@ -109,20 +33,18 @@ export default function Motif({ motifs, sequence }) {
       <div>
         <div className="motif_sequence">
           <p className="p_accent">sequence product:</p>
-          <p
-            className="p_sequence"
-            dangerouslySetInnerHTML={{ __html: formatSequence }}
-          />
+          <SequenceSelection sequence={sequence} leftEndPosition={_leftEndPosition} rightEndPosition={_rightEndPosition} />
         </div>
       </div>
       <div style={{ overflow: "auto", maxHeight: "300px" }}>
         <table>
           <thead>
             <tr>
-              <th>Data Source</th>
+              <th>Type</th>
               <th>Positions</th>
               <th>Notes</th>
               <th>Sequence</th>
+              <th>dataSource</th>
             </tr>
           </thead>
           <tbody>
@@ -136,46 +58,18 @@ export default function Motif({ motifs, sequence }) {
                     motif.leftEndPosition + "-" + motif.rightEndPosition;
                 }
               }
-              let id = `motif_${motif.leftEndPosition}_${motif.rightEndPosition}`;
+              let id = `motif_${motif.id}`;
               return (
                 <tr
                 className="tr_motif"
                   key={`${id}_${index}`}
                   onMouseEnter={() => {
-                    /*
-                    const SEQUENCES = document.getElementsByClassName(id);
-                    try {
-                      if (Array.isArray(SEQUENCES)) {
-                        const SEQUENCE_REACTION = new CustomEvent(`view_${id}`,{
-                          bubbles: true,
-                          detail: {over: true},
-                        });
-                        SEQUENCES.forEach(SEQUENCE => {
-                          SEQUENCE.dispatchEvent(SEQUENCE_REACTION);
-                        });
-                      }
-                    } catch (error) {
-                      console.error("e: ",error);
-                    }
-                    */
+                    set_leftEndPosition(motif.leftEndPosition)
+                    set_rightEndPosition(motif.rightEndPosition)
                   }}
                   onMouseLeave={()=>{
-                    /*
-                    const SEQUENCES = document.getElementsByClassName(id);
-                    try {
-                      if (Array.isArray(SEQUENCES)) {
-                        const SEQUENCE_REACTION = new CustomEvent(`view_${id}`,{
-                          bubbles: true,
-                          detail: {over: false},
-                        });
-                        SEQUENCES.forEach(SEQUENCE => {
-                          SEQUENCE.dispatchEvent(SEQUENCE_REACTION);
-                        });
-                      }
-                    } catch (error) {
-                      console.error("e: ",error);
-                    }
-                    */
+                    set_leftEndPosition(-1)
+                    set_rightEndPosition(-1)
                   }}
                 >
                   {
@@ -185,8 +79,9 @@ export default function Motif({ motifs, sequence }) {
                   <td>{motif.note}</td>
                   <td>
                     <button className="aBase" style={{ fontSize: "10px", color: "black" }}
-                      onClick={()=>{
+                      onClick={(e)=>{
                         navigator.clipboard.writeText(motif.sequence);
+                        alert(`the sequence ${motif.sequence} has been copied to the clipboard`)
                       }}
                     >
                       copy sequence
@@ -197,6 +92,9 @@ export default function Motif({ motifs, sequence }) {
                       </p>
                     </div>
                   </td>
+                  {
+                    motif?.dataSource ? (<td>{motif.dataSource}</td>) : (<td></td>)
+                  }
                 </tr>
               );
             })}

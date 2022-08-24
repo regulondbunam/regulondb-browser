@@ -75,6 +75,8 @@ export const fragment_PRODUCTS = gql`fragment PRODUCTS on Products {
     molecularWeight
     motifs {
       description
+      id
+      dataSource
       leftEndPosition
       note
       rightEndPosition

@@ -1,6 +1,11 @@
+.motif_sequence_select{
+    background-color: #72a7c7
+}
+
 .tr_motif:hover{
     background-color: #72a7c7;
 }
+
 .motif_sequence{
     max-height: 300px;
     overflow: auto;
