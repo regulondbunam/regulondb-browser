@@ -1,7 +1,21 @@
+import { useEffect } from "react";
 
 
 
 export function SequenceSelection({sequence = [], leftEndPosition = -1, rightEndPosition = -1}) {
+
+    useEffect(()=>{
+        let selectSequence = document.getElementById("motif_sequence_h")
+        let divSequence = document.getElementById("div_sequence")
+        if(selectSequence && divSequence){
+            let rect = selectSequence.getBoundingClientRect()
+            let div_rect = divSequence.getBoundingClientRect()
+            //console.log(rect)
+            let x = div_rect.x
+            let y = div_rect.y
+            divSequence.scrollTo(rect.x-x,rect.y-y)
+        }
+    })
     
     const formatSequence = () => {
         let size = sequence.length;
@@ -18,6 +32,12 @@ export function SequenceSelection({sequence = [], leftEndPosition = -1, rightEnd
             if(leftEndPosition !== -1){
                 if(leftEndPosition <= index+1 && rightEndPosition >= index+1){
                     x = `<span class="motif_sequence_select">${x}</span>`
+                }
+                if(leftEndPosition === index+1){
+                    x = `<span id="motif_sequence_h" >${x}`
+                }
+                if(rightEndPosition === index+1){
+                    x = `${x}</span>`
                 }
             }
             if (count === 1) {

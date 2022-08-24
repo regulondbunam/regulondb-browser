@@ -7,7 +7,7 @@ export function Highlight({ motifs, sequence }) {
 
   return (
     <div>
-      <div className="motif_sequence">
+      <div className="motif_sequence" id="div_sequence">
         <p className="p_accent">sequence product:</p>
         <SequenceSelection
           sequence={sequence}
