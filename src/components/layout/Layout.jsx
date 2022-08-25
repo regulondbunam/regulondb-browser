@@ -1,18 +1,20 @@
 import React from "react";
 import Header from "./header/Header";
 import Menu from "./menu/Menu";
+import { Observer } from "./Observer";
+
 const Layout = ({ children }) => {
   const isHome =
     window.location.pathname === "/home" || window.location.pathname === "/";
   //console.log(window.location.pathname);
-  const urlPage = window.location.origin;
   return (
     <div>
+      <Observer />
       <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/icon?family=Material+Icons"
       />
-      <Header urlPage={urlPage} isHome={isHome} />
+      <Header isHome={isHome} />
       <Menu />
       {children}
     </div>
