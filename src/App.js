@@ -8,7 +8,7 @@ import {
 import Home from './apps/home';
 import Search from './apps/search';
 import Gene from './apps/gene';
-import DTT from './apps/dtt/dtt';
+import DTT, { DTTtest } from './apps/dtt/dtt';
 import HT from './apps/ht/HighThroughput';
 import Operon from './apps/operon/operon';
 import Regulon from './apps/regulon/regulon';
@@ -45,6 +45,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="home" element={<Home />} />
           <Route path="dtt" element={<DTT />} />
+          <Route path="dttTest" element={<DTTtest />} />
           <Route path="ht" element={<HT />} >
             <Route path=":site" element={<HT />} >
               <Route path=":datasetType" element={<HT />} >
@@ -60,10 +61,10 @@ function App() {
             <Route path=":geneId" element={<Gene />} />
           </Route>
           <Route path="operon" element={<Operon />} >
-          <Route path=":id" element={<Operon />} />
+            <Route path=":id" element={<Operon />} />
           </Route>
           <Route path="regulon" element={<Regulon />} >
-          <Route path=":id" element={<Regulon />} />
+            <Route path=":id" element={<Regulon />} />
           </Route>
         </Routes>
       </ThemeProvider>

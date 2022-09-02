@@ -19,23 +19,23 @@ export default function verticalPosition(geneticElements, dna) {
                 if (geneticElements[i]._id !== geneticElements[j]._id && i < j) {
                     if (isCollision(geneticElements[i], geneticElements[j])) {
                         geneticElements[j].level++
-                            if (geneticElements[j].strand === 'forward') {
-                                if (levelForward < geneticElements[j].level) {
-                                    levelForward = geneticElements[j].level;
-                                }
-                            } else {
-                                if (levelReverse < geneticElements[j].level) {
-                                    levelReverse = geneticElements[j].level;
-                                }
+                        if (geneticElements[j].strand === 'forward') {
+                            if (levelForward < geneticElements[j].level) {
+                                levelForward = geneticElements[j].level;
                             }
+                        } else {
+                            if (levelReverse < geneticElements[j].level) {
+                                levelReverse = geneticElements[j].level;
+                            }
+                        }
                     }
                 }
             }
         }
         controlFlag++
-    } while (isCollisions(geneticElements) && controlFlag < 5);
+    } while (isCollisions(geneticElements) && controlFlag < 10);
     controlFlag = 0
-    
+
     //console.log("levelForward", levelForward);
     //console.log("levelReverse", levelReverse);
 
@@ -44,7 +44,7 @@ export default function verticalPosition(geneticElements, dna) {
     if (dna) {
         if (levelForward >= levelReverse) {
             maxHeightObject = dna.forwardActive / levelForward;
-        }else{
+        } else {
             maxHeightObject = dna.reverseActive / levelReverse;
         }
     }
@@ -54,7 +54,7 @@ export default function verticalPosition(geneticElements, dna) {
         dnaObject.separation = 0
         dnaObject.width = dnaObject.rightEndPosition - dnaObject.leftEndPosition
         if (dnaObject.width === 0) {
-            dnaObject.width = 1
+            dnaObject.width = properties.width
         }
         dnaObject.x = dnaObject.leftEndPosition
         if (dna) {
@@ -63,12 +63,12 @@ export default function verticalPosition(geneticElements, dna) {
             } else {
                 dnaObject.height = properties.height;
             }
-           // console.log(dnaObject.height);
+            // console.log(dnaObject.height);
             dnaObject.y = dna.y - dnaObject.height
             dnaObject.previousY = dna.y - dnaObject.height
         }
     })
-    
+
     //assign separation
     do {
         for (let i = 0; i < geneticElements.length; i++) {
@@ -97,8 +97,8 @@ export default function verticalPosition(geneticElements, dna) {
         dnaObject.separation = Math.abs(dnaObject.y - dnaObject.previousY)
     });
 
-    //console.log(geneticElements);    
-    
+    console.log(geneticElements);
+
     return { geneticElements: geneticElements, height: height, width: width };
 }
 
@@ -133,7 +133,7 @@ function isOverlap(dnaObjectA, dnaObjectB) {
         dnaObjectB.y < dnaObjectA.y + dnaObjectA.height);
 }
 
-function isOverlaps(geneticElements){
+function isOverlaps(geneticElements) {
     for (let i = 0; i < geneticElements.length; i++) {
         for (let j = 0; j < geneticElements.length; j++) {
             if (geneticElements[i]._id !== geneticElements[j]._id && i < j) {
@@ -143,10 +143,10 @@ function isOverlaps(geneticElements){
             }
         }
     }
-    return false   
+    return false
 }
 
-function isCollisions(geneticElements){
+function isCollisions(geneticElements) {
     for (let i = 0; i < geneticElements.length; i++) {
         for (let j = 0; j < geneticElements.length; j++) {
             if (geneticElements[i]._id !== geneticElements[j]._id && i < j) {
@@ -156,7 +156,7 @@ function isCollisions(geneticElements){
             }
         }
     }
-    return false   
+    return false
 }
 /**
  * a.x < b.x + b.w &&

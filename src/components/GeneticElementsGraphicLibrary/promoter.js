@@ -22,6 +22,7 @@ export default function DrawPromoter({
   stroke = {},
   font = {},
   tooltip = "",
+  height,
   onClick
 }) {
   if (!canva || !dna || !id || leftEndPosition > rightEndPosition) {
@@ -39,18 +40,20 @@ export default function DrawPromoter({
     rightEndPosition = leftEndPosition + 10;
   }
   // attributes
+  if (separation > 0) {
+    height = 10
+  }
   let promoter = canva.group();
-
   const promoter_x = ((leftEndPosition - dna.leftEndPosition) * dna.widthActive) / dna.size;
   let sizeP = (promoter_dp.width * dna.widthActive) / dna.size;
   if (sizeP > promoter_dp.width) {
     sizeP = promoter_dp.width;
   }
   //Body attributes
-  let bodyH = promoter_dp.height/2 + separation;
+  let bodyH = height + separation;
   let bodyW = sizeP;
   const headH = promoter_dp.height;
-  const height = headH + bodyH;
+  const draw_height = headH + bodyH;
   let posX = promoter_x + dna.x;
   let posY = dna.y;
   // Row attributes
@@ -63,7 +66,7 @@ export default function DrawPromoter({
   let body = undefined
   if (strand === "reverse") {
     body = canva.path(
-      "M " + posX + "," + posY + " v " + bodyH + " h -" + bodyW 
+      "M " + posX + "," + posY + " v " + bodyH + " h -" + bodyW
     );
     txtPosX = posX - bodyW;
     txtPosY = posY + bodyH
@@ -72,7 +75,7 @@ export default function DrawPromoter({
     az = -5;
   } else {
     body = canva.path(
-      "M " + posX + "," + posY + " v -" + bodyH + " h " + bodyW 
+      "M " + posX + "," + posY + " v -" + bodyH + " h " + bodyW
     );
     az = 5;
   }
@@ -81,7 +84,7 @@ export default function DrawPromoter({
   body.fill("none");
   body.stroke(stroke);
   promoter.add(body);
-  
+
   //text
   label({
     canvas: canva,
@@ -109,19 +112,19 @@ export default function DrawPromoter({
   arrow.fill("none");
   arrow.stroke(stroke);
   promoter.add(arrow);
-//Actions
-promoter.opacity(opacity);
-if (onClick) {
+  //Actions
+  promoter.opacity(opacity);
+  if (onClick) {
+    promoter.attr({
+      cursor: "pointer"
+    })
+    promoter.click(onClick);
+  }
+  // Tooltip
   promoter.attr({
-    cursor: "pointer"
-  })
-  promoter.click(onClick);
-}
-// Tooltip
-promoter.attr({
-  "data-tip": tooltip,
-  "data-for": `"${canva.node?.id}-${id}"`
-});
+    "data-tip": tooltip,
+    "data-for": `"${canva.node?.id}-${id}"`
+  });
 
   return {
     id: id,
@@ -130,7 +133,7 @@ promoter.attr({
     draw: promoter,
     posX: posX,
     posY: posY,
-    height: height,
+    height: draw_height,
     dna: dna,
     separation: separation,
     leftEndPosition: leftEndPosition,

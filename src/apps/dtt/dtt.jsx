@@ -93,20 +93,17 @@ __Return:__
  * 
  */
 
-
-import React from 'react'
-import Title from './components/cover/title'
-import { Tabs } from './components/tab/tabs';
-import { UserData } from "./components/userData/userData"
-import { RegulonDBData } from './components/regulondbData/regulondbdata';
-
+import React, { useState } from "react";
+import Title from "./components/cover/title";
+import { Tabs } from "./components/tab/tabs";
+import { UserData } from "./components/userData/userData";
+import { RegulonDBData } from "./components/regulondbData/regulondbdata";
+import DrawingTracesTool from "../../components/DrawingTracesTool";
 
 const tabsInfo = [
   { id: "01", name: "RegulonDB-Data", disabled: false },
-  { id: "02", name: "User Data", disabled: false }
+  { id: "02", name: "User Data", disabled: false },
 ];
-
-
 
 const tabs = [
   <div id="01">
@@ -117,7 +114,7 @@ const tabs = [
       <br />
       <UserData></UserData>
     </article>
-  </div>
+  </div>,
 ];
 
 export default function DTT() {
@@ -126,5 +123,44 @@ export default function DTT() {
       <Title></Title>
       <Tabs tabSelect={"01"} tabsInfo={tabsInfo} tabs={tabs} />
     </div>
-  )
+  );
+}
+
+export function DTTtest() {
+  const [left, set_left] = useState(1);
+  const [right, set_right] = useState(1000);
+  const [update, setUpdate] = useState();
+
+  return (
+    <div>
+      leftEndPosition
+      <input id="dttLeft" type="number" />
+      rightEndPosition
+      <input id="dttRight" type="number" />
+      <button
+        onClick={() => {
+          let Left = document.getElementById("dttLeft");
+          let Right = document.getElementById("dttRight");
+          if (Left && Right) {
+            set_left(Number(Left.value));
+            set_right(Number(Right.value));
+            setUpdate(undefined);
+            setTimeout(() => {
+              setUpdate(true);
+            }, 500);
+          }
+        }}
+      >
+        Go
+      </button>
+      {update && (
+        <DrawingTracesTool
+          context="gene"
+          id={"asdf123"}
+          leftEndPosition={left}
+          rightEndPosition={right}
+        />
+      )}
+    </div>
+  );
 }
