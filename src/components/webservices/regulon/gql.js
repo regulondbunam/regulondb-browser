@@ -38,7 +38,7 @@ export const fragment_ALIGMENTMATRIX = gql`fragment ALIGMENTMATRIX on AligmentMa
 export const fragment_EVOLUTIONARYCONSERVATION = gql`fragment EVOLUTIONARYCONSERVATION on EvolutionaryConservation {
     urlPromoterTargetGene
     urlRegulatorTargetGene
-  }` 
+  }`
 
 export const fragment_GeneTerms = gql`fragment GeneTerms on GeneTermsObject {
     gene_id
@@ -238,7 +238,6 @@ query GetRegulonInfo(
     $limit: Int = 10
     $organismName: String
     $page: Int = 0
-    $properties: [String] = ["transcriptionFactor.id", "transcriptionFactor.name"]
     $search: String
   ) {
     getRegulonBy(
@@ -247,7 +246,6 @@ query GetRegulonInfo(
       limit: $limit
       organismName: $organismName
       page: $page
-      properties: $properties
       search: $search
     ) {
       data {
