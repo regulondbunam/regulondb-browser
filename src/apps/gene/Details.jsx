@@ -14,6 +14,7 @@ function scrollFunction() {
     document.body.scrollTop > 124 ||
     document.documentElement.scrollTop > 124
   ) {
+    document.getElementById("adjust_view").style.height = '140px';
     //feedbackTool
     document.getElementById("cover_gene_detailsA").style.top = "0";
     document.getElementById("feedbackTool").style.top = `0px`;
@@ -29,6 +30,7 @@ function scrollFunction() {
     document.getElementById("cover_gene_UpperButton").style.display = "initial";
     //document.getElementById("feedbackTool").style.display = "initial";
   } else {
+    document.getElementById("adjust_view").style.height = '0px';
     document.getElementById("feedbackTool").style.top = `150px`;
     document.getElementById("cover_gene_UpperButton").style.display = "none";
     let coverPosition = 124 - document.documentElement.scrollTop;
@@ -164,6 +166,7 @@ function Details() {
           tabSelect={"description"}
         />
       </div>
+      <div id="adjust_view" style={{height: "0px",}} />
       <DrawingTracesTool
         context="gene"
         id={_data.data[0]._id}
