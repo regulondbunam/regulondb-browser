@@ -167,8 +167,8 @@ function Details() {
       <DrawingTracesTool
         context="gene"
         id={_data.data[0]._id}
-        leftEndPosition={_data.data[0].gene.leftEndPosition - 1000}
-        rightEndPosition={_data.data[0].gene.rightEndPosition + 1000}
+        leftEndPosition={_data.data[0].gene.leftEndPosition}
+        rightEndPosition={_data.data[0].gene.rightEndPosition}
       />
       <article>
         <div id="gene_description" className="description">
