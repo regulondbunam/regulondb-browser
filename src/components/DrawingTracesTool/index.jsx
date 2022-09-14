@@ -1,24 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Style from "./dtt.module.css";
+import Controls from "./controls";
+//import Style from "./dtt.module.css";
 import { useNavigate } from "react-router-dom";
 import WebServices from "../webservices/WebServices";
 import { Track } from "../GeneticElementsGraphicLibrary";
-import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import ZoomInIcon from "@mui/icons-material/ZoomIn";
-import ZoomOutIcon from "@mui/icons-material/ZoomOut";
-import RestartAltIcon from "@mui/icons-material/RestartAlt";
-import ZoomInMapIcon from "@mui/icons-material/ZoomInMap";
-import ZoomOutMapIcon from "@mui/icons-material/ZoomOutMap";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import FileDownloadIcon from "@mui/icons-material/FileDownload";
-import ImageIcon from "@mui/icons-material/Image";
-import LandscapeIcon from "@mui/icons-material/Landscape";
-import Divider from "@mui/material/Divider";
-import Tooltip from "@mui/material/Tooltip";
-import WarningAmberIcon from "@mui/icons-material/WarningAmber";
-import { ReImg } from "reimg";
+
+
+
 
 const DrawingTracesTool = ({
   id,
@@ -26,8 +14,10 @@ const DrawingTracesTool = ({
   context = "DNA",
   leftEndPosition,
   rightEndPosition,
+  fragments,
   custom_geneticElements,
 }) => {
+  console.log("fragments",fragments);
   const [_expand, set_expand] = useState(false);
   const [_geneticElements, set_geneticElements] = useState();
   //const [_state, set_state] = useState();
@@ -41,10 +31,10 @@ const DrawingTracesTool = ({
   let move = parseInt(`${(_posRight - _posLeft) * 0.15}`, 10);
   let zoom = parseInt(`${(_posRight - _posLeft) * 0.25}`, 10);
   let variables = {
-    leftEndPosition: _posLeft,
-    rightEndPosition: _posRight,
+    leftEndPosition: !_expand ? (_posLeft-1000) : _posLeft,
+    rightEndPosition: !_expand ? (_posRight+1000) : _posRight,
   };
-
+  //console.log(_expand,variables.leftEndPosition+","+variables.rightEndPosition);
   useEffect(() => {
     let drawPlace = document.getElementById(`divCanvas_${context}Context${id}`);
     if (drawPlace) {
@@ -73,7 +63,7 @@ const DrawingTracesTool = ({
           A = _geneticElements;
         }
 
-        drawGenes.draw(A, _posLeft, _posRight);
+        drawGenes.draw(A, variables.leftEndPosition, variables.rightEndPosition);
         /*setTimeout(function () {
           set_geneticElements(undefined);
           set_posLeft(_posLeft - move);
@@ -94,61 +84,30 @@ const DrawingTracesTool = ({
   ]);
 
 
-  let aviso = "The Drawing Traces Tool is still under development so some elements may not be displayed properly, please if you detect any problem download the generated image and report it in the User Feedback section. "
-
+  
   return (
     <div>
-      <div style={{ position: "absolute" }}>
-        <h2 style={{ fontSize: "10px", float: "left" }}>Drawing Traces Tool</h2>
-        <Tooltip title={aviso}>
-          <WarningAmberIcon fontSize="small" color="warning" />
-        </Tooltip>
-      </div>
       <table>
         <thead>
           <tr>
-            <th style={{ textAlign: "center" }}>
-              <button
-                className={Style.iconButton}
-                onClick={() => {
-                  set_geneticElements(undefined);
-                  set_posLeft(_posLeft - move);
-                  set_posRight(_posRight - move);
-                }}
-              >
-                <ArrowLeftIcon sx={{ color: "white" }} />
-              </button>
-              <button
-                className={Style.iconButton}
-                onClick={() => {
-                  set_geneticElements(undefined);
-                  set_expand(true);
-                  set_posLeft(_posLeft + zoom);
-                  set_posRight(_posRight - zoom);
-                }}
-              >
-                <ZoomInIcon sx={{ color: "white" }} />
-              </button>
-              <button
-                className={Style.iconButton}
-                onClick={() => {
-                  set_geneticElements(undefined);
-                  set_posLeft(_posLeft - zoom);
-                  set_posRight(_posRight + zoom);
-                }}
-              >
-                <ZoomOutIcon sx={{ color: "white" }} />
-              </button>
-              <button
-                className={Style.iconButton}
-                onClick={() => {
-                  set_geneticElements(undefined);
-                  set_posLeft(_posLeft + move);
-                  set_posRight(_posRight + move);
-                }}
-              >
-                <ArrowRightIcon sx={{ color: "white" }} />
-              </button>
+            <th>
+              <Controls 
+                setGeneticElements={(ge)=>{set_geneticElements(ge)}}
+                move={move}
+                posLeft={_posLeft}
+                setPosLeft={(left)=>{set_posLeft(left)}}
+                setPosRight={(right)=>{set_posRight(right)}}
+                posRight={_posRight}
+                setExpand={(isEx)=>{set_expand(isEx)}}
+                zoom={zoom}
+                expand={_expand}
+                context={context}
+                leftEndPosition={leftEndPosition}
+                rightEndPosition={rightEndPosition}
+                drawPlaceId={drawPlaceId}
+                canvaId={canvaId}
+                drawPlaceName={drawPlaceName}
+              />
             </th>
           </tr>
         </thead>
@@ -170,43 +129,6 @@ const DrawingTracesTool = ({
               />
             </td>
           </tr>
-          <tr>
-            <td style={{ textAlign: "center" }}>
-              {context === "gene" ? (
-                <button
-                  className="iconButton"
-                  onClick={() => {
-                    set_geneticElements(undefined);
-                    set_expand(!_expand);
-                    if (!_expand) {
-                      set_posLeft(leftEndPosition - 500);
-                      set_posRight(rightEndPosition);
-                    } else {
-                      set_posLeft(leftEndPosition);
-                      set_posRight(rightEndPosition);
-                    }
-                  }}
-                >
-                  {!_expand ? <ZoomInMapIcon /> : <ZoomOutMapIcon />}
-                </button>
-              ) : null}
-              <button
-                className="iconButton"
-                onClick={() => {
-                  set_geneticElements(undefined);
-                  set_posLeft(leftEndPosition);
-                  set_posRight(rightEndPosition);
-                }}
-              >
-                <RestartAltIcon sx={{ color: "white" }} />
-              </button>
-              <DownloadOptions
-                drawPlaceId={drawPlaceId}
-                canvaId={canvaId}
-                name={drawPlaceName}
-              />
-            </td>
-          </tr>
         </tbody>
       </table>
     </div>
@@ -215,92 +137,14 @@ const DrawingTracesTool = ({
 
 export default DrawingTracesTool;
 
-function DownloadOptions({ drawPlaceId, canvaId, name }) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const _downloadPNG = () => {
-    let svg = document.getElementById(canvaId);
-    ReImg.fromSvg(svg).toCanvas(function (canvas) {
-      let url = canvas.toDataURL("image/png");
-      let link = document.createElement("a");
-      link.download = name + ".png";
-      link.href = url;
-      link.click();
-    });
-  };
-
-  const _downloadSVG = () => {
-    const svg = document.getElementById(drawPlaceId).innerHTML;
-    const blob = new Blob([svg.toString()]);
-    const element = document.createElement("a");
-    element.download = name + ".svg";
-    element.href = window.URL.createObjectURL(blob);
-    element.click();
-    element.remove();
-  };
-
-  return (
-    <React.Fragment>
-      <button className="iconButton" onClick={handleClick}>
-        <FileDownloadIcon sx={{ color: "white" }} />
-      </button>
-      <Menu
-        anchorEl={anchorEl}
-        id="account-menu"
-        open={open}
-        onClose={handleClose}
-        onClick={handleClose}
-        PaperProps={{
-          elevation: 0,
-          sx: {
-            overflow: "visible",
-            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-            mt: 1.5,
-            "& .MuiAvatar-root": {
-              width: 32,
-              height: 32,
-              ml: -0.5,
-              mr: 1,
-            },
-            "&:before": {
-              content: '""',
-              display: "block",
-              position: "absolute",
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: "background.paper",
-              transform: "translateY(-50%) rotate(45deg)",
-              zIndex: 0,
-            },
-          },
-        }}
-        transformOrigin={{ horizontal: "right", vertical: "top" }}
-        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-      >
-        <MenuItem onClick={_downloadPNG}>
-          <ImageIcon /> PNG file
-        </MenuItem>
-        <MenuItem onClick={_downloadSVG}>
-          <LandscapeIcon /> SVG file
-        </MenuItem>
-        <Divider />
-        <MenuItem onClick={_downloadSVG}>Data JSON</MenuItem>
-      </Menu>
-    </React.Fragment>
-  );
-}
 
 /**
+
+
+              
+              
+              
  * 
  * <div
             style={{
