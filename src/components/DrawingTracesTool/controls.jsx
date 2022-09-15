@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Style from "./dtt.module.css";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
@@ -20,23 +20,26 @@ import Divider from "@mui/material/Divider";
 import { ReImg } from "reimg";
 
 function Controls({
-  setGeneticElements,
-  move,
-  posLeft,
-  setPosLeft,
-  setPosRight,
-  posRight,
-  setExpand,
-  expand,
-  zoom,
-  context,
-  strand,
   leftEndPosition,
   rightEndPosition,
+  currentLeftEndPosition,
+  currentRightEndPosition,
+  regulatoryRegion,
+  move,
+  zoom,
+  setGeneticElements,
+  setPosLeft,
+  setPosRight,
+  context,
+  strand,
   drawPlaceId,
   canvaId,
   drawPlaceName,
+  expand,
+  set_expand
 }) {
+  move = parseInt(`${(currentRightEndPosition - currentLeftEndPosition) * move}`, 10);
+  zoom = parseInt(`${(currentRightEndPosition - currentLeftEndPosition) * zoom}`, 10);
   let aviso =
     "The Drawing Traces Tool is still under development so some elements may not be displayed properly, please if you detect any problem download the generated image and report it in the User Feedback section. ";
   return (
@@ -59,10 +62,10 @@ function Controls({
                 className="iconButton"
                 onClick={() => {
                   setGeneticElements(undefined);
-                  setExpand(!expand);
+                  set_expand(!expand);
                   if (!expand) {
-                    setPosLeft(leftEndPosition - 750);
-                    setPosRight(leftEndPosition + 250);
+                    setPosLeft(regulatoryRegion.leftEndPosition);
+                    setPosRight(regulatoryRegion.rightEndPosition);
                   } else {
                     setPosLeft(leftEndPosition);
                     setPosRight(rightEndPosition);
@@ -78,7 +81,7 @@ function Controls({
               className="iconButton"
               onClick={() => {
                 setGeneticElements(undefined);
-                setExpand(false);
+                set_expand(false);
                 setPosLeft(leftEndPosition);
                 setPosRight(rightEndPosition);
               }}
@@ -90,8 +93,8 @@ function Controls({
             <Button
               onClick={() => {
                 setGeneticElements(undefined);
-                setPosLeft(posLeft - move);
-                setPosRight(posRight - move);
+                setPosLeft(currentLeftEndPosition - move);
+                setPosRight(currentRightEndPosition - move);
               }}
             >
               <ArrowLeftIcon sx={{ color: "white" }} />
@@ -101,9 +104,9 @@ function Controls({
             <Button
               onClick={() => {
                 setGeneticElements(undefined);
-                setExpand(true);
-                setPosLeft(posLeft + zoom);
-                setPosRight(posRight - zoom);
+                set_expand(true);
+                setPosLeft(currentLeftEndPosition + zoom);
+                setPosRight(currentRightEndPosition - zoom);
               }}
             >
               <ZoomInIcon sx={{ color: "white" }} />
@@ -113,8 +116,8 @@ function Controls({
             <Button
               onClick={() => {
                 setGeneticElements(undefined);
-                setPosLeft(posLeft - zoom);
-                setPosRight(posRight + zoom);
+                setPosLeft(currentLeftEndPosition - zoom);
+                setPosRight(currentRightEndPosition + zoom);
               }}
             >
               <ZoomOutIcon sx={{ color: "white" }} />
@@ -124,8 +127,8 @@ function Controls({
             <Button
               onClick={() => {
                 setGeneticElements(undefined);
-                setPosLeft(posLeft + move);
-                setPosRight(posRight + move);
+                setPosLeft(currentLeftEndPosition + move);
+                setPosRight(currentRightEndPosition + move);
               }}
             >
               <ArrowRightIcon sx={{ color: "white" }} />

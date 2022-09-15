@@ -172,9 +172,12 @@ function Details() {
       <div id="adjust_view" style={{height: "0px",}} />
       <DrawingTracesTool
         context="gene"
+        height={200}
         id={_data.data[0]._id}
         leftEndPosition={_data.data[0].gene.leftEndPosition}
         rightEndPosition={_data.data[0].gene.rightEndPosition}
+        fragments={_data.data[0].gene.fragments}
+        strand={_data.data[0].gene.strand}
       />
       <article>
         <div id="gene_description" className="description">
