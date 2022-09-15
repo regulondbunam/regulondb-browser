@@ -44,7 +44,7 @@ function scrollFunction() {
   }
 }
 
-var observer = new IntersectionObserver(
+let observer = new IntersectionObserver(
   function (entries) {
     let detail = undefined;
     if (entries[0].intersectionRatio >= 0.1) {
@@ -106,6 +106,9 @@ function Details() {
         token.length = `${
           geneData.gene.rightEndPosition - geneData.gene.leftEndPosition
         }bp`;
+      }else{
+        geneData.gene.strand && (token.strand = geneData.gene.strand)
+        geneData.gene.fragments &&(token.fragments = geneData.gene.fragments)
       }
       if (geneData.products) {
         if (geneData.products.length > 0) {
