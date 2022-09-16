@@ -14,6 +14,7 @@ function scrollFunction() {
     document.body.scrollTop > 124 ||
     document.documentElement.scrollTop > 124
   ) {
+    document.getElementById("adjust_view").style.height = '140px';
     //feedbackTool
     document.getElementById("cover_gene_detailsA").style.top = "0";
     document.getElementById("feedbackTool").style.top = `0px`;
@@ -29,6 +30,7 @@ function scrollFunction() {
     document.getElementById("cover_gene_UpperButton").style.display = "initial";
     //document.getElementById("feedbackTool").style.display = "initial";
   } else {
+    document.getElementById("adjust_view").style.height = '0px';
     document.getElementById("feedbackTool").style.top = `150px`;
     document.getElementById("cover_gene_UpperButton").style.display = "none";
     let coverPosition = 124 - document.documentElement.scrollTop;
@@ -42,7 +44,7 @@ function scrollFunction() {
   }
 }
 
-var observer = new IntersectionObserver(
+let observer = new IntersectionObserver(
   function (entries) {
     let detail = undefined;
     if (entries[0].intersectionRatio >= 0.1) {
@@ -104,6 +106,9 @@ function Details() {
         token.length = `${
           geneData.gene.rightEndPosition - geneData.gene.leftEndPosition
         }bp`;
+      }else{
+        geneData.gene.strand && (token.strand = geneData.gene.strand)
+        geneData.gene.fragments &&(token.fragments = geneData.gene.fragments)
       }
       if (geneData.products) {
         if (geneData.products.length > 0) {
@@ -164,11 +169,15 @@ function Details() {
           tabSelect={"description"}
         />
       </div>
+      <div id="adjust_view" style={{height: "0px",}} />
       <DrawingTracesTool
         context="gene"
+        height={200}
         id={_data.data[0]._id}
         leftEndPosition={_data.data[0].gene.leftEndPosition}
         rightEndPosition={_data.data[0].gene.rightEndPosition}
+        fragments={_data.data[0].gene.fragments}
+        strand={_data.data[0].gene.strand}
       />
       <article>
         <div id="gene_description" className="description">

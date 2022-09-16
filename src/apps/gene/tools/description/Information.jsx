@@ -27,7 +27,6 @@ export default function Information({ gene, allCitations }) {
 
   let size = gene?.rightEndPosition - gene?.leftEndPosition;
 
-
   return (
     <Paper>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -115,7 +114,12 @@ export default function Information({ gene, allCitations }) {
                 {gene?.sequence && (
                   <tr>
                     <td style={{ fontWeight: "bold" }}>Sequence:</td>
-                    <td><ViewSequence sequence={gene.sequence} title={`gene_${gene.name}_sequence`}  /></td>
+                    <td>
+                      <ViewSequence
+                        sequence={gene.sequence}
+                        title={`gene_${gene.name}_sequence`}
+                      />
+                    </td>
                   </tr>
                 )}
                 {gene?.gcContent && (
@@ -131,26 +135,33 @@ export default function Information({ gene, allCitations }) {
                   </tr>
                 )}
                 {gene?.note && (
-                <tr>
-                  <td colSpan={2}>
-                    <Accordion>
-                      <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel2a-content"
-                        id="panel2a-header"
-                      >
-                      <p style={{ fontWeight: "bold" }} >Notes</p>
-                      </AccordionSummary>
-                      <AccordionDetails>
-                        <p dangerouslySetInnerHTML={{__html: CitationsNote(allCitations,gene.note)}} />
-                      </AccordionDetails>
-                    </Accordion>
-                  </td>
-                </tr>
-            )}
+                  <tr>
+                    <td colSpan={2}>
+                      <Accordion>
+                        <AccordionSummary
+                          expandIcon={<ExpandMoreIcon />}
+                          aria-controls="panel2a-content"
+                          id="panel2a-header"
+                        >
+                          <p style={{ fontWeight: "bold" }}>Notes</p>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                          <p
+                            dangerouslySetInnerHTML={{
+                              __html: CitationsNote(allCitations, gene.note),
+                            }}
+                          />
+                        </AccordionDetails>
+                      </Accordion>
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
+          {gene?.fragments &&(
+            <Fragments fragments={gene.fragments} strand={gene.strand} />
+          )}
           {gene?.multifunTerms && (
             <MultifunTerms multifunTerms={gene?.multifunTerms} />
           )}
@@ -158,6 +169,52 @@ export default function Information({ gene, allCitations }) {
       )}
       <br />
     </Paper>
+  );
+}
+
+function Fragments({ fragments, strand }) {
+  return (
+    <div style={{ paddingLeft: "5%" }}>
+      <h3>Fragments</h3>
+      <div style={{ paddingLeft: "5%" }}>
+        {fragments.map((fragment, index) => {
+          return (
+            <div key={`fragmentInfo_${fragment.id}_${index}`}>
+              <h4>
+                {fragment.name}{" "}
+                <samp style={{ fontSize: "9px" }}>{fragment.id}</samp>
+              </h4>
+              <table className="table_auto table_content">
+                <tbody>
+                  {fragment?.leftEndPosition && (
+                    <tr>
+                      <td style={{ fontWeight: "bold" }}>Position:</td>
+                      <td>
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                          <p>{fragment?.leftEndPosition}</p>
+                          {strand === "reverse" ? (
+                            <ArrowBackIcon fontSize="small" />
+                          ) : (
+                            <ArrowForwardIcon fontSize="small" />
+                          )}
+                          <p>{fragment?.rightEndPosition}</p>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                  {fragment?.sequence && (
+                  <tr>
+                    <td style={{ fontWeight: "bold" }}>Sequence:</td>
+                    <td><ViewSequence sequence={fragment.sequence} title={`fragment_${fragment.name}_sequence`}  /></td>
+                  </tr>
+                )}
+                </tbody>
+              </table>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 

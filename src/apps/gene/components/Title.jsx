@@ -79,6 +79,8 @@ export const Title = ({ title }) => {
     position,
     locations,
     externalCrossReferences,
+    fragments,
+    strand
   } = geneToken;
   return (
     <div id={IDTitle}>
@@ -144,6 +146,15 @@ export const Title = ({ title }) => {
                     ) : (
                       <tr></tr>
                     )}
+                    {
+                      fragments && (
+                        <tr >
+                          <td colSpan={"2"} >
+                          <FragmentsTable fragments={fragments} strand={strand} />
+                          </td>
+                        </tr>
+                      )
+                    }
                     {length ? (
                       <tr>
                         <td style={{ fontWeight: "bold" }}>Length:</td>
@@ -186,3 +197,32 @@ export const Title = ({ title }) => {
 };
 
 export default Title;
+
+function FragmentsTable({fragments = [],strand}){
+  let row = "->";
+  strand === "reverse" && (row = "<-");
+  return (
+    <div>
+      <table className="table_content" >
+      <thead>
+        <tr>
+          <th style={{fontSize: "12px"}} >Fragmented gene in {fragments.length} parts</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          fragments.map((fragment,index)=>{
+            let position = `${fragment.leftEndPosition} ${row} ${fragment.rightEndPosition}`;
+            let length = `${fragment.rightEndPosition - fragment.leftEndPosition}bp`;
+            return(
+              <tr key={`gene_fragment_title_${fragment.id}_${index}`} >
+                <td style={{fontSize: "12px"}} >{fragment.name} : {position}({length})</td>
+              </tr>
+            )
+          })
+        }
+      </tbody>
+    </table>
+    </div>
+  )
+}
