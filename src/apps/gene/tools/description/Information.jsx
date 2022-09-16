@@ -159,7 +159,7 @@ export default function Information({ gene, allCitations }) {
               </tbody>
             </table>
           </div>
-          {gene?.fragments &&(
+          {gene.fragments.length > 0 &&(
             <Fragments fragments={gene.fragments} strand={gene.strand} />
           )}
           {gene?.multifunTerms && (
