@@ -27,8 +27,8 @@ class RegulatoryRegion {
         ? fragmentA.rightEndPosition
         : fragmentB.rightEndPosition
     );
-    this.leftEndPosition = fragments[0].leftEndPosition
-    this.rightEndPosition = fragments[0].rightEndPosition
+    this.leftEndPosition = fragments[0].leftEndPosition;
+    this.rightEndPosition = fragments[0].rightEndPosition;
   }
 
   getRegion() {
@@ -37,7 +37,7 @@ class RegulatoryRegion {
         leftEndPosition: this.leftEndPosition - 750,
         rightEndPosition: this.leftEndPosition + 500,
       };
-    }else{
+    } else {
       return {
         leftEndPosition: this.rightEndPosition - 750,
         rightEndPosition: this.rightEndPosition + 500,
@@ -45,21 +45,19 @@ class RegulatoryRegion {
     }
   }
 
-  getCurrentLeftEndPosition(){
-    return this.currentLeftEndPosition
+  getCurrentLeftEndPosition() {
+    return this.currentLeftEndPosition;
   }
 
-  getCurrentRightEndPosition(){
-    return this.currentRightEndPosition
+  getCurrentRightEndPosition() {
+    return this.currentRightEndPosition;
   }
-
 }
 
 class DrawingTracesTool extends Component {
   drawPlaceId = `divCanvas_${this.props.context}Context${this.props.id}`;
   drawPlaceName = `${this.props.context}_${this.props.id}`;
   canvaId = `canvaGE_${this.props.id}`;
-  
 
   constructor(props) {
     super(props);
@@ -68,21 +66,29 @@ class DrawingTracesTool extends Component {
       this.props.fragments,
       this.props.leftEndPosition,
       this.props.rightEndPosition
-    )
+    );
     this.regulatoryRegion = Regulator.getRegion();
-    this.leftEndPosition = this.props.leftEndPosition ? this.props.leftEndPosition - 1000 : Regulator.getCurrentLeftEndPosition();
-    this.rightEndPosition = this.props.rightEndPosition ? this.props.rightEndPosition + 1000 : Regulator.getCurrentRightEndPosition();
+    this.leftEndPosition = this.props.leftEndPosition
+      ? this.props.leftEndPosition - 1000
+      : Regulator.getCurrentLeftEndPosition();
+    this.rightEndPosition = this.props.rightEndPosition
+      ? this.props.rightEndPosition + 1000
+      : Regulator.getCurrentRightEndPosition();
     this.state = {
       zoom: 0.25,
       move: 0.15,
-      currentLeftEndPosition: this.props.leftEndPosition ? this.props.leftEndPosition - 1000 : Regulator.getCurrentLeftEndPosition(),
-      currentRightEndPosition: this.props.rightEndPosition ? this.props.rightEndPosition + 1000 : Regulator.getCurrentRightEndPosition(),
+      currentLeftEndPosition: this.props.leftEndPosition
+        ? this.props.leftEndPosition - 1000
+        : Regulator.getCurrentLeftEndPosition(),
+      currentRightEndPosition: this.props.rightEndPosition
+        ? this.props.rightEndPosition + 1000
+        : Regulator.getCurrentRightEndPosition(),
       geneticElements: undefined,
       expand: false,
     };
   }
 
-  draw(currentLeftEndPosition, currentRightEndPosition, geneticElements){
+  draw(currentLeftEndPosition, currentRightEndPosition, geneticElements) {
     let drawPlace = document.getElementById(this.drawPlaceId);
     if (drawPlace) {
       if (geneticElements) {
@@ -106,20 +112,20 @@ class DrawingTracesTool extends Component {
             }
             _geneticElements.push(geneticElement);
           });
-          if(this.props.fragments){
-            this.props.fragments.forEach((fragment, index)=>{
+          if (this.props.fragments) {
+            this.props.fragments.forEach((fragment, index) => {
               _geneticElements.push({
                 _id: `${fragment.id}_${index}_GeneFragment`,
                 labelFont: "arial",
                 labelName: fragment.name,
                 leftEndPosition: fragment.leftEndPosition,
                 rightEndPosition: fragment.rightEndPosition,
-                objectType : "gene",
+                objectType: "gene",
                 strand: this.props.strand,
                 lineRGBColor: "45, 124, 255",
-                lineWidth: 4
-              })
-            })
+                lineWidth: 4,
+              });
+            });
           }
         } else {
           _geneticElements = geneticElements;
@@ -140,63 +146,58 @@ class DrawingTracesTool extends Component {
   }
 
   render() {
-    const { currentLeftEndPosition, currentRightEndPosition, geneticElements } = this.state;
+    const { currentLeftEndPosition, currentRightEndPosition, geneticElements } =
+      this.state;
     return (
       <div>
-        <table>
-          <thead>
-            <tr>
-              <th>
-                {Controls({
-                  leftEndPosition: this.leftEndPosition,
-                  rightEndPosition: this.rightEndPosition,
-                  strand: this.props.strand,
-                  context: this.props.context,
-                  ...this.state,
-                  drawPlaceId: this.drawPlaceId,
-                  canvaId: this.canvaId,
-                  drawPlaceName: this.drawPlaceName,
-                  regulatoryRegion: this.regulatoryRegion,
-                  set_expand: (expand) => {
-                    this.setState({ expand: expand });
-                  },
-                  setGeneticElements: (ge) => {
-                    this.setState({ geneticElements: ge });
-                  },
-                  setPosLeft: (left) => {
-                    this.setState({ currentLeftEndPosition: left });
-                  },
-                  setPosRight: (right) => {
-                    this.setState({ currentRightEndPosition: right });
-                  },
-                })}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                {!geneticElements && (
-                  <WebServices
-                    datamart_name="getGeneticElementsFromInterval"
-                    variables={{
-                        leftEndPosition: currentLeftEndPosition,
-                        rightEndPosition: currentRightEndPosition
-                    }}
-                    getData={(data) => {
-                        this.setState({ geneticElements: data.GE });
-                        this.draw(currentLeftEndPosition,currentRightEndPosition,data.GE)
-                    }}
-                  />
-                )}
-                <div
-                  style={{ height: `${this.props.height}px`, width: "100%" }}
-                  id={this.drawPlaceId}
-                />
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        {!geneticElements && (
+          <WebServices
+            datamart_name="getGeneticElementsFromInterval"
+            variables={{
+              leftEndPosition: currentLeftEndPosition,
+              rightEndPosition: currentRightEndPosition,
+            }}
+            getData={(data) => {
+              this.setState({ geneticElements: data.GE });
+              this.draw(
+                currentLeftEndPosition,
+                currentRightEndPosition,
+                data.GE
+              );
+            }}
+          />
+        )}
+        <div>
+          {Controls({
+            leftEndPosition: this.leftEndPosition,
+            rightEndPosition: this.rightEndPosition,
+            strand: this.props.strand,
+            context: this.props.context,
+            ...this.state,
+            drawPlaceId: this.drawPlaceId,
+            canvaId: this.canvaId,
+            drawPlaceName: this.drawPlaceName,
+            regulatoryRegion: this.regulatoryRegion,
+            set_expand: (expand) => {
+              this.setState({ expand: expand });
+            },
+            setGeneticElements: (ge) => {
+              this.setState({ geneticElements: ge });
+            },
+            setPosLeft: (left) => {
+              this.setState({ currentLeftEndPosition: left });
+            },
+            setPosRight: (right) => {
+              this.setState({ currentRightEndPosition: right });
+            },
+          })}
+        </div>
+        <div style={{overflow: "auto"}} >
+          <div
+            style={{ height: `${this.props.height}px`, width: "100%" }}
+            id={this.drawPlaceId}
+          />
+        </div>
       </div>
     );
   }
@@ -246,5 +247,3 @@ DrawingTracesTool.propTypes = {
 };
 
 export default DrawingTracesTool;
-
-
