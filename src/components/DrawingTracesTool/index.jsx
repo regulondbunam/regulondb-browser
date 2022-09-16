@@ -7,7 +7,7 @@ import { Track } from "../GeneticElementsGraphicLibrary";
 
 class RegulatoryRegion {
   constructor(strand, fragments, leftEndPosition, rightEndPosition) {
-    if (fragments) {
+    if (fragments.length > 0) {
       this.setFragments(fragments);
     } else {
       this.leftEndPosition = leftEndPosition;

@@ -216,7 +216,7 @@ function FragmentsTable({fragments = [],strand}){
             let length = `${fragment.rightEndPosition - fragment.leftEndPosition}bp`;
             return(
               <tr key={`gene_fragment_title_${fragment.id}_${index}`} >
-                <td style={{fontSize: "12px"}} >{fragment.name}-{position}({length})</td>
+                <td style={{fontSize: "12px"}} >{fragment.name} : {position}({length})</td>
               </tr>
             )
           })
