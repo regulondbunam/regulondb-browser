@@ -102,8 +102,15 @@ export default function WebServices({
               phrases: phrases,
             });
           }
-          
-          getState("done")
+          if(_data[datamart_name]?.pagination){
+            if(_data[datamart_name]?.pagination.totalResults === 0){
+              getState("no results")
+            }else{
+              getState("done")
+            }
+          }else{
+            getState("done")
+          }
           set_isFinish("finish");
         } catch (error) {
           getState("error");

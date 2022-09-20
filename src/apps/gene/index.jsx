@@ -5,7 +5,7 @@ import Details from "./Details";
 import Home from "./Home";
 import Title, { UpdateTitle } from "./components/Title";
 import "./gene.css";
-import {Feedback} from './components/Feedback'
+import { Feedback } from "./components/Feedback";
 
 function Gene() {
   const [id, setId] = useState();
@@ -13,20 +13,28 @@ function Gene() {
   let { geneId } = useParams();
 
   useEffect(() => {
-    
     if (!geneId) {
-      console.log(`geneId`, geneId);
+      //console.log(`geneId`, geneId);
       UpdateTitle({ title: "Gene" });
     } else {
       switch (_state) {
         case "loading":
-          UpdateTitle({ title:  `Loading... ${geneId}`, state: _state });
+          UpdateTitle({ title: `Loading... ${geneId}`, state: _state });
           break;
         case "error":
-          UpdateTitle({ title:  `Error to query ${geneId} information`, state: _state });
+          UpdateTitle({
+            title: `Error to query ${geneId} information`,
+            state: _state,
+          });
+          break;
+        case "no results":
+          UpdateTitle({
+            title: `Error, document with id ${geneId} was not found.`,
+            state: "error",
+          });
           break;
         default:
-          UpdateTitle({ title:  " ", state: _state });
+          UpdateTitle({ title: " ", state: _state });
           break;
       }
     }
@@ -41,22 +49,25 @@ function Gene() {
 
   return (
     <div>
-       <div className="cover_gene" id="cover_gene_detailsA" >
+      <div className="cover_gene" id="cover_gene_detailsA">
         <Title title={"Gene"} />
         <div className="feedback_tool" id="feedbackTool">
-         <Feedback/>
+          <Feedback />
         </div>
-       </div>
-       {!geneId && <Home />}
+      </div>
+      {!geneId && <Home />}
       {id && (
         <DataProvider
           datamart_name="getGenesBy"
           variables={{ advancedSearch: `'${id}'[_id]` }}
           getState={(state) => {
+            console.log("s_", state);
             set_state(state);
           }}
         >
-          <Details />
+          {_state === "done" && (
+            <Details />
+          )}
         </DataProvider>
       )}
     </div>
