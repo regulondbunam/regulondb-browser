@@ -6,10 +6,10 @@ import DrawingTracesTool from "../../../components/DrawingTracesTool";
 function RDBdata() {
   const [_formData, set_formData] = useState();
   const [_geneticElements, set_geneticElements] = useState();
-
+  console.log(_formData);
   return (
     <div>
-      <article>
+      <div style={{marginLeft: "10%"}}>
         <h2>Drawing Traces from RegulonDB</h2>
         <Form
           onDraw={(formData) => {
@@ -19,9 +19,10 @@ function RDBdata() {
         />
         <br />
         {_geneticElements && <Table />}
-        <br />
-      </article>
+      </div>
+      <div>
 
+      </div>
       {_formData && (
         <div>
           <DrawingTracesTool

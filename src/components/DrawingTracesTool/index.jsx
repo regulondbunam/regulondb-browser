@@ -127,7 +127,7 @@ class DrawingTracesTool extends Component {
 }
 
 const isContext = (props, propName, componentName) => {
-  const validContext = ["gene", "operon", undefined];
+  const validContext = ["gene", "operon","dti", undefined];
   if (!validContext.find((e) => e === props[propName])) {
     return new Error(
       "Invalid prop `" +
@@ -143,7 +143,7 @@ const isContext = (props, propName, componentName) => {
 };
 
 const isStrand = (props, propName, componentName) => {
-  const validContext = ["forward", "reverse"];
+  const validContext = ["forward", "reverse", "both"];
   if (!validContext.find((e) => e === props[propName])) {
     return new Error(
       "Invalid prop `" +
@@ -165,6 +165,8 @@ DrawingTracesTool.propTypes = {
   context: isContext,
   leftEndPosition: PropTypes.number,
   rightEndPosition: PropTypes.number,
+  covered:PropTypes.bool,
+  objectType:PropTypes.array,
   //fragments: PropTypes.array,
   strand: isStrand,
   custom_geneticElements: PropTypes.array,

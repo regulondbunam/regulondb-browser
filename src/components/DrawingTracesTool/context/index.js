@@ -35,9 +35,10 @@ class DttContext {
         this.leftEndPosition = this.props.leftEndPosition;
         this.rightEndPosition = this.props.rightEndPosition;
         break;
+      
       default:
-        this.leftEndPosition = undefined
-        this.rightEndPosition = undefined
+        this.leftEndPosition = this.props.leftEndPosition;
+        this.rightEndPosition = this.props.rightEndPosition;
         console.error("context no identificado")
         break;
     }

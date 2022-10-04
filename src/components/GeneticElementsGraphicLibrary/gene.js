@@ -60,6 +60,7 @@ export default function DrawGene({
   const rowW = () => {
     return body_height * gene_dp.rowSize;
   };
+  //console.log(gene_x)
   const lx1 = gene_width + dna.x + gene_x;
   const ly1 = body_height;
   const lx2 = gene_width + dna.x - rowW() + gene_x;
@@ -90,7 +91,8 @@ export default function DrawGene({
     body_height / 2 +
     " z"
   );
-  gene.move(posX, posY);
+  //console.log(posX);
+  //gene.move(posX, posY);
   gene.id(id);
   gene.fill(color);
   gene.stroke(stroke);
