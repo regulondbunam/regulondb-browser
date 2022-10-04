@@ -92,7 +92,7 @@ export default function DrawGene({
     " z"
   );
   //console.log(posX);
-  //gene.move(posX, posY);
+  gene.move(posX, posY);
   gene.id(id);
   gene.fill(color);
   gene.stroke(stroke);

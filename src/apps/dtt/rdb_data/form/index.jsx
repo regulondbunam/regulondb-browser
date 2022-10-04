@@ -36,8 +36,8 @@ function Form({
 }) {
   const [_strand, set_strand] = useState("both");
   const [_show, set_show] = useState(showForm);
-  const [_leftEndPosition, set_leftEndPosition] = useState(70387);
-  const [_rightEndPosition, set_rightEndPosition] = useState(71265);
+  const [_leftEndPosition, set_leftEndPosition] = useState(200);
+  const [_rightEndPosition, set_rightEndPosition] = useState(12000);
   const [_covered, set_covered] = useState(false);
   const [_geneticElements, set_geneticElements] = useState(geneticElementsData);
 

@@ -7,6 +7,7 @@ import { useState } from "react";
 
 function Table({geneticElements}) {
     const [_show, set_show] = useState(true);
+    console.log(geneticElements)
     return ( 
         <Box
         sx={{

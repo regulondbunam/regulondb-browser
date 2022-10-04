@@ -78,8 +78,8 @@ class DrawingTracesTool extends Component {
               rightEndPosition: currentRightEndPosition,
             }}
             getData={(data) => {
+              this.props.getGeneticElements(data.GE)
               this.setState({ geneticElements: data.GE });
-              
               this.draw(
                 currentLeftEndPosition,
                 currentRightEndPosition,
@@ -158,6 +158,10 @@ const isStrand = (props, propName, componentName) => {
   }
 };
 
+DrawingTracesTool.defaultProps = {  
+  getGeneticElements: ()=>{}
+} 
+
 DrawingTracesTool.propTypes = {
   id: PropTypes.string.isRequired,
   relatedIds: PropTypes.array,
@@ -170,6 +174,7 @@ DrawingTracesTool.propTypes = {
   //fragments: PropTypes.array,
   strand: isStrand,
   custom_geneticElements: PropTypes.array,
+  getGeneticElements: PropTypes.func
 };
 
 export default DrawingTracesTool;
