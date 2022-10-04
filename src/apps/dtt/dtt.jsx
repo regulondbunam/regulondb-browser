@@ -117,7 +117,7 @@ const tabs = [
   </div>,
 ];
 
-export default function DTT() {
+export default function DTT({params,embed}) {
   return (
     <div>
       <Title></Title>

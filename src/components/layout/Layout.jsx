@@ -1,12 +1,18 @@
 import React from "react";
 import Header from "./header/Header";
 import Menu from "./menu/Menu";
+import { useLocation } from 'react-router-dom';
 import { Observer } from "./Observer";
 
 const Layout = ({ children }) => {
+  let location = useLocation();
+  const isEmbed = location.pathname.includes("/embed")
   const isHome =
     window.location.pathname === "/home" || window.location.pathname === "/";
   //console.log(window.location.pathname);
+  if (isEmbed) {
+    return children
+  }
   return (
     <div>
       <Observer />
