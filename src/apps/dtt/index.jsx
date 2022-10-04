@@ -10,12 +10,12 @@ const tabsInfo = [
 ];
 
 const tabs = [
-  <article id="01">
+  <div id="01">
     <RDBdata />
-  </article>,
-  <article id="02">
+  </div>,
+  <div id="02">
       <UserData></UserData>
-  </article>,
+  </div>,
 ];
 
 function DrawingTracesInterface({ params, embed }) {

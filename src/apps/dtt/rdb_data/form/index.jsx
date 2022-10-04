@@ -9,7 +9,7 @@ import Switch from "@mui/material/Switch";
 import Select from "@mui/material/Select";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import "./form.css";
@@ -28,7 +28,7 @@ const geneticElementsData = [
 ];
 
 function Form({
-  onGo = () => {},
+  onDraw = () => {},
   onReset = () => {},
   showForm = true,
   minbp = 1,
@@ -56,6 +56,17 @@ function Form({
     }
     console.log(new_GE);
     set_geneticElements(new_GE);
+  };
+
+  const _onDraw = () => {
+    set_show(false)
+    onDraw({
+      covered: _covered,
+      leftEndPosition: _leftEndPosition,
+      objectType: _geneticElements,
+      rightEndPosition: _rightEndPosition,
+      strand: _strand,
+    })
   };
 
   return (
@@ -235,14 +246,56 @@ function Form({
             <hr />
             <div className="rdb_inputButton">
               <div>
-                <Button sx={{marginRight: "5px"}} variant="contained" size="medium" color="secondary" >Draw Track</Button>
-                <Button sx={{marginRight: "2px"}} variant="contained" size="medium" >Reset</Button>
-                <Button sx={{marginRight: "2px"}} variant="outlined" size="medium" >Demo</Button>
+                <Button
+                  sx={{ marginRight: "5px" }}
+                  variant="contained"
+                  size="medium"
+                  color="secondary"
+                  onClick={_onDraw}
+                >
+                  Draw Track
+                </Button>
+                <Button
+                  sx={{ marginRight: "2px" }}
+                  variant="contained"
+                  size="medium"
+                  onClick={()=>{
+                    set_show(true)
+                    onReset()
+                  }}
+                >
+                  Reset
+                </Button>
+                <Button
+                  sx={{ marginRight: "2px" }}
+                  variant="outlined"
+                  size="medium"
+                >
+                  Demo
+                </Button>
               </div>
               <div>
-                <Button sx={{marginRight: "2px"}} variant="outlined" size="small" >Save Form</Button>
-                <Button sx={{marginRight: "2px"}} variant="outlined" size="small" >Load Form</Button>
-                <Button sx={{marginRight: "2px"}} variant="outlined" size="small" >Create Embed</Button>
+                <Button
+                  sx={{ marginRight: "2px" }}
+                  variant="outlined"
+                  size="small"
+                >
+                  Save Form
+                </Button>
+                <Button
+                  sx={{ marginRight: "2px" }}
+                  variant="outlined"
+                  size="small"
+                >
+                  Load Form
+                </Button>
+                <Button
+                  sx={{ marginRight: "2px" }}
+                  variant="outlined"
+                  size="small"
+                >
+                  Create Embed
+                </Button>
               </div>
             </div>
             <br />
