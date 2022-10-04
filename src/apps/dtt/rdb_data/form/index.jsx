@@ -3,23 +3,27 @@ import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import FormHelperText from "@mui/material/FormHelperText";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
 import Select from "@mui/material/Select";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import "./form.css";
 import { useState } from "react";
 
-const geneticElementData = [
-  { objectType: "", name: "gene" },
-  { objectType: "", name: "promoter" },
-  { objectType: "", name: "operon" },
-  { objectType: "", name: "tf binding site" },
-  { objectType: "", name: "rna" },
-  { objectType: "", name: "riboswitch" },
-  { objectType: "", name: "traslational attenuattor" },
-  { objectType: "", name: "trascriptional attenuattor" },
-  { objectType: "", name: "ppGpp" },
+const geneticElementsData = [
+  "gene",
+  "promoter",
+  "operon",
+  "tf binding site",
+  "rna",
+  "riboswitch",
+  "transnational_attenuator",
+  "transcriptional_attenuator",
+  "ppGpp",
 ];
 
 function Form({
@@ -28,8 +32,29 @@ function Form({
   minbp = 1,
   maxbp = 4639676,
 }) {
-  const [strand, set_strand] = useState("both");
+  const [_strand, set_strand] = useState("both");
   const [_show, set_show] = useState(true);
+  const [_leftEndPosition, set_leftEndPosition] = useState(200);
+  const [_rightEndPosition, set_rightEndPosition] = useState(3000);
+  const [_covered, set_covered] = useState(false);
+  const [_geneticElements, set_geneticElements] = useState(geneticElementsData);
+
+  const handleGeneticElementSelection = (event) => {
+    const element_n = event.target.value
+    let new_GE = [];
+    if (_geneticElements.find((e) => e === element_n)) {
+      _geneticElements.forEach((element) => {
+        element !== element_n && new_GE.push(element);
+      });
+      console.log("delete",element_n);
+    } else {
+      new_GE =  new_GE.concat(_geneticElements);
+      new_GE.push(element_n);
+      console.log("up",element_n);
+    }
+    console.log(new_GE);
+    set_geneticElements(new_GE);
+  };
 
   return (
     <div className="dtt_form">
@@ -54,18 +79,21 @@ function Form({
           <h3>Track selection form</h3>
         </div>
         {_show && (
-          <Paper elevation={3} >
+          <Paper elevation={3} sx={{ padding: "5px" }}>
             <p className="p_accent"> Genome Position </p> (range {minbp}-{maxbp}
             )
             <div style={{ display: "flex", alignItems: "center" }}>
               <div className="rdb_input_position">
                 <div>
                   <TextField
-                    id="outlined-number"
+                    id="rdb_input_leftEndPosition"
                     size="small"
                     label="LeftEndPosition"
                     type="number"
-                    defaultValue={200}
+                    value={_leftEndPosition}
+                    onChange={(event) => {
+                      set_leftEndPosition(event.target.value);
+                    }}
                     InputLabelProps={{
                       shrink: true,
                     }}
@@ -76,25 +104,28 @@ function Form({
                 </div>
               </div>
               <div className="rdb_middle_input">
-                {strand === "both" && (
+                {_strand === "both" && (
                   <p className="p_accent"> {"<- - - ->"} </p>
                 )}
-                {strand === "reverse" && (
+                {_strand === "reverse" && (
                   <p className="p_accent"> {"<- - - - -"} </p>
                 )}
-                {strand === "forward" && (
+                {_strand === "forward" && (
                   <p className="p_accent"> {"- - - - ->"} </p>
                 )}
-                <FormHelperText>selected strand ({strand})</FormHelperText>
+                <FormHelperText>selected strand ({_strand})</FormHelperText>
               </div>
               <div className="rdb_input_position">
                 <div>
                   <TextField
-                    id="outlined-number"
+                    id="rdb_input_rightEndPosition"
                     size="small"
                     label="RightEndPosition"
                     type="number"
-                    defaultValue={3000}
+                    value={_rightEndPosition}
+                    onChange={(event) => {
+                      set_rightEndPosition(event.target.value);
+                    }}
                     InputLabelProps={{
                       shrink: true,
                     }}
@@ -111,8 +142,8 @@ function Form({
                   labelId="demo-simple-select-helper-label"
                   id="demo-simple-select-helper"
                   size="small"
-                  value={strand}
-                  label="Age"
+                  value={_strand}
+                  label="Strand"
                   onChange={(event) => {
                     set_strand(event.target.value);
                   }}
@@ -123,6 +154,71 @@ function Form({
                 </Select>
                 <FormHelperText>select strand sequence</FormHelperText>
               </div>
+            </div>
+            <p className="p_accent"> Display options </p>
+            <div style={{ marginLeft: "5%" }}>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      size="small"
+                      checked={_covered}
+                      onChange={(event) => {
+                        set_covered(!_covered);
+                      }}
+                      inputProps={{ "aria-label": "controlled" }}
+                    />
+                  }
+                  label="Covered"
+                />
+                <FormHelperText>
+                  Draw only the elements that are completely contained in the
+                  selected range
+                </FormHelperText>
+              </FormGroup>
+            </div>
+            <p className="p_accent"> Display Genetic Elements </p>
+            <div>
+              <FormGroup aria-label="position" row>
+              <FormControlLabel
+                  size="small"
+                  value="all"
+                  control={
+                    <Checkbox
+                      checked={_geneticElements.length === 9}
+                      indeterminate={_geneticElements.length !== 9 && _geneticElements.length > 0 }
+                      onChange={() => {
+                        _geneticElements.length === 9
+                          ? set_geneticElements([])
+                          : set_geneticElements(geneticElementsData);
+                      }}
+                      inputProps={{ "aria-label": "controlled" }}
+                    />
+                  }
+                  label="All"
+                  labelPlacement="top"
+                />
+                {geneticElementsData.map((element, index) => {
+                  return (
+                    <FormControlLabel
+                      key={`rdb_form_GE${index}_${element}`}
+                      value={element}
+                      control={
+                        <Checkbox
+                          size="small"
+                          checked={
+                            (_geneticElements.find((e) => e === element)?true:false)
+                          }
+                          onClick={handleGeneticElementSelection}
+                          inputProps={{ "aria-label": "controlled" }}
+                        />
+                      }
+                      label={element}
+                      labelPlacement="top"
+                    />
+                  );
+                })}
+              </FormGroup>
             </div>
           </Paper>
         )}
