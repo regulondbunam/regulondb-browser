@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import DTT from "../dtt/dtt";
+import DrawingTracesInterface from "../dtt";
 
 function Embed () {
     const application = useParams().application;
@@ -9,7 +9,7 @@ function Embed () {
         case "dtt":
             let params = new URLSearchParams(parameters);
             return (
-                <DTT params={params} embed={true} />
+                <DrawingTracesInterface params={params} embed={true} />
             );
     
         default:
