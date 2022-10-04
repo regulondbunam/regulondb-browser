@@ -9,6 +9,7 @@ import Switch from "@mui/material/Switch";
 import Select from "@mui/material/Select";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import Button from '@mui/material/Button';
 import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import "./form.css";
@@ -29,28 +30,29 @@ const geneticElementsData = [
 function Form({
   onGo = () => {},
   onReset = () => {},
+  showForm = true,
   minbp = 1,
   maxbp = 4639676,
 }) {
   const [_strand, set_strand] = useState("both");
-  const [_show, set_show] = useState(true);
+  const [_show, set_show] = useState(showForm);
   const [_leftEndPosition, set_leftEndPosition] = useState(200);
   const [_rightEndPosition, set_rightEndPosition] = useState(3000);
   const [_covered, set_covered] = useState(false);
   const [_geneticElements, set_geneticElements] = useState(geneticElementsData);
 
   const handleGeneticElementSelection = (event) => {
-    const element_n = event.target.value
+    const element_n = event.target.value;
     let new_GE = [];
     if (_geneticElements.find((e) => e === element_n)) {
       _geneticElements.forEach((element) => {
         element !== element_n && new_GE.push(element);
       });
-      console.log("delete",element_n);
+      console.log("delete", element_n);
     } else {
-      new_GE =  new_GE.concat(_geneticElements);
+      new_GE = new_GE.concat(_geneticElements);
       new_GE.push(element_n);
-      console.log("up",element_n);
+      console.log("up", element_n);
     }
     console.log(new_GE);
     set_geneticElements(new_GE);
@@ -156,6 +158,10 @@ function Form({
               </div>
             </div>
             <p className="p_accent"> Display options </p>
+            <FormHelperText>
+              Draw only the elements that are completely contained in the
+              selected range
+            </FormHelperText>
             <div style={{ marginLeft: "5%" }}>
               <FormGroup>
                 <FormControlLabel
@@ -171,22 +177,25 @@ function Form({
                   }
                   label="Covered"
                 />
-                <FormHelperText>
-                  Draw only the elements that are completely contained in the
-                  selected range
-                </FormHelperText>
               </FormGroup>
             </div>
             <p className="p_accent"> Display Genetic Elements </p>
             <div>
+              <FormHelperText>
+                Draws the selected elements, provided they are in the selected
+                range.
+              </FormHelperText>
               <FormGroup aria-label="position" row>
-              <FormControlLabel
+                <FormControlLabel
                   size="small"
                   value="all"
                   control={
                     <Checkbox
                       checked={_geneticElements.length === 9}
-                      indeterminate={_geneticElements.length !== 9 && _geneticElements.length > 0 }
+                      indeterminate={
+                        _geneticElements.length !== 9 &&
+                        _geneticElements.length > 0
+                      }
                       onChange={() => {
                         _geneticElements.length === 9
                           ? set_geneticElements([])
@@ -203,11 +212,14 @@ function Form({
                     <FormControlLabel
                       key={`rdb_form_GE${index}_${element}`}
                       value={element}
+                      sx={{ fontSize: "10px" }}
                       control={
                         <Checkbox
                           size="small"
                           checked={
-                            (_geneticElements.find((e) => e === element)?true:false)
+                            _geneticElements.find((e) => e === element)
+                              ? true
+                              : false
                           }
                           onClick={handleGeneticElementSelection}
                           inputProps={{ "aria-label": "controlled" }}
@@ -220,6 +232,20 @@ function Form({
                 })}
               </FormGroup>
             </div>
+            <hr />
+            <div className="rdb_inputButton">
+              <div>
+                <Button sx={{marginRight: "5px"}} variant="contained" size="medium" color="secondary" >Draw Track</Button>
+                <Button sx={{marginRight: "2px"}} variant="contained" size="medium" >Reset</Button>
+                <Button sx={{marginRight: "2px"}} variant="outlined" size="medium" >Demo</Button>
+              </div>
+              <div>
+                <Button sx={{marginRight: "2px"}} variant="outlined" size="small" >Save Form</Button>
+                <Button sx={{marginRight: "2px"}} variant="outlined" size="small" >Load Form</Button>
+                <Button sx={{marginRight: "2px"}} variant="outlined" size="small" >Create Embed</Button>
+              </div>
+            </div>
+            <br />
           </Paper>
         )}
       </Box>

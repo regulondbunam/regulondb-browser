@@ -16,3 +16,12 @@
     align-items: center;
     background-color: #cadce7;
 }
+
+.rdb_button_form{
+    margin-right: 2px;
+}
+
+.rdb_inputButton{
+    display: flex;
+    justify-content: space-between;
+}
