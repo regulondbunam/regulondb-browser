@@ -4,7 +4,6 @@ import DrawingTracesInterface from "../dtt";
 function Embed () {
     const application = useParams().application;
     const parameters = useParams().parameters
-    console.log(application);
     switch (application) {
         case "dtt":
             let params = new URLSearchParams(parameters);

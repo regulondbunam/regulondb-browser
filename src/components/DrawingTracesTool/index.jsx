@@ -91,7 +91,7 @@ class DrawingTracesTool extends Component {
           />
         )}
         <div>
-          {Controls({
+          {this.props.controls && Controls({
             leftEndPosition: this.leftEndPosition,
             rightEndPosition: this.rightEndPosition,
             strand: this.props.strand,
@@ -159,7 +159,8 @@ const isStrand = (props, propName, componentName) => {
 };
 
 DrawingTracesTool.defaultProps = {  
-  getGeneticElements: ()=>{}
+  getGeneticElements: ()=>{},
+  controls: true
 } 
 
 DrawingTracesTool.propTypes = {
@@ -174,7 +175,8 @@ DrawingTracesTool.propTypes = {
   //fragments: PropTypes.array,
   strand: isStrand,
   custom_geneticElements: PropTypes.array,
-  getGeneticElements: PropTypes.func
+  getGeneticElements: PropTypes.func,
+  controls: PropTypes.bool
 };
 
 export default DrawingTracesTool;
