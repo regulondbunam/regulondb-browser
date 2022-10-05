@@ -62,9 +62,9 @@ function Form({
     set_show(false)
     onDraw({
       covered: _covered,
-      leftEndPosition: _leftEndPosition,
+      leftEndPosition: parseInt(_leftEndPosition),
       objectType: _geneticElements,
-      rightEndPosition: _rightEndPosition,
+      rightEndPosition: parseInt(_rightEndPosition),
       strand: _strand,
     })
   };
