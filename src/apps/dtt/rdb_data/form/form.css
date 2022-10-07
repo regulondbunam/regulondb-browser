@@ -25,3 +25,11 @@
     display: flex;
     justify-content: space-between;
 }
+
+.modal_code{
+    line-break: anywhere;
+    border: 1px dashed #000000;
+    padding: 15px;
+    background-color: #dfdfdf;
+    color: #0037ff;
+}

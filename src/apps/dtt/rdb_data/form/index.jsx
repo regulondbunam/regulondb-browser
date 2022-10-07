@@ -12,6 +12,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
+import ModalEmbed from "./modalEmbed";
 import "./form.css";
 import { useState } from "react";
 
@@ -27,6 +28,8 @@ const geneticElementsData = [
   "ppGpp",
 ];
 
+
+
 function Form({
   onDraw = () => {},
   onReset = () => {},
@@ -40,6 +43,14 @@ function Form({
   const [_rightEndPosition, set_rightEndPosition] = useState(12000);
   const [_covered, set_covered] = useState(false);
   const [_geneticElements, set_geneticElements] = useState(geneticElementsData);
+  
+  let formData = {
+    covered: _covered,
+    leftEndPosition: parseInt(_leftEndPosition),
+    objectType: _geneticElements,
+    rightEndPosition: parseInt(_rightEndPosition),
+    strand: _strand,
+  }
 
   const handleGeneticElementSelection = (event) => {
     const element_n = event.target.value;
@@ -60,13 +71,7 @@ function Form({
 
   const _onDraw = () => {
     set_show(false)
-    onDraw({
-      covered: _covered,
-      leftEndPosition: parseInt(_leftEndPosition),
-      objectType: _geneticElements,
-      rightEndPosition: parseInt(_rightEndPosition),
-      strand: _strand,
-    })
+    onDraw(formData)
   };
 
   return (
@@ -289,19 +294,14 @@ function Form({
                 >
                   Load Form
                 </Button>
-                <Button
-                  sx={{ marginRight: "2px" }}
-                  variant="outlined"
-                  size="small"
-                >
-                  Create Embed
-                </Button>
+                <ModalEmbed formData={formData} />
               </div>
             </div>
             <br />
           </Paper>
         )}
       </Box>
+      
     </div>
   );
 }
