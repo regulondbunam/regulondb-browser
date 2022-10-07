@@ -13,6 +13,7 @@ import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import ModalEmbed from "./modalEmbed";
+import FileOptions from "./fileOptions";
 import "./form.css";
 import { useState } from "react";
 
@@ -28,8 +29,6 @@ const geneticElementsData = [
   "ppGpp",
 ];
 
-
-
 function Form({
   onDraw = () => {},
   onReset = () => {},
@@ -39,18 +38,27 @@ function Form({
 }) {
   const [_strand, set_strand] = useState("both");
   const [_show, set_show] = useState(showForm);
-  const [_leftEndPosition, set_leftEndPosition] = useState(200);
-  const [_rightEndPosition, set_rightEndPosition] = useState(12000);
+  const [_leftEndPosition, set_leftEndPosition] = useState("");
+  const [_rightEndPosition, set_rightEndPosition] = useState("");
   const [_covered, set_covered] = useState(false);
   const [_geneticElements, set_geneticElements] = useState(geneticElementsData);
-  
+
   let formData = {
     covered: _covered,
     leftEndPosition: parseInt(_leftEndPosition),
     objectType: _geneticElements,
     rightEndPosition: parseInt(_rightEndPosition),
     strand: _strand,
-  }
+  };
+
+  const handleReset = () => {
+    set_strand("both");
+    set_show(true);
+    set_leftEndPosition("");
+    set_rightEndPosition("");
+    set_covered(false);
+    set_geneticElements(geneticElementsData);
+  };
 
   const handleGeneticElementSelection = (event) => {
     const element_n = event.target.value;
@@ -63,15 +71,15 @@ function Form({
     } else {
       new_GE = new_GE.concat(_geneticElements);
       new_GE.push(element_n);
-      console.log("up", element_n);
+      //console.log("up", element_n);
     }
-    console.log(new_GE);
+    //console.log(new_GE);
     set_geneticElements(new_GE);
   };
 
   const _onDraw = () => {
-    set_show(false)
-    onDraw(formData)
+    set_show(false);
+    onDraw(formData);
   };
 
   return (
@@ -264,9 +272,9 @@ function Form({
                   sx={{ marginRight: "2px" }}
                   variant="contained"
                   size="medium"
-                  onClick={()=>{
-                    set_show(true)
-                    onReset()
+                  onClick={() => {
+                    handleReset();
+                    onReset();
                   }}
                 >
                   Reset
@@ -280,20 +288,17 @@ function Form({
                 </Button>
               </div>
               <div>
-                <Button
-                  sx={{ marginRight: "2px" }}
-                  variant="outlined"
-                  size="small"
-                >
-                  Save Form
-                </Button>
-                <Button
-                  sx={{ marginRight: "2px" }}
-                  variant="outlined"
-                  size="small"
-                >
-                  Load Form
-                </Button>
+                <FileOptions
+                  formData={formData}
+                  set_formData={(formData) => {
+                    console.log(formData);
+                    set_strand(formData?.strand);
+                    set_leftEndPosition(formData?.leftEndPosition);
+                    set_rightEndPosition(formData?.rightEndPosition);
+                    set_covered(formData.covered);
+                    set_geneticElements(formData?.objectType);
+                  }}
+                />
                 <ModalEmbed formData={formData} />
               </div>
             </div>
@@ -301,7 +306,6 @@ function Form({
           </Paper>
         )}
       </Box>
-      
     </div>
   );
 }
