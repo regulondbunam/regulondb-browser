@@ -4,6 +4,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import DrawingTracesTool from "../../../components/DrawingTracesTool";
 import { useState } from "react";
+import {UpdateTitle} from "../title"
 
 function DrawTrace({
   height = "100px",
@@ -38,6 +39,9 @@ function DrawTrace({
             objectType={formData.objectType}
             getGeneticElements={(ge) => {
               set_geneticElements(ge);
+            }}
+            getStatus={(status)=>{
+              UpdateTitle({state:status})
             }}
           />
         </Paper>

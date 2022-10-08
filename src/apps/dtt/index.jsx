@@ -2,7 +2,7 @@ import { Tabs } from "./tabs/tabs";
 import UserData from "./user_data";
 import RDBdata from "./rdb_data";
 import DDTE from "./embed";
-import {Cover} from "../../components/ui-components"
+import Title from "./title";
 
 const tabsInfo = [
   { id: "01", name: "RegulonDB-Data", disabled: false },
@@ -24,11 +24,7 @@ function DrawingTracesInterface({ params, embed }) {
     }
   return (
     <div>
-      <Cover>
-        <br />
-        <h1 style={{ marginBottom: "0px"}} >Drawing Traces Tool</h1>
-        <br />
-      </Cover>
+      <Title title={"Drawing Traces Tool"} />
       <Tabs tabSelect={"01"} tabsInfo={tabsInfo} tabs={tabs} />
     </div>
   );

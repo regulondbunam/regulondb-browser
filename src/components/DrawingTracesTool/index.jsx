@@ -88,6 +88,7 @@ class DrawingTracesTool extends Component {
               );
               
             }}
+            getState={(status)=>{this.props.getStatus(status)}}
           />
         )}
         <div>
@@ -161,7 +162,8 @@ const isStrand = (props, propName, componentName) => {
 DrawingTracesTool.defaultProps = {  
   getGeneticElements: ()=>{},
   controls: true,
-  height: 200
+  height: 200,
+  getStatus: ()=>{}
 } 
 
 DrawingTracesTool.propTypes = {
@@ -177,6 +179,7 @@ DrawingTracesTool.propTypes = {
   strand: isStrand,
   custom_geneticElements: PropTypes.array,
   getGeneticElements: PropTypes.func,
+  getStatus: PropTypes.func,
   controls: PropTypes.bool
 };
 
