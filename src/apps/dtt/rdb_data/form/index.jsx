@@ -60,6 +60,21 @@ function Form({
     set_geneticElements(geneticElementsData);
   };
 
+  const handleDemo = () => {
+    let posL = 1
+    let posR = 0
+    while (!(posL<posR&&posR-posL>1000&&posR-posL<15000)) {
+      posL = Math.floor(Math.random() * maxbp);
+      posR = Math.floor(Math.random() * maxbp);
+    }
+    set_strand("both");
+    set_show(true);
+    set_leftEndPosition(""+posL);
+    set_rightEndPosition(""+posR);
+    set_covered(false);
+    set_geneticElements(geneticElementsData);
+  };
+
   const handleGeneticElementSelection = (event) => {
     const element_n = event.target.value;
     let new_GE = [];
@@ -283,6 +298,7 @@ function Form({
                   sx={{ marginRight: "2px" }}
                   variant="outlined"
                   size="medium"
+                  onClick={handleDemo}
                 >
                   Demo
                 </Button>
