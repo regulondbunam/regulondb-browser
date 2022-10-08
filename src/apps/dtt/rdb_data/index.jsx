@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Form from "./form";
 import Table from "./table";
-import DrawingTracesTool from "../../../components/DrawingTracesTool";
+import DrawTrace from "./drawTrace";
+
 
 function RDBdata() {
   const [_formData, set_formData] = useState();
@@ -23,25 +24,11 @@ function RDBdata() {
         />
         <br />
       </div>
+      {_formData && (
+        <DrawTrace height={_height} set_geneticElements={(ge)=>{set_geneticElements(ge)}} formData={_formData} />
+      )}
       {_geneticElements && (
         <Table height={_height} geneticElements={_geneticElements} />
-      )}
-      {_formData && (
-        <div>
-          <DrawingTracesTool
-            id={"rdb_dti_001"}
-            context={"dti"}
-            height={_height}
-            leftEndPosition={_formData.leftEndPosition}
-            rightEndPosition={_formData.rightEndPosition}
-            strand={_formData.strand}
-            covered={_formData.covered}
-            objectType={_formData.objectType}
-            getGeneticElements={(ge) => {
-              set_geneticElements(ge);
-            }}
-          />
-        </div>
       )}
     </div>
   );

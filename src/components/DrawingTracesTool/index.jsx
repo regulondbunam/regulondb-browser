@@ -39,7 +39,7 @@ class DrawingTracesTool extends Component {
     if (drawPlace) {
       if (geneticElements) {
         let width = drawPlace.clientWidth;
-        let height = 200;
+        let height = this.props.height;
         const drawGenes = new Track({
           id: this.drawPlaceId,
           canva_id: this.canvaId,
@@ -160,7 +160,8 @@ const isStrand = (props, propName, componentName) => {
 
 DrawingTracesTool.defaultProps = {  
   getGeneticElements: ()=>{},
-  controls: true
+  controls: true,
+  height: 200
 } 
 
 DrawingTracesTool.propTypes = {

@@ -3,22 +3,10 @@ import IconButton from "@mui/material/IconButton";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import DataTable from "./dataTable";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 
 function Table({geneticElements,height = "100px"}) {
     const [_show, set_show] = useState(true);
-    
-
-    useEffect(() => {
-      let section = document.getElementById("rdb_table_GE");
-      if (section) {
-        let rect = section.getBoundingClientRect();
-        window.scroll({
-          top: rect.y + window.pageYOffset,
-          behavior: "smooth",
-        });
-      }
-    }, []);
 
     const jsonTable = useMemo(()=>{
       const columns = [
@@ -87,7 +75,6 @@ function Table({geneticElements,height = "100px"}) {
         </div>
         {_show && (
           <Paper elevation={3} sx={{ padding: "5px", height: height }}>
-
             <DataTable columns={jsonTable.columns} rows={jsonTable.rows} />
             </Paper>
         )}

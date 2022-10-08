@@ -60,7 +60,11 @@ export default function DataTable({ rows = [], columns = [] }) {
                   {columns.map((column) => {
                     return (
                       <TableCell key={`cell_${row.id}_${column.field}`}>
-                        {row[column.field]}
+                        {
+                          column.field === "objectRGBColor"
+                          ?<div style={{backgroundColor: "rgb("+row[column.field]+")", width:"100%", height:"20px" }} ></div>
+                          :row[column.field]
+                        }
                       </TableCell>
                     );
                   })}

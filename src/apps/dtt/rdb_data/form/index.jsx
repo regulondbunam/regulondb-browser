@@ -117,7 +117,7 @@ function Form({
           >
             {_show ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
-          <h3>Track selection form</h3>
+          <h3>Trace Selection Form</h3>
         </div>
         {_show && (
           <Paper elevation={3} sx={{ padding: "5px" }}>
