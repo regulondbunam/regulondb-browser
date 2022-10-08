@@ -87,6 +87,7 @@ function Table({geneticElements,height = "100px"}) {
         </div>
         {_show && (
           <Paper elevation={3} sx={{ padding: "5px", height: height }}>
+
             <DataTable columns={jsonTable.columns} rows={jsonTable.rows} />
             </Paper>
         )}
