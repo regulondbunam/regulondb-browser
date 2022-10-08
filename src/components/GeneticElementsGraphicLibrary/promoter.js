@@ -112,6 +112,8 @@ export default function DrawPromoter({
   arrow.fill("none");
   arrow.stroke(stroke);
   promoter.add(arrow);
+  let rect = canva.rect(10,10).fill("none").move(txtPosX,txtPosY).id(id)
+  promoter.add(rect)
   //Actions
   promoter.opacity(opacity);
   if (onClick) {

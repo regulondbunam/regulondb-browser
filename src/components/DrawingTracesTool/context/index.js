@@ -1,12 +1,10 @@
 import { GetGeneElementsContext } from "./gene";
 import { ElementsContext } from "./general";
 import { GetOperonElementsContext } from "./operon";
+import { DTIContext } from "./dti";
 import RegulatoryRegion from "./regulatoryRegion";
 
-
-
 class DttContext {
-
   constructor(context, props) {
     this.context = context;
     this.props = props;
@@ -19,7 +17,7 @@ class DttContext {
       );
       this.regulatoryRegion = this.regulator.getRegion();
     } else {
-        this.regulator = undefined
+      this.regulator = undefined;
       this.regulatoryRegion = undefined;
     }
     switch (this.context) {
@@ -31,20 +29,21 @@ class DttContext {
           ? this.props.rightEndPosition + 1000
           : this.regulator.getCurrentRightEndPosition();
         break;
+      case "dti":
       case "operon":
         this.leftEndPosition = this.props.leftEndPosition;
         this.rightEndPosition = this.props.rightEndPosition;
         break;
-      
+
       default:
         this.leftEndPosition = this.props.leftEndPosition;
         this.rightEndPosition = this.props.rightEndPosition;
-        console.error("context no identificado")
+        console.error("context no identificado");
         break;
     }
   }
 
-  getRegulator(){
+  getRegulator() {
     return this.regulator;
   }
 
@@ -60,18 +59,22 @@ class DttContext {
     return this.rightEndPosition;
   }
 
-  geneticElementsOnContext(geneticElements){
-    let _geneticElements = ElementsContext(geneticElements)
+  geneticElementsOnContext(geneticElements) {
+    let _geneticElements = ElementsContext(geneticElements);
     switch (this.context) {
-        case "gene":
-            return GetGeneElementsContext(this.props.id,_geneticElements)
-        case "operon":
-            return GetOperonElementsContext(this.props.relatedIds,_geneticElements)
-        default:
-          return geneticElements
-      }
+      case "gene":
+        return GetGeneElementsContext(this.props.id, _geneticElements);
+      case "operon":
+        return GetOperonElementsContext(
+          this.props.relatedIds,
+          _geneticElements
+        );
+      case "dti":
+        return DTIContext(_geneticElements);
+      default:
+        return geneticElements;
+    }
   }
-  
 }
 
-export default DttContext
+export default DttContext;

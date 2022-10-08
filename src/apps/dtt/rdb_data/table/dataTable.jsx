@@ -25,8 +25,6 @@ export default function DataTable({ rows = [], columns = [] }) {
     setPage(0);
   };
 
-  console.log("columns", columns);
-  console.log("rows", rows);
   return (
     <TableContainer component={Paper}>
       <Table arial-label="Table" size="small">
@@ -42,7 +40,23 @@ export default function DataTable({ rows = [], columns = [] }) {
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map((row, index) => {
               return (
-                <TableRow key={index + "_" + row.id}>
+                <TableRow
+                  key={index + "_" + row.id}
+                  onMouseEnter={() => {
+                    let gn = document.getElementById(`draw_${row.id}`);
+                    if (gn) {
+                      gn.setAttribute("stroke", "#00F");
+                      gn.setAttribute("stroke-width", "5");
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    let gn = document.getElementById(`draw_${row.id}`);
+                    if (gn) {
+                      gn.setAttribute("stroke", "");
+                      gn.setAttribute("stroke-width", "0");
+                    }
+                  }}
+                >
                   {columns.map((column) => {
                     return (
                       <TableCell key={`cell_${row.id}_${column.field}`}>
