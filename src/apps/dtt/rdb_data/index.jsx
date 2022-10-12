@@ -4,8 +4,8 @@ import Table from "./table";
 import DrawTrace from "./drawTrace";
 
 
-function RDBdata() {
-  const [_formData, set_formData] = useState();
+function RDBdata({dataForm}) {
+  const [_formData, set_formData] = useState(dataForm);
   const [_geneticElements, set_geneticElements] = useState();
   const _height = window.innerHeight / 2;
 
@@ -14,6 +14,7 @@ function RDBdata() {
       <div style={{ marginLeft: "10%", marginRight: "10%" }}>
         <h2>Drawing Traces from RegulonDB</h2>
         <Form
+          showForm={dataForm===undefined}
           onDraw={(formData) => {
             set_formData(formData);
           }}

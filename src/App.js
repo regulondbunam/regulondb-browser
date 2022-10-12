@@ -53,7 +53,9 @@ function App() {
             </Route>
           </Route>
           <Route path="home" element={<Home />} />
-          <Route path="dtt" element={<DrawingTracesInterface />} />
+          <Route path="dtt" element={<DrawingTracesInterface />} >
+            <Route path=':parameters' />
+          </Route>
           <Route path="ht" element={<HT />} >
             <Route path=":site"  >
               <Route path=":datasetType"  >
