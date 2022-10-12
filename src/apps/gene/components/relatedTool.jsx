@@ -11,6 +11,7 @@ import { enableInformationPhrases } from "../tools/description/Information";
 import { Link } from "react-router-dom";
 
 export default function RelatedDocTools({
+  geneId,
   leftEndPosition,
   rightEndPosition,
   externalReferences = [],
@@ -95,9 +96,13 @@ export default function RelatedDocTools({
           <ListItemButton sx={{ pl: 4 }}>
             <ListItemText primary="only text (v0.1)" />
           </ListItemButton>
-          <ListItemButton sx={{ pl: 4 }}>
-            <ListItemText primary="json" />
-          </ListItemButton>
+          <ListItem sx={{ pl: 4 }}>
+                <a href={`${process.env.REACT_APP_PROSSES_SERVICE}ecoli/gene/${geneId}/jsongql`}
+                  target="_blank" rel="noopener noreferrer"
+                      >
+                        JSON (RAW)
+                      </a>
+              </ListItem>
         </List>
       </Collapse>
       <ListItemButton>
