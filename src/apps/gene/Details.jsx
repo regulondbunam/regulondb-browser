@@ -204,7 +204,9 @@ function Details() {
       </article>
       <aside>
         <RelatedDocTools leftEndPosition={_data.data[0].gene.leftEndPosition-500}
-        rightEndPosition={_data.data[0].gene.rightEndPosition+500} />
+        rightEndPosition={_data.data[0].gene.rightEndPosition+500} 
+        externalReferences={_data.data[0].gene.externalCrossReferences}
+        />
       </aside>
       </div>
     </div>
