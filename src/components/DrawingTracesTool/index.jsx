@@ -116,7 +116,7 @@ class DrawingTracesTool extends Component {
             },
           })}
         </div>
-        <div style={{overflow: "auto"}} >
+        <div>
           <div
             style={{ height: `${this.props.height}px`, width: "100%" }}
             id={this.drawPlaceId}
