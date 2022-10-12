@@ -7,12 +7,18 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import ListItem from "@mui/material/ListItem";
 import Switch from "@mui/material/Switch";
+import { enableInformationPhrases } from "../tools/description/Information";
 
 export default function RelatedDocTools() {
   const [_openRT, set_openRT] = useState(true);
   const [_openRD, set_openRD] = useState(false);
   const [_openD, set_openD] = useState(false);
   const [_openER, set_openER] = useState(false);
+
+  const _handleViewPhrases = (event) => {
+    enableInformationPhrases(event.target.checked);
+  };
+
 
   return (
     <List
@@ -31,7 +37,7 @@ export default function RelatedDocTools() {
         <List component="div" disablePadding>
           <ListItem sx={{ pl: 4 }}>
             <ListItemText primary="L&C Phrases" />
-            <Switch edge="end" onChange={() => {}} defaultChecked={false} />
+            <Switch edge="end" onChange={_handleViewPhrases} defaultChecked={false} />
           </ListItem>
           <ListItemButton sx={{ pl: 4 }}>
             <ListItemText primary="Drawing Traces Tool" />
