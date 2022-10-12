@@ -8,8 +8,9 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import ListItem from "@mui/material/ListItem";
 import Switch from "@mui/material/Switch";
 import { enableInformationPhrases } from "../tools/description/Information";
+import { Link } from "react-router-dom";
 
-export default function RelatedDocTools() {
+export default function RelatedDocTools({leftEndPosition, rightEndPosition}) {
   const [_openRT, set_openRT] = useState(true);
   const [_openRD, set_openRD] = useState(false);
   const [_openD, set_openD] = useState(false);
@@ -40,7 +41,9 @@ export default function RelatedDocTools() {
             <Switch edge="end" onChange={_handleViewPhrases} defaultChecked={false} />
           </ListItem>
           <ListItemButton sx={{ pl: 4 }}>
+            <Link to={`/dtt/leftEndPosition=${leftEndPosition}&rightEndPosition=${rightEndPosition}`} >
             <ListItemText primary="Drawing Traces Tool" />
+            </Link>
           </ListItemButton>
         </List>
       </Collapse>

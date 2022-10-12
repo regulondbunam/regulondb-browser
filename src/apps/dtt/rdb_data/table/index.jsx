@@ -58,7 +58,7 @@ function Table({geneticElements,height = "100px"}) {
       return jsonData
     },[geneticElements])
 
-    console.log(jsonTable)
+    //console.log(jsonTable)
     return ( 
         <div id="rdb_table_GE" >
         <div className="rdb_form_title">
