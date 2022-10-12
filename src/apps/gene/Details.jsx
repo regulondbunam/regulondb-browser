@@ -8,6 +8,7 @@ import Products from "./tools/products";
 import DrawingTracesTool from "../../components/DrawingTracesTool";
 import DisplayOptions from "./components/DisplayOptions";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
+import RelatedDocTools from "./components/relatedTool"
 
 function scrollFunction() {
   if (
@@ -179,6 +180,7 @@ function Details() {
         fragments={_data.data[0].gene.fragments}
         strand={_data.data[0].gene.strand}
       />
+      <div>
       <article>
         <div id="gene_description" className="description">
           <Description
@@ -200,6 +202,10 @@ function Details() {
           <Citations AllCitations={_data.data[0].allCitations} />
         </div>
       </article>
+      <aside>
+        <RelatedDocTools />
+      </aside>
+      </div>
     </div>
   );
 }
