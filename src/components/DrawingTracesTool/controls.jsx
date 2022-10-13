@@ -48,9 +48,9 @@ function Controls({
         <ButtonGroup
           variant="contained"
           size="small"
-          aria-label="outlined primary button group"
+          color="info"
         >
-          <Button>
+          <Button sx={{color: "white"}} >
             Drawing Traces Tool{" "}
             <Tooltip title={aviso}>
               <WarningAmberIcon fontSize="small" color="warning" />
@@ -72,7 +72,7 @@ function Controls({
                   }
                 }}
               >
-                {!expand ? <ZoomInMapIcon /> : <ZoomOutMapIcon />}
+                {!expand ? <ZoomInMapIcon sx={{ color: "white" }} /> : <ZoomOutMapIcon sx={{ color: "white" }} />}
               </Button>
             </Tooltip>
           )}
@@ -181,7 +181,7 @@ function DownloadOptions({ drawPlaceId, canvaId, name }) {
 
   return (
     <React.Fragment>
-      <Button variant="contained" size="small" onClick={handleClick}>
+      <Button variant="contained" color="info" size="small" onClick={handleClick}>
         <FileDownloadIcon sx={{ color: "white" }} />
       </Button>
       <Menu

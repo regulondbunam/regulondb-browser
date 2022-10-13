@@ -6,7 +6,6 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import IconButton from "@mui/material/IconButton";
-import Switch from "@mui/material/Switch";
 import Phrase from "./phrases";
 import ViewSequence from "./viewSequence";
 import Accordion from "@mui/material/Accordion";
@@ -15,21 +14,46 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { CitationsNote } from "../../../../components/citations/citations_note";
 
-const label = { inputProps: { "aria-label": "enable phrases" } };
+const idInformationCard = "rdb_gene_information"
+const  eventName = "card_gene_update"
+
+export function enableInformationPhrases(viewPhrases){
+  
+  const detail = {viewPhrases: viewPhrases};
+
+  const CARD = document.getElementById(idInformationCard);
+  if (CARD) {
+    const CARD_REACTION = new CustomEvent(eventName, {
+      bubbles: true,
+      detail: detail,
+    });
+    CARD.dispatchEvent(CARD_REACTION);
+  }
+}
 
 export default function Information({ gene, allCitations }) {
   const [_show, set_show] = React.useState(true);
   const [_viewPhrases, set_viewPhrases] = React.useState(false);
 
-  const handleChange = (event) => {
-    set_viewPhrases(event.target.checked);
-  };
+  React.useEffect(() => {
+    const card = document.getElementById(idInformationCard);
+    if (card) {
+      card.addEventListener(
+        eventName,
+        function (e) {
+          //console.log(`state`, e.detail)
+          set_viewPhrases(e.detail.viewPhrases);
+        },
+        false
+      );
+    }
+  }, []);
 
   let size = gene?.rightEndPosition - gene?.leftEndPosition;
 
   return (
     <Paper>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div id={idInformationCard} style={{ display: "flex", justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center" }}>
           <div>
             <IconButton
@@ -45,18 +69,6 @@ export default function Information({ gene, allCitations }) {
           <div>
             <h2>Gene Information</h2>
           </div>
-        </div>
-        <div>
-          {_show && (
-            <>
-              Enable phrases
-              <Switch
-                checked={_viewPhrases}
-                onChange={handleChange}
-                {...label}
-              />
-            </>
-          )}
         </div>
       </div>
       {_show && (

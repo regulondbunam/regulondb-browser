@@ -8,10 +8,11 @@ import {
 import Home from './apps/home';
 import Search from './apps/search';
 import Gene from './apps/gene';
-import DTT, { DTTtest } from './apps/dtt/dtt';
+import DrawingTracesInterface from './apps/dtt';
 import HT from './apps/ht/HighThroughput';
 import Operon from './apps/operon/operon';
 import Regulon from './apps/regulon/regulon';
+import Embed from "./apps/embed";
 
 const theme = createTheme({
   palette: {
@@ -26,6 +27,9 @@ const theme = createTheme({
       main: '#c93a1d',
       // dark: will be calculated from palette.secondary.main,
       contrastText: '#ffffff',
+    },
+    info:{
+      main: '#999999'
     },
     // Used by `getContrastText()` to maximize the contrast between
     // the background and the text.
@@ -43,28 +47,34 @@ function App() {
       <ThemeProvider theme={theme}>
         <Routes>
           <Route index element={<Home />} />
+          <Route path="embed" element={<Embed />} >
+            <Route path=":application" >
+              <Route path=':parameters' />
+            </Route>
+          </Route>
           <Route path="home" element={<Home />} />
-          <Route path="dtt" element={<DTT />} />
-          <Route path="dttTest" element={<DTTtest />} />
+          <Route path="dtt" element={<DrawingTracesInterface />} >
+            <Route path=':parameters' />
+          </Route>
           <Route path="ht" element={<HT />} >
-            <Route path=":site" element={<HT />} >
-              <Route path=":datasetType" element={<HT />} >
-                <Route path=":info" element={<HT />} >
+            <Route path=":site"  >
+              <Route path=":datasetType"  >
+                <Route path=":info"  >
                 </Route>
               </Route>
             </Route>
           </Route>
           <Route path="search" element={<Search />} >
-            <Route path=":keyword" element={<Search />} />
+            <Route path=":keyword"  />
           </Route>
           <Route path="gene" element={<Gene />} >
-            <Route path=":geneId" element={<Gene />} />
+            <Route path=":geneId"  />
           </Route>
           <Route path="operon" element={<Operon />} >
-            <Route path=":id" element={<Operon />} />
+            <Route path=":id"  />
           </Route>
           <Route path="regulon" element={<Regulon />} >
-            <Route path=":id" element={<Regulon />} />
+            <Route path=":id" />
           </Route>
         </Routes>
       </ThemeProvider>

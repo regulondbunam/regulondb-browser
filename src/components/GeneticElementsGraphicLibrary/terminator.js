@@ -4,7 +4,7 @@
  * head de la figura se sale de posicion
  */
 import { stroke_validate, font_validate, color_validate } from "./validation";
-import { label } from "./label";
+//import { label } from "./label";
 import { terminator_dp } from "./features_default_properties";
 
 export default function DrawTerminator({
@@ -22,6 +22,7 @@ export default function DrawTerminator({
   stroke = {},
   font = {},
   tooltip = "",
+  height,
   onClick
 }) {
   if (!canva || !dna || !id || leftEndPosition > rightEndPosition) {
@@ -35,93 +36,83 @@ export default function DrawTerminator({
     rightEndPosition = leftEndPosition + 1;
     strand = anchor.strand;
   }
+  if(!height){
+    height = terminator_dp.height
+  }
   // attributes
   const x = ((leftEndPosition - dna.leftEndPosition) * dna.widthActive) / dna.size;
   let terminator_width = ((rightEndPosition - leftEndPosition) * dna.widthActive) / dna.size;
-  //scale
-  const proportion = terminator_dp.height / 40;
-  //body attributes
-  let bodyHeight = proportion * 3 + separation;
-  let bodyFootH = proportion / 4;
-  let bodyFootW = 0;
-  if (terminator_width >= proportion) {
-    bodyFootW = terminator_width / 2 - proportion / 3;
-  }
-
+  let terminator_height = height //+ separation;
+  //attributes
+  
+  let headSize = terminator_height * terminator_dp.proportions.head
+  let bodyHeight = terminator_height * terminator_dp.proportions.body + 0.0875*headSize
+  let bodyWidth = terminator_width * terminator_dp.proportions.foot
+  let footHeight = terminator_height * terminator_dp.proportions.foot
+  let footWidth = terminator_width/2 - bodyWidth/2
+  
+  // positions
   let posX = x + dna.x;
-  let posY = dna.y - bodyHeight - bodyFootH;
-  //Head attributes
-  let headH = proportion;
-  let terminatorH = bodyHeight + headH;
-  let headScale = () => {
-    return (proportion * 33) / 25 / 33;
-  };
-  let headWidth = () => {
-    return 35 - ((25 - proportion) * 8) / 10;
-  };
-  let headHeight = () => {
-    return 35 - ((25 - proportion) * 8) / 10;
-  };
+  let posY = dna.y - terminator_height;
   // draw BODY
-  const body = canva.path(
-    "M 0,0 v " +
-      bodyHeight +
-      " h -" +
-      bodyFootW +
-      " v " +
-      bodyFootH +
-      " h " +
-      terminator_width +
-      " v -" +
-      bodyFootH +
-      " h -" +
-      bodyFootW +
-      " v " +
-      -bodyHeight
-  );
-  body.move(posX, posY);
+  const headMiddle = headSize/2
+  const headInset = 0.9125*headMiddle
+  let body = undefined
+  //console.log("aaa "+separation);
+  if(strand === "reverse"){
+    body = canva.path(
+      "M "+posX+","+dna.y+
+      "v "+footHeight+
+      "h "+footWidth+
+      "v "+bodyHeight+ 
+      "q -"+(0.25*headSize)+" 0 -"+(0.25*headSize)+" "+(headInset)+
+      "q 0 "+headMiddle+" "+headMiddle+" "+headMiddle+
+      "q "+headMiddle+" 0 "+headMiddle+" -"+headMiddle+
+      "q 0 -"+(headInset)+" -"+(0.25*headSize)+" -"+(headInset)+
+      "v -"+bodyHeight+
+      "h "+footWidth+
+      "v -"+footHeight
+    );
+  } else {
+    body = canva.path(
+      "M "+posX+","+dna.y+
+      "v -"+footHeight+
+      "h "+footWidth+
+      "v -"+bodyHeight+ 
+      "q -"+(0.25*headSize)+" 0 -"+(0.25*headSize)+" -"+(headInset)+
+      "q 0 -"+headMiddle+" "+headMiddle+" -"+headMiddle+
+      "q "+headMiddle+" 0 "+headMiddle+" "+headMiddle+
+      "q 0 "+(headInset)+" -"+(0.25*headSize)+" "+(headInset)+
+      "v "+bodyHeight+
+      "h "+footWidth+
+      "v "+footHeight
+    );
+  }
   body.attr({
     "fill-opacity": 0
   });
   body.stroke(stroke);
   body.opacity(opacity);
-  // draw HEAD
-  var head = canva.path(
-    "M 23.2 28 L 23.2 27.1 A 14.7 14.7 0 0 0 30 14.7 A 14.7 14.7 0 0 0 15.2 0 L 15.2 0 A 14.7 14.7 0 0 0 0.5 14.7 A 14.7 14.7 0 0 0 7.2 27.1 L 7.2 28"
-  );
-  let headX = dna.x + x + terminator_width / 2 - headWidth() / 2;
-  let headY = dna.y - bodyHeight - headHeight();
-  head.move(headX + 1, headY + 1);
-  head.transform({
-    scale: headScale()
-  });
-  //head.fill(color);
-  head.attr({
-    "fill-opacity": 0
-  });
-  head.stroke(stroke);
-  head.opacity(opacity);
+
   var group = canva.group();
   group.add(body);
-  group.add(head);
   //text
-  const text = label({
-    canvas: canva,
-    x: headX,
-    y: headY - font.size,
-    text: labelName,
-    font: font
-  });
-  // reverse effect
-  if (strand === "reverse") {
-    group.move(dna.x + x, dna.y);
-    group.transform({
-      rotate: 180
+  /*
+  if(labelName){
+    const text = label({
+      canvas: canva,
+      x: headX,
+      y: headY - font.size,
+      text: labelName,
+      font: font
     });
-    text.transform({
-      translateY: (bodyHeight + bodyFootH + 30) * 2
-    });
-  }
+    if(strand === "reverse"){
+      text.transform({
+        translateY: (bodyHeight + bodyFootH + 30) * 2
+      });
+    }
+  }*/
+  
   //Actions
   if (onClick) {
    group.attr({
@@ -142,7 +133,7 @@ export default function DrawTerminator({
     posX: posX,
     posY: posY,
     terminator_width: terminator_width,
-    height: terminatorH,
+    height: terminator_height,
     dna: dna,
     separation: separation,
     leftEndPosition: leftEndPosition,
@@ -157,3 +148,19 @@ export default function DrawTerminator({
     tooltip: tooltip
   };
 }
+
+
+/*
+  //Head attributes
+  let headH = proportion;
+  let terminatorH = bodyHeight + headH;
+  let headScale = () => {
+    return (proportion * 33) / 25 / 33;
+  };
+  let headWidth = () => {
+    return 35 - ((25 - proportion) * 8) / 10;
+  };
+  let headHeight = () => {
+    return 35 - ((25 - proportion) * 8) / 10;
+  };
+  */

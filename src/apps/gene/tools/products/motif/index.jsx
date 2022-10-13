@@ -29,9 +29,13 @@ function cleanMotifs(motifs) {
   return newMotifs;
 }
 
-export default function Motif({ motifs, sequence }) {
+export default function Motif({ motifs = [], sequence }) {
   
   const [_display, set_display] = useState("Highlight");
+
+  if(motifs.length === 0){
+    return <></>
+  }
 
   const handleChange = (event) => {
     set_display(event.target.value);

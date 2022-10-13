@@ -45,6 +45,8 @@ export default function DrawTfBindingSite({
   if(tfBindingSite_width > 100){
     tfBindingSite_width = ((30) * dna.widthActive) / dna.size;
   }
+  const group = canva.group();
+  
   // scale
   let proportion = tfBindingSite_dp.height;
   if (height) {
@@ -59,31 +61,23 @@ export default function DrawTfBindingSite({
   let tf_binding = canva.rect(tfW, tfH);
   tf_binding.move(posX, posY).stroke(stroke).fill(color);
   //Text properties
-  let textP = label({
-    text: labelName,
-    id: id + "_label",
-    canvas: canva,
-    element_x: posX,
-    element_y: posY,
-    element_w: tfW,
-    element_h: tfH,
-    font: font,
-    size: tfH*font.size/25
-  })
-  /*
-  const textP = canva.text(labelName);
-  textP
-    .font({
-      family: "Arial",
-      size: proportion * 0.8,
-      separation: "middle"
-    })
-    .move(posX + tfH / 10, posY + tfW / 4);
-    */
-  //group
-  const group = canva.group();
   group.add(tf_binding);
+  if(tfW > (tfH*font.size/25)*labelName.length){
+    let textP = label({
+      text: labelName,
+      id: id + "_label",
+      canvas: canva,
+      element_x: posX,
+      element_y: posY,
+      element_w: tfW,
+      element_h: tfH,
+      font: font,
+      size: tfH*font.size/25
+    })
   group.add(textP);
+  }
+  
+  //opacity
   group.opacity(opacity);
   //strand effect
   if (strand === "reverse") {
