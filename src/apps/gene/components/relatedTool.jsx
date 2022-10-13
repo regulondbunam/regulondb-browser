@@ -29,6 +29,39 @@ export default function RelatedDocTools({
     <List sx={{ width: "95%", bgcolor: "background.paper" }} dense={true}>
       <ListItemButton
         onClick={() => {
+          set_openD(!_openD);
+        }}
+      >
+        <ListItemText primary="Display Options" />
+        {_openD ? <ExpandLess /> : <ExpandMore />}
+      </ListItemButton>
+      <Collapse in={_openD} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItemButton sx={{ pl: 4 }}>
+          <a href={`${process.env.REACT_APP_PROSSES_SERVICE}ecoli/gene/${geneId}/pdf`}
+                  target="_blank" rel="noopener noreferrer"
+                      >
+                        PDF 
+                      </a>
+          </ListItemButton>
+          <ListItemButton sx={{ pl: 4 }}>
+          <a href={`${process.env.REACT_APP_PROSSES_SERVICE}ecoli/gene/${geneId}/txt`}
+                  target="_blank" rel="noopener noreferrer"
+                      >
+                        Download Text only (v0.1) 
+                      </a>
+          </ListItemButton>
+          <ListItem sx={{ pl: 4 }}>
+                <a href={`${process.env.REACT_APP_PROSSES_SERVICE}ecoli/gene/${geneId}/jsongql`}
+                  target="_blank" rel="noopener noreferrer"
+                      >
+                        JSON (RAW)
+                      </a>
+              </ListItem>
+        </List>
+      </Collapse>
+      <ListItemButton
+        onClick={() => {
           set_openRT(!_openRT);
         }}
       >
@@ -78,39 +111,6 @@ export default function RelatedDocTools({
               </ListItem>
             );
           })}
-        </List>
-      </Collapse>
-      <ListItemButton
-        onClick={() => {
-          set_openD(!_openD);
-        }}
-      >
-        <ListItemText primary="Display Options" />
-        {_openD ? <ExpandLess /> : <ExpandMore />}
-      </ListItemButton>
-      <Collapse in={_openD} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }}>
-          <a href={`${process.env.REACT_APP_PROSSES_SERVICE}ecoli/gene/${geneId}/pdf`}
-                  target="_blank" rel="noopener noreferrer"
-                      >
-                        PDF 
-                      </a>
-          </ListItemButton>
-          <ListItemButton sx={{ pl: 4 }}>
-          <a href={`${process.env.REACT_APP_PROSSES_SERVICE}ecoli/gene/${geneId}/txt`}
-                  target="_blank" rel="noopener noreferrer"
-                      >
-                        Download Text only (v0.1) 
-                      </a>
-          </ListItemButton>
-          <ListItem sx={{ pl: 4 }}>
-                <a href={`${process.env.REACT_APP_PROSSES_SERVICE}ecoli/gene/${geneId}/jsongql`}
-                  target="_blank" rel="noopener noreferrer"
-                      >
-                        JSON (RAW)
-                      </a>
-              </ListItem>
         </List>
       </Collapse>
       <ListItemButton>
