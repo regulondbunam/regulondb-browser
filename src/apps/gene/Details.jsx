@@ -6,7 +6,6 @@ import Citations from "./tools/Citations";
 import Description from "./tools/description";
 import Products from "./tools/products";
 import DrawingTracesTool from "../../components/DrawingTracesTool";
-import DisplayOptions from "./components/DisplayOptions";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 import RelatedDocTools from "./components/relatedTool"
 
@@ -148,7 +147,6 @@ function Details() {
   }, [_data]);
   return (
     <div>
-      <DisplayOptions />
       
       <div className="cover_gene" id="cover_gene_details">
       
