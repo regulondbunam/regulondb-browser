@@ -38,21 +38,21 @@ export default function RelatedDocTools({
       <Collapse in={_openD} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <ListItemButton sx={{ pl: 4 }}>
-          <a href={`${process.env.REACT_APP_PROSSES_SERVICE}ecoli/gene/${geneId}/pdf`}
+          <a href={`${process.env.REACT_APP_PROSSES_SERVICE}/ecoli/gene/${geneId}/pdf`}
                   target="_blank" rel="noopener noreferrer"
                       >
                         PDF 
                       </a>
           </ListItemButton>
           <ListItemButton sx={{ pl: 4 }}>
-          <a href={`${process.env.REACT_APP_PROSSES_SERVICE}ecoli/gene/${geneId}/txt`}
+          <a href={`${process.env.REACT_APP_PROSSES_SERVICE}/ecoli/gene/${geneId}/txt`}
                   target="_blank" rel="noopener noreferrer"
                       >
                         Download Text only (v0.1) 
                       </a>
           </ListItemButton>
           <ListItem sx={{ pl: 4 }}>
-                <a href={`${process.env.REACT_APP_PROSSES_SERVICE}ecoli/gene/${geneId}/jsongql`}
+                <a href={`${process.env.REACT_APP_PROSSES_SERVICE}/ecoli/gene/${geneId}/jsongql`}
                   target="_blank" rel="noopener noreferrer"
                       >
                         JSON (RAW)
