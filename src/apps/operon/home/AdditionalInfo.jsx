@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Track } from "../../../components/GeneticElementsGraphicLibrary";
-import RegulatoryNetwork from "../../../components/regulatoryNetwork/RegulatoryNetwork";
 import WebServices from "../../../components/webservices/WebServices";
 
 function AdditionalInfo({ additionalInfo, id }) {
@@ -32,36 +31,25 @@ function AdditionalInfo({ additionalInfo, id }) {
     leftEndPosition: leftEndPosition,
     rightEndPosition: rightEndPosition,
   };
-  switch (additionalInfo.type) {
-    case "ge_draw":
-      return (
-        <div>
-          {!_GE && (
-            <WebServices
-              datamart_name="getGeneticElementsFromInterval"
-              variables={variables}
-              getData={(data) => {
-                set_GE(data.GE);
-              }}
-              getState={(state) => {
-                set_state(state);
-              }}
-            />
-          )}
-          {_state === "loading" && <div>Loading...</div>}
-          <div id={`drawGE_${id}`} style={{ overflow: "auto" }} />
-        </div>
-      );
-    case "rn_draw":
-      //console.log(id);
-      return(
-        <div>
-          <RegulatoryNetwork id_regulon={id} />
-        </div>
-      )
-    default:
-      return null
-  }
+  
+  return (
+    <div>
+      {!_GE && (
+        <WebServices
+          datamart_name="getGeneticElementsFromInterval"
+          variables={variables}
+          getData={(data) => {
+            set_GE(data.GE);
+          }}
+          getState={(state) => {
+            set_state(state);
+          }}
+        />
+      )}
+      {_state === "loading" && <div>Loading...</div>}
+      <div id={`drawGE_${id}`} style={{ overflow: "auto" }} />
+    </div>
+  );
   
 }
 

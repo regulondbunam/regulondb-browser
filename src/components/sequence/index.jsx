@@ -1,4 +1,8 @@
 import Format from './Format'
+import MkSequence from './mkSequence'
+import { MarkSequencePromoter } from './mkSequencePromoter'
+import { MarkSequenceTerminator } from './mkSequenceTerminator'
+import { MarkSequenceSimple } from './mkSequenceSimple'
 import "./secuence.css"
 
 export function FastaSequence({
@@ -22,3 +26,5 @@ export function GenebankSequence({
         <p id="rdb_p_sequence" className="rdb_p_sequence" dangerouslySetInnerHTML={{__html: formatSequence.getGenebankFormat({color: color})}} />
     )
 }
+
+export{MkSequence, MarkSequencePromoter, MarkSequenceTerminator, MarkSequenceSimple}

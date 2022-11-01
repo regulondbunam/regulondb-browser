@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal as ModalComponent} from '../../../../components/ui-components/ui_components'
+import {Modal as ModalComponent} from '../ui-components_old/ui_components'
 
 export const Modal = ({
     cit,

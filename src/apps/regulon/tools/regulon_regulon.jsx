@@ -6,7 +6,7 @@ import { Operons } from './regulon/operon'
 import Terms from './regulon_terms'
 import { SigmaFactors } from './regulon/sigmaFactors'
 import { TranscriptionUnits } from './regulon/transcriptionUnits'
-import { SpinnerCircle } from '../../../components/ui-components/ui_components'
+import { SpinnerCircle } from '../components/ui-components_old/ui_components'
 
 export default function Regulon({id_regulon, conf}) {
 

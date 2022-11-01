@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useLazyQuery } from "@apollo/client";
-//import { RelatedIds } from "./operon/RelatedIds";
+import { OperonIds } from "./operon/relatedIds";
 import { query_GET_GENE_BY } from "./gene/gql";
 import { query_GET_OPERON_BY } from "./operon/gql";
 import { query_GET_REGULON_BY } from "./regulon/gql";
 import { query_GET_PHRASE_OF } from "./phrases/gql";
 import { query_GET_GE_Interval } from "./GeneticElementsFromInterval/gql";
 import { PhraseUtil } from "./phrases/util";
+
 
 export default function WebServices({
   datamart_name,
@@ -17,12 +18,14 @@ export default function WebServices({
   isGetPhrases = false,
 }) {
   let query = ""
+  let relatedIds
   switch (datamart_name) {
     case "getRegulonBy":
       query = query_GET_REGULON_BY;
       break;
     case "getOperonBy":
       query = query_GET_OPERON_BY;
+      relatedIds = OperonIds
       break;
     case "getGenesBy":
       query = query_GET_GENE_BY;
@@ -39,8 +42,8 @@ export default function WebServices({
   });
   // eslint-disable-next-line no-unused-vars
   const [_getPhrases, phrases] = useLazyQuery(query_GET_PHRASE_OF);
-  // eslint-disable-next-line no-unused-vars
-  const [_relatedIds, set_relatedIds] = useState([]);
+
+  const [_relatedIds, set_relatedIds] = useState();
   const [_isFinish, set_isFinish] = useState(false);
   const [_data, set_data] = useState();
 
@@ -62,44 +65,49 @@ export default function WebServices({
       getData({error: "webservices "+datamart_name+" query error"});
     }
     if (_data && !_isFinish) {
-      //Obtencion de phrases y related IDS
-      /*
-      if(operon.data && !phrases.data && !phrases.loading && !phrases.error && isGetPhrases){
-        let relatedIds = RelatedIds(operon.data.getOperonBy.data);
-        if (relatedIds.all.length > 0) {
-          set_relatedIds(relatedIds);
-          _getPhrases({ variables: { id: relatedIds.all } });
-        } else {
-          set_relatedIds([]);
+      //Obtencion de phrases
+      try {
+        if(isGetPhrases){
+          if(_relatedIds){
+            //console.log(_relatedIds);
+            _getPhrases({ variables: { id: relatedIds.all } });
+          }else{
+            set_relatedIds(relatedIds(_data[datamart_name].data))
+          }
         }
+      } catch (error) {
+        console.error("mee");
       }
-      */
+
       //Envio de _data
-      if (phrases.data || !isGetPhrases) {
-        let relatedIds = _relatedIds;
-        let phrases = {
+      if (phrases.data || !isGetPhrases || phrases.error) {
+        if(phrases.error){
+          console.error("get phrases error: ",error);
+        }
+
+        let phrasesData = {
           data: [],
           Util: undefined,
         };
         if (isGetPhrases) {
-          phrases = {
+          phrasesData = {
             data: phrases.data.getPhraseOf,
             Util: PhraseUtil,
           };
         }
-        //console.log("WebServices: _data", _data);
+
         try {
           if(datamart_name === "getGeneticElementsFromInterval"){
             getData({
               GE: _data[datamart_name],
-              relatedIds: relatedIds,
-              phrases: phrases,
+              relatedIds: _relatedIds,
+              phrases: phrasesData,
             });
           }else{
             getData({
               ..._data[datamart_name],
-              relatedIds: relatedIds,
-              phrases: phrases,
+              relatedIds: _relatedIds,
+              phrases: phrasesData,
             });
           }
           if(_data[datamart_name]?.pagination){
@@ -122,7 +130,7 @@ export default function WebServices({
       
       */
     }
-  }, [_getData, queryData, _data, _isFinish, _relatedIds, phrases, isGetPhrases, getData, getState, datamart_name]);
+  }, [_getData, queryData, _data,relatedIds,_getPhrases, _isFinish, phrases, isGetPhrases,_relatedIds, getData, getState, datamart_name]);
 
   return <></>;
 }

@@ -9,7 +9,6 @@ import dagre from "cytoscape-dagre";
 //Assets
 import Style from "./styles/Canvas.module.css";
 import networkStyle from "./styles/network.style.json";
-import "boxicons";
 
 cytoscape.use(svg);
 cytoscape.use(dagre);

@@ -9,10 +9,9 @@ import Home from './apps/home';
 import Search from './apps/search';
 import Gene from './apps/gene';
 import DrawingTracesInterface from './apps/dtt';
-import HT from './apps/ht/HighThroughput';
-import Operon from './apps/operon/operon';
-import Regulon from './apps/regulon/regulon';
+import Operon from './apps/operon';
 import Embed from "./apps/embed";
+import Regulon from './apps/regulon/regulon';
 
 const theme = createTheme({
   palette: {
@@ -54,15 +53,7 @@ function App() {
           </Route>
           <Route path="home" element={<Home />} />
           <Route path="dtt" element={<DrawingTracesInterface />} >
-            <Route path=':parameters' />
-          </Route>
-          <Route path="ht" element={<HT />} >
-            <Route path=":site"  >
-              <Route path=":datasetType"  >
-                <Route path=":info"  >
-                </Route>
-              </Route>
-            </Route>
+            <Route path=":parameters"  />
           </Route>
           <Route path="search" element={<Search />} >
             <Route path=":keyword"  />
@@ -71,7 +62,10 @@ function App() {
             <Route path=":geneId"  />
           </Route>
           <Route path="operon" element={<Operon />} >
-            <Route path=":id"  />
+            <Route path=":operonId"  />
+          </Route>
+          <Route path="tu" element={<Operon />} >
+            <Route path=":tuId"  />
           </Route>
           <Route path="regulon" element={<Regulon />} >
             <Route path=":id" />
@@ -82,9 +76,4 @@ function App() {
   );
 }
 
-
 export default App;
-
-
-
-

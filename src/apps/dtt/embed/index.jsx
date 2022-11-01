@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useQuery } from '@apollo/client';
 import { query_GET_GE_Interval } from "../../../components/webservices/GeneticElementsFromInterval/gql";
 import { DrawingTE } from './drawingTracesEmbed';

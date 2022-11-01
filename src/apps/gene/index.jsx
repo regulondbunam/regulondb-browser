@@ -5,7 +5,7 @@ import Details from "./Details";
 import Home from "./Home";
 import Title, { UpdateTitle } from "./components/Title";
 import "./gene.css";
-import { Feedback } from "./components/Feedback";
+
 
 function Gene() {
   const [id, setId] = useState();
@@ -51,9 +51,6 @@ function Gene() {
     <div>
       <div className="cover_gene" id="cover_gene_detailsA">
         <Title title={"Gene"} />
-        <div className="feedback_tool" id="feedbackTool">
-          <Feedback />
-        </div>
       </div>
       {!geneId && <Home />}
       {id && (

@@ -17,7 +17,7 @@ function scrollFunction() {
     document.getElementById("adjust_view").style.height = '140px';
     //feedbackTool
     document.getElementById("cover_gene_detailsA").style.top = "0";
-    document.getElementById("feedbackTool").style.top = `0px`;
+    //document.getElementById("feedbackTool").style.top = `0px`;
     document.getElementById("cover_gene_detailsA").style.position = "fixed";
     let tabsPosition = document.getElementById(
       "cover_gene_detailsA"
@@ -31,7 +31,7 @@ function scrollFunction() {
     //document.getElementById("feedbackTool").style.display = "initial";
   } else {
     document.getElementById("adjust_view").style.height = '0px';
-    document.getElementById("feedbackTool").style.top = `150px`;
+    //document.getElementById("feedbackTool").style.top = `150px`;
     document.getElementById("cover_gene_UpperButton").style.display = "none";
     let coverPosition = 124 - document.documentElement.scrollTop;
     document.getElementById("cover_gene_detailsA").style.position = "initial";
@@ -64,7 +64,7 @@ let observer = new IntersectionObserver(
 
 function Details() {
   const { _data } = useContext(DataCONTEXT);
-  console.log("_data", _data);
+  //console.log("_data", _data);
 
   useEffect(() => {
     window.onscroll = function () {

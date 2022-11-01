@@ -1,57 +1,105 @@
 /**
  *
  * @param {object} operon_data |
- * @returns object of array of ids
+ * @returns array of objects with ids
  * Esta funcion toma un objeto de operon_data y devuelve un objeto con los ids de los operones, genes, tus y rBS
+ *
+ * {}
  */
 
-export function RelatedIds(operon_data) {
+export function OperonIds(operon_data) {
   let ids = {};
-  let aIds = []
   try {
+    let tus = [];
+    let genes = [];
+    let promoters = [];
+    let regulator = [];
+    let regulatoryInteractions = [];
+    let terminators = [];
     operon_data.forEach((operon) => {
-      ids["operon"] = operon?._id;
       if (operon?.transcriptionUnits) {
-        let tus = [];
         operon.transcriptionUnits.forEach((transcriptionUnit) => {
-          transcriptionUnit?.id && tus.push(transcriptionUnit.id);
+          tus = IfNoExistPush(tus, transcriptionUnit.id);
           if (transcriptionUnit?.genes) {
-            let genes = [];
             transcriptionUnit?.genes.forEach((gene) => {
-              gene?.id && genes.push(gene.id);
-            });
-            ids["gene"] = genes;
-          }
-          if (transcriptionUnit?.promoter) {
-            ids["gene"] = transcriptionUnit?.promoter.id;
-          }
-          if (transcriptionUnit?.regulatorBindingSites) {
-            let RegulatoryInteractions = [];
-            transcriptionUnit?.regulatorBindingSites.forEach((rBS) => {
-              if (rBS?.regulatoryInteractions) {
-                rBS?.regulatoryInteractions.forEach((regulatoryInteraction) => {
-                  regulatoryInteraction?.id &&
-                  RegulatoryInteractions.push(regulatoryInteraction._id);
-                })
+              genes = IfNoExistPush(genes, gene.id);
+              if (gene?.regulatorBindingSites) {
+                gene.regulatorBindingSites.forEach((rbs) => {
+                  if (rbs?.regulator) {
+                    regulator = IfNoExistPush(regulator, rbs.regulator._id);
+                  }
+                  if (rbs?.regulatoryInteractions) {
+                    rbs.regulatoryInteractions.forEach((ri) => {
+                      regulatoryInteractions = IfNoExistPush(
+                        regulatoryInteractions,
+                        ri._id
+                      );
+                    });
+                  }
+                });
               }
             });
-            ids["RegulatoryInteractions"] = RegulatoryInteractions;
+          }
+          if (transcriptionUnit?.promoter) {
+            promoters = IfNoExistPush(promoters, transcriptionUnit.promoter.id);
+            if (transcriptionUnit.promoter?.regulatorBindingSites) {
+                transcriptionUnit.promoter.regulatorBindingSites.forEach((rbs) => {
+                    if (rbs?.regulator) {
+                        regulator = IfNoExistPush(regulator, rbs.regulator._id);
+                    }
+                    if (rbs?.regulatoryInteractions) {
+                        rbs.regulatoryInteractions.forEach((ri) => {
+                            regulatoryInteractions = IfNoExistPush(
+                                regulatoryInteractions,
+                                ri._id
+                            );
+                        });
+                    }
+                });
+            }
+        }
+          if (transcriptionUnit?.regulatorBindingSites) {
+            transcriptionUnit.regulatorBindingSites.forEach((rbs) => {
+              if (rbs?.regulator) {
+                regulator = IfNoExistPush(regulator, rbs.regulator._id);
+              }
+              if (rbs?.regulatoryInteractions) {
+                rbs.regulatoryInteractions.forEach((ri) => {
+                  regulatoryInteractions = IfNoExistPush(
+                    regulatoryInteractions,
+                    ri._id
+                  );
+                });
+              }
+            });
           }
           if (transcriptionUnit?.terminators) {
-            let terminators = [];
             transcriptionUnit.terminators.forEach((terminator) => {
-              terminator?.id && terminators.push(terminator.id);
-            })
-            ids["terminator"] = terminators;
+              terminators = IfNoExistPush(terminators, terminator._id);
+            });
           }
         });
-        ids["transcriptionUnit"] = tus;
       }
     });
-    ids["all"] = aIds.concat(ids["operon"], ids["gene"], ids["transcriptionUnit"], ids["terminator"], ids["RegulatoryInteractions"]);
+    ids = {
+      transcriptionUnits: tus,
+      genes: genes,
+      promoters: promoters,
+      regulator: regulator,
+      regulatoryInteractions: regulatoryInteractions,
+      terminators: terminators,
+      all: genes.concat(promoters).concat(regulator).concat(regulatoryInteractions).concat(terminators)
+    };
   } catch (error) {
-    console.error("get Phrases Atributes", error);
+    console.error("get Ids operon", error);
   }
-
   return ids;
+}
+
+function IfNoExistPush(array = [], element) {
+  if (!array.find((e) => e === element)) {
+    array.push(element);
+    return array;
+  }
+  return array;
 }

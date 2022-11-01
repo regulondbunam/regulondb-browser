@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import GetAllRegulon from './webServices/getAllRegulon/getAllRegulon'
-import {IntelligentTable} from "../../components/ui-components/ui_components"
+//import {IntelligentTable} from "../../components/ui-components/ui_components"
 import {formatData} from './components/regulon_formatDataHomeTable'
 import {useNavigate} from "react-router-dom";
 
@@ -12,6 +12,7 @@ import {useNavigate} from "react-router-dom";
  */
 export function Home({conf}) {
     const [_data, set_data] = useState()
+    // eslint-disable-next-line no-unused-vars
     const [_dataTable, set_dataTable] = useState()
     const [_found, set_found] = useState()
     const [_state, set_state] = useState("done")
@@ -49,7 +50,7 @@ export function Home({conf}) {
                 <div dangerouslySetInnerHTML={{__html: conf?.description}} />
                 <p>{_found} Regulon </p>
                 <br/>
-                <IntelligentTable data={_dataTable} />
+                table
             </article>
         )
     }

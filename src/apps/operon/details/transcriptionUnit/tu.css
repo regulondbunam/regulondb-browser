@@ -1,0 +1,15 @@
+.tu_gene_content{
+    margin-left: 5%;
+}
+
+.tu_firstGene{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
+.tu_firstGene_name{
+    font-size: 24px;
+    width: 25%;
+}

@@ -66,6 +66,11 @@ export const fragment_OPERON = gql`fragment OPERON on Operon {
       rightEndPosition
     }
     strand
+    statistics{
+      genes
+      promoters
+      transcriptionUnits
+    }
     citations {
       ...CITATIONS
     }

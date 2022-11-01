@@ -1,5 +1,5 @@
 import React from 'react'
-import { Tabs } from "../../../components/ui-components/ui_components";
+import { Tabs } from "./ui-components_old/ui_components";
 import Description from '../tools/regulon_description'
 import Regulon from '../tools/regulon_regulon'
 import RInteractions from '../tools/regulon_ri'

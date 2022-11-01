@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import { GeneOntology } from '../terms/geneOntology';
 import { Multifun } from '../terms/multifun';
-import { Modal } from "../../../../components/ui-components/ui_components"
+import { Modal } from "../../components/ui-components_old/ui_components"
 
 const thStyle = {
     fontWeight: "bold",

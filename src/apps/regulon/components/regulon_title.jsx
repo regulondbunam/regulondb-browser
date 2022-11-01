@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Cover } from "../../../components/ui-components/ui_components";
+import { Cover } from "./ui-components_old/ui_components";
 
 
 export const Title = () => {
