@@ -11,6 +11,7 @@ import Gene from './apps/gene';
 import DrawingTracesInterface from './apps/dtt';
 import Operon from './apps/operon';
 import Embed from "./apps/embed";
+import HT from './apps/ht/HighThroughput';
 import Regulon from './apps/regulon/regulon';
 
 const theme = createTheme({
@@ -27,7 +28,7 @@ const theme = createTheme({
       // dark: will be calculated from palette.secondary.main,
       contrastText: '#ffffff',
     },
-    info:{
+    info: {
       main: '#999999'
     },
     // Used by `getContrastText()` to maximize the contrast between
@@ -53,22 +54,30 @@ function App() {
           </Route>
           <Route path="home" element={<Home />} />
           <Route path="dtt" element={<DrawingTracesInterface />} >
-            <Route path=":parameters"  />
+            <Route path=":parameters" />
           </Route>
           <Route path="search" element={<Search />} >
-            <Route path=":keyword"  />
+            <Route path=":keyword" />
           </Route>
           <Route path="gene" element={<Gene />} >
-            <Route path=":geneId"  />
+            <Route path=":geneId" />
           </Route>
           <Route path="operon" element={<Operon />} >
-            <Route path=":operonId"  />
+            <Route path=":operonId" />
           </Route>
           <Route path="tu" element={<Operon />} >
-            <Route path=":tuId"  />
+            <Route path=":tuId" />
           </Route>
           <Route path="regulon" element={<Regulon />} >
             <Route path=":id" />
+          </Route>
+          <Route path="ht" element={<HT />} >
+            <Route path=":site"  >
+              <Route path=":datasetType"  >
+                <Route path=":info"  >
+                </Route>
+              </Route>
+            </Route>
           </Route>
         </Routes>
       </ThemeProvider>
