@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLazyQuery } from "@apollo/client";
-import { OperonIds } from "./operon/relatedIds";
+import { OperonIds } from "./operon/related_Ids";
 import { query_GET_GENE_BY } from "./gene/gql";
 import { query_GET_OPERON_BY } from "./operon/gql";
 import { query_GET_REGULON_BY } from "./regulon/gql";
