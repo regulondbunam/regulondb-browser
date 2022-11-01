@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import igv from "https://cdn.jsdelivr.net/npm/igv@2.13.3/dist/igv.esm.min.js"
+import igv from "igv"
 import { confGenome } from "./genome/genome"
 //import { SpinnerCircle } from '../../../../components/ui-components/ui_components';
 //const FILE_SERVER = process.env.REACT_APP_FILE_SERVICE
