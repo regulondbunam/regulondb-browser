@@ -5,6 +5,7 @@ import { query_GET_GENE_BY } from "./gene/gql";
 import { query_GET_OPERON_BY } from "./operon/gql";
 import { query_GET_REGULON_BY } from "./regulon/gql";
 import { query_GET_PHRASE_OF } from "./phrases/gql";
+import { query_getAllSigmulon } from "./sigmulon/gql";
 import { query_GET_GE_Interval } from "./GeneticElementsFromInterval/gql";
 import { PhraseUtil } from "./phrases/util";
 
@@ -20,6 +21,9 @@ export default function WebServices({
   let query = ""
   let relatedIds
   switch (datamart_name) {
+    case "getAllSigmulon":
+      query = query_getAllSigmulon;
+      break;
     case "getRegulonBy":
       query = query_GET_REGULON_BY;
       break;
