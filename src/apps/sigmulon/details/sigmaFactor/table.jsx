@@ -113,9 +113,9 @@ export default function Table({ columns, data }) {
 
                 <div {...getTableBodyProps()}>
                     <FixedSizeList
-                        height={400}
+                        height={200}
                         itemCount={rows.length}
-                        itemSize={35}
+                        itemSize={30}
                         width={totalColumnsWidth + scrollBarSize}
                     >
                         {RenderRow}
