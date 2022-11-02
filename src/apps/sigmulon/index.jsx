@@ -53,6 +53,7 @@ function Sigmulon() {
 
   const viewHome = !sigmulonId && !promoterId;
 
+  //console.log(id);
   return (
     <div id="sigmulon_app">
       <div id="sigmulon_cover">
@@ -62,8 +63,6 @@ function Sigmulon() {
         {viewHome && <Home />}
         {id && (
           <DataProvider
-            isGetRelatedIDs={true}
-            isGetPhrases={true}
             datamart_name="getSigmulonBy"
             variables={{ advancedSearch: advancedSearch }}
             getState={(state) => {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Cover } from "../../components/ui-components";
+import "./title.css"
 
 const IDTitle = "title_cover_sigmulonTool";
 const eventName = "cover_sigmulonTool_event";
@@ -59,7 +60,7 @@ export const Title = ({ title }) => {
       );
     }
   }, []);
-  //if (!sigmulonToken) {
+  if (!sigmulonToken) {
     return (
       <div id={IDTitle} >
         <Cover state={_state} message={_message}>
@@ -67,44 +68,38 @@ export const Title = ({ title }) => {
         </Cover>
       </div>
     );
-  //}
-  /*
+  }
+
   const {
-    id,
-    name,
-    regulationPositions,
-    strand,
+    _id,
+    sigmaFactor,
     statistics
   } = sigmulonToken;
-  let row = "->";
-  strand === "reverse" && (row = "<-");
   //console.log(sigmulonToken);
-  return(
+  return (
     <div id={IDTitle} >
       <Cover state={_state} message={_message}>
-          sigmulon
-          <p style={{fontSize: "10px"}} >{id}</p>
-          <h1>{name}</h1>
-          
-          <p>{`${regulationPositions.leftEndPosition} ${row} ${regulationPositions.rightEndPosition}`}</p>
-          <div className="cover_statistics" >
-            <div className="stt_box stt_gene">
-              <p>Genes</p>
-              <p>{statistics?.genes}</p>
-            </div>
-            <div className="stt_box stt_promoter">
-              <p>Promoters</p>
-              <p>{statistics?.promoters}</p>
-            </div>
-            <div className="stt_box stt_tu">
-              <p>Transcription Unit</p>
-              <p>{statistics?.transcriptionUnits}</p>
-            </div>
-          </div>
-        </Cover>
+        sigmulon
+        <p style={{ fontSize: "10px" }} >{_id}</p>
+        <h1>{sigmaFactor.name}</h1>
+        <div className="cover_statistics" >
+          {
+            Object.keys(statistics).map((key) => {
+              if(key !== "__typename"){
+                return (
+                  <div className="stt_box stt_gene">
+                    <p>{key}</p>
+                    <p>{statistics[key]}</p>
+                  </div>
+                )
+              }
+              return null
+            })
+          }
+        </div>
+      </Cover>
     </div>
   )
-  */
 };
 
 export default Title;
