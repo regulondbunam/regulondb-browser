@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
+import Table from "./table";
 
 function SigmaFactor({ sigmaFactor, allCitations }) {
     const jsonTABLE = useMemo(()=>{
@@ -55,11 +56,13 @@ function SigmaFactor({ sigmaFactor, allCitations }) {
                     <div>
                     <p className="p_accent">Gene:</p>
                     <Link to={`/gene/${sigmaFactor.gene._id}`} ><p style={{marginLeft: "2%", fontSize: "20px"}}>{sigmaFactor.gene.name}</p></Link>
-                        
                     </div>
                 </div>
-
-
+                <div>
+                    {sigmaFactor.sigmulonGenes.length > 0 &&(
+                        <Table columns={jsonTABLE.genes.columns} data={jsonTABLE.genes.data} />
+                    )}
+                </div>
             </article>
 
         </div>
