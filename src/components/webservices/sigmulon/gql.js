@@ -27,11 +27,11 @@ export const fragment_PAGINATION = gql`fragment PAGINATION on Pagination {
     totalResults
   }`
 
-export const query_getAllSigmulon = gql`
+export const query_getSigmulonBy = gql`
 ${fragment_CITATIONS}
 ${fragment_PAGINATION}
-query getAllSigmulon {
-    getAllSigmulon {
+query getSigmulon($advancedSearch: String){
+    getSigmulonBy(advancedSearch:$advancedSearch){
       pagination {
         ...PAGINATION
       }
@@ -98,6 +98,41 @@ query getAllSigmulon {
               year
             }
           }
+        }
+      }
+    }
+  }
+`
+
+export const query_getAllSigmulon = gql`
+query getAllSigmulon {
+    getAllSigmulon {
+      data {
+        _id
+        sigmaFactor {
+          _id
+          gene {
+            _id
+            name
+          }
+          name
+          sigmulonGenes {
+            name
+            _id
+          }
+          sigmulonRegulators {
+            _id
+            name
+          }
+          synonyms
+        }
+        statistics {
+          cotranscriptionFactors
+          genes
+          promoters
+          sigmaFactors
+          transcriptionFactors
+          transcriptionUnits
         }
       }
     }
