@@ -27,13 +27,19 @@ function formatJsonTable(panel, elements) {
             } else {
                 let row = {}
                 rowGenes.forEach((gn, i) => {
-                    row[`column_${i}`] = gn.name
+                    row[`column_${i+1}`] = gn.name
                 })
                 data.push(row)
                 rowGenes = [gene]
             }
-
         })
+        if (rowGenes.length > 0) {
+            let row = {}
+            rowGenes.forEach((gn, i) => {
+                row[`column_${i+1}`] = gn.name
+            })
+            data.push(row)
+        }
     }
     return { columns: columns, data: data }
 }
@@ -55,7 +61,7 @@ function SigmaFactor({ sigmaFactor, allCitations }) {
             set_jtGenes(formatJsonTable(panelGenes,_sigmulonGenes))
         }
     }, [_jtGenes, _sigmulonGenes]);
-
+    console.log(sigmaFactor);
     return (
         <div>
             <article>

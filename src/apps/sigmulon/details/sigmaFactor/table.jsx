@@ -100,17 +100,8 @@ export default function Table({ columns, data }) {
         <Styles>
             <div {...getTableProps()} className="table">
                 <div>
-                    {headerGroups.map(headerGroup => (
-                        <div {...headerGroup.getHeaderGroupProps()} className="tr">
-                            {headerGroup.headers.map(column => (
-                                <div {...column.getHeaderProps()} className="th">
-                                    {column.render('Header')}
-                                </div>
-                            ))}
-                        </div>
-                    ))}
+                    
                 </div>
-
                 <div {...getTableBodyProps()}>
                     <FixedSizeList
                         height={200}
