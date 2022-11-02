@@ -1,7 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
+import Style from "./table.module.css"
 import { useTable, useBlockLayout } from 'react-table'
 import { FixedSizeList } from 'react-window'
+import { Link } from 'react-router-dom'
 
 const scrollbarWidth = () => {
     // thanks too https://davidwalsh.name/detect-scrollbar-width
@@ -12,14 +13,14 @@ const scrollbarWidth = () => {
     document.body.removeChild(scrollDiv)
     return scrollbarWidth
 }
-
+/*
 const Styles = styled.div`
   padding: 1rem;
 
   .table {
     display: inline-block;
-    border-spacing: 0;
-    border: 1px solid black;
+    border-spacing: 5;
+    
 
     .tr {
       :last-child {
@@ -41,9 +42,9 @@ const Styles = styled.div`
       }
     }
   }
-`
+`*/
 
-export default function Table({ columns, data }) {
+export default function Table({ columns, data, link = "/" }) {
     // Use the state and functions returned from useTable to build your UI
 
     const defaultColumn = React.useMemo(
@@ -58,7 +59,6 @@ export default function Table({ columns, data }) {
     const {
         getTableProps,
         getTableBodyProps,
-        headerGroups,
         rows,
         totalColumnsWidth,
         prepareRow,
@@ -83,9 +83,19 @@ export default function Table({ columns, data }) {
                     className="tr"
                 >
                     {row.cells.map(cell => {
+                        //console.log(cell.value)
                         return (
                             <div {...cell.getCellProps()} className="td">
-                                {cell.render('Cell')}
+                                <Link to={link+"/"+cell.value._id} >
+                                    <div className={Style.cell_content} >
+                                        <div>
+                                            <p style={{ fontSize: "8px" }} >{cell.value._id}</p>
+                                        </div>
+                                        <div>
+                                            <p>{cell.value.name}</p>
+                                        </div>
+                                    </div>
+                                </Link>
                             </div>
                         )
                     })}
@@ -97,22 +107,20 @@ export default function Table({ columns, data }) {
 
     // Render the UI for your table
     return (
-        <Styles>
-            <div {...getTableProps()} className="table">
-                <div>
-                    
-                </div>
-                <div {...getTableBodyProps()}>
-                    <FixedSizeList
-                        height={200}
-                        itemCount={rows.length}
-                        itemSize={30}
-                        width={totalColumnsWidth + scrollBarSize}
-                    >
-                        {RenderRow}
-                    </FixedSizeList>
-                </div>
+        <div {...getTableProps()}>
+            <div>
+
             </div>
-        </Styles>
+            <div className={Style.table_content} {...getTableBodyProps()}>
+                <FixedSizeList
+                    height={200}
+                    itemCount={rows.length}
+                    itemSize={50}
+                    width={totalColumnsWidth + scrollBarSize}
+                >
+                    {RenderRow}
+                </FixedSizeList>
+            </div>
+        </div>
     )
 }

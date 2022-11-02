@@ -27,7 +27,7 @@ function formatJsonTable(panel, elements) {
             } else {
                 let row = {}
                 rowGenes.forEach((gn, i) => {
-                    row[`column_${i+1}`] = gn.name
+                    row[`column_${i+1}`] = gn
                 })
                 data.push(row)
                 rowGenes = [gene]
@@ -61,7 +61,7 @@ function SigmaFactor({ sigmaFactor, allCitations }) {
             set_jtGenes(formatJsonTable(panelGenes,_sigmulonGenes))
         }
     }, [_jtGenes, _sigmulonGenes]);
-    console.log(sigmaFactor);
+    //console.log(sigmaFactor);
     return (
         <div>
             <article>
@@ -109,14 +109,14 @@ function SigmaFactor({ sigmaFactor, allCitations }) {
                                     {
                                         !_jtGenes
                                             ? (<p>Loading...</p>)
-                                            : <Table columns={_jtGenes.columns} data={_jtGenes.data} />
+                                            : <Table columns={_jtGenes.columns} data={_jtGenes.data} link="/gene" />
                                     }
 
                                 </div>
                             )}
                         </div>
                     )}
-
+                    <br />
                 </Paper>
 
             </article>

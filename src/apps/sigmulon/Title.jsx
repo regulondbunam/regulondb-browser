@@ -87,7 +87,7 @@ export const Title = ({ title }) => {
             Object.keys(statistics).map((key) => {
               if(key !== "__typename"){
                 return (
-                  <div className="stt_box stt_gene">
+                  <div key={"statistic_"+key} className="stt_box stt_gene">
                     <p>{key}</p>
                     <p>{statistics[key]}</p>
                   </div>
