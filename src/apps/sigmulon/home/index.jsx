@@ -1,21 +1,21 @@
-import React, {useEffect, useState} from 'react';
-import {UpdateTitle} from "../Title"
+import React, { useEffect, useState } from 'react';
+import { UpdateTitle } from "../Title"
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
 import WebServices from "../../../components/webservices/WebServices";
 import TableView from "./Table";
 
 function Home() {
-    
-    useEffect(() => {
-        UpdateTitle({ title: "Sigmulon", sigmulonToken: undefined });
-    })
 
-    return ( 
-        <article id="sigmulon_home">
-            <Sigmulon />
-        </article>
-     );
+  useEffect(() => {
+    UpdateTitle({ title: "Sigmulon", sigmulonToken: undefined });
+  })
+
+  return (
+    <article id="sigmulon_home">
+      <Sigmulon />
+    </article>
+  );
 }
 
 export default Home;
@@ -71,10 +71,13 @@ function Sigmulon({ keyword }) {
         </Box>
       )}
       {_sigmulon?.data && (
-        <TableView
-          type="sigmulon"
-          data={_sigmulon.data}
-        />
+        <div>
+          <br />
+          <TableView
+            type="sigmulon"
+            data={_sigmulon.data}
+          />
+        </div>
       )}
     </div>
   );

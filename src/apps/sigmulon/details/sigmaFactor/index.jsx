@@ -4,13 +4,16 @@ import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import SigmulonGenes from "./sigmulonGenes";
+import SigmulonGenes from "./sigmaGenes";
+import SigmulonRegulators from "./sigmaRegulators";
 
 
 
 function SigmaFactor({ sigmaFactor, allCitations }) {
 
     const [_showGenes, set_showGenes] = useState(true);
+    const [_showRegulators, set_showRegulators] = useState(true);
+
 
     const idPanelGenes = "sigmaGenesInfo"
     const idPanelRegulators = "sigmaRegulatorsInfo"
@@ -59,6 +62,33 @@ function SigmaFactor({ sigmaFactor, allCitations }) {
                         </div>
                         {_showGenes && (
                             <SigmulonGenes idPanel={idPanelGenes} sigmulonGenes={sigmaFactor.sigmulonGenes} />
+                        )}
+                        <br />
+                    </Paper>
+                )}
+                <br />
+                {sigmaFactor.sigmulonRegulators.length > 0 && (
+                    <Paper>
+                        <div id={idPanelRegulators} style={{ display: "flex", justifyContent: "space-between" }}>
+                            <div style={{ display: "flex", alignItems: "center" }}>
+                                <div>
+                                    <IconButton
+                                        sx={{ width: "10px", height: "10px" }}
+                                        aria-label="view"
+                                        onClick={() => {
+                                            set_showRegulators(!_showRegulators);
+                                        }}
+                                    >
+                                        {_showRegulators ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                                    </IconButton>
+                                </div>
+                                <div>
+                                    <h2>Sigmulon Regulators</h2>
+                                </div>
+                            </div>
+                        </div>
+                        {_showGenes && (
+                            <SigmulonRegulators idPanel={idPanelRegulators} sigmulonRegulators={sigmaFactor.sigmulonRegulators} />
                         )}
                         <br />
                     </Paper>
