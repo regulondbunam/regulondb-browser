@@ -86,23 +86,33 @@ export default function Table({ columns, data, link = "/" }) {
                         //console.log(cell.value)
                         return (
                             <div {...cell.getCellProps()} className="td">
-                                <Link to={link+"/"+cell.value._id} >
+                                {cell.value?._id && (
+                                    <Link to={link + "/" + cell.value._id} >
+                                        <div className={Style.cell_content} >
+                                            <div>
+                                                <p style={{ fontSize: "8px" }} >{cell.value._id}</p>
+                                            </div>
+                                            <div>
+                                                <p dangerouslySetInnerHTML={{__html: cell.value.name}} />
+                                            </div>
+                                        </div>
+                                    </Link>
+                                )}
                                     <div className={Style.cell_content} >
                                         <div>
-                                            <p style={{ fontSize: "8px" }} >{cell.value._id}</p>
+                                            <p style={{ fontSize: "8px" }} ></p>
                                         </div>
                                         <div>
-                                            <p>{cell.value.name}</p>
+                                            <p></p>
                                         </div>
                                     </div>
-                                </Link>
                             </div>
                         )
                     })}
                 </div>
             )
         },
-        [prepareRow, rows]
+        [prepareRow, rows, link]
     )
 
     // Render the UI for your table
