@@ -3,6 +3,7 @@ import { DataCONTEXT } from "../../../components/webservices/DataProvider";
 import { UpdateTitle } from "../Title";
 import NavigationTabs from "./NavigationTabs";
 import SigmaFactor from "./sigmaFactor";
+import Promoters from "./promoters";
 
 class Details extends Component {
   createTabs = (sigmaFactor,transcribedPromoters,allCitations) => {
@@ -16,13 +17,7 @@ class Details extends Component {
             id: "t_02",
             name: "Promoters",
             subtitle: "transcribed",
-            element: (
-              <div>
-                <div style={{ marginLeft: "10%" }}>
-                  <h2>Transcribed Promoters</h2>
-                </div>
-              </div>
-            ),
+            element: (<Promoters transcribedPromoters={transcribedPromoters} />),
           }
     ];
     return tabs;
