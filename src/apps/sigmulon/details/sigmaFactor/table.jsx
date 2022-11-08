@@ -93,7 +93,7 @@ export default function Table({ columns, data, link = "/" }) {
                                                 <p style={{ fontSize: "8px" }} >{cell.value._id}</p>
                                             </div>
                                             <div>
-                                                <p dangerouslySetInnerHTML={{__html: cell.value.name}} />
+                                                <p  style={{ fontSize: "16px" }} dangerouslySetInnerHTML={{__html: cell.value.name}} />
                                             </div>
                                         </div>
                                     </Link>

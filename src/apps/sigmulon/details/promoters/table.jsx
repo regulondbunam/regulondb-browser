@@ -75,7 +75,7 @@ export default function TableList({ columns, data, link = "/" }) {
                 <FixedSizeList
                     height={1200}
                     itemCount={rows.length}
-                    itemSize={200}
+                    itemSize={220}
                     width={totalColumnsWidth + scrollBarSize}
                 >
                     {RenderRow}
@@ -87,13 +87,25 @@ export default function TableList({ columns, data, link = "/" }) {
 
 function PromoterInfo({ promoter }) {
 
-    const [_showCitations, set_showCitations] = useState(false);
-
+    let distanceFrom = null
+    let firstGene
+    promoter.transcribedGenes.forEach(gene => {
+        if (distanceFrom === null) {
+            distanceFrom = gene.distanceFromTSS
+            firstGene = gene
+        } else {
+            if (distanceFrom > gene.distanceFromTSS) {
+                distanceFrom = gene.distanceFromTSS
+                firstGene = gene
+            }
+        }
+    });
     console.log(promoter);
     return (
         <div className={Style.tpRow_summary}>
             <div className={Style.tpRowTitle}>
                 <p className='p_accent'>Promoter: {promoter.name}</p>
+                <p> Distance from TSS {distanceFrom} to gene <Link to={"/gene/" + firstGene._id} >{firstGene.name}</Link></p>
             </div>
             <div className={Style.tpRow_content}>
                 <div className={Style.tpRow_genes}>
@@ -110,13 +122,14 @@ function PromoterInfo({ promoter }) {
                                         <tr key={"genePromoter_" + gene._id + "_" + inx}>
                                             <td>
                                                 <Link to={"/gene/" + gene._id} >
-                                                    <table className={Style.tpRow_gene_table} >
-                                                        <tbody>
-                                                            <tr><td style={{fontSize: "12px"}} >{gene.name}</td></tr>
-                                                            <tr><td>Distance from TSS</td></tr>
-                                                            <tr><td>{gene.distanceFromTSS}</td></tr>
-                                                        </tbody>
-                                                    </table>
+                                                    <div className={Style.cell_content} >
+                                                        <div>
+                                                            <p style={{ fontSize: "8px" }} >{gene._id}</p>
+                                                        </div>
+                                                        <div>
+                                                            <p style={{ fontSize: "16px" }} dangerouslySetInnerHTML={{ __html: gene.name }} />
+                                                        </div>
+                                                    </div>
                                                 </Link>
                                             </td>
                                         </tr>
