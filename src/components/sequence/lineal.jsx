@@ -32,7 +32,7 @@ export default function LinealSequence({
                     const featureStyle = {
                         position: "absolute",
                         top: `0px`,
-                        left: `${feature.positionX*8.45}px`
+                        left: `${feature.sequencePosition*8.45}px`
                     }
                     switch (feature.type) {
                         case "promoter":

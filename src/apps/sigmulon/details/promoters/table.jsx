@@ -100,21 +100,38 @@ function PromoterInfo({ promoter }) {
             }
         }
     });
-    // feature {id,label,positionX,type}
+    // feature {id,label,sequencePosition,type}
     let promoterFeatures = []
     //create promoter feature
-    if(promoter?.sequence && promoter?.sequence != null ){
+    if(promoter?.sequence){
         promoter.sequence.split("").forEach((x,index)=>{
             if (x === x.toUpperCase()) {
                 //let anchorId = `sequence_${promoter._id}_item_${x}_${index}`
                 promoterFeatures.push({
                     id: promoter._id+"_promoter",
                     label: "+1",
-                    positionX: index,
+                    sequencePosition: index,
                     type: "promoter"
                 })
                }
         })
+        if(promoter.boxes.length > 0){
+            /*
+            promoter.boxes.forEach((x,index)=>{
+
+            })*/
+            promoter.sequence.split("").forEach((x,index)=>{
+                if (x === x.toUpperCase()) {
+                    //let anchorId = `sequence_${promoter._id}_item_${x}_${index}`
+                    promoterFeatures.push({
+                        id: promoter._id+"_promoter",
+                        label: "+1",
+                        sequencePosition: index,
+                        type: "promoter"
+                    })
+                   }
+            })
+        }
     }
     
 
