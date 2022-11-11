@@ -1,5 +1,6 @@
 import Format from './Format'
 import MkSequence from './mkSequence'
+import LinealSequence from './lineal'
 import { MarkSequencePromoter } from './mkSequencePromoter'
 import { MarkSequenceTerminator } from './mkSequenceTerminator'
 import { MarkSequenceSimple } from './mkSequenceSimple'
@@ -27,4 +28,4 @@ export function GenebankSequence({
     )
 }
 
-export{MkSequence, MarkSequencePromoter, MarkSequenceTerminator, MarkSequenceSimple}
+export{MkSequence, LinealSequence, MarkSequencePromoter, MarkSequenceTerminator, MarkSequenceSimple}

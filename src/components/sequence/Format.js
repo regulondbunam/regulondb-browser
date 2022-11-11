@@ -6,7 +6,11 @@ export default class Formats {
         this.title = title
     }
 
-
+    addAttributes(x,id,color=false){
+        const attributeColor = color ? `class="rdb_sequence_${x}"` : ''
+        const attributeId = `id="${id}"`
+        return `<span ${attributeId} ${attributeColor} >${x}</span>`
+    }
 
     putColor(x) {
         switch (x) {
@@ -114,6 +118,14 @@ export default class Formats {
             return x;
         }).join('')
         return `#${this.title}<br>#${this.getStrInfoSequence()}<br>${sequenceFormat}`
+    }
+
+    getLinealFormat({ sequenceId, color = false}){
+        let sequenceFormat = this.sequence.map((x, index)=>{
+            x = this.addAttributes(x,`sequence_${sequenceId}_item_${x}_${index}`,color)
+            return x
+        }).join('')
+        return sequenceFormat
     }
 
 

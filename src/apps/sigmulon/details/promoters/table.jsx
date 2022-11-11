@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useTable, useBlockLayout } from 'react-table'
 import { FixedSizeList } from 'react-window'
 import { Link } from 'react-router-dom'
 import Style from "./table.module.css"
+import { LinealSequence } from "../../../../components/sequence";
 
 const scrollbarWidth = () => {
     // thanks too https://davidwalsh.name/detect-scrollbar-width
@@ -29,7 +30,6 @@ export default function TableList({ columns, data, link = "/" }) {
     const {
         getTableProps,
         getTableBodyProps,
-        headerGroups,
         rows,
         totalColumnsWidth,
         prepareRow,
@@ -100,6 +100,25 @@ function PromoterInfo({ promoter }) {
             }
         }
     });
+    // feature {id,label,positionX,type}
+    let promoterFeatures = []
+    //create promoter feature
+    if(promoter?.sequence && promoter?.sequence != null ){
+        promoter.sequence.split("").forEach((x,index)=>{
+            if (x === x.toUpperCase()) {
+                //let anchorId = `sequence_${promoter._id}_item_${x}_${index}`
+                promoterFeatures.push({
+                    id: promoter._id+"_promoter",
+                    label: "+1",
+                    positionX: index,
+                    type: "promoter"
+                })
+               }
+        })
+    }
+    
+
+
     console.log(promoter);
     return (
         <div className={Style.tpRow_summary}>
@@ -127,7 +146,7 @@ function PromoterInfo({ promoter }) {
                                                             <p style={{ fontSize: "8px" }} >{gene._id}</p>
                                                         </div>
                                                         <div>
-                                                            <p style={{ fontSize: "16px" }} dangerouslySetInnerHTML={{ __html: gene.name }} />
+                                                            <p style={{ fontSize: "16px", color: "black" }} dangerouslySetInnerHTML={{ __html: gene.name }} />
                                                         </div>
                                                     </div>
                                                 </Link>
@@ -168,7 +187,9 @@ function PromoterInfo({ promoter }) {
                     </table>
                 </div>
                 <div className={Style.tpRow_sequence}>
-                    {promoter.sequence}
+                    {promoter?.sequence && (
+                        <LinealSequence sequence={promoter.sequence} color={true} height={170} sequenceId={promoter._id} features={promoterFeatures} />
+                    )}
                 </div>
 
             </div>
