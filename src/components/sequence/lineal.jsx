@@ -9,6 +9,7 @@ export default function LinealSequence({
     features = [],
     height
 }) {
+    if(!sequence){return null}
     const formatSequence = new Format(sequence, "")
     const width = sequence.length * 8.5
     const middleHeight = height / 2

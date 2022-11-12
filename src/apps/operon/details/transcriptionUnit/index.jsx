@@ -75,7 +75,27 @@ export default function TranscriptionUnit({
   return (
     <div>
       <div style={{ marginLeft: "10%" }}>
-        <h2>Transcription Unit {`${tu.name}`}</h2>
+        <div>
+           <h2>Transcription Unit {`${tu.name}`}</h2>
+        </div>
+       <div>
+        {tu?.statistics && (
+          <div className="cover_statistics" >
+          <div className="stt_box stt_gene">
+            <p>Genes</p>
+            <p>{tu.statistics?.genes}</p>
+          </div>
+          <div className="stt_box stt_promoter">
+            <p>Sites</p>
+            <p>{tu.statistics?.sites}</p>
+          </div>
+          <div className="stt_box stt_tu">
+            <p>Transcription Factors</p>
+            <p>{tu.statistics?.transcriptionFactors}</p>
+          </div>
+        </div>
+        )}
+       </div>
       </div>
       <TUDtt operon={operon} tu={tu} showControls={showInfo} />
       {showInfo && (

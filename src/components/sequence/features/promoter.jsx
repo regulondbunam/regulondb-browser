@@ -5,7 +5,6 @@ export default function Promoter({ featureStyle = {}, id, height, width, label =
 
     const drawId = "promoterDraw_"+id
     const canvaId = "promoterCanva_"+id
-
     useEffect(() => {
         const drawPlace = document.getElementById(drawId)
         let canvas = document.getElementById(canvaId);
@@ -15,7 +14,7 @@ export default function Promoter({ featureStyle = {}, id, height, width, label =
             DrawPromoter({
                 id: id,
                 canva: canvas,
-                height: height-20,
+                height: height,
                 posX: 1,
                 posY: 20,
                 arrowSize: 15,
@@ -51,7 +50,7 @@ function DrawPromoter({
 
     // draw body
     //const body = canva.path("M 0 0 V " + -height + " H " + arrowSize + " V");
-    const lup = canva.line(posX, posY, posX, posY+height).stroke(stroke)
+    const lup = canva.line(posX, posY, posX, height).stroke(stroke)
     const line = canva.line(posX, posY, posX+arrowSize, posY).stroke(stroke)
     //atributos de arrow
     let ax = posX + arrowSize

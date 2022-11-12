@@ -1,4 +1,4 @@
-import {MkSequence} from "../../../../components/sequence"
+import { LinealSequence } from "../../../../components/sequence"
 import { CitationsNote } from "../../../../components/citations/citations_note";
 import { ParagraphCitations,  } from "../../../../components/citations"
 
@@ -36,7 +36,7 @@ function TableRI({ regulatoryInteractions, allCitations }) {
         <td>
             {
                 regulatoryInteractions.map((ri, indx) => {
-                    const rSite = ri?.regulatorySite;
+                    const rs = ri?.regulatorySite;
                     return (
                         <div style={{ marginLeft: "2%" }} key={`tabe_Rinteraction_${ri?._id}_${indx}`}
                             onMouseEnter={() => {
@@ -74,34 +74,27 @@ function TableRI({ regulatoryInteractions, allCitations }) {
                                                         <tbody>
                                                             <tr>
                                                                 <td>
-
-                                                                    <MkSequence id={`cav-${ri?._id}-${rSite?._id}-fullInfo`} positions={true}
-                                                                        data_sequence={{
-                                                                            sequence: rSite?.sequence, posL: rSite?.leftEndPosition, posR: rSite?.rightEndPosition
-                                                                        }}
-                                                                    />
-
-
+                                                                <LinealSequence sequence={rs?.sequence} color={true} height={25} sequenceId={`${rs?._id}-${ri?._id}summaryInfo`}/>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>
-                                                                    {`Center Position: ${ri?.centerPosition}, Absolute Position: ${rSite?.absolutePosition}`}
+                                                                    {`Center Position: ${ri?.centerPosition}, Absolute Position: ${rs?.absolutePosition}`}
                                                                 </td>
                                                             </tr>
                                                             {
-                                                                rSite?.note
-                                                                    ? <tr><td> <p dangerouslySetInnerHTML={{ __html: CitationsNote(allCitations, rSite?.note) }} /></td></tr>
+                                                                rs?.note
+                                                                    ? <tr><td> <p dangerouslySetInnerHTML={{ __html: CitationsNote(allCitations, rs?.note) }} /></td></tr>
                                                                     : null
                                                             }
                                                             {
-                                                                rSite?.citations
+                                                                rs?.citations
                                                                     ? <tr>
                                                                         <td>
                                                                             <p>Regulatory Site Citations</p>
                                                                             {ParagraphCitations({
                                                                                 allCitations: allCitations,
-                                                                                citations: rSite?.citations
+                                                                                citations: rs?.citations
                                                                             })}
                                                                         </td>
                                                                     </tr>

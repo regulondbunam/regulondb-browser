@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MarkSequenceSimple } from "../../../../components/sequence"
+import { LinealSequence} from "../../../../components/sequence"
 import { ParagraphCitations,  } from "../../../../components/citations"
 
 
@@ -70,8 +70,7 @@ export function RbsSummary({ regulatorBindingSites = [], tuId, title = "", allCi
                         <th style={thStyle} >Name</th>
                         <th style={thStyle} >Function</th>
                         <th></th>
-                        <th style={thStyle} >Center Position</th>
-                        <th style={thStyle} >Absolute Position</th>
+                        <th style={thStyle} >Relative Position</th>
                         <th style={thStyle} >LeftPos</th>
                         <th style={thStyle} >RightPos</th>
                         <th style={thStyle} >Sequence</th>
@@ -116,12 +115,9 @@ function orderRIS(rbs,allCitations) {
             site.push(ri?.function)
             site.push(" ")
             site.push(ri?.centerPosition)
-            site.push(rs?.absolutePosition)
             site.push(rs?.leftEndPosition)
             site.push(rs?.rightEndPosition)
-            site.push(<MarkSequenceSimple id={`${rs?._id}-${ri?._id}summaryInfo`} data_sequence={{
-                sequence: rs?.sequence, posL: rs?.leftEndPosition, posR: rs?.rightEndPosition
-            }} />)
+            site.push(<LinealSequence sequence={rs?.sequence} color={true} height={25} sequenceId={`${rs?._id}-${ri?._id}summaryInfo`}/>)
             site.push(<div>{ParagraphCitations({
                 allCitations: allCitations,
                 citations: ri?.citations
