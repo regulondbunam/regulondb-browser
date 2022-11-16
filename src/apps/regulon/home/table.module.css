@@ -1,0 +1,12 @@
+.regulon_cell{
+    background-color: #cadce7;
+    height: 50px;
+    margin: 5px;
+    padding-left: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.regulon_cell:hover{
+    background-color: #72a7c7;
+}
