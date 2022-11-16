@@ -279,16 +279,15 @@ query GetRegulonInfo(
   }`
 
 export const query_GET_ALL_REGULON = gql`
+${fragment_TF}
+${fragment_CITATIONS}
+${fragment_ENCODEFROM}
   query GetAllRegulon{
     getAllRegulon(limit: 0){
       data{
         _id
-        transcriptionFactor{
-          name
-          synonyms
-          products{
-            name
-          }
+        transcriptionFactor {
+          ...TF
         }
       }
       pagination{

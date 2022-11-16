@@ -63,7 +63,7 @@ export const Title = ({ title }) => {
     return (
       <div id={IDTitle} >
         <Cover state={_state} message={_message}>
-          <h1>{_title}</h1>
+          <h1 style={{margin: "0"}}>{_title}</h1>
         </Cover>
       </div>
     );

@@ -99,13 +99,20 @@ function SelectFilter({ _regulonData, set_filter}) {
 function Home() {
     const [_regulonData, set_regulonData] = useState();
     const [_filter, set_filter] = useState();
-    
     if (!_regulonData) {
         return <WebServices datamart_name={"getAllRegulon"} 
             getData={(data) => { const jsonTable = formatJsonTable(data.data); set_regulonData(jsonTable); set_filter(jsonTable) }} 
-            getState={(state) => { UpdateTitle({ state: state }) }} />
+            getState={(state) => { 
+                const titleState = {
+                    loading: "Loading list of regulons... wait a moment",
+                    done: "Regulons",
+                    error: "sorry we have a problem ... try again later"
+                }
+                UpdateTitle({ state: state, title:titleState[state] })
+            }} 
+            />
     }
-    UpdateTitle("done")
+    UpdateTitle({title: "Regulons"})
     //console.log(_regulonData);
     return (
         <article>
