@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import { CitationsNote } from '../../../../components/citations/citations_note';
 import Conformations from './conformations';
 import EncodedFrom from './encode';
+import Products from './products';
 import "./transcriptionFactor.css"
 
 function TranscriptionFactor({ transcriptionFactor, allCitations }) {
@@ -30,24 +31,27 @@ function TranscriptionFactor({ transcriptionFactor, allCitations }) {
                 </div>
             </div>
             {_show && (
-                <div style={{margin: "0 5% 0 5%", padding: "0 0 20px 0"}} >
+                <div style={{ margin: "0 5% 0 5%", padding: "0 0 20px 0" }} >
 
                     {transcriptionFactor.synonyms.length > 0 && (
                         <div>
-                             <p className="p_accent">Synonyms:</p> <p> {transcriptionFactor.synonyms.join(", ")}</p>
+                            <p className="p_accent">Synonyms:</p> <p> {transcriptionFactor.synonyms.join(", ")}</p>
                         </div>
                     )}
-                   {transcriptionFactor.note && (
-                        <div>
-                             <p className="p_accent">Note:</p>
-                             <p dangerouslySetInnerHTML={{ __html: CitationsNote(allCitations,transcriptionFactor.note)}} />
-                        </div>
-                    )}
-                    {transcriptionFactor.conformations.length > 0 &&(
+                    {transcriptionFactor.conformations.length > 0 && (
                         <Conformations conformations={transcriptionFactor.conformations} allCitations={allCitations} />
                     )}
                     {transcriptionFactor.encodedFrom && (
                         <EncodedFrom encodedFrom={transcriptionFactor.encodedFrom} />
+                    )}
+                    {transcriptionFactor.products.length > 0 && (
+                        <Products products={transcriptionFactor.products} />
+                    )}
+                    {transcriptionFactor.note && (
+                        <div>
+                            <p className="p_accent">Note:</p>
+                            <p dangerouslySetInnerHTML={{ __html: CitationsNote(allCitations, transcriptionFactor.note) }} />
+                        </div>
                     )}
                 </div>
             )}

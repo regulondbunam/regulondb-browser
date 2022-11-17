@@ -14,19 +14,13 @@ export default function Conformations({ conformations, allCitations }) {
         <div>
             <h3>Conformations</h3>
             <div style={{
-                display: "flex",
-                marginLeft: "5%",
-                overflow: "auto"
+                marginLeft: "5%"
             }}>
                 {conformations.map((conformation) => {
                     return (
-                        <div key={"tf_conformation_"+conformation.id} style={{
-                            width: "300px",
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            backgroundColor: "#f9f7f6",
-                            margin: "5px",
+                        <div  key={"tf_conformation_"+conformation.id} 
+                        style={{
+                            marginBottom: "10px"
                         }} >
                             <div>{conformation.type}</div>
                             <div><p className='p_accent'>{conformation.name}</p></div>
