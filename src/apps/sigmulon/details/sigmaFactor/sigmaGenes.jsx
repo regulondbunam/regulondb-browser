@@ -44,7 +44,6 @@ function SigmulonGenes({ idPanel, sigmulonGenes }) {
                     />
                     </div>
             </div>
-
             <div>
                 {
                     !_jtGenes

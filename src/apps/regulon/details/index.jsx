@@ -1,4 +1,5 @@
 import NavigationTabs from "./NavigationTabs";
+import Regulates from "./regulates";
 import TranscriptionFactor from "./transcriptionFactor";
 
 function Details({ regulonData }) {
@@ -10,12 +11,18 @@ function Details({ regulonData }) {
             name: "Transcription Factor",
         },
         {
+            id: "regulonTab_03",
+            subtitle: "Regulatory",
+            name: "Network",
+        },
+        {
             id: "regulonTab_02",
             name: "Regulates",
         },
         {
             id: "regulonTab_03",
-            name: "Regulatory Interactions",
+            subtitle: "Regulatory",
+            name: "Interactions",
         },
         {
             id: "regulonTab_04",
@@ -32,7 +39,13 @@ function Details({ regulonData }) {
         <div>
             <NavigationTabs tabsInfo={tabsInfo} tabSelect={"regulonTab_01"} />
             <article>
-                <TranscriptionFactor transcriptionFactor={data.transcriptionFactor} allCitations={data.allCitations} />
+                <div id="transcriptionFactor" >
+                    <TranscriptionFactor transcriptionFactor={data.transcriptionFactor} allCitations={data.allCitations} />
+                </div>
+                <br />
+                <div id="regulates">
+                    <Regulates regulates={data.regulates} allCitations={data.allCitations} />
+                </div>
             </article>
         </div>
     );

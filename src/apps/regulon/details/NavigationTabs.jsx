@@ -95,6 +95,7 @@ function NavigationTabs({ tabsInfo = [] , tabSelect = "init", tabs = [], allCita
             {tabsInfo.map((tab, index) => {
               const TabElement = (
                 <div>
+                  {tab.subtitle &&( <div>{tab.subtitle}</div> )}
                   <div className={Style.tab_name}>{tab.name}</div>
                 </div>
               );
