@@ -1,29 +1,106 @@
 import React from 'react';
-import Table from "./table";
-import { formatJsonTable } from "./utiles";
+import { Table } from './geneTable';
 import TextField from '@mui/material/TextField';
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+
+const GENE_COLUMNS = [
+    {
+        Header: 'Gene',
+        columns: [
+            {
+                Header: ' . ',
+                accessor: 'gene',
+            },
+        ],
+    },
+    {
+        Header: 'Multifunction',
+        columns: [
+            {
+                Header: 'Name',
+                accessor: 'multifunction',
+            },
+        ],
+    },
+    {
+        Header: 'Gene Ontology Terms',
+        columns: [
+            {
+                Header: 'Biological Process',
+                accessor: 'biologicalProcess',
+            },
+            {
+                Header: 'Cellular Component:',
+                accessor: 'cellularComponent:',
+            },
+            {
+                Header: 'Molecular Function',
+                accessor: 'molecularFunction',
+            },
+        ],
+    }
+]
+
+function formatTable(genes = []) {
+    let data = []
+    
+    genes.forEach((gene) => {
+        const terms = gene.terms
+        const strMultifunction = terms?.multifun ? terms.multifun.map((multi) => { return multi.name }).join(", ") : ""
+        const strBiologicalProcess = terms?.geneOntology ? terms.geneOntology.biologicalProcess.map((multi) => { return multi.name }).join(", ") : ""
+        const strCellularComponent = terms?.geneOntology ? terms.geneOntology.cellularComponent.map((multi) => { return multi.name }).join(", ") : ""
+        const strMolecularFunction = terms?.geneOntology ? terms.geneOntology.molecularFunction.map((multi) => { return multi.name }).join(", ") : ""
+        data.push({
+            gene: {
+                id: gene.id,
+                name: gene.name,
+                function: gene.function
+            },
+            multifunction: terms.multifun,
+            strMultifunction: strMultifunction,
+            biologicalProcess: terms.geneOntology?.biologicalProcess ? terms.geneOntology?.biologicalProcess : [] ,
+            strBiologicalProcess: strBiologicalProcess,
+            cellularComponent: terms.geneOntology?.cellularComponent ? terms.geneOntology?.cellularComponent : [] ,
+            strCellularComponent: strCellularComponent,
+            molecularFunction: terms.geneOntology?.molecularFunction ? terms.geneOntology?.molecularFunction : [] ,
+            strMolecularFunction: strMolecularFunction,
+        })
+
+    })
+    return data
+}
 
 function Genes({ genes, idPanel = "regulates_genes" }) {
-    const [_genes, set_genes] = React.useState();
+    const ATTRIBUTES = ["Gene name", "Gene id", "Function", "Multifunction", "Biological Process", "Cellular Component", "Molecular Function"]
+    const genesList = React.useMemo(() => { return formatTable(genes) }, [genes])
+    const [_filter, set_filter] = React.useState(ATTRIBUTES[0]);
+    const [_genesList, set_genesList] = React.useState(genesList);
 
-    React.useEffect(() => {
-        let panel = document.getElementById(idPanel)
-        if (panel) {
-            set_genes(formatJsonTable(panel, genes))
-        }
-    }, [genes, idPanel])
+    console.log(genes);
 
     const _handleUpdate = (event) => {
         //console.log(event.target.value)
         const keyword = event.target.value
         let str = new RegExp(keyword.toLowerCase());
-        const filterSG = genes.filter(sg => (str.test(sg.name.toLowerCase())) || str.test(sg.id.toLowerCase()) || str.test(sg.function.toLowerCase()))
-        let panel = document.getElementById(idPanel)
-        if (panel) {
-            set_genes(formatJsonTable(panel, filterSG))
+        let filterGenes = undefined
+        switch (_filter) {
+            case "Gene name":
+                filterGenes = genesList.filter(item => str.test(item.gene.name.toLowerCase))
+                break;
+            case "Gene id":
+                filterGenes = genesList.filter(item => str.test(item.gene.id.toLowerCase))
+                break;
+            case "Function":
+                filterGenes = genesList.filter(item => str.test(item.gene.function.toLowerCase))
+                break;
+            default:
+                filterGenes = genesList
+                break;
         }
-
+        set_genesList(filterGenes)
     }
 
     const styleFilter = {
@@ -38,22 +115,18 @@ function Genes({ genes, idPanel = "regulates_genes" }) {
         <div>
             <h2>Genes</h2>
             <p className='p_accent'> {`Total of genes: ${genes.length}`} </p>
-            <div style={styleFilter}>
-                <div><FilterAltIcon /></div>
-                <div style={{ width: "50%" }} >
-                    <TextField size="small" sx={{ width: "100%" }} id="sgFilter-basic" label="Filter" variant="standard"
-                        onChange={_handleUpdate}
-                    />
-                </div>
-                <div>
-                {_genes?.total &&(<p className='p_accent' > ({_genes.total}) </p>)}
-                </div>
+            <div style={styleFilter} >
+                <div><p className="p_accent" >Filter by</p></div>
+                <div><SelectFilter _filter={_filter} set_filter={set_filter} attributes={ATTRIBUTES} /></div>
+                <div><TextField size="small" sx={{ width: "100%" }} id="sgFilter-basic" label={_filter} variant="standard"
+                    onChange={_handleUpdate}
+                /></div>
             </div>
             <div id={idPanel} style={{ margin: "0 2% 1px 5%" }} >
                 {
-                    !_genes
+                    !_genesList
                         ? (<p>Loading...</p>)
-                        : <Table columns={_genes.columns} data={_genes.data} link="/gene" />
+                        : <Table columns={GENE_COLUMNS} data={_genesList} />
                 }
             </div>
         </div>
@@ -61,3 +134,27 @@ function Genes({ genes, idPanel = "regulates_genes" }) {
 }
 
 export default Genes;
+
+function SelectFilter({ _filter, set_filter, attributes = [] }) {
+
+    const handleChange = (event) => {
+        set_filter(event.target.value);
+    };
+
+    return (
+        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }} size="small">
+            <InputLabel id="filter-select-small">Attribute</InputLabel>
+            <Select
+                labelId="filter-select-small"
+                id="filter-select-small"
+                value={_filter}
+                label="Promoter attribute"
+                onChange={handleChange}
+            >
+                {attributes.map((attribute, index) => {
+                    return <MenuItem key={"promoter_attribute_" + attribute + " " + index} value={attribute}>{attribute}</MenuItem>
+                })}
+            </Select>
+        </FormControl>
+    );
+}

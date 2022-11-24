@@ -1,10 +1,21 @@
-export function formatJsonTable(panel, elements) {
+export function formatJsonTable(panel, elements, type = "grid") {
     let panelWidth = panel.clientWidth
     let columns = []
     let data = []
-    let cellWidth = 95
-    const numberColumns = panelWidth / (cellWidth + 5)
-    for (let i = 1; i < numberColumns; i++) {
+    let cellWidth
+    let numberColumns
+    switch (type) {
+        case "list":
+            numberColumns = 1
+            cellWidth = 180
+            break;
+        default:
+        case "grid":
+            cellWidth = 95
+            numberColumns = panelWidth / (cellWidth + 5)
+            break;
+    }
+    for (let i = 0; i < numberColumns; i++) {
         columns.push({
             Header: '-',
             accessor: `column_${i}`,
@@ -19,7 +30,7 @@ export function formatJsonTable(panel, elements) {
             } else {
                 let row = {}
                 rowGenes.forEach((gn, i) => {
-                    row[`column_${i+1}`] = gn
+                    row[`column_${i}`] = gn
                 })
                 data.push(row)
                 rowGenes = [gene]
@@ -33,5 +44,6 @@ export function formatJsonTable(panel, elements) {
             data.push(row)
         }
     }
+    //console.log(numberColumns);
     return { columns: columns, data: data, total:elements.length }
 }

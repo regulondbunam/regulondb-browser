@@ -44,7 +44,7 @@ const Styles = styled.div`
   }
 `*/
 
-export default function Table({ columns, data, link = "/" }) {
+export default function Table({ columns, data, link = "/", type = "grid" }) {
     // Use the state and functions returned from useTable to build your UI
 
     const defaultColumn = React.useMemo(
@@ -84,17 +84,29 @@ export default function Table({ columns, data, link = "/" }) {
                 >
                     {row.cells.map(cell => {
                         //console.log(cell.value)
+                        let styleCell
+                        switch (type) {
+                            case "list":
+                                styleCell =  Style.cell_list
+                                break;
+                            default:
+                            case "grid":
+                                styleCell = Style.cell_content
+                        }
                         return (
                             <div {...cell.getCellProps()} className="td">
                                 {cell.value?.id && (
                                     <Link to={link + "/" + cell.value.id} >
-                                        <div className={Style.cell_content} >
-                                            <div>
+                                        <div className={styleCell} >
+                                            <div className={Style.cell_id} >
+                                                <div>
                                                 <p style={{ fontSize: "8px" }} >{cell.value.id}</p>
-                                            </div>
-                                            <div>
+                                                </div>
+                                                <div>
                                                 <p  style={{ fontSize: "16px" }} dangerouslySetInnerHTML={{__html: cell.value.name}} />
                                             </div>
+                                            </div>
+                                            
                                             <div>
                                             <p  style={{ fontSize: "14px" }} dangerouslySetInnerHTML={{__html: cell.value.function}} />
                                             </div>
@@ -115,7 +127,7 @@ export default function Table({ columns, data, link = "/" }) {
                 </div>
             )
         },
-        [prepareRow, rows, link]
+        [prepareRow, rows, link, type]
     )
 
     // Render the UI for your table
@@ -126,7 +138,7 @@ export default function Table({ columns, data, link = "/" }) {
             </div>
             <div className={Style.table_content} {...getTableBodyProps()}>
                 <FixedSizeList
-                    height={100}
+                    height={200}
                     itemCount={rows.length}
                     itemSize={50}
                     width={totalColumnsWidth + scrollBarSize}

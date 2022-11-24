@@ -3,6 +3,13 @@
     border-top: 1px solid black;
     border-bottom: 1px solid black;;
 }
+
+.cell_id{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .cell_content{
     display: flex;
     flex-direction: column;
@@ -16,3 +23,12 @@
     cursor: pointer;
     border: 1px solid black;
 }
+
+.cell_list{
+    display: flex;
+    align-items: center;
+    background-color: #cadce7;
+    margin: 5px;
+    height: 45px;
+}
+
