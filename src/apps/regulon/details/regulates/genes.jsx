@@ -13,6 +13,7 @@ const GENE_COLUMNS = [
             {
                 Header: ' . ',
                 accessor: 'gene',
+                width: 100,
             },
         ],
     },
@@ -22,6 +23,7 @@ const GENE_COLUMNS = [
             {
                 Header: 'Name',
                 accessor: 'multifunction',
+                width: 200
             },
         ],
     },
@@ -31,14 +33,17 @@ const GENE_COLUMNS = [
             {
                 Header: 'Biological Process',
                 accessor: 'biologicalProcess',
+                width: 200,
             },
             {
-                Header: 'Cellular Component:',
-                accessor: 'cellularComponent:',
+                Header: 'Cellular Component',
+                accessor: 'cellularComponent',
+                width: 200,
             },
             {
                 Header: 'Molecular Function',
                 accessor: 'molecularFunction',
+                width: 200,
             },
         ],
     }
@@ -122,7 +127,7 @@ function Genes({ genes, idPanel = "regulates_genes" }) {
                     onChange={_handleUpdate}
                 /></div>
             </div>
-            <div id={idPanel} style={{ margin: "0 2% 1px 5%" }} >
+            <div id={idPanel} style={{ margin: "0 2% 1px 5%", overflow: "auto" }} >
                 {
                     !_genesList
                         ? (<p>Loading...</p>)

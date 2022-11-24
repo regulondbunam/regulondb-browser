@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useTable, useBlockLayout } from 'react-table'
 import { FixedSizeList } from 'react-window'
+import Style from "./table.module.css"
 
 const scrollbarWidth = () => {
     // thanks too https://davidwalsh.name/detect-scrollbar-width
@@ -16,12 +17,6 @@ const scrollbarWidth = () => {
 
 export function Table({ columns, data }) {
 
-    const defaultColumn = React.useMemo(
-        () => ({
-            width: 150,
-        }),
-        []
-    )
     const scrollBarSize = React.useMemo(() => scrollbarWidth(), [])
 
     const {
@@ -34,8 +29,7 @@ export function Table({ columns, data }) {
     } = useTable(
         {
             columns,
-            data,
-            defaultColumn,
+            data
         },
         useBlockLayout,
     )
@@ -70,7 +64,21 @@ export function Table({ columns, data }) {
                             case 'biologicalProcess':
                                 component = <div style={{ overflow: "auto", height: 75 }} >
                                     {cell.value.map((bp) => {
-                                        return <div key={"bp_" + bp.term_id} ><p style={{fontSize: "10px"}} >{bp.name}</p></div>
+                                        return <div key={"bp_" + bp.term_id} style={{ fontSize: "10px" }} >{bp.name}</div>
+                                    })}
+                                </div>
+                                break
+                            case 'cellularComponent':
+                                component = <div style={{ overflow: "auto", height: 75 }} >
+                                    {cell.value.map((cc) => {
+                                        return <div key={"bp_" + cc.term_id} style={{ fontSize: "10px" }} >{cc.name}</div>
+                                    })}
+                                </div>
+                                break
+                            case 'molecularFunction':
+                                component = <div style={{ overflow: "auto", height: 75 }} >
+                                    {cell.value.map((mf) => {
+                                        return <div key={"bp_" + mf.term_id} style={{ fontSize: "10px" }} >{mf.name}</div>
                                     })}
                                 </div>
                                 break
@@ -90,31 +98,28 @@ export function Table({ columns, data }) {
     )
 
     return (
-        <>
-            <table {...getTableProps()}>
-                <thead>
-                    {headerGroups.map(headerGroup => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map(column => (
-                                <th {...column.getHeaderProps()}>
-                                    {column.render('Header')}
-                                </th>
-                            ))}
-                        </tr>
-                    ))}
-                </thead>
-                <tbody {...getTableBodyProps()}>
-                    <FixedSizeList
-                        height={200}
-                        itemCount={rows.length}
-                        itemSize={80}
-                        width={totalColumnsWidth + scrollBarSize}
-                    >
-                        {RenderRow}
-                    </FixedSizeList>
-                </tbody>
-            </table>
-            <br />
-        </>
+        <table {...getTableProps()} className={Style.geneTable} >
+            <thead>
+                {headerGroups.map(headerGroup => (
+                    <tr {...headerGroup.getHeaderGroupProps()}>
+                        {headerGroup.headers.map(column => (
+                            <th {...column.getHeaderProps()}>
+                                {column.render('Header')}
+                            </th>
+                        ))}
+                    </tr>
+                ))}
+            </thead>
+            <tbody {...getTableBodyProps()}>
+                <FixedSizeList
+                    height={200}
+                    itemCount={rows.length}
+                    itemSize={80}
+                    width={totalColumnsWidth + scrollBarSize}
+                >
+                    {RenderRow}
+                </FixedSizeList>
+            </tbody>
+        </table>
     )
 }
