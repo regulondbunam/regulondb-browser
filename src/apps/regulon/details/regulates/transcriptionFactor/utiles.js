@@ -7,11 +7,11 @@ export function formatJsonTable(panel, elements, type = "grid") {
     switch (type) {
         case "list":
             numberColumns = 1
-            cellWidth = 180
+            cellWidth = 300
             break;
         default:
         case "grid":
-            cellWidth = 95
+            cellWidth = 250
             numberColumns = panelWidth / (cellWidth + 5)
             break;
     }

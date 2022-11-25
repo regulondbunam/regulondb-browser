@@ -43,9 +43,12 @@ function Details({ regulonData }) {
                     <TranscriptionFactor transcriptionFactor={data.transcriptionFactor} allCitations={data.allCitations} />
                 </div>
                 <br />
-                <div id="regulates">
+                { data?.regulates && (
+                    <div id="regulates">
                     <Regulates regulates={data.regulates} allCitations={data.allCitations} />
                 </div>
+                )}
+                
             </article>
         </div>
     );
