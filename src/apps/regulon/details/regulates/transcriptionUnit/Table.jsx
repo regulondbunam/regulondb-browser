@@ -15,7 +15,8 @@ const scrollbarWidth = () => {
 }
 
 
-export function Table({ columns, data }) {
+
+export default function Table({ columns, data }) {
 
     const scrollBarSize = React.useMemo(() => scrollbarWidth(), [])
 
@@ -29,10 +30,11 @@ export function Table({ columns, data }) {
     } = useTable(
         {
             columns,
-            data
+            data,
         },
-        useBlockLayout,
+        useBlockLayout
     )
+
     const RenderRow = React.useCallback(
         ({ index, style }) => {
             const row = rows[index]
@@ -44,44 +46,29 @@ export function Table({ columns, data }) {
                     })}
                 >
                     {row.cells.map(cell => {
-                        console.log(cell)
                         let component = <div></div>
+                        
                         switch (cell.column.id) {
-                            case "gene":
+                            case "tu":
                                 component = <div>
-                                    <Link to={"/gene/" + cell.value.id}>
-                                        <p>{`${cell.value.name} (${cell.value.function})`}</p>
+                                    <Link to={"/tu/" + cell.value.id}>
+                                        <p>{cell.value.name}</p>
                                     </Link>
                                 </div>
                                 break;
-                            case "multifunction":
-                                component = <div style={{ overflow: "auto", height: 75 }} >
-                                    {cell.value.map((multi) => {
-                                        return <div key={"multi_" + multi.id} ><p>{multi.name}</p></div>
-                                    })}
+                            case "tuFunction":
+                                component = <div>
+                                    <p>{cell.value}</p>
                                 </div>
-                                break
-                            case 'biologicalProcess':
-                                component = <div style={{ overflow: "auto", height: 75 }} >
-                                    {cell.value.map((bp) => {
-                                        return <div key={"bp_" + bp.term_id} style={{ fontSize: "10px" }} >{bp.name}</div>
-                                    })}
+                                break;
+                            case 'firstGene':
+                                //console.log(cell.value);
+                                component = <div>
+                                    <Link to={"/gene/" + cell.value.id}>
+                                        <p>{cell.value.name}</p>
+                                    </Link>
                                 </div>
-                                break
-                            case 'cellularComponent':
-                                component = <div style={{ overflow: "auto", height: 75 }} >
-                                    {cell.value.map((cc) => {
-                                        return <div key={"bp_" + cc.term_id} style={{ fontSize: "10px" }} >{cc.name}</div>
-                                    })}
-                                </div>
-                                break
-                            case 'molecularFunction':
-                                component = <div style={{ overflow: "auto", height: 75 }} >
-                                    {cell.value.map((mf) => {
-                                        return <div key={"bp_" + mf.term_id} style={{ fontSize: "10px" }} >{mf.name}</div>
-                                    })}
-                                </div>
-                                break
+                                break;
                             default:
                                 break;
                         }
@@ -94,14 +81,15 @@ export function Table({ columns, data }) {
                 </tr>
             )
         },
-        [rows, prepareRow]
+        [prepareRow, rows]
     )
 
+    // Render the UI for your table
     return (
-        <table {...getTableProps()} className={Style.geneTable} >
+        <table {...getTableProps()} className={Style.table} >
             <thead>
                 {headerGroups.map(headerGroup => (
-                    <tr {...headerGroup.getHeaderGroupProps()}>
+                    <tr{...headerGroup.getHeaderGroupProps()}>
                         {headerGroup.headers.map(column => (
                             <th {...column.getHeaderProps()}>
                                 {column.render('Header')}
@@ -110,11 +98,12 @@ export function Table({ columns, data }) {
                     </tr>
                 ))}
             </thead>
+
             <tbody {...getTableBodyProps()}>
                 <FixedSizeList
-                    height={200}
+                    height={400}
                     itemCount={rows.length}
-                    itemSize={80}
+                    itemSize={35}
                     width={totalColumnsWidth + scrollBarSize}
                 >
                     {RenderRow}

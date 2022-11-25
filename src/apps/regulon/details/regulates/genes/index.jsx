@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from './geneTable';
+import { Table } from './Table';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
@@ -51,7 +51,7 @@ const GENE_COLUMNS = [
 
 function formatTable(genes = []) {
     let data = []
-    
+
     genes.forEach((gene) => {
         const terms = gene.terms
         const strMultifunction = terms?.multifun ? terms.multifun.map((multi) => { return multi.name }).join(", ") : ""
@@ -66,11 +66,11 @@ function formatTable(genes = []) {
             },
             multifunction: terms.multifun,
             strMultifunction: strMultifunction,
-            biologicalProcess: terms.geneOntology?.biologicalProcess ? terms.geneOntology?.biologicalProcess : [] ,
+            biologicalProcess: terms.geneOntology?.biologicalProcess ? terms.geneOntology?.biologicalProcess : [],
             strBiologicalProcess: strBiologicalProcess,
-            cellularComponent: terms.geneOntology?.cellularComponent ? terms.geneOntology?.cellularComponent : [] ,
+            cellularComponent: terms.geneOntology?.cellularComponent ? terms.geneOntology?.cellularComponent : [],
             strCellularComponent: strCellularComponent,
-            molecularFunction: terms.geneOntology?.molecularFunction ? terms.geneOntology?.molecularFunction : [] ,
+            molecularFunction: terms.geneOntology?.molecularFunction ? terms.geneOntology?.molecularFunction : [],
             strMolecularFunction: strMolecularFunction,
         })
 
@@ -84,7 +84,7 @@ function Genes({ genes, idPanel = "regulates_genes" }) {
     const [_filter, set_filter] = React.useState(ATTRIBUTES[0]);
     const [_genesList, set_genesList] = React.useState(genesList);
 
-    console.log(genes);
+    //console.log(genes);
 
     const _handleUpdate = (event) => {
         //console.log(event.target.value)
@@ -93,13 +93,26 @@ function Genes({ genes, idPanel = "regulates_genes" }) {
         let filterGenes = undefined
         switch (_filter) {
             case "Gene name":
-                filterGenes = genesList.filter(item => str.test(item.gene.name.toLowerCase))
+                filterGenes = genesList.filter(item => str.test(item.gene.name.toLowerCase()))
+
                 break;
             case "Gene id":
-                filterGenes = genesList.filter(item => str.test(item.gene.id.toLowerCase))
+                filterGenes = genesList.filter(item => str.test(item.gene.id.toLowerCase()))
                 break;
             case "Function":
-                filterGenes = genesList.filter(item => str.test(item.gene.function.toLowerCase))
+                filterGenes = genesList.filter(item => str.test(item.gene.function.toLowerCase()))
+                break;
+            case "Multifunction":
+                filterGenes = genesList.filter(item => str.test(item.strMultifunction.toLowerCase()))
+                break;
+            case "Biological Process":
+                filterGenes = genesList.filter(item => str.test(item.strBiologicalProcess.toLowerCase()))
+                break;
+            case "Cellular Component":
+                filterGenes = genesList.filter(item => str.test(item.strCellularComponent.toLowerCase()))
+                break;
+            case "Molecular Function":
+                filterGenes = genesList.filter(item => str.test(item.strMolecularFunction.toLowerCase()))
                 break;
             default:
                 filterGenes = genesList

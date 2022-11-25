@@ -35,8 +35,8 @@ function Regulates({regulates}) {
             {_show && (
                 <div style={{ margin: "0 5% 0 5%", padding: "0 0 20px 0" }} >
                     {regulates.genes.length > 0 && ( <Genes genes={regulates.genes} />)}
-                    {regulates.operons.length > 0 && ( <Operon operon={regulates.operons} /> )}
-                    {regulates.transcriptionUnits.length > 0 && ( <TranscriptionUnit transcriptionUnit={regulates.transcriptionUnits} /> )}
+                    {regulates.operons.length > 0 && ( <Operon operons={regulates.operons} /> )}
+                    {regulates.transcriptionUnits.length > 0 && ( <TranscriptionUnit transcriptionUnits={regulates.transcriptionUnits} /> )}
                     {regulates.transcriptionFactors.length > 0 && ( <TranscriptionFactor transcriptionFactor={regulates.transcriptionFactors} /> )}
                     {regulates.sigmaFactors.length > 0 && ( <SigmaFactor sigmaFactor={regulates.sigmaFactors} /> )}
                 </div>
