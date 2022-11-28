@@ -3,17 +3,33 @@ import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import IconButton from "@mui/material/IconButton";
-import Genes from './genes';
-import Operon from './operon';
-import TranscriptionFactor from './transcriptionFactor';
-import TranscriptionUnit from './transcriptionUnit';
-import SigmaFactor from './sigmaFactor';
+import TableList from './table';
 
-//import "./transcriptionFactor.css"
+const COLUMNS_LIST = [
+    {
+        Header: '---',
+        accessor: `_data`,
+        width: "100%"
+    },
+]
 
-function Regulates({regulates}) {
+function FormatData(regulatoryInteractions = []){
+    let formatIR = []
+    regulatoryInteractions.forEach((ri)=>{
+        formatIR.push({
+            _data: ri
+        })
+    })
+    return formatIR
+}
+
+function RegulatoryInteractions({ regulatoryInteractions, allCitations }) {
+
+    const [_data, set_data] = React.useState(FormatData(regulatoryInteractions));
     const [_show, set_show] = React.useState(true);
-    //console.log(regulates);
+
+    console.log(regulatoryInteractions);
+
     return (
         <Paper>
             <div style={{ display: "flex", alignItems: "center" }}>
@@ -29,16 +45,17 @@ function Regulates({regulates}) {
                     </IconButton>
                 </div>
                 <div>
-                    <h2>Regulates</h2>
+                    <h2>Regulatory Interactions</h2>
                 </div>
             </div>
             {_show && (
                 <div style={{ margin: "0 5% 0 5%", padding: "0 0 20px 0" }} >
-                    {regulates.genes.length > 0 && ( <Genes genes={regulates.genes} />)}
-                    {regulates.operons.length > 0 && ( <Operon operons={regulates.operons} /> )}
-                    {regulates.transcriptionUnits.length > 0 && ( <TranscriptionUnit transcriptionUnits={regulates.transcriptionUnits} /> )}
-                    {regulates.transcriptionFactors.length > 0 && ( <TranscriptionFactor transcriptionFactor={regulates.transcriptionFactors} /> )}
-                    {regulates.sigmaFactors.length > 0 && ( <SigmaFactor sigmaFactor={regulates.sigmaFactors} /> )}
+                    <div>
+                        Filter
+                    </div>
+                    <div>
+                        <TableList columns={COLUMNS_LIST} data={_data} allCitations={allCitations} />
+                    </div>
                 </div>
             )}
 
@@ -47,4 +64,4 @@ function Regulates({regulates}) {
     );
 }
 
-export default Regulates;
+export default RegulatoryInteractions;

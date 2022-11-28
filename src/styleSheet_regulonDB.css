@@ -16,6 +16,7 @@ Ver: 0.0.28
 	--color-blue3: #3d779b;
 	--color-blue4: #72a7c7;
 	--color-blue5: #cadce7;
+	--color-blue6: #f4f5f5;
 	--color-grey1: #373737;
 	--color-grey2: #666666;
 	--color-grey3: #999999;
@@ -218,6 +219,23 @@ Ver: 0.0.28
   }
   
   /*TABLES*/
+
+  .table_data{
+	background-color: #f4f5f5;
+	width: 900px;
+	text-align: left;
+	border-collapse: collapse;
+  }
+  
+  .table_data thead {
+	  color: white;
+	  background: #cadce7;
+	  border-bottom: 1px solid #72a7c7;
+	}
+  
+	.table_data tbody tr {
+	  border-bottom: 1px solid #72a7c7;
+	}
   
   .tableContent-th-title {
 	color: #666666;

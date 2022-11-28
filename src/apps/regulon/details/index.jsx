@@ -1,6 +1,8 @@
 import NavigationTabs from "./NavigationTabs";
 import Regulates from "./regulates";
 import TranscriptionFactor from "./transcriptionFactor";
+import DiagramRegulatoryNetwork from "./regulatoryNetwork";
+import RegulatoryInteractions from "./regulatoryInteractions";
 
 function Details({ regulonData }) {
     const data = regulonData.data[0]
@@ -11,25 +13,25 @@ function Details({ regulonData }) {
             name: "Transcription Factor",
         },
         {
-            id: "regulonTab_03",
+            id: "regulonTab_02",
             subtitle: "Regulatory",
             name: "Network",
         },
         {
-            id: "regulonTab_02",
+            id: "regulonTab_03",
             name: "Regulates",
         },
         {
-            id: "regulonTab_03",
+            id: "regulonTab_04",
             subtitle: "Regulatory",
             name: "Interactions",
         },
         {
-            id: "regulonTab_04",
+            id: "regulonTab_05",
             name: "Terms",
         },
         {
-            id: "regulonTab_05",
+            id: "regulonTab_06",
             name: "Citations",
         },
     ];
@@ -43,12 +45,21 @@ function Details({ regulonData }) {
                     <TranscriptionFactor transcriptionFactor={data.transcriptionFactor} allCitations={data.allCitations} />
                 </div>
                 <br />
+                <div>
+                    <DiagramRegulatoryNetwork regulonId={data._id} />
+                </div>
+                <br />
                 { data?.regulates && (
                     <div id="regulates">
                     <Regulates regulates={data.regulates} allCitations={data.allCitations} />
                 </div>
                 )}
-                
+                <br />
+                { data.regulatoryInteractions.length > 0 &&(
+                    <div id="regulatoryInteraction">
+                        <RegulatoryInteractions regulatoryInteractions={data.regulatoryInteractions} allCitations={data.allCitations} />
+                    </div>
+                )}
             </article>
         </div>
     );
