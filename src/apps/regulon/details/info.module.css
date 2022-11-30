@@ -2,6 +2,7 @@
   width: 100%;
   padding-left: 10%;
   display: flow-root;
+  z-index: 9999;
 }
 
 .tabContent {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Cover } from "../../components/ui-components";
 
 const IDTitle = "title_cover_regulonTool";
+export {IDTitle}
 const eventName = "cover_regulonTool_event";
 
 export function UpdateTitle({ state, title, message, /*regulonToken*/ }) {
@@ -64,7 +65,7 @@ export const Title = ({ title = "" }) => {
   }, []);
 
   return (
-    <div id={IDTitle} >
+    <div id={IDTitle} style={{zIndex: "9999"}} >
       <Cover state={_state} message={_message}>
         <h1 style={{margin: "0px", padding: "10px 0px 10px 0px"}} >{_title}</h1>
       </Cover>

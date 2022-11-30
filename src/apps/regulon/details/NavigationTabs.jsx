@@ -5,6 +5,9 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 
+const idNavTabs = "regulonNavTabs"
+export {idNavTabs}
+
 const StyledTabs = styled((props) => (
   <Tabs
     {...props}
@@ -58,23 +61,7 @@ const headerStyle = {
   backgroundColor: backgroundColor,
 };
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box>{children}</Box>}
-    </div>
-  );
-}
-
-function NavigationTabs({ tabsInfo = [] , tabSelect = "init", tabs = [], allCitations }) {
+function NavigationTabs({ tabSelect = "init", tabs = [] }) {
   const [value, setValue] = useState(tabSelect);
 
   const handleChange = (event, newValue) => {
@@ -83,7 +70,7 @@ function NavigationTabs({ tabsInfo = [] , tabSelect = "init", tabs = [], allCita
 
   return (
     <div>
-      <div id="navTab_gene" className={Style.tabHeader} style={headerStyle}>
+      <div id={idNavTabs} className={Style.tabHeader} style={headerStyle}>
         <Box>
           <StyledTabs
             variant="scrollable"
@@ -92,7 +79,7 @@ function NavigationTabs({ tabsInfo = [] , tabSelect = "init", tabs = [], allCita
             onChange={handleChange}
             aria-label="styled tabs example"
           >
-            {tabsInfo.map((tab, index) => {
+            {tabs.map((tab, index) => {
               const TabElement = (
                 <div>
                   {tab.subtitle &&( <div>{tab.subtitle}</div> )}
@@ -110,13 +97,11 @@ function NavigationTabs({ tabsInfo = [] , tabSelect = "init", tabs = [], allCita
           </StyledTabs>
         </Box>
       </div>
-      {tabs.map((tab, index) => {
-        return (
-          <TabPanel key={`${index}_${tab.id}`} value={value} index={tab.id}>
-            
-          </TabPanel>
-        );
-      })}
+      <article>
+        {tabs.map((tab,index)=>{
+          return <>{tab.component}<br/></>
+        })}
+      </article>
     </div>
   );
 }

@@ -53,7 +53,7 @@ function TranscriptionFactor({ transcriptionFactor, idPanel = "regulates_transcr
                 {
                     !_transcriptionFactor
                         ? (<p>Loading...</p>)
-                        : <Table columns={_transcriptionFactor.columns} data={_transcriptionFactor.data} link="/gene" />
+                        : <Table columns={_transcriptionFactor.columns} data={_transcriptionFactor.data} link="/regulon" />
                 }
             </div>
         </div>
