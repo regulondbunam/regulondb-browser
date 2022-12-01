@@ -3,8 +3,11 @@ import Regulates from "./regulates";
 import TranscriptionFactor from "./transcriptionFactor";
 import DiagramRegulatoryNetwork from "./regulatoryNetwork";
 import RegulatoryInteractions from "./regulatoryInteractions";
-import { IDTitle, UpdateTitle } from '../Title';
+import Citations from "./Citations";
+import Terms from "./terms";
+import { IDTitle, /*UpdateTitle*/ } from '../Title';
 import { useEffect } from "react";
+
 
 
 function scrollFunction() {
@@ -45,6 +48,7 @@ function Details({ regulonData }) {
         };
       }, []);
     const data = regulonData.data[0]
+    //console.log(data);
 
     const tabs = [
         {
@@ -89,14 +93,16 @@ function Details({ regulonData }) {
             id: "regulonTab_Terms",
             name: "Terms",
             component: <div id="regulonTab_Terms">
-                 
+                 {data?.terms && (
+                    <Terms geneOntology={data.terms.geneOntology} multifun={data.terms.multifun} allCitations={data.allCitations} />
+                 )}
             </div>,
         },
         {
             id: "regulonTab_Citations",
             name: "Citations",
             component: <div id="regulonTab_Citations">
-
+                <Citations allCitations={data.allCitations} />
             </div>,
         },
         
