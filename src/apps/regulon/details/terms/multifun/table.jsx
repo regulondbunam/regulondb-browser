@@ -52,7 +52,7 @@ export default function TableList({ columns, data }) {
                                     component = cell.value
                                     break;
                                 case "genes":
-                                    component = <div>
+                                    component = <div style={{height: "50px", overflow: "auto"}}>
                                         {cell.value.map((gene) => {
                                             return <div key={"gene_" + gene.gene_id} style={{float: "left", marginLeft: "10px"}} ><Link to={"/gene/"+gene.gene_id}>{gene.gene_name}</Link></div>
                                         })}

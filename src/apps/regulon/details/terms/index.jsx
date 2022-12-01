@@ -7,7 +7,7 @@ import GeneOntology from './geneOntology';
 import Multifun from './multifun';
 
 function Terms({ geneOntology, multifun, allCitations }) {
-    console.log(multifun);
+    console.log(geneOntology);
     const [_show, set_show] = React.useState(true);
     //console.log(transcriptionFactor);
     return (
