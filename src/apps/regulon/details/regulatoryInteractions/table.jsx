@@ -19,6 +19,11 @@ export default function TableList({ columns, data, allCitations }) {
     // Use the state and functions returned from useTable to build your UI
 
     const scrollBarSize = React.useMemo(() => scrollbarWidth(), [])
+    const rowHeight = 290
+    let tableHeight = 1500
+    if(data.length < 6 ){
+        tableHeight = rowHeight*data.length
+    }
 
     const {
         getTableProps,
@@ -65,9 +70,9 @@ export default function TableList({ columns, data, allCitations }) {
         <div style={{ width: "100%" }} {...getTableProps()}>
             <div {...getTableBodyProps()}>
                 <FixedSizeList
-                    height={1200}
+                    height={tableHeight}
                     itemCount={rows.length}
-                    itemSize={290}
+                    itemSize={rowHeight}
                     width={totalColumnsWidth + scrollBarSize}
                 >
                     {RenderRow}
