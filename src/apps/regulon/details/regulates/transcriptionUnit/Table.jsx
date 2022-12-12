@@ -19,6 +19,12 @@ const scrollbarWidth = () => {
 export default function Table({ columns, data }) {
 
     const scrollBarSize = React.useMemo(() => scrollbarWidth(), [])
+    const rowHeight = 35
+    let tableHeight = 400
+    if(data.length < 7 ){
+        tableHeight = rowHeight*data.length
+    }
+
 
     const {
         getTableProps,
@@ -101,9 +107,9 @@ export default function Table({ columns, data }) {
 
             <tbody {...getTableBodyProps()}>
                 <FixedSizeList
-                    height={400}
+                    height={tableHeight}
                     itemCount={rows.length}
-                    itemSize={35}
+                    itemSize={rowHeight}
                     width={totalColumnsWidth + scrollBarSize}
                 >
                     {RenderRow}
