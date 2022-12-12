@@ -37,7 +37,7 @@ function Regulates({regulates}) {
                     {regulates.genes.length > 0 && ( <Genes genes={regulates.genes} />)}
                     {regulates.operons.length > 0 && ( <Operon operons={regulates.operons} /> )}
                     {regulates.transcriptionUnits.length > 0 && ( <TranscriptionUnit transcriptionUnits={regulates.transcriptionUnits} /> )}
-                    {regulates.transcriptionFactors.length > 0 && ( <TranscriptionFactor transcriptionFactor={regulates.transcriptionFactors} /> )}
+                    {regulates.transcriptionFactors.length > 0 && ( <TranscriptionFactor transcriptionFactors={regulates.transcriptionFactors} /> )}
                     {regulates.sigmaFactors.length > 0 && ( <SigmaFactor sigmaFactor={regulates.sigmaFactors} /> )}
                 </div>
             )}
