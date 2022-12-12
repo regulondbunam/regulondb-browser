@@ -97,10 +97,6 @@ export const fragment_REGULATES = gql`fragment REGULATES on Regulates {
       name
     }
     sigmaFactors {
-      firstGene {
-        id
-        name
-      }
       function
       id
       name

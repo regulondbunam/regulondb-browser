@@ -106,10 +106,11 @@ export default function WebServices({
       }
     } else {
       console.error("Webservices "+datamart_name+" error:", error);
+      console.log(query)
       getState("error");
       getData({error: "webservices "+datamart_name+" query error"});
     }
-  }, [_getPhrases, data, datamart_name, error, getData, getState, isGetPhrases, isGetRelatedIDs, loading, phrases, relatedIds]);
+  }, [_getPhrases, data, datamart_name, error, getData, getState, isGetPhrases, isGetRelatedIDs, loading, phrases, relatedIds, query]);
 
   return <></>;
 }
