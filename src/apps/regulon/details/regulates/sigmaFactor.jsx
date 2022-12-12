@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 function SigmaFactor({sigmaFactor}) {
-    console.log(sigmaFactor);
+    //console.log(sigmaFactor);
     return ( 
         <div>
             <h2>Sigma Factor</h2>

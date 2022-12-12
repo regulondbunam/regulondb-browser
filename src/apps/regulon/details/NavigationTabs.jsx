@@ -66,6 +66,20 @@ function NavigationTabs({ tabSelect = "init", tabs = [] }) {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    let section = document.getElementById(newValue);
+    if (section) {
+      let rect = section.getBoundingClientRect();
+      let move = 106;
+      if (window.pageYOffset < 120) {
+        move = move + 100;
+      }
+      //console.log(rect.y,window.pageYOffset);
+      window.scroll({
+        top: rect.y + window.pageYOffset - move,
+        behavior: "smooth",
+      });
+
+    }
   };
 
   return (
@@ -99,7 +113,11 @@ function NavigationTabs({ tabSelect = "init", tabs = [] }) {
       </div>
       <article>
         {tabs.map((tab,index)=>{
-          return <>{tab.component}<br/></>
+          return (
+            <div key={"component_"+tab.id+"_"+index} id={tab.id}>
+              {tab.component}<br/>
+            </div>
+          )
         })}
       </article>
     </div>

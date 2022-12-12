@@ -54,7 +54,7 @@ function Details({ regulonData }) {
         {
             id: "regulonTab_TF",
             name: "Transcription Factor",
-            component: <div id={"regulonTab_TF"} >
+            component: <div>
                 <TranscriptionFactor transcriptionFactor={data.transcriptionFactor} allCitations={data.allCitations} />
             </div>,
         },
@@ -69,7 +69,7 @@ function Details({ regulonData }) {
         {
             id: "regulonTab_Regulates",
             name: "Regulates",
-            component: <div id="regulonTab_Regulates">
+            component: <div>
                 {data?.regulates && (
                     <div >
                         <Regulates regulates={data.regulates} allCitations={data.allCitations} />
@@ -81,7 +81,7 @@ function Details({ regulonData }) {
             id: "regulonTab_RI",
             subtitle: "Regulatory",
             name: "Interactions",
-            component: <div id="regulonTab_RI">
+            component: <div>
                 {data.regulatoryInteractions.length > 0 && (
                     <div >
                         <RegulatoryInteractions regulatoryInteractions={data.regulatoryInteractions} allCitations={data.allCitations} />
@@ -92,7 +92,7 @@ function Details({ regulonData }) {
         {
             id: "regulonTab_Terms",
             name: "Terms",
-            component: <div id="regulonTab_Terms">
+            component: <div>
                  {data?.terms && (
                     <Terms geneOntology={data.terms.geneOntology} multifun={data.terms.multifun} allCitations={data.allCitations} />
                  )}
@@ -101,7 +101,7 @@ function Details({ regulonData }) {
         {
             id: "regulonTab_Citations",
             name: "Citations",
-            component: <div id="regulonTab_Citations">
+            component: <div>
                 <Citations allCitations={data.allCitations} />
             </div>,
         },
