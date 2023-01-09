@@ -44,7 +44,7 @@
           "id": "sigmulon-search",
           "title": "Sigmulon",
           "link" : "/sigmulon",
-          "state": "disabled"
+          "state": "enabled"
         },
         {
           "id": "srna-search",

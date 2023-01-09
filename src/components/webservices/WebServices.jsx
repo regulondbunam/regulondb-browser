@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { useLazyQuery } from "@apollo/client";
+import React, { useEffect } from "react";
+import { useLazyQuery, useQuery } from "@apollo/client";
 import { OperonIds } from "./operon/related_Ids";
 import { query_GET_GENE_BY } from "./gene/gql";
 import { query_GET_OPERON_BY } from "./operon/gql";
-import { query_GET_REGULON_BY } from "./regulon/gql";
+import { query_GET_REGULON_BY, query_GET_ALL_REGULON } from "./regulon/gql";
 import { query_GET_PHRASE_OF } from "./phrases/gql";
+import { query_getAllSigmulon, query_getSigmulonBy } from "./sigmulon/gql";
 import { query_GET_GE_Interval } from "./GeneticElementsFromInterval/gql";
 import { PhraseUtil } from "./phrases/util";
 
 
 export default function WebServices({
   datamart_name,
-  variables,
+  variables = {},
   getData = () => {},
   getState = () => {},
   isGetRelatedIDs = false,
@@ -20,8 +21,17 @@ export default function WebServices({
   let query = ""
   let relatedIds
   switch (datamart_name) {
+    case "getSigmulonBy":
+      query = query_getSigmulonBy;
+      break;
+    case "getAllSigmulon":
+      query = query_getAllSigmulon;
+      break;
     case "getRegulonBy":
       query = query_GET_REGULON_BY;
+      break;
+    case "getAllRegulon":
+      query = query_GET_ALL_REGULON;
       break;
     case "getOperonBy":
       query = query_GET_OPERON_BY;
@@ -37,100 +47,70 @@ export default function WebServices({
       console.error("No query found for " + datamart_name);
       break;
   }
-  const [_getData, queryData] = useLazyQuery(query, {
+  const { data, loading, error } = useQuery(query, {
     variables: variables,
   });
-  // eslint-disable-next-line no-unused-vars
-  const [_getPhrases, phrases] = useLazyQuery(query_GET_PHRASE_OF);
 
-  const [_relatedIds, set_relatedIds] = useState();
-  const [_isFinish, set_isFinish] = useState(false);
-  const [_data, set_data] = useState();
+  const [_getPhrases, phrases] = useLazyQuery(query_GET_PHRASE_OF);
 
 
   useEffect(() => {
-    const { data, loading, error } = queryData;
     if (!error) {
-      if (!data && !loading) {
-        _getData();
+      if (loading) {
         getState("loading");
       }
-      if (!_data && data) {
-        set_data(data);
+      if (data) {
         getState("done");
-      }
-    } else {
-      console.error("Webservices "+datamart_name+" error:", error);
-      getState("error");
-      getData({error: "webservices "+datamart_name+" query error"});
-    }
-    if (_data && !_isFinish) {
-      //Obtencion de phrases
-      try {
-        if(isGetPhrases){
-          if(_relatedIds){
-            //console.log(_relatedIds);
-            _getPhrases({ variables: { id: relatedIds.all } });
-          }else{
-            set_relatedIds(relatedIds(_data[datamart_name].data))
-          }
+        let listRelatedIds
+        let phrasesData
+        if(isGetRelatedIDs && !isGetPhrases){
+          listRelatedIds = relatedIds(data[datamart_name].data)
         }
-      } catch (error) {
-        console.error("mee");
-      }
-
-      //Envio de _data
-      if (phrases.data || !isGetPhrases || phrases.error) {
+        if (isGetPhrases && (!phrases.loading || !phrases.data || !phrases.error)) {
+          listRelatedIds = relatedIds(data[datamart_name].data)
+          _getPhrases({ variables: { id: listRelatedIds.all } });
+        }
         if(phrases.error){
-          console.error("get phrases error: ",error);
+          console.error("get phrases error:", error);
         }
-
-        let phrasesData = {
-          data: [],
-          Util: undefined,
-        };
-        if (isGetPhrases) {
+        if(phrases.data){
           phrasesData = {
             data: phrases.data.getPhraseOf,
             Util: PhraseUtil,
           };
         }
-
         try {
           if(datamart_name === "getGeneticElementsFromInterval"){
             getData({
-              GE: _data[datamart_name],
-              relatedIds: _relatedIds,
+              GE: data[datamart_name],
+              relatedIds: listRelatedIds,
               phrases: phrasesData,
             });
           }else{
             getData({
-              ..._data[datamart_name],
-              relatedIds: _relatedIds,
+              ...data[datamart_name],
+              relatedIds: listRelatedIds,
               phrases: phrasesData,
             });
           }
-          if(_data[datamart_name]?.pagination){
-            if(_data[datamart_name]?.pagination.totalResults === 0){
+          if(data[datamart_name]?.pagination){
+            if(data[datamart_name]?.pagination.totalResults === 0){
               getState("no results")
-            }else{
-              getState("done")
             }
-          }else{
-            getState("done")
           }
-          set_isFinish("finish");
         } catch (error) {
           getState("error");
-          getData({error: "webservices getData error"});
-          console.error("on setData error:", error);
+          getData({error: "webservices send data in attribute getData error"});
+          console.error("webservices send data in attribute getData error:", error);
         }
       }
-      /*
-      
-      */
+    } else {
+      console.error("Webservices "+datamart_name+" error:", error);
+      console.log(query)
+      getState("error");
+      getData({error: "webservices "+datamart_name+" query error"});
     }
-  }, [_getData, queryData, _data,relatedIds,_getPhrases, _isFinish, phrases, isGetPhrases,_relatedIds, getData, getState, datamart_name]);
+  }, [_getPhrases, data, datamart_name, error, getData, getState, isGetPhrases, isGetRelatedIDs, loading, phrases, relatedIds, query]);
 
   return <></>;
 }

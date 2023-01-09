@@ -12,7 +12,8 @@ import DrawingTracesInterface from './apps/dtt';
 import Operon from './apps/operon';
 import Embed from "./apps/embed";
 import HT from './apps/ht/HighThroughput';
-import Regulon from './apps/regulon/regulon';
+import Regulon from './apps/regulon';
+import Sigmulon from './apps/sigmulon';
 
 const theme = createTheme({
   palette: {
@@ -68,8 +69,14 @@ function App() {
           <Route path="tu" element={<Operon />} >
             <Route path=":tuId" />
           </Route>
+          <Route path="sigmulon" element={<Sigmulon />} >
+            <Route path=":sigmulonId" />
+          </Route>
+          <Route path="promoter" element={<Sigmulon />} >
+            <Route path=":promoterId" />
+          </Route>
           <Route path="regulon" element={<Regulon />} >
-            <Route path=":id" />
+            <Route path=":regulonId" />
           </Route>
           <Route path="ht" element={<HT />} >
             <Route path=":site"  >

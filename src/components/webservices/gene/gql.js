@@ -308,13 +308,7 @@ query GetGeneInfo(
     $limit: Int = 10
     $organismName: String
     $page: Int = 0
-    $properties: [String] = [
-      "gene.id"
-      "gene.name"
-      "gene.synonyms"
-      "gene.type"
-      "products.name"
-    ]
+    $properties: [String]
     $search: String
   ) {
     getGenesBy(
