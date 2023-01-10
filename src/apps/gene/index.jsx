@@ -6,12 +6,18 @@ import Home from "./Home";
 import Title, { UpdateTitle } from "./components/Title";
 import "./gene.css";
 
+function fragmentId(id = "") {
+  if (id.match("_")) {
+    return id.split("_")[0]
+  }
+  return id
+}
 
 function Gene() {
   const [id, setId] = useState();
   const [_state, set_state] = useState();
   let { geneId } = useParams();
-
+  geneId = fragmentId(geneId)
   useEffect(() => {
     if (!geneId) {
       //console.log(`geneId`, geneId);
@@ -49,23 +55,29 @@ function Gene() {
 
   return (
     <div>
-      <div className="cover_gene" id="cover_gene_detailsA">
-        <Title title={"Gene"} />
-      </div>
-      {!geneId && <Home />}
+
+      {!geneId && (
+        <><div className="cover_gene" id="cover_gene_detailsA">
+          <Title title={"Gene"} />
+        </div><Home /></>)}
       {id && (
-        <DataProvider
-          datamart_name="getGenesBy"
-          variables={{ advancedSearch: `'${id}'[_id]` }}
-          getState={(state) => {
-            console.log("s_", state);
-            set_state(state);
-          }}
-        >
-          {_state === "done" && (
-            <Details />
-          )}
-        </DataProvider>
+        <>
+          <div className="cover_gene" id="cover_gene_detailsA">
+            <Title title={"Gene"} />
+          </div>
+          <DataProvider
+            datamart_name="getGenesBy"
+            variables={{ advancedSearch: `'${id}'[_id]` }}
+            getState={(state) => {
+              console.log("s_", state);
+              set_state(state);
+            }}
+          >
+            {_state === "done" && (
+              <Details />
+            )}
+          </DataProvider>
+        </>
       )}
     </div>
   );
