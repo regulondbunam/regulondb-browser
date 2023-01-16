@@ -1,5 +1,5 @@
 import React from 'react';
-import Table from './Table';
+import Table from './table';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
