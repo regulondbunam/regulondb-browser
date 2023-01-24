@@ -1,22 +1,22 @@
 import { gql } from "@apollo/client";
 
 export const fragment_CITATIONS = gql`fragment CITATIONS on Citations {
-    publication {
-      id
-      authors
-      pmid
-      citation
-      url
-      title
-      year
-    }
-    evidence {
-      id
-      name
-      code
-      type
-    }
-  }`
+  publication {
+    id
+    authors
+    pmid
+    citation
+    url
+    title
+    year
+  }
+  evidence {
+    id
+    name
+    code
+    type
+  }
+}`
 
 export const fragment_PAGINATION = gql`fragment PAGINATION on Pagination {
     currentPage
@@ -27,81 +27,150 @@ export const fragment_PAGINATION = gql`fragment PAGINATION on Pagination {
     totalResults
   }`
 
-export const query_getSigmulonBy = gql`
+export const fragment_ExternalCrossReferences = gql`fragment ExternalCrossReferences on ExternalCrossReferences {
+  externalCrossReferenceId
+  externalCrossReferenceName
+  objectId
+  url
+}`
+
+export const fragment_SrnaProducts = gql`fragment SRNA_PRODUCTS on srnaProduct {
+  citations {
+    ...CITATIONS
+  }
+  externalCrossReferences {
+    ...ExternalCrossReferences
+  }
+  gene {
+    _id
+    gcContent
+    genomePosition
+    name
+    strand
+  }
+  name
+  note
+  sequence
+  synonyms
+}`
+
+export const fragment_RegulatoryInteractions = gql`fragment RegulatoryInteractions on srnaRegulatoryInteractions {
+  _id
+  citations {
+    ...CITATIONS
+  }
+  distanceToGene
+  function
+  mechanism
+  regulatedEntity {
+    _id
+    name
+    type
+  }
+  regulatoryBindingSites {
+    absolutePosition
+    citations {
+      ...CITATIONS
+    }
+    function
+    id
+    leftEndPosition
+    rightEndPosition
+    sequence
+    strand
+  }
+}`
+
+const fragment_SrnaSummary = gql`fragment SummaryObject on SummaryObject {
+  activated
+  dual
+  repressed
+  total
+  unknown
+}
+
+fragment Summary on SrnaSummary {
+  bindingSites {
+    ...SummaryObject
+  }
+  genes {
+    ...SummaryObject
+  }
+  regulatoryInteractions {
+    ...SummaryObject
+  }
+  sigmaFactors {
+    ...SummaryObject
+  }
+  transcriptionFactors {
+    ...SummaryObject
+  }
+  transcriptionUnits {
+    ...SummaryObject
+  }
+}`
+
+export const query_getAllSRNA = gql`
 ${fragment_CITATIONS}
 ${fragment_PAGINATION}
-query getSigmulon($advancedSearch: String){
-    getSigmulonBy(advancedSearch:$advancedSearch){
-      pagination {
-        ...PAGINATION
+${fragment_ExternalCrossReferences}
+${fragment_SrnaProducts}
+${fragment_RegulatoryInteractions}
+${fragment_SrnaSummary}
+query getAllSRNA($limit: Int, $page: Int) {
+  getAllSrnas(limit: $limit, page: $page) {
+    data {
+      _id
+      allCitations {
+        ...CITATIONS
       }
-      data {
-        _id
-        allCitations {
-          ...CITATIONS
-        }
-        sigmaFactor {
-          _id
-          gene {
-            _id
-            name
-          }
-          name
-          sigmulonGenes {
-            name
-            _id
-          }
-          sigmulonRegulators {
-            _id
-            name
-          }
-          synonyms
-        }
-        statistics {
-          cotranscriptionFactors
-          genes
-          promoters
-          sigmaFactors
-          transcriptionFactors
-          transcriptionUnits
-        }
-        transcribedPromoters {
-          _id
-          boxes {
-            leftEndPosition
-            rightEndPosition
-            sequence
-            type
-          }
-          name
-          operon_id
-          sequence
-          transcribedGenes {
-            _id
-            distanceFromTSS
-            name
-          }
-          citations {
-            evidence {
-              code
-              id
-              name
-              type
-            }
-            publication {
-              authors
-              citation
-              id
-              pmid
-              title
-              url
-              year
-            }
-          }
-        }
+      product {
+        ...SRNA_PRODUCTS
+      }
+      regulatoryInteractions {
+        ...RegulatoryInteractions
+      }
+      summary{
+        ...Summary
       }
     }
   }
+}   
 `
 
-export const query_getAllSigmulon = gql``
+export const query_getSrnaBy = gql`query getSrnaBy(
+  $advancedSearch: String
+  $fullMatchOnly: Boolean
+  $limit: Int 
+  $page: Int
+	$properties: [String]
+	$search: String) {
+  getSrnaBy(
+    advancedSearch:$advancedSearch
+    fullMatchOnly:$fullMatchOnly
+    limit:$limit
+    page:$page
+    properties:$properties
+    search:$search
+  ) { 
+    data {
+      _id
+      allCitations {
+        ...CITATIONS
+      }
+      product {
+        ...SRNA_PRODUCTS
+      }
+      regulatoryInteractions {
+        ...RegulatoryInteractions
+      }
+      summary {
+        ...Summary
+      }
+    }
+    pagination {
+      ...PAGINATION
+    }
+  }
+}
+`
