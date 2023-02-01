@@ -70,17 +70,16 @@ export default function TableList({ columns, data, link = "/" }) {
 }
 
 function RegulonInfo({ regulon }) {
-    //console.log(regulon);
     let genes = ""
-    if(regulon.transcriptionFactor.encodedFrom){
-        if(regulon.transcriptionFactor.encodedFrom.genes.length > 0){
-            genes = `Encoded Genes: ${regulon.transcriptionFactor.encodedFrom.genes.map(gene=>{return gene.gene_name}).join(", ")}`
+    if(regulon.encodedGenes){
+        if(regulon.encodedGenes.length > 0){
+            genes = `Encoded Genes: ${regulon.encodedGenes.map(gene=>{return gene.gene_name}).join(", ")}`
         }
     }
     return (
         <Link to={"/regulon/" + regulon._id}>
             <div className={Style.regulon_cell} >
-                    <p className='p_accent' dangerouslySetInnerHTML={{ __html: `${regulon.transcriptionFactor.name}, ${regulon.transcriptionFactor.synonyms.join(", ")}, ${regulon.transcriptionFactor.products.map(p => p.name).join(", ")} ` }} />
+                    <p className='p_accent' dangerouslySetInnerHTML={{ __html: `${regulon.name}, ${regulon.synonyms.join(", ")}, ${regulon.productsName.join(", ")} ` }} />
                     <p>{`${genes}`}</p>
             </div>
         </Link>

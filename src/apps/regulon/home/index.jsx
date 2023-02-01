@@ -29,18 +29,19 @@ function formatJsonTable(regulons = []) {
 }
 
 function SelectFilter({ _regulonData, set_filter}) {
+    console.log(_regulonData);
     const attributesList = {
         name: {
             label: "Name",
-            filter: (str) => { return _regulonData.data.filter(reg => str.test(reg._data.transcriptionFactor.name.toLowerCase())) },
+            filter: (str) => { return _regulonData.data.filter(reg => str.test(reg._data.name.toLowerCase())) },
         },
         product: {
             label: "Product Name",
-            filter: (str) => { return _regulonData.data.filter(reg => (reg._data.transcriptionFactor.products.find(product => str.test(product.name.toLowerCase())))) },
+            filter: (str) => { return _regulonData.data.filter(reg => (reg._data.productsName.find(product => str.test(product.toLowerCase())))) },
         },
         synonyms: {
             label: "Synonyms",
-            filter: (str) => { return _regulonData.data.filter(reg => (reg._data.transcriptionFactor.synonyms.find(synonym => str.test(synonym.toLowerCase())))) },
+            filter: (str) => { return _regulonData.data.filter(reg => (reg._data.synonyms.find(synonym => str.test(synonym.toLowerCase())))) },
         },
     }
 
@@ -100,8 +101,14 @@ function Home() {
     const [_regulonData, set_regulonData] = useState();
     const [_filter, set_filter] = useState();
     if (!_regulonData) {
-        return <WebServices datamart_name={"getAllRegulon"} 
-            getData={(data) => { const jsonTable = formatJsonTable(data.data); set_regulonData(jsonTable); set_filter(jsonTable) }} 
+        return <WebServices 
+            datamart_name={"getObjectList"}
+            variables={{datamartType: "regulon"}}
+            getData={(data) => { 
+                const jsonTable = formatJsonTable(data); 
+                set_regulonData(jsonTable); 
+                set_filter(jsonTable) 
+            }} 
             getState={(state) => { 
                 const titleState = {
                     loading: "Loading list of regulons... wait a moment",
