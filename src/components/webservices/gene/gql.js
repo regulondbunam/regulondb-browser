@@ -156,9 +156,10 @@ export const fragment_Regulation = gql`fragment REGULATION on Regulation {
     operon {
       arrangement {
         promoters {
-          ...PROMOTER
+          id
+          name
         }
-        regulator {
+        regulators {
           function
           id
           name
@@ -272,7 +273,7 @@ ${fragment_GROWTHCONDITIONS}
         _id
         schemaVersion
         organism {
-          id
+          _id
           name
         }
         allCitations {
@@ -296,7 +297,6 @@ ${fragment_CITATIONS}
 ${fragment_PAGINATION}
 ${fragment_ExternalCrossReferences}
 ${fragment_PRODUCTS}
-${fragment_PROMOTER}
 ${fragment_Regulation}
 ${fragment_GENE}
 ${fragment_SHINEDALGARNOS}
