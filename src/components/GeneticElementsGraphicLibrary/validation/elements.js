@@ -1,25 +1,30 @@
 import { toInt, eMes } from "./util";
-import {dnaObjects_list} from "../features_default_properties";
+import { dnaObjects_list } from "../features_default_properties";
 
 export function validateElements(dnaObjects = []) {
   if (!dnaObjects || dnaObjects.length === 0) {
     return null;
   }
   let validate_dnaObjects = [];
+  let preValidate_dnaObjects = [];
+
   dnaObjects.map((ge, inx) => {
-    let dnaObject = {...ge}
+    let dnaObject = { ...ge }
+    let distinct = "obj_"
     if (dnaObject?._id) {
       if (dnaObject?.objectType) {
+        distinct += dnaObject.objectType + "_"
         if (!dnaObjects_list.find(objectType => objectType === dnaObject.objectType)) {
           eMes(`object type not defined: ${dnaObject?.objectType} `, inx);
           return null;
         }
         if (dnaObject?.leftEndPosition && dnaObject?.rightEndPosition) {
           //console.log(feature?.leftEndPosition)
-          if(!`${dnaObject?.leftEndPosition}`.indexOf("+")){
+          distinct += dnaObject.leftEndPosition + "_" + dnaObject.rightEndPosition
+          if (!`${dnaObject?.leftEndPosition}`.indexOf("+")) {
             dnaObject.cut = "left"
           }
-          if(!`${dnaObject?.rightEndPosition}`.indexOf("+")){
+          if (!`${dnaObject?.rightEndPosition}`.indexOf("+")) {
             dnaObject.cut = "right"
           }
           let leftEndPosition = toInt(dnaObject?.leftEndPosition);
@@ -28,7 +33,12 @@ export function validateElements(dnaObjects = []) {
             dnaObject.leftEndPosition = leftEndPosition;
             dnaObject.rightEndPosition = rightEndPosition;
             if (dnaObject?.strand) {
-              validate_dnaObjects.push(dnaObject);
+              distinct += dnaObject.strand
+              if (!preValidate_dnaObjects.find(obj => obj === distinct)) {
+                preValidate_dnaObjects.push(distinct)
+                validate_dnaObjects.push(dnaObject);
+              }
+
             } else {
               eMes("strand", inx);
             }

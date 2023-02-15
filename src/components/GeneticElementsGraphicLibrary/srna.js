@@ -21,6 +21,7 @@ export default function DrawRna({
   stroke = {},
   font = {},
   tooltip = "",
+  height,
   onClick
 }) {
   if (!canva || !dna || !id | (leftEndPosition > rightEndPosition)) {
@@ -29,6 +30,11 @@ export default function DrawRna({
   stroke = stroke_validate(stroke, srna_dp.stroke);
   font = font_validate(font, srna_dp.font);
   color = color_validate(color, srna_dp.fill);
+  // scale
+  let proportion = srna_dp.height;
+  if (height) {
+    proportion = height;
+  }  
 
   // anchor effect
   if (anchor) {
@@ -38,17 +44,23 @@ export default function DrawRna({
   //attributes
   const srna_x = ((leftEndPosition - dna.leftEndPosition) * dna.widthActive) / dna.size;
   let srna_width = ((rightEndPosition - leftEndPosition) * dna.widthActive) / dna.size;
-  let srna = canva.group();
-  let height = srna_dp.height
+  let srnaGroup = canva.group();
+  let posY = 0
+  //Strand effect
+  if(strand === "reverse"){
+    posY = dna.y + separation
+  }else{
+    posY = dna.y - separation - proportion;
+  }
 
 
   //body attributes
-  let bodyHeight = srna_dp.height / 3;
+  let bodyHeight = proportion / 2;
   let posX = srna_x + dna.x;
-  let posY = dna.y - separation - srna_dp.height   ;
+  
 
   //fet attributes
-  let lineHeight = (srna_dp.height / 2);
+  let lineHeight = proportion / 2;
   let lineSeparation = srna_dp.lineSeparation
 
   //Draw rect
@@ -57,15 +69,16 @@ export default function DrawRna({
   body.stroke(stroke);
   body.fill(color);
 
-  srna.add(body);
+  srnaGroup.add(body);
 
   //Draw lines
   for (let index = 0; index < srna_width; index = index + lineSeparation) {
     let line = canva
-      .line(posX+index, dna.y, posX+index, dna.y - lineHeight)
+      .line(posX+index, posY+bodyHeight, posX+index,  posY+bodyHeight+lineHeight)
       .stroke(stroke)
-    srna.add(line);
+    srnaGroup.add(line);
   }
+
 
   //Draw label
   let text = label({
@@ -78,40 +91,26 @@ export default function DrawRna({
     font: font
   });
 
-  //Strand effect
-
-  if(strand === "reverse"){
-    posY = height + posY;
-    if (anchor) {
-      posX = srna.x;
-      posY = dna.y + separation;
-    }
-    srna.transform({
-      rotate: 180,
-      translateY: height
-    });
-    text.move(text.x(),posY+separation*2+srna_dp.height);
-    
-  }
-
+  srnaGroup.add(text);
+  
   //Actions
   if (onClick) {
-    srna.attr({
+    srnaGroup.attr({
       cursor: "pointer"
     })
-    srna.click(onClick);
+    srnaGroup.click(onClick);
   }
 
   //srna.add(text);
   // Tooltip
-  srna.attr({
+  srnaGroup.attr({
     "data-tip": "",
     "data-for": `"${canva.node?.id}-${id}"`
   });
   return {
     id: id,
     canva: canva,
-    draw: srna,
+    draw: srnaGroup,
     posX: posX,
     posY: posY,
     srna_width: srna_width,
