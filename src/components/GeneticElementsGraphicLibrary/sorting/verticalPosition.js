@@ -2,7 +2,7 @@ import { getPropertiesByObjectType } from "../features_default_properties";
 import { WhoGoesUp } from "./verticalRules";
 
 export default function verticalPosition(geneticElements, dna) {
-    //console.log(geneticElements);
+    console.log(geneticElements);
     //assign level
     geneticElements.forEach(dnaObject => {
         dnaObject.level = 1;
@@ -35,10 +35,6 @@ export default function verticalPosition(geneticElements, dna) {
         controlFlag++
     } while (isCollisions(geneticElements) && controlFlag < 10);
     controlFlag = 0
-
-    //console.log("levelForward", levelForward);
-    //console.log("levelReverse", levelReverse);
-
     //assign positions to geneticElements
     let maxHeightObject = undefined;
     if (dna) {
@@ -116,17 +112,15 @@ function isCollision(dnaObjectA, dnaObjectB) {
 }
 
 function isOverlap(dnaObjectA, dnaObjectB) {
-    if (dnaObjectA.strand !== dnaObjectB.strand || dnaObjectA._id === dnaObjectB._id) {
-        return false;
-    }
-    /*
-    if(dnaObjectA._id === "" && dnaObjectB._id === ""){
+    if(dnaObjectA._id === "draw_RDBECOLIRIC03499" && dnaObjectB._id === "draw_RDBECOLIRIC00090"){
         console.log("1", dnaObjectA.x + " < "+ dnaObjectB.x + dnaObjectB.width );
         console.log("2", dnaObjectB.x < dnaObjectA.x + dnaObjectA.width );
         console.log("3", dnaObjectA.y < dnaObjectB.y + dnaObjectB.height);
         console.log("4", dnaObjectB.y < dnaObjectA.y + dnaObjectA.height);
     }
-    */
+    if (dnaObjectA.strand !== dnaObjectB.strand || dnaObjectA._id === dnaObjectB._id) {
+        return false;
+    }
     return (dnaObjectA.x < dnaObjectB.x + dnaObjectB.width &&
         dnaObjectB.x < dnaObjectA.x + dnaObjectA.width &&
         dnaObjectA.y < dnaObjectB.y + dnaObjectB.height &&

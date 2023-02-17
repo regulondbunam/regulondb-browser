@@ -16,17 +16,16 @@ export function stroke_validate(stroke, strokeDefault) {
   return stroke;
 }
 
-export function font_validate(font, fontDefult) {
+export function font_validate(font, fontDefault) {
   font.fill = color_validate(font?.fill);
-
   if (!font?.family) {
-    font.family = fontDefult.family;
+    font.family = fontDefault.family;
   }
   if (!font?.size || isNaN(font?.size)) {
-    font.size = fontDefult.size;
+    font.size = fontDefault.size;
   }
   if (!font?.separation) {
-    font.separation = fontDefult.separation;
+    font.separation = fontDefault.separation;
   }
   return font;
 }
@@ -35,7 +34,6 @@ export function color_validate(color, defColor = "#000000") {
   if (!color) {
     return defColor;
   }
-  
   try { 
     let rgb = color.split(",");
     if (rgb.length === 3) {
@@ -58,6 +56,7 @@ export function stroke_define(feature) {
     linecap: feature?.lineType
   };
 }
+
 export function font_define(feature) {
   return {
     family: feature?.labelFont,
@@ -66,6 +65,7 @@ export function font_define(feature) {
     separation: "middle"
   };
 }
+
 export function rgb_to_rgbFormat(rgb) {
   if (rgb) {
     return `rgb(${rgb})`;
