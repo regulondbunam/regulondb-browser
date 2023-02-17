@@ -34,12 +34,13 @@ class Track {
     }
     //validar dna
     const dna_obj = validateDNA(geneticElements, covered_LeftPosition, covered_RightPosition);
-    //sorting geneticElements
+    //sorting geneticElements by position
     geneticElements = dnaPosition(geneticElements, covered_LeftPosition, covered_RightPosition);
     if (!geneticElements) {
       console.error("error on sorting dnaPositions");
       return undefined;
     }
+    //assign draw priority
     geneticElements = drawingPriority(geneticElements);
     if (!geneticElements) {
       console.error("error on drawing priority");

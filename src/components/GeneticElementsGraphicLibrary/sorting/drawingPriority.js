@@ -5,7 +5,7 @@ import {getPropertiesByObjectType } from "../features_default_properties";
     dnaObjects.forEach(dnaObject => {
         dnaObject.drawPriority = getPropertiesByObjectType(dnaObject.objectType).drawPriority;
     });
-    // sort by priority
+    /*// sort by priority
     dnaObjects.sort(function (a, b) {
       if (a?.drawPriority > b?.drawPriority) {
         return 1;
@@ -14,7 +14,7 @@ import {getPropertiesByObjectType } from "../features_default_properties";
         return -1;
       }
       return 0;
-    });
+    });*/
     return dnaObjects;
   }
   

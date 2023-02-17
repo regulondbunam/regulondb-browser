@@ -46,22 +46,21 @@ export default function DrawRna({
   let srna_width = ((rightEndPosition - leftEndPosition) * dna.widthActive) / dna.size;
   let srnaGroup = canva.group();
   let posY = 0
+  //body attributes
+  let bodyHeight = proportion / 2;
+  let posX = srna_x + dna.x;
+  //fet attributes
+  let lineHeight = proportion / 2;
+  let lineSeparation = srna_dp.lineSeparation
   //Strand effect
   if(strand === "reverse"){
-    posY = dna.y + separation
+    posY = dna.y + separation +lineHeight
   }else{
     posY = dna.y - separation - proportion;
   }
 
 
-  //body attributes
-  let bodyHeight = proportion / 2;
-  let posX = srna_x + dna.x;
   
-
-  //fet attributes
-  let lineHeight = proportion / 2;
-  let lineSeparation = srna_dp.lineSeparation
 
   //Draw rect
   let body = canva.rect(srna_width, bodyHeight);
@@ -73,9 +72,17 @@ export default function DrawRna({
 
   //Draw lines
   for (let index = 0; index < srna_width; index = index + lineSeparation) {
-    let line = canva
+    let line
+    if (strand === "reverse") {
+      line = canva
+      .line(posX+index, posY, posX+index,  posY-lineHeight)
+      .stroke(stroke)
+    }else{
+      line = canva
       .line(posX+index, posY+bodyHeight, posX+index,  posY+bodyHeight+lineHeight)
       .stroke(stroke)
+    }
+    
     srnaGroup.add(line);
   }
 
