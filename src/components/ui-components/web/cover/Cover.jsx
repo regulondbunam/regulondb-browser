@@ -1,7 +1,7 @@
 import React from "react";
 import "./uiComponents_cover.css";
 
-export function Cover({ children, coverId = "uiCover", state, message, messageStyle = {} }) {
+export function Cover({ children, coverId = "uiCover", state, message, messageStyle = {}, coverBackgroundStile = {}  }) {
   let coverSTL = "uicover_background";
   let messageSTL = "uiMessage";
   let messageState = ""
@@ -29,7 +29,7 @@ export function Cover({ children, coverId = "uiCover", state, message, messageSt
       <div className={messageSTL} >
         {messageState}
       </div>
-      <div id={coverId} className={coverSTL}>
+      <div id={coverId} className={coverSTL} style={coverBackgroundStile} >
         {children}
       </div>
       <div style={messageStyle} >

@@ -95,8 +95,6 @@ function SelectFilter({ _regulonData, set_filter}) {
     );
 }
 
-
-
 function Home() {
     const [_regulonData, set_regulonData] = useState();
     const [_filter, set_filter] = useState();

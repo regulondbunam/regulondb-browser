@@ -14,6 +14,7 @@ import Embed from "./apps/embed";
 import HT from './apps/ht/HighThroughput';
 import Regulon from './apps/regulon';
 import Sigmulon from './apps/sigmulon';
+import SRNA from './apps/srna';
 
 const theme = createTheme({
   palette: {
@@ -77,6 +78,9 @@ function App() {
           </Route>
           <Route path="regulon" element={<Regulon />} >
             <Route path=":regulonId" />
+          </Route>
+          <Route path="srna" element={<SRNA />} >
+            <Route path=":srnaId" />
           </Route>
           <Route path="ht" element={<HT />} >
             <Route path=":site"  >
