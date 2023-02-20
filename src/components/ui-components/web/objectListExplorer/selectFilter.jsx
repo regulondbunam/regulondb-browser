@@ -21,7 +21,7 @@ synonyms: [String]
 */
 
 export default function SelectFilter({ ObjectsData, setFilterData, attributesEnabled = [] }) {
-    const [AttributeSelected, setAttributeSelected] = useState("_id");
+    const [AttributeSelected, setAttributeSelected] = useState("name");
     const attributesList = useMemo(() => {
         let list = {}
         attributesEnabled.forEach((attributeEnabled) => {
