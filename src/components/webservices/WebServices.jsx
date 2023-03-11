@@ -8,7 +8,7 @@ import { query_GET_PHRASE_OF } from "./phrases/gql";
 import { query_getAllSigmulon, query_getSigmulonBy } from "./sigmulon/gql";
 import { query_GET_GE_Interval } from "./GeneticElementsFromInterval/gql";
 import { PhraseUtil } from "./phrases/util";
-
+import { query_GET_ALL_OVERVIEWS } from "./overviews/gql"
 
 export default function WebServices({
   datamart_name,
@@ -21,6 +21,9 @@ export default function WebServices({
   let query = ""
   let relatedIds
   switch (datamart_name) {
+    case "getAllObjectInfo":
+      query = query_GET_ALL_OVERVIEWS;
+      break;
     case "getSigmulonBy":
       query = query_getSigmulonBy;
       break;
@@ -80,6 +83,13 @@ export default function WebServices({
           };
         }
         try {
+          if(datamart_name === "getAllObjectInfo" ){
+            getData({
+              data: data[datamart_name],
+              relatedIds: listRelatedIds,
+              phrases: phrasesData,
+            });
+          }
           if(datamart_name === "getGeneticElementsFromInterval"){
             getData({
               GE: data[datamart_name],

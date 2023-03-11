@@ -7,8 +7,8 @@
         {
             "id": "iocs",
             "title": "Integrated Overview",
-            "link": "/inteOverview",
-            "state": "disabled",
+            "link": "/Overviews",
+            "state": "enabled",
             "type": "LINK"
         },
         {
