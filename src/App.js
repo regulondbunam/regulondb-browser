@@ -14,6 +14,7 @@ import Embed from "./apps/embed";
 import HT from './apps/ht/HighThroughput';
 import Regulon from './apps/regulon';
 import Sigmulon from './apps/sigmulon';
+import Overviews from './apps/overviews'
 
 const theme = createTheme({
   palette: {
@@ -77,6 +78,9 @@ function App() {
           </Route>
           <Route path="regulon" element={<Regulon />} >
             <Route path=":regulonId" />
+          </Route>
+          <Route path="/overviews" element={<Overviews />}>
+            <Route path=":overviewsId" element={<Overviews />} />
           </Route>
           <Route path="ht" element={<HT />} >
             <Route path=":site"  >
