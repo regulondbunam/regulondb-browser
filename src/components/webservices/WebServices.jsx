@@ -9,7 +9,7 @@ import { query_getAllSigmulon, query_getSigmulonBy } from "./sigmulon/gql";
 import { query_GET_GE_Interval } from "./GeneticElementsFromInterval/gql";
 import { QUERY_GetObjectList } from "./objectList/gql";
 import { PhraseUtil } from "./phrases/util";
-
+import { query_GET_ALL_OVERVIEWS } from "./overviews/gql"
 
 export default function WebServices({
   datamart_name,
@@ -24,6 +24,8 @@ export default function WebServices({
   switch (datamart_name) {
     case "getObjectList":
       query = QUERY_GetObjectList;
+    case "getAllObjectInfo":
+      query = query_GET_ALL_OVERVIEWS;
       break;
     case "getSigmulonBy":
       query = query_getSigmulonBy;
@@ -102,6 +104,25 @@ export default function WebServices({
                 phrases: phrasesData,
               });
               break;
+          if(datamart_name === "getAllObjectInfo" ){
+            getData({
+              data: data[datamart_name],
+              relatedIds: listRelatedIds,
+              phrases: phrasesData,
+            });
+          }
+          if(datamart_name === "getGeneticElementsFromInterval"){
+            getData({
+              GE: data[datamart_name],
+              relatedIds: listRelatedIds,
+              phrases: phrasesData,
+            });
+          }else{
+            getData({
+              ...data[datamart_name],
+              relatedIds: listRelatedIds,
+              phrases: phrasesData,
+            });
           }
           if (data[datamart_name]?.pagination) {
             if (data[datamart_name]?.pagination.totalResults === 0) {

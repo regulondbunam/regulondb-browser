@@ -17,6 +17,7 @@ import Sigmulon from './apps/sigmulon';
 import SRNA from './apps/srna';
 import { TestComponents } from './apps/testinComponents';
 import DocumentationDatamarts from './apps/docs_dt';
+import Overviews from './apps/overviews'
 
 const theme = createTheme({
   palette: {
@@ -87,6 +88,9 @@ function App() {
           </Route>
           <Route path="srna" element={<SRNA />} >
             <Route path=":srnaId" />
+            </Route>
+          <Route path="/overviews" element={<Overviews />}>
+            <Route path=":overviewsId" element={<Overviews />} />
           </Route>
           <Route path="ht" element={<HT />} >
             <Route path=":site"  >
