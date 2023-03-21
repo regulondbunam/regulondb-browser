@@ -1,5 +1,5 @@
 import React from "react";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 //Assets
 import TableCSS from "./css/TableServ.module.css";
 import conf from "./../conf/view_main.conf.json";
@@ -22,9 +22,9 @@ const TableServ = (props) => {
           {props.service.map((ObjectService, k) => (
             <tr key={k} className={TableCSS.containerText}>
               <td className={TableCSS.query}>
-                <a href={ObjectService.Nombre} className={TableCSS.service}>
-                  {ObjectService.Nombre}
-                </a>
+                <Link to={"/doc_datamarts/"+ObjectService.Nombre} >
+                 {ObjectService.Nombre}
+                </Link>
               </td>
               <td className={TableCSS.description}>
                 <p className={TableCSS.DescriptionService}>

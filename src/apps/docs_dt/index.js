@@ -26,7 +26,7 @@ const DocumentationDatamarts = () => {
           </div>
           <div className={DocCSS.containerServices}>
             {service ? (
-              <ServInfo {...conf.serv_info} />
+              <ServInfo conf={conf.serv_info} service={service} />
             ) : (
               <ServDesc {...conf.serv_desc.title_main} />
 

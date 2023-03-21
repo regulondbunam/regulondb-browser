@@ -15,7 +15,7 @@ const RecursiveComponent = ({ id, title, value, sons }) => {
   let navigate = useNavigate();
 
   function handleClick(value) {
-    navigate.push(`/${value}`);
+    navigate(`/doc_datamarts/${value}`, { replace: true });
   }
 
   function toggle() {

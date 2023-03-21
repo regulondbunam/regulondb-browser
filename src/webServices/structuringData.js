@@ -134,17 +134,23 @@ export const FormatDataTable = (data) => {
       if (!ObjArguments[args[i].name].hasOwnProperty(args[i].args[j].name)) {
         ObjArguments[args[i].name][args[i].args[j].name] = [];
       }
-      let DataMDtoObj;
+      let DataMDtoObj = {};
       if (args[i].args[j].description !== undefined) {
-        let descrip = args[i].args[j].description.replace(/#+/g, "#");
-        DataMDtoObj = md2json.parse(descrip);
+        if (args[i].args[j].description !== null) {
+          let descrip = args[i].args[j].description.replace(/#+/g, "#");
+          DataMDtoObj = md2json.parse(descrip);
+        }
+
       }
 
       if (DataMDtoObj !== undefined) {
+        let description = DataMDtoObj["Description"] ? DataMDtoObj["Description"]["raw"] : ""
+        let valorDefault = args[i].args[j].defaultValue ? args[i].args[j].defaultValue : ""
+        let necesario = DataMDtoObj["Required"] ? DataMDtoObj["Required"]["raw"] : ""
         ObjArguments[args[i].name][args[i].args[j].name].push({
-          Descripcion: DataMDtoObj["Description"]["raw"],
-          ValorPorDefault: args[i].args[j].defaultValue,
-          Necesario: DataMDtoObj["Required"]["raw"],
+          Descripcion: description,
+          ValorPorDefault: valorDefault,
+          Necesario: necesario,
           Tipo:
             args[i].args[j].type.name == null
               ? `[${args[i].args[j].type.ofType.name}]`

@@ -22,9 +22,8 @@ import ServInfoCSS from "./css/ServInfo.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronCircleLeft } from "@fortawesome/free-solid-svg-icons";
 
-const ServInfo = (conf) => {
+const ServInfo = ({conf, service}) => {
   const { pathname } = useLocation();
-  const service = pathname.substr(1);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -45,32 +44,34 @@ const ServInfo = (conf) => {
 
   const DescServices = FormatDataServDesc(data);
 
-  console.log(service,DescServices);
-
+  
   const description = DescServices.filter(
     (e) => e.Nombre === service && e.Descripcion
   );
 
+  console.log(service,description[0]["Ejemplo"]);
+
+
   let url =
     "http://132.248.220.201:4001/graphql?query=" +
-    encodeURI(description[0]["Example"]);
+    encodeURI(description[0]["Ejemplo"]);
 
   const codeExample = {
-    0: <Example {...description[0]["Example"]} />,
-    1: <Code {...Node(description[0]["Example"])} />,
-    2: <Code {...Python2(description[0]["Example"])} />,
-    3: <Code {...Python3(description[0]["Example"])} />,
-    4: <Code {...R(description[0]["Example"])} />,
-    5: <Code {...Java(description[0]["Example"])} />,
-    6: <Code {...Ruby(description[0]["Example"])} />,
-    7: <Code {...Curl(description[0]["Example"])} />,
+    0: <Example {...description[0]["Ejemplo"]} />,
+    1: <Code {...Node(description[0]["Ejemplo"])} />,
+    2: <Code {...Python2(description[0]["Ejemplo"])} />,
+    3: <Code {...Python3(description[0]["Ejemplo"])} />,
+    4: <Code {...R(description[0]["Ejemplo"])} />,
+    5: <Code {...Java(description[0]["Ejemplo"])} />,
+    6: <Code {...Ruby(description[0]["Ejemplo"])} />,
+    7: <Code {...Curl(description[0]["Ejemplo"])} />,
     8: <Code {...Wget(url)} />,
   };
 
   return (
     <div className={ServInfoCSS.serviceInfo}>
       <div className={ServInfoCSS.tryContainer}>
-        <Link to="/" className={ServInfoCSS.tryLink}>
+        <Link to="/doc_datamarts" className={ServInfoCSS.tryLink}>
           <FontAwesomeIcon
             icon={faChevronCircleLeft}
             style={{ fontSize: "1rem" }}

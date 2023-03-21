@@ -11,9 +11,9 @@ const Table = (props) => {
   const { loading, error, data } = useQuery(GetArguments());
   if (loading) return <p>Cargando...</p>;
   if (error) return <p>Error...</p>;
-
+  
   const Args = FormatDataTable(data);
-
+  //console.log("table",Args);
   return (
     <div className={TableCSS.table}>
       {Object.keys(Args[props.service]).length !== 0 ? (

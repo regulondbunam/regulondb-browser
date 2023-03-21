@@ -6,6 +6,7 @@ import ExampleCSS from "./css/Example.module.css";
 import conf from "./../conf/view_main.conf.json";
 
 const ExampleOutput = (Code) => {
+  console.log(Code);
   const query = gql`
     ${Code[0].toString()}
   `;
