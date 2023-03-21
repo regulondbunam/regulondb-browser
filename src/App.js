@@ -16,6 +16,7 @@ import Regulon from './apps/regulon';
 import Sigmulon from './apps/sigmulon';
 import SRNA from './apps/srna';
 import { TestComponents } from './apps/testinComponents';
+import DocumentationDatamarts from './apps/docs_dt';
 
 const theme = createTheme({
   palette: {
@@ -54,6 +55,9 @@ function App() {
             <Route path=":application" >
               <Route path=':parameters' />
             </Route>
+          </Route>
+          <Route path="doc_datamarts" element={<DocumentationDatamarts />} >
+            <Route path=":service" />
           </Route>
           <Route path="testComponents" element={<TestComponents />} />
           <Route path="home" element={<Home />} />
