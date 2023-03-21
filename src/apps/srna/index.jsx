@@ -7,6 +7,14 @@ function SRNA() {
   const [_state, set_state] = useState();
   let { srnaId } = useParams();
 
+  if (srnaId) {
+    return(
+      <div>
+        Hola
+      </div>
+    )
+  }
+
   return (
     <div>
       <Home />

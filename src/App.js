@@ -15,6 +15,7 @@ import HT from './apps/ht/HighThroughput';
 import Regulon from './apps/regulon';
 import Sigmulon from './apps/sigmulon';
 import SRNA from './apps/srna';
+import { TestComponents } from './apps/testinComponents';
 
 const theme = createTheme({
   palette: {
@@ -54,6 +55,7 @@ function App() {
               <Route path=':parameters' />
             </Route>
           </Route>
+          <Route path="testComponents" element={<TestComponents />} />
           <Route path="home" element={<Home />} />
           <Route path="dtt" element={<DrawingTracesInterface />} >
             <Route path=":parameters" />

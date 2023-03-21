@@ -1,5 +1,5 @@
 import {Title} from './components/title';
-import { ObjectListExplorer } from '../../components/ui-components';
+import ObjectListExplorer from '../../components/objectListExplorer';
 
 export default function Home() {
 

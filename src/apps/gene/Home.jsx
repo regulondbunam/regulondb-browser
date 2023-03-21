@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 //import Gene from "../search/results/Gene"
-import { ObjectListExplorer } from "../../components/ui-components";
+import ObjectListExplorer from "../../components/objectListExplorer";
 import { UpdateTitle } from "./components/Title";
 
 export default function Home(){
