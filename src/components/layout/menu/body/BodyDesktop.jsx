@@ -100,21 +100,21 @@ export function BodyDesktop({ submenuData }) {
               return (
                 <div key={item.id} style={styleSubmenu}>
                   {item.state !== "disabled" ? (
-                    <p
+                    <a
                       style={setStyleLink(item.id, item.state)}
                       target={item.target}
                       href={item.link}
                     >
                       {item.title}
-                    </p>
+                    </a>
                   ) : (
-                    <p
+                    <a
                       style={setStyleLink(item.id, item.state)}
                       target={item.target}
                       href={item.link}
                     >
                       {item.title}
-                    </p>
+                    </a>
                   )}
                 </div>
               );

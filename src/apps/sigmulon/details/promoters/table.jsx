@@ -136,7 +136,7 @@ function PromoterInfo({ promoter }) {
     
 
 
-    console.log(promoter);
+    //console.log(promoter);
     return (
         <div className={Style.tpRow_summary}>
             <div className={Style.tpRowTitle}>
