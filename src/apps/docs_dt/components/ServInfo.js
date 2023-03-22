@@ -22,7 +22,7 @@ import ServInfoCSS from "./css/ServInfo.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronCircleLeft } from "@fortawesome/free-solid-svg-icons";
 
-const ServInfo = ({conf, service}) => {
+const ServInfo = ({ conf, service }) => {
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -44,16 +44,16 @@ const ServInfo = ({conf, service}) => {
 
   const DescServices = FormatDataServDesc(data);
 
-  
+
   const description = DescServices.filter(
     (e) => e.Nombre === service && e.Descripcion
   );
 
-  console.log(service,description[0]["Ejemplo"]);
+  console.log(service, description[0]["Ejemplo"]);
 
 
   let url =
-    "http://132.248.220.201:4001/graphql?query=" +
+    process.env.REACT_APP_WEB_SERVICE_URL + "?query=" +
     encodeURI(description[0]["Ejemplo"]);
 
   const codeExample = {
@@ -103,9 +103,8 @@ const ServInfo = ({conf, service}) => {
         {buttons.language_buttons.map((button, index) => (
           <div key={button.id} className={ServInfoCSS.languageSection}>
             <button
-              className={`${ServInfoCSS.languages} ${
-                active === index && ServInfoCSS.active
-              }`}
+              className={`${ServInfoCSS.languages} ${active === index && ServInfoCSS.active
+                }`}
               onClick={() => handleOnClick(index)}
             >
               {button.title}
