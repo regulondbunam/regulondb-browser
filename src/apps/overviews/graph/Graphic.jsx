@@ -94,8 +94,8 @@ __Return:__
 
  * useState
  */
-import { useMemo} from 'react';
-//import { Chart as ChartJS } from 'chart.js/auto'
+import { useMemo, useId } from 'react';
+import { Chart as ChartJS } from 'chart.js/auto'
 import { Bar } from "react-chartjs-2";
 import PropTypes from 'prop-types'
 
@@ -107,39 +107,41 @@ import PropTypes from 'prop-types'
  */
 export default function Graphic({ label = "", data = [] }) {
 
+  const ID = useId()
+
   //console.log(data)
-    const axis = useMemo(() => {
-      
-      let axisX=[];
-      let axisY=[];
+  const axis = useMemo(() => {
 
-      data.forEach(element=>{
+    let axisX = [];
+    let axisY = [];
 
-        const { xAxis, yAxis } = element
-        //console.log("x:"+xAxis+",y:"+yAxis)
-        axisX.push(xAxis);
-        axisY.push(yAxis);
-      })   
-     return { x: axisX, y: axisY }
-   })
+    data.forEach(element => {
 
-   const arrayOfObj = axis.x.map(function(d, i) {
+      const { xAxis, yAxis } = element
+      //console.log("x:"+xAxis+",y:"+yAxis)
+      axisX.push(xAxis);
+      axisY.push(yAxis);
+    })
+    return { x: axisX, y: axisY }
+  }, [data])
+
+  const arrayOfObj = axis.x.map(function (d, i) {
     return {
       label: d,
       data: axis.y[i] || 0
     };
   });
 
-  const sortedArrayOfObj = arrayOfObj.sort(function(a, b) {
-    return b.data-a.data;
+  const sortedArrayOfObj = arrayOfObj.sort(function (a, b) {
+    return b.data - a.data;
   });
 
   const newArrayLabel = [];
   const newArrayData = [];
-  sortedArrayOfObj.forEach(function(d){
+  sortedArrayOfObj.forEach(function (d) {
     newArrayLabel.push(d.label);
     newArrayData.push(d.data);
-});  
+  });
 
   /**
    * Dataset properties
@@ -182,6 +184,7 @@ export default function Graphic({ label = "", data = [] }) {
     <div>
       <article>
         <Bar
+          id={ID}
           data={graphData}
           options={graphOptions}>
         </Bar>
@@ -192,7 +195,7 @@ export default function Graphic({ label = "", data = [] }) {
 
 Graphic.propTypes = {
   label: PropTypes.string,
-  data: PropTypes.object
+  data: PropTypes.array
 }
 
 Graphic.defaultProps = {

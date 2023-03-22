@@ -114,9 +114,9 @@ import Tablita from './Tablita';
  * @param {object} overviewsId - identify the id of the overviews 
  * @returns {ReactElement} 
  */
-export default function Graph({overviewsId}) {
+export default function Graph() {
 
-  const id= useParams().overviewsId;
+  const id = useParams().overviewsId;
 
   const  {data,loading, error } = useQuery(query_GET_OVERVIEW,{
     variables:{ id}
@@ -139,20 +139,10 @@ export default function Graph({overviewsId}) {
       {data &&(
         <article>
         <Paragraph description={data.getOverview.graph.description} />
-        {
-          <Graphic label={data.getOverview.graph.title} data={data.getOverview.data} />
-        }
+        <Graphic label={data.getOverview.graph.title} data={data.getOverview.data} />
         <Tablita labelX={data.getOverview.graph.labelX} labelY={data.getOverview.graph.labelY} data={data.getOverview.data}/>
       </article>
       )}
     </div>
   )
-}
-
-Graph.propTypes = {
-  overviewsId: PropTypes.object,
-}
-
-Graph.defaultProps = {
-  overviewsId: '',
 }
