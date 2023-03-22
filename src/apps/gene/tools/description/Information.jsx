@@ -238,7 +238,7 @@ export function MultifunTerms({ multifunTerms }) {
         {multifunTerms.map((m, i) => {
           return (
             <div key={`multifun${i}-data-${m.id}`}>
-              <Link to={`/multifun/${m.id}`}>{`${m.label}: ${m.name}`}</Link>
+              <Link to={`/multifun/${m._id}`}>{`${m.label}: ${m.name}`}</Link>
             </div>
           );
         })}

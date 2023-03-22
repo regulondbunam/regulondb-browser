@@ -34,12 +34,12 @@ export const query_GET_GE_Interval = gql`query GET_GE(
       objectRGBColor
       objectType
       organism {
-        organism_id
-        organism_name
+        _id
+        name
       }
       relatedGenes {
+        _id
         effect
-        gene_id
         objectRGBColor
         strand
         tooltip

@@ -69,7 +69,7 @@ function Gene() {
             datamart_name="getGenesBy"
             variables={{ advancedSearch: `'${id}'[_id]` }}
             getState={(state) => {
-              console.log("s_", state);
+              //console.log("s_", state);
               set_state(state);
             }}
           >

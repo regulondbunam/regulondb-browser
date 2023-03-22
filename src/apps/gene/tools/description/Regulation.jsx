@@ -31,7 +31,7 @@ export default function Regulation({ regulation }) {
           <div style={{ paddingLeft: "5%" }}>
         {regulation?.operon && (
           <div>
-            <Link to={`/operon/${regulation.operon.id}`}>
+            <Link to={`/operon/${regulation.operon._id}`}>
               <h4
                 style={{ color: "#72a7c7" }}
               >{`Operon ${regulation.operon.name}`}</h4>
@@ -45,7 +45,7 @@ export default function Regulation({ regulation }) {
               {regulation.regulators.map((regulator, index) => {
                 return (
                   <div key={`regulator${index}_info_${regulator.id}`}>
-                    <Link to={`/regulator/${regulator.id}`}>
+                    <Link to={`/regulator/${regulator._id}`}>
                       {`${regulator?.function} -- ${regulator?.name}, type ${regulator?.type}`}
                     </Link>
                   </div>

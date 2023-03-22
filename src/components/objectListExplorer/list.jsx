@@ -15,9 +15,10 @@ export function List({ attributesEnabled, datamartType, title, ComponentState = 
             datamart_name={"getObjectList"}
             variables={{ datamartType: datamartType }}
             getData={(data) => {
+                console.log(data);
                 const jsonTable = formatJsonTable(data);
                 setObjectsData(jsonTable);
-                setFilterData(jsonTable)
+                setFilterData(jsonTable);
             }}
             getState={(state) => {
                 const titleState = {
@@ -25,11 +26,10 @@ export function List({ attributesEnabled, datamartType, title, ComponentState = 
                     done: `${title} List`,
                     error: "sorry we have a problem ... :( try again later"
                 }
-                ComponentState({ state: state, title: titleState[state] })
+                //ComponentState({ state: state, title: titleState[state] })
             }}
         />
     }
-    //console.log(FilterData);
     return (
         <div className={Style.mainDiv}>
             <SelectFilter ObjectsData={ObjectsData} setFilterData={setFilterData} attributesEnabled={attributesEnabled} />

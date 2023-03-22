@@ -95,7 +95,7 @@ __Return:__
  * useState
  */
 import { useMemo} from 'react';
-import { Chart as ChartJS } from 'chart.js/auto'
+//import { Chart as ChartJS } from 'chart.js/auto'
 import { Bar } from "react-chartjs-2";
 import PropTypes from 'prop-types'
 

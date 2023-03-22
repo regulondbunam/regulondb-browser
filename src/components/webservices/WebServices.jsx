@@ -24,6 +24,7 @@ export default function WebServices({
   switch (datamart_name) {
     case "getObjectList":
       query = QUERY_GetObjectList;
+      break;
     case "getAllObjectInfo":
       query = query_GET_ALL_OVERVIEWS;
       break;
@@ -61,6 +62,7 @@ export default function WebServices({
 
 
   useEffect(() => {
+    //console.log("hola");
     if (!error) {
       if (loading) {
         getState("loading");
@@ -86,6 +88,7 @@ export default function WebServices({
           };
         }
         try {
+          //console.log(data[datamart_name]);
           switch (datamart_name) {
             case "getGeneticElementsFromInterval":
               getData({
@@ -94,35 +97,22 @@ export default function WebServices({
                 phrases: phrasesData,
               });
               break;
+            case "getAllObjectInfo":
+              getData({
+                data: data[datamart_name],
+                relatedIds: listRelatedIds,
+                phrases: phrasesData,
+              });
+              break;
             case "getObjectList":
               getData(data[datamart_name])
-              break
+              break;
             default:
               getData({
                 ...data[datamart_name],
                 relatedIds: listRelatedIds,
                 phrases: phrasesData,
               });
-              break;
-          if(datamart_name === "getAllObjectInfo" ){
-            getData({
-              data: data[datamart_name],
-              relatedIds: listRelatedIds,
-              phrases: phrasesData,
-            });
-          }
-          if(datamart_name === "getGeneticElementsFromInterval"){
-            getData({
-              GE: data[datamart_name],
-              relatedIds: listRelatedIds,
-              phrases: phrasesData,
-            });
-          }else{
-            getData({
-              ...data[datamart_name],
-              relatedIds: listRelatedIds,
-              phrases: phrasesData,
-            });
           }
           if (data[datamart_name]?.pagination) {
             if (data[datamart_name]?.pagination.totalResults === 0) {
