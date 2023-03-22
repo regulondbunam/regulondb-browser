@@ -14,7 +14,7 @@ export default function TUDtt({ operon, tu, showControls = false }) {
         let terminators = []
         if (tu?.genes) {
             tu?.genes.forEach((gene) => {
-                genes = IfNoExistPush(genes, gene.id);
+                genes = IfNoExistPush(genes, gene._id);
                 if (gene?.regulatorBindingSites) {
                     gene.regulatorBindingSites.forEach((rbs) => {
                         if (rbs?.regulator) {
@@ -33,7 +33,7 @@ export default function TUDtt({ operon, tu, showControls = false }) {
             });
         }
         if (tu?.promoter) {
-            promoters = IfNoExistPush(promoters, tu.promoter.id);
+            promoters = IfNoExistPush(promoters, tu.promoter._id);
             if (tu.promoter?.regulatorBindingSites) {
                 tu.promoter.regulatorBindingSites.forEach((rbs) => {
                     if (rbs?.regulator) {
@@ -75,7 +75,7 @@ export default function TUDtt({ operon, tu, showControls = false }) {
     return (
         <div id="dtt_operon">
             {
-                <DrawingTracesTool controls={showControls} id={tu.id} relatedIds={relatedIds} context="operon" strand={strand} leftEndPosition={regulationPositions.leftEndPosition} rightEndPosition={regulationPositions.rightEndPosition} />
+                <DrawingTracesTool controls={showControls} id={tu._id} relatedIds={relatedIds} context="operon" strand={strand} leftEndPosition={regulationPositions.leftEndPosition} rightEndPosition={regulationPositions.rightEndPosition} />
             }
         </div>
     );
