@@ -14,6 +14,9 @@ import Embed from "./apps/embed";
 import HT from './apps/ht/HighThroughput';
 import Regulon from './apps/regulon';
 import Sigmulon from './apps/sigmulon';
+import SRNA from './apps/srna';
+import { TestComponents } from './apps/testinComponents';
+import DocumentationDatamarts from './apps/docs_dt';
 import Overviews from './apps/overviews'
 
 const theme = createTheme({
@@ -54,6 +57,10 @@ function App() {
               <Route path=':parameters' />
             </Route>
           </Route>
+          <Route path="doc_datamarts" element={<DocumentationDatamarts />} >
+            <Route path=":service" />
+          </Route>
+          <Route path="testComponents" element={<TestComponents />} />
           <Route path="home" element={<Home />} />
           <Route path="dtt" element={<DrawingTracesInterface />} >
             <Route path=":parameters" />
@@ -79,6 +86,9 @@ function App() {
           <Route path="regulon" element={<Regulon />} >
             <Route path=":regulonId" />
           </Route>
+          <Route path="srna" element={<SRNA />} >
+            <Route path=":srnaId" />
+            </Route>
           <Route path="/overviews" element={<Overviews />}>
             <Route path=":overviewsId" element={<Overviews />} />
           </Route>

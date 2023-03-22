@@ -1,18 +1,27 @@
-import React, {useEffect} from 'react';
-import Operon from "./Operon"
-import {UpdateTitle} from "../Title"
+import { useEffect } from 'react';
+import ObjectListExplorer from '../../../components/objectListExplorer';
+import { UpdateTitle } from '../Title';
+
 
 function Home() {
-    
+
     useEffect(() => {
-        UpdateTitle({ title: "Operon", operonToken: undefined });
+        UpdateTitle({ title: "Operon", geneToken: undefined });
     })
 
-    return ( 
-        <article id="operon_home">
-            <Operon keyword="RDBECOLIOP" />
+    const attributesEnabled=[
+        "_id",
+        "productsName",
+        "encodedGenes",
+        "name",
+        "synonyms"
+    ]
+
+    return (
+        <article>
+            <ObjectListExplorer attributesEnabled={attributesEnabled} title='Operon' datamartType={"operon"} />
         </article>
-     );
+    );
 }
 
 export default Home;

@@ -19,6 +19,8 @@ export function CitationModal({ title, references }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  //console.log(references);
+
   const { evidence, publication } = references;
 
   let styleStrong = {};
@@ -40,7 +42,7 @@ export function CitationModal({ title, references }) {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            {evidence?.id && (
+            {evidence?._id && (
               <div>
                 <h2>Evidence</h2>
                 <h1 style={styleStrong} >
@@ -49,7 +51,7 @@ export function CitationModal({ title, references }) {
                 </h1>
               </div>
             )}
-            {publication?.id && (
+            {publication?._id && (
               <div>
                 <h2>Reference:</h2>
                 { publication?.url && <a href={publication.url} target="_blank" rel="noopener noreferrer" >Go to Reference</a>}

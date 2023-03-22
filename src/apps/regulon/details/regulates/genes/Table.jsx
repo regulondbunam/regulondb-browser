@@ -53,6 +53,7 @@ export function Table({ columns, data }) {
                         let component = <div></div>
                         switch (cell.column.id) {
                             case "gene":
+                                //console.log(cell.value);
                                 component = <div>
                                     <Link to={"/gene/" + cell.value.id}>
                                         <p>{`${cell.value.name} (${cell.value.function})`}</p>
@@ -62,7 +63,7 @@ export function Table({ columns, data }) {
                             case "multifunction":
                                 component = <div style={{ overflow: "auto", height: 75 }} >
                                     {cell.value.map((multi) => {
-                                        return <div key={"multi_" + multi.id} ><p>{multi.name}</p></div>
+                                        return <div key={"multi_" + multi._id} ><p>{multi.name}</p></div>
                                     })}
                                 </div>
                                 break

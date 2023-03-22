@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const fragment_CITATIONS = gql`fragment CITATIONS on Citations {
     publication {
-      id
+      _id
       authors
       pmid
       citation
@@ -11,7 +11,7 @@ export const fragment_CITATIONS = gql`fragment CITATIONS on Citations {
       year
     }
     evidence {
-      id
+      _id
       name
       code
       type
@@ -41,8 +41,8 @@ export const fragment_EVOLUTIONARYCONSERVATION = gql`fragment EVOLUTIONARYCONSER
   }`
 
 export const fragment_GeneTerms = gql`fragment GeneTerms on GeneTermsObject {
-    gene_id
-    gene_name
+    _id
+    name
   }`
 
 export const fragment_GO = gql`fragment GENEONTOLOGY on RegulonGeneOntology {
@@ -51,35 +51,35 @@ export const fragment_GO = gql`fragment GENEONTOLOGY on RegulonGeneOntology {
         ...GeneTerms
       }
       name
-      term_id
+      _id
     }
     cellularComponent {
       genes {
         ...GeneTerms
       }
       name
-      term_id
+      _id
     }
     molecularFunction {
       genes {
         ...GeneTerms
       }
       name
-      term_id
+      _id
     }
   }`
 
 export const fragment_REGULATES = gql`fragment REGULATES on Regulates {
     genes {
       function
-      id
+      _id
       name
       terms {
         geneOntology {
           ...GENEONTOLOGY
         }
         multifun {
-          id
+          _id
           name
           genes {
             ...GeneTerms
@@ -89,30 +89,30 @@ export const fragment_REGULATES = gql`fragment REGULATES on Regulates {
     }
     operons {
       firstGene {
-        id
+        _id
         name
       }
       function
-      id
+      _id
       name
     }
     sigmaFactors {
       function
-      id
+      _id
       name
     }
     transcriptionFactors {
       function
-      id
+      _id
       name
     }
     transcriptionUnits {
       firstGene {
-        id
+        _id
         name
       }
       function
-      id
+      _id
       name
     }
   }`
@@ -130,7 +130,7 @@ export const fragment_RI = gql`fragment RI on RegulonRegulatoryInteractions {
       type
     }
     regulatedGenes {
-      id
+      _id
       name
     }
     regulator {
@@ -149,7 +149,7 @@ export const fragment_RI = gql`fragment RI on RegulonRegulatoryInteractions {
         ...CITATIONS
       }
       function
-      id
+      _id
       leftEndPosition
       rightEndPosition
       sequence
@@ -162,7 +162,7 @@ export const fragment_TERMS = gql`fragment TERMS on Terms {
       ...GENEONTOLOGY
     }
     multifun {
-      id
+      _id
       name
       genes {
         ...GeneTerms
@@ -172,14 +172,14 @@ export const fragment_TERMS = gql`fragment TERMS on Terms {
 
 export const fragment_ENCODEFROM = gql`fragment ENCODEFROM on EncodedFrom {
     genes {
-      gene_id
-      gene_name
+      _id
+      name
       genomePosition
       length
     }
     operon {
       name
-      operon_id
+      _id
       tusEncodingRegulator {
         promoterName
         transcriptionUnitName
@@ -198,7 +198,7 @@ export const fragment_TF = gql`fragment TF on TranscriptionFactor {
       }
       effectorInteractionType
       functionalType
-      id
+      _id
       name
       type
     }

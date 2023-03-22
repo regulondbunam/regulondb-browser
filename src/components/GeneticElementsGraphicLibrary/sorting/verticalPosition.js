@@ -2,7 +2,7 @@ import { getPropertiesByObjectType } from "../features_default_properties";
 import { WhoGoesUp } from "./verticalRules";
 
 export default function verticalPosition(geneticElements, dna) {
-    console.log(geneticElements);
+    //console.log(geneticElements);
     //assign level
     geneticElements.forEach(dnaObject => {
         dnaObject.level = 1;
@@ -93,7 +93,7 @@ export default function verticalPosition(geneticElements, dna) {
         dnaObject.separation = Math.abs(dnaObject.y - dnaObject.previousY)
     });
 
-    console.log(geneticElements);
+    //console.log(geneticElements);
 
     return { geneticElements: geneticElements, height: height, width: width };
 }

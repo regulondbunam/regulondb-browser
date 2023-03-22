@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const fragment_CITATIONS = gql`fragment CITATIONS on Citations {
     publication {
-      id
+      _id
       authors
       pmid
       citation
@@ -11,7 +11,7 @@ export const fragment_CITATIONS = gql`fragment CITATIONS on Citations {
       year
     }
     evidence {
-      id
+      _id
       name
       code
       type
@@ -48,7 +48,7 @@ export const fragment_PRODUCTS = gql`fragment PRODUCTS on Products {
         citations {
           ...CITATIONS
         }
-        id
+        _id
         name
         productsIds
       }
@@ -56,7 +56,7 @@ export const fragment_PRODUCTS = gql`fragment PRODUCTS on Products {
         citations {
           ...CITATIONS
         }
-        id
+        _id
         name
         productsIds
       }
@@ -64,18 +64,18 @@ export const fragment_PRODUCTS = gql`fragment PRODUCTS on Products {
         citations {
           ...CITATIONS
         }
-        id
+        _id
         name
         productsIds
       }
     }
-    id
+    _id
     isRegulator
     isoelectricPoint
     molecularWeight
     motifs {
       description
-      id
+      _id
       dataSource
       leftEndPosition
       note
@@ -108,7 +108,7 @@ export const fragment_PROMOTER = gql`fragment PROMOTER on Promoter {
     citations {
       ...CITATIONS
     }
-    id
+    _id
     name
     note
     regulatorBindingSites {
@@ -156,26 +156,26 @@ export const fragment_Regulation = gql`fragment REGULATION on Regulation {
     operon {
       arrangement {
         promoters {
-          id
+          _id
           name
         }
         regulators {
           function
-          id
+          _id
           name
           type
         }
         transcriptionUnit {
-          id
+          _id
           name
         }
       }
-      id
+      _id
       name
     }
     regulators {
       function
-      id
+      _id
       name
       type
     }
@@ -197,17 +197,17 @@ export const fragment_GENE = gql`fragment GENE on Gene{
           }
           fragments {
             centisomePosition
-            id
+            _id
             leftEndPosition
             name
             rightEndPosition
             sequence
           }
           gcContent
-          id
+          _id
           leftEndPosition
           multifunTerms {
-            id
+            _id
             label
             name
           }
@@ -222,7 +222,7 @@ export const fragment_GENE = gql`fragment GENE on Gene{
 
 export const fragment_SHINEDALGARNOS = gql`fragment SHINEDALGARNOS on ShineDalgarnos {
     distanceToGene
-    id
+    _id
     leftEndPosition
     note
     rightEndPosition
@@ -236,7 +236,7 @@ export const fragment_GROWTHCONDITIONS = gql`fragment GROWTHCONDITIONS on Growth
     controlCondition
     effect
     experimentalCondition
-    id
+    _id
   }`
 
 export const query_GET_GENE_INFO = gql`
@@ -251,13 +251,6 @@ ${fragment_GROWTHCONDITIONS}
     $limit: Int = 10
     $organismName: String
     $page: Int = 0
-    $properties: [String] = [
-      "gene.id"
-      "gene.name"
-      "gene.synonyms"
-      "gene.type"
-      "products.name"
-    ]
     $search: String
   ) {
     getGenesBy(
@@ -324,7 +317,7 @@ query GetGeneInfo(
         _id
         schemaVersion
         organism {
-          id
+          _id
           name
         }
         allCitations {

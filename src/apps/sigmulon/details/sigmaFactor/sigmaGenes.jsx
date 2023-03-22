@@ -23,7 +23,6 @@ function SigmulonGenes({ idPanel, sigmulonGenes }) {
         if (panel) {
            set_jtGenes(formatJsonTable(panel,filterSG)) 
         }
-        
     }
 
     const styleFilter = {

@@ -5,7 +5,7 @@ export default function geneTableData(data) {
         let products = doc.products.map(product => { return product.name }).join(', ')
         rows.push({
             title: `${doc.gene.name}, ${products}`,
-            id: doc.gene.id,
+            id: doc.gene._id,
             additionalInfo: {
                 type: "ge_draw",
                 leftEndPosition: doc.gene.leftEndPosition,

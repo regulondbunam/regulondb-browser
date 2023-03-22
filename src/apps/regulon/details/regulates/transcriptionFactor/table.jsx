@@ -56,6 +56,7 @@ export default function Table({ columns, data }) {
                         
                         switch (cell.column.id) {
                             case "tf":
+                                //console.log(cell.value);
                                 component = <div>
                                     <Link to={"/tu/" + cell.value.id}>
                                         <p>{cell.value.name}</p>

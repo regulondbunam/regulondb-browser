@@ -26,7 +26,7 @@ function formatTable(transcriptionFactor = []) {
         //console.log(tu.firstGene.name)
         data.push({
             tf: {
-                id: tf.id,
+                id: tf._id,
                 name: tf.name,
             },
             tfFunction: tf.function,

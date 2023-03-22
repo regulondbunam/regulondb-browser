@@ -13,13 +13,13 @@ function EncodedFrom({ encodedFrom }) {
                         <div style={{display: "flex"}} >
                             {encodedFrom.genes.map(gene => {
                                 return (
-                                    <Link key={gene.gene_id} to={"/gene/" + gene.gene_id} >
+                                    <Link key={gene.gene_id} to={"/gene/" + gene._id} >
                                         <div className={"cell_content"} >
                                             <div>
-                                                <p style={{ fontSize: "8px" }} >{gene.gene_id}</p>
+                                                <p style={{ fontSize: "8px" }} >{gene._id}</p>
                                             </div>
                                             <div>
-                                                <p style={{ fontSize: "16px" }} dangerouslySetInnerHTML={{ __html: gene.gene_name }} />
+                                                <p style={{ fontSize: "16px" }} dangerouslySetInnerHTML={{ __html: gene.name }} />
                                             </div>
                                         </div>
                                     </Link>
@@ -34,10 +34,10 @@ function EncodedFrom({ encodedFrom }) {
                     <div style={{display: "flex"}} >
                         {encodedFrom.operon.map(operon => {
                             return (
-                                <Link key={operon.operon_id} to={"/operon/" + operon.operon_id} >
+                                <Link key={operon.operon_id} to={"/operon/" + operon._id} >
                                     <div className={"cell_content"} >
                                         <div>
-                                            <p style={{ fontSize: "8px" }} >{operon.operon_id}</p>
+                                            <p style={{ fontSize: "8px" }} >{operon._id}</p>
                                         </div>
                                         <div>
                                             <p style={{ fontSize: "16px" }} dangerouslySetInnerHTML={{ __html: operon.name }} />
