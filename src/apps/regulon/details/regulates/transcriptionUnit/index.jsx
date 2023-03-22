@@ -31,12 +31,12 @@ function formatTable(transcriptionUnits = []) {
         //console.log(tu.firstGene.name)
         data.push({
             tu: {
-                id: tu.id,
+                id: tu._id,
                 name: tu.name,
             },
             tuFunction: tu.function,
             firstGene: {
-                id: tu.firstGene.id,
+                id: tu.firstGene._id,
                 name: tu.firstGene.name,
             }
         })

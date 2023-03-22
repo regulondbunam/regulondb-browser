@@ -116,7 +116,7 @@ function GeneOntologyItem(components, allCitations) {
     <tbody>
       {components.map((component) => {
         return (
-          <tr className={"trShadow"} style={trStyle} key={`ccT_${component.id}`}>
+          <tr className={"trShadow"} style={trStyle} key={`ccT_${component._id}`}>
             <td>{component.name}<ParagraphCitations citations={component.citations} allCitations={allCitations} /></td>
           </tr>
         );

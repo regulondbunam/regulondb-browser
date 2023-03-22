@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const fragment_CITATIONS = gql`fragment CITATIONS on Citations {
     publication {
-      id
+      _id
       authors
       pmid
       citation
@@ -11,7 +11,7 @@ export const fragment_CITATIONS = gql`fragment CITATIONS on Citations {
       year
     }
     evidence {
-      id
+      _id
       name
       code
       type
@@ -59,7 +59,7 @@ export const fragment_RegulatorBS = gql`fragment RegulatorBS on RegulatorBinding
   }`
 
 export const fragment_OPERON = gql`fragment OPERON on Operon {
-    id
+    _id
     name
     regulationPositions {
       leftEndPosition
@@ -77,31 +77,31 @@ export const fragment_OPERON = gql`fragment OPERON on Operon {
   }`
 
 export const fragment_TRANSCRIPTIONUNIT = gql`fragment TRANSCRIPTIONUNITS on TranscriptionUnits {
-    id
+    _id
     name
     note
     synonyms
     firstGene {
+      _id
       distanceToPromoter
-      gene_id
-      gene_name
+      name
     }
     genes {
-      id
+      _id
       name
       regulatorBindingSites {
         ...RegulatorBS
       }
     }
     promoter {
-      id
+      _id
       name
       bindsSigmaFactor {
-        sigmaFactor_id
+        _id
         citations {
           ...CITATIONS
         }
-        sigmaFactor_name
+        name
       }
       citations {
         ...CITATIONS
@@ -180,7 +180,7 @@ query GetOperonInfo(
         _id
         schemaVersion
         organism {
-          id
+          _id
           name
         }
         allCitations {

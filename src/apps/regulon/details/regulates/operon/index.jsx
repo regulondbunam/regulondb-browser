@@ -31,12 +31,12 @@ function formatTable(operons = []) {
         //console.log(operon.firstGene.name)
         data.push({
             operon: {
-                id: operon.id,
+                id: operon._id,
                 name: operon.name,
             },
             operonFunction: operon.function,
             firstGene: {
-                id: operon.firstGene.id,
+                id: operon.firstGene._id,
                 name: operon.firstGene.name,
             }
         })

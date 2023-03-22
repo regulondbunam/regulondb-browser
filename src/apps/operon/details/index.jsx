@@ -28,7 +28,7 @@ class Details extends Component {
     if (transcriptionUnits.length > 0) {
       transcriptionUnits.forEach((tu) => {
         tabs.push({
-          id: tu.id,
+          id: tu._id,
           type:"tu",
           operon: operon,
           tu:tu
@@ -49,7 +49,7 @@ class Details extends Component {
     if (transcriptionUnits.length > 0) {
       transcriptionUnits.forEach((tu) => {
         tabsInfo.push({
-          id: tu.id,
+          id: tu._id,
           name: `${tu.name}`,
           type: "tu",
         });
@@ -57,6 +57,8 @@ class Details extends Component {
     }
     return tabsInfo;
   };
+
+  
 
   render() {
     const { data, relatedIds } = this.context._data;
@@ -70,6 +72,7 @@ class Details extends Component {
     if (this.error) {
       return "error";
     }
+    //console.log(tabs);
     return (
       <div>
         <NavigationTabs

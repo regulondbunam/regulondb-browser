@@ -51,7 +51,7 @@ function RegulatoryInteractions({ regulatoryInteractions, allCitations }) {
         {
             value: "regulatedGeneId",
             label: "Regulated Gene ID",
-            filter: (str) => {return riList.filter(item => item._data.regulatedGenes.find(gene => str.test(gene.id.toLowerCase()))) },
+            filter: (str) => {return riList.filter(item => item._data.regulatedGenes.find(gene => str.test(gene._id.toLowerCase()))) },
         },
     ]
     const [_data, set_data] = React.useState(riList);

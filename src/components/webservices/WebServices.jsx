@@ -7,20 +7,24 @@ import { query_GET_REGULON_BY, query_GET_ALL_REGULON } from "./regulon/gql";
 import { query_GET_PHRASE_OF } from "./phrases/gql";
 import { query_getAllSigmulon, query_getSigmulonBy } from "./sigmulon/gql";
 import { query_GET_GE_Interval } from "./GeneticElementsFromInterval/gql";
+import { QUERY_GetObjectList } from "./objectList/gql";
 import { PhraseUtil } from "./phrases/util";
 import { query_GET_ALL_OVERVIEWS } from "./overviews/gql"
 
 export default function WebServices({
   datamart_name,
   variables = {},
-  getData = () => {},
-  getState = () => {},
+  getData = () => { },
+  getState = () => { },
   isGetRelatedIDs = false,
   isGetPhrases = false,
 }) {
   let query = ""
   let relatedIds
   switch (datamart_name) {
+    case "getObjectList":
+      query = QUERY_GetObjectList;
+      break;
     case "getAllObjectInfo":
       query = query_GET_ALL_OVERVIEWS;
       break;
@@ -58,6 +62,7 @@ export default function WebServices({
 
 
   useEffect(() => {
+    //console.log("hola");
     if (!error) {
       if (loading) {
         getState("loading");
@@ -66,59 +71,65 @@ export default function WebServices({
         getState("done");
         let listRelatedIds
         let phrasesData
-        if(isGetRelatedIDs && !isGetPhrases){
+        if (isGetRelatedIDs && !isGetPhrases) {
           listRelatedIds = relatedIds(data[datamart_name].data)
         }
         if (isGetPhrases && (!phrases.loading || !phrases.data || !phrases.error)) {
           listRelatedIds = relatedIds(data[datamart_name].data)
           _getPhrases({ variables: { id: listRelatedIds.all } });
         }
-        if(phrases.error){
+        if (phrases.error) {
           console.error("get phrases error:", error);
         }
-        if(phrases.data){
+        if (phrases.data) {
           phrasesData = {
             data: phrases.data.getPhraseOf,
             Util: PhraseUtil,
           };
         }
         try {
-          if(datamart_name === "getAllObjectInfo" ){
-            getData({
-              data: data[datamart_name],
-              relatedIds: listRelatedIds,
-              phrases: phrasesData,
-            });
+          //console.log(data[datamart_name]);
+          switch (datamart_name) {
+            case "getGeneticElementsFromInterval":
+              getData({
+                GE: data[datamart_name],
+                relatedIds: listRelatedIds,
+                phrases: phrasesData,
+              });
+              break;
+            case "getAllObjectInfo":
+              getData({
+                data: data[datamart_name],
+                relatedIds: listRelatedIds,
+                phrases: phrasesData,
+              });
+              break;
+            case "getObjectList":
+              getData(data[datamart_name])
+              break;
+            default:
+              getData({
+                ...data[datamart_name],
+                relatedIds: listRelatedIds,
+                phrases: phrasesData,
+              });
           }
-          if(datamart_name === "getGeneticElementsFromInterval"){
-            getData({
-              GE: data[datamart_name],
-              relatedIds: listRelatedIds,
-              phrases: phrasesData,
-            });
-          }else{
-            getData({
-              ...data[datamart_name],
-              relatedIds: listRelatedIds,
-              phrases: phrasesData,
-            });
-          }
-          if(data[datamart_name]?.pagination){
-            if(data[datamart_name]?.pagination.totalResults === 0){
+          if (data[datamart_name]?.pagination) {
+            if (data[datamart_name]?.pagination.totalResults === 0) {
               getState("no results")
             }
           }
         } catch (error) {
           getState("error");
-          getData({error: "webservices send data in attribute getData error"});
+          getData({ error: "webservices send data in attribute getData error" });
           console.error("webservices send data in attribute getData error:", error);
         }
       }
     } else {
-      console.error("Webservices "+datamart_name+" error:", error);
+      console.error("Webservices " + datamart_name + " error:", error);
       console.log(query)
       getState("error");
-      getData({error: "webservices "+datamart_name+" query error"});
+      getData({ error: "webservices " + datamart_name + " query error" });
     }
   }, [_getPhrases, data, datamart_name, error, getData, getState, isGetPhrases, isGetRelatedIDs, loading, phrases, relatedIds, query]);
 

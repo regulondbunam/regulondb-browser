@@ -25,27 +25,20 @@
       "type": "SUBMENU",
       "options": [
         {
+          "id": "ws_API",
+          "title": "GraphQL Web Services",
+          "link" : "/doc_datamarts",
+          "state": "enabled"
+        },
+        {
           "id": "db_ddfas",
-          "title": "Datamarts",
+          "title": "Mongo Dump",
           "link" : "/datamarts",
           "state": "disabled"
         }
       ]
     },
-    {
-      "id": "Web_ServicesDG",
-      "title": "Data Grid",
-      "link": "/ws/gql",
-      "type": "SUBMENU",
-      "options": [
-        {
-          "id": "ws_API",
-          "title": "Web Services (GraphQL)",
-          "link" : "/webService",
-          "state": "disabled"
-        }
-      ]
-    },
+
     {
       "id": "Web_Front",
       "title": "Frontend",
@@ -54,9 +47,9 @@
       "options": [
         {
           "id": "F-ui",
-          "title": "ui-components",
-          "link" : "/webService",
-          "state": "disabled"
+          "title": "components repository",
+          "link" : "/testComponents",
+          "state": "enabled"
         },
         {
           "id": "regulondb-browser",

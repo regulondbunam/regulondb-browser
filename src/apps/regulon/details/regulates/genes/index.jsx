@@ -60,7 +60,7 @@ function formatTable(genes = []) {
         const strMolecularFunction = terms?.geneOntology ? terms.geneOntology.molecularFunction.map((multi) => { return multi.name }).join(", ") : ""
         data.push({
             gene: {
-                id: gene.id,
+                id: gene._id,
                 name: gene.name,
                 function: gene.function
             },
@@ -84,7 +84,7 @@ function Genes({ genes, idPanel = "regulates_genes" }) {
     const [_filter, set_filter] = React.useState(ATTRIBUTES[0]);
     const [_genesList, set_genesList] = React.useState(genesList);
 
-    //console.log(genes);
+    //console.log(genesList);
 
     const _handleUpdate = (event) => {
         //console.log(event.target.value)
@@ -97,7 +97,7 @@ function Genes({ genes, idPanel = "regulates_genes" }) {
 
                 break;
             case "Gene id":
-                filterGenes = genesList.filter(item => str.test(item.gene.id.toLowerCase()))
+                filterGenes = genesList.filter(item => str.test(item.gene._id.toLowerCase()))
                 break;
             case "Function":
                 filterGenes = genesList.filter(item => str.test(item.gene.function.toLowerCase()))

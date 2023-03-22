@@ -9,13 +9,13 @@ import { ListItem } from "@mui/material";
 const Genes = ({ firstGene, genes = [], allCitations }) => {
   return (
     <div>
-      {firstGene.gene_id && (
+      {firstGene._id && (
         <div>
           <h3>First Gene</h3>
           <div className="tu_firstGene tu_gene_content">
             <div>{firstGene.gene_id}</div>
-            <Link to={"/gene/" + firstGene.gene_id}>
-              <div className="tu_firstGene_name">{firstGene.gene_name}</div>
+            <Link to={"/gene/" + firstGene._id}>
+              <div className="tu_firstGene_name">{firstGene.name}</div>
             </Link>
             <div>
               <p>Promoter Distance: {firstGene.distanceToPromoter}bp</p>
@@ -63,7 +63,7 @@ function ListGene({ gene, allCitations }) {
         <div>
           <div><p style={{ fontSize: "10px" }} >{gene.id}</p></div>
           <div>
-            <Link to={"/gene/" + gene.id}>
+            <Link to={"/gene/" + gene._id}>
               <p style={{ fontSize: "18px" }} className="p_accent" >Gene {gene.name}
                 {regulatorBindingSites.length > 0 && (` regulated by ${regulators}`)}
               </p>

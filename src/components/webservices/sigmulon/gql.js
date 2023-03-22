@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const fragment_CITATIONS = gql`fragment CITATIONS on Citations {
     publication {
-      id
+      _id
       authors
       pmid
       citation
@@ -11,7 +11,7 @@ export const fragment_CITATIONS = gql`fragment CITATIONS on Citations {
       year
     }
     evidence {
-      id
+      _id
       name
       code
       type
@@ -74,7 +74,7 @@ query getSigmulon($advancedSearch: String){
             type
           }
           name
-          operon_id
+          operonId
           sequence
           transcribedGenes {
             _id
@@ -84,14 +84,14 @@ query getSigmulon($advancedSearch: String){
           citations {
             evidence {
               code
-              id
+              _id
               name
               type
             }
             publication {
               authors
               citation
-              id
+              _id
               pmid
               title
               url

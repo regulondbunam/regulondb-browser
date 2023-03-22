@@ -50,7 +50,7 @@
           "id": "srna-search",
           "title": "sRNA",
           "link" : "/srna",
-          "state": "disabled"
+          "state": "enabled"
         }
       ]
     },
