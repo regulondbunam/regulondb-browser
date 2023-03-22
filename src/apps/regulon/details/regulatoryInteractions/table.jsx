@@ -132,7 +132,7 @@ function RegulatoryInteraction({ regulatoryInteraction, allCitations }) {
                             <div>
                                 {regulatoryInteraction.regulatedGenes.map((gene, index) => {
                                     return (
-                                        <Link key={"reg_" + gene.id + "_i" + index} style={{ float: "left", marginLeft: "5px" }} to={"/gene/" + gene.id}> <p>{gene.name}</p> </Link>
+                                        <Link key={"reg_" + gene._id + "_i" + index} style={{ float: "left", marginLeft: "5px" }} to={"/gene/" + gene._id}> <p>{gene.name}</p> </Link>
                                     )
                                 })}
                             </div>

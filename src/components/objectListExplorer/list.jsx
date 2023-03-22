@@ -15,17 +15,18 @@ export function List({ attributesEnabled, datamartType, title, ComponentState = 
             datamart_name={"getObjectList"}
             variables={{ datamartType: datamartType }}
             getData={(data) => {
-                console.log(data);
+                //console.log(data);
                 const jsonTable = formatJsonTable(data);
                 setObjectsData(jsonTable);
                 setFilterData(jsonTable);
             }}
             getState={(state) => {
+                /*
                 const titleState = {
                     loading: "Loading list of " + datamartType + "... wait a moment",
                     done: `${title} List`,
                     error: "sorry we have a problem ... :( try again later"
-                }
+                }*/
                 //ComponentState({ state: state, title: titleState[state] })
             }}
         />

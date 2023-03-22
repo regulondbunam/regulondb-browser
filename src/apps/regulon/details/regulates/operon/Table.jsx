@@ -56,6 +56,7 @@ export default function Table({ columns, data }) {
                         
                         switch (cell.column.id) {
                             case "operon":
+                                //console.log(cell.value);
                                 component = <div>
                                     <Link to={"/operon/" + cell.value.id}>
                                         <p>{cell.value.name}</p>
