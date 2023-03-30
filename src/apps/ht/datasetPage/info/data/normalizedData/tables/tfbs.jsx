@@ -89,6 +89,18 @@ export default function TFBS({
 
 
 function linkGenes(genes = []) {
+    //console.log(window.finder);
+    if(window.IN_URL.isEmbed){
+        return (
+            <div >
+                {
+                    genes.map((gen) => {
+                        return <p key={gen._id} style={{ marginLeft: "5px" }}>{gen.name}</p>
+                    })
+                }
+            </div>
+        )
+    }
     return (
         <div >
             {

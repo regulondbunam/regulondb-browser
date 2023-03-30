@@ -12,16 +12,9 @@ export default function TranscriptionFactor({objectsTested}) {
                     <div key={obj.name+i} >
                         <h3>{obj.name}</h3>
                         {
-                            obj.genes.length > 0 && <div>
-                                <p>
-                                Genes:
-                                {
-                                    obj.genes.map(gen=>{
-                                        return <Link key={gen._id} style={{ marginLeft: "5px" }} to={`/gene/${gen._id}`} >{gen.name}</Link>
-                                    })
-                                }
-                                </p>
-                            </div>
+                            obj.genes.length > 0 && (
+                                linkGenes(obj.genes)
+                            )
                         }
                         <div id={`moreInfo_${obj.name}_${i}`} style={{display: 'none'}}  >
                             {
@@ -70,4 +63,27 @@ export default function TranscriptionFactor({objectsTested}) {
         }
     </div>
   )
+}
+
+function linkGenes(genes=[]) {
+    if(window.IN_URL.isEmbed){
+        return (
+            <div >
+                {
+                    genes.map((gen) => {
+                        return <p key={gen._id} style={{ marginLeft: "5px" }}>{gen.name}</p>
+                    })
+                }
+            </div>
+        )
+    }
+    return (
+        <div >
+            {
+                genes.map((gen)=>{
+                    return <Link key={gen._id} style={{ marginLeft: "5px" }} to={`/gene/${gen._id}`} >{gen.name}</Link>
+                })
+            }
+        </div>
+    )
 }

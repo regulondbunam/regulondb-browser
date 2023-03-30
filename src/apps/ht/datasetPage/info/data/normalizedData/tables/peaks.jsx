@@ -89,6 +89,17 @@ export default function PEAKS({
 
 
 function linkGenes(genes = []) {
+    if(window.IN_URL.isEmbed){
+        return (
+            <div >
+                {
+                    genes.map((gen) => {
+                        return <p key={gen._id} style={{ marginLeft: "5px" }}>{gen.name}</p>
+                    })
+                }
+            </div>
+        )
+    }
     return (
         <div >
             {

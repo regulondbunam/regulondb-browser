@@ -63,7 +63,7 @@ function Table({ columns, datasetType, data, ignoreColumns, hiddenColumns }) {
             const row = rows[index]
             prepareRow(row)
             return (
-                <Link to={`/ht/dataset/${datasetType}/datasetId=${row.original._id}`} >
+                <Link to={`${window.IN_URL.dataset}${datasetType}/datasetId=${row.original._id}`} >
                     <div
                         {...row.getRowProps({
                             style,

@@ -54,7 +54,14 @@ function App() {
           <Route index element={<Home />} />
           <Route path="embed" element={<Embed />} >
             <Route path=":application" >
-              <Route path=':parameters' />
+              <Route path=':parameters' >
+                <Route path=":parameterA"  >
+                  <Route path=":parameterB"  >
+                    <Route path=":parameterC"  >
+                    </Route>
+                  </Route>
+                </Route>
+              </Route>
             </Route>
           </Route>
           <Route path="doc_datamarts" element={<DocumentationDatamarts />} >
@@ -88,7 +95,7 @@ function App() {
           </Route>
           <Route path="srna" element={<SRNA />} >
             <Route path=":srnaId" />
-            </Route>
+          </Route>
           <Route path="/overviews" element={<Overviews />}>
             <Route path=":overviewsId" element={<Overviews />} />
           </Route>

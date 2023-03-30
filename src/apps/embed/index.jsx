@@ -1,16 +1,20 @@
 import { useParams } from "react-router-dom";
 import DrawingTracesInterface from "../dtt";
+import { HtParameters } from "../ht/HighThroughput";
 
 function Embed () {
-    const application = useParams().application;
-    const parameters = useParams().parameters
+
+    // eslint-disable-next-line no-unused-vars
+    const { application, parameters, parameterA, parameterB, parameterC} = useParams()
+    let params
     switch (application) {
         case "dtt":
-            let params = new URLSearchParams(parameters);
+            params = new URLSearchParams(parameters);
             return (
                 <DrawingTracesInterface params={params} embed={true} />
             );
-    
+        case "ht":
+            return <HtParameters site={parameters} datasetType={parameterA} info={parameterB} isEmbed />
         default:
             return (
                 <div>application no embed permission</div>

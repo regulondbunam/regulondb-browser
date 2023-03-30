@@ -32,7 +32,7 @@ export default class PanelHT extends React.Component {
                 <div>
                     <ModalHT id={panel?.id} title={panel.title} md_data={this.state._mdData} />
                 </div>
-                <Link to={`/ht/dataset/${datasetType}/`}>
+                <Link to={`${window.IN_URL.dataset}${datasetType}/`}>
                 <h2 style={{fontSize: "5vh"}} >
                 {panel.title}
                 </h2>
@@ -63,12 +63,3 @@ export default class PanelHT extends React.Component {
         )
     }
 }
-
-/*
-<button >View all datasets</button>
- <Link to={`/${panel.url}`}>
-            <div className={Style.Panel}>
-                {panel.title}
-            </div>
-        </Link>
-*/

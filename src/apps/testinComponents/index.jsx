@@ -1,8 +1,4 @@
 import React from 'react';
-import { Card, Cover, Button, IconButton } from "../../components/ui-components"
-import Spinner from "../../components/ui-components/components/loading/Spinner"
-import Circle from "../../components/ui-components/spinners/circle"
-import { Tabs } from "../../components/ui-components/tab/tabs"
 import DrawingTracesTool from "../../components/DrawingTracesTool"
 import RegulatoryNetwork from "../../components/regulatoryNetwork/RegulatoryNetwork"
 import ObjectListExplorer from "../../components/objectListExplorer"
@@ -24,29 +20,6 @@ export function TestComponents() {
         <div>
             <h1>Components in RegulonDB</h1>
             <article>
-                <h2>ui-components</h2>
-                <div style={{ marginLeft: "5%" }} >
-                    <h3>Card</h3>
-                    <Card type={"icon"} >
-                        Hola
-                    </Card>
-                    <h3>Spinner Loading</h3>
-                    <Spinner />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <h3>Spinner Circle</h3>
-                    <Circle />
-                    <h3>Cover</h3>
-                    <Cover>
-                        <h1>Title</h1>
-                    </Cover>
-                    <h3>Tabs</h3>
-                    <Tabs />
-                    <h3>Buttons</h3>
-                    <div style={{ display: "flex" }} ><Button>Hola</Button><IconButton /></div>
-                </div>
                 <h2>Drawing Traces Tool</h2>
                 <div style={{ marginLeft: "5%" }}  >
                     <DrawingTracesTool leftEndPosition={25000} rightEndPosition={35000} />
