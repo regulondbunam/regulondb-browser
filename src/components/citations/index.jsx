@@ -51,9 +51,9 @@ export function ParagraphCitations({ allCitations, citations, small = true }) {
 
                 citations.map((cit, indx) => {
                     try {
-                        let index = allCitations.findIndex((citation) => citation?.publication?.id === cit?.publication?.id && citation?.evidence?.id === cit?.evidence?.id)
+                        let index = allCitations.findIndex((citation) => citation?.publication?._id === cit?.publication?._id && citation?.evidence?._id === cit?.evidence?._id)
                         return (
-                            <CitationModal key={`CitaitopnPH_${cit?.publication?.id}_${cit?.evidence?.id}_${indx}`}
+                            <CitationModal key={`CitaitopnPH_${cit?.publication?._id}_${cit?.evidence?._id}_${indx}`}
                                 classNameModal="citation"
                                 title={`[${index + 1}]${Citation(cit, small)}`}
                                 references={cit}

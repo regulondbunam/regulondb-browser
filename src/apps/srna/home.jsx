@@ -17,7 +17,6 @@ export default function Home() {
             <article>
                 <ObjectListExplorer attributesEnabled={attributesEnabled} title='SRNA' datamartType={"srna"} />
             </article>
-            
         </div>
     )
 }

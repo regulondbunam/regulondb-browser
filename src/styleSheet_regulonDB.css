@@ -193,6 +193,14 @@ Ver: 0.0.28
 	background-color: transparent;
 	border: 0px solid #000000;
   }
+
+  .aBase :hover{
+	box-shadow: none;
+  }
+
+  .aBase :active{
+	background-color: transparent;
+  }
   
   .aAccent {
 	color: var(--color-accentB) !important;

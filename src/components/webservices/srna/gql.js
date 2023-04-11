@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const fragment_CITATIONS = gql`fragment CITATIONS on Citations {
   publication {
-    id
+    _id
     authors
     pmid
     citation
@@ -11,7 +11,7 @@ export const fragment_CITATIONS = gql`fragment CITATIONS on Citations {
     year
   }
   evidence {
-    id
+    _id
     name
     code
     type
@@ -73,7 +73,7 @@ export const fragment_RegulatoryInteractions = gql`fragment RegulatoryInteractio
       ...CITATIONS
     }
     function
-    id
+    _id
     leftEndPosition
     rightEndPosition
     sequence
@@ -138,7 +138,14 @@ query getAllSRNA($limit: Int, $page: Int) {
 }   
 `
 
-export const query_getSrnaBy = gql`query getSrnaBy(
+export const query_getSrnaBy = gql`
+${fragment_CITATIONS}
+${fragment_PAGINATION}
+${fragment_ExternalCrossReferences}
+${fragment_SrnaProducts}
+${fragment_RegulatoryInteractions}
+${fragment_SrnaSummary}
+query getSrnaBy(
   $advancedSearch: String
   $fullMatchOnly: Boolean
   $limit: Int 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Cover } from "../../../components/ui-components";
 import "./title.css"
 
-const IDTitle = "title_cover_srnaTool";
+export const IDTitle = "title_cover_srnaTool";
 const eventName = "cover_srnaTool_event";
 
 export function UpdateTitle({ state, title, message, srnaToken }) {
@@ -65,7 +65,7 @@ export const Title = ({ title }) => {
     return (
       <div id={IDTitle} >
         <Cover state={_state} message={_message}>
-          <h1>{_title}</h1>
+          <h1 style={{margin: "0px", padding: "10px 0px 10px 0px"}} >{_title}</h1>
         </Cover>
       </div>
     );

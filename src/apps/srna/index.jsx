@@ -1,17 +1,13 @@
-import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import Home from "./home";
+import Details from "./details";
 
 function SRNA() {
-  const [id, setId] = useState();
-  const [_state, set_state] = useState();
   let { srnaId } = useParams();
 
   if (srnaId) {
     return(
-      <div>
-        Hola
-      </div>
+      <Details srnaId={srnaId} />
     )
   }
 

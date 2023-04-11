@@ -10,6 +10,7 @@ import { query_GET_GE_Interval } from "./GeneticElementsFromInterval/gql";
 import { QUERY_GetObjectList } from "./objectList/gql";
 import { PhraseUtil } from "./phrases/util";
 import { query_GET_ALL_OVERVIEWS } from "./overviews/gql"
+import { query_getSrnaBy } from "./srna/gql";
 
 export default function WebServices({
   datamart_name,
@@ -22,6 +23,9 @@ export default function WebServices({
   let query = ""
   let relatedIds
   switch (datamart_name) {
+    case "getSrnaBy":
+      query = query_getSrnaBy;
+      break;
     case "getObjectList":
       query = QUERY_GetObjectList;
       break;

@@ -6,7 +6,7 @@ export function relCitation(allCitations, idCit, small = true) {
         return ""
     }
     const id_cit = re.exec(idCit)[0]
-    const index = allCitations.findIndex(element => element?.publication?.id === id_cit) + 1
+    const index = allCitations.findIndex(element => element?.publication?._id === id_cit) + 1
     if (!index) {
         return ""
     }
