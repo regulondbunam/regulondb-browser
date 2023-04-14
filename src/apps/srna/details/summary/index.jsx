@@ -1,6 +1,4 @@
 import Card from "../../components/card";
-import ViewSequence from "../../components/viewSequence";
-import Divider from '@mui/material/Divider';
 
 export function Summary({summary}) {
     return(
