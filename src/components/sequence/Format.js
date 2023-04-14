@@ -6,7 +6,7 @@ export default class Formats {
         this.title = title
     }
 
-    addAttributes(x,id,color=false){
+    addAttributes(x, id, color = false) {
         const attributeColor = color ? `class="rdb_sequence_${x}"` : ''
         const attributeId = `id="${id}"`
         return `<span ${attributeId} ${attributeColor} >${x}</span>`
@@ -26,6 +26,9 @@ export default class Formats {
             case 'G':
                 x = `<span class="rdb_sequence_G">${x}</span>`
                 break;
+            case 'U':
+                x = `<span class="rdb_sequence_U">${x}</span>`
+                break;
             case 'a':
                 x = `<span class="rdb_sequence_a">${x}</span>`
                 break;
@@ -38,6 +41,9 @@ export default class Formats {
             case 'g':
                 x = `<span class="rdb_sequence_g">${x}</span>`
                 break;
+            case 'u':
+                x = `<span class="rdb_sequence_u">${x}</span>`
+                break;
             default:
                 break;
         }
@@ -45,7 +51,7 @@ export default class Formats {
     }
 
     getInfoSequence() {
-        let infoSequence ={
+        let infoSequence = {
             elements: {},
             size: this.size,
             sequence: this.sequence,
@@ -53,7 +59,7 @@ export default class Formats {
         }
         let elementRead = []
         this.sequence.forEach(x => {
-            if(elementRead.find(el => el === x) === undefined){
+            if (elementRead.find(el => el === x) === undefined) {
                 let items = this.sequence.filter(y => y === x)
                 infoSequence.elements[x] = items.length
             }
@@ -99,30 +105,30 @@ export default class Formats {
             count += 1
             innerCount += 1
             line = ''
-            if(count===1){
-               // console.log(spaceNumber)
-                for(let i = 0; i<spaceNumber-(index.toString().length);i++){
+            if (count === 1) {
+                // console.log(spaceNumber)
+                for (let i = 0; i < spaceNumber - (index.toString().length); i++) {
                     line += "&nbsp;"
                 }
-                return `\t${line}${index+1} ${x}`
+                return `\t${line}${index + 1} ${x}`
             }
             if (count === 60) {
                 count = 0;
                 innerCount = 0
                 return `${x}<br>`
             }
-            if (innerCount === 10){
+            if (innerCount === 10) {
                 innerCount = 0
                 return `${x} `
-            } 
+            }
             return x;
         }).join('')
         return `#${this.title}<br>#${this.getStrInfoSequence()}<br>${sequenceFormat}`
     }
 
-    getLinealFormat({ sequenceId, color = false}){
-        let sequenceFormat = this.sequence.map((x, index)=>{
-            x = this.addAttributes(x,`sequence_${sequenceId}_item_${x}_${index}`,color)
+    getLinealFormat({ sequenceId, color = false }) {
+        let sequenceFormat = this.sequence.map((x, index) => {
+            x = this.addAttributes(x, `sequence_${sequenceId}_item_${x}_${index}`, color)
             return x
         }).join('')
         return sequenceFormat

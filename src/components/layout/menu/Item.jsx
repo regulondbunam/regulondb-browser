@@ -27,7 +27,8 @@ const BUTTON_MENU_ACTIVE_STYLE = {
   boxShadow: "none",
   backgroundColor: "#72a7c7",
   height: "60px",
-  textTransform: "none"
+  textTransform: "none",
+  borderRadius: "0px",
 };
 
 function MenuItem({ item, menuBody, set_menuBody = () => {} }) {

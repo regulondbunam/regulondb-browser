@@ -3,6 +3,7 @@ import { Title, IDTitle, UpdateTitle } from '../components/title';
 import { useEffect, useState } from "react";
 import WebServices from "../../../components/webservices/WebServices";
 import { SrnaProduct } from "./product";
+import RegulatoryInteractions from "./regulatoryInteractions";
 
 
 function scrollFunction() {
@@ -50,7 +51,7 @@ function Details({ srnaId }) {
     //let dttData = {}
 
     if (srnaData) {
-        //console.log(srnaData.data[0].allCitations);
+        console.log(srnaData.data[0]);
         const title = srnaData.data[0].product ? srnaData.data[0].product.name : "srna"
         UpdateTitle({ state: "done", title: title })
         if (srnaData.data[0]._id) {
@@ -67,6 +68,17 @@ function Details({ srnaId }) {
                 name: "Product",
                 component: <div id="srnaTab_srnaDescription">
                     <SrnaProduct srnaProduct={srnaData.data[0].product} allCitations={srnaData.data[0].allCitations} />
+                </div>,
+            })
+        }
+
+        if (srnaData.data[0].product) {
+            tabs.push({
+                id: "srnaRegulatoryInteractions",
+                name: "Regulatory",
+                subtitle: "Interactions",
+                component: <div id="srnaTab_srnaDescription">
+                    <RegulatoryInteractions regulatoryInteractions={srnaData.data[0].regulatoryInteractions} allCitations={srnaData.data[0].allCitations} />
                 </div>,
             })
         }

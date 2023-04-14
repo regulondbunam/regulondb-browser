@@ -46,7 +46,7 @@ export function ParagraphCitations({ allCitations, citations, small = true }) {
         return null
     }
     return (
-        <>
+        <div style={{display: "flow-root"}} >
             {
 
                 citations.map((cit, indx) => {
@@ -64,7 +64,7 @@ export function ParagraphCitations({ allCitations, citations, small = true }) {
                     }
                 })
             }
-        </>
+        </div>
     )
 }
 

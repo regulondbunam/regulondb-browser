@@ -30,11 +30,11 @@ export function CitationModal({ title, references }) {
     }
   }
   if (!open) {
-    return <button className="aBase citation" onClick={handleOpen} dangerouslySetInnerHTML={{__html: title}} />;
+    return <p style={{whiteSpace: "nowrap", float: "left"}} className="aBase citation" onClick={handleOpen} dangerouslySetInnerHTML={{__html: title}} />;
   } else {
     return (
       <div>
-        <button style={{backgroundColor: "#c93a1d"}} className="aBase citation" dangerouslySetInnerHTML={{__html: title}} />
+        <p style={{backgroundColor: "#3d779b", color: "white"}} className="aBase citation" dangerouslySetInnerHTML={{__html: title}} />
         <Modal
           open={open}
           onClose={handleClose}
