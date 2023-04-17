@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const setStyleLink = (id, state) => {
     switch (state) {
@@ -65,9 +66,9 @@ export function BodyDesktop({ submenuData }) {
             case "SUBMENU":
               return (
                 <div key={item.id} style={styleSubmenu}>
-                  <a href={item.link} style={styleSubTitle}>
+                  <Link to={item.link} style={styleSubTitle}>
                     {item.title}
-                  </a>
+                  </Link>
                   {item.options.map((itemm) => {
                     return (
                       <div
@@ -75,18 +76,16 @@ export function BodyDesktop({ submenuData }) {
                         style={{ paddingTop: "5%", paddingBottom: "1%" }}
                       >
                         {itemm.state !== "disabled" ? (
-                          <a
+                          <Link to={itemm.link}
                             style={setStyleLink(itemm.id, itemm.state)}
                             target={itemm.target}
-                            href={itemm.link}
                           >
                             {itemm.title}
-                          </a>
+                          </Link>
                         ) : (
                           <p
                             style={setStyleLink(itemm.id, itemm.state)}
                             target={itemm.target}
-                            href={itemm.link}
                           >
                             {itemm.title}
                           </p>
@@ -100,13 +99,12 @@ export function BodyDesktop({ submenuData }) {
               return (
                 <div key={item.id} style={styleSubmenu}>
                   {item.state !== "disabled" ? (
-                    <a
+                    <Link to={item.link}
                       style={setStyleLink(item.id, item.state)}
                       target={item.target}
-                      href={item.link}
                     >
                       {item.title}
-                    </a>
+                    </Link>
                   ) : (
                     <a
                       style={setStyleLink(item.id, item.state)}
