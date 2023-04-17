@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { TextField } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const styleSearch = {
   display: "flex",
   alignItems: "center",
-  backgroundColor: "#ffffff"
 };
 
 export default function InputSearch({ hint }) {
@@ -14,32 +13,36 @@ export default function InputSearch({ hint }) {
   const handleChange = (event) => {
     setKeyword(event.target.value);
   };
+  const handleSearch = () => {
+    navigate("/search/" + keyword, { replace: true });
+  }
 
   return (
     <div
       style={styleSearch}
-      onKeyPress={(event) => {
-        if (event.key === "Enter") {
-          navigate("/search/" + keyword, { replace: true });
-        }
-      }}
     >
       <TextField
+        sx={{ backgroundColor: "white", borderRadius: "5px", width: "100%" }}
         id="outlined-keyword"
+        variant="filled"
+        size="small"
         label="Search"
         value={keyword}
         onChange={handleChange}
-        size="small"
-        fullWidth
+        onKeyUp={(event) => {
+          if (event.key === "Enter") {
+            handleSearch()
+          }
+        }}
       />
-      <button
-      onClick={() => {
-        navigate("/search/" + keyword, { replace: true });
-      }}
-      className="accent"
+      <Button
+        sx={{ marginLeft: "10px", height: "48px" }}
+        onClick={handleSearch}
+        color="secondary"
+        variant="contained"
       >
         Search
-      </button>
+      </Button>
     </div>
   );
 }

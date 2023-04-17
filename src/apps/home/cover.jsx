@@ -44,13 +44,14 @@ export function Cover(params) {
                 </div>
             </div>
             <div className={Style.coverBottom}>
-                <div>
+                <div style={{width: "40%"}} >
                     <InputSearch />
                 </div>
+                <br />
                 <div>
                     {searchLinks.map(link=>{
                         return (
-                            <div key={"cover_link"+link} >
+                            <div key={"cover_link"+link} style={{paddingLeft: "10px", float: "left"}} >
                                 <Link to={link.link} >{link.label}</Link>
                             </div>
                         )
