@@ -1,6 +1,6 @@
 import { Cover } from './cover';
 import { Body } from './body';
-//import conf from './conf/home.conf.json'
+import conf from './conf/home.conf.json'
 
 
 const Home = () => {
@@ -10,6 +10,12 @@ const Home = () => {
             <Cover />
             <br />
             <Body />
+            <div>
+                <p style={{ color: "white" }} >
+                    {conf.version}
+                </p>
+            </div>
+
         </div>
     );
 }
