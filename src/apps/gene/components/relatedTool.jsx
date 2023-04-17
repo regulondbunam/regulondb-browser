@@ -32,7 +32,7 @@ export default function RelatedDocTools({
 }) {
   const [_openRT, set_openRT] = useState(true);
   //const [_openRD, set_openRD] = useState(false);
-  const [_openD, set_openD] = useState(false);
+  //const [_openD, set_openD] = useState(false);
   const [_openER, set_openER] = useState(true);
   const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);

@@ -19,37 +19,28 @@ import { TestComponents } from './apps/testinComponents';
 import DocumentationDatamarts from './apps/docs_dt';
 import Overviews from './apps/overviews'
 
-const theme = createTheme({
+const THEME = createTheme({
   palette: {
     primary: {
-      // light: will be calculated from palette.primary.main,
-      main: '#32617d',
-      // dark: will be calculated from palette.primary.main,
-      contrastText: "#ffffff"
-    },
-    secondary: {
-      light: '#c93a1d',
-      main: '#c93a1d',
-      // dark: will be calculated from palette.secondary.main,
+      main: '#1F3D4E',
       contrastText: '#ffffff',
     },
-    info: {
-      main: '#999999'
+    secondary: {
+      light: '#D2A769',
+      main: '#C98528',
+      contrastText: '#ffffff',
     },
-    // Used by `getContrastText()` to maximize the contrast between
-    // the background and the text.
-    contrastThreshold: 3,
-    // Used by the functions below to shift a color's luminance by approximately
-    // two indexes within its tonal palette.
-    // E.g., shift from Red 500 to Red 300 or Red 700.
-    tonalOffset: 0.2,
+    error: {
+      main: '#C93A1D',
+      contrastText: '#ffffff',
+    }
   },
 });
 
 function App() {
   return (
+    <ThemeProvider theme={THEME}>
     <Layout>
-      <ThemeProvider theme={theme}>
         <Routes>
           <Route index element={<Home />} />
           <Route path="embed" element={<Embed />} >
@@ -108,8 +99,8 @@ function App() {
             </Route>
           </Route>
         </Routes>
-      </ThemeProvider>
     </Layout>
+    </ThemeProvider>
   );
 }
 

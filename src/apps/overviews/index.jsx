@@ -144,11 +144,12 @@ export default function Overviews() {
      * This function is used to update the state of the component "OverviesData"
      * @param {array} data 
      */
-    
+    /*
     const updateOverviesData = (data) => {
         console.log(data)
         setOverviewsData(data)
     }
+    */
 
     /**
      * This function is used to update the state of the component "state"

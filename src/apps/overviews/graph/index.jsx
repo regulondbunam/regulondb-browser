@@ -106,7 +106,7 @@ import { query_GET_OVERVIEW } from '../../../components/webservices/overviews/gq
 import { useQuery } from '@apollo/client';
 import { useParams } from "react-router-dom";
 import Graphic from "./Graphic"
-import PropTypes from 'prop-types'
+//import PropTypes from 'prop-types'
 import Tablita from './Tablita';
 
 /**

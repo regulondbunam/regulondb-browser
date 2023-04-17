@@ -38,7 +38,7 @@ export default function InputSearch({ hint }) {
       <Button
         sx={{ marginLeft: "10px", height: "48px" }}
         onClick={handleSearch}
-        color="secondary"
+        color="error"
         variant="contained"
       >
         Search

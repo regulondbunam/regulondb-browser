@@ -1,5 +1,6 @@
 import { Cover } from './cover';
-import conf from './conf/home.conf.json'
+import { Body } from './body';
+//import conf from './conf/home.conf.json'
 
 
 const Home = () => {
@@ -7,6 +8,8 @@ const Home = () => {
     return (
         <div>
             <Cover />
+            <br />
+            <Body />
         </div>
     );
 }
