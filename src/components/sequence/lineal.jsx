@@ -7,7 +7,7 @@ export default function LinealSequence({
     sequence = "",
     color = false,
     features = [],
-    height
+    height = 30
 }) {
     if(!sequence){return null}
     const formatSequence = new Format(sequence, "")

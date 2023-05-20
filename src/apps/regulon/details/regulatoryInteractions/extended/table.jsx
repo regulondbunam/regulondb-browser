@@ -2,8 +2,8 @@ import React from 'react'
 import { useTable, useBlockLayout } from 'react-table'
 import { FixedSizeList } from 'react-window'
 import { Link } from 'react-router-dom'
-import { LinealSequence } from "../../../../components/sequence";
-import { ParagraphCitations } from "../../../../components/citations/index"
+import { LinealSequence } from "../../../../../components/sequence";
+import { ParagraphCitations } from "../../../../../components/citations/index"
 
 const scrollbarWidth = () => {
     // thanks too https://davidwalsh.name/detect-scrollbar-width
