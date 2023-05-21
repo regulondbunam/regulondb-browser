@@ -66,8 +66,17 @@ function DownloadCVS(preGlobalFilteredRows = [], allColumns) {
     preGlobalFilteredRows.forEach((row) => {
         let cells = []
         try {
-            visualColumns.forEach(col=>{
-                cells.push(row.values[col.id])
+            visualColumns.forEach(col => {
+                const id = col.id
+                let rowValue = ""
+                if (typeof (row.values[id]) === "object" && row.values[id] !== null) {
+                    if (row.values[id].props.value) {
+                        rowValue = row.values[id].props.value
+                    }
+                } else {
+                    rowValue = row.values[id]
+                }
+                cells.push(rowValue)
             })
             fileInfo += cells.join(", ") + "\n"
         } catch (error) {
@@ -75,7 +84,7 @@ function DownloadCVS(preGlobalFilteredRows = [], allColumns) {
             console.error(error);
         }
 
-        
+
 
     })
     const filename = "data.csv"

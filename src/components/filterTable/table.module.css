@@ -1,15 +1,9 @@
 .mainTable {
-    border: 1px solid;
+    width: 100%;
 }
 
-.th {
-    font-size: 14px;
-    text-align: center;
-    background-color: #72a7c7;
-    color: #FFFFFF;
-    font-weight: bold;
-    border-bottom: 1px solid #3d779b;
-    padding: 1px;
+.rowTable{
+    background-color: #FFFFFF;
 }
 
 .thLabel{
@@ -19,7 +13,7 @@
 
 .resizer {
     display: inline-block;
-    background: #3d779b;
+    background: #72a7c7;
     width: 2px;
     height: 100%;
     position: absolute;
@@ -36,8 +30,8 @@
 
 .resizerRight {
     display: inline-block;
-    background: #3d779b;
-    color:#3d779b;
+    background: #72a7c7;
+    color:#72a7c7;
     width: 2px;
     height: 100%;
     touch-action: none;
@@ -47,42 +41,7 @@
     z-index: 0;
 }
 
-.author_row {
-    border-bottom: 2px solid #3d779b;
-}
-
-.bodyTableAuthor {
-    background-color: rgb(255, 243, 218);
-}
-
-.scrollIndicator {
-    position: relative;
-    top: 21px;
-    background-color: rgb(235, 235, 235);
-    border-radius: 50px 50px 50px 50px;
-    width: 10px;
-}
-
-.scrollThumb {
-    position: relative;
-    background-color: #3d779b;
-    border-radius: 50px 50px 50px 50px;
-    width: 10px;
-}
-
-.window_table::-webkit-scrollbar {
-    height: 10px;
-    width: 12px;
-    /* width of the entire scrollbar */
-}
-
-.window_table::-webkit-scrollbar-track {
-    background-color: rgb(235, 235, 235);
-    border-radius: 50px 50px 50px 50px;
-    /* color of the tracking area */
-}
-
-.window_table::-webkit-scrollbar-thumb {
-    background-color: #3d779b;
-    border-radius: 50px 50px 50px 50px;
+.bodyTable {
+    background-color: #f4f5f5;;
+    overflow-x: hidden !important;
 }

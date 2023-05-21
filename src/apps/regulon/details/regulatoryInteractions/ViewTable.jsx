@@ -14,7 +14,7 @@ const COLUMNS = [
         Header: 'Type',
         accessor: '_type',
         filter: "fuzzyText",
-        width: 100
+        width: 115
     },
     {
         Header: 'Genes',
@@ -59,7 +59,8 @@ const COLUMNS = [
     {
         Header: 'Sequence',
         accessor: '_sequence',
-        filter: "fuzzyText"
+        filter: "fuzzyText",
+        width: 323
     },
     {
         Header: 'Citations',
@@ -79,13 +80,13 @@ function formatData(regulatoryInteractions = [], allCitations) {
         }
         let genes = ""
         if (isValidArray(ri?.regulatedGenes)) {
-            genes = <>
+            genes = <div style={{overflow: "auto"}} value={ri?.regulatedGenes.map(gene=>(gene.name)).join(" ")} >
                 {
                     ri?.regulatedGenes.map((gene) => {
-                        return <a href={"/gene/"+gene._id} value={gene.name} >{gene.name}</a>
+                        return <a href={"/gene/"+gene._id} style={{marginRight: "3px"}} value={gene.name} >{gene.name}</a>
                     })
                 }
-            </>
+            </div>
 
         }
         let RIfunction = validString(ri.function)
@@ -99,6 +100,14 @@ function formatData(regulatoryInteractions = [], allCitations) {
             rightPosition = ri.regulatoryBindingSites.rightEndPosition
             sequence = <LinealSequence value={validString(ri?.regulatoryBindingSites.sequence)} id={"sequence_bs_"+ri?.regulatoryBindingSites._id} sequence={validString(ri?.regulatoryBindingSites.sequence)} color />
         }
+        /*
+        function to set row sizes 
+        const rowHeights = new Array(1000)
+        .fill(true)
+        .map(() => 25 + Math.round(Math.random() * 50));
+
+        const getItemSize = index => rowHeights[index]; 
+        */
         data.push({
             _name: name,
             _type: type,
@@ -120,5 +129,6 @@ export function Table({ regulatoryInteractions, allCitations }) {
         return formatData(regulatoryInteractions, allCitations)
     },[regulatoryInteractions,allCitations])
     console.log(regulatoryInteractions);
+    
     return <FilterTable columns={COLUMNS} data={data} />
 }

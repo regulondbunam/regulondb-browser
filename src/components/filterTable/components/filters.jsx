@@ -51,7 +51,7 @@ export function OptionFilter({
     //console.log(FilterState)
     return (
         <div>
-            <Button size="small" variant="contained" sx={{ width: "100%" }} color={FilterState[0].value === "" ? "primary" : "secondary"} onClick={handleOpen}>
+            <Button size="small" variant="contained" sx={{ width: "100%" }} color={FilterState[0].value === "" ? "grey" : "secondary"} onClick={handleOpen}>
                 {FilterState[0].value === ""
                     ? "Set Filter"
                     : "Edit Filter"
@@ -198,7 +198,7 @@ function FilterParameter({ filter, setFilterState, filterState, filterIndex, wor
                         sx={{ width: 200 }}
                         onInputChange={(event, newInputValue) => {
                             updateFilterState(equal, logic, newInputValue, regex)
-                          }}
+                        }}
                         renderInput={(params) => <TextField {...params} variant="standard" label="term" />}
                     />
                 }
@@ -246,11 +246,22 @@ function FilterParameter({ filter, setFilterState, filterState, filterIndex, wor
 
 function wordsListProcess(preFilteredRows = [], id) {
     let options = []
-    preFilteredRows.forEach((row)=>{
-        if (!options.find(value=> value === row.values[id])) {
-            options.push(row.values[id])
+    preFilteredRows.forEach((row) => {
+        let rowValue = ""
+        if (typeof (row.values[id]) === "object" && row.values[id] !== null) {
+            if (row.values[id].props.value) {
+                rowValue = row.values[id].props.value
+            } else {
+                console.error("The react element does not have the prop value to carry the filter.");
+                return;
+            }
+        } else {
+            rowValue = row.values[id]
         }
-        
+        if (!options.find(value => value === rowValue)) {
+            options.push(rowValue)
+        }
+
     })
     //console.log(options);
     return options

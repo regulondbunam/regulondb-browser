@@ -30,6 +30,10 @@ const THEME = createTheme({
       main: '#C98528',
       contrastText: '#ffffff',
     },
+    grey: {
+      main: '#d5d5d7',
+      contrastText: '#000000',
+    },
     error: {
       main: '#C93A1D',
       contrastText: '#ffffff',
