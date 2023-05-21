@@ -8,7 +8,7 @@ const COLUMNS = [
         Header: 'Regulated Entity',
         accessor: '_name',
         filter: "fuzzyText",
-        width: 60
+        width: 115
     },
     {
         Header: 'Type',

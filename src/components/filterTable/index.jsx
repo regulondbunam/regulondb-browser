@@ -1,7 +1,4 @@
 import { useTable, useBlockLayout, useGlobalFilter, useResizeColumns, useSortBy, useFilters } from 'react-table'
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
 import SortByAlphaIcon from '@mui/icons-material/SortByAlpha';
 import SortIcon from '@mui/icons-material/Sort';
 import { FixedSizeList } from 'react-window'
@@ -13,7 +10,6 @@ import filterRows from './components/filterRows';
 import { OptionFilter } from './components/filters';
 
 import scrollbarWidth from './scrollbarWidth'
-import { TableStyles } from "./styledComponents"
 import Style from './table.module.css'
 
 export function validString(value) {
@@ -21,6 +17,10 @@ export function validString(value) {
         return value
     }
     return ""
+}
+
+export function isValidString(value) {
+    return typeof value === 'string' || value instanceof String
 }
 
 export function isValidArray(value = []) {
@@ -96,19 +96,19 @@ export default function FilterTable({ columns, data }) {
             const row = rows[index]
             prepareRow(row)
             return (
-                <div
+                <tr
                     {...row.getRowProps({
                         style,
                     })}
                 >
                     {row.cells.map(cell => {
                         return (
-                            <div {...cell.getCellProps()} className="td">
+                            <td {...cell.getCellProps()}>
                                 {cell.render('Cell')}
-                            </div>
+                            </td>
                         )
                     })}
-                </div>
+                </tr>
             )
         },
         [prepareRow, rows]
@@ -124,16 +124,109 @@ export default function FilterTable({ columns, data }) {
                     allColumns={allColumns}
                 />
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "auto 10px" }} >
-                <TableStyles className={Style.window_table}>
+            <div style={{ display: "grid", gridTemplateColumns: "auto 10px" }}  >
+                <table className={Style.mainTable} >
+                    <thead>
+                        {headerGroups.map(headerGroup => (
+                            <tr {...headerGroup.getHeaderGroupProps()}>
+                                {headerGroup.headers.map((column, index) => (
+                                    <th className={Style.th} key={`table_main_${index}`} {...column.getHeaderProps()} >
+                                        {isValidString(column.render('Header')) && (
+                                            <div>
+                                                <div className={Style.thLabel}  >
+                                                    <div
+                                                        className={Style.resizerRight}
+                                                    />
+                                                    <div {...column.getHeaderProps(column.getSortByToggleProps())} >
+                                                        {column.render('Header')}
+                                                        <span>
+                                                            {column.isSorted
+                                                                ? column.isSortedDesc
+                                                                    ? '(Z-A)'
+                                                                    : '(A-Z)'
+                                                                : ''}
+                                                        </span>
+                                                    </div>
+                                                    <div
+                                                        {...column.getResizerProps()}
+                                                        className={`${Style.resizer} ${column.isResizing ? Style.isResizing : ''}`}
+                                                    />
+                                                </div>
+                                                <div>
+                                                    {column.canFilter ? column.render('Filter') : null}
+                                                </div>
+                                            </div>
+                                        )}
+                                    </th>
+                                ))}
+                            </tr>
+                        ))}
+                    </thead>
+                    <tbody  {...getTableBodyProps()} >
+                            <FixedSizeList
+                                height={heightTable}
+                                itemCount={rows.length}
+                                itemSize={itemSize}
+                                width={totalColumnsWidth + scrollBarSize}
+                                className={Style.bodyTableAuthor}
+                                ref={listRef}
+                                onItemsRendered={({
+                                    visibleStartIndex,
+                                }) => {
+                                    let thumb = document.getElementById("scrollThumb")
+                                    if (thumb) {
+                                        if ((itemScroll * visibleStartIndex) > heightTable) {
+                                            thumb.style.top = `${heightTable}px`
+                                        } else {
+                                            thumb.style.top = `${itemScroll * visibleStartIndex}px`
+                                        }
+
+                                    }
+                                }}
+                            >
+                                {RenderRow}
+                            </FixedSizeList>
+                        </tbody>
+                </table>
+                <div className={Style.scrollIndicator} id="scrollIndicator_author"
+                    style={{ height: `${heightTable}px` }}
+                    onClick={e => {
+                        let ind = e.target
+                        ind = ind.getBoundingClientRect()
+                        let sel = (e.clientY - ind.top) * (rows.length / heightTable)
+                        console.log(sel);
+                        listRef.current.scrollToItem(sel)
+                    }} >
+                    <div className={Style.scrollThumb} id='scrollThumb' style={{ height: `${thumbHeight}px` }} ></div>
+                </div>
+            </div>
+
+        </div>
+
+    )
+}
+
+/*
+            <div className={Style.author_row}  >
+                <ColumnSelector columnsInfo={metadata.columns} getToggleHideAllColumnsProps={getToggleHideAllColumnsProps} allColumns={allColumns} />
+            </div>
+
+            <TableStyles className={Style.window_table}>
                     <div {...getTableProps()} className="table">
                         <div >
                             {headerGroups.map(headerGroup => (
                                 <div {...headerGroup.getHeaderGroupProps()} className="tr">
                                     {headerGroup.headers.map((column, index) => (
                                         <div key={`table_main_${index}`} >
-                                            <div {...column.getHeaderProps()} className="th" >
+                                            <div {...column.getHeaderProps(column.getSortByToggleProps())} className="th" >
                                                 {column.render('Header')}
+                                                <span>
+                                                    {column.isSorted
+                                                        ? column.isSortedDesc
+                                                            ? '(Z-A)'
+                                                            : '(A-Z)'
+                                                        : ''}
+                                                </span>
                                                 <div
                                                     {...column.getResizerProps()}
                                                     className={`resizer ${column.isResizing ? 'isResizing' : ''
@@ -141,13 +234,6 @@ export default function FilterTable({ columns, data }) {
                                                 />
                                             </div>
                                             <div style={{ display: "flex" }} >
-                                                <div style={{ width: "50px" }} className="th"  >
-                                                    <div{...column.getSortByToggleProps()} >
-                                                        {column.isSorted
-                                                            ? <SortByAlphaIcon fontSize="small" />
-                                                            : <SortIcon fontSize="small" />}
-                                                    </div>
-                                                </div>
                                                 <div>{column.canFilter ? column.render('Filter') : null}</div>
                                             </div>
 
@@ -196,15 +282,4 @@ export default function FilterTable({ columns, data }) {
                     }} >
                     <div className={Style.scrollThumb} id='scrollThumb' style={{ height: `${thumbHeight}px` }} ></div>
                 </div>
-            </div>
-
-        </div>
-
-    )
-}
-
-/*
-            <div className={Style.author_row}  >
-                <ColumnSelector columnsInfo={metadata.columns} getToggleHideAllColumnsProps={getToggleHideAllColumnsProps} allColumns={allColumns} />
-            </div>
 */

@@ -1,17 +1,69 @@
-.author_row{
+.mainTable {
+    border: 1px solid;
+}
+
+.th {
+    font-size: 14px;
+    text-align: center;
+    background-color: #72a7c7;
+    color: #FFFFFF;
+    font-weight: bold;
+    border-bottom: 1px solid #3d779b;
+    padding: 1px;
+}
+
+.thLabel{
+    display: flex;
+    justify-content: center;
+}
+
+.resizer {
+    display: inline-block;
+    background: #3d779b;
+    width: 2px;
+    height: 100%;
+    position: absolute;
+    right: 0px;
+    top: 0;
+    transform: translateX(50%);
+    touch-action: none;
+    z-index: 1;
+}
+
+.isResizing {
+    background: #c93a1d;
+}
+
+.resizerRight {
+    display: inline-block;
+    background: #3d779b;
+    color:#3d779b;
+    width: 2px;
+    height: 100%;
+    touch-action: none;
+    position: absolute;
+    left: -1px;
+    top: 0px;
+    z-index: 0;
+}
+
+.author_row {
     border-bottom: 2px solid #3d779b;
 }
-.bodyTableAuthor{
+
+.bodyTableAuthor {
     background-color: rgb(255, 243, 218);
 }
-.scrollIndicator{
+
+.scrollIndicator {
     position: relative;
     top: 21px;
     background-color: rgb(235, 235, 235);
     border-radius: 50px 50px 50px 50px;
     width: 10px;
 }
-.scrollThumb{
+
+.scrollThumb {
     position: relative;
     background-color: #3d779b;
     border-radius: 50px 50px 50px 50px;
@@ -20,15 +72,17 @@
 
 .window_table::-webkit-scrollbar {
     height: 10px;
-    width: 12px;               /* width of the entire scrollbar */
-  }
-  
+    width: 12px;
+    /* width of the entire scrollbar */
+}
+
 .window_table::-webkit-scrollbar-track {
     background-color: rgb(235, 235, 235);
-    border-radius: 50px 50px 50px 50px;        /* color of the tracking area */
-  }
-  
+    border-radius: 50px 50px 50px 50px;
+    /* color of the tracking area */
+}
+
 .window_table::-webkit-scrollbar-thumb {
     background-color: #3d779b;
     border-radius: 50px 50px 50px 50px;
-  }
+}
