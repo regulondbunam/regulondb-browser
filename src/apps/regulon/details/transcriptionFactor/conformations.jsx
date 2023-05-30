@@ -1,5 +1,6 @@
 import React from 'react';
 import { ParagraphCitations } from '../../../../components/citations';
+//import { GetOf } from '../../../../components/phrases';
 
 export default function Conformations({ conformations, allCitations }) {
     //console.log(tf?.conformations)
@@ -17,8 +18,11 @@ export default function Conformations({ conformations, allCitations }) {
                 marginLeft: "5%"
             }}>
                 {conformations.map((conformation) => {
+                    //console.log(conformation._id);
+                    //let phrases = GetOf([conformation._id])
+                    //console.log(conformation);
                     return (
-                        <div  key={"tf_conformation_"+conformation.id} 
+                        <div  key={"tf_conformation_"+conformation._id} 
                         style={{
                             marginBottom: "10px"
                         }} >
