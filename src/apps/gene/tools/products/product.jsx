@@ -1,6 +1,6 @@
 import React from "react";
 //import { ParagraphCitations } from "../../../../components/citations";
-import { ParagraphCitations } from "../../../../components/datamartSchema/citations";
+import { ParagraphCitations, ExternalCrossReferences } from "../../../../components/datamartSchema";
 import GeneOntologyTerms from "./geneOntologyTerms";
 import Motifs from "./motif";
 import ViewSequence from "./viewSequence";
@@ -101,28 +101,7 @@ export default function Product({ product, allCitations }) {
                         overflow: "auto",
                       }}
                     >
-                      {product.externalCrossReferences.map(
-                        (externalCrossReference, index) => {
-                          return (
-                            <div
-                              key={`${externalCrossReference.externalCrossReferenceId}_${index}`}
-                              style={{ float: "left", marginRight: "5px" }}
-                            >
-                              <a
-                                href={`${externalCrossReference.url}`}
-                                className="p_accent"
-                                target="_blank"
-                                rel="noreferrer"
-                                style={{ fontSize: "12px" }}
-                              >
-                                {
-                                  externalCrossReference.externalCrossReferenceName
-                                }
-                              </a>
-                            </div>
-                          );
-                        }
-                      )}
+                      <ExternalCrossReferences externalCrossReferences={product.externalCrossReferences} />
                     </div>
                   </td>
                 </tr>

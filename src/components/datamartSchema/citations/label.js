@@ -11,7 +11,7 @@
  * @returns {String}
  */
 export function labelCitation({publication = {}, evidence = {}, small = true, index}) {
-    console.log(publication, evidence);
+    //console.log(publication, evidence);
     const {
         authors,
         citation,

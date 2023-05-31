@@ -11,7 +11,7 @@ export const DEFAULT_ParagraphCitations_PROPS = {
     list: false,
 }
 
-export function ParagraphCitations({
+function ParagraphCitations({
     allCitations,
     citations,
     list = false,
@@ -22,7 +22,7 @@ export function ParagraphCitations({
                 citations.map((cit, indx) => {
                     try {
                         //console.log(cit);
-                        let index = allCitations.findIndex((citation) => citation?.publication?._id === cit?.publication?._id && citation?.evidence?._id === cit?.evidence?._id)
+                        let index = allCitations.findIndex((citation) => citation?.publication?._id === cit?.publication?._id && citation?.evidence?._id === cit?.evidence?._id)+1
                         let evidence = cit?.evidence ? cit.evidence : undefined
                         let publication = cit?.publication ? cit.publication : undefined
                         return (
@@ -45,3 +45,5 @@ export function ParagraphCitations({
 ParagraphCitations.defaultProps = DEFAULT_ParagraphCitations_PROPS
 
 ParagraphCitations.propTypes = PROP_TYPES
+
+export { ParagraphCitations }
