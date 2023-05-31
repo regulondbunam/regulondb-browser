@@ -8,19 +8,12 @@ const PROP_TYPES = {
     type: PropTypes.string,
 };
 
-export const DEFAULT_EVIDENCE_PROPS = {
-    additiveEvidenceCodeRule: 0,
-    code: "",
-    name: "",
-    type: "",
-}
-
 export function EvidenceTitle({
     _id,
-    additiveEvidenceCodeRule,
-    code,
-    name,
-    type,
+    additiveEvidenceCodeRule = 0,
+    code = "",
+    name = "",
+    type = "",
 }) {
     let styleStrong = {};
     if (type === "Strong") {
@@ -39,7 +32,5 @@ export function EvidenceTitle({
         </div>
     );
 }
-
-EvidenceTitle.defaultProps = DEFAULT_EVIDENCE_PROPS
 
 EvidenceTitle.propTypes = PROP_TYPES

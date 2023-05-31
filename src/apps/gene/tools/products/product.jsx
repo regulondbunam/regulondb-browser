@@ -1,5 +1,6 @@
 import React from "react";
-import { ParagraphCitations } from "../../../../components/citations";
+//import { ParagraphCitations } from "../../../../components/citations";
+import { ParagraphCitations } from "../../../../components/datamartSchema/citations";
 import GeneOntologyTerms from "./geneOntologyTerms";
 import Motifs from "./motif";
 import ViewSequence from "./viewSequence";

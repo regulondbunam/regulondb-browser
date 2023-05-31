@@ -10,23 +10,14 @@ const PROP_TYPES = {
     year: PropTypes.number,
 };
 
-export const DEFAULT_PUBLICATION_PROPS = {
-    authors: "",
-    citation: "",
-    pmid: "",
-    title: "",
-    url: "",
-    year: 0,
-}
-
 export function Publication({
     _id,
-    authors,
-    citation,
-    pmid,
-    title,
-    url,
-    year,
+    authors = [],
+    citation = "",
+    pmid = "",
+    title = "",
+    url = "",
+    year = 0,
 }) {
     return (
         <div>
@@ -37,7 +28,5 @@ export function Publication({
         </div>
     );
 }
-
-Publication.defaultProps = DEFAULT_PUBLICATION_PROPS
 
 Publication.propTypes = PROP_TYPES

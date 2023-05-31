@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { Publication, DEFAULT_PUBLICATION_PROPS } from './publication';
-import { EvidenceTitle, DEFAULT_EVIDENCE_PROPS } from './evidence';
+import { Publication } from './publication';
+import { EvidenceTitle } from './evidence';
 import { labelCitation } from './label';
 
 const style = {
@@ -23,18 +23,13 @@ const PROP_TYPES = {
     publication: PropTypes.object,
 };
 
-export const DEFAULT_MODAL_CITATION_PROPS = {
-    evidence: DEFAULT_EVIDENCE_PROPS,
-    publication: DEFAULT_PUBLICATION_PROPS,
-}
-
-export function ModalCitation({evidence, publication}) {
+export function ModalCitation({evidence = {}, publication = {}, index}) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     return (
         <>
-            <p style={{whiteSpace: "nowrap", float: "left"}} className="aBase citation" onClick={handleOpen} dangerouslySetInnerHTML={{__html: labelCitation(publication,evidence)}} />
+            <p style={{whiteSpace: "nowrap", float: "left"}} className="aBase citation" onClick={handleOpen} dangerouslySetInnerHTML={{__html: labelCitation({publication: publication,evidence: evidence, index: index})}} />
             <Modal
               open={open}
               onClose={handleClose}
@@ -49,7 +44,5 @@ export function ModalCitation({evidence, publication}) {
         </>
         )
 }
-
-ModalCitation.defaultProps = DEFAULT_MODAL_CITATION_PROPS
 
 ModalCitation.propTypes = PROP_TYPES
