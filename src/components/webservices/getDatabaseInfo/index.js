@@ -3,6 +3,6 @@ import { query_GetReleasesVersions } from "./queries";
 
 export function useGetReleasesVersions() {
     let {data, error, loading} = useQuery(query_GetReleasesVersions) 
-    let releasesVersion = data.getDatabaseInfo
+    let releasesVersion = data?.getDatabaseInfo
     return {data, releasesVersion, error, loading}
 }
