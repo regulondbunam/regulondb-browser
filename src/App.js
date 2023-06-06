@@ -18,6 +18,7 @@ import SRNA from './apps/srna';
 import { TestComponents } from './apps/testinComponents';
 import DocumentationDatamarts from './apps/docs_dt';
 import Overviews from './apps/overviews'
+import SummaryHistory from './apps/summaryHistory'
 
 const THEME = createTheme({
   palette: {
@@ -64,6 +65,7 @@ function App() {
           </Route>
           <Route path="testComponents" element={<TestComponents />} />
           <Route path="home" element={<Home />} />
+          <Route path="summaryHistory" element={<SummaryHistory />} />
           <Route path="dtt" element={<DrawingTracesInterface />} >
             <Route path=":parameters" />
           </Route>
