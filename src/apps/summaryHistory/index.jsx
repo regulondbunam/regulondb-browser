@@ -14,8 +14,9 @@ export default function SummaryHistory() {
     return (
         <div>
             <>Hola soy Summary</>
-            <graphView/>
+            
             <TableView arraySummary={data.getDatabaseInfo} />
         </div>
     )
 }   
+//<graphView/>
