@@ -5,6 +5,7 @@ import Release from "./release";
 
 function ReleaseNotes() {
     let { releaseInfo } = useParams();
+    // eslint-disable-next-line no-unused-vars
     const { releases, loading, error } = useGetReleasesVersions()
     const query = new URLSearchParams(releaseInfo);
     let version = query.get('version')
