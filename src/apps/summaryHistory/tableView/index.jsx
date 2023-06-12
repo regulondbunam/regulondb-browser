@@ -1,6 +1,16 @@
 import Table from "./Table"
 import { useMemo } from 'react';
 
+//Valida si el objeto entrante tiene un valor valido
+function validObject(obj) {
+    if (!obj) {
+        return false
+    }
+    if (obj === null) {
+        return false
+    }
+    return true
+}
 
 /**
  * Description placeholder
@@ -40,27 +50,32 @@ function formatTable(data = []) {
     //console.log(rows)
 
     let rows = []
+    let genomicObjects = {}
     data.forEach((summary) => {
-        let genomicObjects = {}
-        if (summary?.statistics) {
+
+        //Creacion Filas
+        if (validObject(summary.statistics)) {
             const statistics = summary.statistics
             Object.keys(statistics).map((key) => {
-                return (
-                    (console.log(genomicObjects,[key]))       
-                )
+                const statistic = statistics[key]
+                if(!genomicObjects.hasOwnProperty(key)){
+                    genomicObjects[key] = []
+                }
+                if (validObject(statistic)) {
+                    if (statistic.__typename === "detailedStatistics") {
+                        genomicObjects[key].push(statistic.total)
+                    }
+                    //condicion si typename es dbInfoExternalReferencesType
+                    //condicion si typename es  productsDBInfoType
+                    //condicion si typename es dbInfoRegulons 
+                }
             })
 
-            //iterar statistics que es un object (Object.keys())
-            //dentro de la iteracion
-            //guardar en nombre de la key (objeto genomico) en el objeto genomicObjectos y iniciarlo como arreglo vacio
-
-            // hacer push del total asia el arreglo de la hey
-            //... continuara
 
         }
         //row = {attenuators: [128,3875,192],effectors: [12,123,434,65]}
     })
-    //console.log(colums)
+    console.log(genomicObjects)
 
     tableData.rows.push(rows)
     tableData.colums.push(colums)
@@ -68,3 +83,5 @@ function formatTable(data = []) {
 
     return tableData
 }
+
+
