@@ -67,7 +67,7 @@ function App() {
           <Route path="testComponents" element={<TestComponents />} />
           <Route path="home" element={<Home />} />
           <Route path="releasesNote" element={<ReleaseNotes />} >
-            <Route path=":regulonDBVersion" />
+            <Route path=":releaseInfo" />
           </Route>
           <Route path="dtt" element={<DrawingTracesInterface />} >
             <Route path=":parameters" />

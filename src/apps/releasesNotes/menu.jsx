@@ -1,9 +1,6 @@
 import React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
 import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
-import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
@@ -13,7 +10,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon  from '@mui/material/ListItemIcon';
 import { Link } from 'react-router-dom';
-const drawerWidth = 170;
+const drawerWidth = 190;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -44,8 +41,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export function Menu({children, releasesVersion = [], regulonDBVersion }) {
-  const theme = useTheme();
+export function Menu({children, releases = [], version, date }) {
   const [open, setOpen] = React.useState(true);
   const viewDrawer = () => {
     setOpen(!open);
@@ -73,7 +69,7 @@ export function Menu({children, releasesVersion = [], regulonDBVersion }) {
             </DrawerHeader>
           </div>
           <h1>
-            {`RegulonDB version ${regulonDBVersion} release note`}
+            {`RegulonDB ${version ? "version: "+version : "date: "+date} release note`}
           </h1>
         </Toolbar>
       </div>
@@ -97,7 +93,7 @@ export function Menu({children, releasesVersion = [], regulonDBVersion }) {
         >
           <Divider />
           <List>
-            {releasesVersion.map((release, index) => (<MenuItem key={"releaseItem" + release.releaseDate} regulonDBVersion={regulonDBVersion} release={release} />))}
+            {releases.map((release, index) => (<MenuItem key={"releaseItem" + release.releaseDate} version={version} date={date} release={release} />))}
           </List>
           <Divider />
         </Drawer>
@@ -112,21 +108,30 @@ export function Menu({children, releasesVersion = [], regulonDBVersion }) {
   );
 }
 
-function MenuItem({ release, regulonDBVersion }) {
+function MenuItem({ release, version, date }) {
   let style = { width: drawerWidth, }
-  if (release.regulonDBVersion === regulonDBVersion) {
+  let link = "./"
+  if (release?.releaseDate) {
+    link += "date="+release.releaseDate
+  }  
+  if (release?.regulonDBVersion) {
+    link += "&version="+release.regulonDBVersion
+  }
+  
+  if (release.regulonDBVersion === version) {
     style = {
       backgroundColor: "#72a7c7",
       color: "white",
       width: drawerWidth,
     }
   }
+  
   return (
     <ListItem disablePadding   >
-      <Link to={"./" + release.regulonDBVersion} >
+      <Link to={link} >
         <ListItemButton style={style} >
-          <ListItemText primary={release.regulonDBVersion}
-            secondary={release.releaseDate} />
+          <ListItemText primary={`${release.releaseDate} ${release.regulonDBVersion?"(v."+release.regulonDBVersion+")":""}`}
+             />
         </ListItemButton>
       </Link>
     </ListItem>

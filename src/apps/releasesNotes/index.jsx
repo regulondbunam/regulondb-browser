@@ -1,26 +1,47 @@
 import { useGetReleasesVersions } from "../../components/webservices/getDatabaseInfo";
 import { useParams } from 'react-router-dom';
 import { Menu } from "./menu";
+import Release from "./release";
 
 function ReleaseNotes() {
-    let { regulonDBVersion } = useParams();
-    const { releasesVersion, loading, error } = useGetReleasesVersions()
-    if (!regulonDBVersion) {
-        if(releasesVersion){
-            regulonDBVersion = releasesVersion[0].regulonDBVersion
+    let { releaseInfo } = useParams();
+    const { releases, loading, error } = useGetReleasesVersions()
+    const query = new URLSearchParams(releaseInfo);
+    let version = query.get('version')
+    let date = query.get('date')
+    console.log(version, date);
+    let release;
+    if (!version && date) {
+        release = releases.find(release => release.releaseDate === date)
+        version = undefined
+        date = release.releaseDate
+    } else {
+        if (!version) {
+            if (releases) {
+                version = releases[0].regulonDBVersion
+                date = releases[0].releaseDate
+            }
+        } else {
+            if (version) {
+                release = releases.find(release => release.regulonDBVersion === version)
+                date = release.releaseDate
+            }
         }
     }
+
+    console.log(release);
+
     return (
         <div >
             <div>
-                {releasesVersion && (
-                    <Menu releasesVersion={releasesVersion} regulonDBVersion={regulonDBVersion} >
-                         {regulonDBVersion}
+                {releases && (
+                    <Menu releases={releases} version={version} date={date} >
+                        <Release release={release} />
                     </Menu>
                 )}
             </div>
             <div>
-               
+
             </div>
         </div>
     );
