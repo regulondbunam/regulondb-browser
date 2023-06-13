@@ -1,4 +1,5 @@
 import { Card } from "../../../components/ui-components"
+import Style from "../style.module.css"
 
 function validObject(obj) {
     if (!obj) {
@@ -17,7 +18,7 @@ export function Summary({ statistics }) {
     return (
         <Card id={"ReleaseSummary"} title="Summary"  >
             <div style={{ margin: "2%" }} >
-                <table>
+                <table className={Style.table} >
                     <thead>
                         <tr>
                             <th>Object</th>

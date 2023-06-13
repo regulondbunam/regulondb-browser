@@ -12,32 +12,33 @@ function ReleaseNotes() {
     let date = query.get('date')
     console.log(version, date);
     let release;
-    if (!version && date) {
+    if (!version && date && releases) {
         release = releases.find(release => release.releaseDate === date)
         version = undefined
         date = release.releaseDate
     } else {
-        if (!version) {
-            if (releases) {
-                version = releases[0].regulonDBVersion
-                date = releases[0].releaseDate
-            }
+        if (!releaseInfo && releases) {
+            version = releases[0].regulonDBVersion
+            date = releases[0].releaseDate
+            release = releases[0]
         } else {
-            if (version) {
+            if (version && releases) {
                 release = releases.find(release => release.regulonDBVersion === version)
                 date = release.releaseDate
             }
         }
     }
 
-    console.log(release);
+    //console.log(release);
 
     return (
         <div >
             <div>
                 {releases && (
                     <Menu releases={releases} version={version} date={date} >
-                        <Release release={release} />
+                        {release && (
+                            <Release release={release} />
+                        )}
                     </Menu>
                 )}
             </div>
