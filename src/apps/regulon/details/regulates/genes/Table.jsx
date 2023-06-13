@@ -20,8 +20,8 @@ export function Table({ columns, data }) {
     const scrollBarSize = React.useMemo(() => scrollbarWidth(), [])
     const rowHeight = 80
     let tableHeight = 500
-    if(data.length < 7 ){
-        tableHeight = rowHeight*data.length
+    if (data.length < 7) {
+        tableHeight = rowHeight * data.length
     }
 
     const {
@@ -61,18 +61,21 @@ export function Table({ columns, data }) {
                                 </div>
                                 break;
                             case "multifunction":
-                                component = <div style={{ overflow: "auto", height: 75 }} >
-                                    {cell.value.map((multi) => {
-                                        return <div key={"multi_" + multi._id} ><p>{multi.name}</p></div>
-                                    })}
-                                </div>
+                                if (cell.value) {
+                                    component = <div style={{ overflow: "auto", height: 75 }} >
+                                        {cell.value.map((multi) => {
+                                            return <div key={"multi_" + multi._id} ><p>{multi.name}</p></div>
+                                        })}
+                                    </div>
+                                }
+
                                 break
                             case 'biologicalProcess':
                             case 'cellularComponent':
                             case 'molecularFunction':
                                 component = <div style={{ overflow: "auto", height: 75 }} >
                                     {cell.value.map((mf) => {
-                                        return <div key={"bp_" + mf.term_id} style={{ fontSize: "10px" }} >{mf.name}</div>
+                                        return <div key={"bp_" + mf._id} style={{ fontSize: "10px" }} >{mf.name}</div>
                                     })}
                                 </div>
                                 break

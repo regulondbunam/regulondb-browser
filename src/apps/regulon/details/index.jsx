@@ -39,6 +39,16 @@ function scrollFunction() {
 
 function Details({ regulonData }) {
 
+    const {
+        _id,
+        allCitations,
+        regulates,
+        regulator,
+        regulatoryInteractions,
+        summary,
+        terms,
+    } = regulonData
+
     useEffect(() => {
         window.onscroll = function () {
           scrollFunction();
@@ -47,32 +57,30 @@ function Details({ regulonData }) {
           window.onscroll = function () {};
         };
       }, []);
-    const data = regulonData.data[0]
     //console.log(data);
-
     const tabs = [
         {
-            id: "regulonTab_TF",
-            name: "Transcription Factor",
-            component: <div>
-                <TranscriptionFactor transcriptionFactor={data.transcriptionFactor} allCitations={data.allCitations} />
-            </div>,
+            id: "regulonTab_regulator",
+            name: "Regulator",
+            component: <div id="regulonTab_regulator">
+                Regulator
+            </div>
         },
         {
             id: "regulonTab_RegulatoryNetwork",
             subtitle: "Regulatory",
             name: "Network",
             component: <div id="regulonTab_RegulatoryNetwork">
-                <DiagramRegulatoryNetwork regulonId={data._id} />
+                <DiagramRegulatoryNetwork regulonId={_id} />
             </div>,
         },
         {
             id: "regulonTab_Regulates",
             name: "Regulates",
             component: <div>
-                {data?.regulates && (
+                {regulates && (
                     <div >
-                        <Regulates regulates={data.regulates} allCitations={data.allCitations} />
+                        <Regulates regulates={regulates} allCitations={allCitations} />
                     </div>
                 )}
             </div>,
@@ -82,9 +90,9 @@ function Details({ regulonData }) {
             subtitle: "Regulatory",
             name: "Interactions",
             component: <div>
-                {data.regulatoryInteractions.length > 0 && (
+                {regulatoryInteractions.length > 0 && (
                     <div >
-                        <RegulatoryInteractions regulatoryInteractions={data.regulatoryInteractions} allCitations={data.allCitations} />
+                        <RegulatoryInteractions regulatoryInteractions={regulatoryInteractions} allCitations={allCitations} />
                     </div>
                 )}
             </div>,
@@ -93,8 +101,8 @@ function Details({ regulonData }) {
             id: "regulonTab_Terms",
             name: "Terms",
             component: <div>
-                 {data?.terms && (
-                    <Terms geneOntology={data.terms.geneOntology} multifun={data.terms.multifun} allCitations={data.allCitations} />
+                 {terms && (
+                    <Terms geneOntology={terms.geneOntology} multifun={terms.multifun} allCitations={allCitations} />
                  )}
             </div>,
         },
@@ -102,16 +110,23 @@ function Details({ regulonData }) {
             id: "regulonTab_Citations",
             name: "Citations",
             component: <div>
-                <Citations allCitations={data.allCitations} />
+                <Citations allCitations={allCitations} />
             </div>,
         },
+    ]
+/*
+    const tabs = [
+        
+        
+       
+        
         
     ];
-
+*/
 
     return (
         <div >
-            <NavigationTabs tabs={tabs} tabSelect={"regulonTab_TF"} />
+            <NavigationTabs tabs={tabs} tabSelect={"regulonTab_regulator"} />
         </div>
     );
 }
