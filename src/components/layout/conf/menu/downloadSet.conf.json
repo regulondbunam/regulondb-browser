@@ -5,10 +5,10 @@
     "icon": "inventory",
     "options":[
         {
-            "id": "expDatasets",
-            "title": "Releases and Data Sets",
-            "link": "/experimentaldt",
-            "state": "disabled",
+            "id": "releasesNotes",
+            "title": "Version Notes",
+            "link": "/releasesNote",
+            "state": "enabled",
             "type": "LINK"
         },
         {

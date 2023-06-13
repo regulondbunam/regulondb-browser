@@ -46,9 +46,9 @@ export function ReleaseCard() {
                                         <p>{"Release date: " + dbInfo.releaseDate}</p>
                                         <p>{"Ecocyc version: " + dbInfo.ecocycVersion}</p>
                                         <p>{"LC version: " + dbInfo.lcVersion}</p>
-                                        <Link to={"/"}>
+                                        <Link to={"/releasesNote"}>
                                             <Typography color="secondary">
-                                                Read realease notes
+                                                Read release notes
                                             </Typography>
                                         </Link>
 
