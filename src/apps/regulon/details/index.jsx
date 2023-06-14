@@ -1,6 +1,6 @@
 import NavigationTabs, { idNavTabs } from "./NavigationTabs";
 import Regulates from "./regulates";
-//import TranscriptionFactor from "./transcriptionFactor";
+import Summary from "./summary";
 import DiagramRegulatoryNetwork from "./regulatoryNetwork";
 import RegulatoryInteractions from "./regulatoryInteractions";
 import Regulator from "./regulator";
@@ -58,7 +58,7 @@ function Details({ regulonData }) {
           window.onscroll = function () {};
         };
       }, []);
-    //console.log(data);
+    //console.log(regulonData);
     const tabs = [
         {
             id: "regulonTab_regulator",
@@ -105,6 +105,13 @@ function Details({ regulonData }) {
                  {terms && (
                     <Terms geneOntology={terms.geneOntology} multifun={terms.multifun} allCitations={allCitations} />
                  )}
+            </div>,
+        },
+        {
+            id: "regulonTab_Summary",
+            name: "Summary",
+            component: <div>
+               <Summary summary={summary} />
             </div>,
         },
         {

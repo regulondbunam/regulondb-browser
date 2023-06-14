@@ -6,7 +6,7 @@ import Conformations from "./conformations";
 import EncodedFrom from "./encode";
 import Products from "./products";
 export default function Regulator({ regulator, allCitations }) {
-    console.log(regulator);
+    //console.log(regulator);
     const {
         citations,
         confidenceLevel,
