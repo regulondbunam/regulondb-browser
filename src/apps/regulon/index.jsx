@@ -1,9 +1,6 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Title, { UpdateTitle } from "./Title";
-import Home from "./home";
+import Title from "./Title";
 import Details from "./details";
-import WebServices from "../../components/webservices/WebServices";
 import { useGetRegulonData } from "../../components/webservices";
 
 

@@ -20,7 +20,7 @@ function Regulates({regulates}) {
         transcriptionFactors,
         transcriptionUnits,
     } = regulates
-    console.log(regulates);
+    //console.log(regulates);
     return (
         <Paper>
             <div style={{ display: "flex", alignItems: "center" }}>

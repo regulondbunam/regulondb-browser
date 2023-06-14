@@ -27,6 +27,9 @@ export default function Conformations({ conformations, allCitations }) {
                             marginBottom: "10px"
                         }} >
                             <div>{conformation.type}</div>
+                            <div>{conformation?.confidenceLevel&&(
+                                <p>confidence level: {conformation?.confidenceLevel}</p>
+                            )}</div>
                             <div><p className='p_accent'>{conformation.name}</p></div>
                             {conformation.effectorInteractionType && (
                                 <div>

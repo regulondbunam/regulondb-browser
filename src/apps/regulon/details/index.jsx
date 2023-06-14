@@ -1,8 +1,9 @@
 import NavigationTabs, { idNavTabs } from "./NavigationTabs";
 import Regulates from "./regulates";
-import TranscriptionFactor from "./transcriptionFactor";
+//import TranscriptionFactor from "./transcriptionFactor";
 import DiagramRegulatoryNetwork from "./regulatoryNetwork";
 import RegulatoryInteractions from "./regulatoryInteractions";
+import Regulator from "./regulator";
 import Citations from "./Citations";
 import Terms from "./terms";
 import { IDTitle, /*UpdateTitle*/ } from '../Title';
@@ -63,7 +64,7 @@ function Details({ regulonData }) {
             id: "regulonTab_regulator",
             name: "Regulator",
             component: <div id="regulonTab_regulator">
-                Regulator
+                <Regulator regulator={regulator} allCitations={allCitations} />
             </div>
         },
         {
