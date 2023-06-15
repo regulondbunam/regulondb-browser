@@ -19,6 +19,8 @@ import { TestComponents } from './apps/testinComponents';
 import DocumentationDatamarts from './apps/docs_dt';
 import Overviews from './apps/overviews'
 
+import ReleaseNotes from './apps/releasesNotes';
+
 const THEME = createTheme({
   palette: {
     primary: {
@@ -64,6 +66,9 @@ function App() {
           </Route>
           <Route path="testComponents" element={<TestComponents />} />
           <Route path="home" element={<Home />} />
+          <Route path="releasesNote" element={<ReleaseNotes />} >
+            <Route path=":releaseInfo" />
+          </Route>
           <Route path="dtt" element={<DrawingTracesInterface />} >
             <Route path=":parameters" />
           </Route>

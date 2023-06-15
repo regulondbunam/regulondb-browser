@@ -13,6 +13,13 @@ import SigmaFactor from './sigmaFactor';
 
 function Regulates({regulates}) {
     const [_show, set_show] = React.useState(true);
+    const {
+        genes,
+        operons,
+        sigmaFactors,
+        transcriptionFactors,
+        transcriptionUnits,
+    } = regulates
     //console.log(regulates);
     return (
         <Paper>
@@ -34,11 +41,11 @@ function Regulates({regulates}) {
             </div>
             {_show && (
                 <div style={{ margin: "0 5% 0 5%", padding: "0 0 20px 0" }} >
-                    {regulates.genes.length > 0 && ( <Genes genes={regulates.genes} />)}
-                    {regulates.operons.length > 0 && ( <Operon operons={regulates.operons} /> )}
-                    {regulates.transcriptionUnits.length > 0 && ( <TranscriptionUnit transcriptionUnits={regulates.transcriptionUnits} /> )}
-                    {regulates.transcriptionFactors.length > 0 && ( <TranscriptionFactor transcriptionFactors={regulates.transcriptionFactors} /> )}
-                    {regulates.sigmaFactors.length > 0 && ( <SigmaFactor sigmaFactor={regulates.sigmaFactors} /> )}
+                    {genes.length > 0 && ( <Genes genes={genes} />)}
+                    {operons.length > 0 && ( <Operon operons={operons} /> )}
+                    {sigmaFactors.length > 0 && ( <SigmaFactor sigmaFactor={sigmaFactors} /> )}
+                    {transcriptionFactors.length > 0 && ( <TranscriptionFactor transcriptionFactors={transcriptionFactors} /> )}
+                    {transcriptionUnits.length > 0 && ( <TranscriptionUnit transcriptionUnits={transcriptionUnits} /> )}
                 </div>
             )}
 
@@ -48,3 +55,10 @@ function Regulates({regulates}) {
 }
 
 export default Regulates;
+
+/**
+ *  
+                    
+                   
+                   
+ */
