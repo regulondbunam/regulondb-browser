@@ -4,6 +4,7 @@ version control 0.0.6
 */
 import {Button, IconButton, DropDown, Split} from "./buttons"
 import Card from "./card";
+import Accordion from "./accordion";
 import { Cover } from "./cover/Cover";
 import DataVerifier from "./utils";
 //import { Tabs } from "./web/tab/tabs";
@@ -13,6 +14,7 @@ import DataVerifier from "./utils";
 //import SpinnerCircle from "./web/spinners/circle"
 
 export {
+  Accordion,
   Button, IconButton, DropDown, Split,
   Cover,
   Card,
