@@ -116,7 +116,7 @@ function Row({ row, type }) {
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
-              <AdditionalInfo additionalInfo={row.additionalInfo} id={row.id} />
+             
             </Box>
           </Collapse>
         </TableCell>

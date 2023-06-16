@@ -5,12 +5,12 @@ export default function regulonTableData(data) {
     data.forEach(doc => {
         let synonyms = ""
         try {
-            synonyms = doc.transcriptionFactor.synonyms.map(synonym => synonym).join(', ');
+            synonyms = doc.regulator.synonyms.map(synonym => synonym).join(', ');
         } catch (error) {
-            console.error("No synonyms found for transcriptionFactor: "+doc.transcriptionFactor.name);
+            console.error("No synonyms found for regulator: "+doc.regulator.name);
         }
         rows.push({
-            title: `${doc.transcriptionFactor.name}, ${synonyms}`, 
+            title: `${doc.regulator.name}, ${synonyms}`, 
             id: doc._id,
             additionalInfo: {
                 type: "rn_draw",
