@@ -1,13 +1,8 @@
-import { useEffect } from 'react';
 import ObjectListExplorer  from '../../../components/objectListExplorer';
-import { UpdateTitle } from '../Title';
 
 
 function Home() {
 
-    useEffect(() => {
-        UpdateTitle({ title: "Regulon", geneToken: undefined });
-    })
 
     const attributesEnabled=[
         "_id",

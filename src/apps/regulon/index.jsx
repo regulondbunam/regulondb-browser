@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import Title from "./Title";
 import Details from "./details";
 import { useGetRegulonData } from "../../components/webservices";
-
+import Home from "./home";
 
 function Regulon() {
     
@@ -21,7 +21,8 @@ function Regulon() {
    }else{
     return (
         <>
-        Home
+        <Title title="Regulon" />
+        <Home />
         </>
     )
    }
