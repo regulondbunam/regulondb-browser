@@ -22,19 +22,18 @@ function validObject(obj) {
  */
 export default function TableView({ arraySummary = [] }) {
 
-    /*const tableData = useMemo(() => {
-        
-        return formatTable
-    })*/
+    const tableData = useMemo(() => {
+        return formatTable(arraySummary)
+    })
 
 
-    formatTable(arraySummary)
+    console.log(tableData);
 
 
     return (
         <div>
             <>Hola soy tableView</>
-            <Table />
+            <Table tableData={tableData} />
         </div>
     )
 }
@@ -46,12 +45,13 @@ function formatTable(data = []) {
 
     let colums = data.map((row) => {
         return `${row.regulonDBVersion} ${row.releaseDate}`
+
     })
+    colums.unshift('Object')
     //console.log(rows)
 
     let rows = []
     let genomicObjects = {}
-    let products = {}
     data.forEach((summary) => {
 
         //Creacion Filas
@@ -90,21 +90,16 @@ function formatTable(data = []) {
             })
         }
     })
-    /**
-     *row = [
-        ["attenuators",2,12,4,45,64,3,23,4235,234,243123,14,1243,354 ...],
-        ["effectors",2,12,4,45,64,3,23,4235,234,243123,14,1243,354 ...],
-     ]
-     1 -> Iterar Objeto (Object.keys(genomicObjects))
-        1.2-> dentro de iteracion crear el arreglo [key, ...arrglo] utilizando destructuracion https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
-        1.3 -> condicion si key es product crear el formato para  polipeptides, srna, rnas
-        1.3 -> aniadir al arreglo row con un push()
-     */
-    console.log(genomicObjects)
 
-    tableData.rows.push(rows)
+    Object.keys(genomicObjects).forEach((key) => {
+        if (key !== "__typename") {
+            let { object = key, array = genomicObjects[key] } = genomicObjects[key]
+            rows.push([object, ...array ])
+        }
+    })
+
+    tableData.rows = rows
     tableData.colums.push(colums)
-    console.log(tableData)
 
     return tableData
 }
