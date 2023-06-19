@@ -19,10 +19,7 @@ const searchLinks = [
         label: "Sigmulon",
         link: "/sigmulon"
     },
-    {
-        label: "SRNA",
-        link: "/srna"
-    },
+
 ]
 
 export function Cover(params) {
