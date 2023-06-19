@@ -228,6 +228,38 @@ export const fragment_REGULATOR = gql`fragment REGULATOR on Regulator {
   type
 }`
 
+export const fragment_SUMMARY = gql`fragment SUMOBJ on SummaryObject {
+  activated
+  dual
+  repressed
+  total
+  unknown
+}
+
+fragment SUMMARY on Summary {
+  bindingSites {
+    ...SUMOBJ
+  }
+  genes {
+    ...SUMOBJ
+  }
+  operons {
+    ...SUMOBJ
+  }
+  regulatoryInteractions {
+    ...SUMOBJ
+  }
+  sigmaFactors {
+    ...SUMOBJ
+  }
+  transcriptionFactors {
+    ...SUMOBJ
+  }
+  transcriptionUnits {
+    ...SUMOBJ
+  }
+}`
+
 export const query_GET_REGULON_BY = gql`
 ${fragment_CITATIONS}
 ${fragment_PAGINATION}
@@ -240,6 +272,7 @@ ${fragment_RI}
 ${fragment_TERMS}
 ${fragment_ENCODEFROM}
 ${fragment_REGULATOR}
+${fragment_SUMMARY}
 query GetRegulonInfo($advancedSearch: String, $fullMatchOnly: Boolean = false, $limit: Int = 10, $organismName: String, $page: Int = 0, $search: String) {
   getRegulonBy(
     advancedSearch: $advancedSearch
@@ -271,6 +304,9 @@ query GetRegulonInfo($advancedSearch: String, $fullMatchOnly: Boolean = false, $
       }
       regulator {
         ...REGULATOR
+      }
+      summary{
+        ...SUMMARY
       }
     }
     pagination {

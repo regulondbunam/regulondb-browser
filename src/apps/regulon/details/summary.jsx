@@ -1,7 +1,7 @@
-import {Card} from "../../../components/ui-components"
+import {Card, DataVerifier} from "../../../components/ui-components"
 import Style from "./style.module.css"
 export default function Summary({summary}) {
-    if (!Summary) {
+    if (DataVerifier.isValidObject(Summary)) {
         return null
     }
     return(
@@ -19,6 +19,9 @@ export default function Summary({summary}) {
                     <tbody>
                         {Object.keys(summary).map((key,index)=>{
                             let objects = summary[key]
+                            if(!objects){
+                                return null
+                            }
                             return <tr key={"summaryRow_"+index+"_"+key}>
                                 <td>{key}</td>
                                 {Object.keys(objects).map((obj,idx)=>{
