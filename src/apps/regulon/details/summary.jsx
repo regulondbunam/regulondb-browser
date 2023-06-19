@@ -19,12 +19,15 @@ export default function Summary({summary}) {
                     <tbody>
                         {Object.keys(summary).map((key,index)=>{
                             let objects = summary[key]
-                            if(!objects){
+                            if(!objects || key === "__typename"){
                                 return null
                             }
                             return <tr key={"summaryRow_"+index+"_"+key}>
                                 <td>{key}</td>
                                 {Object.keys(objects).map((obj,idx)=>{
+                                    if(!objects || obj === "__typename"){
+                                        return null
+                                    }
                                     return <td key={"summaryCell_"+idx+"_"+obj+"_row_"+index} >{objects[obj]}</td>
                                 })}
                             </tr>
