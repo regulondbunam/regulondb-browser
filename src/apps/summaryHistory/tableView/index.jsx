@@ -27,9 +27,6 @@ export default function TableView({ arraySummary = [] }) {
     })
 
 
-    console.log(tableData);
-
-
     return (
         <div>
             <>Hola soy tableView</>
@@ -44,16 +41,19 @@ function formatTable(data = []) {
     let tableData = { rows: [], colums: [] }
 
     let colums = data.map((row) => {
-        return `${row.regulonDBVersion} ${row.releaseDate}`
-
+        if(validObject(row.statistics)){
+            return `${row.regulonDBVersion} ${row.releaseDate}`
+        }
+       
     })
+    colums = colums.filter(row=>row !== undefined)
     colums.unshift('Object')
     //console.log(rows)
 
     let rows = []
     let genomicObjects = {}
     data.forEach((summary) => {
-
+        
         //Creacion Filas
         if (validObject(summary.statistics)) {
             const statistics = summary.statistics
@@ -89,8 +89,9 @@ function formatTable(data = []) {
                 }
             })
         }
+        
     })
-
+    
     Object.keys(genomicObjects).forEach((key) => {
         if (key !== "__typename") {
             let { object = key, array = genomicObjects[key] } = genomicObjects[key]

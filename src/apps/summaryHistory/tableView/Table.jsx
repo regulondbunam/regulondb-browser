@@ -1,17 +1,33 @@
 export default function Table({ tableData }) {
-    const {colums, rows} = tableData
+    const { colums, rows } = tableData
+    
     return (
         <table>
             <thead>
-                <tr>
-                    {
-                        //iterar columnas metodo map() 
-                    }
-                </tr>
+                {
+                    colums.map((column,i) => (
+                        <tr key={i}>
+                            {column.map((cell, i) => (
+                                <th  key={i}>
+                                    {cell}
+                                </th>
+                            ))}
+                        </tr>
+                    ))
+                }
+                
             </thead>
             <tbody>
                 {
-                    //iterar rows metodo map
+                    rows.map((row,i) => (
+                        <tr key={i}>
+                            {row.map((cell, i) => (
+                                <td key={i}>
+                                    {cell}
+                                </td>
+                            ))}
+                        </tr>
+                    ))
                 }
             </tbody>
         </table>
