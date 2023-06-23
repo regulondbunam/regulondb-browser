@@ -45,12 +45,6 @@
           "title": "Sigmulon",
           "link" : "/sigmulon",
           "state": "enabled"
-        },
-        {
-          "id": "srna-search",
-          "title": "sRNA",
-          "link" : "/srna",
-          "state": "enabled"
         }
       ]
     },

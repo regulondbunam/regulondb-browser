@@ -128,7 +128,7 @@ export function Table({ regulatoryInteractions, allCitations }) {
     const data = useMemo(()=>{
         return formatData(regulatoryInteractions, allCitations)
     },[regulatoryInteractions,allCitations])
-    console.log(regulatoryInteractions);
+    //console.log(regulatoryInteractions);
     
     return <FilterTable columns={COLUMNS} data={data} />
 }

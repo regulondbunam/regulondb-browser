@@ -31,7 +31,7 @@ export function UpdateTitle({ state, title, message, /*regulonToken*/ }) {
   }
 }
 
-export const Title = ({ title = "" }) => {
+export function Title({ title = "" }){
   const [_state, set_state] = useState();
   //const [regulonToken, set_regulonToken] = useState();
   const [_title, set_title] = useState(title);

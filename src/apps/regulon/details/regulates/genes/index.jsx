@@ -11,8 +11,18 @@ const GENE_COLUMNS = [
         Header: 'Gene',
         columns: [
             {
-                Header: ' . ',
+                Header: '  ',
                 accessor: 'gene',
+                width: 100,
+            },
+        ],
+    },
+    {
+        Header: 'Function',
+        columns: [
+            {
+                Header: '  ',
+                accessor: 'function',
                 width: 100,
             },
         ],
@@ -51,7 +61,7 @@ const GENE_COLUMNS = [
 
 function formatTable(genes = []) {
     let data = []
-
+   // console.log(genes[0]);
     genes.forEach((gene) => {
         const terms = gene.terms
         const strMultifunction = terms?.multifun ? terms.multifun.map((multi) => { return multi.name }).join(", ") : ""

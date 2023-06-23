@@ -86,7 +86,7 @@ export default function Information({ gene, allCitations }) {
                   </tr>
                 )}
                 {gene?.synonyms && (
-                  <tr>
+                  <tr> 
                     <td style={{ fontWeight: "bold" }}>Synonyms: </td>
                     <td>{gene?.synonyms.join(", ")}</td>
                   </tr>

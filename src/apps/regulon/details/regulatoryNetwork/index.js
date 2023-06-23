@@ -23,7 +23,7 @@ function DiagramRegulatoryNetwork({regulonId}) {
                     </IconButton>
                 </div>
                 <div>
-                    <h2>Regulates</h2>
+                    <h2>Regulatory Network</h2>
                 </div>
             </div>
             {_show && (

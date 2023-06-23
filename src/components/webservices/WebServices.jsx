@@ -3,7 +3,6 @@ import { useLazyQuery, useQuery } from "@apollo/client";
 import { OperonIds } from "./operon/related_Ids";
 import { query_GET_GENE_BY } from "./gene/gql";
 import { query_GET_OPERON_BY } from "./operon/gql";
-import { query_GET_REGULON_BY, query_GET_ALL_REGULON } from "./regulon/gql";
 import { query_GET_PHRASE_OF } from "./phrases/gql";
 import { query_getAllSigmulon, query_getSigmulonBy } from "./sigmulon/gql";
 import { query_GET_GE_Interval } from "./GeneticElementsFromInterval/gql";
@@ -11,6 +10,7 @@ import { QUERY_GetObjectList } from "./objectList/gql";
 import { PhraseUtil } from "./phrases/util";
 import { query_GET_ALL_OVERVIEWS } from "./overviews/gql"
 import { query_getSrnaBy } from "./srna/gql";
+import { query_GET_REGULON_BY, query_GET_ALL_REGULON } from "./regulon/query";
 
 export default function WebServices({
   datamart_name,
@@ -23,6 +23,12 @@ export default function WebServices({
   let query = ""
   let relatedIds
   switch (datamart_name) {
+    case "getRegulonBy":
+      query = query_GET_REGULON_BY;
+      break;
+    case "getAllRegulon":
+      query = query_GET_ALL_REGULON;
+      break;
     case "getSrnaBy":
       query = query_getSrnaBy;
       break;
@@ -37,12 +43,6 @@ export default function WebServices({
       break;
     case "getAllSigmulon":
       query = query_getAllSigmulon;
-      break;
-    case "getRegulonBy":
-      query = query_GET_REGULON_BY;
-      break;
-    case "getAllRegulon":
-      query = query_GET_ALL_REGULON;
       break;
     case "getOperonBy":
       query = query_GET_OPERON_BY;

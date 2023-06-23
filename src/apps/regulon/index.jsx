@@ -1,60 +1,45 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Title, { UpdateTitle } from "./Title";
-import Home from "./home";
+import Title from "./Title";
 import Details from "./details";
-import WebServices from "../../components/webservices/WebServices";
+import { useGetRegulonData } from "../../components/webservices";
+import Home from "./home";
+import { Cover } from "../../components/ui-components";
+
 
 function Regulon() {
-    const [_regulonData, set_regulonData] = useState();
+    
     let { regulonId } = useParams();
+    const { regulonData: regulons, loading } = useGetRegulonData(regulonId)
+    
+   if(regulonId){
+    
+    const regulonData = regulons
 
-    useEffect(()=>{
-        if(!regulonId && _regulonData){
-            set_regulonData(undefined)
-        }
-    },[_regulonData, set_regulonData,regulonId])
-    //console.log(regulonId);
-    let Body = <div></div>
-    if (regulonId && !_regulonData) {
-        Body = <WebServices datamart_name={"getRegulonBy"}
-            variables={{
-                advancedSearch: `${regulonId}[_id]`,
-                limit: 1
-            }}
-            getData={(data) => { set_regulonData(data) }}
-            getState={(state) => {
-                const titleState = {
-                    loading: `Searching regulons ID ${regulonId}... wait a moment`,
-                    done: "Regulon",
-                    error: "sorry we have a problem ... try again later"
-                }
-                UpdateTitle({ state: state, title: titleState[state] })
-            }}
-        />
+    if (loading) {
+        return "loading"
     }
-    if (!regulonId) {
-        Body = <Home />
-    }else{
-        if (_regulonData) {
-            //console.log(_regulonData);
-            if (_regulonData.data.length > 0) {
-                UpdateTitle({ title: `Regulon ${_regulonData.data[0].transcriptionFactor.name}` })
-                Body = <Details regulonData={_regulonData} />
-            } else {
-                UpdateTitle({ title: `Regulon error ` })
-                Body = <div></div>
-            }
-        }
+
+    if(regulonData){
+        //console.log(regulonData);
+        return (
+            <>
+              <Title title={"Regulon "+regulonData.regulator.name} />
+              <Details regulonData={regulonData} />
+            </>
+        )
     }
-    
-    
+   }else{
     return (
-        <div>
-            <Title title="Regulon" />
-            {Body}
-        </div>
-    );
+        <>
+        <Cover >
+            <h1>Regulons</h1>
+        </Cover>
+        <Home />
+        </>
+    )
+   }
+
+   return null
 }
 
 export default Regulon;
