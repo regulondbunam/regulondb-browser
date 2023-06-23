@@ -29,7 +29,6 @@ export default function TableView({ arraySummary = [] }) {
 
     return (
         <div>
-            <>Hola soy tableView</>
             <Table tableData={tableData} />
         </div>
     )
@@ -40,6 +39,7 @@ function formatTable(data = []) {
 
     let tableData = { rows: [], colums: [] }
 
+    console.log(tableData)
     let colums = data.map((row) => {
         if(validObject(row.statistics)){
             return `${row.regulonDBVersion} ${row.releaseDate}`
@@ -58,11 +58,12 @@ function formatTable(data = []) {
         if (validObject(summary.statistics)) {
             const statistics = summary.statistics
             Object.keys(statistics).map((key) => {
+                console.log(statistics[key])
                 const statistic = statistics[key]
                 if (!genomicObjects.hasOwnProperty(key)) {
                     genomicObjects[key] = []
                 }
-                if (validObject(statistic)) {
+                if (validObject(statistic)) {                            
                     if (statistic.__typename === "detailedStatistics") {
                         genomicObjects[key].push(statistic.total)
                     }
@@ -85,13 +86,13 @@ function formatTable(data = []) {
                     }
                     if (statistic.__typename === "dbInfoExternalReferencesType") {
                         genomicObjects[key].push(statistic.total)
-                    }
-                }
+                    } 
+             }
             })
         }
         
     })
-    
+
     Object.keys(genomicObjects).forEach((key) => {
         if (key !== "__typename") {
             let { object = key, array = genomicObjects[key] } = genomicObjects[key]

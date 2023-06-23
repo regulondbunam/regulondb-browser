@@ -10,7 +10,7 @@ export default function SummaryHistory() {
       if (loading) return  "loading"
       if (error) return `Error! ${error.message}`   
 
-   //   if ( data ) console.log(data);
+      if ( data ) console.log(data);
     return (
         <div>
             <>Hola soy Summary</>

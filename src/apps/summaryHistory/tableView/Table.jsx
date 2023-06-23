@@ -1,14 +1,16 @@
+import Style from "./table.module.css";
+
 export default function Table({ tableData }) {
     const { colums, rows } = tableData
     
     return (
-        <table>
-            <thead>
+        <table className={Style.shTable}>
+            <thead className={Style.thead}>
                 {
                     colums.map((column,i) => (
                         <tr key={i}>
                             {column.map((cell, i) => (
-                                <th  key={i}>
+                                <th  key={i} className={Style.th}>
                                     {cell}
                                 </th>
                             ))}
@@ -17,12 +19,12 @@ export default function Table({ tableData }) {
                 }
                 
             </thead>
-            <tbody>
+            <tbody className={Style.body}>
                 {
                     rows.map((row,i) => (
                         <tr key={i}>
                             {row.map((cell, i) => (
-                                <td key={i}>
+                                <td key={i} className={Style.td} >
                                     {cell}
                                 </td>
                             ))}
