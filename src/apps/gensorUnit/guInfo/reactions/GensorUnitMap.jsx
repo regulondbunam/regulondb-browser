@@ -12,6 +12,8 @@ import { IconButton } from "@mui/material";
 import NavigationMenu from "./NavigationMenu";
 import Box from "@mui/material/Box";
 import BuildMap from "./buildGUMap/index";
+import Windows from "./windows";
+
 import ComboBox from "./comboBox";
 
 cytoscape.use(fcose);
@@ -290,13 +292,15 @@ const generateElements = (responseData) => {
   return elements;
 };
 export default function GensorUnitMap({ data }) {
-  const components = data["getGUsBy"]["data"][0]["gensorUnit"]["components"];
+  //const components = data["getGUsBy"]["data"][0]["gensorUnit"]["components"];
   const reactions = data["getGUsBy"]["data"][0]["reactions"];
   const cyStylesheet = sbgnStylesheet(cytoscape);
   //estado para abrir o cerrar el Drawer o barra lateral
   const [isDrawOpen, setIsDrawOpen] = useState(false);
   //estado que tine el nucleo del mapa de cytoscape
   const [_cy, select_cy] = useState();
+  const [selectedNode, setSelectedNode] = useState(null);
+
   //esta funcion asigna los estilos a cada uno de los nodos utilizando el selector
   const cyEffects = (cy) => {
     select_cy(cy);
@@ -337,7 +341,23 @@ export default function GensorUnitMap({ data }) {
       "shape-polygon-points": "-0.7, -0.6,   1, -0.6,   0.7, 0.5,   -1, 0.5",
       width: "160px",
     });
+
+    cy.on("click", "node", function (event) {
+      var node = event.target;
+      if (node.data().class === "process") {
+        let componentes = cy.nodes().filter(function (ele) {
+          return ele.data("associatedReaction").includes(node.id());
+        });
+
+        let nodeSelected = reactions.filter(
+          (reaction) => "R" + reaction.number === node.id()
+        );
+        const position = node.renderedPosition();
+        setSelectedNode({ ...nodeSelected[0], ...position });
+      }
+    });
   };
+
   const filterInfoList = (data) => {
     let nameReactions = [];
     let reactions = data["getGUsBy"]["data"][0]["reactions"];
@@ -370,10 +390,15 @@ export default function GensorUnitMap({ data }) {
   //const elements = BuildMap(components, reactions);
   //console.log(BuildMap(components, reactions));
   //console.log(elements);
-
   return (
     <div>
       <div>
+        {selectedNode && (
+          <Windows
+            infoNode={{ selectedNode }}
+            setSelectedNode={() => setSelectedNode(false)}
+          />
+        )}
         <div className={styles.toolBar}>
           <IconButton
             sx={{
@@ -450,6 +475,7 @@ export default function GensorUnitMap({ data }) {
         minZoom={0.1}
         autounselectify={false}
         boxSelectionEnabled={true}
+        stylesheet={styles}
         cy={cyEffects}
         layout={layout}
       />
