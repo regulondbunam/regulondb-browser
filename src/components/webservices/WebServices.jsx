@@ -10,6 +10,7 @@ import { QUERY_GetObjectList } from "./objectList/gql";
 import { PhraseUtil } from "./phrases/util";
 import { query_GET_ALL_OVERVIEWS } from "./overviews/gql"
 import { query_getSrnaBy } from "./srna/gql";
+import { query_mainView } from "./gensorUnit/gql";
 import { query_GET_REGULON_BY, query_GET_ALL_REGULON } from "./regulon/query";
 
 export default function WebServices({
@@ -28,6 +29,9 @@ export default function WebServices({
       break;
     case "getAllRegulon":
       query = query_GET_ALL_REGULON;
+      break;
+    case "getAllGUs":
+      query = query_mainView;
       break;
     case "getSrnaBy":
       query = query_getSrnaBy;

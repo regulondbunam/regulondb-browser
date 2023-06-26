@@ -133,7 +133,7 @@ export default function TableGu ({table,guDataFiltered}){
     /*la idea es generar un funcion que cree un arreglo con los rangos
     para colocarlos en el TablePagination
     [1, 2,{ label: 'All', value: guDataFiltered.length }]*/
-    if(guDataFiltered.length==1){
+    if(guDataFiltered.length===1){
         return [];
     }else{
         return [1,2];
@@ -175,7 +175,7 @@ export default function TableGu ({table,guDataFiltered}){
                 </TableBody>
                 <TableFooter>
                 <TablePagination
-                    rowsPerPageOptions={[1, 2,{ label: 'All', value: guDataFiltered.length }]}
+                    rowsPerPageOptions={[1, { label: 'All', value: guDataFiltered.length }]}
                     count={guDataFiltered.length}
                     rowsPerPage={ROWS_PER_PAGE}
                     page={PAGE}

@@ -81,7 +81,7 @@ export default function GensorUnit() {
    * id of the Gu entered in the URL.
    * @tipo {String}
    */ let { guId } = useParams();
-  const /** Object */ [DATA, SET_DATA] = useState();
+  const /** Object */[DATA, SET_DATA] = useState();
   if (guId) {
     return (
       <GuInfo guInfoDescription={setting.GuInfo_Description} guId={guId} />
@@ -89,11 +89,14 @@ export default function GensorUnit() {
   }
   return (
     <div>
-      <MainQuery
-        getData={(DATA) => {
-          SET_DATA(DATA);
-        }}
-      />
+      {!DATA && (
+        <MainQuery
+          getData={(DATA) => {
+            SET_DATA(DATA);
+          }}
+        />
+      )}
+
       <Cover>
         <h1>GensorUnit</h1>
       </Cover>

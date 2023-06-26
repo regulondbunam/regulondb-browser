@@ -19,7 +19,7 @@
         {
           "id": "gensorUnit-search",
           "title": "Gensor Unit",
-          "state": "disabled",
+          "state": "enabled",
           "link" : "/gu"
         },
         {
@@ -63,7 +63,7 @@
         {
           "id": "coexpression-browsing",
           "title": "Coexpression",
-          "state": "disabled",
+          "state": "enabled",
           "link" : "/coexpression"
         },
         {
