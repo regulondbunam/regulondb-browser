@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from "react-router-dom";
 import { ApolloProvider } from '@apollo/react-hooks';
 import Client from './webServices/apollo_client';
 import "./styleSheet_regulonDB.css"
@@ -10,11 +9,9 @@ import "./styleSheet_regulonDB.css"
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <BrowserRouter>
             <ApolloProvider client={Client}>
                 <App />
             </ApolloProvider>
-        </BrowserRouter>
     </React.StrictMode>
 );
 

@@ -19,7 +19,7 @@
         {
           "id": "gensorUnit-search",
           "title": "Gensor Unit",
-          "state": "disabled",
+          "state": "enabled",
           "link" : "/gu"
         },
         {
@@ -45,12 +45,6 @@
           "title": "Sigmulon",
           "link" : "/sigmulon",
           "state": "enabled"
-        },
-        {
-          "id": "srna-search",
-          "title": "sRNA",
-          "link" : "/srna",
-          "state": "enabled"
         }
       ]
     },
@@ -69,7 +63,7 @@
         {
           "id": "coexpression-browsing",
           "title": "Coexpression",
-          "state": "disabled",
+          "state": "enabled",
           "link" : "/coexpression"
         },
         {

@@ -22,7 +22,6 @@ export const fragment_PAGINATION = gql`fragment PAGINATION on Pagination {
     currentPage
     firstPage
     hasNextPage
-    lastPage
     limit
     totalResults
   }`

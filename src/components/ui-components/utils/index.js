@@ -2,6 +2,19 @@
 
 class DataVerifier {
 
+    static isValidObject(obj = {}){
+        if (!obj) {
+            return false
+        }
+        if (obj === null) {
+            return false
+        }
+        if (Object.keys(obj).length === 0) {
+            return false
+        }
+        return true
+    }
+
     static isValidArray(array) {
         if (!array) {
             return false

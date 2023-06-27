@@ -11,10 +11,13 @@ export function useGetRegulonData(id) {
         }
     })
     let regulonData
-    try {
-        regulonData = data.getRegulonBy.data[0]
-    } catch (error) {
-        console.error("assign regulonData error");
+    if(data){
+        try {
+            //console.log(data);
+            regulonData = data.getRegulonBy.data[0]
+        } catch (error) {
+            console.error("assign regulonData error");
+        }
     }
     if (error) {
         console.error("useQuery query_GET_REGULON_BY Error:",error);

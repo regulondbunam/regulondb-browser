@@ -12,10 +12,10 @@
             "type": "LINK"
         },
         {
-            "id": "cpuPredictions",
-            "title": "Computational Predictions",
-            "link": "/cpupredictions",
-            "state": "disabled",
+            "id": "summaryHistory",
+            "title": "Summary History",
+            "link": "/summaryHistory",
+            "state": "enabled",
             "type": "LINK"
         },
         {
