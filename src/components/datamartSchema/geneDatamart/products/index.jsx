@@ -43,7 +43,7 @@ export function Product({
     type,
     allCitations
 }) {
-    console.log(DataVerifier.isValidArray(motifs));
+    //console.log(DataVerifier.isValidArray(motifs));
     return (
         <div>
             <p style={{ fontSize: "18px" }} ><b>{name}</b></p>

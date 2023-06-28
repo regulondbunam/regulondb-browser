@@ -28,68 +28,70 @@ Ver: 0.0.28
 	--color-accentAA: #c93a1d99;
 	--color-accentB: #cc9900;
 	--color-postit: #fff8a6;
-  }
-  /*font family */
-  :root {
+}
+
+/*font family */
+:root {
 	--fontFamily-principal: Arial, sans-serif;
 	--fontFamily-option: Arial, Helvetica, sans-serif;
 	--fontFamily-simpleText: "Times New Roman", Times, serif;
 	--fontFamily-cita: "Times New Roman", Times;
 	--fontFamily-sequence: "Courier New", Courier, monospace;
-  }
-  
-  /*all site*/
-  * {
+}
+
+/*all site*/
+* {
 	box-sizing: border-box;
-  }
-  
-  body {
+}
+
+body {
 	padding-top: 1%;
 	background-color: var(--color-rest);
 	font-family: var(--fontFamily-principal);
 	font-size: 12px;
 	margin: 0px;
-  }
-  
-  footer {
+}
+
+footer {
 	bottom: 0;
 	width: 100%;
 	height: 40px;
-  }
-  /* Layout Site*/
-  section {
+}
+
+/* Layout Site*/
+section {
 	padding: 0% 0% 0% 0% !important;
-  }
-  
-  article {
+}
+
+article {
 	float: left;
 	padding: 0% 0% 2% 5%;
 	width: 80%;
-  }
-  
-  .articleHome {
+}
+
+.articleHome {
 	padding: 0% 0% 0% 0% !important;
-  }
-  
-  aside {
+}
+
+aside {
 	display: flex;
-    flex-direction: row-reverse;
+	flex-direction: row-reverse;
 	float: left;
 	width: 20%;
-  }
-  
-  /*Titles*/
-  
-  :root {
+}
+
+/*Titles*/
+
+:root {
 	--color-title: var(--color-blue2);
 	--color-subtitle: var(--color-grey2);
 	--font-title: var(--fontFamily-principal);
 	--fontStyle-title: normal;
 	--fontWeight: bold;
 	--lineHeight-title: normal;
-  }
-  
-  h1 {
+}
+
+h1 {
 	margin-bottom: 10px;
 	margin-top: 10px;
 	font-size: 24px;
@@ -99,18 +101,18 @@ Ver: 0.0.28
 	line-height: var(--fontWeight);
 	color: var(--color-title);
 	margin-top: 0;
-  }
-  
-  .h1-cover {
+}
+
+.h1-cover {
 	font-size: 24px;
 	font-family: var(--font-title);
 	font-style: var(--fontStyle-title);
 	font-weight: var(--fontWeight);
 	line-height: var(--fontWeight);
 	color: var(--color-rest);
-  }
-  
-  h2 {
+}
+
+h2 {
 	font-size: 20px;
 	margin-bottom: 10px;
 	margin-top: 10px;
@@ -119,9 +121,9 @@ Ver: 0.0.28
 	font-weight: var(--fontWeight);
 	line-height: var(--fontWeight);
 	color: var(--color-subtitle);
-  }
-  
-  h3 {
+}
+
+h3 {
 	font-size: 18px;
 	margin-bottom: 5px;
 	margin-top: 5px;
@@ -130,9 +132,9 @@ Ver: 0.0.28
 	font-weight: var(--fontWeight);
 	line-height: var(--fontWeight);
 	color: var(--color-subtitle);
-  }
+}
 
-  h4 {
+h4 {
 	font-size: 16px;
 	margin-bottom: 5px;
 	margin-top: 5px;
@@ -141,11 +143,11 @@ Ver: 0.0.28
 	font-weight: var(--fontWeight);
 	line-height: var(--fontWeight);
 	color: var(--color-subtitle);
-  }
-  
-  /* p */
-  
-  p {
+}
+
+/* p */
+
+p {
 	font-family: var(--fontFamily-principal);
 	font-size: 14px;
 	font-style: normal;
@@ -154,9 +156,9 @@ Ver: 0.0.28
 	font-weight: normal;
 	margin: 0;
 	text-align: justify;
-  }
+}
 
-  .p_accent{
+.p_accent {
 	font-family: var(--fontFamily-principal);
 	font-size: 16px;
 	font-style: normal;
@@ -165,23 +167,23 @@ Ver: 0.0.28
 	font-weight: bold;
 	margin: 0;
 	text-align: justify;
-  }
+}
 
-  .p_sequence {
+.p_sequence {
 	font-family: var(--fontFamily-sequence);
 	font-size: 14px;
-  }
-  
-  :root {
+}
+
+:root {
 	--a-fontFamily: var(--fontFamily-principal);
 	--a-fontSize: 14px;
 	--a-fontStyle: normal;
 	--a-fontWeight: normal;
 	--a-line: normal;
 	--a-colorS: var(--color-blue4);
-  }
-  
-  .aBase {
+}
+
+.aBase {
 	padding: 0 10px 0 0;
 	font-family: var(--a-fontFamily);
 	font-style: var(--a-fontStyle);
@@ -192,21 +194,21 @@ Ver: 0.0.28
 	cursor: pointer;
 	background-color: transparent;
 	border: 0px solid #000000;
-  }
+}
 
-  .aBase :hover{
+.aBase :hover {
 	box-shadow: none;
-  }
+}
 
-  .aBase :active{
+.aBase :active {
 	background-color: transparent;
-  }
-  
-  .aAccent {
+}
+
+.aAccent {
 	color: var(--color-accentB) !important;
-  }
-  
-  a {
+}
+
+a {
 	font-family: var(--a-fontFamily);
 	font-size: var(--a-fontSize);
 	font-style: var(--a-fontStyle);
@@ -214,134 +216,149 @@ Ver: 0.0.28
 	line-height: var(--a-line);
 	color: var(--a-colorS);
 	cursor: pointer;
-  }
-  
-  a:link {
-	font-family: var(--fontFamily-principal);
-	color: var(--color-blue4);
-  }
-  
-  a:visited {
-	font-family: var(--fontFamily-principal);
-	color: var(--color-blue4);
-  }
-  
-  /*TABLES*/
+}
 
-  .table_data{
+a:link {
+	font-family: var(--fontFamily-principal);
+	color: var(--color-blue4);
+}
+
+a:visited {
+	font-family: var(--fontFamily-principal);
+	color: var(--color-blue4);
+}
+
+/*TABLES*/
+
+.table_data {
 	background-color: #f4f5f5;
 	width: 900px;
 	text-align: left;
 	border-collapse: collapse;
-  }
-  
-  .table_data thead {
-	  color: white;
-	  background: #cadce7;
-	  border-bottom: 1px solid #72a7c7;
-	}
-  
-	.table_data tbody tr {
-	  border-bottom: 1px solid #72a7c7;
-	}
-  
-  .tableContent-th-title {
+}
+
+.table_data thead {
+	color: white;
+	background: #cadce7;
+	border-bottom: 1px solid #72a7c7;
+}
+
+.table_data tbody tr {
+	border-bottom: 1px solid #72a7c7;
+}
+
+.tableContent-th-title {
 	color: #666666;
 	border-bottom: 1px solid #72a7c7;
 	text-align: inherit;
-  }
-  
-  .tableContent-th-subtitle {
+}
+
+.tableContent-th-subtitle {
 	color: #999999;
 	text-align: inherit;
-  }
-  
-  .tableContent_td_content {
+}
+
+.tableContent_td_content {
 	border-bottom: 1px solid #999999;
 	text-align: inherit;
-  }
+}
 
-  .table_auto{
-	  table-layout: fixed;
-	  width: auto;
-	  display: inline-block;
-  }
-  
-  table {
+.table_auto {
+	table-layout: fixed;
+	width: auto;
+	display: inline-block;
+}
+
+table {
 	width: 100%;
 	font-family: arial, sans-serif;
 	color: rgb(39, 39, 39);
 	border-collapse: collapse;
-  }
+}
 
-  .table_vertical td {
+.tableAccent {
+	table-layout: fixed;
+	width: auto;
+	display: inline-block;
+}
+
+.tableAccent th {
+	background: #cadce7;
+}
+
+.tableAccent tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+.table_vertical td {
 	border-left: 2px solid var(--color-grey2);
 	border-right: 2px solid var(--color-grey2);
 
-  }
-  
-  .table_vertical th {
+}
+
+.table_vertical th {
 	border-left: 2px solid var(--color-blue3);
 	border-right: 2px solid var(--color-blue3);
 
-  }
-  
-  .table_content th {
-	border-bottom: 2px solid var(--color-blue3);
-  }
+}
 
-  td,
-  th {
+.table_content th {
+	border-bottom: 2px solid var(--color-blue3);
+}
+
+td,
+th {
 	font-size: 14px;
 	text-align: left;
 	color: var(--color-grey2);
 	padding: 2px;
-  }
-  
-  td {
+}
+
+td {
 	vertical-align: top;
-  }
-  
-  /*tr:nth-child(even) {
+}
+
+/*tr:nth-child(even) {
 	  background-color: var(--color-grey5);
 	}*/
-  
-  .trClickable:hover {
+
+.trClickable:hover {
 	background-color: var(--color-grey5);
 	cursor: pointer;
-  }
-  /*Body div*/
-  
-  .bodyDiv {
+}
+
+/*Body div*/
+
+.bodyDiv {
 	padding: 3% 10% 5% 10%;
-  }
-  
-  /*Features*/
-  
-  .sequence {
+}
+
+/*Features*/
+
+.sequence {
 	font-family: var(--fontFamily-sequence);
 	font-size: 16px;
-  }
-  
-  .citation {
+}
+
+.citation {
 	font-family: var(--fontFamily-cita);
 	font-size: 12px;
-  }
-  
-  .divA:hover {
+}
+
+.divA:hover {
 	cursor: pointer;
 	-webkit-box-shadow: inset 2px 3px 13px 1px var(--color-blue4);
 	-moz-box-shadow: inset 2px 3px 13px 1px var(--color-blue4);
 	box-shadow: inset 2px 3px 13px 1px var(--color-blue4);
-  }
-  
-  /*
+}
+
+/*
   Input Styles
   */
-  
-  /*Button*/
-  
-  button {
+
+/*Button*/
+
+button {
 	border: 1px solid var(--color-blue2);
 	background-color: var(--color-blue2);
 	color: #ffffff;
@@ -352,92 +369,93 @@ Ver: 0.0.28
 	display: inline-block;
 	cursor: pointer;
 	text-align: center;
-  }
-  
-  button:hover {
+}
+
+button:hover {
 	-webkit-box-shadow: 1px 1px 1px 0 #000000;
 	-moz-box-shadow: 1px 1px 1px 0 #000000;
 	box-shadow: 1px 1px 1px 0 #000000;
-  }
-  
-  button:active {
+}
+
+button:active {
 	background-color: var(--color-blue4);
-  }
-  button:disabled {
+}
+
+button:disabled {
 	-webkit-box-shadow: 1px 1px 10px 0 #000000;
 	-moz-box-shadow: 1px 1px 10px 0 #000000;
 	box-shadow: 1px 1px 0px 0 #000000;
 	border: 0px solid var(--color-blue2);
 	background-color: var(--color-grey4);
 	cursor: not-allowed;
-  }
-  
-  .accent {
+}
+
+.accent {
 	background-color: var(--color-accentA);
-  }
-  
-  .accent:active {
+}
+
+.accent:active {
 	background-color: var(--color-accentAA) !important;
-  }
-  
-  .accent:disabled {
+}
+
+.accent:disabled {
 	-webkit-box-shadow: 1px 1px 10px 0 #000000;
 	-moz-box-shadow: 1px 1px 10px 0 #000000;
 	box-shadow: 1px 1px 0px 0 #000000;
 	border: 0px solid var(--color-blue2);
 	background-color: var(--color-grey4);
 	cursor: not-allowed;
-  }
-  
-  /* DropDown */
-  .dropdown {
+}
+
+/* DropDown */
+.dropdown {
 	position: relative;
 	display: inline-block;
-  }
-  
-  .dropdown-content {
+}
+
+.dropdown-content {
 	display: none;
 	position: absolute;
 	background-color: var(--color-blue5);
 	min-width: 160px;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 	z-index: 1;
-  }
-  
-  .dropdown-content a button {
+}
+
+.dropdown-content a button {
 	color: black;
 	padding: 12px 16px;
 	text-decoration: none;
 	display: block;
-  }
-  
-  .dropdown-content a:hover {
-	background-color: var(--color-rest); 
-  }
+}
 
-  .dropdown-button {
+.dropdown-content a:hover {
+	background-color: var(--color-rest);
+}
+
+.dropdown-button {
 	color: black;
 	background-color: var(--color-blue5);
 	padding: 5px 5px;
 	text-decoration: none;
 	display: block;
 	border: 0px solid var(--color-blue2);
-  }
+}
 
-  .dropdown-button:hover {
-	background-color: var(--color-rest) !important; 
+.dropdown-button:hover {
+	background-color: var(--color-rest) !important;
 	-webkit-box-shadow: 0px 0px 0px 0 #000000 !important;
 	-moz-box-shadow: 0px 0px 0px 0 #000000 !important;
-	box-shadow: 0px 0px 0px 0 #000000 !important; 
-  }
-  
-  .dropdown:hover .dropdown-content {
+	box-shadow: 0px 0px 0px 0 #000000 !important;
+}
+
+.dropdown:hover .dropdown-content {
 	display: block;
-  }
-  
-  /*Icon Button*/
-  
-  .iconButton {
+}
+
+/*Icon Button*/
+
+.iconButton {
 	background-color: #000000;
 	border: none;
 	color: white;
@@ -449,19 +467,20 @@ Ver: 0.0.28
 	margin: 2px;
 	cursor: pointer;
 	border-radius: 50%;
-  }
-  /* tab style */
+}
 
-  .tabs{
+/* tab style */
+
+.tabs {
 	background-color: #CADCE7;
 	padding-left: 10%;
-  	display: flow-root;
+	display: flow-root;
 	width: 100%;
 	padding-right: 1%;
-    box-shadow: inset -1px -10px 0px -6px var(--color-blue1);
-  }
+	box-shadow: inset -1px -10px 0px -6px var(--color-blue1);
+}
 
-  .tabs button {
+.tabs button {
 	background-color: #ffffff;
 	margin-right: 1%;
 	color: #373737;
@@ -469,32 +488,32 @@ Ver: 0.0.28
 	border-right: 1px solid #666666;
 	border-left: 1px solid #666666;
 	border-bottom: 3px solid var(--color-blue1);
-  }
+}
 
-  /* Change background color of buttons on hover */
-  .tabs button:hover {
+/* Change background color of buttons on hover */
+.tabs button:hover {
 	background-color: #ddd;
-  }
-  
-  /* Create an active/current tablink class */
-  .tabs button.active {
+}
+
+/* Create an active/current tablink class */
+.tabs button.active {
 	background-color: #ffffff;
 	color: #3D779B;
 	border-top: 3px solid var(--color-blue1);
 	border-right: 2px solid var(--color-blue1);
 	border-left: 2px solid var(--color-blue1);
 	border-bottom: 3px solid var(--color-rest);
-  }
-  
-  /* div effects */
+}
 
-  div.sticky {
+/* div effects */
+
+div.sticky {
 	position: -webkit-sticky;
 	position: sticky;
 	top: 0;
-  }
-  
-  /*
+}
+
+/*
   history version
   
   v0.0.27
@@ -504,4 +523,3 @@ Ver: 0.0.28
   ++ add table desing 
   
   */
-  

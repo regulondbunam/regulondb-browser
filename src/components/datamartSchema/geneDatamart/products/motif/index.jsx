@@ -46,7 +46,6 @@ export default function Motif({ motifs = [], sequence }) {
   return (
     <div>
       <div>
-        <h4>Motif</h4>
         <Box sx={{ minWidth: "120px" }}>
           <FormControl sx={{ minWidth: "120px" }} size="small">
             <InputLabel id="demo-simple-select-label">
