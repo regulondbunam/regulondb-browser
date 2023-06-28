@@ -2,7 +2,7 @@ import { useMemo } from "react"
 import { NavigationTabs } from "../../components/ui-components"
 import { Card } from "../../components/ui-components"
 import DrawingTracesTool from "../../components/DrawingTracesTool";
-import { Gene, Product, Regulation } from "../../components/datamartSchema"
+import { Gene, Product, Regulation, AllCitations } from "../../components/datamartSchema"
 
 export default function Information({ geneData }) {
 
@@ -67,7 +67,10 @@ export default function Information({ geneData }) {
             tabsInfo.push({
                 id: "GeneTab_Citations",
                 name: "Citations",
-                component: <div id="GeneTab_Citations"></div>,
+                component: <div id="GeneTab_Citations">
+                    <h2>Citations</h2>
+                    <AllCitations allCitations={geneData.allCitations} />
+                </div>,
             })
         }
         return tabsInfo

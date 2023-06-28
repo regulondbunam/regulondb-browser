@@ -23,13 +23,13 @@ const PROP_TYPES = {
     publication: PropTypes.object,
 };
 
-export function ModalCitation({evidence = {}, publication = {}, index}) {
+export function ModalCitation({evidence = {}, publication = {}, index, small= true}) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     return (
         <>
-            <p style={{whiteSpace: "nowrap", float: "left"}} className="aBase citation" onClick={handleOpen} dangerouslySetInnerHTML={{__html: labelCitation({publication: publication,evidence: evidence, index: index})}} />
+            <p style={{whiteSpace: "nowrap", float: "left", fontWeight: open?"bold":"normal"}} className="aBase citation" onClick={handleOpen} dangerouslySetInnerHTML={{__html: labelCitation({small: small, publication: publication,evidence: evidence, index: index})}} />
             <Modal
               open={open}
               onClose={handleClose}

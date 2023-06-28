@@ -25,9 +25,9 @@ export function labelCitation({publication = {}, evidence = {}, small = true, in
     const codeLabel = () => {
         if (code) {
             if (evidence.type === 'S') {
-                return `<b>[${code}]</b>`
+                return `code: <b>[${code}]</b>`
             }
-            return `[${code}]`
+            return `code: [${code}]`
         }
         return ''
     }
