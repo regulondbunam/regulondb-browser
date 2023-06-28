@@ -43,12 +43,15 @@ function Gene({
     sequence = "",
     strand = "",
     synonyms = [],
+    viewTitle = true,
 }) {
     const size = rightEndPosition - leftEndPosition;
 
     return (
         <div>
-            <p style={{ fontSize: "18px" }} ><b>{name} Gene</b></p>
+            {viewTitle &&(
+                <p style={{ fontSize: "18px" }} ><b>{name} Gene</b></p>
+            )}
             <table className="table_auto table_content">
                 <tbody>
                     {DataVerifier.isValidArray(synonyms) && (
@@ -126,9 +129,6 @@ function Gene({
                     />
                 </Accordion>
             )}
-            {DataVerifier.isValidArray(multifunTerms) && (
-                <MultifunTerms multifunTerms={multifunTerms} />
-            )}
             {DataVerifier.isValidArray(fragments) && (
                 <Fragments fragments={fragments} strand={strand} />
             )}
@@ -167,7 +167,7 @@ function ExternalCrossReferences({ references }) {
                                 href={`${reference.url}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                            >{reference.externalCrossReferenceName}</a>
+                            >{`${reference.externalCrossReferenceName}: ${reference.objectId}`}</a>
                         )
                     }))
                 }
@@ -176,6 +176,7 @@ function ExternalCrossReferences({ references }) {
     )
 }
 
+// eslint-disable-next-line no-unused-vars
 function MultifunTerms({ multifunTerms }) {
     return (
         <Accordion title={<p style={{ fontWeight: "bold" }}>Multifun Terms</p>} >

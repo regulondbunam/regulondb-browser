@@ -1,3 +1,4 @@
 import { useGetRegulonData } from "./regulon";
+import {useGetGenesBy} from './gene';
 
-export { useGetRegulonData }
+export { useGetRegulonData, useGetGenesBy }

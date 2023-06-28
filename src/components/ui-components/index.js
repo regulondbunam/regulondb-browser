@@ -7,6 +7,7 @@ import Card from "./card";
 import Accordion from "./accordion";
 import { Cover } from "./cover/Cover";
 import DataVerifier from "./utils";
+import NavigationTabs from "./tab/NavigationTabs";
 //import { Tabs } from "./web/tab/tabs";
 //import Header from "./web/layout/header";
 //import TableI from "./output/table/table"
@@ -18,5 +19,6 @@ export {
   Button, IconButton, DropDown, Split,
   Cover,
   Card,
-  DataVerifier
+  DataVerifier,
+  NavigationTabs
 };

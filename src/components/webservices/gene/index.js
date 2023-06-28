@@ -28,7 +28,11 @@ export function useGetGenesBy({
     let geneData
     try {
         if (data) {
-            geneData = data.getGenesBy.data[0]
+            if(data.getGenesBy.data[0]){
+              geneData = data.getGenesBy.data[0]  
+            }else{
+                geneData = null
+            }
         }
     } catch (error) {
         console.error("assign geneData value:", error);

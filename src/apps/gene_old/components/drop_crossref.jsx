@@ -10,7 +10,7 @@ export default function DropRef({id, externalCrossReferences = []}) {
         <table>
           <tbody>
             <tr>
-              <td>{`RegulonDB: ${id}`}</td>
+              <td>{id}(RegulonDB)</td>
             </tr>
             {externalCrossReferences.map((ref, i) => {
               if (
@@ -25,7 +25,7 @@ export default function DropRef({id, externalCrossReferences = []}) {
                         href={`${ref?.url}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                      >{`${ref?.externalCrossReferenceName}: ${ref?.objectId}`}</a>
+                      >{`${ref?.objectId}(${ref?.externalCrossReferenceName})`}</a>
                     </td>
                   </tr>
                 );

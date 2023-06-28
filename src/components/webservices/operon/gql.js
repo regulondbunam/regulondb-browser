@@ -22,7 +22,6 @@ export const fragment_PAGINATION = gql`fragment PAGINATION on Pagination {
     currentPage
     firstPage
     hasNextPage
-    lastPage
     limit
     totalResults
   }`
@@ -162,18 +161,10 @@ ${fragment_TRANSCRIPTIONUNIT}
 ${fragment_PAGINATION}
 query GetOperonInfo(
     $advancedSearch: String
-    $fullMatchOnly: Boolean = false
-    $limit: Int = 10
-    $page: Int = 0
-    $properties: [String] = ["operon.id", "operon.name"]
     $search: String
   ) {
     getOperonBy(
       advancedSearch: $advancedSearch
-      fullMatchOnly: $fullMatchOnly
-      limit: $limit
-      page: $page
-      properties: $properties
       search: $search
     ) {
       data {
