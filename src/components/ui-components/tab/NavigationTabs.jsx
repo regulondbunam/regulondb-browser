@@ -132,7 +132,6 @@ function NavigationTabs({ tabSelect = "init", tabs = [] }) {
           if (!tab.position) {
             return (
               <div key={"component_" + tab.id + "_" + index} id={tab.id}>
-                <br />
                 {tab.component}<br />
               </div>
             )

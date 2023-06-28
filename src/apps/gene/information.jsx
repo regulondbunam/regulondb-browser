@@ -2,7 +2,7 @@ import { useMemo } from "react"
 import { NavigationTabs } from "../../components/ui-components"
 import { Card } from "../../components/ui-components"
 import DrawingTracesTool from "../../components/DrawingTracesTool";
-import { Gene } from "../../components/datamartSchema"
+import { Gene, Product } from "../../components/datamartSchema"
 
 export default function Information({ geneData }) {
 
@@ -28,7 +28,7 @@ export default function Information({ geneData }) {
                 name: "Description",
                 component: <Card id="GeneTab_regulator" title={`Gene ${geneData.gene.name} Description`} >
                     <div style={{ margin: "0% 1% 1% 2%" }} >
-                        <Gene {...geneData.gene} viewTitle={false} />
+                        <Gene {...geneData.gene} allCitations={geneData.allCitations} viewTitle={false} products={geneData.products} />
                         <br />
                     </div>
                 </Card>
@@ -40,7 +40,15 @@ export default function Information({ geneData }) {
                 id: "GeneTab_Products",
                 subtitle: "Products",
                 name: `(${products.length})`,
-                component: <div id="GeneTab_Products"></div>,
+                component: <Card id=""GeneTab_Products title={`Products`} >
+                <div style={{ margin: "0% 1% 1% 2%" }} >
+                    {products.map((product)=>{
+                        return <Product key={`product_${product._id}`} {...product} allCitations={geneData.allCitations}  />
+                    })}
+                    
+                    <br />
+                </div>
+            </Card>
             })
         }
         if (geneData?.regulation) {

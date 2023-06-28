@@ -1,4 +1,4 @@
-import { Gene } from '../../components/datamartSchema/gene';
+import { Gene } from '../../components/datamartSchema//geneDatamart/gene';
 import { useGetGenesBy } from '../../components/webservices/gene';
 
 

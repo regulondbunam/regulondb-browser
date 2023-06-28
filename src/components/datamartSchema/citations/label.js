@@ -19,12 +19,7 @@ export function labelCitation({publication = {}, evidence = {}, small = true, in
         //title,
         //url,
         year, } = publication
-    const {
-        //additiveEvidenceCodeRule,
-        code,
-        //name,
-        //type,
-    } = evidence
+    const code = evidence?.code
     const numIndex = index ? `[${index}]` : ""
     //W->weak S->strong
     const codeLabel = () => {

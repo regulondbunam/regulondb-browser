@@ -2,9 +2,8 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ViewSequence from "./viewSequence";
 import PropTypes from 'prop-types';
-import { NoteCitations } from "../citations";
-import { DataVerifier, Accordion } from "../../ui-components";
-import { ParagraphCitations } from "../citations";
+import { DataVerifier, Accordion } from "../../../ui-components";
+import { ParagraphCitations, NoteCitations } from "../../citations";
 
 const PROP_TYPES = {
     _id: PropTypes.string.isRequired,
@@ -44,12 +43,14 @@ function Gene({
     strand = "",
     synonyms = [],
     viewTitle = true,
+    viewExternalRef = false,
+    products
 }) {
     const size = rightEndPosition - leftEndPosition;
 
     return (
         <div>
-            {viewTitle &&(
+            {viewTitle && (
                 <p style={{ fontSize: "18px" }} ><b>{name} Gene</b></p>
             )}
             <table className="table_auto table_content">
@@ -101,7 +102,7 @@ function Gene({
                             <td>
                                 <ViewSequence
                                     sequence={sequence}
-                                    title={`gene_${name}_sequence`}
+                                    _id={_id} name={name} products={products}
                                 />
                             </td>
                         </tr>
@@ -132,9 +133,10 @@ function Gene({
             {DataVerifier.isValidArray(fragments) && (
                 <Fragments fragments={fragments} strand={strand} />
             )}
-            {DataVerifier.isValidArray(externalCrossReferences) && (
+            {DataVerifier.isValidArray(externalCrossReferences) && viewExternalRef ? (
                 <ExternalCrossReferences references={externalCrossReferences} />
-            )}
+            )
+                : null}
             {DataVerifier.isValidArray(citations) && (
                 <Citations citations={citations} allCitations={allCitations} />
             )}
@@ -146,11 +148,11 @@ Gene.propTypes = PROP_TYPES
 
 export { Gene }
 
-function Citations({citations, allCitations}){
-    return(
+function Citations({ citations, allCitations }) {
+    return (
         <Accordion title={"Citations"} >
             <div>
-            <ParagraphCitations citations={citations} allCitations={allCitations} />
+                <ParagraphCitations citations={citations} allCitations={allCitations} />
             </div>
         </Accordion>
     )

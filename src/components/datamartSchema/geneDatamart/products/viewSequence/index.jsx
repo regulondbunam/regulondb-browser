@@ -7,7 +7,7 @@ import Switch from "@mui/material/Switch";
 import {
   FastaSequence,
   GenebankSequence,
-} from "../../../sequence";
+} from "../../../../sequence";
 
 export default function ViewSequence({ sequence, title }) {
   const [_viewFastaSequence, set_viewFastaSequence] = React.useState(false);
