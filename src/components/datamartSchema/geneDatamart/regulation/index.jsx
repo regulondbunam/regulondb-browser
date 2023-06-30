@@ -29,7 +29,9 @@ function Statistics({statistics}){
     return(
         <table className="tableAccent" >
                     <thead>
-                        <th colSpan={2}>Statistics</th>
+                       <tr>
+                       <th colSpan={2}>Statistics</th>
+                       </tr>
                     </thead>
                     <tbody>
                         {Object.keys(statistics).map((key,index)=>{

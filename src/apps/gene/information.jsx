@@ -26,7 +26,7 @@ export default function Information({ geneData }) {
             tabsInfo.push({
                 id: "GeneTab_Description",
                 name: "Description",
-                component: <Card id="GeneTab_regulator" title={`Gene ${geneData.gene.name} Description`} >
+                component: <Card title={`Gene ${geneData.gene.name} Description`} >
                     <div style={{ margin: "0% 1% 1% 2%" }} >
                         <Gene {...geneData.gene} allCitations={geneData.allCitations} viewTitle={false} products={geneData.products} />
                         <br />
@@ -40,7 +40,7 @@ export default function Information({ geneData }) {
                 id: "GeneTab_Products",
                 subtitle: "Products",
                 name: `(${products.length})`,
-                component: <Card id="" GeneTab_Products title={`Products`} >
+                component: <Card title={`Products`} >
                     <div style={{ margin: "0% 1% 1% 2%" }} >
                         {products.map((product) => {
                             return <Product key={`product_${product._id}`} {...product} allCitations={geneData.allCitations} />
@@ -55,7 +55,7 @@ export default function Information({ geneData }) {
             tabsInfo.push({
                 id: "GeneTab_Regulation",
                 name: "Regulation",
-                component: <Card id="GeneTab_Regulation" title={`Regulation`} >
+                component: <Card title={`Regulation`} >
                     <div style={{ margin: "0% 1% 1% 2%" }} >
                         <Regulation {...geneData.regulation} />
                         <br />
@@ -67,7 +67,7 @@ export default function Information({ geneData }) {
             tabsInfo.push({
                 id: "GeneTab_Citations",
                 name: "Citations",
-                component: <div id="GeneTab_Citations">
+                component: <div >
                     <h2>Citations</h2>
                     <AllCitations allCitations={geneData.allCitations} />
                 </div>,
