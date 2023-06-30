@@ -3,11 +3,18 @@ import { NavigationTabs } from "../../components/ui-components"
 import { Card } from "../../components/ui-components"
 import DrawingTracesTool from "../../components/DrawingTracesTool";
 import { Gene, Product, Regulation, AllCitations } from "../../components/datamartSchema"
+import RelatedTool from "./components/relatedTool";
 
 export default function Information({ geneData }) {
 
     const tabs = useMemo(() => {
         let tabsInfo = []
+        tabsInfo.push({
+            id:"relatedTool",
+            noTab: true,
+            position: "aside",
+            component: <RelatedTool {...geneData} />
+        })
         if (geneData?.gene) {
             tabsInfo.push({
                 id: "GeneTab_dtt",

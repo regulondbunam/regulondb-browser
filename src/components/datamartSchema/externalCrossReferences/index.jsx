@@ -12,10 +12,20 @@ function ExternalCrossReference({
     externalCrossReferenceName = "",
     objectId = "",
     url = "",
+    variant = "paragraph"
 }) {
+    let style = {}
+    switch (variant) {
+        case "list":
+            break;
+        default:
+            style = { float: "left", marginRight: "5px" }
+            break;
+    }
+
     return (
         <div
-            style={{ float: "left", marginRight: "5px" }}
+            style={style}
         >
             <a
                 href={`${url}`}
@@ -24,7 +34,7 @@ function ExternalCrossReference({
                 rel="noreferrer"
                 style={{ fontSize: "12px" }}
             >
-                {externalCrossReferenceName}
+                {`${externalCrossReferenceName}: ${objectId}`}
             </a>
         </div>
     );
@@ -39,13 +49,15 @@ function ExternalCrossReferences({
     return(
         <div>
             {externalCrossReferences.map((ecr,index)=>{
-                return <ExternalCrossReference 
+                return <ExternalCrossReference  
                     key={`${ecr.externalCrossReferenceId}_${index}`}
+                    variant={variant}
                     {...ecr}
                     />
             })}
         </div>
     )
 }
+
 
 export { ExternalCrossReference, ExternalCrossReferences };

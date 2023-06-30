@@ -148,7 +148,17 @@ function NavigationTabs({ tabSelect = "init", tabs = [], title = "" }) {
               })}
             </div>
             <div className={Style.aside} >
-              Hola
+            {tabs.map((tab, index) => {
+              if (tab.position === "aside") {
+                return (
+                  <div key={"component_" + tab.id + "_" + index} id={tab.id}>
+                    <br />
+                    {tab.component}<br />
+                  </div>
+                )
+              }
+              return null
+            })}
             </div>
           </div>
         </div>
