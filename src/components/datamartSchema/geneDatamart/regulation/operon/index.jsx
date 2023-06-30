@@ -13,42 +13,36 @@ export default function Operon({
                 <p style={{ fontSize: "18px" }} ><b>{`Operon ${name}`}</b></p>
             </Link>
             {DataVerifier.isValidArray(arrangement) && (
-                <div style={{marginLeft: "1%"}} >
-                    {arrangement.map((arr, indx) => <Arrangement key={`arrOperon${_id}_${indx}`} {...arr} />)}
+                <div style={{ marginLeft: "1%" }} >
+                    <p style={{ fontSize: "14px" }} ><b>Arrangement: </b></p>
+                    <table className="tableAccent">
+                        <thead>
+                            <th>Transcription Unit</th>
+                            <th>Promoter</th>
+                            <th>Regulators</th>
+                        </thead>
+                        <tbody>
+                            {arrangement.map((arr, indx) => <tr key={`arrOperon${_id}_${indx}`} ><Arrangement  {...arr} /></tr>)}
+                        </tbody>
+                    </table>
+
                 </div>
 
             )}
         </div>
     )
 }
-export function Arrangement({
+function Arrangement({
     promoters,
     regulators,
     transcriptionUnit,
 }) {
     //console.log(transcriptionUnit);
     return (
-        <table className="table_auto table_content">
-            <tbody>
-                {DataVerifier.isValidArray(promoters) && (
-                    <tr>
-                        <td style={{ fontWeight: "bold" }}>Promoters:</td>
-                        <td>{promoters.map(pro => pro.name).join(", ")}</td>
-                    </tr>
-                )}
-                {DataVerifier.isValidObject(transcriptionUnit) && (
-                    <tr>
-                        <td style={{ fontWeight: "bold" }}>Transcription Unit:</td>
-                        <td>{transcriptionUnit.name}</td>
-                    </tr>
-                )}
-                {DataVerifier.isValidArray(regulators) && (
-                    <tr>
-                        <td style={{ fontWeight: "bold" }}>Regulators:</td>
-                        <td>{regulators.map(regulators => `${regulators.name} (${regulators.function})`).join(", ")}</td>
-                    </tr>
-                )}
-            </tbody>
-        </table>
-    )
+        <>
+        <td>{transcriptionUnit.name}</td>
+        <td>{promoters.map(pro => pro.name).join(", ")}</td>
+        <td>{regulators.map(regulators => <p>{`${regulators.name} (${regulators.function})`}</p>)}</td>
+        </>
+        )
 }
