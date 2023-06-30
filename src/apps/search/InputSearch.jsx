@@ -20,6 +20,7 @@ export default function InputSearch({ hint }) {
   return (
     <div
       style={styleSearch}
+      className="noPrint"
     >
       <TextField
         sx={{ backgroundColor: "white", borderRadius: "5px", width: "350px" }}

@@ -513,6 +513,20 @@ div.sticky {
 	top: 0;
 }
 
+/*Print*/
+
+@media print {
+	.noPrint {
+		visibility: hidden; 
+	}
+
+	#page-wrapper * {
+		visibility: visible; 
+		text-align: left;
+		print-color-adjust: exact !important;
+	}
+}
+
 /*
   history version
   

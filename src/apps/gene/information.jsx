@@ -41,6 +41,18 @@ export default function Information({ geneData }) {
                 </Card>
             })
         }
+        if (geneData?.regulation) {
+            tabsInfo.push({
+                id: "GeneTab_Regulation",
+                name: "Regulation",
+                component: <Card title={`Regulation`} >
+                    <div style={{ margin: "0% 1% 1% 2%" }} >
+                        <Regulation {...geneData.regulation} />
+                        <br />
+                    </div>
+                </Card>,
+            },)
+        }
         let products = geneData.products
         if (products) {
             tabsInfo.push({
@@ -58,18 +70,7 @@ export default function Information({ geneData }) {
                 </Card>
             })
         }
-        if (geneData?.regulation) {
-            tabsInfo.push({
-                id: "GeneTab_Regulation",
-                name: "Regulation",
-                component: <Card title={`Regulation`} >
-                    <div style={{ margin: "0% 1% 1% 2%" }} >
-                        <Regulation {...geneData.regulation} />
-                        <br />
-                    </div>
-                </Card>,
-            },)
-        }
+        
         if (geneData.allCitations) {
             tabsInfo.push({
                 id: "GeneTab_Citations",

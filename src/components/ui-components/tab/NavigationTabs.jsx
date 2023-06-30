@@ -86,7 +86,7 @@ function NavigationTabs({ tabSelect = "init", tabs = [], title = "" }) {
 
   return (
     <div id={idNavTabs}>
-      <div id="headerNavTabs">
+      <div id="headerNavTabs" className="noPrint">
         <HeaderNav title={title} />
         <div id={idNavTabs} className={Style.tabHeader} style={headerStyle}>
           <Box>

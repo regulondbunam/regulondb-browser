@@ -4,6 +4,7 @@ import { ExternalCrossReferences } from "../../../components/datamartSchema"
 import { Link } from "react-router-dom"
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import Button from '@mui/material/Button';
 
 const style = {
     position: "absolute",
@@ -22,7 +23,7 @@ export default function RelatedTool({ gene, products }) {
     const [open, setOpen] = React.useState(false);
 
     return (
-        <div>
+        <div className="noPrint" >
             <Accordion title={<p style={{ fontWeight: "bold" }}>Related Tools</p>} >
                 {DataVerifier.isValidObject(gene) && (
                     <>
@@ -35,6 +36,11 @@ export default function RelatedTool({ gene, products }) {
                         )}
                     </>
                 )}
+            </Accordion>
+            <Accordion title={<p style={{ fontWeight: "bold" }}>Download Options</p>} >
+            <Button size='small' variant="text"
+                onClick={pdfDownloader}
+            >PDF</Button>
             </Accordion>
             <Accordion title={<p style={{ fontWeight: "bold" }}>External Cross References</p>} >
                 {DataVerifier.isValidArray(gene.externalCrossReferences) && (
@@ -60,4 +66,8 @@ export default function RelatedTool({ gene, products }) {
             </Accordion>
         </div>
     )
+}
+
+function pdfDownloader(){
+    window.print()
 }

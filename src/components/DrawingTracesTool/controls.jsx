@@ -36,21 +36,22 @@ function Controls({
   canvaId,
   drawPlaceName,
   expand,
-  set_expand
+  set_expand,
+  geneticElements
 }) {
   move = parseInt(`${(currentRightEndPosition - currentLeftEndPosition) * move}`, 10);
   zoom = parseInt(`${(currentRightEndPosition - currentLeftEndPosition) * zoom}`, 10);
   let aviso =
     "The Drawing Traces Tool is still under development so some elements may not be displayed properly, please if you detect any problem download the generated image and report it in the User Feedback section. ";
   return (
-    <div className={Style.controls}>
-      <div>
+    <div className={Style.controls} >
+      <div className="noPrint">
         <ButtonGroup
           variant="contained"
           size="small"
-          color="info"
+          color="secondary"
         >
-          <Button sx={{color: "white"}} >
+          <Button sx={{ color: "white" }} >
             Drawing Traces Tool{" "}
             <Tooltip title={aviso}>
               <WarningAmberIcon fontSize="small" color="warning" />
@@ -76,19 +77,6 @@ function Controls({
               </Button>
             </Tooltip>
           )}
-          <Tooltip title={"Reset Graphic"}>
-            <Button
-              className="iconButton"
-              onClick={() => {
-                setGeneticElements(undefined);
-                set_expand(false);
-                setPosLeft(leftEndPosition);
-                setPosRight(rightEndPosition);
-              }}
-            >
-              <RestartAltIcon sx={{ color: "white" }} />
-            </Button>
-          </Tooltip>
           <Tooltip title={"Move to left"}>
             <Button
               onClick={() => {
@@ -98,6 +86,17 @@ function Controls({
               }}
             >
               <ArrowLeftIcon sx={{ color: "white" }} />
+            </Button>
+          </Tooltip>
+          <Tooltip title={"move to right"}>
+            <Button
+              onClick={() => {
+                setGeneticElements(undefined);
+                setPosLeft(currentLeftEndPosition + move);
+                setPosRight(currentRightEndPosition + move);
+              }}
+            >
+              <ArrowRightIcon sx={{ color: "white" }} />
             </Button>
           </Tooltip>
           <Tooltip title={"zoom in"}>
@@ -123,31 +122,36 @@ function Controls({
               <ZoomOutIcon sx={{ color: "white" }} />
             </Button>
           </Tooltip>
-          <Tooltip title={"move to right"}>
+
+          <Tooltip title={"Reset Graphic"}>
             <Button
+              className="iconButton"
               onClick={() => {
                 setGeneticElements(undefined);
-                setPosLeft(currentLeftEndPosition + move);
-                setPosRight(currentRightEndPosition + move);
+                set_expand(false);
+                setPosLeft(leftEndPosition);
+                setPosRight(rightEndPosition);
               }}
             >
-              <ArrowRightIcon sx={{ color: "white" }} />
+              <RestartAltIcon sx={{ color: "white" }} />
             </Button>
           </Tooltip>
+          <DownloadOptions
+            drawPlaceId={drawPlaceId}
+            canvaId={canvaId}
+            name={drawPlaceName}
+            geneticElements={geneticElements}
+          />
         </ButtonGroup>
       </div>
       <div>
-        <DownloadOptions
-          drawPlaceId={drawPlaceId}
-          canvaId={canvaId}
-          name={drawPlaceName}
-        />
+
       </div>
     </div>
   );
 }
 
-function DownloadOptions({ drawPlaceId, canvaId, name }) {
+function DownloadOptions({ drawPlaceId, canvaId, name, geneticElements }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -179,11 +183,28 @@ function DownloadOptions({ drawPlaceId, canvaId, name }) {
     element.remove();
   };
 
+  const _downloadGQL = () => {
+    const element = document.createElement('a');
+    const text = `{"data":${JSON.stringify(geneticElements)}}`
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', "dtt.json");
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element)
+    console.log(geneticElements);
+  }
+
   return (
     <React.Fragment>
-      <Button variant="contained" color="info" size="small" onClick={handleClick}>
-        <FileDownloadIcon sx={{ color: "white" }} />
-      </Button>
+      <Tooltip title={"Download options"} >
+        <Button variant="contained" color="secondary" size="small" onClick={handleClick}>
+          <FileDownloadIcon sx={{ color: "white" }} />
+        </Button>
+      </Tooltip>
       <Menu
         anchorEl={anchorEl}
         id="account-menu"
@@ -226,7 +247,7 @@ function DownloadOptions({ drawPlaceId, canvaId, name }) {
           <LandscapeIcon /> SVG file
         </MenuItem>
         <Divider />
-        <MenuItem onClick={_downloadSVG}>Data JSON</MenuItem>
+        <MenuItem onClick={_downloadGQL}>Data JSON</MenuItem>
       </Menu>
     </React.Fragment>
   );
