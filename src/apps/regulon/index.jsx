@@ -3,7 +3,6 @@ import Title from "./Title";
 import Details from "./details";
 import { useGetRegulonData } from "../../components/webservices";
 import Home from "./home";
-import { Cover } from "../../components/ui-components";
 
 
 function Regulon() {

@@ -22,6 +22,8 @@ export default function TableList({ columns, data }) {
             switch (data[0]._data.datamartType) {
                 case "operon":
                     return 63
+                case "sigmulon":
+                    return 90
                 default:
                     return 50
             }

@@ -41,7 +41,7 @@ function Sigmulon() {
           break;
       }
     }
-    let idTest = sigmulonId?sigmulonId:promoterId
+    let idTest = sigmulonId ? sigmulonId : promoterId
     if (idTest !== id) {
       if (!id) {
         setId(idTest);
@@ -56,21 +56,23 @@ function Sigmulon() {
   //console.log(id);
   return (
     <div id="sigmulon_app">
-      <div id="sigmulon_cover">
-        <Title title={"sigmulon"} />
-      </div>
+
       <div id="sigmulon_content">
         {viewHome && <Home />}
         {id && (
-          <DataProvider
-            datamart_name="getSigmulonBy"
-            variables={{ advancedSearch: advancedSearch }}
-            getState={(state) => {
-              set_state(state);
-            }}
-          >
-            {_state === "done" && <Details promoterId={promoterId} />}
-          </DataProvider>
+          <div id="sigmulon_cover">
+            <Title title={"sigmulon"} />
+            <DataProvider
+              datamart_name="getSigmulonBy"
+              variables={{ advancedSearch: advancedSearch }}
+              getState={(state) => {
+                set_state(state);
+              }}
+            >
+              {_state === "done" && <Details promoterId={promoterId} />}
+            </DataProvider>
+          </div>
+
         )}
       </div>
     </div>
