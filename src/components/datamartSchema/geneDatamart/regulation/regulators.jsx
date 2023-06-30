@@ -1,4 +1,3 @@
-
 export default function Regulators({regulators = []}) {
     return (
         <table className="table_auto table_content" >
@@ -6,7 +5,6 @@ export default function Regulators({regulators = []}) {
                 <tr><th colSpan={3} > <p style={{ fontSize: "18px" }} ><b>Regulators</b></p></th></tr>
                 <tr>
                     <th>Name</th>
-                    <th>function</th>
                     <th>type</th>
                 </tr>
             </thead>
@@ -27,8 +25,8 @@ function Regulator({
 }) {
     return(
         <tr>
-            <td>{name}</td>
-            <td>{RegulatorFunction}</td>
+            <td>
+                {name}</td>
             <td>{type}</td>
         </tr>
     )

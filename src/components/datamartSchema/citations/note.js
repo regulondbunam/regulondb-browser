@@ -6,24 +6,37 @@ export function relCitation(allCitations, idCit, small = true) {
         return ""
     }
     const id_cit = re.exec(idCit)[0]
-    const index = allCitations.findIndex(element => element?.publication?._id === id_cit) + 1
-    if (!index) {
+    let index
+    try {
+        index = allCitations.findIndex(element => element?.publication?._id === id_cit)
+        if (!index) {
+            return ""
+        }
+    } catch (error) {
+        console.error("error: "+idCit,error);
         return ""
     }
     const fullCit = allCitations[index]
-    const publication = fullCit?.publication?.citation
-    const url = fullCit?.publication?.url
-    return `<a class='citation' data-tip='${publication}' target="_blank" rel="noopener noreferrer" href="${url}">[${index}]${labelCitation({publication: fullCit.publication, evidence:fullCit.evidence,index:index})}</a>&nbsp;`
+    let publication = ""
+    let url = ""
+    if (fullCit?.publication) {
+        publication = fullCit?.publication?.citation 
+        url = fullCit?.publication?.url  
+    }else{
+        console.log(index);
+        return ""
+    }
+    return `<a class='citation' data-tip='${publication}' target="_blank" rel="noopener noreferrer" href="${url}">${labelCitation({ publication: fullCit.publication, evidence: fullCit.evidence, index: index+1 })}</a>&nbsp;`
 }
 
 export const NoteCitations = (allCitations, note) => {
     const REX = /\[\s*RDBECOLI(PRC|EVC)[0-9]{5}\]/
     const PP = /(\|CITS:)|\|\./
     if (PP.exec(note)) {
-        while (PP.exec(note)){
+        while (PP.exec(note)) {
             note = note.replace(PP, ' ')
         };
-        while (REX.exec(note)){
+        while (REX.exec(note)) {
             note = note.replace(REX, relCitation(allCitations, REX.exec(note)[0]))
         };
     }

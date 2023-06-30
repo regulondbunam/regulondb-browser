@@ -17,9 +17,5 @@ export default function Home(){
         "synonyms"
     ]
     
-    return (
-        <article>
-            <ObjectListExplorer attributesEnabled={attributesEnabled} title='Gene' datamartType={"gene"} />
-        </article>
-    )
+    return <ObjectListExplorer attributesEnabled={attributesEnabled} title='Gene' datamartType={"gene"} />
 }
