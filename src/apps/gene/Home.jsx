@@ -1,21 +1,39 @@
-import React, { useEffect } from "react";
-//import Gene from "../search/results/Gene"
+import React from "react";
+import { Cover } from "../../components/ui-components";
 import ObjectListExplorer from "../../components/objectListExplorer";
-import { UpdateTitle } from "./components/Title";
+import { useGetObjectList } from "../../components/webservices";
 
-export default function Home(){
+export default function Home() {
 
-    
-    useEffect(() => {
-        UpdateTitle({ title: "Gene", geneToken: undefined });
-    })
+    const { objectsList, loading, error } = useGetObjectList({ datamartType: "gene" })
+    let state = "done"
+    let title = "Genes"
+    if (loading) {
+        state = "loading"
+        title = "loading gene list"
+    }
+    if (error) {
+        state = "error"
+        title = "... Sorry, we have an error, try again later 🥲"
+    }
 
-    const attributesEnabled=[
+    const attributesEnabled = [
         "_id",
-        "productsName",
         "name",
-        "synonyms"
+        "synonyms",
+        "productsName"
     ]
-    
-    return <ObjectListExplorer attributesEnabled={attributesEnabled} title='Gene' datamartType={"gene"} />
+
+    return (
+        <div>
+            <Cover state={state} >
+                <h1>{title}</h1>
+            </Cover>
+            <div style={{marginLeft: "3%"}}>
+                {objectsList && !error
+                    ? (<ObjectListExplorer attributesEnabled={attributesEnabled} objectsList={objectsList} />)
+                    : null}
+            </div>
+        </div>
+    )
 }
