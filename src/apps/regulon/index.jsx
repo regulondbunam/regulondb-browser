@@ -29,14 +29,7 @@ function Regulon() {
         )
     }
    }else{
-    return (
-        <>
-        <Cover >
-            <h1>Regulons</h1>
-        </Cover>
-        <Home />
-        </>
-    )
+    return <Home />
    }
 
    return null

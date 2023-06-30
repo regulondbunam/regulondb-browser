@@ -21,7 +21,7 @@
   z-index: -1;
   left: 0;
   width: 100%;
-  background: linear-gradient(90deg, #f4f5f5, #d5e2ea9f, #c2e5f8);
+  background: linear-gradient(90deg, #c2e5f8, #32617d, #c2e5f8);
   background-size: 200% 200%;
   animation: gradient 5s ease infinite;
 }
