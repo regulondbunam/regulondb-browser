@@ -10,6 +10,7 @@ import {
 } from "../../../../sequence";
 
 export default function ViewSequence({ sequence, _id, name, products }) {
+  console.log(products);
   const [_viewFastaSequence, set_viewFastaSequence] = React.useState(false);
   const [_viewGenebankSequence, set_viewGenebankSequence] =
     React.useState(false);

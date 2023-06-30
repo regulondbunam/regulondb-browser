@@ -131,7 +131,7 @@ function Gene({
                 </Accordion>
             )}
             {DataVerifier.isValidArray(fragments) && (
-                <Fragments fragments={fragments} strand={strand} />
+                <Fragments _id={_id} fragments={fragments} strand={strand} products={products} />
             )}
             {DataVerifier.isValidArray(externalCrossReferences) && viewExternalRef ? (
                 <ExternalCrossReferences references={externalCrossReferences} />
@@ -195,7 +195,7 @@ function MultifunTerms({ multifunTerms }) {
     );
 }
 
-function Fragments({ fragments, strand }) {
+function Fragments({ fragments, strand, products, _id }) {
     return (
         <Accordion title={<p style={{ fontWeight: "bold" }}>Fragments</p>}>
             <div >
@@ -222,7 +222,7 @@ function Fragments({ fragments, strand }) {
                                         <p>{fragment?.rightEndPosition}</p>
                                     </div>
                                 </td>
-                                <td><ViewSequence sequence={fragment.sequence} title={`fragment_${fragment.name}_sequence`} /></td>
+                                <td><ViewSequence _id={_id} sequence={fragment.sequence} products={products} title={`fragment_${fragment.name}_sequence`} /></td>
                             </tr>
                         ))}
                     </tbody>

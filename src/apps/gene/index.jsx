@@ -8,7 +8,9 @@ import Home from "./Home";
 
 export default function Gene() {
   let { geneId } = useParams();
-  
+  if(geneId.split("_").length>1){
+    geneId = geneId.split("_")[0]
+  }
   if(geneId){
     return <GeneDescription geneId={geneId} />
   }
@@ -19,7 +21,7 @@ function GeneDescription({geneId}){
 
   const [title, setTitle] = React.useState("gene");
   const {geneData, loading, error} = useGetGenesBy({_id: geneId})
-  //console.log(geneData);
+  console.log(geneData);
   useEffect(() => {
     if (loading) {
       UpdateTitle({state: "loading"})
