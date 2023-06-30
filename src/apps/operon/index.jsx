@@ -41,7 +41,7 @@ function Operon() {
           break;
       }
     }
-    let idTest = operonId?operonId:tuId
+    let idTest = operonId ? operonId : tuId
     if (idTest !== id) {
       if (!id) {
         setId(idTest);
@@ -49,29 +49,31 @@ function Operon() {
         setId(undefined);
       }
     }
-  }, [id, operonId,tuId, _state]);
+  }, [id, operonId, tuId, _state]);
 
   const viewHome = !operonId && !tuId;
 
   return (
     <div id="operon_app">
-      <div id="operon_cover">
-        <Title title={"Operon"} />
-      </div>
+
       <div id="operon_content">
         {viewHome && <Home />}
         {id && (
-          <DataProvider
-            isGetRelatedIDs={true}
-            isGetPhrases={true}
-            datamart_name="getOperonBy"
-            variables={{ advancedSearch: advancedSearch }}
-            getState={(state) => {
-              set_state(state);
-            }}
-          >
-            {_state === "done" && <Details id_selected={tuId} />}
-          </DataProvider>
+          <div id="operon_cover">
+            <Title title={"Operon"} />
+            <DataProvider
+              isGetRelatedIDs={true}
+              isGetPhrases={true}
+              datamart_name="getOperonBy"
+              variables={{ advancedSearch: advancedSearch }}
+              getState={(state) => {
+                set_state(state);
+              }}
+            >
+              {_state === "done" && <Details id_selected={tuId} />}
+            </DataProvider>
+          </div>
+
         )}
       </div>
     </div>
