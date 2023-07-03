@@ -15,11 +15,24 @@ export function Regulation({
         <div>
              <Operon {...operon} />
              {DataVerifier.isValidArray(regulators) && (
-                <Regulators regulators={regulators} />
+                <div>
+                    <p style={{ fontSize: "18px" }} ><b>{`Regulators`}</b></p>
+                    <div style={{marginLeft: "1%"}} >
+                        <Regulators regulators={regulators} />
+                    </div>
+                    
+                </div>
              )}
              <br />
              {DataVerifier.isValidObject(statistics) &&(
+                <div>
+                <p style={{ fontSize: "18px" }} ><b>{`Statistics`}</b></p>
+                <div style={{marginLeft: "1%"}} >
                 <Statistics statistics={statistics} />
+                </div>
+                
+            </div>
+                
              )}
         </div>
     )
@@ -28,11 +41,6 @@ export function Regulation({
 function Statistics({statistics}){
     return(
         <table className="tableAccent" >
-                    <thead>
-                       <tr>
-                       <th colSpan={2}>Statistics</th>
-                       </tr>
-                    </thead>
                     <tbody>
                         {Object.keys(statistics).map((key,index)=>{
                             let statistic = statistics[key]

@@ -1,5 +1,5 @@
 import { useMemo } from "react"
-import { NavigationTabs } from "../../components/ui-components"
+import { NavigationTabs, DataVerifier } from "../../components/ui-components"
 import { Card } from "../../components/ui-components"
 import DrawingTracesTool from "../../components/DrawingTracesTool";
 import { Gene, Product, Regulation, AllCitations } from "../../components/datamartSchema"
@@ -18,7 +18,8 @@ export default function Information({ geneData }) {
         if (geneData?.gene) {
             tabsInfo.push({
                 id: "GeneTab_dtt",
-                noTab: true,
+                subtitle: "DTT",
+                name: "Genome Position",
                 position: "head",
                 component: <DrawingTracesTool
                     context="gene"
@@ -54,21 +55,21 @@ export default function Information({ geneData }) {
             },)
         }
         let products = geneData.products
-        if (products) {
-            tabsInfo.push({
-                id: "GeneTab_Products",
-                subtitle: "Products",
-                name: `(${products.length})`,
-                component: <Card title={`Products`} >
-                    <div style={{ margin: "0% 1% 1% 2%" }} >
-                        {products.map((product) => {
-                            return <Product key={`product_${product._id}`} {...product} allCitations={geneData.allCitations} />
-                        })}
-
-                        <br />
-                    </div>
-                </Card>
-            })
+        if (DataVerifier.isValidArray(products)) {
+            products.forEach((product,index) => {
+                tabsInfo.push({
+                    id: "GeneTab_Products"+index,
+                    subtitle: "Product",
+                    name: product.name,
+                    component: <Card title={`Product: ${product.name}`} >
+                        <div style={{ margin: "0% 1% 1% 2%" }} >
+                        <Product key={`product_${product._id}`} {...product} allCitations={geneData.allCitations} />
+                            <br />
+                        </div>
+                    </Card>
+                })
+            });
+            
         }
         
         if (geneData.allCitations) {
@@ -85,5 +86,5 @@ export default function Information({ geneData }) {
     }, [geneData])
 
     return <NavigationTabs tabs={tabs} tabSelect={"GeneTab_Description"}
-        title={`Gene ${geneData.gene.name}: ${geneData.products.map(prod => prod.name).join(", ")}`} />
+        title={`Gene ${geneData.gene.name}`} />
 }

@@ -1,16 +1,40 @@
-.container {
-  padding-left: 5%;
-  display: flex;
-  justify-content: space-between;
+.navBody {
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
 }
 
-.article{
-  width: 75%
+.navBodyMenuHide {
+  display: grid;
+  grid-template-columns: 2% 88% 10%;
 }
 
-.aside{
-  width: 20%;
+.hideMenu{
+  position: absolute;
+  top: 243px;
+  z-index: 99;
 }
+
+.hideMenuSticky{
+  position: sticky;
+  top: 10px;
+  z-index: 99;
+}
+
+.navMenu{
+  margin-right: 2px;
+}
+
+/*
+
+
+.navContent{
+  width: 80%;
+}
+
+.navAside{
+  width: 10%;
+}
+*/
 
 .headerNavShow {
   background-color: #f4f5f5;
@@ -26,6 +50,12 @@
   display: none;
 }
 
+.menuSticky {
+  position: sticky;
+  top: 75px;
+  z-index: 99;
+}
+
 .headerSticky {
   position: sticky;
   top: 0;
@@ -38,7 +68,6 @@
 }
 
 .tabHeader {
-  width: 100%;
   padding-left: 5%;
   display: flow-root;
   z-index: 9999;
