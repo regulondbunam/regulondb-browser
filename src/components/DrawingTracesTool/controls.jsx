@@ -51,12 +51,6 @@ function Controls({
           size="small"
           color="secondary"
         >
-          <Button sx={{ color: "white" }} >
-            Drawing Traces Tool{" "}
-            <Tooltip title={aviso}>
-              <WarningAmberIcon fontSize="small" color="warning" />
-            </Tooltip>{" "}
-          </Button>
           {context === "gene" && (
             <Tooltip title={"Regulatory region"}>
               <Button

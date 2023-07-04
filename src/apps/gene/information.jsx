@@ -1,81 +1,80 @@
 import { useMemo } from "react"
-import { NavigationTabs } from "../../components/ui-components"
+import { AnchorNav, DataVerifier } from "../../components/ui-components"
 import { Card } from "../../components/ui-components"
 import DrawingTracesTool from "../../components/DrawingTracesTool";
 import { Gene, Product, Regulation, AllCitations } from "../../components/datamartSchema"
 import RelatedTool from "./components/relatedTool";
 
+
+
 export default function Information({ geneData }) {
 
-    const tabs = useMemo(() => {
+    let relationTool = null
+    let dtt = null
+
+    if (geneData?.gene) {
+        relationTool = <RelatedTool {...geneData} />
+        dtt = <DrawingTracesTool
+            context="gene"
+            height={200}
+            id={geneData._id}
+            leftEndPosition={geneData.gene.leftEndPosition}
+            rightEndPosition={geneData.gene.rightEndPosition}
+            fragments={geneData.gene.fragments}
+            strand={geneData.gene.strand}
+        />
+    }
+    const sections = useMemo(() => {
+
+
         let tabsInfo = []
-        tabsInfo.push({
-            id:"relatedTool",
-            noTab: true,
-            position: "aside",
-            component: <RelatedTool {...geneData} />
-        })
         if (geneData?.gene) {
             tabsInfo.push({
-                id: "GeneTab_dtt",
-                noTab: true,
-                position: "head",
-                component: <DrawingTracesTool
-                    context="gene"
-                    height={200}
-                    id={geneData._id}
-                    leftEndPosition={geneData.gene.leftEndPosition}
-                    rightEndPosition={geneData.gene.rightEndPosition}
-                    fragments={geneData.gene.fragments}
-                    strand={geneData.gene.strand}
-                />
-            })
-            tabsInfo.push({
                 id: "GeneTab_Description",
-                name: "Description",
-                component: <Card title={`Gene ${geneData.gene.name} Description`} >
+                label: "Description",
+                title: "Description",
+                component:
                     <div style={{ margin: "0% 1% 1% 2%" }} >
                         <Gene {...geneData.gene} allCitations={geneData.allCitations} viewTitle={false} products={geneData.products} />
                         <br />
                     </div>
-                </Card>
             })
         }
         if (geneData?.regulation) {
             tabsInfo.push({
                 id: "GeneTab_Regulation",
-                name: "Regulation",
-                component: <Card title={`Regulation`} >
+                label: "Regulation",
+                title: "Regulation",
+                component: 
                     <div style={{ margin: "0% 1% 1% 2%" }} >
                         <Regulation {...geneData.regulation} />
                         <br />
                     </div>
-                </Card>,
             },)
         }
         let products = geneData.products
-        if (products) {
-            tabsInfo.push({
-                id: "GeneTab_Products",
-                subtitle: "Products",
-                name: `(${products.length})`,
-                component: <Card title={`Products`} >
-                    <div style={{ margin: "0% 1% 1% 2%" }} >
-                        {products.map((product) => {
-                            return <Product key={`product_${product._id}`} {...product} allCitations={geneData.allCitations} />
-                        })}
-
-                        <br />
-                    </div>
-                </Card>
-            })
+        if (DataVerifier.isValidArray(products)) {
+            products.forEach(product => {
+                tabsInfo.push({
+                    id: "GeneTab_Products",
+                    label: `Product: ${product.name.substring(0, 10)}...`,
+                    tooltip: `Product: ${product.name}`,
+                    title: `Product ${product.name}`,
+                    component:
+                        <div style={{ margin: "0% 1% 1% 2%" }} >
+                            <Product key={`product_${product._id}`} {...product} allCitations={geneData.allCitations} />
+                            <br />
+                        </div>
+                })
+            });
         }
-        
+
         if (geneData.allCitations) {
             tabsInfo.push({
                 id: "GeneTab_Citations",
-                name: "Citations",
-                component: <div >
+                label: "Citations",
+                title: "Citations",
+                component: <div style={{overflow: "auto"}} >
                     <h2>Citations</h2>
                     <AllCitations allCitations={geneData.allCitations} />
                 </div>,
@@ -84,6 +83,6 @@ export default function Information({ geneData }) {
         return tabsInfo
     }, [geneData])
 
-    return <NavigationTabs tabs={tabs} tabSelect={"GeneTab_Description"}
-        title={`Gene ${geneData.gene.name}: ${geneData.products.map(prod => prod.name).join(", ")}`} />
+    return <AnchorNav sections={sections} header={dtt} aside={relationTool}
+        title={`Gene ${geneData.gene.name}`} />
 }

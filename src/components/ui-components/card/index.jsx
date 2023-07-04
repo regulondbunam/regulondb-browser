@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -8,18 +8,42 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from '@mui/material/Tooltip';
 //import PropTypes from "prop-types";
 
+export function showCard(id,view) {
+  let detail = {view: view};
+  const CARD = document.getElementById("card_"+id);
+  if (CARD) {
+    const CARD_REACTION = new CustomEvent("updateView", {
+      bubbles: true,
+      detail: detail,
+    });
+    CARD.dispatchEvent(CARD_REACTION);
+  }
+}
+
 function Card({
   children,
   id,
   title = "",
-  displayCard = true
 }) {
-  const [view, setView] = React.useState(displayCard);
+  const [view, setView] = React.useState(true);
+
+  useEffect(() => {
+    const crd = document.getElementById("card_"+id)
+    if (crd) {
+      crd.addEventListener(
+        "updateView",
+        (e) => {
+          setView(e.detail.view);
+        },
+        false
+      );
+    }
+  }, [id]);
 
   return (
     <Box>
       <Paper>
-        <div id={id} style={{ display: "flex", justifyContent: "space-between" }}>
+        <div id={"card_"+id} style={{ display: "flex", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center" }}>
             <div>
             <Tooltip title={view ? "collapse":"expand"}>

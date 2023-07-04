@@ -1,6 +1,6 @@
 {
   "objectType": "dna",
-  "defaultColor": "#EFEBEB",
+  "defaultColor": "#fff",
   "stroke": { "color": "#000", "width": 1, "linecap": "round" },
   "font": {
     "size": 12,
