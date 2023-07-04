@@ -99,6 +99,7 @@ class DrawingTracesTool extends Component {
             context: this.props.context,
             ...this.state,
             drawPlaceId: this.drawPlaceId,
+            geneticElements: this.state.geneticElements,
             canvaId: this.canvaId,
             drawPlaceName: this.drawPlaceName,
             regulatoryRegion: this.regulatoryRegion,

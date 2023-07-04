@@ -17,6 +17,20 @@ export default function TableList({ columns, data }) {
         []
     )
 
+    const itemSize = ()=>{
+        if(data[0]){
+            switch (data[0]._data.datamartType) {
+                case "operon":
+                    return 63
+                case "sigmulon":
+                    return 90
+                default:
+                    return 50
+            }
+            
+        }
+    }
+
     const {
         getTableProps,
         getTableBodyProps,
@@ -83,7 +97,7 @@ export default function TableList({ columns, data }) {
                 <FixedSizeList
                     height={550}
                     itemCount={rows.length}
-                    itemSize={90}
+                    itemSize={itemSize()}
                     width={"100%"}
                 >
                     {RenderRow}

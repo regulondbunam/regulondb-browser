@@ -92,7 +92,7 @@ export default class Formats {
             }
             count += 1
         }
-        return `#${this.title}<br>#${this.getStrInfoSequence()}<br>${sequenceFormat}`
+        return `>${this.title}|${this.getStrInfoSequence()}<br>${sequenceFormat}`
     }
 
     getGenebankFormat({ color = false }) {
@@ -123,7 +123,7 @@ export default class Formats {
             }
             return x;
         }).join('')
-        return `#${this.title}<br>#${this.getStrInfoSequence()}<br>${sequenceFormat}`
+        return `#${this.title};${this.getStrInfoSequence()}<br>${sequenceFormat}`
     }
 
     getLinealFormat({ sequenceId, color = false }) {

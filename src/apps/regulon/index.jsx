@@ -3,7 +3,6 @@ import Title from "./Title";
 import Details from "./details";
 import { useGetRegulonData } from "../../components/webservices";
 import Home from "./home";
-import { Cover } from "../../components/ui-components";
 
 
 function Regulon() {
@@ -29,14 +28,7 @@ function Regulon() {
         )
     }
    }else{
-    return (
-        <>
-        <Cover >
-            <h1>Regulons</h1>
-        </Cover>
-        <Home />
-        </>
-    )
+    return <Home />
    }
 
    return null

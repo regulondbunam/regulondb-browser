@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   min-height: 10px;
-  background-color: #d5e2ead7;
+  background-color: #f4f5f5;
 }
 
 .uicover_error {
@@ -21,7 +21,7 @@
   z-index: -1;
   left: 0;
   width: 100%;
-  background: linear-gradient(90deg, #1f3d4e, #d5e2ea9f, #1f3d4e);
+  background: linear-gradient(90deg, #c2e5f8, #32617d, #c2e5f8);
   background-size: 200% 200%;
   animation: gradient 5s ease infinite;
 }

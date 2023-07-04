@@ -6,19 +6,13 @@ import "./title.css";
 const IDTitle = "title_cover_geneTool";
 const eventName = "cover_geneTool_event";
 
-export function UpdateTitle({ state, title, message, geneToken }) {
+export function UpdateTitle({ state, message }) {
   let detail = {};
   if (state) {
     detail.state = state;
   }
-  if (title) {
-    detail.title = title;
-  }
   if (message) {
     detail.message = message;
-  }
-  if (geneToken) {
-    detail.geneToken = geneToken;
   }
 
   const COVER = document.getElementById(IDTitle);
@@ -31,10 +25,8 @@ export function UpdateTitle({ state, title, message, geneToken }) {
   }
 }
 
-export const Title = ({ title }) => {
+export const Title = ({ title, geneData }) => {
   const [_state, set_state] = useState();
-  const [geneToken, set_geneToken] = useState();
-  const [_title, set_title] = useState(title);
   const [_message, set_message] = useState();
 
   useEffect(() => {
@@ -47,31 +39,25 @@ export const Title = ({ title }) => {
           if (e.detail.state) {
             set_state(e.detail.state);
           }
-          if (e.detail.title) {
-            set_title(e.detail.title);
-          }
           if (e.detail.message) {
             set_message(e.detail.message);
-          }
-          if (e.detail.geneToken) {
-            set_geneToken(e.detail.geneToken);
           }
         },
         false
       );
     }
   }, []);
-  if (!geneToken) {
+  if (!geneData) {
     return (
       <div id={IDTitle} >
         <Cover state={_state} message={_message}>
-          <h1>{_title}</h1>
+          <h1>{title}</h1>
         </Cover>
       </div>
     );
   }
   const {
-    id,
+    _id,
     name,
     products,
     synonyms,
@@ -81,7 +67,7 @@ export const Title = ({ title }) => {
     externalCrossReferences,
     fragments,
     strand
-  } = geneToken;
+  } = formatDataHeader(geneData);
   return (
     <div id={IDTitle}>
       <Cover id={"component_" + IDTitle} state={_state} message={_message}>
@@ -89,13 +75,12 @@ export const Title = ({ title }) => {
           <tbody>
             <tr>
               <td>Gene</td>
-              <td>Product</td>
+              <td>Products</td>
             </tr>
             <tr>
               <td>
                 {name ? (
                   <h1
-                    assistentvalue={`${name} gene page...`}
                     style={{ margin: "0" }}
                     dangerouslySetInnerHTML={{
                       __html: `${name}`,
@@ -103,7 +88,6 @@ export const Title = ({ title }) => {
                   ></h1>
                 ) : (
                   <h1
-                    assistentvalue={`null gene page...`}
                     style={{ margin: "0" }}
                   >
                     Unknown Gene Name
@@ -112,21 +96,19 @@ export const Title = ({ title }) => {
               </td>
               <td>
                 {products ? (
-                  <h2
-                    assistentvalue={`${name} gene page...`}
-                    style={{ margin: "0" }}
+                  <h1
+                    style={{ margin: "0", color: "#666666" }}
                     dangerouslySetInnerHTML={{
                       __html: `${products}`,
                     }}
-                  ></h2>
+                  ></h1>
                 ) : (
-                  <h2
-                    assistentvalue={`${name} gene page...`}
-                    style={{ margin: "0" }}
+                  <h1
+                    style={{ margin: "0", color: "#666666" }}
                     dangerouslySetInnerHTML={{
                       __html: `${products}`,
                     }}
-                  ></h2>
+                  ></h1>
                 )}
               </td>
             </tr>
@@ -150,7 +132,7 @@ export const Title = ({ title }) => {
                       fragments && (
                         <tr >
                           <td colSpan={"2"} >
-                          <FragmentsTable fragments={fragments} strand={strand} />
+                            <FragmentsTable fragments={fragments} strand={strand} />
                           </td>
                         </tr>
                       )
@@ -158,7 +140,7 @@ export const Title = ({ title }) => {
                     {length ? (
                       <tr>
                         <td style={{ fontWeight: "bold" }}>Length:</td>
-                        <td>{length}bp</td>
+                        <td>{length}</td>
                       </tr>
                     ) : (
                       <tr></tr>
@@ -184,7 +166,7 @@ export const Title = ({ title }) => {
               </td>
               <td>
                 {externalCrossReferences ? (
-                  <DropRef id={id} externalCrossReferences={externalCrossReferences} />
+                  <DropRef id={_id} externalCrossReferences={externalCrossReferences} />
                 ) : null}
               </td>
             </tr>
@@ -198,31 +180,66 @@ export const Title = ({ title }) => {
 
 export default Title;
 
-function FragmentsTable({fragments = [],strand}){
+function formatDataHeader(geneData) {
+  let headerData = {
+    _id: geneData._id
+  }
+  if (geneData.gene) {
+    geneData.gene.name && (headerData.name = geneData.gene.name);
+    geneData.gene.synonyms && (headerData.synonyms = geneData.gene.synonyms.join(", "));
+    if (geneData.gene.leftEndPosition && geneData.gene.rightEndPosition) {
+      let row = "->";
+      geneData.gene.strand === "reverse" && (row = "<-");
+      headerData.position = `${geneData.gene.leftEndPosition} ${row} ${geneData.gene.rightEndPosition}`;
+      headerData.length = `${geneData.gene.rightEndPosition - geneData.gene.leftEndPosition} bp`;
+    } else {
+      geneData.gene.strand && (headerData.strand = geneData.gene.strand)
+      geneData.gene.fragments && (headerData.fragments = geneData.gene.fragments)
+    }
+  }
+  if (geneData.products) {
+    if (geneData.products.length > 0) {
+      headerData.products = geneData.products
+        .map((product) => product.name)
+        .join(", ");
+      headerData.locations = geneData.products
+        .map((product) => product.cellularLocations.join(", "))
+        .join(", ");
+    } else {
+      headerData.products = "";
+      headerData.locations = "";
+    }
+  }
+  geneData.gene.externalCrossReferences &&
+    (headerData.externalCrossReferences = geneData.gene.externalCrossReferences);
+  return headerData
+}
+
+function FragmentsTable({ fragments = [], strand }) {
   let row = "->";
   strand === "reverse" && (row = "<-");
   return (
     <div>
       <table className="table_content" >
-      <thead>
-        <tr>
-          <th style={{fontSize: "12px"}} >Fragmented gene in {fragments.length} parts</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          fragments.map((fragment,index)=>{
-            let position = `${fragment.leftEndPosition} ${row} ${fragment.rightEndPosition}`;
-            let length = `${fragment.rightEndPosition - fragment.leftEndPosition}bp`;
-            return(
-              <tr key={`gene_fragment_title_${fragment.id}_${index}`} >
-                <td style={{fontSize: "12px"}} >{fragment.name} : {position}({length})</td>
-              </tr>
-            )
-          })
-        }
-      </tbody>
-    </table>
+        <thead>
+          <tr>
+            <th style={{ fontSize: "12px" }} >Fragmented gene in {fragments.length} parts</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            fragments.map((fragment, index) => {
+              let position = `${fragment.leftEndPosition} ${row} ${fragment.rightEndPosition}`;
+              let length = `${fragment.rightEndPosition - fragment.leftEndPosition}bp`;
+              return (
+                <tr key={`gene_fragment_title_${fragment.id}_${index}`} >
+                  <td style={{ fontSize: "12px" }} >{fragment.name} : {position}({length})</td>
+                </tr>
+              )
+            })
+          }
+        </tbody>
+      </table>
     </div>
   )
 }

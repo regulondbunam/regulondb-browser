@@ -27,7 +27,7 @@ function Menu() {
   let MenuComponent = isMobile ? MenuMovil : MenuDesktop;
 
   return (
-    <div>
+    <div className="noPrint" >
       <MenuComponent
         menuView={_menuView}
         SetMenuView={(menuView) => {

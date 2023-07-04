@@ -20,11 +20,12 @@ export default function InputSearch({ hint }) {
   return (
     <div
       style={styleSearch}
+      className="noPrint"
     >
       <TextField
-        sx={{ backgroundColor: "white", borderRadius: "5px", width: "100%" }}
+        sx={{ backgroundColor: "white", borderRadius: "5px", width: "350px" }}
         id="outlined-keyword"
-        variant="filled"
+        variant="outlined"
         size="small"
         label="Search"
         value={keyword}
@@ -38,7 +39,7 @@ export default function InputSearch({ hint }) {
       <Button
         sx={{ marginLeft: "10px", height: "48px" }}
         onClick={handleSearch}
-        color="error"
+        color="secondary"
         variant="contained"
       >
         Search

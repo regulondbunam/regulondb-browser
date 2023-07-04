@@ -128,7 +128,7 @@ class Track {
         .width(width)
         .height(height)
         .id(canvas_id);
-      canvas.rect(width, height).fill("#f7fcff")
+      canvas.rect(width, height).fill("#fff")
     } catch (error) {
       console.error(error)
     }

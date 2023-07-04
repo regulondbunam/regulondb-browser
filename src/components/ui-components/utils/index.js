@@ -25,8 +25,27 @@ class DataVerifier {
         if (!Array.isArray(array)) {
             return false
         }
-        if (array.length < 0) {
+        if (array.length <= 0) {
             return false
+        }
+        return true
+    }
+
+    static isValidNumber(num){
+        if (!num) {
+            return false
+        }
+        if (num === null) {
+            return false
+        }
+        if (isNaN(num)) {
+            return false
+        }
+        if (Number.isInteger) {
+            if (!Number.isSafeInteger) {
+                console.error("no safe Integer", num);
+                return false
+            }
         }
         return true
     }

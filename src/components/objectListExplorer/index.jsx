@@ -1,28 +1,26 @@
-import React, {useState} from 'react';
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import { List } from './list';
-import { Cover } from '../ui-components';
+import { useMemo, useState } from "react";
+import { formatJsonTable } from "./formatData";
+import Style from "./style.module.css"
+import SelectFilter from "./selectFilter";
+import Divider from '@mui/material/Divider';
+import TableList from "./tableList";
 
-export default function ObjectListExplorer({attributesEnabled,datamartType, title = ""} ) {
-    const [ComponentState, setComponentState] = useState({title:title,state:"done"});
-    return (
-        <Box
-      sx={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        '& > :not(style)': {
-          m: 1,
-          width: "100%",
-        },
-      }}
-    >
-      <Paper elevation={3} >
-        <Cover state={ComponentState.state} coverBackgroundStile={{opacity: "0.5", height:"15px"}} />
-        <h2>{ComponentState.title}</h2>
-        <List attributesEnabled={attributesEnabled} title={title} datamartType={datamartType} ComponentState={(cState)=>{setComponentState(cState)}} />
-      </Paper>
-    </Box>
-
-    )
+export default function ObjectListExplorer({ attributesEnabled, objectsList }) {
+  const objectsData = useMemo(() => {
+    return formatJsonTable(objectsList)
+  }, [objectsList])
+  const [FilterData, setFilterData] = useState(objectsData);
+  return (
+    <Paper elevation={1} >
+      <div className={Style.mainDiv}>
+        <SelectFilter ObjectsData={objectsData} setFilterData={setFilterData} attributesEnabled={attributesEnabled} />
+        <br />
+        <Divider />
+        {FilterData?.data && (
+          <TableList data={FilterData.data} columns={FilterData.columns} />
+        )}
+      </div>
+    </Paper>
+  )
 }
