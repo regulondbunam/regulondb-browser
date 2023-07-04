@@ -27,26 +27,36 @@ function scrollFunction(sections = [], setIdSection, setOnTop, title = "", setNa
       headerNav.className = Style.headerNavShow
       headerNav.style.display = "flex"
       sections.forEach((section) => {
-        const sectionCard = document.getElementById("section_"+section.id)
+        let sectionCard = document.getElementById("init_section_" + section.id)
         if (sectionCard) {
           const { y, height } = sectionCard.getBoundingClientRect()
           const hNav = headerNav.getBoundingClientRect().height
-
+          if (y <= hNav && y + height >= y * -1) {
+            setNavTitle(`${title}, ${section.title}`)
+            setIdSection(section.id)
+          }
+        }
+        /*
+        sectionCard = document.getElementById("end_section_" + section.id)
+        if (sectionCard) {
+          const { y, height } = sectionCard.getBoundingClientRect()
+          const hNav = headerNav.getBoundingClientRect().height
           if (y <= hNav + 75 && y + height >= y * -1) {
             setNavTitle(`${title}, ${section.title}`)
             setIdSection(section.id)
           }
         }
+        */
       })
     }
     if (headerNavAnchor) {
       headerNavAnchor.className = Style.headerSticky
     }
-    if(anchorMenu){
+    if (anchorMenu) {
       anchorMenu.className = Style.menuSticky
     }
 
-   
+
 
   } else {
     if (headerNav) {
@@ -65,9 +75,11 @@ export default function AnchorNav({ title = "", sections = [], idSelectSection, 
   const [onTop, setOnTop] = useState(document.documentElement.scrollTop > 260);
   //console.log(onTop);
   useEffect(() => {
-    window.onscroll = function () {
-      scrollFunction(sections, setIdSection, setOnTop, title, setNavTitle);
-    };
+    if (!collapse) {
+      window.onscroll = function () {
+        scrollFunction(sections, setIdSection, setOnTop, title, setNavTitle);
+      };
+    }
 
     const anchorSections = document.getElementById("anchorSections")
     if (anchorSections) {
@@ -84,12 +96,18 @@ export default function AnchorNav({ title = "", sections = [], idSelectSection, 
         }
       }
     }
+    return function cleanup() {
+      window.onscroll = function () { };
+    };
   }, [collapse, idSection, sections, title]);
 
   const handleCollapse = () => {
     sections.forEach(section => {
       showCard(section.id, collapse)
     });
+    if (collapse) {
+      window.onscroll = function () { };
+    }
     setCollapse(!collapse)
   }
 
@@ -131,40 +149,11 @@ export default function AnchorNav({ title = "", sections = [], idSelectSection, 
     setViewMenu(!viewMenu)
   }
 
-  /*    const scrollFunction = (tabs = [], setValue) => {
-          if (
-            document.body.scrollTop > 260 ||
-            document.documentElement.scrollTop > 260
-          ) {
-            let headerNav = document.getElementById("headerNav")
-            let headerNavTabs = document.getElementById("headerNavTabs")
-            if (headerNav) {
-              headerNav.className = Style.headerNavShow
-              headerNav.style.display = "flex"
-              tabs.forEach((tab) => {
-                const elementTab = document.getElementById(tab.id)
-                if (elementTab && !tab.noTab) {
-                  const {y,height} = elementTab.getBoundingClientRect()
-                  const hNav = headerNav.getBoundingClientRect().height
-                  if(y<=hNav+75 && y+height >= y*-1 ){
-                    setValue(tab.id)
-                  }
-                }
-              })
-            }
-            if (headerNavTabs) {
-              headerNavTabs.className = Style.headerSticky
-            }
-          } else {
-            let headerNav = document.getElementById("headerNav")
-            if (headerNav) {
-              headerNav.style.display = "none"
-            }
-          }
-        }
-  */
-
   const handleChange = (id) => {
+    const sectionCard = document.getElementById("scroll_section_" + id)
+    if (sectionCard) {
+      sectionCard.scrollIntoView()// behavior: 'smooth'
+    }
     setIdSection(id)
   };
 
@@ -178,51 +167,55 @@ export default function AnchorNav({ title = "", sections = [], idSelectSection, 
       </div>
       <div id="anchorBody" className={Style.body}>
         <div >
-        {viewMenu ? (
-          <div id="anchorMenu" className={Style.menu}>
-            <ButtonGroup
-              disableElevation
-              aria-label="Disabled elevation buttons"
-            >
-              <Tooltip title={"Hide Menu"} >
-                <IconButton onClick={handleMenu} sx={{ borderRadius: 0 }} color="secondary" >
-                  <FormatIndentDecreaseIcon />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title={onTop ? "go to top page" : "go to bottom page"} >
-                <IconButton onClick={handleTop} sx={{ borderRadius: 0 }} color="secondary" >
-                  {onTop ? <VerticalAlignBottomIcon /> : <VerticalAlignTopIcon />}
-                </IconButton>
-              </Tooltip>
-              <Tooltip onClick={handleCollapse} title={collapse ? "Expand all sections" : "Collapse all sections"} >
-                <IconButton sx={{ borderRadius: 0 }} color="secondary" >
-                  {collapse ? <UnfoldMoreIcon /> : <UnfoldLessIcon />}
-                </IconButton>
-              </Tooltip>
-            </ButtonGroup>
-            <AnchorBox anchors={sections}
-              idSelect={idSection}
-              onChange={handleChange}
-            />
-          </div>
-        )
-          : (
-            <div id="anchorMenu" className={Style.menuHide}>
-              <Tooltip title={"Show Menu"} >
-                <IconButton onClick={handleMenu} sx={{ borderRadius: 0 }} color="secondary" >
-                  <FormatIndentIncreaseIcon />
-                </IconButton>
-              </Tooltip>
+          {viewMenu ? (
+            <div id="anchorMenu" className={Style.menu}>
+              <ButtonGroup
+                disableElevation
+                aria-label="Disabled elevation buttons"
+              >
+                <Tooltip title={"Hide Menu"} >
+                  <IconButton onClick={handleMenu} sx={{ borderRadius: 0 }} color="secondary" >
+                    <FormatIndentDecreaseIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title={onTop ? "go to top page" : "go to bottom page"} >
+                  <IconButton onClick={handleTop} sx={{ borderRadius: 0 }} color="secondary" >
+                    {onTop ? <VerticalAlignBottomIcon /> : <VerticalAlignTopIcon />}
+                  </IconButton>
+                </Tooltip>
+                <Tooltip onClick={handleCollapse} title={collapse ? "Expand all sections" : "Collapse all sections"} >
+                  <IconButton sx={{ borderRadius: 0 }} color="secondary" >
+                    {collapse ? <UnfoldMoreIcon /> : <UnfoldLessIcon />}
+                  </IconButton>
+                </Tooltip>
+              </ButtonGroup>
+              <AnchorBox anchors={sections}
+                idSelect={idSection}
+                onChange={handleChange}
+              />
             </div>
-          )}
+          )
+            : (
+              <div id="anchorMenu" className={Style.menuHide}>
+                <Tooltip title={"Show Menu"} >
+                  <IconButton onClick={handleMenu} sx={{ borderRadius: 0 }} color="secondary" >
+                    <FormatIndentIncreaseIcon />
+                  </IconButton>
+                </Tooltip>
+              </div>
+            )}
         </div>
         <div id="anchorContent" className={Style.content}>
           <div id="anchorSections" className={Style.section}>
             {sections.map((section, index) => {
-              return <div id={"section_"+section.id} key={"c_"+index+"_section_"+section.id} >
+              return <div key={"c_" + index + "_section_" + section.id} >
+                <div className={Style.scroll_section} id={"scroll_section_" + section.id}/>
+                <div className={Style.flag_section} id={"init_section_" + section.id}/>
                 <Card id={section.id} title={section.title} >
-                {section.component}
-              </Card>
+                  {section.component}
+                  <div className={Style.flag_section} id={"end_section_" + section.id}/>
+                </Card>
+               <br />
               </div>
             })}
           </div>

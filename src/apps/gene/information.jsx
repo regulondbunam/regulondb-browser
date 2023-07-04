@@ -36,7 +36,6 @@ export default function Information({ geneData }) {
                 component:
                     <div style={{ margin: "0% 1% 1% 2%" }} >
                         <Gene {...geneData.gene} allCitations={geneData.allCitations} viewTitle={false} products={geneData.products} />
-                        <br />
                     </div>
             })
         }
@@ -48,7 +47,6 @@ export default function Information({ geneData }) {
                 component: 
                     <div style={{ margin: "0% 1% 1% 2%" }} >
                         <Regulation {...geneData.regulation} />
-                        <br />
                     </div>
             },)
         }
@@ -63,7 +61,6 @@ export default function Information({ geneData }) {
                     component:
                         <div style={{ margin: "0% 1% 1% 2%" }} >
                             <Product key={`product_${product._id}`} {...product} allCitations={geneData.allCitations} />
-                            <br />
                         </div>
                 })
             });
