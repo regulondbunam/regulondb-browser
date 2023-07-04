@@ -11,40 +11,43 @@ export function Regulation({
     statistics,
 }) {
 
-    return(
+    return (
         <div>
-             <Operon {...operon} />
-             {DataVerifier.isValidArray(regulators) && (
-                <Regulators regulators={regulators} />
-             )}
-             <br />
-             {DataVerifier.isValidObject(statistics) &&(
-                <Statistics statistics={statistics} />
-             )}
+            <Operon {...operon} />
+            <p style={{ fontSize: "18px" }} ><b>{`Regulators`}</b></p>
+            <div style={{ marginLeft: "1%" }}>
+                {DataVerifier.isValidArray(regulators) && (
+                    <Regulators regulators={regulators} />
+                )}
+            </div>
+
+            <br />
+            <p style={{ fontSize: "18px" }} ><b>{`Statistics`}</b></p>
+            <div style={{ marginLeft: "1%" }}>
+                {DataVerifier.isValidObject(statistics) && (
+                    <Statistics statistics={statistics} />
+                )}
+            </div>
+
         </div>
     )
 }
 
-function Statistics({statistics}){
-    return(
+function Statistics({ statistics }) {
+    return (
         <table className="tableAccent" >
-                    <thead>
-                       <tr>
-                       <th colSpan={2}>Statistics</th>
-                       </tr>
-                    </thead>
-                    <tbody>
-                        {Object.keys(statistics).map((key,index)=>{
-                            let statistic = statistics[key]
-                            if(!statistic || key === "__typename"){
-                                return null
-                            }
-                            return <tr key={"statisticsRow_"+index+"_"+key}>
-                                <td>{key}</td>
-                                <td>{statistic}</td>
-                            </tr>
-                        })}
-                    </tbody>
-                </table>
+            <tbody>
+                {Object.keys(statistics).map((key, index) => {
+                    let statistic = statistics[key]
+                    if (!statistic || key === "__typename") {
+                        return null
+                    }
+                    return <tr key={"statisticsRow_" + index + "_" + key}>
+                        <td>{key}</td>
+                        <td>{statistic}</td>
+                    </tr>
+                })}
+            </tbody>
+        </table>
     )
 }

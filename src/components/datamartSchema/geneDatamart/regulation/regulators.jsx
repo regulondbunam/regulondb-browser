@@ -1,8 +1,7 @@
 export default function Regulators({regulators = []}) {
     return (
-        <table className="table_auto table_content" >
+        <table className="tableAccent" >
             <thead>
-                <tr><th colSpan={3} > <p style={{ fontSize: "18px" }} ><b>Regulators</b></p></th></tr>
                 <tr>
                     <th>Name</th>
                     <th>type</th>

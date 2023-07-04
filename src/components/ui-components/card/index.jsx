@@ -44,7 +44,7 @@ function Card({
     <Box>
       <Paper>
         <div id={"card_"+id} style={{ display: "flex", justifyContent: "space-between" }}>
-          <div style={{ display: "flex", alignItems: "center" }}>
+          <div style={{ display: "flex", alignItems: "center", width: "100%", backgroundColor: "#72A7C7" }}>
             <div>
             <Tooltip title={view ? "collapse":"expand"}>
               <IconButton
@@ -58,8 +58,8 @@ function Card({
               </IconButton>
               </Tooltip>
             </div>
-            <div>
-              <h2>{title}</h2>
+            <div >
+              <h2 style={{color: "white"}} >{title}</h2>
             </div>
           </div>
         </div>
