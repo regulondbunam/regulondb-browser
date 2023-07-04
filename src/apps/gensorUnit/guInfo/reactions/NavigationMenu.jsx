@@ -1,7 +1,6 @@
 import * as React from "react";
 import List from "@mui/material/List";
 import DropDownList from "./DropDownList";
-
 export default function NavigationMenu({ options, map }) {
   let subList = Object.keys(options).sort((titleA, titleB) => {
     return titleB.length - titleA.length;

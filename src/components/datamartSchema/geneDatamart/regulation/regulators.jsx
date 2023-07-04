@@ -1,16 +1,16 @@
-
 export default function Regulators({regulators = []}) {
     return (
-        <table className="tableAccent" >
+        <table className="table_auto table_content" >
             <thead>
+                <tr><th colSpan={3} > <p style={{ fontSize: "18px" }} ><b>Regulators</b></p></th></tr>
                 <tr>
                     <th>Name</th>
-                    <th>Function</th>
+                    <th>type</th>
                 </tr>
             </thead>
             <tbody>
                 {regulators.map((regulator,index)=>{
-                    return <Regulator key={"regulatorData_"+index+"_"+regulator._id} {...regulator} regulatorFunction={regulator.function} />
+                    return <Regulator key={"regulatorData_"+index+"_"+regulator._id} {...regulator} />
                 })}
             </tbody>
         </table>
@@ -19,7 +19,7 @@ export default function Regulators({regulators = []}) {
 
 function Regulator({
     _id,
-    regulatorFunction,
+    RegulatorFunction,
     name,
     type,
 }) {
@@ -27,7 +27,7 @@ function Regulator({
         <tr>
             <td>
                 {name}</td>
-            <td>{regulatorFunction}</td>
+            <td>{type}</td>
         </tr>
     )
 }
