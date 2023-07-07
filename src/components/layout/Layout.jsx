@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./header/Header";
 import Menu from "./menu/Menu";
+import Footer from "./footer/Footer";
 import { Outlet } from "react-router-dom";
 import { Observer } from "./Observer";
 
@@ -18,6 +19,7 @@ const Layout = () => {
       <Header isHome={isHome} />
       <Menu />
       <Outlet />
+      <Footer />
     </div>
   );
 };

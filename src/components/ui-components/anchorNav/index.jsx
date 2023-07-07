@@ -36,7 +36,6 @@ function scrollFunction(sections = [], setIdSection, setOnTop, title = "", setNa
           const hNav = headerNav.getBoundingClientRect().height
           if (initY <= hNav && endY >= hNav) {
             setNavTitle(`${title}, ${section.title}`)
-            console.log(section.id);
             setIdSection(section.id)
             animateAnchor(section.id)
           }
@@ -80,11 +79,9 @@ export default function AnchorNav({ title = "", sections = [], idSelectSection, 
           const yBox = box.getBoundingClientRect().y
           let yFrom = 0
           if (optionOld) {
-              yFrom = Math.abs(yBox-optionOld.getBoundingClientRect().y-(optionOld.getBoundingClientRect().height/2)+2)
+              yFrom = Math.abs(yBox-optionOld.getBoundingClientRect().y-2)
           }
-          let yTo = Math.abs(yBox-optionNew.getBoundingClientRect().y-(optionNew.getBoundingClientRect().height/2)+2)
-          console.log(yBox, yFrom, yTo);
-          
+          let yTo = Math.abs(yBox-optionNew.getBoundingClientRect().y-2)
           api.start({
               from: {
                 y: yFrom,
@@ -220,11 +217,11 @@ export default function AnchorNav({ title = "", sections = [], idSelectSection, 
                       <animated.div
                           id="anchor_list_style"
                           style={{
-                              marginLeft: "2px",
+                              marginLeft: "4px",
                               position: "absolute",
-                              height: "8px",
-                              width: "8px",
-                              borderRadius: "50%",
+                              height: "11px",
+                              width: "4px",
+                              borderRadius: "1px",
                               backgroundColor: "#3D779B",
                               ...springs,
                           }}
