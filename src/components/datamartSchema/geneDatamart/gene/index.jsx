@@ -144,12 +144,10 @@ function Gene({
                         <Citations citations={citations} allCitations={allCitations} />
                     )}
                 </div>
-                <div className="rightGen">
+                <div className="rightGen" style={{marginLeft: "15px"}}>
                     {DataVerifier.isValidString(sequence) && (
-                        <>
-                            <PanelSequence sequence={sequence}
-                                    _id={_id} name={name} products={products} />
-                        </>
+                        <PanelSequence sequence={sequence}
+                        _id={_id} name={name} products={products} />
                     )}
                 </div>
             </div>

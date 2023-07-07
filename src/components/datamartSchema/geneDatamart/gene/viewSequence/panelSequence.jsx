@@ -10,7 +10,13 @@ import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import TextField from '@mui/material/TextField';
 import Divider from '@mui/material/Divider';
-
+import ListItemText from '@mui/material/ListItemText';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ContentCopy from '@mui/icons-material/ContentCopy';
+import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 import {
     FastaSequence,
     GenebankSequence,
@@ -18,7 +24,7 @@ import {
 
 const FORMATS = {
     fasta: "fasta",
-    genebank: "genebank"
+    genbank: "genbank"
 }
 
 const OPTIONS = {
@@ -26,14 +32,14 @@ const OPTIONS = {
     color: 0,
     countItems: 1,
     fasta_CharactersPerLine: 2,
-    genebank_Columns: 3,
+    genbank_Columns: 3,
 }
 
 const initOptions = {
     color: false,
     countItems: false,
     fasta_CharactersPerLine: 60,
-    genebankColumns: 6,
+    genbankColumns: 6,
 }
 
 function reducerOptions(state, action) {
@@ -54,19 +60,24 @@ function reducerOptions(state, action) {
 export default function PanelSequence({ sequence, _id, name, products }) {
     const [state, dispatch] = React.useReducer(reducerOptions, initOptions);
     const [format, setFormat] = React.useState(FORMATS.fasta);
+    const idSequence = "sequence_rdb_" + _id
     const handleChange = (event) => {
         setFormat(event.target.value);
     };
     let title = ""
     let domSequence = <></>
     switch (format) {
-        case FORMATS.genebank:
+        case FORMATS.genbank:
             title = `gene: ${name}; product: ${products.map(product => product.name).join(", ")}`
-            domSequence = <GenebankSequence sequence={sequence} color={state.color} countItems={state.countItems} title={title} />
+            domSequence = <GenebankSequence id={idSequence}
+                sequence={sequence} color={state.color}
+                countItems={state.countItems} title={title}
+            />
             break;
         default:
             title = `RegulonDB|${_id}|gene: ${name}|product: ${products.map(product => product.name).join(", ")}`
-            domSequence = <FastaSequence sequence={sequence} color={state.color}
+            domSequence = <FastaSequence id={idSequence}
+                sequence={sequence} color={state.color}
                 countItems={state.countItems} title={title}
                 charactersPerLine={state.fasta_CharactersPerLine}
             />
@@ -88,11 +99,11 @@ export default function PanelSequence({ sequence, _id, name, products }) {
                         onChange={handleChange}
                     >
                         <MenuItem value={FORMATS.fasta}>Fasta</MenuItem>
-                        <MenuItem value={FORMATS.genebank}>Genebank</MenuItem>
+                        <MenuItem value={FORMATS.genbank}>Genbank</MenuItem>
                     </Select>
                 </FormControl>
                 <MenuOptions state={state} dispatch={dispatch} format={format} />
-                <DownloadOptions />
+                <DownloadOptions format={format} sequence={sequence} title={`${_id}_sequence`} idSequence={idSequence} />
             </div>
             <div>
                 {domSequence}
@@ -115,7 +126,7 @@ function MenuOptions({ state, dispatch, format }) {
     const handleClose = () => {
         setAnchorEl(null);
     };
-    const handleChangeOption = (option,value) => {
+    const handleChangeOption = (option, value) => {
         dispatch({ type: option, value: value })
     }
     //console.log(state);
@@ -159,7 +170,7 @@ function MenuOptions({ state, dispatch, format }) {
                                     size='small'
                                     value={state.fasta_CharactersPerLine}
                                     onChange={(event) => {
-                                        handleChangeOption(OPTIONS.fasta_CharactersPerLine,event.target.value)
+                                        handleChangeOption(OPTIONS.fasta_CharactersPerLine, event.target.value)
                                     }}
                                     InputLabelProps={{
                                         shrink: true,
@@ -181,30 +192,99 @@ function MenuOptions({ state, dispatch, format }) {
                 )}
                 <Divider />
                 <MenuItem onClick={handleClose}>
-                    <Button variant="outlined" size='small' onClick={()=>{handleChangeOption(OPTIONS.reset)}} >Reset Options</Button>
+                    <Button variant="outlined" size='small' onClick={() => { handleChangeOption(OPTIONS.reset) }} >Reset Options</Button>
                 </MenuItem>
             </Menu>
         </div>
     )
 }
 
-function DownloadOptions({ setOptions }) {
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => {
-        setOpen(!open)
-    }
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
+function DownloadOptions({ format, sequence, title, idSequence }) {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [snackOpen, setSnackOpen] = React.useState(false);
+    const openMenu = Boolean(anchorEl);
+
+    const handleOpenSnack = () => {
+        setSnackOpen(true);
+    };
+    const handleCloseSnack = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSnackOpen(false);
+    };
+    const handleClickMenu = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleCloseMenu = () => {
+        setAnchorEl(null);
+    };
+
+    const download = () => {
+        let e = document.getElementById(idSequence);
+        if (e.innerText) {
+            const blob = new Blob([e.innerText]);
+            const element = document.createElement("a");
+            element.href = window.URL.createObjectURL(blob);
+            element.download = `${title}.${format}`;
+            document.body.appendChild(element);
+            element.click();
+            element.remove();
+        }
+    };
+
     return (
         <div style={{ marginRight: "5px" }} >
             <Button
                 id="demo-customized-button"
                 variant="outlined"
                 disableElevation
-                onClick={handleOpen}
+                onClick={handleClickMenu}
                 endIcon={<KeyboardArrowDownIcon />}
                 sx={{ height: 30 }}
             >
                 Download
             </Button>
+            <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={openMenu}
+                onClose={handleCloseMenu}
+            >
+                <MenuItem
+                    onClick={() => {
+                        navigator.clipboard.writeText(sequence);
+                        handleOpenSnack();
+                        handleCloseMenu();
+                    }}
+                >
+                    <ListItemIcon>
+                        <ContentCopy fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>copy sequence</ListItemText>
+
+                </MenuItem>
+                <MenuItem onClick={() => {
+                    download()
+                    handleCloseMenu();
+                }} >
+                    <ListItemIcon>
+                        <ArticleOutlinedIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>{`${format} file`}</ListItemText>
+                </MenuItem>
+            </Menu>
+            <Stack spacing={2} sx={{ width: '100%' }}>
+                <Snackbar open={snackOpen} autoHideDuration={1000} onClose={handleCloseSnack}>
+                    <Alert onClose={handleCloseSnack} severity="success" sx={{ width: '100%' }}>
+                        Sequence copied to clipboard!
+                    </Alert>
+                </Snackbar>
+            </Stack>
         </div>
     )
 }
