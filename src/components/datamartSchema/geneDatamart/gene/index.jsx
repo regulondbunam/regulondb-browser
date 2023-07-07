@@ -124,34 +124,34 @@ function Gene({
                             )}
                         </tbody>
                     </table>
-                    {DataVerifier.isValidString(note) && (
-                        <Accordion title={<p style={{ fontWeight: "bold" }}>Note</p>} >
-                            <p
-                                dangerouslySetInnerHTML={{
-                                    __html: NoteCitations(allCitations, note),
-                                }}
-                            />
-                        </Accordion>
-                    )}
-                    {DataVerifier.isValidArray(fragments) && (
-                        <Fragments _id={_id} fragments={fragments} strand={strand} products={products} />
-                    )}
-                    {DataVerifier.isValidArray(externalCrossReferences) && viewExternalRef ? (
-                        <ExternalCrossReferences references={externalCrossReferences} />
-                    )
-                        : null}
-                    {DataVerifier.isValidArray(citations) && (
-                        <Citations citations={citations} allCitations={allCitations} />
-                    )}
+
                 </div>
-                <div className="rightGen" style={{marginLeft: "15px"}}>
+                <div className="rightGen" style={{ marginLeft: "15px" }}>
                     {DataVerifier.isValidString(sequence) && (
                         <PanelSequence sequence={sequence}
-                        _id={_id} name={name} products={products} />
+                            _id={_id} name={name} products={products} />
                     )}
                 </div>
             </div>
-
+            {DataVerifier.isValidString(note) && (
+                <Accordion title={<p style={{ fontWeight: "bold" }}>Note</p>} >
+                    <p
+                        dangerouslySetInnerHTML={{
+                            __html: NoteCitations(allCitations, note),
+                        }}
+                    />
+                </Accordion>
+            )}
+            {DataVerifier.isValidArray(fragments) && (
+                <Fragments _id={_id} fragments={fragments} strand={strand} products={products} />
+            )}
+            {DataVerifier.isValidArray(externalCrossReferences) && viewExternalRef ? (
+                <ExternalCrossReferences references={externalCrossReferences} />
+            )
+                : null}
+            {DataVerifier.isValidArray(citations) && (
+                <Citations citations={citations} allCitations={allCitations} />
+            )}
         </div>
     );
 }

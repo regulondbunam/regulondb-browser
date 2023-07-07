@@ -275,7 +275,7 @@ function DownloadOptions({ format, sequence, title, idSequence }) {
                     <ListItemIcon>
                         <ArticleOutlinedIcon fontSize="small" />
                     </ListItemIcon>
-                    <ListItemText>{`${format} file`}</ListItemText>
+                    <ListItemText>{`sequence ${format} file`}</ListItemText>
                 </MenuItem>
             </Menu>
             <Stack spacing={2} sx={{ width: '100%' }}>
