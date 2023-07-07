@@ -40,9 +40,26 @@ function Arrangement({
     //console.log(transcriptionUnit);
     return (
         <>
-        <td>{transcriptionUnit.name}</td>
-        <td>{promoters.map(pro => pro.name).join(", ")}</td>
-        <td>{regulators.map(regulators => <p>{`${regulators.name} (${regulators.function})`}</p>)}</td>
+            <td>{transcriptionUnit.name}</td>
+            <td>{promoters.map(pro => pro.name).join(", ")}</td>
+            <td>{regulators.map((regulator, index) => {
+                let fun = ""
+                switch (regulator.function) {
+                    case "repressor":
+                        fun = "-"
+                        break;
+                    case "activator":
+                        fun = "+"
+                        break;
+                    case "dual":
+                        fun = "+-"
+                        break;
+                    default:
+                        fun = ""
+                        break;
+                }
+                return <p key={`${regulator.name}_${regulator._id}_${index}`}>{`${regulator.name}${fun}`}</p>
+            })}</td>
         </>
-        )
+    )
 }

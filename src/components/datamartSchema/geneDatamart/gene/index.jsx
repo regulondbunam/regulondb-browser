@@ -190,22 +190,6 @@ function ExternalCrossReferences({ references }) {
     )
 }
 
-// eslint-disable-next-line no-unused-vars
-function MultifunTerms({ multifunTerms }) {
-    return (
-        <Accordion title={<p style={{ fontWeight: "bold" }}>Multifun Terms</p>} >
-            <div >
-                {multifunTerms.map((m, i) => {
-                    return (
-                        <div key={`multifun${i}-data-${m.id}`}>
-                            <p><b>{`${m.label}: ${m.name}`}</b></p>
-                        </div>
-                    );
-                })}
-            </div>
-        </Accordion>
-    );
-}
 
 function Fragments({ fragments, strand, products, _id }) {
     return (

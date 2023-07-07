@@ -1,7 +1,7 @@
 import { useMemo } from "react"
 import { AnchorNav, DataVerifier } from "../../components/ui-components"
 import DrawingTracesTool from "../../components/DrawingTracesTool";
-import { Gene, Product, Regulation, AllCitations } from "../../components/datamartSchema"
+import { Gene, Product, Regulation, AllCitations, MultifunTerms } from "../../components/datamartSchema"
 import RelatedTool from "./components/relatedTool";
 
 
@@ -37,6 +37,17 @@ export default function Information({ geneData }) {
                         <Gene {...geneData.gene} allCitations={geneData.allCitations} viewTitle={false} products={geneData.products} />
                     </div>
             })
+            if(DataVerifier.isValidArray(geneData.gene.multifunTerms)){
+                tabsInfo.push({
+                    id: "GeneTab_MultifunTerms",
+                    label: "MultifunTerms",
+                    title: "MultifunTerms",
+                    component:
+                        <div style={{ margin: "0% 1% 1% 2%", minHeight: "150px", paddingTop: "20px" }} >
+                            <MultifunTerms multifunTerms={geneData.gene.multifunTerms} />
+                        </div>
+                })
+            }
         }
         if (geneData?.regulation) {
             tabsInfo.push({
