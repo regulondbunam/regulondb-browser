@@ -34,7 +34,7 @@ function ExternalCrossReference({
                 rel="noreferrer"
                 style={{ fontSize: "12px" }}
             >
-                {`${externalCrossReferenceName}: ${objectId}`}
+                {`${externalCrossReferenceName}`}
             </a>
         </div>
     );

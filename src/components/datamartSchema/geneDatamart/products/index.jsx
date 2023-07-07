@@ -165,7 +165,7 @@ function Citations({ citations, allCitations }) {
 function ExternalCrossReferences({ references }) {
     return (
         <Accordion title={"External Cross References"} >
-            <div>
+            <div style={{display: "grid", gridTemplateColumns: "25% 25% 25% 25%"}} >
                 {
                     references.map(((reference) => {
                         return (

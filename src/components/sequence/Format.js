@@ -1,9 +1,13 @@
 export default class Formats {
 
-    constructor(sequence, title) {
+    constructor(sequence, title, options) {
         this.sequence = sequence.split('');
         this.size = sequence.length
         this.title = title
+        if(options){
+            this.countItems = options.countItems
+        }
+        
     }
 
     addAttributes(x, id, color = false) {
@@ -70,21 +74,28 @@ export default class Formats {
     getStrInfoSequence() {
         let infoSequence = this.getInfoSequence()
         let strInfoSequence = `size: ${infoSequence.size}`
-        Object.keys(infoSequence.elements).forEach(x => {
-            strInfoSequence += ` ${x}: ${infoSequence.elements[x]}`
-        })
+        if(this.countItems){
+            Object.keys(infoSequence.elements).forEach(x => {
+                strInfoSequence += ` ${x}: ${infoSequence.elements[x]}`
+            })
+        }
         return strInfoSequence
     }
 
-    getFastaFormat({ color = false }) {
+    getFastaFormat({ color = false, charactersPerLine = 60 }) {
+        if(!Number.isInteger(charactersPerLine)){
+            charactersPerLine = parseInt(charactersPerLine)
+        }
         let count = 1
         let sequenceFormat = ''
         for (let index = 0; index < this.sequence.length; index++) {
+            
             let x = this.sequence[index];
             if (color) {
                 x = this.putColor(x)
             }
-            if (count === 60) {
+            if (count === charactersPerLine) {
+                
                 count = 0;
                 sequenceFormat += `${x}<br>`
             } else {

@@ -1,10 +1,19 @@
 import React from 'react';
-import { Accordion, DataVerifier } from "../../../components/ui-components"
+import { DataVerifier } from "../../../components/ui-components"
 import { ExternalCrossReferences } from "../../../components/datamartSchema"
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import Divider from '@mui/material/Divider';
+import Collapse from '@mui/material/Collapse';
 
 const style = {
     position: "absolute",
@@ -22,52 +31,83 @@ export default function RelatedTool({ gene, products }) {
 
     const [open, setOpen] = React.useState(false);
 
+    const navigate = useNavigate();
+
     return (
         <div className="noPrint" >
-            <Accordion title={<p style={{ fontWeight: "bold" }}>Related Tools</p>} >
-                {DataVerifier.isValidObject(gene) && (
-                    <>
-                        {DataVerifier.isValidNumber(gene.leftEndPosition) && (
-                            <Link
-                                to={`/dtt/leftEndPosition=${gene.leftEndPosition - 1000}&rightEndPosition=${gene.rightEndPosition + 1000}`}
-                            >
-                                <b>Drawing Traces Tool</b>
-                            </Link>
-                        )}
-                    </>
-                )}
-            </Accordion>
-            <Accordion title={<p style={{ fontWeight: "bold" }}>Download Options</p>} >
-            <Button size='small' variant="text"
-                onClick={pdfDownloader}
-            >PDF</Button>
-            </Accordion>
-            <Accordion title={<p style={{ fontWeight: "bold" }}>External Cross References</p>} >
-                {DataVerifier.isValidArray(gene.externalCrossReferences) && (
-                    <>
-                        <b>Gene References: </b>
+            {DataVerifier.isValidObject(gene) && (
+                <Tool title={"Related Tools"} >
+                    <List>
+                        <ListItemButton sx={{ pl: 4 }} onClick={() => {
+                            navigate(`/dtt/leftEndPosition=${gene.leftEndPosition - 1000}&rightEndPosition=${gene.rightEndPosition + 1000}`)
+                        }} >
+                            <p>Drawing Traces Tool</p>
+                        </ListItemButton>
+                        <ListItemButton sx={{ pl: 4 }} onClick={() => {
+                            navigate(`/coexpression/geneId=${gene._id}`)
+                        }} >
+                            <p>Gene Coexpression</p>
+                        </ListItemButton>
+                    </List>
+                    
+                </Tool>
+            )}
+            <Tool title={"Download Options"} >
+                <ListItemButton sx={{ pl: 4 }} onClick={pdfDownloader} >
+                    <ListItemIcon>
+                        <PictureAsPdfIcon />
+                    </ListItemIcon>
+                    <p>PDF document</p>
+                </ListItemButton>
+            </Tool>
+            {DataVerifier.isValidArray(gene.externalCrossReferences) && (
+                <Tool title={"External Cross References"} >
+                    <ListItem sx={{ pl: 4 }}>
                         <ExternalCrossReferences variant="list" externalCrossReferences={gene.externalCrossReferences} />
-                    </>
-                )}
-            </Accordion>
-            <Accordion title={<p style={{ fontWeight: "bold" }}>User Feedback</p>} >
-                <button onClick={()=>{setOpen(!open)}} >User Feedback</button>
-                <Modal
-                    open={open}
-                    onClose={() => { setOpen(!open) }}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                >
-                    <Box sx={style}>
-                        <div style={{ display: "flex", flexDirection: "row-reverse" }} ><button onClick={() => { setOpen(!open) }} className="accent" >Close</button></div>
-                        <div class="asana-embed-container"><link rel="stylesheet" href="https://form.asana.com/static/asana-form-embed-style.css" /><iframe title="feedbackForm" className="asana-embed-iframe" src="https://form.asana.com/?k=uzd6ZoyuRLFIKgmaAw1uKQ&d=1108899165642340&embed=true"></iframe><div class="asana-embed-footer"><a rel="nofollow noopener  noreferrer" target="_blank" class="asana-embed-footer-link" href="https://asana.com/es?utm_source=embedded_form"><span class="asana-embed-footer-text Typography Typography--s">Formulario desarrollado por</span><div class="asana-embed-footer-logo" role="img" aria-label="Logo de Asana"></div></a></div></div>
-                    </Box>
-                </Modal>
-            </Accordion>
+                    </ListItem>
+                </Tool>
+            )}
+            <Tool title={"FeedBack"} >
+                <ListItemButton sx={{ pl: 4 }} onClick={() => {
+                    setOpen(!open)
+                }} >
+                    <p>User Feedback</p>
+                </ListItemButton>
+            </Tool>
+
+            <Divider />
+            <Modal
+                open={open}
+                onClose={() => { setOpen(!open) }}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <div style={{ display: "flex", flexDirection: "row-reverse" }} ><button onClick={() => { setOpen(!open) }} className="accent" >Close</button></div>
+                    <div class="asana-embed-container"><link rel="stylesheet" href="https://form.asana.com/static/asana-form-embed-style.css" /><iframe title="feedbackForm" className="asana-embed-iframe" src="https://form.asana.com/?k=uzd6ZoyuRLFIKgmaAw1uKQ&d=1108899165642340&embed=true"></iframe><div class="asana-embed-footer"><a rel="nofollow noopener  noreferrer" target="_blank" class="asana-embed-footer-link" href="https://asana.com/es?utm_source=embedded_form"><span class="asana-embed-footer-text Typography Typography--s">Formulario desarrollado por</span><div class="asana-embed-footer-logo" role="img" aria-label="Logo de Asana"></div></a></div></div>
+                </Box>
+            </Modal>
         </div>
     )
 }
 
-function pdfDownloader(){
+function Tool({ title, children }) {
+    const [open, setOpen] = React.useState(false);
+    return (
+        <List dense >
+            <ListItemButton onClick={() => { setOpen(!open) }}>
+                <ListItemText primary={title} />
+                {open ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                    {children}
+                </List>
+            </Collapse>
+        </List>
+    )
+}
+
+function pdfDownloader() {
     window.print()
 }

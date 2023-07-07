@@ -12,22 +12,27 @@ export function Regulation({
 }) {
 
     return (
-        <div>
-            <Operon {...operon} />
-            <p style={{ fontSize: "18px" }} ><b>{`Regulators`}</b></p>
-            <div style={{ marginLeft: "1%" }}>
-                {DataVerifier.isValidArray(regulators) && (
-                    <Regulators regulators={regulators} />
-                )}
+        <div style={{ display: 'flex', justifyContent: "space-around" }} >
+            <div>
+                <Operon {...operon} />
+            </div>
+            <div>
+                <p style={{ fontSize: "18px" }} ><b>{`Regulators`}</b></p>
+                <div style={{ marginLeft: "1%" }}>
+                    {DataVerifier.isValidArray(regulators) && (
+                        <Regulators regulators={regulators} />
+                    )}
+                </div>
+            </div>
+            <div>
+                <p style={{ fontSize: "18px" }} ><b>{`Statistics`}</b></p>
+                <div style={{ marginLeft: "1%" }}>
+                    {DataVerifier.isValidObject(statistics) && (
+                        <Statistics statistics={statistics} />
+                    )}
+                </div>
             </div>
 
-            <br />
-            <p style={{ fontSize: "18px" }} ><b>{`Statistics`}</b></p>
-            <div style={{ marginLeft: "1%" }}>
-                {DataVerifier.isValidObject(statistics) && (
-                    <Statistics statistics={statistics} />
-                )}
-            </div>
 
         </div>
     )

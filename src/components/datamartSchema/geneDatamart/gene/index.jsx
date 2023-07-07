@@ -1,6 +1,7 @@
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ViewSequence from "./viewSequence";
+import PanelSequence from "./viewSequence/panelSequence";
 import PropTypes from 'prop-types';
 import { DataVerifier, Accordion } from "../../../ui-components";
 import { ParagraphCitations, NoteCitations } from "../../citations";
@@ -53,50 +54,52 @@ function Gene({
             {viewTitle && (
                 <p style={{ fontSize: "18px" }} ><b>{name} Gene</b></p>
             )}
-            <table className="table_auto table_content">
-                <tbody>
-                    {DataVerifier.isValidArray(synonyms) && (
-                        <tr>
-                            <td style={{ fontWeight: "bold" }}>Synonyms: </td>
-                            <td>{synonyms.join(", ")}</td>
-                        </tr>
-                    )}
-                    {DataVerifier.isValidString(bnumber) && (
-                        <tr>
-                            <td style={{ fontWeight: "bold" }}>Bnumber:</td>
-                            <td>{bnumber}</td>
-                        </tr>
-                    )}
-                    {leftEndPosition && (
-                        <>
-                            <tr>
-                                <td style={{ fontWeight: "bold" }}>Position:</td>
-                                <td>
-                                    <div style={{ display: "flex", alignItems: "center" }}>
-                                        <p>{leftEndPosition}</p>
-                                        {strand === "reverse" ? (
-                                            <ArrowBackIcon fontSize="small" />
-                                        ) : (
-                                            <ArrowForwardIcon fontSize="small" />
-                                        )}
-                                        <p>{rightEndPosition}</p>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style={{ fontWeight: "bold" }}>Size:</td>
-                                <td>{size}bp</td>
-                            </tr>
-                        </>
+            <div style={{ display: "grid", gridTemplateColumns: "20% 80%" }} >
+                <div className="leftGene">
+                    <table className="table_auto table_content">
+                        <tbody>
+                            {DataVerifier.isValidArray(synonyms) && (
+                                <tr>
+                                    <td style={{ fontWeight: "bold" }}>Synonyms: </td>
+                                    <td>{synonyms.join(", ")}</td>
+                                </tr>
+                            )}
+                            {DataVerifier.isValidString(bnumber) && (
+                                <tr>
+                                    <td style={{ fontWeight: "bold" }}>Bnumber:</td>
+                                    <td>{bnumber}</td>
+                                </tr>
+                            )}
+                            {leftEndPosition && (
+                                <>
+                                    <tr>
+                                        <td style={{ fontWeight: "bold" }}>Position:</td>
+                                        <td>
+                                            <div style={{ display: "flex", alignItems: "center" }}>
+                                                <p>{leftEndPosition}</p>
+                                                {strand === "reverse" ? (
+                                                    <ArrowBackIcon fontSize="small" />
+                                                ) : (
+                                                    <ArrowForwardIcon fontSize="small" />
+                                                )}
+                                                <p>{rightEndPosition}</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style={{ fontWeight: "bold" }}>Size:</td>
+                                        <td>{`${size} bp`}</td>
+                                    </tr>
+                                </>
 
-                    )}
-                    {DataVerifier.isValidString(strand) && (
-                        <tr>
-                            <td style={{ fontWeight: "bold" }}>Strand:</td>
-                            <td>{strand}</td>
-                        </tr>
-                    )}
-                    {DataVerifier.isValidString(sequence) && (
+                            )}
+                            {DataVerifier.isValidString(strand) && (
+                                <tr>
+                                    <td style={{ fontWeight: "bold" }}>Strand:</td>
+                                    <td>{strand}</td>
+                                </tr>
+                            )}
+                            {/*DataVerifier.isValidString(sequence) && (
                         <tr>
                             <td style={{ fontWeight: "bold" }}>Sequence:</td>
                             <td>
@@ -106,21 +109,30 @@ function Gene({
                                 />
                             </td>
                         </tr>
+                    )*/}
+                            {DataVerifier.isValidNumber(gcContent) && (
+                                <tr>
+                                    <td style={{ paddingLeft: "15px" }}>GC content:</td>
+                                    <td>{gcContent.toFixed(2)}%</td>
+                                </tr>
+                            )}
+                            {DataVerifier.isValidNumber(centisomePosition) && (
+                                <tr>
+                                    <td style={{ fontWeight: "bold" }}>Centisome Position:</td>
+                                    <td>{centisomePosition}</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+
+                </div>
+                <div className="rightGen" style={{ marginLeft: "15px" }}>
+                    {DataVerifier.isValidString(sequence) && (
+                        <PanelSequence sequence={sequence}
+                            _id={_id} name={name} products={products} />
                     )}
-                    {DataVerifier.isValidNumber(gcContent) && (
-                        <tr>
-                            <td style={{ fontWeight: "bold" }}>GC content:</td>
-                            <td>{gcContent}%</td>
-                        </tr>
-                    )}
-                    {DataVerifier.isValidNumber(centisomePosition) && (
-                        <tr>
-                            <td style={{ fontWeight: "bold" }}>Centisome Position:</td>
-                            <td>{centisomePosition}</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
+                </div>
+            </div>
             {DataVerifier.isValidString(note) && (
                 <Accordion title={<p style={{ fontWeight: "bold" }}>Note</p>} >
                     <p
@@ -178,22 +190,6 @@ function ExternalCrossReferences({ references }) {
     )
 }
 
-// eslint-disable-next-line no-unused-vars
-function MultifunTerms({ multifunTerms }) {
-    return (
-        <Accordion title={<p style={{ fontWeight: "bold" }}>Multifun Terms</p>} >
-            <div >
-                {multifunTerms.map((m, i) => {
-                    return (
-                        <div key={`multifun${i}-data-${m.id}`}>
-                            <p><b>{`${m.label}: ${m.name}`}</b></p>
-                        </div>
-                    );
-                })}
-            </div>
-        </Accordion>
-    );
-}
 
 function Fragments({ fragments, strand, products, _id }) {
     return (

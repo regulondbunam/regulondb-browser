@@ -1,9 +1,29 @@
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import { SequenceSelection } from "./sequence";
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import IconButton from "@mui/material/IconButton";
+
+const Alert = forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export function Highlight({ motifs, sequence }) {
   const [_leftEndPosition, set_leftEndPosition] = useState(-1);
   const [_rightEndPosition, set_rightEndPosition] = useState(-1);
+  const [snackOpen, setSnackOpen] = useState(false);
+
+    const handleOpenSnack = () => {
+        setSnackOpen(true);
+    };
+    const handleCloseSnack = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSnackOpen(false);
+    };
 
   return (
     <div>
@@ -14,8 +34,8 @@ export function Highlight({ motifs, sequence }) {
               <th>Type</th>
               <th>Positions</th>
               <th>Notes</th>
-              <th>Sequence</th>
               <th>dataSource</th>
+              <th>Sequence</th>
             </tr>
           </thead>
           <tbody>
@@ -46,26 +66,22 @@ export function Highlight({ motifs, sequence }) {
                   {motif?.type ? <td>{motif.type}</td> : <td></td>}
                   <td>{positions}</td>
                   <td>{motif.note}</td>
+                  {motif?.dataSource ? <td>{motif.dataSource}</td> : <td></td>}
                   <td>
-                    <button
-                      className="aBase"
-                      style={{ fontSize: "10px", color: "black" }}
+                    <IconButton
                       onClick={(e) => {
                         navigator.clipboard.writeText(motif.sequence);
-                        alert(
-                          `the sequence ${motif.sequence} has been copied to the clipboard`
-                        );
+                        handleOpenSnack();
                       }}
                     >
-                      copy sequence
-                    </button>
+                      <ContentCopyIcon />
+                    </IconButton>
                     <div style={{ display: "none" }}>
                       <p id={`sequence_${index}_${id}`} className="p_sequence">
                         {motif.sequence}
                       </p>
                     </div>
                   </td>
-                  {motif?.dataSource ? <td>{motif.dataSource}</td> : <td></td>}
                 </tr>
               );
             })}
@@ -80,6 +96,13 @@ export function Highlight({ motifs, sequence }) {
           rightEndPosition={_rightEndPosition}
         />
       </div>
+      <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar open={snackOpen} autoHideDuration={1000} onClose={handleCloseSnack}>
+          <Alert onClose={handleCloseSnack} severity="success" sx={{ width: '100%' }}>
+            Sequence copied to clipboard!
+          </Alert>
+        </Snackbar>
+      </Stack>
     </div>
   );
 }

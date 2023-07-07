@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+
 import Style from "./anchorNav.module.css"
 
 export function Anchor({ id, label, select = false, setId = () => { } }) {
@@ -9,40 +9,10 @@ export function Anchor({ id, label, select = false, setId = () => { } }) {
     )
 }
 
-export function AnchorBox({ idSelect, onChange, anchors = [] }) {
-
-    useEffect(() => {
-        const anchorSel = document.getElementById("anchor_list_style")
-        if (anchorSel) {
-            const optionSelect = document.getElementById(idSelect)
-
-            if (optionSelect) {
-                let initPosition = anchorSel.offsetTop
-                let destPosition = optionSelect.offsetTop
-                let interval = setInterval(function () {
-                    if (anchorSel.offsetTop === optionSelect.offsetTop + 8) {
-                        clearInterval(interval);
-                    }
-                    if (destPosition > initPosition) {
-                        anchorSel.style.top = (anchorSel.offsetTop + 1) + "px"
-                        if (anchorSel.offsetTop > destPosition) {
-                            clearInterval(interval);
-                        }
-                    } else {
-                        anchorSel.style.top = (anchorSel.offsetTop - 1) + "px"
-                        if (anchorSel.offsetTop < destPosition) {
-                            clearInterval(interval);
-                        }
-                    }
-                }, 2)
-                //console.log(optionSelect.offsetTop);
-
-            }
-        }
-    }, [idSelect]);
+export function AnchorBox({ idSelect, onChange, anchors = [], animate}) {
 
     return (
-        <div style={{ display: "grid", gridTemplateColumns: "95% 5%", }}>
+        <div id='anchors_box' style={{ display: "grid", gridTemplateColumns: "95% 5%", }}>
             <div>
                 <ul style={{ fontSize: "14px", textAlign: "end" }} >
                     {anchors.map((anchor, index) => (
@@ -50,25 +20,14 @@ export function AnchorBox({ idSelect, onChange, anchors = [] }) {
                             id={anchor.id}
                             label={anchor.label}
                             select={idSelect === anchor.id}
-                            setId={onChange}
+                            setId={(id)=>{
+                                onChange(id)
+                            }}
                         />
                     ))}
                 </ul>
             </div>
-            <div>
-                {idSelect && (
-                    <div id="anchor_list_style"
-                        style={{
-                            marginLeft: "2px",
-                            position: "absolute",
-                            height: "8px",
-                            width: "8px",
-                            borderRadius: "50%",
-                            backgroundColor: "#3D779B",
-                        }} />
-                )}
-
-            </div>
+            {animate}
         </div>
     )
 }
