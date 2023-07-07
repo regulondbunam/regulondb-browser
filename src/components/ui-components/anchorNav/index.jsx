@@ -76,20 +76,20 @@ export default function AnchorNav({ title = "", sections = [], idSelectSection, 
       const optionNew = document.getElementById(id)
       const box = document.getElementById('anchors_box')
       if (optionNew && box) {
-          const yBox = box.getBoundingClientRect().y
-          let yFrom = 0
-          if (optionOld) {
-              yFrom = Math.abs(yBox-optionOld.getBoundingClientRect().y-2)
-          }
-          let yTo = Math.abs(yBox-optionNew.getBoundingClientRect().y-2)
-          api.start({
-              from: {
-                y: yFrom,
-              },
-              to: {
-                y: yTo,
-              },
-            })
+        const yBox = box.getBoundingClientRect().y
+        let yFrom = 0
+        if (optionOld) {
+          yFrom = Math.abs(yBox - optionOld.getBoundingClientRect().y - 2)
+        }
+        let yTo = Math.abs(yBox - optionNew.getBoundingClientRect().y - 2)
+        api.start({
+          from: {
+            y: yFrom,
+          },
+          to: {
+            y: yTo,
+          },
+        })
       }
     }
 
@@ -119,7 +119,7 @@ export default function AnchorNav({ title = "", sections = [], idSelectSection, 
     };
   }, [collapse, idSection, sections, title, api]);
 
-  
+
 
   const handleCollapse = () => {
     sections.forEach(section => {
@@ -172,7 +172,34 @@ export default function AnchorNav({ title = "", sections = [], idSelectSection, 
   const handleChange = (id) => {
     const sectionCard = document.getElementById("scroll_section_" + id)
     if (sectionCard) {
-      sectionCard.scrollIntoView({behavior: 'smooth'})// behavior: 'smooth'
+      sectionCard.scrollIntoView({ behavior: 'smooth' })// behavior: 'smooth'
+    }
+    if (collapse) {
+      const animateAnchor = (id) => {
+        const optionOld = document.getElementById(idSection)
+        const optionNew = document.getElementById(id)
+        const box = document.getElementById('anchors_box')
+        if (optionNew && box) {
+          const yBox = box.getBoundingClientRect().y
+          let yFrom = 0
+          if (optionOld) {
+            yFrom = Math.abs(yBox - optionOld.getBoundingClientRect().y - 2)
+          }
+          let yTo = Math.abs(yBox - optionNew.getBoundingClientRect().y - 2)
+          api.start({
+            from: {
+              y: yFrom,
+            },
+            to: {
+              y: yTo,
+            },
+          })
+        }
+      }
+      let section = sections.find(sec => sec.id === id)
+      setNavTitle(`${title}, ${section.title}`)
+      animateAnchor(id)
+      setIdSection(id)
     }
   };
 
@@ -213,22 +240,22 @@ export default function AnchorNav({ title = "", sections = [], idSelectSection, 
                 onChange={handleChange}
                 animate={
                   <div>
-                  {idSection && (
+                    {idSection && (
                       <animated.div
-                          id="anchor_list_style"
-                          style={{
-                              marginLeft: "4px",
-                              position: "absolute",
-                              height: "11px",
-                              width: "4px",
-                              borderRadius: "1px",
-                              backgroundColor: "#3D779B",
-                              ...springs,
-                          }}
+                        id="anchor_list_style"
+                        style={{
+                          marginLeft: "4px",
+                          position: "absolute",
+                          height: "11px",
+                          width: "4px",
+                          borderRadius: "1px",
+                          backgroundColor: "#3D779B",
+                          ...springs,
+                        }}
                       />
-                  )}
-  
-              </div>
+                    )}
+
+                  </div>
                 }
               />
             </div>
@@ -248,11 +275,11 @@ export default function AnchorNav({ title = "", sections = [], idSelectSection, 
             {sections.map((section, index) => {
               return <div key={"c_" + index + "_section_" + section.id} >
                 <div className={Style.scroll_section} id={"scroll_section_" + section.id} />
-                <div className={Style.flag_section} id={"init_section_" + section.id}/>
-                  <Card id={section.id} title={section.title} >
-                    {section.component}
-                <div className={Style.end_flag_section} id={"end_section_" + section.id}/>
-                  </Card>
+                <div className={Style.flag_section} id={"init_section_" + section.id} />
+                <Card id={section.id} title={section.title} >
+                  {section.component}
+                  <div className={Style.end_flag_section} id={"end_section_" + section.id} />
+                </Card>
                 <br />
               </div>
             })}
