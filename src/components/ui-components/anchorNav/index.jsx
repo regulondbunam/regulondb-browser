@@ -224,7 +224,7 @@ export default function AnchorNav({ title = "", sections = [], idSelectSection, 
                     <FormatIndentDecreaseIcon />
                   </IconButton>
                 </Tooltip>
-                <Tooltip title={onTop ? "go to top page" : "go to bottom page"} >
+                <Tooltip title={onTop ? "go to bottom page" : "go to top page"} >
                   <IconButton onClick={handleTop} sx={{ borderRadius: 0 }} color="secondary" >
                     {onTop ? <VerticalAlignBottomIcon /> : <VerticalAlignTopIcon />}
                   </IconButton>

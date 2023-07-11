@@ -14,7 +14,7 @@ export function AnchorBox({ idSelect, onChange, anchors = [], animate}) {
     return (
         <div id='anchors_box' style={{ display: "grid", gridTemplateColumns: "95% 5%", }}>
             <div>
-                <ul style={{ fontSize: "14px", textAlign: "end" }} >
+                <ul style={{ fontSize: "14px", textAlign: "end", padding: "0" }} >
                     {anchors.map((anchor, index) => (
                         <Anchor key={"anchor_" + index + "_" + anchor.id}
                             id={anchor.id}

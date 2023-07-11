@@ -21,6 +21,7 @@ import Overviews from './apps/overviews'
 import SummaryHistory from './apps/summaryHistory'
 import ReleaseNotes from './apps/releasesNotes';
 import GensorUnit from "./apps/gensorUnit"
+import AboutUs from './apps/aboutUs';
 
 
 const router = createBrowserRouter([
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: "aboutUs",
+        element: <AboutUs />,
       },
       {
         path: "home",
