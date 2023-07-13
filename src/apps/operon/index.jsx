@@ -4,10 +4,11 @@ import "./operon.css";
 import Home from "./home";
 import { useGetOperonByID, useGetOperonByTuId } from "../../components/webservices";
 import Title from "./Title";
+import Document from "./document";
 
 
 export default function Operon() {
-  let { operonId, tuId } = useParams();
+  let { operonId, tuId, section } = useParams();
   if (!operonId && !tuId) {
     return <Home />
   }
@@ -15,7 +16,7 @@ export default function Operon() {
     return <RedirectToOperon tuId={tuId} />
   }
   if (operonId) {
-    return <LoadOperon operonId={operonId} />
+    return <LoadOperon operonId={operonId} section={section} />
   }
   return null
 }
@@ -49,11 +50,14 @@ function RedirectToOperon({ tuId }) {
   return (
     <div>
       <Title state={state} title={title} operonData={operonData} />
+      {operonData && (
+        <Document operonData={operonData}/>
+      )}
     </div>
   )
 }
 
-function LoadOperon({ operonId }) {
+function LoadOperon({ operonId, section }) {
   const { operonData, loading, error } = useGetOperonByID({ _id: operonId })
   let state = "done"
   let title = "Operons"
@@ -74,11 +78,12 @@ function LoadOperon({ operonId }) {
       title = operonData.operon.name
     }
   }
-
   return (
     <div>
       <Title state={state} title={title} operonData={operonData} />
-      operon
+      {operonData && (
+        <Document operonData={operonData} section={section} />
+      )}
     </div>
   )
 }

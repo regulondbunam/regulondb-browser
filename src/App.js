@@ -96,7 +96,10 @@ const router = createBrowserRouter([
         path: "operon",
         element: <Operon />,
         children: [
-          { path: ":operonId" }
+          { 
+            path: ":operonId",
+            children: [{path: ":section"}]
+          }
         ]
       },
       {

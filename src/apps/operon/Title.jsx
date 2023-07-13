@@ -17,7 +17,6 @@ export default function Title({ state, title, operonData }) {
 function Info(operonData) {
 
     const {
-        _id,
         operon
     } = operonData
     let leftEndPosition = "",
