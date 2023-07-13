@@ -2,9 +2,14 @@ import { Cover, AnchorNav } from "../../components/ui-components"
 import { Funding } from "./funding"
 import { WRegulonDB } from "./whatIsRegulonDB"
 import { TermsConditions } from "./termsConditions"
+import { useParams } from "react-router-dom"
+
+
 
 
 export default function AboutUs() {
+
+    let { section } = useParams();
     
     const sections = [
         {
@@ -17,7 +22,7 @@ export default function AboutUs() {
                 </div>
         },
         {
-            id: "Funding",
+            id: "funding",
             label: "Funding",
             title: "Funding",
             component:
@@ -42,7 +47,9 @@ export default function AboutUs() {
             <Cover>
                 <h1 style={{fontSize: "xxx-large"}} >About us</h1>
             </Cover>
-            <AnchorNav title="About us" sections={sections} />
+            <AnchorNav title="About us" sections={sections} idSelectSection={section} />
         </div>
     )
 }
+
+export { Funding, WRegulonDB, TermsConditions }

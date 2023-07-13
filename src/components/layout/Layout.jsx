@@ -14,7 +14,9 @@ const Layout = () => {
       <Observer />
       <Header isHome={isHome} />
       <Menu />
-      <Outlet />
+      <div style={{minHeight: "78vh"}} >
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );

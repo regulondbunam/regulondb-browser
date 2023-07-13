@@ -40,6 +40,9 @@ const router = createBrowserRouter([
       {
         path: "aboutUs",
         element: <AboutUs />,
+        children: [
+          { path: ":section" }
+        ],
       },
       {
         path: "home",
