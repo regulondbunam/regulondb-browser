@@ -5,9 +5,8 @@ export function useGetOperonByID({
     _id,
 }) {
     const { data, loading, error } = useQuery(query_GET_OPERON_BY, {
-        variables: { search: `${_id}[_id]`, limit: 1 }
+        variables: { advancedSearch: `${_id}[_id]`, limit: 1 }
     })
-    
     let operonData
     try {
         if (data) {
@@ -32,7 +31,7 @@ export function useGetOperonByTuId({
     _tuId,
 }) {
     const { data, loading, error } = useQuery(query_GET_OPERON_BY, {
-        variables: { search: `${_tuId}[transcriptionUnits._id]`, limit: 1 }
+        variables: { advancedSearch: `${_tuId}[transcriptionUnits._id]`, limit: 1 }
     })
     let operonData
     try {
