@@ -1,30 +1,5 @@
 import { gql } from "@apollo/client";
-
-export const fragment_CITATIONS = gql`fragment CITATIONS on Citations {
-    publication {
-      _id
-      authors
-      pmid
-      citation
-      url
-      title
-      year
-    }
-    evidence {
-      _id
-      name
-      code
-      type
-    }
-  }`
-
-export const fragment_PAGINATION = gql`fragment PAGINATION on Pagination {
-    currentPage
-    firstPage
-    hasNextPage
-    limit
-    totalResults
-  }`
+import { fragment_CITATIONS, fragment_PAGINATION } from "../commonQueries";
 
 export const fragment_RegulatorBS = gql`fragment RegulatorBS on RegulatorBindingSites {
     regulator {
@@ -162,10 +137,12 @@ ${fragment_PAGINATION}
 query GetOperonInfo(
     $advancedSearch: String
     $search: String
+    $limit: Int
   ) {
     getOperonBy(
       advancedSearch: $advancedSearch
       search: $search
+      limit: $limit
     ) {
       data {
         _id
