@@ -70,6 +70,11 @@ export const fragment_TRANSCRIPTIONUNIT = gql`fragment TRANSCRIPTIONUNITS on Tra
     promoter {
       _id
       name
+      additiveEvidences {
+        category
+        code
+        type
+      }
       bindsSigmaFactor {
         _id
         citations {

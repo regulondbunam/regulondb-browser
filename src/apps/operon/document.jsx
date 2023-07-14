@@ -31,7 +31,7 @@ export default function Document({ operonData, section }) {
                     label: tu.name,
                     title: tu.name,
                     component: <div>
-                        <TranscriptionUnit {...tu} regulationPositions={operonData.operon.regulationPositions} strand={operonData.operon.strand} />
+                        <TranscriptionUnit {...tu} allCitations={operonData.allCitations} regulationPositions={operonData.operon.regulationPositions} strand={operonData.operon.strand} />
                     </div>
                 })
             });
