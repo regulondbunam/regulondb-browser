@@ -19,12 +19,12 @@ function Info(operonData) {
     const {
         operon
     } = operonData
-    let leftEndPosition = "",
-        rightEndPosition = "",
-        sGenes = "",
-        sPromoters = "",
-        sTU = "",
-        row = ""
+    let leftEndPosition = undefined,
+        rightEndPosition = undefined,
+        sGenes = undefined,
+        sPromoters = undefined,
+        sTU = undefined,
+        row = undefined
 
     if (DataVerifier.isValidObject(operon)) {
         if (DataVerifier.isValidString(operon.strand)) {
@@ -36,29 +36,21 @@ function Info(operonData) {
             rightEndPosition = operon.regulationPositions.rightEndPosition
         }
         if (DataVerifier.isValidObject(operon.statistics)) {
-            sGenes = operon.statistics.gene
+            sGenes = operon.statistics.genes
             sPromoters = operon.statistics.promoters
             sTU = operon.statistics.transcriptionUnits
         }
     }
-
     return(
         <div>
+            <p><b>Regulation Position</b></p>
             <p>{`${leftEndPosition} ${row} ${rightEndPosition}`}</p>
-                <div className="cover_statistics" >
-                    <div className="stt_box stt_gene">
-                        <p>Genes</p>
-                        <p>{sGenes}</p>
-                    </div>
-                    <div className="stt_box stt_promoter">
-                        <p>Promoters</p>
-                        <p>{sPromoters}</p>
-                    </div>
-                    <div className="stt_box stt_tu">
-                        <p>Transcription Unit</p>
-                        <p>{sTU}</p>
-                    </div>
+                <div>
+                    {sGenes && (<p><b>Genes:</b>{sGenes}</p>)}
+                    {sPromoters && (<p><b>Promoters:</b>{sPromoters}</p>)}
+                    {sTU && (<p><b>TranscriptionFactors:</b>{sTU}</p>)}
                 </div>
+                <br />
         </div>
     )
 }

@@ -24,6 +24,7 @@ class Track {
     this.width = drawPlace.width;
     this.height = drawPlace.height
     this.dna_y = drawPlace.dna_y;
+    this.labelTitle = drawPlace.labelTitle
   }
 
   draw(geneticElements, covered_LeftPosition, covered_RightPosition) {
@@ -58,7 +59,8 @@ class Track {
         ...dna_obj,
         id: this.id,
         canva: canvas,
-        y: y
+        y: y,
+        labelName: this.labelTitle
       })
       geneticElements = verticalPosition(geneticElements,dna).geneticElements;
       if (!geneticElements) {

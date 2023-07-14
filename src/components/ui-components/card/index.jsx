@@ -1,5 +1,5 @@
 
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -8,9 +8,9 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from '@mui/material/Tooltip';
 //import PropTypes from "prop-types";
 
-export function showCard(id,view) {
-  let detail = {view: view};
-  const CARD = document.getElementById("card_"+id);
+export function showCard(id, view) {
+  let detail = { view: view };
+  const CARD = document.getElementById("card_" + id);
   if (CARD) {
     const CARD_REACTION = new CustomEvent("updateView", {
       bubbles: true,
@@ -20,15 +20,24 @@ export function showCard(id,view) {
   }
 }
 
+const DEFAULT_OPTIONS = {
+  showTitle: true
+}
+
 function Card({
   children,
   id,
   title = "",
+  options
 }) {
   const [view, setView] = React.useState(true);
 
+  const newOptions = useMemo(() => {
+    return { ...DEFAULT_OPTIONS, ...options }
+  })
+
   useEffect(() => {
-    const crd = document.getElementById("card_"+id)
+    const crd = document.getElementById("card_" + id)
     if (crd) {
       crd.addEventListener(
         "updateView",
@@ -43,26 +52,28 @@ function Card({
   return (
     <Box>
       <Paper>
-        <div id={"card_"+id} style={{ display: "flex", justifyContent: "space-between" }}>
-          <div style={{ display: "flex", alignItems: "center", width: "100%", backgroundColor: "#72A7C7" }}>
-            <div>
-            <Tooltip title={view ? "collapse":"expand"}>
-              <IconButton
-                sx={{ width: "25px", height: "25px" }}
-                aria-label="view"
-                onClick={() => {
-                  setView(!view);
-                }}
-              >
-                {view ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-              </IconButton>
-              </Tooltip>
-            </div>
-            <div >
-              <h2 style={{color: "white"}} >{title}</h2>
+        {newOptions.showTitle && (
+          <div id={"card_" + id} style={{ display: "flex", justifyContent: "space-between" }}>
+            <div style={{ display: "flex", alignItems: "center", width: "100%", backgroundColor: "#72A7C7" }}>
+              <div>
+                <Tooltip title={view ? "collapse" : "expand"}>
+                  <IconButton
+                    sx={{ width: "25px", height: "25px" }}
+                    aria-label="view"
+                    onClick={() => {
+                      setView(!view);
+                    }}
+                  >
+                    {view ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                  </IconButton>
+                </Tooltip>
+              </div>
+              <div >
+                <h2 style={{ color: "white" }} >{title}</h2>
+              </div>
             </div>
           </div>
-        </div>
+        )}
         <div>
           {view && children}
         </div>

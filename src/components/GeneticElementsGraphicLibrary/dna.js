@@ -38,11 +38,18 @@ export default function DrawDna({
   const forwardActive = y;
   const reverseActive = canva.node.clientHeight - y - stroke.width;
   //draw text
+  
   if (labelName) {
+    console.log(labelName);
     canva
       .text(labelName)
-      .font(font)
-      .move(lx2 - font["size"] / 2, 1);
+      .font({
+        size: 14,
+        family: "arial",
+        fill: "#000",
+        weight: "bold",
+      })
+      .move(0, 5);
   }
 
   canva

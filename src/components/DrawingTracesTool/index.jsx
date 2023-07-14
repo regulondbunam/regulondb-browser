@@ -45,6 +45,7 @@ class DrawingTracesTool extends Component {
           canva_id: this.canvaId,
           width: width,
           height: height,
+          labelTitle: this.props.labelTitle
         });
         //console.log(dttContext);
         //
@@ -164,11 +165,13 @@ DrawingTracesTool.defaultProps = {
   getGeneticElements: ()=>{},
   controls: true,
   height: 200,
-  getStatus: ()=>{}
+  getStatus: ()=>{},
+  labelTitle: ""
 } 
 
 DrawingTracesTool.propTypes = {
   id: PropTypes.string.isRequired,
+  labelTitle: PropTypes.string,
   relatedIds: PropTypes.array,
   height: PropTypes.number,
   context: isContext,

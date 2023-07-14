@@ -44,8 +44,8 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
     borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-export default function Accordion({children, title}) {
-    const [expanded, setExpanded] = useState(true);
+export default function Accordion({children, title, expand = true}) {
+    const [expanded, setExpanded] = useState(expand);
     return (
         <AccordionStyled expanded={expanded} onChange={() => { setExpanded(!expanded) }} >
             <AccordionSummary

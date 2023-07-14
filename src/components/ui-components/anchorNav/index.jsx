@@ -59,7 +59,12 @@ function scrollFunction(sections = [], setIdSection, setOnTop, title = "", setNa
 
 }
 
-export default function AnchorNav({ title = "", sections = [], idSelectSection, header, aside, bottom }) {
+export default function AnchorNav({
+  title = "",
+  sections = [],
+  idSelectSection,
+  cardOptions,
+  header, aside, bottom }) {
 
   const [idSection, setIdSection] = useState();
   const [navTitle, setNavTitle] = useState(title);
@@ -76,10 +81,10 @@ export default function AnchorNav({ title = "", sections = [], idSelectSection, 
       const sectionCard = document.getElementById("scroll_section_" + idSelectSection)
       if (sectionCard) {
         sectionCard.scrollIntoView({ behavior: 'smooth' })
-        setTimeout(()=>{
+        setTimeout(() => {
           sectionCard.scrollIntoView({ behavior: 'smooth' })// behavior: 'smooth'
-        },500)
-       
+        }, 500)
+
       }
     }
     const animateAnchor = (id) => {
@@ -287,11 +292,10 @@ export default function AnchorNav({ title = "", sections = [], idSelectSection, 
               return <div key={"c_" + index + "_section_" + section.id} >
                 <div className={Style.scroll_section} id={"scroll_section_" + section.id} />
                 <div className={Style.flag_section} id={"init_section_" + section.id} />
-                <Card id={section.id} title={section.title} >
+                <Card options={cardOptions} id={section.id} title={section.title} >
                   {section.component}
                   <div className={Style.end_flag_section} id={"end_section_" + section.id} />
                 </Card>
-                <br />
               </div>
             })}
           </div>
