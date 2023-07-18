@@ -40,7 +40,6 @@ export default function DrawDna({
   //draw text
   
   if (labelName) {
-    console.log(labelName);
     canva
       .text(labelName)
       .font({

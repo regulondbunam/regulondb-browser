@@ -2,6 +2,7 @@ import DrawingTracesTool from "../../../DrawingTracesTool"
 import { Accordion, DataVerifier } from "../../../ui-components"
 import Genes from "./genes"
 
+import { LinealSequence } from "../../../sequence";
 import { ParagraphCitations, NoteCitations } from "../../citations";
 
 export default function TranscriptionUnit({
@@ -39,7 +40,7 @@ export default function TranscriptionUnit({
                 />
             </div>
             <div>
-                <Accordion title={"Show detailed TU information"} expand={false} >
+                <Accordion title={"Detailed TU " + name + " with promoter " + promoter.name + " information"} backgroundColor="#ffffff" >
                     <div>
                         {DataVerifier.isValidObject(firstGene) && (
                             <Genes firstGene={firstGene} genes={genes} />
@@ -65,9 +66,9 @@ export default function TranscriptionUnit({
                                             </>
                                         )}
                                     </div>
-                                        {DataVerifier.isValidArray(promoter.additiveEvidences) && (
-                                           <div>
-                                             <table className="tableAccent" >
+                                    {DataVerifier.isValidArray(promoter.additiveEvidences) && (
+                                        <div>
+                                            <table className="tableAccent" >
                                                 <thead>
                                                     <tr>
                                                         <th colSpan={3} >Additive Evidences</th>
@@ -88,11 +89,22 @@ export default function TranscriptionUnit({
                                                     })}
                                                 </tbody>
                                             </table>
-                                           </div>
-                                        )}
+                                        </div>
+                                    )}
+                                    {DataVerifier.isValidString(promoter.sequence) && (
+                                        <div>
+                                            <Accordion title={"Sequence"} backgroundColor="#f4f5f5" >
+                                                <SequencePromoter
+                                                    _id={"tu_sequence_" + _id + "_" + promoter._id}
+                                                    boxes={promoter.boxes}
+                                                    transcriptionStartSite={promoter.transcriptionStartSite}
+                                                    strand={strand} sequence={promoter.sequence} />
+                                            </Accordion>
+                                        </div>
+                                    )}
                                     {DataVerifier.isValidString(promoter.note) && (
                                         <Accordion title={"Note"} backgroundColor="#f4f5f5" expand={false} >
-                                            <p dangerouslySetInnerHTML={{__html: NoteCitations(allCitations,promoter.note)}} />
+                                            <p dangerouslySetInnerHTML={{ __html: NoteCitations(allCitations, promoter.note) }} />
                                         </Accordion>
                                     )}
                                     {DataVerifier.isValidArray(promoter.citations) && (
@@ -106,4 +118,55 @@ export default function TranscriptionUnit({
             </div>
         </div>
     )
+}
+
+
+function SequencePromoter({ _id, boxes, transcriptionStartSite, sequence, strand }) {
+
+    let promoterFeatures = []
+    let promoterRelativePosition = sequence.split("").findIndex(bp => bp === bp.toUpperCase())
+
+    sequence.split("").forEach((x, index) => {
+        let label = ""
+        if (index - promoterRelativePosition >= 0) {
+            label = `+ ${index - promoterRelativePosition + 1}`
+        } else {
+            label = index - promoterRelativePosition
+        }
+        promoterFeatures.push({
+            id: _id + "_measure_" + index + "_index",
+            label: label,
+            sequencePosition: index,
+            type: "measure"
+        })
+        if (index === promoterRelativePosition) {
+            promoterFeatures.push({
+                id: _id + "_promoter_" + index + "_feature",
+                label: "+1",
+                sequencePosition: index,
+                type: "promoter",
+            })
+        }
+    })
+
+    if (DataVerifier.isValidArray(boxes)) {
+
+        boxes.forEach((box, index) => {
+            let boxPosition = strand === "forward" ? box.leftEndPosition : box.rightEndPosition
+            const distancePromoter_BoxLeft = Math.abs(transcriptionStartSite.leftEndPosition - boxPosition)
+            const boxWidth = box.sequence.length * 8.41
+            
+            promoterFeatures.push({
+                id: _id + "_box_" + index + "_feature",
+                label: box.type.replace('minus', '-'),
+                sequencePosition: promoterRelativePosition - distancePromoter_BoxLeft,
+                type: "box",
+                boxWidth: boxWidth
+            })
+        });
+    }
+
+
+    return <LinealSequence sequenceId={_id} height={100} sequence={sequence} color={true} features={promoterFeatures} />
+
 }

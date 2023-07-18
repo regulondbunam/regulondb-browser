@@ -21,8 +21,12 @@ export default function Promoter({ featureStyle = {}, id, height, width, label =
                 strand: "forward"
             })
         }
+        return ()=>{
+          if (drawPlace) {
+            drawPlace.innerHTML = ""
+          }
+        }
     })
-
     return (
         <div
             id={drawId}
@@ -51,7 +55,7 @@ function DrawPromoter({
     // draw body
     //const body = canva.path("M 0 0 V " + -height + " H " + arrowSize + " V");
     const lup = canva.line(posX, posY, posX, height).stroke(stroke)
-    const line = canva.line(posX, posY, posX+arrowSize, posY).stroke(stroke)
+    const line = canva.line(posX, posY, posX+arrowSize+2, posY).stroke(stroke)
     //atributos de arrow
     let ax = posX + arrowSize
     let ay = posY - 5

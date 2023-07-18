@@ -6,7 +6,7 @@ import { TranscriptionUnit } from "../../components/datamartSchema";
 
 
 const cardOptions = {
-    showTitle: false
+    showTitle: true
 }
 
 export default function Document({ operonData, section }) {
@@ -28,8 +28,8 @@ export default function Document({ operonData, section }) {
             operonData.transcriptionUnits.forEach(tu => {
                 _sections.push({
                     id: "OperonAnchor_TU" + tu._id,
-                    label: tu.name,
-                    title: tu.name,
+                    label: tu.name+" "+tu.promoter.name,
+                    title: tu.name+" "+tu.promoter.name,
                     component: <div>
                         <TranscriptionUnit {...tu} allCitations={operonData.allCitations} regulationPositions={operonData.operon.regulationPositions} strand={operonData.operon.strand} />
                     </div>
