@@ -1,6 +1,6 @@
 import { useTable, useBlockLayout, useGlobalFilter, useResizeColumns, useSortBy, useFilters } from 'react-table'
-import SortByAlphaIcon from '@mui/icons-material/SortByAlpha';
-import SortIcon from '@mui/icons-material/Sort';
+//import SortByAlphaIcon from '@mui/icons-material/SortByAlpha';
+//import SortIcon from '@mui/icons-material/Sort';
 import { VariableSizeList as List } from 'react-window';
 import { TableStyles } from "./styledComponents"
 import React from 'react';

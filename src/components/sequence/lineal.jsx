@@ -8,6 +8,18 @@ import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import ZoomOutIcon from "@mui/icons-material/ZoomOut";
 import Tooltip from "@mui/material/Tooltip";
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import FileDownloadIcon from "@mui/icons-material/FileDownload";
+import ImageIcon from "@mui/icons-material/Image";
+import Divider from "@mui/material/Divider";
+import ListItemText from '@mui/material/ListItemText';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import html2canvas from 'html2canvas';
+import ContentCopy from '@mui/icons-material/ContentCopy';
 
 
 
@@ -21,10 +33,13 @@ export default function LinealSequence({
     color = false,
     features = [],
     height = 30,
-    measure = false
+    measure = false,
+    name = "sequence",
+    controls = true,
+    zoom = 1.5
 }) {
     const initialStates = {
-        zoom: 1,
+        zoom: zoom,
         measure: measure,
     }
 
@@ -49,9 +64,11 @@ export default function LinealSequence({
     }
     return (
         <div style={{ display: "flex", alignItems: "flex-start" }} >
-            <div style={{ marginRight: "3px", }} >
-                <Controls states={states} dispatch={dispatch} />
-            </div>
+            {controls && (
+                <div style={{ marginRight: "3px", }} >
+                    <Controls states={states} dispatch={dispatch} sequence={sequence} drawPlaceId={`sequencePanel_${sequenceId}`} name={name} />
+                </div>
+            )}
             <div id={`sequencePanel_${sequenceId}`} style={divStyle}>
                 {
                     features.map((feature, index) => {
@@ -84,7 +101,7 @@ export default function LinealSequence({
 }
 
 
-function Controls({ states, dispatch }) {
+function Controls({ states, sequence, dispatch, drawPlaceId, name }) {
 
     const handleZoomIn = () => {
         if (states.zoom < 2) {
@@ -99,7 +116,7 @@ function Controls({ states, dispatch }) {
     }
 
     const handleReset = () => {
-        dispatch({ zoom: 1, measure: false })
+        dispatch({ zoom: 1.5, measure: false })
     }
 
     const handleMeasure = () => {
@@ -110,7 +127,7 @@ function Controls({ states, dispatch }) {
         <ButtonGroup
             orientation="vertical"
             aria-label="vertical outlined button group"
-            variant="contained"
+            variant="outlined"
             size="small"
             color="secondary"
         >
@@ -127,6 +144,126 @@ function Controls({ states, dispatch }) {
             <Tooltip placement="left" title={"show measure"}>
                 <Button onClick={handleMeasure} ><StraightenIcon /></Button>
             </Tooltip>
+            <DownloadOptions
+                drawPlaceId={drawPlaceId}
+                name={name}
+                sequence={sequence}
+            />
         </ButtonGroup>
+    );
+}
+
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
+
+function DownloadOptions({ drawPlaceId, name, sequence }) {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [snackOpen, setSnackOpen] = React.useState(false);
+
+    const handleOpenSnack = () => {
+        setSnackOpen(true);
+    };
+    const handleCloseSnack = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSnackOpen(false);
+    };
+    const open = Boolean(anchorEl);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const _downloadPNG = () => {
+        let element = document.getElementById(drawPlaceId);
+        html2canvas(element).then(function (canvas) {
+            let link = document.createElement("a");
+            document.body.appendChild(link);
+            link.download = `${name}.jpg`;
+            link.href = canvas.toDataURL();
+            link.target = '_blank';
+            link.click();
+        });
+    };
+
+    return (
+        <React.Fragment>
+            <Tooltip title={"Download options"} >
+                <Button variant="outlined" color="secondary" size="small" onClick={handleClick}>
+                    <FileDownloadIcon />
+                </Button>
+            </Tooltip>
+            <Menu
+                anchorEl={anchorEl}
+                id="account-menu"
+                open={open}
+                onClose={handleClose}
+                onClick={handleClose}
+                PaperProps={{
+                    elevation: 0,
+                    sx: {
+                        overflow: "visible",
+                        filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                        mt: 1.5,
+                        "& .MuiAvatar-root": {
+                            width: 32,
+                            height: 32,
+                            ml: -0.5,
+                            mr: 1,
+                        },
+                        "&:before": {
+                            content: '""',
+                            display: "block",
+                            position: "absolute",
+                            top: 0,
+                            right: 14,
+                            width: 10,
+                            height: 10,
+                            bgcolor: "background.paper",
+                            transform: "translateY(-50%) rotate(45deg)",
+                            zIndex: 0,
+                        },
+                    },
+                }}
+                transformOrigin={{ horizontal: "right", vertical: "top" }}
+                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+            >
+
+                <MenuItem
+                    onClick={() => {
+                        navigator.clipboard.writeText(sequence);
+                        handleOpenSnack();
+                        handleClose();
+                    }}
+                >
+                    <ListItemIcon>
+                        <ContentCopy fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>copy sequence</ListItemText>
+
+                </MenuItem>
+                <Divider />
+                <MenuItem onClick={_downloadPNG}>
+                    <ListItemIcon>
+                        <ImageIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>JPG file</ListItemText>
+                </MenuItem>
+            </Menu>
+            <Stack spacing={2} sx={{ width: '100%' }}>
+                <Snackbar open={snackOpen} autoHideDuration={1000} onClose={handleCloseSnack}>
+                    <Alert onClose={handleCloseSnack} severity="success" sx={{ width: '100%' }}>
+                        Sequence copied to clipboard!
+                    </Alert>
+                </Snackbar>
+            </Stack>
+        </React.Fragment>
     );
 }

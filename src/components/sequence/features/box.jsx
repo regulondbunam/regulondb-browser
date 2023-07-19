@@ -10,7 +10,7 @@ export default function Box({ featureStyle = {}, id, height, width, label = "" }
         let canvas = document.getElementById(canvaId);
         if (drawPlace && canvas === null) {
             canvas = SVG().addTo("#" + drawId).size(width, height).id(canvaId);
-            canvas.text(label).move(0,(height/2)-30).font({
+            canvas.text(label).move(width/2-9,(height/2)-30).font({
                 size: 10,
             })
             DrawBox({

@@ -82,6 +82,7 @@ export const fragment_TRANSCRIPTIONUNIT = gql`fragment TRANSCRIPTIONUNITS on Tra
         }
         name
       }
+      confidenceLevel
       citations {
         ...CITATIONS
       }

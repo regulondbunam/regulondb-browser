@@ -15,6 +15,7 @@ import Divider from '@mui/material/Divider';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
 import Paper from '@mui/material/Paper';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { styled } from '@mui/material/styles';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -51,12 +52,12 @@ export function OptionFilter({
     //console.log(FilterState)
     return (
         <div>
-            <Button size="small" variant="contained" sx={{ width: "100%" }} color={FilterState[0].value === "" ? "grey" : "secondary"} onClick={handleOpen}>
-                {FilterState[0].value === ""
-                    ? "Set Filter"
-                    : "Edit Filter"
-                }
-            </Button>
+            <Tooltip title={FilterState[0].value === "" ? "Set Filter" : "Edit Filter"} >
+                <Button size="small" variant="contained" sx={{ width: "100%" }} color={FilterState[0].value === "" ? "grey" : "secondary"} onClick={handleOpen}>
+                    <FilterAltIcon fontSize="small" />
+                </Button>
+            </Tooltip>
+
             <Modal
                 open={open}
                 aria-labelledby="modal-modal-title"
