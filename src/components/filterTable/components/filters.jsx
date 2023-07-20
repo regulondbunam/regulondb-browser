@@ -249,7 +249,11 @@ function wordsListProcess(preFilteredRows = [], id) {
     let options = []
     preFilteredRows.forEach((row) => {
         let rowValue = ""
+        let rowValues
         if (typeof (row.values[id]) === "object" && row.values[id] !== null) {
+            if (row.values[id].props.values) {
+                rowValues = row.values[id].props.values
+            }
             if (row.values[id].props.value) {
                 rowValue = row.values[id].props.value
             } else {
@@ -262,7 +266,14 @@ function wordsListProcess(preFilteredRows = [], id) {
         if (!options.find(value => value === rowValue)) {
             options.push(rowValue)
         }
-
+        if(rowValues){
+            rowValues.forEach(element => {
+                if (!options.find(value => value === element)) {
+                    options.push(element)
+                }
+            });
+        }
+       
     })
     //console.log(options);
     return options

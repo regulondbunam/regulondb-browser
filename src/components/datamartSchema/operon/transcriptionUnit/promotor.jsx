@@ -11,6 +11,25 @@ export default function Promoter({
     allCitations,
 }) {
 
+    let _confidenceLevel
+    if (DataVerifier.isValidString(promoter.confidenceLevel)) {
+        switch (promoter.confidenceLevel) {
+            case "S":
+                _confidenceLevel = <span style={{ fontWeight: "bold", color: "#0C6A87" }} >Strong</span>
+                break;
+            case "C":
+                _confidenceLevel = <span style={{ fontWeight: "bold", color: "#000000" }} >Confirmed</span>
+                break;
+            case "w":
+                _confidenceLevel = <span style={{ color: "#0C6A87" }} >Weak</span>
+                break;
+            default:
+                _confidenceLevel = <span>.</span>
+                break;
+        }
+    }
+    
+
     return (
         <div >
             <h3>{`Promoter ${promoter.name}`}</h3>
@@ -20,7 +39,7 @@ export default function Promoter({
                         <p><b>Synonyms:</b>{" " + promoter.synonyms.join(", ")}</p>
                     )}
                     {DataVerifier.isValidString(promoter.confidenceLevel) && (
-                        <p><b>Confidence Level:</b>{" " + promoter.confidenceLevel}</p>
+                        <p><b>Confidence Level:</b>{" "}{_confidenceLevel}</p>
                     )}
                     {DataVerifier.isValidObject(promoter.transcriptionStartSite) && (
                         <>{DataVerifier.isValidNumber(promoter.transcriptionStartSite.leftEndPosition) && (

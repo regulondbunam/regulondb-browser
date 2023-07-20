@@ -54,9 +54,9 @@ export default function LinealSequence({
         overflow: "auto",
         position: "relative",
         zoom: states.zoom,
-        "-ms-zoom": states.zoom,
-        "-webkit-zoom": states.zoom,
-        "-moz-transform": `scale(${states.zoom},${states.zoom})`,
+        MsZoom: states.zoom,
+        WebkitZoom: states.zoom,
+        MozTransform: `scale(${states.zoom},${states.zoom})`,
     }
     const sequenceStyle = {
         position: "absolute",
