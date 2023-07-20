@@ -109,6 +109,12 @@ export const fragment_TRANSCRIPTIONUNIT = gql`fragment TRANSCRIPTIONUNITS on Tra
     terminators {
       _id
       class
+      confidenceLevel
+      additiveEvidences {
+        category
+        code
+        type
+      }
       citations {
         ...CITATIONS
       }

@@ -52,7 +52,7 @@ export default function Document({ operonData, section }) {
     return (
         <div>
             <AnchorNav sections={sections} cardOptions={cardOptions}
-                title={`Gene ${operonData.operon.name}`} header={dtt} />
+                title={`Operon ${operonData.operon.name}`} header={dtt} />
         </div>
     )
 }
