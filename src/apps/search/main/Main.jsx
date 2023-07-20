@@ -1,5 +1,5 @@
-import Title from "../components/Title";
 import React from "react";
+import {Cover} from "../../../components/ui-components"
 //import Switch from "@mui/material/Switch";
 import InputSearch from "../InputSearch";
 
@@ -12,7 +12,9 @@ function Main() {
   */
   return (
     <div>
-      <Title title={"Search Tool"} />
+     <Cover>
+      <h1>Search Tool</h1>
+     </Cover>
       <article>
         <p>Welcome to search tool</p>
         <br />

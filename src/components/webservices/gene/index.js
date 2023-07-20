@@ -1,6 +1,28 @@
 import { useQuery } from "@apollo/client";
 import { query_GET_GENE_BY } from "./queries";
 
+export function useGetGenesBySearch({search}){
+    const { data, loading, error } = useQuery(query_GET_GENE_BY, {
+        variables: {search: search}
+    })
+    let genesData = []
+    try {
+        if (data) {
+            if(data.getGenesBy.data){
+              genesData = data.getGenesBy.data
+            }
+        }
+    } catch (error) {
+        console.error("assign geneData value:", error);
+        console.log("query getGeneBySearch", query_GET_GENE_BY);
+    }
+    if (error) {
+        console.error("query getGeneBy: ", error);
+        console.log("query getGeneBySearch", query_GET_GENE_BY);
+    }
+    return { genesData, loading, error }
+}
+
 export function useGetGenesBy({
     _id,
     advancedSearch,

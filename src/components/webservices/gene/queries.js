@@ -218,7 +218,7 @@ ${fragment_GROWTHCONDITIONS}
 query GetGeneInfo(
     $advancedSearch: String
     $fullMatchOnly: Boolean = false
-    $limit: Int = 10
+    $limit: Int
     $organismName: String
     $page: Int = 0
     $properties: [String]

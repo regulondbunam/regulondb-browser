@@ -1,88 +1,94 @@
-import React, { useState } from "react";
+
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
-import TableView from "./Table";
-import { UpdateTitle } from "../components/Title";
-import WebServices from "../../../components/webservices/WebServices";
+import { DataVerifier } from "../../../components/ui-components"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
 
-function Gene({ keyword, limit = 10 }) {
-  const [_genes, set_genes] = useState();
-  const [_genesState, set_genesState] = useState();
-  const [_geneTablePage, set_geneTablePage] = useState(0);
-  const [_geneTableLimit, set_geneTableLimit] = useState(limit);
+const PagesResults = (geneData, limit = 10) => {
+  let _results = []
+  if (DataVerifier.isValidArray(geneData)) {
+    let _page = []
+    let count = 1
+    geneData.forEach((gene) => {
+      _page.push({ name: gene.gene.name, _id: gene._id })
+      if (limit === count) {
+        _results.push(_page)
+        _page = []
+        count = 1
+      } else {
+        count++
+      }
+    });
+    _results.push(_page)
+  }
+  return _results
+}
 
-  if (_genesState === "loading") {
-    UpdateTitle({ state: "loading" });
-  }
-  if (_genesState === "error") {
-    let error = "";
-    if (_genes?.error) {
-      error += " " + _genes.error + ", ";
-    }
-    UpdateTitle({ state: "error", message: error });
-  }
-  if (_genesState === "done") {
-    UpdateTitle({ state: "done" });
-    let geneButton = document.getElementById("button_gene_results");
-    if (geneButton) {
-      const geneButton_Update = new CustomEvent("updateLinkButton", {
-        bubbles: true,
-        detail: { lengthResults: _genes?.pagination?.totalResults },
-      });
-      geneButton.dispatchEvent(geneButton_Update);
-    }
-  }
-  let gene_variables = {
-    page: _geneTablePage,
-    limit: _geneTableLimit,
-    search: keyword,
-  };
+function Gene({ error, loading, geneData, limit = 10 }) {
+
+  const [page, setPage] = useState(0);
+  let navigate = useNavigate();
+
+  let results = PagesResults(geneData, limit)
 
   return (
     <div>
-      {!_genes && (
-        <WebServices
-          datamart_name="getGenesBy"
-          variables={gene_variables}
-          getData={(data) => {
-            set_genes(data);
-          }}
-          getState={(state) => {
-            set_genesState(state);
-          }}
-        />
-      )}
-      {_genesState === "loading" && (
+      <h2>{`Genes (${geneData.length})`}</h2>
+      {loading && (
         <Box sx={{ width: "100%" }}>
-          <Skeleton height={40} />
-          <Skeleton height={40} />
-          <Skeleton height={40} />
           <Skeleton height={40} />
           <Skeleton height={40} />
           <Skeleton height={40} />
         </Box>
       )}
-      {_genes?.data && (
-        <TableView
-          type="gene"
-          data={_genes.data}
-          totalResults={_genes.pagination.totalResults}
-          limit={_geneTableLimit}
-          page={_geneTablePage}
-          setLimit={(limit) => {
-            limit === -1 && (limit = 1)
-            //console.log("setLimit", limit); -> All -1
-            set_geneTableLimit(limit);
-            set_genes(undefined);
-          }}
-          setPage={(page) => {
-            set_geneTablePage(page);
-            set_genes(undefined);
-          }}
-        />
+      {DataVerifier.isValidArray(results) && (
+        <List dense >
+          {results[page].map(gene => {
+            return (
+              <ListItemButton key={"gene_result_" + gene._id}
+                onClick={()=>{navigate("/gene/" + gene._id);}}
+              >
+                <ListItemText primary={gene.name} />
+              </ListItemButton>
+            )
+          })}
+          <ListItem>
+            <div style={{backgroundColor: "#DDDDDD", width: "100%", height: "30px", display: "flex", flexDirection: "row-reverse"}} >
+              {geneData.length>limit && (
+                <ButtonGroup size="small">
+                <Button
+                  onClick={()=>{
+                    if (page > 0) {
+                      setPage(page-1)
+                    }
+                  }}
+                >{"<- PrevPage"}</Button>
+                <Button>{page+1}</Button>
+                <Button
+                  onClick={()=>{
+                    if (page < results.length-1) {
+                      setPage(page+1)
+                    }
+                  }}
+                >{"NextPage ->"}</Button>
+              </ButtonGroup>
+              )}
+            </div>
+          </ListItem>
+        </List>
       )}
     </div>
-  );
+  )
 }
+
 
 export default Gene;
