@@ -28,7 +28,7 @@ export default function Promoter({
                 break;
         }
     }
-    
+
 
     return (
         <div >
@@ -91,14 +91,14 @@ export default function Promoter({
                         </Accordion>
                     </div>
                 )}
+                {DataVerifier.isValidArray(promoter.regulatorBindingSites) && (
+                    <Accordion title={"Regulator Binding Sites"} backgroundColor="#f4f5f5" >
+                        <RegulatorBindingSites allCitations={allCitations} regulatorBindingSites={promoter.regulatorBindingSites} confidenceLevel={promoter.confidenceLevel} />
+                    </Accordion>
+                )}
                 {DataVerifier.isValidString(promoter.note) && (
                     <Accordion title={"Note"} backgroundColor="#f4f5f5" expand={false} >
                         <p dangerouslySetInnerHTML={{ __html: NoteCitations(allCitations, promoter.note) }} />
-                    </Accordion>
-                )}
-                {DataVerifier.isValidArray(promoter.regulatorBindingSites) && (
-                    <Accordion  title={"Regulator Binding Sites"} backgroundColor="#f4f5f5" >
-                        <RegulatorBindingSites allCitations={allCitations} regulatorBindingSites={promoter.regulatorBindingSites} confidenceLevel={promoter.confidenceLevel} />
                     </Accordion>
                 )}
                 {DataVerifier.isValidArray(promoter.citations) && (
@@ -111,7 +111,7 @@ export default function Promoter({
 
 function SequencePromoter({ _id, boxes, name, transcriptionStartSite, sequence, strand }) {
 
-    const features = useMemo(()=>{
+    const features = useMemo(() => {
         let promoterRelativePosition = sequence.split("").findIndex(bp => bp === bp.toUpperCase())
         let promoterFeatures = []
         sequence.split("").forEach((x, index) => {
@@ -127,14 +127,12 @@ function SequencePromoter({ _id, boxes, name, transcriptionStartSite, sequence, 
                 sequencePosition: index,
                 type: "measure"
             })
-            if (index === promoterRelativePosition) {
-                promoterFeatures.push({
-                    id: _id + "_promoter_" + index + "_feature",
-                    label: "+1",
-                    sequencePosition: index,
-                    type: "promoter",
-                })
-            }
+        })
+        promoterFeatures.push({
+            id: _id + "_promoter_" + promoterRelativePosition + "_feature",
+            label: "+1",
+            sequencePosition: promoterRelativePosition,
+            type: "promoter",
         })
         if (DataVerifier.isValidArray(boxes)) {
 
@@ -142,7 +140,7 @@ function SequencePromoter({ _id, boxes, name, transcriptionStartSite, sequence, 
                 let boxPosition = strand === "forward" ? box.leftEndPosition : box.rightEndPosition
                 const distancePromoter_BoxLeft = Math.abs(transcriptionStartSite.leftEndPosition - boxPosition)
                 const boxWidth = box.sequence.length * 8.41
-    
+
                 promoterFeatures.push({
                     id: _id + "_box_" + index + "_feature",
                     label: box.type.replace('minus', '-'),
@@ -153,9 +151,9 @@ function SequencePromoter({ _id, boxes, name, transcriptionStartSite, sequence, 
             });
         }
         return promoterFeatures
-    },[_id,sequence, boxes, transcriptionStartSite, strand])
+    }, [_id, sequence, boxes, transcriptionStartSite, strand])
 
-   
+
 
 
     return <LinealSequence name={name} sequenceId={_id} height={100} sequence={sequence} color={true} features={features} />

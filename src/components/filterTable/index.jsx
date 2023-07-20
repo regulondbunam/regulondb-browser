@@ -139,7 +139,7 @@ export default function FilterTable({ columns, data, getItemSize = ()=>{return 3
                             {headerGroups.map(headerGroup => (
                                 <div {...headerGroup.getHeaderGroupProps()} className="tr">
                                     {headerGroup.headers.map((column, index) => {
-                                        console.log(column);
+                                        //console.log(column);
                                         return (
                                         <div key={`table_main_${index}`} >
                                             <div {...column.getHeaderProps()} className="th" >

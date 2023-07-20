@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import Format from './Format'
-import { Promoter, Measure, Box } from './features';
+import { Promoter, Measure, Box, Terminator } from './features';
 import StraightenIcon from '@mui/icons-material/Straighten';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
@@ -42,6 +42,7 @@ export default function LinealSequence({
         zoom: zoom,
         measure: measure,
     }
+    let isMeasure = features.find(f => f.type === "measure")
 
     const [states, dispatch] = useReducer(reducer, initialStates);
     if (!sequence) { return null }
@@ -66,7 +67,10 @@ export default function LinealSequence({
         <div style={{ display: "flex", alignItems: "flex-start" }} >
             {controls && (
                 <div style={{ marginRight: "3px", }} >
-                    <Controls states={states} dispatch={dispatch} sequence={sequence} drawPlaceId={`sequencePanel_${sequenceId}`} name={name} />
+                    <Controls states={states} dispatch={dispatch}
+                        sequence={sequence} drawPlaceId={`sequencePanel_${sequenceId}`} name={name}
+                        isMeasure={isMeasure}
+                    />
                 </div>
             )}
             <div id={`sequencePanel_${sequenceId}`} style={divStyle}>
@@ -87,8 +91,10 @@ export default function LinealSequence({
                                 return null
                             case "box":
                                 return <Box featureStyle={featureStyle} id={feature.id} label={feature.label} height={height} width={feature.boxWidth} />
+                            case "terminator":
+                                return <Terminator featureStyle={featureStyle} id={feature.id} label={feature.label} height={height} width={(feature.length+1)*8.41} />
                             default:
-                                return null
+                            return null
                         }
                     })
                 }
@@ -101,7 +107,7 @@ export default function LinealSequence({
 }
 
 
-function Controls({ states, sequence, dispatch, drawPlaceId, name }) {
+function Controls({ states, sequence, dispatch, drawPlaceId, name, isMeasure }) {
 
     const handleZoomIn = () => {
         if (states.zoom < 2) {
@@ -141,9 +147,12 @@ function Controls({ states, sequence, dispatch, drawPlaceId, name }) {
             <Tooltip placement="left" title={"reset graphic"}>
                 <Button onClick={handleReset} ><RestartAltIcon /></Button>
             </Tooltip>
-            <Tooltip placement="left" title={"show measure"}>
-                <Button onClick={handleMeasure} ><StraightenIcon /></Button>
-            </Tooltip>
+            {isMeasure && (
+                <Tooltip placement="left" title={"show measure"}>
+                    <Button onClick={handleMeasure} ><StraightenIcon /></Button>
+                </Tooltip>
+            )}
+
             <DownloadOptions
                 drawPlaceId={drawPlaceId}
                 name={name}
