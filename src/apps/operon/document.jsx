@@ -3,6 +3,7 @@ import { AnchorNav, DataVerifier } from "../../components/ui-components"
 import { AllCitations } from "../../components/datamartSchema"
 import DrawingTracesTool from "../../components/DrawingTracesTool";
 import { TranscriptionUnit } from "../../components/datamartSchema";
+import { getRelatedIdsByOperonData } from "../../components/webservices";
 
 
 const cardOptions = {
@@ -11,9 +12,13 @@ const cardOptions = {
 
 export default function Document({ operonData, section }) {
 
+    let relatedIds = getRelatedIdsByOperonData(operonData)
+    console.log(relatedIds);
+    //
     console.log(operonData);
     let dtt = <DrawingTracesTool
         context="operon"
+        relatedIds={relatedIds.all}
         height={200}
         id={operonData._id}
         leftEndPosition={operonData.operon.regulationPositions.leftEndPosition - 1000}
@@ -31,12 +36,13 @@ export default function Document({ operonData, section }) {
                 if (DataVerifier.isValidObject(tu.promoter)) {
                     promoterName = " - "+tu.promoter.name
                 }
+                let tuRelatedIds = relatedIds.groupByTu[tu._id]
                 _sections.push({
                     id: "OperonAnchor_TU" + tu._id,
                     label: tu.name+promoterName,
                     title: tu.name+promoterName,
                     component: <div>
-                        <TranscriptionUnit {...tu} allCitations={operonData.allCitations} regulationPositions={operonData.operon.regulationPositions} strand={operonData.operon.strand} />
+                        <TranscriptionUnit {...tu} relatedIds={tuRelatedIds} allCitations={operonData.allCitations} regulationPositions={operonData.operon.regulationPositions} strand={operonData.operon.strand} />
                     </div>
                 })
             });

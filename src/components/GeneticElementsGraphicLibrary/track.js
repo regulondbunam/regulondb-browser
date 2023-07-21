@@ -102,12 +102,14 @@ class Track {
         case tfBindingSite_dp.objectType:
           DrawTfBindingSite({...object, id:object._id, dna: dna, canva: canvas})
          break;
+         /*
         case transcriptionalAttenuator_dp.objectType:
           DrawTranscriptionalAttenuator({...object, id:object._id, dna: dna, canva: canvas})
          break;
         case transnationalAttenuator_dp.objectType:
           DrawTransnationalAttenuator({...object, id:object._id, dna: dna, canva: canvas})
          break;
+         */
         default:
           console.error("no objectType")
           return undefined;

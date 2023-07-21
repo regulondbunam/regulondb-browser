@@ -47,7 +47,7 @@ const COLUMNS = [
     },
 ]
 
-function formatData(regulatorBindingSites = [], confidenceLevel, allCitations) {
+function formatData(regulatorBindingSites = [], allCitations) {
     let data = []
     regulatorBindingSites.forEach(rbs => {
         let spanColor = "#000"
@@ -74,8 +74,9 @@ function formatData(regulatorBindingSites = [], confidenceLevel, allCitations) {
         if (DataVerifier.isValidArray(rbs.regulatoryInteractions)) {
             let _absolutePosition = "",
                 _leftEndPosition = "", _rightEndPosition = "",
-                _sequence = "", _citations = "", _confidenceLevel = confidenceLevel
-            switch (confidenceLevel) {
+                _sequence = "", _citations = ""
+            // _confidenceLevel = confidenceLevel
+            /*switch (confidenceLevel) {
                 case "S":
                     _confidenceLevel = <span style={{ fontWeight: "bold", color: "#0C6A87" }} >Strong</span>
                     break;
@@ -88,7 +89,7 @@ function formatData(regulatorBindingSites = [], confidenceLevel, allCitations) {
                 default:
                     _confidenceLevel = <span>.</span>
                     break;
-            }
+            }*/
             rbs.regulatoryInteractions.forEach(regulatoryInteraction => {
                 let regulatorySite = regulatoryInteraction.regulatorySite
                 _absolutePosition = regulatorySite.absolutePosition + ""
@@ -117,16 +118,17 @@ function formatData(regulatorBindingSites = [], confidenceLevel, allCitations) {
                 }
                 _citations = <ParagraphCitations value={""} values={citationValues}
                     citations={regulatorySite.citations} allCitations={allCitations} />
+                data.push({
+                    _regulator,
+                    _absolutePosition,
+                    _leftEndPosition,
+                    _rightEndPosition,
+                    _sequence,
+                    _citations,
+                    // _confidenceLevel
+                })
             });
-            data.push({
-                _regulator,
-                _absolutePosition,
-                _leftEndPosition,
-                _rightEndPosition,
-                _sequence,
-                _citations,
-                _confidenceLevel
-            })
+
         }
     });
     return data
@@ -139,8 +141,8 @@ export default function RegulatorBindingSites({
 }) {
 
     const data = useMemo(() => {
-        return formatData(regulatorBindingSites, confidenceLevel, allCitations)
-    }, [regulatorBindingSites, confidenceLevel, allCitations])
+        return formatData(regulatorBindingSites, allCitations)
+    }, [regulatorBindingSites, allCitations])
 
     return <FilterTable columns={COLUMNS} data={data} />
 }

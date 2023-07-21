@@ -1,6 +1,7 @@
 import { GetGeneElementsContext } from "./gene";
 import { ElementsContext } from "./general";
 import { GetOperonElementsContext } from "./operon";
+import { GetTuElementsContext } from "./tu";
 import { DTIContext } from "./dti";
 import RegulatoryRegion from "./regulatoryRegion";
 
@@ -31,6 +32,10 @@ class DttContext {
         break;
       case "dti":
       case "operon":
+        this.leftEndPosition = this.props.leftEndPosition;
+        this.rightEndPosition = this.props.rightEndPosition;
+        break;
+      case "tu":
         this.leftEndPosition = this.props.leftEndPosition;
         this.rightEndPosition = this.props.rightEndPosition;
         break;
@@ -66,6 +71,11 @@ class DttContext {
         return GetGeneElementsContext(this.props.id, _geneticElements);
       case "operon":
         return GetOperonElementsContext(
+          this.props.relatedIds,
+          _geneticElements
+        );
+      case "tu":
+        return GetTuElementsContext(
           this.props.relatedIds,
           _geneticElements
         );

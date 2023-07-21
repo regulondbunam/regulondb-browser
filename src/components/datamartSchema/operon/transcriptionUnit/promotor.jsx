@@ -98,7 +98,7 @@ export default function Promoter({
                 )}
                 {DataVerifier.isValidArray(promoter.regulatorBindingSites) && (
                     <Accordion title={"Regulator Binding Sites"} backgroundColor="#f4f5f5" >
-                        <RegulatorBindingSites allCitations={allCitations} regulatorBindingSites={promoter.regulatorBindingSites} confidenceLevel={promoter.confidenceLevel} />
+                        <RegulatorBindingSites allCitations={allCitations} regulatorBindingSites={promoter.regulatorBindingSites}/>
                     </Accordion>
                 )}
                 {DataVerifier.isValidString(promoter.note) && (

@@ -11,6 +11,7 @@ import RegulatorBindingSites from "./regulatorBindingSites";
 export default function TranscriptionUnit({
     _id,
     allCitations,
+    relatedIds,
     regulationPositions,
     strand,
     additiveEvidences = [],
@@ -37,8 +38,9 @@ export default function TranscriptionUnit({
             <div>
                 <DrawingTracesTool
                     labelTitle={`Transcription Unit ${name}`}
+                    relatedIds={relatedIds}
                     controls={false}
-                    context="operon"
+                    context="tu"
                     height={200}
                     id={_id}
                     leftEndPosition={regulationPositions.leftEndPosition}

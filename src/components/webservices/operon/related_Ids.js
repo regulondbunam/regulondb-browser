@@ -1,3 +1,5 @@
+import { DataVerifier } from "../../ui-components";
+
 /**
  *
  * @param {object} operon_data |
@@ -7,7 +9,7 @@
  * {}
  */
 
-export function OperonIds(operon_data) {
+export function getRelatedIdsByOperonData(operon) {
   let ids = {};
   try {
     let tus = [];
@@ -16,71 +18,72 @@ export function OperonIds(operon_data) {
     let regulator = [];
     let regulatoryInteractions = [];
     let terminators = [];
-    operon_data.forEach((operon) => {
-      if (operon?.transcriptionUnits) {
-        operon.transcriptionUnits.forEach((transcriptionUnit) => {
-          tus = IfNoExistPush(tus, transcriptionUnit.id);
-          if (transcriptionUnit?.genes) {
-            transcriptionUnit?.genes.forEach((gene) => {
-              genes = IfNoExistPush(genes, gene.id);
-              if (gene?.regulatorBindingSites) {
-                gene.regulatorBindingSites.forEach((rbs) => {
-                  if (rbs?.regulator) {
-                    regulator = IfNoExistPush(regulator, rbs.regulator._id);
-                  }
-                  if (rbs?.regulatoryInteractions) {
-                    rbs.regulatoryInteractions.forEach((ri) => {
-                      regulatoryInteractions = IfNoExistPush(
-                        regulatoryInteractions,
-                        ri._id
-                      );
-                    });
-                  }
-                });
-              }
-            });
-          }
-          if (transcriptionUnit?.promoter) {
-            promoters = IfNoExistPush(promoters, transcriptionUnit.promoter.id);
-            if (transcriptionUnit.promoter?.regulatorBindingSites) {
-                transcriptionUnit.promoter.regulatorBindingSites.forEach((rbs) => {
-                    if (rbs?.regulator) {
-                        regulator = IfNoExistPush(regulator, rbs.regulator._id);
-                    }
-                    if (rbs?.regulatoryInteractions) {
-                        rbs.regulatoryInteractions.forEach((ri) => {
-                            regulatoryInteractions = IfNoExistPush(
-                                regulatoryInteractions,
-                                ri._id
-                            );
-                        });
-                    }
-                });
+    let groupByTu = {}
+    if (DataVerifier.isValidArray(operon.transcriptionUnits)) {
+      operon.transcriptionUnits.forEach((transcriptionUnit) => {
+        let groupTu = []
+        tus = IfNoExistPush(tus, transcriptionUnit._id);
+        if (DataVerifier.isValidArray(transcriptionUnit.genes)) {
+          transcriptionUnit?.genes.forEach((gene) => {
+            genes = IfNoExistPush(genes, gene._id);
+            groupTu = IfNoExistPush(groupTu, gene._id);
+            if (DataVerifier.isValidArray(gene.regulatorBindingSites)) {
+              gene.regulatorBindingSites.forEach((rbs) => {
+                if (rbs?.regulator) {
+                  regulator = IfNoExistPush(regulator, rbs.regulator._id);
+                  groupTu = IfNoExistPush(groupTu, rbs.regulator._id);
+                }
+                if (DataVerifier.isValidArray(rbs.regulatoryInteractions)) {
+                  rbs.regulatoryInteractions.forEach((ri) => {
+                    regulatoryInteractions = IfNoExistPush(regulatoryInteractions, ri._id);
+                    groupTu = IfNoExistPush(groupTu, ri._id);
+                  });
+                }
+              });
             }
+          });
         }
-          if (transcriptionUnit?.regulatorBindingSites) {
-            transcriptionUnit.regulatorBindingSites.forEach((rbs) => {
+        if (DataVerifier.isValidObject(transcriptionUnit.promoter)) {
+          promoters = IfNoExistPush(promoters, transcriptionUnit.promoter._id);
+          groupTu = IfNoExistPush(groupTu, transcriptionUnit.promoter._id);
+          if (DataVerifier.isValidArray(transcriptionUnit.promoter.regulatorBindingSites)) {
+            transcriptionUnit.promoter.regulatorBindingSites.forEach((rbs) => {
               if (rbs?.regulator) {
                 regulator = IfNoExistPush(regulator, rbs.regulator._id);
+                groupTu = IfNoExistPush(groupTu, rbs.regulator._id);
               }
-              if (rbs?.regulatoryInteractions) {
+              if (DataVerifier.isValidArray(rbs.regulatoryInteractions)) {
                 rbs.regulatoryInteractions.forEach((ri) => {
-                  regulatoryInteractions = IfNoExistPush(
-                    regulatoryInteractions,
-                    ri._id
-                  );
+                  regulatoryInteractions = IfNoExistPush(regulatoryInteractions, ri._id);
+                  groupTu = IfNoExistPush(groupTu, ri._id);
                 });
               }
             });
           }
-          if (transcriptionUnit?.terminators) {
-            transcriptionUnit.terminators.forEach((terminator) => {
-              terminators = IfNoExistPush(terminators, terminator._id);
-            });
-          }
-        });
-      }
-    });
+        }
+        if (DataVerifier.isValidArray(transcriptionUnit.regulatorBindingSites)) {
+          transcriptionUnit.regulatorBindingSites.forEach((rbs) => {
+            if (rbs?.regulator) {
+              regulator = IfNoExistPush(regulator, rbs.regulator._id);
+              groupTu = IfNoExistPush(groupTu, rbs.regulator._id);
+            }
+            if (DataVerifier.isValidArray(rbs.regulatoryInteractions)) {
+              rbs.regulatoryInteractions.forEach((ri) => {
+                regulatoryInteractions = IfNoExistPush(regulatoryInteractions,ri._id);
+                groupTu = IfNoExistPush(groupTu, ri._id);
+              });
+            }
+          });
+        }
+        if (DataVerifier.isValidArray(transcriptionUnit.terminators)) {
+          transcriptionUnit.terminators.forEach((terminator) => {
+            terminators = IfNoExistPush(terminators, terminator._id);
+            groupTu = IfNoExistPush(groupTu, terminator._id);
+          });
+        }
+        groupByTu[transcriptionUnit._id] = groupTu
+      });
+    }
     ids = {
       transcriptionUnits: tus,
       genes: genes,
@@ -88,7 +91,8 @@ export function OperonIds(operon_data) {
       regulator: regulator,
       regulatoryInteractions: regulatoryInteractions,
       terminators: terminators,
-      all: genes.concat(promoters).concat(regulator).concat(regulatoryInteractions).concat(terminators)
+      all: genes.concat(promoters).concat(regulator).concat(regulatoryInteractions).concat(terminators),
+      groupByTu:  groupByTu
     };
   } catch (error) {
     console.error("get Ids operon", error);
