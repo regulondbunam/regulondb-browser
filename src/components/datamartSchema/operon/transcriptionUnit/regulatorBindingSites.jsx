@@ -59,7 +59,7 @@ function formatData(regulatorBindingSites = [], confidenceLevel, allCitations) {
                 break;
             case "activator":
                 fun = "+"
-                spanColor = "#00FF00"
+                spanColor = "#14A054"
                 break;
             case "dual":
                 fun = "+-"

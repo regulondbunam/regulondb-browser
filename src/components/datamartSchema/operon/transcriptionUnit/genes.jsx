@@ -1,10 +1,20 @@
 import { Link } from "react-router-dom"
 import { DataVerifier } from "../../../ui-components"
+import RegulatorBindingSites from "./regulatorBindingSites";
 
 export default function Genes({
+    allCitations,
     firstGene,
-    genes
+    genes,
 }) {
+
+    let relatedGenes = []
+
+    genes.forEach(gene => {
+        if (gene._id !== firstGene._id) {
+            relatedGenes.push(gene)
+        }
+    });
 
     return (
         <div>
@@ -14,10 +24,28 @@ export default function Genes({
                 {DataVerifier.isValidNumber(firstGene.distanceToPromoter) && (
                     <p><b>Distance to promoter:</b>{" " + firstGene.distanceToPromoter + " bp"}</p>
                 )}
-                {DataVerifier.isValidArray(genes) && (
-                    <p><b>Rest genes:</b>{" "}
-                        {genes.map(gene => <Link key={"link_gene_tu_"+gene._id} style={{ marginRight: "5px" }} to={"/gene/" + gene._id} ><b>{gene.name}</b></Link>)}
+                {DataVerifier.isValidArray(relatedGenes) && (
+                    <p><b>Related genes:</b>{" "}
+                        {relatedGenes.map(gene => <Link key={"link_gene_tu_" + gene._id} style={{ marginRight: "5px" }} to={"/gene/" + gene._id} ><b>{gene.name}</b></Link>)}
                     </p>
+                )}
+                {DataVerifier.isValidArray(genes) && (
+                    <div>
+                        {genes.map(gene => {
+                            return (
+                                <div>
+                                    {DataVerifier.isValidArray(gene.regulatorBindingSites) && (
+                                        <>
+                                            <p><b>{`Regulator Binding Sites in gene ${gene.name}`}</b></p>
+                                            <RegulatorBindingSites regulatorBindingSites={gene.regulatorBindingSites} allCitations={allCitations} />
+                                        </>
+                                    )}
+                                </div>
+                            )
+                        })}
+
+                    </div>
+
                 )}
             </div>
 

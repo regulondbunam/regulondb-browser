@@ -25,10 +25,10 @@ export const TableStyles = styled.div`
     .th{
       font-size: 14px;
       text-align: center;
-      background-color: #cadce7;
+      background-color: #D5D5D7;
       color: #666666;
       font-weight: bold;
-      border-bottom: 2px solid #72a7c7;
+      border-bottom: 2px solid #FFFFFF;
       padding: 2px;
         .resizer {
             display: inline-block;

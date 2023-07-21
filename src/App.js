@@ -100,7 +100,8 @@ const router = createBrowserRouter([
             path: ":operonId",
             children: [{path: ":section"}]
           }
-        ]
+        ],
+        errorElement: <>Error</>
       },
       {
         path: "tu",

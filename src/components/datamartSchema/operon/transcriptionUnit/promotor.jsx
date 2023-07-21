@@ -20,7 +20,7 @@ export default function Promoter({
             case "C":
                 _confidenceLevel = <span style={{ fontWeight: "bold", color: "#000000" }} >Confirmed</span>
                 break;
-            case "w":
+            case "W":
                 _confidenceLevel = <span style={{ color: "#0C6A87" }} >Weak</span>
                 break;
             default:
@@ -49,8 +49,13 @@ export default function Promoter({
                     )}
                     {DataVerifier.isValidObject(promoter.bindsSigmaFactor) && (
                         <>
-                            <p><b>Binds Sigma Factor:</b>{" " + promoter.bindsSigmaFactor.name}</p>
-                            <p style={{ marginLeft: "3px" }} ><ParagraphCitations citations={promoter.bindsSigmaFactor.citations} allCitations={allCitations} /></p>
+                            {DataVerifier.isValidString(promoter.bindsSigmaFactor.name) && (
+                                <>
+                                    <p><b>Binds Sigma Factor:</b>{" " + promoter.bindsSigmaFactor.name}</p>
+                                    <p style={{ marginLeft: "3px" }} ><ParagraphCitations citations={promoter.bindsSigmaFactor.citations} allCitations={allCitations} /></p>
+                                </>
+                            )}
+
                         </>
                     )}
                 </div>

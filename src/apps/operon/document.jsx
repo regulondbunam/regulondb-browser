@@ -25,11 +25,16 @@ export default function Document({ operonData, section }) {
     const sections = useMemo(() => {
         let _sections = []
         if (DataVerifier.isValidArray(operonData.transcriptionUnits)) {
+
             operonData.transcriptionUnits.forEach(tu => {
+                let promoterName = ""
+                if (DataVerifier.isValidObject(tu.promoter)) {
+                    promoterName = " - "+tu.promoter.name
+                }
                 _sections.push({
                     id: "OperonAnchor_TU" + tu._id,
-                    label: tu.name+" "+tu.promoter.name,
-                    title: tu.name+" "+tu.promoter.name,
+                    label: tu.name+promoterName,
+                    title: tu.name+promoterName,
                     component: <div>
                         <TranscriptionUnit {...tu} allCitations={operonData.allCitations} regulationPositions={operonData.operon.regulationPositions} strand={operonData.operon.strand} />
                     </div>
