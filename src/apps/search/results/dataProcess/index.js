@@ -1,5 +1,4 @@
-import geneTableData from "./geneTable";
-import operonTableData from "./operonTable";
-import regulonTableData from "./regulonTable";
+import geneFormatResults from "./gene";
 
-export { geneTableData, operonTableData, regulonTableData };
+
+export { geneFormatResults};

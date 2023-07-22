@@ -16,7 +16,7 @@ export default function Results({keyword}) {
         <h1>{title}</h1>
       </Cover>
       <article>
-         <Gene geneData={genesData} loading={geneLoading} error={geneError}  />
+         <Gene geneData={genesData} loading={geneLoading} error={geneError} keyword={keyword}  />
       </article>
       
     </div>
