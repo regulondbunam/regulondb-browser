@@ -31,8 +31,7 @@ export default function Promoter({
 
 
     return (
-        <div >
-            <h3>{`Promoter ${promoter.name}`}</h3>
+        <Accordion title={<h2 style={{ margin: 0 }} >{`Promoter ${promoter.name}`}</h2>} >
             <div style={{ marginLeft: "5px", display: "flex", flexDirection: "column" }}>
                 <div>
                     {DataVerifier.isValidArray(promoter.synonyms) && (
@@ -51,8 +50,8 @@ export default function Promoter({
                         <>
                             {DataVerifier.isValidString(promoter.bindsSigmaFactor.name) && (
                                 <>
-                                    <p><b>Binds Sigma Factor:</b>{" " + promoter.bindsSigmaFactor.name}</p>
-                                    <p style={{ marginLeft: "3px" }} ><ParagraphCitations citations={promoter.bindsSigmaFactor.citations} allCitations={allCitations} /></p>
+                                    <p><b>Sigma Factor:</b>{" " + promoter.bindsSigmaFactor.name}</p>
+                                    <p style={{ marginLeft: "25px" }} ><ParagraphCitations citations={promoter.bindsSigmaFactor.citations} allCitations={allCitations} /></p>
                                 </>
                             )}
 
@@ -86,31 +85,28 @@ export default function Promoter({
                 )}
                 {DataVerifier.isValidString(promoter.sequence) && (
                     <div>
-                        <Accordion title={"Sequence"} backgroundColor="#f4f5f5" >
-                            <SequencePromoter
-                                name={promoter.name + "_sequence"}
-                                _id={"tu_sequence_" + _id + "_" + promoter._id}
-                                boxes={promoter.boxes}
-                                transcriptionStartSite={promoter.transcriptionStartSite}
-                                strand={strand} sequence={promoter.sequence} />
-                        </Accordion>
+
+                        <SequencePromoter
+                            name={promoter.name + "_sequence"}
+                            _id={"tu_sequence_" + _id + "_" + promoter._id}
+                            boxes={promoter.boxes}
+                            transcriptionStartSite={promoter.transcriptionStartSite}
+                            strand={strand} sequence={promoter.sequence} />
                     </div>
                 )}
-                {DataVerifier.isValidArray(promoter.regulatorBindingSites) && (
-                    <Accordion title={"Regulator Binding Sites"} backgroundColor="#f4f5f5" >
-                        <RegulatorBindingSites allCitations={allCitations} regulatorBindingSites={promoter.regulatorBindingSites}/>
-                    </Accordion>
-                )}
                 {DataVerifier.isValidString(promoter.note) && (
-                    <Accordion title={"Note"} backgroundColor="#f4f5f5" expand={false} >
+                    <>
+                    <p><b>Note:</b></p>
                         <p dangerouslySetInnerHTML={{ __html: NoteCitations(allCitations, promoter.note) }} />
-                    </Accordion>
+                    </>
                 )}
                 {DataVerifier.isValidArray(promoter.citations) && (
                     <p><b>Citations:</b><br /><ParagraphCitations citations={promoter.citations} allCitations={allCitations} /></p>
                 )}
+                
+                
             </div>
-        </div>
+        </Accordion>
     )
 }
 
@@ -164,3 +160,8 @@ function SequencePromoter({ _id, boxes, name, transcriptionStartSite, sequence, 
     return <LinealSequence name={name} sequenceId={_id} height={100} sequence={sequence} color={true} features={features} />
 
 }
+/*
+{DataVerifier.isValidArray(promoter.regulatorBindingSites) && (
+                        <RegulatorBindingSites allCitations={allCitations} regulatorBindingSites={promoter.regulatorBindingSites} />
+                )}
+*/

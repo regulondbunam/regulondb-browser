@@ -15,9 +15,20 @@ export function EvidenceTitle({
     name = "",
     type = "",
 }) {
-    let styleStrong = {};
-    if (type === "Strong") {
-        styleStrong = { fontWeight: "bold" };
+    let evidenceType
+    switch (type) {
+        case "S":
+            evidenceType = <span style={{ fontWeight: "bold", color: "#0C6A87" }} >Strong</span>
+            break;
+        case "C":
+            evidenceType = <span style={{ fontWeight: "bold", color: "#000000" }} >Confirmed</span>
+            break;
+        case "W":
+            evidenceType = <span style={{ color: "#0C6A87" }} >Weak</span>
+            break;
+        default:
+            evidenceType = ""
+            break;
     }
     if(code !== ""){
         code = code+": "
@@ -25,10 +36,12 @@ export function EvidenceTitle({
     return (
         <div>
             <h2>Evidence</h2>
-            <h1 style={styleStrong} >
-                {code}: {name}
-                <br />{type}
+            <h1>
+                {code}{name}
+                
             </h1>
+            <p style={{fontSize: "20px"}} >{evidenceType}</p>
+            <br />
         </div>
     );
 }

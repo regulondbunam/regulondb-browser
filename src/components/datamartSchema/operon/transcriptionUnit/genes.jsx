@@ -1,52 +1,83 @@
 import { Link } from "react-router-dom"
-import { DataVerifier } from "../../../ui-components"
+import {Accordion, DataVerifier } from "../../../ui-components"
+import { ParagraphCitations, NoteCitations } from "../../citations";
 import RegulatorBindingSites from "./regulatorBindingSites";
+import { Divider } from "@mui/material";
 
 export default function Genes({
     allCitations,
     firstGene,
-    genes,
+    genes = [],
+    tuId,
+    confidenceLevel,
+    strand,
+    note,
+    citations
 }) {
 
-    let relatedGenes = []
-
-    genes.forEach(gene => {
-        if (gene._id !== firstGene._id) {
-            relatedGenes.push(gene)
+    //let orderGenes = genes.reverse()
+    //console.log(genes);
+/*
+ordenados desde el primer gene
+    genes.sort((a,b)=>{
+        return a.leftEndPosition - b.rightEndPosition
+    })
+*/
+let _confidenceLevel
+    if (DataVerifier.isValidString(confidenceLevel)) {
+        switch (confidenceLevel) {
+            case "S":
+                _confidenceLevel = <span style={{ fontWeight: "bold", color: "#0C6A87" }} >Strong</span>
+                break;
+            case "C":
+                _confidenceLevel = <span style={{ fontWeight: "bold", color: "#000000" }} >Confirmed</span>
+                break;
+            case "W":
+                _confidenceLevel = <span style={{ color: "#0C6A87" }} >Weak</span>
+                break;
+            default:
+                _confidenceLevel = <span>.</span>
+                break;
         }
-    });
-
+    }
     return (
         <div>
-            <h3>Related Genes</h3>
             <div style={{ marginLeft: "5px" }}>
-                <p><b>First gene:</b>{" "}<Link to={"/gene/" + firstGene._id} ><b>{firstGene.name}</b></Link></p>
-                {DataVerifier.isValidNumber(firstGene.distanceToPromoter) && (
-                    <p><b>Distance to promoter:</b>{" " + firstGene.distanceToPromoter + " bp"}</p>
-                )}
-                {DataVerifier.isValidArray(relatedGenes) && (
-                    <p><b>Related genes:</b>{" "}
-                        {relatedGenes.map(gene => <Link key={"link_gene_tu_" + gene._id} style={{ marginRight: "5px" }} to={"/gene/" + gene._id} ><b>{gene.name}</b></Link>)}
+            <p><b>Strand:</b>{" "+strand}</p>
+                <div onMouseEnter={()=>{
+                    let drawGene = document.getElementById("draw_"+tuId+"_"+firstGene._id)
+                    if(drawGene){
+                        drawGene.style.border = "1px solid #5095ff;"
+                        console.log(drawGene);
+                    }
+                }} >
+                    {DataVerifier.isValidArray(genes) && (
+                    <p><b>Genes:</b>{" "}
+                        {genes.map(gene => <Link key={"link_gene_tu_" + gene._id} style={{ marginRight: "5px" }} to={"/gene/" + gene._id} ><b>{gene.name}</b></Link>)}
                     </p>
                 )}
-                {DataVerifier.isValidArray(genes) && (
-                    <div>
-                        {genes.map(gene => {
-                            return (
-                                <div>
-                                    {DataVerifier.isValidArray(gene.regulatorBindingSites) && (
-                                        <>
-                                            <p><b>{`Regulator Binding Sites in gene ${gene.name}`}</b></p>
-                                            <RegulatorBindingSites regulatorBindingSites={gene.regulatorBindingSites} allCitations={allCitations} />
-                                        </>
-                                    )}
-                                </div>
-                            )
-                        })}
-
-                    </div>
-
+                
+                </div>
+                
+                {DataVerifier.isValidNumber(firstGene.distanceToPromoter) && (
+                    <p><b>Distance from TSS to first gene:</b>{" " + firstGene.distanceToPromoter + " bp"}</p>
                 )}
+                {DataVerifier.isValidString(confidenceLevel) && (
+                        <p><b>Confidence Level:</b>{" "}{_confidenceLevel}</p>
+                    )}
+                {DataVerifier.isValidString(note) && (
+                    <div>
+                        <p><b>Note:</b></p>
+                        <p dangerouslySetInnerHTML={{ __html: NoteCitations(allCitations, note) }} />
+                    </div>
+                )}
+                {DataVerifier.isValidArray(citations) && (
+                    <p><b>Citations:</b><br /><ParagraphCitations citations={citations} allCitations={allCitations} /></p>
+                )}
+                <br />
+                <Divider />
+                
+                
             </div>
 
         </div>

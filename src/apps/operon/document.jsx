@@ -40,7 +40,7 @@ export default function Document({ operonData, section }) {
                 _sections.push({
                     id: "OperonAnchor_TU" + tu._id,
                     label: tu.name+promoterName,
-                    title: tu.name+promoterName,
+                    title: "TU: "+tu.name+promoterName,
                     component: <div>
                         <TranscriptionUnit {...tu} relatedIds={tuRelatedIds} allCitations={operonData.allCitations} regulationPositions={operonData.operon.regulationPositions} strand={operonData.operon.strand} />
                     </div>

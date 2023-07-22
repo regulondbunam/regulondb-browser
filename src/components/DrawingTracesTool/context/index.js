@@ -6,7 +6,8 @@ import { DTIContext } from "./dti";
 import RegulatoryRegion from "./regulatoryRegion";
 
 class DttContext {
-  constructor(context, props) {
+  constructor(context, props, preId) {
+    this.preId = preId
     this.context = context;
     this.props = props;
     if (this.context === "gene") {
@@ -68,19 +69,19 @@ class DttContext {
     let _geneticElements = ElementsContext(geneticElements);
     switch (this.context) {
       case "gene":
-        return GetGeneElementsContext(this.props.id, _geneticElements);
+        return GetGeneElementsContext(this.props.id, _geneticElements, this.preId);
       case "operon":
         return GetOperonElementsContext(
           this.props.relatedIds,
-          _geneticElements
+          _geneticElements, this.preId
         );
       case "tu":
         return GetTuElementsContext(
           this.props.relatedIds,
-          _geneticElements
+          _geneticElements, this.preId
         );
       case "dti":
-        return DTIContext(_geneticElements);
+        return DTIContext(_geneticElements, this.preId);
       default:
         return geneticElements;
     }

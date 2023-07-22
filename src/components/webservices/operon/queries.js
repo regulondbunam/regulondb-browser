@@ -55,6 +55,7 @@ export const fragment_TRANSCRIPTIONUNIT = gql`fragment TRANSCRIPTIONUNITS on Tra
     name
     note
     synonyms
+    confidenceLevel
     firstGene {
       _id
       distanceToPromoter

@@ -15,7 +15,7 @@ class DrawingTracesTool extends Component {
 
   constructor(props) {
     super(props);
-    this.dttContext = new DttContext(this.props.context, this.props)
+    this.dttContext = new DttContext(this.props.context, this.props, this.props.id)
 
     if(this.dttContext.getRegulator()){
       this.Regulator = this.dttContext.getRegulator()
@@ -47,7 +47,7 @@ class DrawingTracesTool extends Component {
           height: height,
           labelTitle: this.props.labelTitle
         });
-        //console.log(dttContext);
+        //console.log(this.props.id);
         //
         let _geneticElements = dttContext.geneticElementsOnContext(geneticElements)
         //console.log(_geneticElements)

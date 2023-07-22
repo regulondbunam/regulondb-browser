@@ -180,7 +180,7 @@ p {
 	--a-fontStyle: normal;
 	--a-fontWeight: normal;
 	--a-line: normal;
-	--a-colorS: var(--color-blue4);
+	--a-colorS: #0C6A87;
 }
 
 .aBase {
@@ -220,12 +220,12 @@ a {
 
 a:link {
 	font-family: var(--fontFamily-principal);
-	color: var(--color-blue4);
+	color: var(--a-colorS);
 }
 
 a:visited {
 	font-family: var(--fontFamily-principal);
-	color: var(--color-blue4);
+	color: var(--a-colorS);
 }
 
 /*TABLES*/
