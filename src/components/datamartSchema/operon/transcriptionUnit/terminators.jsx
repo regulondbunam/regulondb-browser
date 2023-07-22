@@ -5,12 +5,12 @@ import { useMemo } from "react";
 
 export default function Terminators({ terminators, tuID, allCitations }) {
     return (
-        <div>
-            <h2>Terminators</h2>
+        <Accordion title={<h2 style={{ margin: 0 }} >Terminators</h2>} >
+
             <div style={{ marginLeft: "5px", display: "flex", flexDirection: "column" }}>
                 {terminators.map((terminator, index) => (<Terminator key={`T${index}_tu_${tuID}_terminator${terminator._id}`} allCitations={allCitations} terminator={terminator} />))}
             </div>
-        </div>
+        </Accordion>
     )
 }
 
@@ -39,15 +39,13 @@ function Terminator({ terminator, allCitations }) {
                 <p><b>Class:</b>{" " + terminator.class}</p>
             )}
             {DataVerifier.isValidString(terminator.confidenceLevel) && (
-                        <p><b>Confidence Level:</b>{" "}{_confidenceLevel}</p>
-                    )}
+                <p><b>Confidence Level:</b>{" "}{_confidenceLevel}</p>
+            )}
             {DataVerifier.isValidObject(terminator.transcriptionTerminationSite) && (
                 <p><b>Transcription Site:</b>{" " + terminator.transcriptionTerminationSite.leftEndPosition + " - " + terminator.transcriptionTerminationSite.rightEndPosition}</p>
             )}
             {DataVerifier.isValidString(terminator.sequence) && (
-                <Accordion title={"sequence"} >
-                    <SequenceTerminator _id={terminator._id} transcriptionTerminationSite={terminator.transcriptionTerminationSite} sequence={terminator.sequence} name={`Terminator_${terminator._id}`} />
-                </Accordion>
+                <SequenceTerminator _id={terminator._id} transcriptionTerminationSite={terminator.transcriptionTerminationSite} sequence={terminator.sequence} name={`Terminator_${terminator._id}`} />
             )}
             {DataVerifier.isValidArray(terminator.citations) && (
                 <p><b>Citations:</b><br /><ParagraphCitations citations={terminator.citations} allCitations={allCitations} /></p>
@@ -76,6 +74,6 @@ function SequenceTerminator({ _id, sequence, name, transcriptionTerminationSite 
 
 
 
-    return <LinealSequence name={name} sequenceId={_id} height={100} sequence={sequence} color={true} features={features} />
+    return <LinealSequence zoom={1} name={name} sequenceId={_id} height={100} sequence={sequence} color={true} features={features} />
 
 }

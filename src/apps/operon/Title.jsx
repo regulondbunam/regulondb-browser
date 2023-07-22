@@ -1,7 +1,7 @@
 import { DataVerifier, Cover } from "../../components/ui-components";
 
 export default function Title({ state, title, operonData }) {
-    
+
 
     return (
         <div>
@@ -41,16 +41,19 @@ function Info(operonData) {
             sTU = operon.statistics.transcriptionUnits
         }
     }
-    return(
-        <div>
-            <p><b>Regulation Position</b></p>
-            <p>{`${leftEndPosition} ${row} ${rightEndPosition}`}</p>
-                <div>
-                    {sGenes && (<p><b>Genes:</b>{sGenes}</p>)}
-                    {sPromoters && (<p><b>Promoters:</b>{sPromoters}</p>)}
-                    {sTU && (<p><b>TranscriptionFactors:</b>{sTU}</p>)}
-                </div>
-                <br />
+    return (
+        <div style={{display: "flex"}}>
+            <div style={{marginRight: "25px"}} >
+                <p><b>Operon Region</b></p>
+                <p>{`${leftEndPosition} ${row} ${rightEndPosition}`}</p>
+            </div>
+
+            <div>
+                {sGenes && (<p><b>Genes:</b>{sGenes}</p>)}
+                {sPromoters && (<p><b>Promoters:</b>{sPromoters}</p>)}
+                {sTU && (<p><b>Transcription Units:</b>{sTU}</p>)}
+            </div>
+            <br />
         </div>
     )
 }

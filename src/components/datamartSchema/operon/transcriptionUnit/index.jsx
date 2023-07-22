@@ -71,27 +71,31 @@ export default function TranscriptionUnit({
                 )}
                 <Divider />
                 <Accordion title={<h2 style={{ margin: 0 }} >{`Regulatory Interactions`}</h2>} >
-                    {DataVerifier.isValidArray(promoter.regulatorBindingSites) && (
+                    {DataVerifier.isValidObject(promoter) && (
                         <>
-                            <RegulatorBindingSites regulatorBindingSites={promoter.regulatorBindingSites} allCitations={allCitations} />
-                            {DataVerifier.isValidArray(genes) && (
-                                <div>
+                            {DataVerifier.isValidArray(promoter.regulatorBindingSites) && (
+                                <>
+                                    <RegulatorBindingSites regulatorBindingSites={promoter.regulatorBindingSites} allCitations={allCitations} />
+                                    {DataVerifier.isValidArray(genes) && (
+                                        <div>
 
-                                    {genes.map(gene => {
-                                        return (
-                                            <div>
-                                                {DataVerifier.isValidArray(gene.regulatorBindingSites) && (
-                                                    <>
-                                                        <h4>Regulation identified only at gene level</h4>
-                                                        <RegulatorBindingSites regulatorBindingSites={gene.regulatorBindingSites} allCitations={allCitations} />
-                                                    </>
-                                                )}
-                                            </div>
-                                        )
-                                    })}
+                                            {genes.map(gene => {
+                                                return (
+                                                    <div>
+                                                        {DataVerifier.isValidArray(gene.regulatorBindingSites) && (
+                                                            <>
+                                                                <h4>Regulation identified only at gene level</h4>
+                                                                <RegulatorBindingSites regulatorBindingSites={gene.regulatorBindingSites} allCitations={allCitations} />
+                                                            </>
+                                                        )}
+                                                    </div>
+                                                )
+                                            })}
 
-                                </div>
+                                        </div>
 
+                                    )}
+                                </>
                             )}
                         </>
                     )}

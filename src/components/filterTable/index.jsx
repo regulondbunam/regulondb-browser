@@ -13,6 +13,9 @@ import scrollbarWidth from './scrollbarWidth'
 import Style from './table.module.css'
 
 export function validString(value) {
+    if (value === null || value === "null") {
+        return ""
+    }
     if (typeof value === 'string' || value instanceof String) {
         return value
     }

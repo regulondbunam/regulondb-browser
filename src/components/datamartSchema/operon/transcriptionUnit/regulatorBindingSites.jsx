@@ -16,7 +16,7 @@ const COLUMNS = [
         Header: 'Regulatory Interactions',
         columns: [
             {
-                Header: 'AbsolutePosition',
+                Header: 'Central Rel Pos',
                 accessor: '_absolutePosition',
                 filter: "fuzzyText",
                 width: 80
@@ -40,8 +40,14 @@ const COLUMNS = [
                 filter: "fuzzyText"
             },
             {
+                Header: 'Confidence Level',
+                accessor: '_Confidence Level',
+                width: 80,
+            },
+            {
                 Header: 'citations',
                 accessor: '_citations',
+                width: 400,
             }
         ],
     },
@@ -92,7 +98,7 @@ function formatData(regulatorBindingSites = [], allCitations) {
             }*/
             rbs.regulatoryInteractions.forEach(regulatoryInteraction => {
                 let regulatorySite = regulatoryInteraction.regulatorySite
-                _absolutePosition = regulatorySite.absolutePosition + ""
+                _absolutePosition = validString(regulatoryInteraction.centerPosition + "")
                 _leftEndPosition = regulatorySite.leftEndPosition + ""
                 _rightEndPosition = regulatorySite.rightEndPosition + ""
                 _sequence = <LinealSequence
