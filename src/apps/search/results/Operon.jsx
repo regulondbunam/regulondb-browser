@@ -20,9 +20,11 @@ function Operon({ keyword, error, loading, operonsData }) {
           <Skeleton height={40} />
         </Box>
       )}
+      <div style={{marginLeft: "3%"}} >
       {DataVerifier.isValidArray(results) && (
         <ListResult results={results} />
       )}
+      </div>
     </div>
   )
 }

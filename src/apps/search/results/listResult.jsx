@@ -66,7 +66,7 @@ export default function ListResult({ results = [] }) {
                         <Button>{page + 1}</Button>
                         <Button
                             onClick={() => {
-                                if (page < results.length - 1) {
+                                if (page < data.length - 1) {
                                     setPage(page + 1)
                                 }
                             }}
