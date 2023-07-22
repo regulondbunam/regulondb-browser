@@ -1,5 +1,5 @@
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
+//import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 //import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -53,7 +53,7 @@ export default function ListResult({ results = [] }) {
                     })}
                 </List>
             </div>
-            <div style={{ backgroundColor: "#DDDDDD", width: "100%", height: "30px", display: "flex", flexDirection: "row-reverse" }} >
+            <div style={{ backgroundColor: "#f5f5f5", width: "100%", height: "30px", display: "flex", flexDirection: "row-reverse" }} >
                 {results.length > limit && (
                     <ButtonGroup size="small">
                         <Button

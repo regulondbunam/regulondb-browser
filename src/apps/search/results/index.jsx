@@ -1,24 +1,34 @@
-import {Cover} from "../../../components/ui-components"
-import { useGetGenesBySearch } from "../../../components/webservices";
+import { Cover } from "../../../components/ui-components"
+import { useGetGenesBySearch, useGetOperonBySearch } from "../../../components/webservices";
 import Gene from "./Gene";
+import Operon from "./Operon"
 
 
-export default function Results({keyword}) {
+export default function Results({ keyword }) {
 
-  const {genesData,loading: geneLoading,error: geneError} = useGetGenesBySearch({search:keyword})
-  
+  const { genesData, loading: geneLoading, error: geneError } = useGetGenesBySearch({ search: keyword })
+  const { operonsData, loading: operonsLoading, error: operonsError } = useGetOperonBySearch({ search: keyword })
+
+
   let title = `Search results for ${keyword}`
 
+  console.log(operonsData);
 
-  return(
+  return (
     <div>
       <Cover>
         <h1>{title}</h1>
       </Cover>
       <article>
-         <Gene geneData={genesData} loading={geneLoading} error={geneError} keyword={keyword}  />
+        {genesData && (
+          <Gene geneData={genesData} loading={geneLoading} error={geneError} keyword={keyword} />
+        )}
+        {operonsData && (
+          <Operon operonsData={operonsData} loading={operonsLoading} error={operonsError} keyword={keyword} />
+        )}
+
       </article>
-      
+
     </div>
   )
 }
