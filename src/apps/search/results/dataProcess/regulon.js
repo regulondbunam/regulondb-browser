@@ -6,23 +6,16 @@ export default function regulonFormatResults(regulonsData, keyword = "") {
         regulonsData.forEach((regulon) => {
             let secondary = ""
             let title = regulon.regulator.name
-            if (DataVerifier.isValidObject(regulon.regulates)) {
-                let genes = regulon.regulates.genes.map((gene) => {
-                    switch (gene.function) {
-                        case "repressor":
-                            return `<span style="color:red">${gene.name}</span>`
-                        case "activator":
-                            return `<span style="color:green">${gene.name}</span>`
-                        case "dual":
-                            return `<span style="color:blue">${gene.name}</span>`
-                        default:
-                            return `<span>${gene.name}</span>`
+            if (DataVerifier.isValidObject(regulon.summary)) {
+                let summary = []
+                for (const key in regulon.summary) {
+                    if (Object.hasOwnProperty.call(regulon.summary, key) && key !== "__typename") {
+                        const element = regulon.summary[key];
+                        summary.push(`<p><b>${key}: </b>${element.total}</p>`)
                     }
-                }).join(", ")
+                }
 
-                secondary = `<div>
-                <p><b>Genes: </b>${genes}</p>
-                </div>`
+                secondary = `<div>${summary.join(" ")}</div>`
             }
 
             //let matches = title.matchAll(keyword)
