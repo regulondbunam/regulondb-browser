@@ -40,14 +40,17 @@ export default function ListResult({ results = [] }) {
 
     return (
         <div>
-            <div style={{height: `${37*limit}px`}} >
+            <div style={{MinHeight: `${37*limit}px`}} >
                 <List dense >
                     {data[page].map(dt => {
                         return (
-                            <ListItemButton key={dt.type + "_result_" + dt.type._id}
+                            <ListItemButton key={dt.type + "_result_" + dt._id}
                                 onClick={() => { navigate("/" + dt.type + "/" + dt._id); }}
                             >
-                                <ListItemText primary={<p style={{fontSize: "16px"}} dangerouslySetInnerHTML={{__html: dt.title}} />} />
+                                <ListItemText
+                                    primary={<p style={{fontSize: "16px"}} dangerouslySetInnerHTML={{__html: dt.title}} />} 
+                                    secondary={<p style={{fontSize: "16px"}} dangerouslySetInnerHTML={{__html: dt.secondary}} />}
+                                />
                             </ListItemButton>
                         )
                     })}

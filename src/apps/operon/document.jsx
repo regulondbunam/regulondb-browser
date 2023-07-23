@@ -58,7 +58,7 @@ export default function Document({ operonData, section }) {
             })
         }
         return _sections
-    }, [operonData])
+    }, [operonData, relatedIds])
 
     return (
         <div>
