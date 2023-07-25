@@ -29,6 +29,24 @@ export default function TranscriptionUnit({
 }) {
 
 
+    let isPromoterRi = false
+    if (DataVerifier.isValidObject(promoter)) {
+        if (DataVerifier.isValidArray(promoter.regulatorBindingSites)) {
+            isPromoterRi = true
+        }
+    }
+    let isGeneRi = false
+    if (DataVerifier.isValidArray(genes)) {
+        for (let i = 0; i < genes.length; i++) {
+            const gene = genes[i];
+            if (DataVerifier.isValidArray(gene.regulatorBindingSites)) {
+                isGeneRi = true
+                i = genes.length
+            }
+        }
+    }
+    let isTuRi = DataVerifier.isValidArray(regulatorBindingSites)
+
     return (
         <div>
             <div
@@ -70,36 +88,33 @@ export default function TranscriptionUnit({
                     <Promoter _id={_id} promoter={promoter} allCitations={allCitations} strand={strand} />
                 )}
                 <Divider />
-                <Accordion title={<h2 style={{ margin: 0 }} >{`Regulatory Interactions`}</h2>} >
-                    {DataVerifier.isValidObject(promoter) && (
-                        <>
-                            {DataVerifier.isValidArray(promoter.regulatorBindingSites) && (
-                                <>
-                                    <RegulatorBindingSites regulatorBindingSites={promoter.regulatorBindingSites} allCitations={allCitations} />
-                                    {DataVerifier.isValidArray(genes) && (
+                {(isGeneRi || isPromoterRi || isTuRi) && (
+                    <Accordion title={<h2 style={{ margin: 0 }} >{`Regulatory Interactions`}</h2>} >
+                        {DataVerifier.isValidArray(promoter.regulatorBindingSites) && (
+                            <RegulatorBindingSites regulatorBindingSites={promoter.regulatorBindingSites} allCitations={allCitations} />
+                        )}
+                        {DataVerifier.isValidArray(genes) && (
+                            <div>
+                                {genes.map(gene => {
+                                    return (
                                         <div>
-
-                                            {genes.map(gene => {
-                                                return (
-                                                    <div>
-                                                        {DataVerifier.isValidArray(gene.regulatorBindingSites) && (
-                                                            <>
-                                                                <h4>Regulation identified only at gene level</h4>
-                                                                <RegulatorBindingSites regulatorBindingSites={gene.regulatorBindingSites} allCitations={allCitations} />
-                                                            </>
-                                                        )}
-                                                    </div>
-                                                )
-                                            })}
-
+                                            {DataVerifier.isValidArray(gene.regulatorBindingSites) && (
+                                                <>
+                                                    <h4>Regulation identified only at gene {gene.name} level</h4>
+                                                    <RegulatorBindingSites regulatorBindingSites={gene.regulatorBindingSites} allCitations={allCitations} />
+                                                </>
+                                            )}
                                         </div>
+                                    )
+                                })}
+                            </div>
 
-                                    )}
-                                </>
-                            )}
-                        </>
-                    )}
-                </Accordion>
+                        )}
+                        {DataVerifier.isValidArray(regulatorBindingSites) && (
+                            <RegulatorBindingSites regulatorBindingSites={regulatorBindingSites} allCitations={allCitations} />
+                        )}
+                    </Accordion>
+                )}
                 <div>
 
 
@@ -109,9 +124,7 @@ export default function TranscriptionUnit({
                         <Terminators terminators={terminators} tuID={_id} allCitations={allCitations} />
                     )}
                     <Divider />
-                    {DataVerifier.isValidArray(regulatorBindingSites) && (
-                        <RegulatorBindingSites regulatorBindingSites={regulatorBindingSites} allCitations={allCitations} />
-                    )}
+
                 </div>
 
             </div>

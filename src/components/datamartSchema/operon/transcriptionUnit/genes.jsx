@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
-import {Accordion, DataVerifier } from "../../../ui-components"
+import {DataVerifier } from "../../../ui-components"
 import { ParagraphCitations, NoteCitations } from "../../citations";
-import RegulatorBindingSites from "./regulatorBindingSites";
 import { Divider } from "@mui/material";
 
 export default function Genes({
