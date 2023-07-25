@@ -82,7 +82,6 @@ export default function Information({ geneData }) {
                 label: "Citations",
                 title: "Citations",
                 component: <div style={{overflow: "auto"}} >
-                    <h2>Citations</h2>
                     <AllCitations allCitations={geneData.allCitations} />
                 </div>,
             })

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Main from './main/Main';
-import Results from './results/Results';
+import Results from './results';
 
 function Search() {
     const [_keyword, set_keyword] = useState();

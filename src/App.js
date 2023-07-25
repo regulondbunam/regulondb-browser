@@ -21,6 +21,7 @@ import Overviews from './apps/overviews'
 import SummaryHistory from './apps/summaryHistory'
 import ReleaseNotes from './apps/releasesNotes';
 import GensorUnit from "./apps/gensorUnit"
+import AboutUs from './apps/aboutUs';
 
 
 const router = createBrowserRouter([
@@ -35,6 +36,13 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: "aboutUs",
+        element: <AboutUs />,
+        children: [
+          { path: ":section" }
+        ],
       },
       {
         path: "home",
@@ -88,8 +96,12 @@ const router = createBrowserRouter([
         path: "operon",
         element: <Operon />,
         children: [
-          { path: ":operonId" }
-        ]
+          { 
+            path: ":operonId",
+            children: [{path: ":section"}]
+          }
+        ],
+        errorElement: <>Error</>
       },
       {
         path: "tu",

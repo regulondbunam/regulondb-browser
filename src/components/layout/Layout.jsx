@@ -10,15 +10,13 @@ const Layout = () => {
     window.location.pathname === "/home" || window.location.pathname === "/";
   //console.log(window.location.pathname);
   return (
-    <div>
+    <div style={{display: "flex", flexDirection: "column"}}>
       <Observer />
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      />
       <Header isHome={isHome} />
       <Menu />
-      <Outlet />
+      <div style={{minHeight: "78vh"}} >
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );

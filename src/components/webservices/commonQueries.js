@@ -22,8 +22,6 @@ export const fragment_CITATIONS = gql`fragment CITATIONS on Citations {
     currentPage
     firstPage
     hasNextPage
-    lastPage
-    limit
     totalResults
   }`
 

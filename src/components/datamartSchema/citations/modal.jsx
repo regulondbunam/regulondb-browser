@@ -29,7 +29,7 @@ export function ModalCitation({evidence = {}, publication = {}, index, small= tr
     const handleClose = () => setOpen(false);
     return (
         <>
-            <p style={{whiteSpace: "nowrap", float: "left", fontWeight: open?"bold":"normal"}} className="aBase citation" onClick={handleOpen} dangerouslySetInnerHTML={{__html: labelCitation({small: small, publication: publication,evidence: evidence, index: index})}} />
+            <div style={{whiteSpace: "nowrap", float: "left", fontWeight: open?"bold":"normal"}} className="aBase citation" onClick={handleOpen} dangerouslySetInnerHTML={{__html: labelCitation({small: small, publication: publication,evidence: evidence, index: index})}} />
             <Modal
               open={open}
               onClose={handleClose}

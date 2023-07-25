@@ -17,7 +17,7 @@ function ParagraphCitations({
     list = false,
 }) {
     return (
-        <div>
+        <div style={{display: "flex", flexDirection: "column"}} >
             {
                 citations.map((cit, indx) => {
                     try {
@@ -26,11 +26,13 @@ function ParagraphCitations({
                         let evidence = cit?.evidence ? cit.evidence : undefined
                         let publication = cit?.publication ? cit.publication : undefined
                         return (
-                            <ModalCitation key={`CitaitopnPH_${cit?.publication?._id}_${cit?.evidence?._id}_${indx}`}
+                            <div>
+                                <ModalCitation key={`CitaitopnPH_${cit?.publication?._id}_${cit?.evidence?._id}_${indx}`}
                                 index={index}
                                 evidence={evidence}
                                 publication={publication}
                             />
+                            </div>
                         )
                     } catch (error) {
                         return null

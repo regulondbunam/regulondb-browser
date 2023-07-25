@@ -59,9 +59,14 @@ function scrollFunction(sections = [], setIdSection, setOnTop, title = "", setNa
 
 }
 
-export default function AnchorNav({ title = "", sections = [], idSelectSection, header, aside, bottom }) {
+export default function AnchorNav({
+  title = "",
+  sections = [],
+  idSelectSection,
+  cardOptions,
+  header, aside, bottom }) {
 
-  const [idSection, setIdSection] = useState(idSelectSection);
+  const [idSection, setIdSection] = useState();
   const [navTitle, setNavTitle] = useState(title);
   const [viewMenu, setViewMenu] = useState(true);
   const [collapse, setCollapse] = useState(false);
@@ -69,8 +74,19 @@ export default function AnchorNav({ title = "", sections = [], idSelectSection, 
   const [springs, api] = useSpring(() => ({
     from: { y: 0 },
   }))
+
   //console.log(onTop);
   useEffect(() => {
+    if (idSelectSection && !idSection) {
+      const sectionCard = document.getElementById("scroll_section_" + idSelectSection)
+      if (sectionCard) {
+        sectionCard.scrollIntoView({ behavior: 'smooth' })
+        setTimeout(() => {
+          sectionCard.scrollIntoView({ behavior: 'smooth' })// behavior: 'smooth'
+        }, 500)
+
+      }
+    }
     const animateAnchor = (id) => {
       const optionOld = document.getElementById(idSection)
       const optionNew = document.getElementById(id)
@@ -117,7 +133,7 @@ export default function AnchorNav({ title = "", sections = [], idSelectSection, 
     return function cleanup() {
       window.onscroll = function () { };
     };
-  }, [collapse, idSection, sections, title, api]);
+  }, [collapse, idSection, sections, title, api, idSelectSection]);
 
 
 
@@ -224,7 +240,7 @@ export default function AnchorNav({ title = "", sections = [], idSelectSection, 
                     <FormatIndentDecreaseIcon />
                   </IconButton>
                 </Tooltip>
-                <Tooltip title={onTop ? "go to top page" : "go to bottom page"} >
+                <Tooltip title={onTop ? "go to bottom page" : "go to top page"} >
                   <IconButton onClick={handleTop} sx={{ borderRadius: 0 }} color="secondary" >
                     {onTop ? <VerticalAlignBottomIcon /> : <VerticalAlignTopIcon />}
                   </IconButton>
@@ -276,11 +292,10 @@ export default function AnchorNav({ title = "", sections = [], idSelectSection, 
               return <div key={"c_" + index + "_section_" + section.id} >
                 <div className={Style.scroll_section} id={"scroll_section_" + section.id} />
                 <div className={Style.flag_section} id={"init_section_" + section.id} />
-                <Card id={section.id} title={section.title} >
+                <Card options={cardOptions} id={section.id} title={section.title} >
                   {section.component}
                   <div className={Style.end_flag_section} id={"end_section_" + section.id} />
                 </Card>
-                <br />
               </div>
             })}
           </div>

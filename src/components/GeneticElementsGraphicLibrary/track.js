@@ -24,6 +24,7 @@ class Track {
     this.width = drawPlace.width;
     this.height = drawPlace.height
     this.dna_y = drawPlace.dna_y;
+    this.labelTitle = drawPlace.labelTitle
   }
 
   draw(geneticElements, covered_LeftPosition, covered_RightPosition) {
@@ -58,7 +59,8 @@ class Track {
         ...dna_obj,
         id: this.id,
         canva: canvas,
-        y: y
+        y: y,
+        labelName: this.labelTitle
       })
       geneticElements = verticalPosition(geneticElements,dna).geneticElements;
       if (!geneticElements) {
@@ -100,12 +102,14 @@ class Track {
         case tfBindingSite_dp.objectType:
           DrawTfBindingSite({...object, id:object._id, dna: dna, canva: canvas})
          break;
+         /*
         case transcriptionalAttenuator_dp.objectType:
           DrawTranscriptionalAttenuator({...object, id:object._id, dna: dna, canva: canvas})
          break;
         case transnationalAttenuator_dp.objectType:
           DrawTransnationalAttenuator({...object, id:object._id, dna: dna, canva: canvas})
          break;
+         */
         default:
           console.error("no objectType")
           return undefined;

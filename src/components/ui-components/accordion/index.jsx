@@ -29,10 +29,6 @@ const AccordionSummary = styled((props) => (
 ))(({ theme }) => ({
     padding: 0,
     minHeight: "10px",
-    backgroundColor:
-        theme.palette.mode === 'dark'
-            ? 'rgba(255, 255, 255, .05)'
-            : '#D5E2EA',
     flexDirection: 'row-reverse',
     '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
         transform: 'rotate(180deg)',
@@ -44,14 +40,17 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
     borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-export default function Accordion({children, title}) {
-    const [expanded, setExpanded] = useState(true);
+export default function Accordion({children, title, expand = true, backgroundColor = "#D5E2EA"}) {
+    const [expanded, setExpanded] = useState(expand);
     return (
         <AccordionStyled expanded={expanded} onChange={() => { setExpanded(!expanded) }} >
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel2a-content"
                 id="panel2a-header"
+                style={{
+                    backgroundColor: backgroundColor,
+                }}
             >
                 {title}
             </AccordionSummary>

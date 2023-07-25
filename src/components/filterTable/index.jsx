@@ -1,6 +1,6 @@
 import { useTable, useBlockLayout, useGlobalFilter, useResizeColumns, useSortBy, useFilters } from 'react-table'
-import SortByAlphaIcon from '@mui/icons-material/SortByAlpha';
-import SortIcon from '@mui/icons-material/Sort';
+//import SortByAlphaIcon from '@mui/icons-material/SortByAlpha';
+//import SortIcon from '@mui/icons-material/Sort';
 import { VariableSizeList as List } from 'react-window';
 import { TableStyles } from "./styledComponents"
 import React from 'react';
@@ -13,6 +13,9 @@ import scrollbarWidth from './scrollbarWidth'
 import Style from './table.module.css'
 
 export function validString(value) {
+    if (value === null || value === "null") {
+        return ""
+    }
     if (typeof value === 'string' || value instanceof String) {
         return value
     }
@@ -38,7 +41,7 @@ export default function FilterTable({ columns, data, getItemSize = ()=>{return 3
     //const [downloadAction, setDownloadAction] = React.useState();
     
 
-    const _nRows = 20
+    const _nRows = data.length
     const defaultColumn = React.useMemo(
         () => ({
             width: 150,
@@ -84,7 +87,7 @@ export default function FilterTable({ columns, data, getItemSize = ()=>{return 3
     // use row to download filtered data 
     //console.log(preGlobalFilteredRows)
 
-    const itemSize = 30
+    const itemSize = 40
     const heightTable = _nRows * itemSize
     const itemScroll = heightTable / rows.length
     const itemsView = heightTable / itemSize
@@ -119,7 +122,9 @@ export default function FilterTable({ columns, data, getItemSize = ()=>{return 3
     // Render the UI for your table
     return (
         <div>
-            <div>
+            {
+                /* 
+                <div>
                 <GlobalFilter
                     preGlobalFilteredRows={preGlobalFilteredRows}
                     globalFilter={state.globalFilter}
@@ -127,13 +132,18 @@ export default function FilterTable({ columns, data, getItemSize = ()=>{return 3
                     allColumns={allColumns}
                 />
             </div>
+                */
+            }
+            
             <div style={{ display: "grid", gridTemplateColumns: "auto 10px" }} >
                 <TableStyles className={Style.window_table}>
                     <div {...getTableProps()} style={{ width: "100%" }} className="table">
                         <div >
                             {headerGroups.map(headerGroup => (
                                 <div {...headerGroup.getHeaderGroupProps()} className="tr">
-                                    {headerGroup.headers.map((column, index) => (
+                                    {headerGroup.headers.map((column, index) => {
+                                        //console.log(column);
+                                        return (
                                         <div key={`table_main_${index}`} >
                                             <div {...column.getHeaderProps()} className="th" >
                                                 {isValidString(column.render('Header')) ? (
@@ -157,9 +167,6 @@ export default function FilterTable({ columns, data, getItemSize = ()=>{return 3
                                                                 className={`${Style.resizer} ${column.isResizing ? Style.isResizing : ''}`}
                                                             />
                                                         </div>
-                                                        <div>
-                                                            {column.canFilter ? column.render('Filter') : null}
-                                                        </div>
                                                     </div>
                                                 )
                                             :(
@@ -168,7 +175,7 @@ export default function FilterTable({ columns, data, getItemSize = ()=>{return 3
                                             </div>
                                         </div>
 
-                                    ))}
+                                    )})}
                                 </div>
                             ))}
                         </div>

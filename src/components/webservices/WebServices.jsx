@@ -1,12 +1,8 @@
 import React, { useEffect } from "react";
 import { useLazyQuery, useQuery } from "@apollo/client";
-import { OperonIds } from "./operon/related_Ids";
-import { query_GET_GENE_BY } from "./gene/gql";
-import { query_GET_OPERON_BY } from "./operon/gql";
 import { query_GET_PHRASE_OF } from "./phrases/gql";
 import { query_getAllSigmulon, query_getSigmulonBy } from "./sigmulon/gql";
 import { query_GET_GE_Interval } from "./GeneticElementsFromInterval/gql";
-import { QUERY_GetObjectList } from "./objectList/gql";
 import { PhraseUtil } from "./phrases/util";
 import { query_GET_ALL_OVERVIEWS } from "./overviews/gql"
 import { query_getSrnaBy } from "./srna/gql";
@@ -36,9 +32,6 @@ export default function WebServices({
     case "getSrnaBy":
       query = query_getSrnaBy;
       break;
-    case "getObjectList":
-      query = QUERY_GetObjectList;
-      break;
     case "getAllObjectInfo":
       query = query_GET_ALL_OVERVIEWS;
       break;
@@ -47,13 +40,6 @@ export default function WebServices({
       break;
     case "getAllSigmulon":
       query = query_getAllSigmulon;
-      break;
-    case "getOperonBy":
-      query = query_GET_OPERON_BY;
-      relatedIds = OperonIds
-      break;
-    case "getGenesBy":
-      query = query_GET_GENE_BY;
       break;
     case "getGeneticElementsFromInterval":
       query = query_GET_GE_Interval;

@@ -60,11 +60,11 @@ const generateElements = (responseData) => {
   reactions.forEach((reaction) => {
     //se evalua a que capa pertenece la reacion
     capa =
-      reaction.type == "transcription"
+      reaction.type === "transcription"
         ? 1
-        : reaction.type == "translation"
+        : reaction.type === "translation"
         ? 2
-        : reaction.type == "state transition"
+        : reaction.type === "state transition"
         ? 3
         : 4;
     //x se vuelve negativo
@@ -79,7 +79,7 @@ const generateElements = (responseData) => {
         component.function != "activator"
       ) {
         elementoRepetido = elements.filter((elemento) => {
-          return elemento.data.id == component.name;
+          return elemento.data.id === component.name;
         })[0];
       }
     });
@@ -96,7 +96,7 @@ const generateElements = (responseData) => {
         let positionNodos;
         if (elementoRepetido) {
           positionNodos =
-            component.function == "product"
+            component.function === "product"
               ? {
                   x: positionAux.x,
                   y: positionAux.y - 100,
@@ -113,7 +113,7 @@ const generateElements = (responseData) => {
           }
         } else {
           positionNodos =
-            component.function == "product"
+            component.function === "product"
               ? {
                   x: capas[capa].x,
                   y: capas[capa].y - 100,
@@ -130,14 +130,14 @@ const generateElements = (responseData) => {
           }
         }
 
-        if (component.function == "activator") {
+        if (component.function === "activator") {
           positionNodos = {
             x: capas[0].x,
             y: capas[0].y,
           };
         }
 
-        if (component.type == "complex") {
+        if (component.type === "complex") {
           elements.push({
             data: {
               id: component.name,
@@ -168,9 +168,9 @@ const generateElements = (responseData) => {
                 data: {
                   id: component.name + "_SubNode" + SubNode.name,
                   class:
-                    SubNode.type == "simple_molecule"
+                    SubNode.type === "simple_molecule"
                       ? "simple chemical"
-                      : SubNode.type == "complex"
+                      : SubNode.type === "complex"
                       ? "complex"
                       : "macromolecule",
                   parent: component.name,
@@ -195,7 +195,7 @@ const generateElements = (responseData) => {
             data: {
               id: component.name,
               class:
-                component.type == "simple_molecule"
+                component.type === "simple_molecule"
                   ? "simple chemical"
                   : "macromolecule",
               label: component.name,
@@ -220,12 +220,12 @@ const generateElements = (responseData) => {
       } else {
         elements
           .filter((element) => {
-            return component.name == element.data.id;
+            return component.name === element.data.id;
           })[0]
           .data.associatedReaction.push("R" + reaction.number);
       }
       //proceso que genera las edges entre los nodos
-      if (component.function == "product") {
+      if (component.function === "product") {
         elements.push({
           data: {
             id: component.name + "RowR" + reaction.number,
@@ -245,15 +245,15 @@ const generateElements = (responseData) => {
           data: {
             id: component.name + "RowR" + reaction.number,
             class:
-              component.type == "gene"
+              component.type === "gene"
                 ? "consumption"
-                : component.function == "activator"
+                : component.function === "activator"
                 ? "stimulation"
-                : component.function == "catalyzer"
+                : component.function === "catalyzer"
                 ? "catalysis"
-                : component.function == "product"
+                : component.function === "product"
                 ? "production"
-                : component.function == "reactant"
+                : component.function === "reactant"
                 ? "consumption"
                 : "necessary stimulation",
             associatedReaction: ["R" + reaction.number],
@@ -373,7 +373,7 @@ export default function GensorUnitMap({ data }) {
         keys.push(element.type);
         let aux = [];
         components.forEach((component) => {
-          if (component.type == element.type) {
+          if (component.type === element.type) {
             aux.push(component["name"]);
           }
         });
@@ -463,7 +463,9 @@ export default function GensorUnitMap({ data }) {
             }}
             hideBackdrop={true}
           >
+            <button onClick={()=>{setIsDrawOpen(false);}} >Close</button>
             <NavigationMenu options={filterInfoList(data)} map={_cy} />
+            
           </Drawer>
         </Box>
       </div>
