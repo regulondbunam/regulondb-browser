@@ -98,7 +98,7 @@ function formatData(regulatorBindingSites = [], allCitations) {
             }*/
             rbs.regulatoryInteractions.forEach(regulatoryInteraction => {
                 let regulatorySite = regulatoryInteraction.regulatorySite
-                _absolutePosition = validString(regulatoryInteraction.centerPosition + "")
+                _absolutePosition = validString(regulatoryInteraction.relativeCenterPosition + "")
                 _leftEndPosition = regulatorySite.leftEndPosition + ""
                 _rightEndPosition = regulatorySite.rightEndPosition + ""
                 _sequence = <LinealSequence

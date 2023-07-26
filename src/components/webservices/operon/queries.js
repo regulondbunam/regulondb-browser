@@ -12,13 +12,13 @@ export const fragment_RegulatorBS = gql`fragment RegulatorBS on RegulatorBinding
     }
     regulatoryInteractions {
       _id
-      centerPosition
+      relativeCenterPosition
       function
       note
       mechanism
       regulatorySite {
         _id
-        absolutePosition
+        centerEndPosition
         citations {
           ...CITATIONS
         }
