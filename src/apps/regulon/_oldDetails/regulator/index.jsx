@@ -1,5 +1,5 @@
 import "./regulator.css"
-import { Card, DataVerifier } from "../../../../components/ui-components";
+import { DataVerifier } from "../../../../components/ui-components";
 import { CitationsNote } from "../../../../components/citations/citations_note";
 import { ParagraphCitations } from "../../../../components/citations";
 import Conformations from "./conformations";
@@ -23,7 +23,6 @@ export default function Regulator({ regulator, allCitations }) {
     //console.log(synonyms);
     //console.log(DataVerifier.isValidArray(synonyms));
     return (
-        <Card title={"Regulator " + name}>
             <div style={{ marginLeft: "2%", marginRight: "3%" }} >
                 <div>
                     {DataVerifier.isValidArray(synonyms) && (
@@ -66,7 +65,6 @@ export default function Regulator({ regulator, allCitations }) {
                 )}
                 <br />
             </div>
-        </Card>
     )
 }
 

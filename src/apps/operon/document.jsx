@@ -13,7 +13,7 @@ const cardOptions = {
 export default function Document({ operonData, section }) {
 
     let relatedIds = getRelatedIdsByOperonData(operonData)
-    console.log(relatedIds);
+    //console.log(relatedIds);
     //
     console.log(operonData);
     let dtt = <DrawingTracesTool

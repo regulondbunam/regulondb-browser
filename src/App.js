@@ -108,7 +108,8 @@ const router = createBrowserRouter([
         element: <Operon />,
         children: [
           { path: ":tuId" }
-        ]
+        ],
+        errorElement: <>Error</>
       },
       {
         path: "sigmulon",
@@ -129,7 +130,8 @@ const router = createBrowserRouter([
         element: <Regulon />,
         children: [
           { path: ":regulonId" }
-        ]
+        ],
+        errorElement: <>Error</>
       },
       {
         path: "overviews",

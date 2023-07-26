@@ -1,5 +1,6 @@
 //import regulonData from "./dataTest.json"
 import { useQuery } from "@apollo/client";
+import { DataVerifier } from "../../ui-components";
 import {query_GET_REGULON_BY, query_GET_ALL_REGULON} from "./query"
 
 export function useGetRegulonBySearch({search}) {
@@ -35,7 +36,12 @@ export function useGetRegulonData(id) {
     if(data){
         try {
             //console.log(data);
-            regulonData = data.getRegulonBy.data[0]
+            if(DataVerifier.isValidArray(data.getRegulonBy.data)){
+                regulonData = data.getRegulonBy.data[0]
+            }else{
+                regulonData = null
+            }
+            
         } catch (error) {
             console.error("assign regulonData error");
         }
