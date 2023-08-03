@@ -22,7 +22,7 @@ function Regulates({ regulates }) {
     } = regulates
     //console.log(regulates);
     return (
-        <div style={{ margin: "0 5% 0 5%", padding: "0 0 20px 0" }} >
+        <div style={{ marginLeft: "2%", marginRight: "3%" }} >
             {genes.length > 0 && (<Genes genes={genes} />)}
             {operons.length > 0 && (<Operon operons={operons} />)}
             {sigmaFactors.length > 0 && (<SigmaFactor sigmaFactor={sigmaFactors} />)}

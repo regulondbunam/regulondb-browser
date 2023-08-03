@@ -4,50 +4,34 @@ function EncodedFrom({ encodedFrom }) {
     return (
         <div>
             {encodedFrom.genes.length > 0 || encodedFrom.operon.length > 0 ? (
-                <h2>Encoded From</h2>
+                <p><b>Encoded From</b></p>
             ) : (<div />)}
-            <div style={{ marginLeft: "5%" }} >
+            <div style={{ marginLeft: "1%" }} >
                 {encodedFrom.genes.length > 0 && (
                     <div>
-                        <h3>Genes:</h3>
-                        <div style={{display: "flex"}} >
+                        <p><b>Genes:</b>{" "}
                             {encodedFrom.genes.map(gene => {
                                 return (
                                     <Link key={gene.gene_id} to={"/gene/" + gene._id} >
-                                        <div className={"cell_content"} >
-                                            <div>
-                                                <p style={{ fontSize: "8px" }} >{gene._id}</p>
-                                            </div>
-                                            <div>
-                                                <p style={{ fontSize: "16px" }} dangerouslySetInnerHTML={{ __html: gene.name }} />
-                                            </div>
-                                        </div>
+                                        <span dangerouslySetInnerHTML={{ __html: gene.name }} />
                                     </Link>
                                 )
                             })}
-                        </div>
+                        </p>
                     </div>
                 )}
                 {encodedFrom.operon.length > 0 && (
                     <div>
-                    <h3>Operon:</h3>
-                    <div style={{display: "flex"}} >
+                        <p><b>Operons:</b>{" "}
                         {encodedFrom.operon.map(operon => {
-                            return (
-                                <Link key={operon.operon_id} to={"/operon/" + operon._id} >
-                                    <div className={"cell_content"} >
-                                        <div>
-                                            <p style={{ fontSize: "8px" }} >{operon._id}</p>
-                                        </div>
-                                        <div>
-                                            <p style={{ fontSize: "16px" }} dangerouslySetInnerHTML={{ __html: operon.name }} />
-                                        </div>
-                                    </div>
-                                </Link>
-                            )
-                        })}
+                                return (
+                                    <Link key={operon.operon_id} to={"/operon/" + operon._id} >
+                                        <span dangerouslySetInnerHTML={{ __html: operon.name }} />
+                                    </Link>
+                                )
+                            })}
+                        </p>
                     </div>
-                </div>
                 )}
             </div>
 

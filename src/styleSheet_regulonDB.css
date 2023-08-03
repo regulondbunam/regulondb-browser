@@ -228,6 +228,10 @@ a:visited {
 	color: var(--a-colorS);
 }
 
+b{
+	font-size: 15px;
+}
+
 /*TABLES*/
 
 .table_data {

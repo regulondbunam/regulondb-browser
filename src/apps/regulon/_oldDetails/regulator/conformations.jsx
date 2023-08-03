@@ -13,11 +13,19 @@ export default function Conformations({ conformations, allCitations }) {
     }
     return (
         <div>
-            <h3>Conformations</h3>
+            <p><b>Conformations</b></p>
             <div style={{
                 marginLeft: "5%"
             }}>
-                {conformations.map((conformation) => {
+                vista en una tabla, columns: name, type, confidenceLevel, citations
+            </div>
+        </div>
+    )
+}
+
+
+/*
+{conformations.map((conformation) => {
                     //console.log(conformation._id);
                     //let phrases = GetOf([conformation._id])
                     //console.log(conformation);
@@ -52,7 +60,4 @@ export default function Conformations({ conformations, allCitations }) {
                         </div>
                     )
                 })}
-            </div>
-        </div>
-    )
-}
+*/

@@ -141,16 +141,10 @@ function Genes({ genes, idPanel = "regulates_genes" }) {
 
     return (
         <div>
-            <h2>Genes</h2>
-            <p className='p_accent'> {`Total of genes: ${genes.length}`} </p>
-            <div style={styleFilter} >
-                <div><p className="p_accent" >Filter by</p></div>
-                <div><SelectFilter _filter={_filter} set_filter={set_filter} attributes={ATTRIBUTES} /></div>
-                <div><TextField size="small" sx={{ width: "100%" }} id="sgFilter-basic" label={_filter} variant="standard"
-                    onChange={_handleUpdate}
-                /></div>
-            </div>
-            <div id={idPanel} style={{ margin: "0 2% 1px 5%", overflow: "auto" }} >
+            <br />
+            <p> <b>{`Regulated Genes: ${genes.length}`}</b> </p>
+            
+            <div id={idPanel} style={{overflow: "auto" }} >
                 {
                     !_genesList
                         ? (<p>Loading...</p>)
@@ -162,6 +156,16 @@ function Genes({ genes, idPanel = "regulates_genes" }) {
 }
 
 export default Genes;
+
+/*
+<div style={styleFilter} >
+                <div><p >Filter by</p></div>
+                <div><SelectFilter _filter={_filter} set_filter={set_filter} attributes={ATTRIBUTES} /></div>
+                <div><TextField size="small" sx={{ width: "100%" }} id="sgFilter-basic" label={_filter} variant="standard"
+                    onChange={_handleUpdate}
+                /></div>
+            </div>
+            */
 
 function SelectFilter({ _filter, set_filter, attributes = [] }) {
 

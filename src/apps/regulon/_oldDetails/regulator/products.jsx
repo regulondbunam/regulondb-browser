@@ -1,10 +1,10 @@
 function Products({ products }) {
     return (
         <div>
-            <h2>Products</h2>
-            <div style={{margin: "0 0 5px 5%"}} >
+            <p><b>Products:</b></p>
+            <div style={{marginLeft: "1%"}} >
                 {products.map(product => {
-                    return <div key={"tfProduct_" + product._id} ><p className='p_accent'>{product.name}</p></div>
+                    return <p>{product.name}</p>
                 })}
             </div>
         </div>

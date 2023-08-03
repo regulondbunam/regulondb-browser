@@ -12,7 +12,7 @@ export default function Regulator({ regulator, allCitations }) {
         confidenceLevel,
         conformations,
         encodedFrom,
-        name,
+        // name,
         note,
         products,
         siteLength,
@@ -22,34 +22,40 @@ export default function Regulator({ regulator, allCitations }) {
     } = regulator
     //console.log(synonyms);
     //console.log(DataVerifier.isValidArray(synonyms));
+    let _confidenceLevel = ""
+    if (DataVerifier.isValidString(confidenceLevel)) {
+        switch (confidenceLevel) {
+            case "S":
+                _confidenceLevel = <span style={{ fontWeight: "bold", color: "#0C6A87" }} >Strong</span>
+                break;
+            case "C":
+                _confidenceLevel = <span style={{ fontWeight: "bold", color: "#000000" }} >Confirmed</span>
+                break;
+            case "w":
+                _confidenceLevel = <span style={{ color: "#0C6A87" }} >Weak</span>
+                break;
+            default:
+                _confidenceLevel = <span>.</span>
+                break;
+        }
+    }
     return (
-            <div style={{ marginLeft: "2%", marginRight: "3%" }} >
-                <div>
-                    {DataVerifier.isValidArray(synonyms) && (
-                        <p><b>Synonyms: </b>{synonyms.map(s => (s)).join(", ")}</p>
-                    )}
-                    {DataVerifier.isValidArray(siteLength) && (
-                        <p><b>Site Length; </b>{siteLength.map(s=>(s)).join(", ")}</p>
-                    )}
-                    {DataVerifier.isValidArray(symmetry) &&(
-                        <p><b>Symmetry: </b>{symmetry.map(s=>(s)).join(", ")}</p>
-                    )}
-                    {DataVerifier.isValidString(type) &&(
-                        <p><b>Type: </b>{type}</p>
-                    )}
-                </div>
-
-                {DataVerifier.isValidString(note) && (
-                    <>
-                    <p><b>Note:</b></p>
-                    <p dangerouslySetInnerHTML={{ __html: CitationsNote(allCitations, note) }} />
-                    </>
+        <div style={{ marginLeft: "2%", marginRight: "3%" }} >
+            <div>
+                {DataVerifier.isValidArray(synonyms) && (
+                    <p><b>Synonyms: </b>{synonyms.map(s => (s)).join(", ")}</p>
                 )}
-                {DataVerifier.isValidArray(conformations) && (
-                    <Conformations conformations={conformations} allCitations={allCitations} />
+                {DataVerifier.isValidArray(siteLength) && (
+                    <p><b>Site Length; </b>{siteLength.map(s => (s)).join(", ")}</p>
+                )}
+                {DataVerifier.isValidArray(symmetry) && (
+                    <p><b>Symmetry: </b>{symmetry.map(s => (s)).join(", ")}</p>
+                )}
+                {DataVerifier.isValidString(type) && (
+                    <p><b>Type: </b>{type}</p>
                 )}
                 {DataVerifier.isValidString(confidenceLevel) && (
-                    ConfidenceLevel(confidenceLevel)
+                    <p><b>Confidence Level:</b>{" "}{_confidenceLevel}</p>
                 )}
                 {encodedFrom && (
                     <EncodedFrom encodedFrom={encodedFrom} />
@@ -57,21 +63,26 @@ export default function Regulator({ regulator, allCitations }) {
                 {DataVerifier.isValidArray(products) && (
                     <Products products={products} />
                 )}
-                {DataVerifier.isValidArray(citations) && (
-                    <>
+            </div>
+
+            {DataVerifier.isValidString(note) && (
+                <>
+                    <p><b>Note:</b></p>
+                    <div style={{ marginLeft: "1%" }}>
+                        <p dangerouslySetInnerHTML={{ __html: CitationsNote(allCitations, note) }} />
+                    </div>
+                </>
+            )}
+            {DataVerifier.isValidArray(conformations) && (
+                <Conformations conformations={conformations} allCitations={allCitations} />
+            )}
+            {DataVerifier.isValidArray(citations) && (
+                <>
                     <p><b>Citations</b></p>
                     <ParagraphCitations allCitations={allCitations} citations={citations} />
-                    </>
-                )}
-                <br />
-            </div>
-    )
-}
-
-function ConfidenceLevel(confidenceLevel) {
-    return (
-        <div>
-            <h3>Confidence Level: {confidenceLevel} </h3>
+                </>
+            )}
+            <br />
         </div>
     )
 }

@@ -35,7 +35,7 @@ export default function Document({ regulonData, section }) {
         let _sections = []
         if(DataVerifier.isValidObject(regulator)){
             _sections.push({
-                id: "GeneTab_Regulator",
+                id: "RegulonTab_Regulator",
                 label: "Regulator",
                 title: "Regulator "+regulator.name,
                 component: <div style={{ overflow: "auto" }} >
@@ -43,27 +43,20 @@ export default function Document({ regulonData, section }) {
                 </div>,
             })
         }
-        _sections.push({
-            id: "GeneTab_RegulatoryNetwork",
-            label: "Regulatory Network",
-            title: "Regulatory Network",
-            component: <div style={{ overflow: "auto" }} >
-                 <DiagramRegulatoryNetwork regulonId={_id} />
-            </div>,
-        })
         if(DataVerifier.isValidObject(regulates)){
             _sections.push({
-                id: "GeneTab_Regulates",
-                label: "Regulates",
-                title: "Regulates",
+                id: "RegulonTab_Regulon",
+                label: "Regulon",
+                title: "Regulon",
                 component: <div style={{ overflow: "auto" }} >
+                    <DiagramRegulatoryNetwork regulonId={_id} />
                     <Regulates regulates={regulates} allCitations={allCitations} />
                 </div>,
             })
         }
         if(DataVerifier.isValidArray(regulatoryInteractions)){
             _sections.push({
-                id: "GeneTab_RegulatoryInteractions",
+                id: "RegulonTab_RegulatoryInteractions",
                 label: "Regulatory Interactions",
                 title: "Regulatory Interactions",
                 component: <div style={{ overflow: "auto" }} >
@@ -73,7 +66,7 @@ export default function Document({ regulonData, section }) {
         }
         if(DataVerifier.isValidObject(terms)){
             _sections.push({
-                id: "GeneTab_Terms",
+                id: "RegulonTab_Terms",
                 label: "Terms",
                 title: "Terms ",
                 component: <div style={{ overflow: "auto" }} >
@@ -83,7 +76,7 @@ export default function Document({ regulonData, section }) {
         }
         if(DataVerifier.isValidArray(allCitations)){
             _sections.push({
-                id: "GeneTab_Citations",
+                id: "RegulonTab_Citations",
                 label: "Citations",
                 title: "Citations ",
                 component: <div style={{ overflow: "auto" }} >
