@@ -1,5 +1,5 @@
 import React, { useId } from 'react'
-import { useTable, useBlockLayout } from 'react-table'
+import { useReactTable } from '@tanstack/react-table'
 import { FixedSizeList } from 'react-window'
 import { Link } from 'react-router-dom'
 import List from '@mui/material/List';
@@ -36,13 +36,12 @@ export default function TableList({ columns, data }) {
         getTableBodyProps,
         rows,
         prepareRow,
-    } = useTable(
+    } = useReactTable(
         {
             columns,
             data,
             defaultColumn,
         },
-        useBlockLayout
     )
 
     const RenderRow = React.useCallback(

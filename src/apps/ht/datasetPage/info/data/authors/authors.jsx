@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { SpinnerCircle } from '../../../../components/ui-components_old/ui_components';
-import { AuthorTable } from './table';
+//import { AuthorTable } from './table';
 
 export default function Authors({ id_dataset }) {
     //console.log(data)
@@ -30,18 +30,18 @@ export default function Authors({ id_dataset }) {
     if (!id_dataset) {
         return null
     }
-    try {
-        return (
-            <div>
-                {
+    return (
+        <div>
+            Update Table
+        </div>
+    )
+
+}
+
+/*
+{
                     _tableData 
                     ?<AuthorTable tableData={_tableData} id_dataset={id_dataset} />
                     : <SpinnerCircle />
                 }
-            </div>
-        )
-    } catch (error) {
-        return null
-    }
-
-}
+*/

@@ -1,6 +1,6 @@
 import React from 'react'
 import GlobalFilter from './tableComponents/GlobalFilter'
-import { useTable, useBlockLayout, useGlobalFilter, useResizeColumns, useSortBy } from 'react-table'
+import {useReactTable, useBlockLayout, useGlobalFilter, useResizeColumns, useSortBy } from '@tanstack/react-table'
 import { FixedSizeList } from 'react-window'
 import scrollbarWidth from './scrollbarWidth'
 import { TableStyles } from "./styledComponents"
@@ -33,7 +33,7 @@ function Table({ columns, data, id_dataset }) {
         setGlobalFilter,
         allColumns,
         getToggleHideAllColumnsProps,
-    } = useTable(
+    } = useReactTable(
         {
             columns,
             data,

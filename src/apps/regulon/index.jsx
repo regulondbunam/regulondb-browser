@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import Title from "./Title";
 import { useGetRegulonData } from "../../components/webservices";
 import Home from "./home";
-import Document from "./document";
+//import Document from "./document";
 
 
 function Regulon() {
@@ -32,9 +32,7 @@ function Regulon() {
         return (
             <div>
                 <Title title={title} />
-                {regulonData && (
-                    <Document regulonData={regulonData} />
-                )}
+                
             </div>
         )
     } else {
@@ -45,3 +43,9 @@ function Regulon() {
 }
 
 export default Regulon;
+
+/*
+{regulonData && (
+                    <Document regulonData={regulonData} />
+                )}
+*/

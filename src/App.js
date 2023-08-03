@@ -10,14 +10,14 @@ import Search from './apps/search';
 import Gene from './apps/gene';
 import DrawingTracesInterface from './apps/dtt';
 import Operon from './apps/operon';
-import Embed from "./apps/embed";
-import HT from './apps/ht/HighThroughput';
+//import Embed from "./apps/embed";
+//import HT from './apps/ht/HighThroughput';
 import Regulon from './apps/regulon';
-import Sigmulon from './apps/sigmulon';
+//import Sigmulon from './apps/sigmulon';
 import Coexpression from "./apps/coexpression"
 import { TestComponents } from './apps/testinComponents';
 import DocumentationDatamarts from './apps/docs_dt';
-import Overviews from './apps/overviews'
+//import Overviews from './apps/overviews'
 import SummaryHistory from './apps/summaryHistory'
 import ReleaseNotes from './apps/releasesNotes';
 import GensorUnit from "./apps/gensorUnit"
@@ -113,14 +113,14 @@ const router = createBrowserRouter([
       },
       {
         path: "sigmulon",
-        element: <Sigmulon />,
+        element: <>IN MAINTENANCE</>,
         children: [
           { path: ":sigmulonId" }
         ]
       },
       {
         path: "promoter",
-        element: <Sigmulon />,
+        element: <>IN MAINTENANCE</>,
         children: [
           { path: ":promoterId" }
         ]
@@ -135,14 +135,14 @@ const router = createBrowserRouter([
       },
       {
         path: "overviews",
-        element: <Overviews />,
+        element: <>IN MAINTENANCE</>,
         children: [
           { path: ":overviewsId" }
         ]
       },
       {
         path: "ht",
-        element: <HT />,
+        element: <>IN MAINTENANCE</>,
         children: [
           {
             path: ":site",
@@ -170,7 +170,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/embed",
-    element: <Embed />,
+    element: <>IN MAINTENANCE</>,
     children: [
       {
         path: ":application",
