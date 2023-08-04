@@ -1,6 +1,7 @@
 import React from "react"
-import SearchIcon from '@mui/icons-material/Search';
-import SearchOffIcon from '@mui/icons-material/SearchOff';
+import InputAdornment from '@mui/material/InputAdornment';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import TextField from '@mui/material/TextField';
 import { Button, Tooltip } from "@mui/material";
 
 export function GlobalFilter({
@@ -10,28 +11,31 @@ export function GlobalFilter({
     placeholder,
     ...props
 }) {
-    const [view, setView] = React.useState(false)
+    //const [view, setView] = React.useState(false)
 
     return (
         <div style={{ display: "flex", alignItems: "center" }} >
-            <Button 
-            onClick={()=>{
-                setView(!view)
-                if (view) {
-                    onChange("")
-                }
-            }}
+            <Tooltip title="General filter" >
+            <TextField
+            value={value}
+            onChange={(e)=>onChange(e.target.value)}
+            id="globalSearch-textfield"
             color="secondary"
-            sx={{ height: "25px", minWidth: "25px" }} variant={view ? "outlined" : "contained"} >
-                <Tooltip title={view ?  "clean search" : placeholder } >
-                    {view ? <SearchOffIcon /> : <SearchIcon />}
+            InputProps={{
+                startAdornment: (
+                    <InputAdornment position="start">
+                            <FilterAltIcon color="secondary" />
+                        </InputAdornment>
+                    ),
+                }}
+                variant="outlined"
+                size="small"
+                sx={{
+                    width: "200px",
+                    '& .MuiOutlinedInput-root': { height: "25px", backgroundColor: "#ffffff" },
+                }}
+                />
                 </Tooltip>
-            </Button>
-            {view && (
-                <div>
-                    <input placeholder={placeholder} style={{ height: "25px" }} {...props} value={value} onChange={e => onChange(e.target.value)} />
-                </div>
-            )}
         </div>
     )
 }
