@@ -103,7 +103,8 @@ function formatData(regulons = []) {
       const { summary, regulator, _id } = regulon
       data.push({
         id: regulator.name+"_"+index,
-        _name: <Link value={regulator.name} to={"/regulon/" + _id} >{regulator.name}</Link>,
+        //_name: <Link value={regulator.name} to={"/regulon/" + _id} >{regulator.name}</Link>,
+        _name: regulator.name,
         _genes: summary.genes.total,
         _operon: summary.operons.total,
         _tu: summary.transcriptionUnits.total,
@@ -140,7 +141,7 @@ export default function Home() {
       <Cover state={state} >
         <h1>{title}</h1>
       </Cover>
-      <div style={{ marginLeft: "3%" }}>
+      <div style={{ margin: "0 3% 0 3%" }}>
         {data && (
           <Table regulons={data.getAllRegulon.data} />
         )}

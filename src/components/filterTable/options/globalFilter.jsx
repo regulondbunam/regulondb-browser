@@ -4,31 +4,23 @@ import SearchOffIcon from '@mui/icons-material/SearchOff';
 import { Button, Tooltip } from "@mui/material";
 
 export function GlobalFilter({
-    value: initialValue,
+    value,
     onChange,
     debounce = 500,
     placeholder,
     ...props
 }) {
-    const [value, setValue] = React.useState(initialValue)
     const [view, setView] = React.useState(false)
-
-    React.useEffect(() => {
-        setValue(initialValue)
-    }, [initialValue])
-
-    React.useEffect(() => {
-        const timeout = setTimeout(() => {
-            onChange(value)
-        }, debounce)
-
-        return () => clearTimeout(timeout)
-    }, [value, onChange, debounce])
 
     return (
         <div style={{ display: "flex", alignItems: "center" }} >
             <Button 
-            onClick={()=>{setView(!view)}}
+            onClick={()=>{
+                setView(!view)
+                if (view) {
+                    onChange("")
+                }
+            }}
             color="secondary"
             sx={{ height: "25px", minWidth: "25px" }} variant={view ? "outlined" : "contained"} >
                 <Tooltip title={view ?  "clean search" : placeholder } >
@@ -37,7 +29,7 @@ export function GlobalFilter({
             </Button>
             {view && (
                 <div>
-                    <input placeholder={placeholder} style={{ height: "25px" }} {...props} value={value} onChange={e => setValue(e.target.value)} />
+                    <input placeholder={placeholder} style={{ height: "25px" }} {...props} value={value} onChange={e => onChange(e.target.value)} />
                 </div>
             )}
         </div>

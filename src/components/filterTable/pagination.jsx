@@ -1,35 +1,69 @@
-export default function Pagination({table}) {
-    
-    return(
+import Button from "@mui/material/Button";
+import FirstPageIcon from '@mui/icons-material/FirstPage';
+import LastPageIcon from '@mui/icons-material/LastPage';
+import { Tooltip, ButtonGroup, Box } from "@mui/material";
+
+export default function Pagination({ table }) {
+
+    return (
         <div style={{ display: "flex", alignItems: "center", width: "100%", height: "100%", flexDirection: "row-reverse" }}>
-        <button
-          className="border rounded p-1"
-          onClick={() => table.setPageIndex(0)}
-          disabled={!table.getCanPreviousPage()}
-        >
-          {'<<'}
-        </button>
-        <button
-          className="border rounded p-1"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          {'<'}
-        </button>
-        <button
-          className="border rounded p-1"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          {'>'}
-        </button>
-        <button
-          className="border rounded p-1"
-          onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-          disabled={!table.getCanNextPage()}
-        >
-          {'>>'}
-        </button>
+            <ButtonGroup
+                variant="contained"
+                size="small"
+                color="secondary"
+                sx={{ height: "25px" }}
+            >
+                <Tooltip title="First Page" >
+                    <Button
+                        onClick={() => table.setPageIndex(0)}
+                        disabled={!table.getCanPreviousPage()}
+                    >
+                        <FirstPageIcon />
+                    </Button>
+                </Tooltip>
+                <Tooltip title="Prev Page" >
+                    <Button
+                        onClick={() => table.previousPage()}
+                        disabled={!table.getCanPreviousPage()}
+                    >
+                        {'<'}
+                    </Button>
+                </Tooltip>
+                <Box sx={{
+                    width: "30px",
+                    display: " flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: "#C98528",
+                    color: "white",
+                    borderRight: "1px solid rgb(140, 93, 28)"
+                }} >
+                    <p style={{color:"white"}} ><b>{table.getState().pagination.pageIndex + 1}</b></p>
+                </Box>
+                <Tooltip title="Next Page" >
+                    <Button
+                        onClick={() => table.nextPage()}
+                        disabled={!table.getCanNextPage()}
+                    >
+                        {'>'}
+                    </Button>
+                </Tooltip>
+                <Tooltip title="Last Page" >
+                    <Button
+                        onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+                        disabled={!table.getCanNextPage()}
+                    >
+                        <LastPageIcon />
+                    </Button>
+                </Tooltip>
+
+            </ButtonGroup>
+
+        </div>
+    )
+}
+
+/*
         <span className="flex items-center gap-1">
           <div>Page</div>
           <strong>
@@ -61,6 +95,4 @@ export default function Pagination({table}) {
             </option>
           ))}
         </select>
-      </div>
-    )
-}
+*/

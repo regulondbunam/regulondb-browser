@@ -66,11 +66,22 @@ const fuzzyFilter = (row, columnId, value, addMeta) => {
 }
 
 
-export default function FilterTable({ columns, data, getItemSize = () => { return 30 } }) {
+export default function FilterTable({ 
+    columns, 
+    data, 
+    getItemSize = () => { return 30 }, 
+    pagination = {
+        pageIndex: 0,
+        pageSize: 20
+    } 
+}) {
     const [columnFilters, setColumnFilters] = React.useState([])
     const [globalFilter, setGlobalFilter] = React.useState('')
     const table = useReactTable({
         data,
+        initialState: {
+            pagination:pagination
+        },
         columns,
         filterFns: {
             fuzzy: fuzzyFilter,
@@ -89,14 +100,11 @@ export default function FilterTable({ columns, data, getItemSize = () => { retur
         getFacetedRowModel: getFacetedRowModel(),
         getFacetedUniqueValues: getFacetedUniqueValues(),
         getFacetedMinMaxValues: getFacetedMinMaxValues(),
-        debugTable: true,
-        debugHeaders: true,
-        debugColumns: false,
     })
     return (
         <div>
             <div className={style.options}>
-                <Options globalFilter={globalFilter} setGlobalFilter={setColumnFilters} />
+                <Options globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
             </div>
             <table className={style.table} >
                 <thead>
