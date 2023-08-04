@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { Cover, DataVerifier } from "../../components/ui-components";
 import { gql, useQuery } from "@apollo/client";
 import FilterTable from "../../components/filterTable";
+import Data from "./exampleData.json";
 import { Link } from "react-router-dom";
 
 
@@ -119,10 +120,12 @@ function formatData(regulons = []) {
 
 export default function Home() {
 
-  const { data, loading, error } = useQuery(query_GET_ALL_REGULON)
-
+  //const { data, loading, error } = useQuery(query_GET_ALL_REGULON)
+  console.log(Data)
+  let data = Data.data
   let state = "done"
   let title = "Regulons"
+  /*
   if (loading) {
     state = "loading"
     title = "loading Regulon list"
@@ -135,7 +138,7 @@ export default function Home() {
     state = "done"
 
   }
-
+*/
   return (
     <div>
       <Cover state={state} >
