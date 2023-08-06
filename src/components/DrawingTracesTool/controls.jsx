@@ -37,10 +37,8 @@ function Controls({
   drawPlaceName,
   expand,
   set_expand,
-  geneticElements,
-  variant = "contained"
+  geneticElements
 }) {
-  //let iconColor =  variant==="outlined" ? "withe" : ""
   move = parseInt(`${(currentRightEndPosition - currentLeftEndPosition) * move}`, 10);
   zoom = parseInt(`${(currentRightEndPosition - currentLeftEndPosition) * zoom}`, 10);
   //let aviso = "The Drawing Traces Tool is still under development so some elements may not be displayed properly, please if you detect any problem download the generated image and report it in the User Feedback section. ";
@@ -48,7 +46,7 @@ function Controls({
     <div className={Style.controls} >
       <div className="noPrint">
         <ButtonGroup
-          variant={variant}
+          variant="contained"
           size="small"
           color="secondary"
         >
@@ -68,7 +66,7 @@ function Controls({
                   }
                 }}
               >
-                {!expand ? <ZoomInMapIcon  /> : <ZoomOutMapIcon  />}
+                {!expand ? <ZoomInMapIcon sx={{ color: "white" }} /> : <ZoomOutMapIcon sx={{ color: "white" }} />}
               </Button>
             </Tooltip>
           )}
@@ -80,7 +78,7 @@ function Controls({
                 setPosRight(currentRightEndPosition - move);
               }}
             >
-              <ArrowLeftIcon  />
+              <ArrowLeftIcon sx={{ color: "white" }} />
             </Button>
           </Tooltip>
           <Tooltip title={"move to right"}>
@@ -91,7 +89,7 @@ function Controls({
                 setPosRight(currentRightEndPosition + move);
               }}
             >
-              <ArrowRightIcon  />
+              <ArrowRightIcon sx={{ color: "white" }} />
             </Button>
           </Tooltip>
           <Tooltip title={"zoom in"}>
@@ -103,7 +101,7 @@ function Controls({
                 setPosRight(currentRightEndPosition - zoom);
               }}
             >
-              <ZoomInIcon  />
+              <ZoomInIcon sx={{ color: "white" }} />
             </Button>
           </Tooltip>
           <Tooltip title={"zoom out"}>
@@ -114,7 +112,7 @@ function Controls({
                 setPosRight(currentRightEndPosition + zoom);
               }}
             >
-              <ZoomOutIcon  />
+              <ZoomOutIcon sx={{ color: "white" }} />
             </Button>
           </Tooltip>
 
@@ -128,11 +126,10 @@ function Controls({
                 setPosRight(rightEndPosition);
               }}
             >
-              <RestartAltIcon  />
+              <RestartAltIcon sx={{ color: "white" }} />
             </Button>
           </Tooltip>
           <DownloadOptions
-            variant={variant}
             drawPlaceId={drawPlaceId}
             canvaId={canvaId}
             name={drawPlaceName}
@@ -147,7 +144,7 @@ function Controls({
   );
 }
 
-function DownloadOptions({ variant, drawPlaceId, canvaId, name, geneticElements }) {
+function DownloadOptions({ drawPlaceId, canvaId, name, geneticElements }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -197,8 +194,8 @@ function DownloadOptions({ variant, drawPlaceId, canvaId, name, geneticElements 
   return (
     <React.Fragment>
       <Tooltip title={"Download options"} >
-        <Button variant={variant} color="secondary" size="small" onClick={handleClick}>
-          <FileDownloadIcon  />
+        <Button variant="contained" color="secondary" size="small" onClick={handleClick}>
+          <FileDownloadIcon sx={{ color: "white" }} />
         </Button>
       </Tooltip>
       <Menu

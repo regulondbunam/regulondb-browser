@@ -58,8 +58,8 @@ export default function TranscriptionUnit({
                     MozBoxShadow: " 0px 2px 2px 0px rgba(0,0,0,0.43)",
                 }}>
                 <DrawingTracesTool
-                    variant="outlined"
                     relatedIds={relatedIds}
+                    controls={false}
                     context="tu"
                     height={200}
                     id={_id}
