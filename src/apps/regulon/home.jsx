@@ -50,6 +50,7 @@ const COLUMNS = [
         header: 'Name',
         accessorKey: '_name',
         filter: "fuzzyText",
+        cell: info=><Link to={"/regulon/" + info.row.original.id} >{info.getValue()}</Link>
       },
     ]
   },
@@ -103,8 +104,7 @@ function formatData(regulons = []) {
     regulons.forEach((regulon, index) => {
       const { summary, regulator, _id } = regulon
       data.push({
-        id: regulator.name+"_"+index,
-        //_name: <Link value={regulator.name} to={"/regulon/" + _id} >{regulator.name}</Link>,
+        id: _id,
         _name: regulator.name,
         _genes: summary.genes.total,
         _operon: summary.operons.total,

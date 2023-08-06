@@ -66,21 +66,21 @@ const fuzzyFilter = (row, columnId, value, addMeta) => {
 }
 
 
-export default function FilterTable({ 
-    columns, 
-    data, 
-    getItemSize = () => { return 30 }, 
+export default function FilterTable({
+    columns,
+    data,
+    getItemSize = () => { return 30 },
     pagination = {
         pageIndex: 0,
         pageSize: 20
-    } 
+    }
 }) {
     const [columnFilters, setColumnFilters] = React.useState([])
     const [globalFilter, setGlobalFilter] = React.useState('')
     const table = useReactTable({
         data,
         initialState: {
-            pagination:pagination
+            pagination: pagination
         },
         columns,
         filterFns: {
@@ -150,14 +150,18 @@ export default function FilterTable({
                         return (
                             <tr key={row.id}>
                                 {row.getVisibleCells().map(cell => {
-                                    return (
-                                        <td key={cell.id}>
-                                            {flexRender(
-                                                cell.column.columnDef.cell,
-                                                cell.getContext()
-                                            )}
-                                        </td>
-                                    )
+                                    if (typeof (cell.getValue()) === "object") {
+                                        return <td key={cell.id}>{cell.getValue()}</td>
+                                    } else {
+                                        return (
+                                            <td key={cell.id}>
+                                                {flexRender(
+                                                    cell.column.columnDef.cell,
+                                                    cell.getContext()
+                                                )}
+                                            </td>
+                                        )
+                                    }
                                 })}
                             </tr>
                         )

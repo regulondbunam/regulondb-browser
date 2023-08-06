@@ -11,7 +11,7 @@ import Gene from './apps/gene';
 import DrawingTracesInterface from './apps/dtt';
 import Operon from './apps/operon';
 //import Embed from "./apps/embed";
-//import HT from './apps/ht/HighThroughput';
+import HT from './apps/ht/HighThroughput';
 import Regulon from './apps/regulon';
 //import Sigmulon from './apps/sigmulon';
 import Coexpression from "./apps/coexpression"
