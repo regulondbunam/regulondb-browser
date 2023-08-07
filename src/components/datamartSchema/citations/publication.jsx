@@ -24,7 +24,7 @@ export function Publication({
             <h2>Reference:</h2>
             {url !== "" && <a href={url} target="_blank" rel="noopener noreferrer" >Go to Reference</a>}
             <p>{pmid !== "" ? `pmid: ${pmid}` : ""}</p>
-            <p className="citation">{citation !== "" ? citation : ""}</p>
+            <p ><b>{citation !== "" ? citation : ""}</b></p>
         </div>
     );
 }

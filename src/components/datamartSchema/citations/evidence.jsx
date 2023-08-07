@@ -35,13 +35,11 @@ export function EvidenceTitle({
     }
     return (
         <div>
-            <h2>Evidence</h2>
-            <h1>
+            <h2>Evidence:</h2>
+            <h3>
                 {code}{name}
-                
-            </h1>
+            </h3>
             <p style={{fontSize: "20px"}} >{evidenceType}</p>
-            <br />
         </div>
     );
 }
