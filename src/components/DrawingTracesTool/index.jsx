@@ -94,6 +94,7 @@ class DrawingTracesTool extends Component {
         )}
         <div>
           {this.props.controls && Controls({
+            variant: this.props.variant,
             leftEndPosition: this.leftEndPosition,
             rightEndPosition: this.rightEndPosition,
             strand: this.props.strand,

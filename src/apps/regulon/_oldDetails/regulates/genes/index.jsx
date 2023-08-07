@@ -1,5 +1,5 @@
 import React from 'react';
-//import { Table } from './Table';
+import { Table } from './Table';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
@@ -145,7 +145,11 @@ function Genes({ genes, idPanel = "regulates_genes" }) {
             <p> <b>{`Regulated Genes: ${genes.length}`}</b> </p>
             
             <div id={idPanel} style={{overflow: "auto" }} >
-               
+                {
+                    !_genesList
+                        ? (<p>Loading...</p>)
+                        : <Table columns={GENE_COLUMNS} data={_genesList} />
+                }
             </div>
         </div>
     );
@@ -154,11 +158,6 @@ function Genes({ genes, idPanel = "regulates_genes" }) {
 export default Genes;
 
 /*
- {
-                    !_genesList
-                        ? (<p>Loading...</p>)
-                        : <Table columns={GENE_COLUMNS} data={_genesList} />
-                }
 <div style={styleFilter} >
                 <div><p >Filter by</p></div>
                 <div><SelectFilter _filter={_filter} set_filter={set_filter} attributes={ATTRIBUTES} /></div>

@@ -1,33 +1,16 @@
-import style from "./table.module.css"
-import React from 'react'
-import Options from "./options"
-import Pagination from "./pagination"
-import {
-    Column,
-    Table,
-    useReactTable,
-    ColumnFiltersState,
-    getCoreRowModel,
-    getFilteredRowModel,
-    getFacetedRowModel,
-    getFacetedUniqueValues,
-    getFacetedMinMaxValues,
-    getPaginationRowModel,
-    sortingFns,
-    getSortedRowModel,
-    FilterFn,
-    SortingFn,
-    ColumnDef,
-    flexRender,
-    FilterFns,
-} from '@tanstack/react-table'
+import { useTable, useBlockLayout, useGlobalFilter, useResizeColumns, useSortBy, useFilters } from 'react-table'
+//import SortByAlphaIcon from '@mui/icons-material/SortByAlpha';
+//import SortIcon from '@mui/icons-material/Sort';
+import { VariableSizeList as List } from 'react-window';
+import { TableStyles } from "./styledComponents"
+import React from 'react';
+import GlobalFilter from './components/GlobalFilter'
+//import { ColumnSelector } from './components/ColumnSelector'
+import filterRows from './components/filterRows';
+import { OptionFilter } from './components/filters';
 
-import {
-    RankingInfo,
-    rankItem,
-    compareItems,
-} from '@tanstack/match-sorter-utils'
-
+import scrollbarWidth from './scrollbarWidth'
+import Style from './table.module.css'
 
 export function validString(value) {
     if (value === null || value === "null") {
@@ -52,125 +35,256 @@ export function isValidArray(value = []) {
     return false;
 }
 
-const fuzzyFilter = (row, columnId, value, addMeta) => {
-    // Rank the item
-    const itemRank = rankItem(row.getValue(columnId), value)
 
-    // Store the itemRank info
-    addMeta({
-        itemRank,
-    })
+export default function FilterTable({ columns, data, getItemSize = ()=>{return 30 } }) {
 
-    // Return if the item should be filtered in/out
-    return itemRank.passed
-}
+    //const [downloadAction, setDownloadAction] = React.useState();
+    
 
+    const _nRows = data.length
+    const defaultColumn = React.useMemo(
+        () => ({
+            width: 150,
+            Filter: OptionFilter,
+        }),
+        []
+    )
+    const filterTypes = React.useMemo(
+        () => ({
+            fuzzyText: filterRows,
+        }),
+        []
+    )
 
-export default function FilterTable({
-    columns,
-    data,
-    getItemSize = () => { return 30 },
-    pagination = {
-        pageIndex: 0,
-        pageSize: 20
-    }
-}) {
-    const [columnFilters, setColumnFilters] = React.useState([])
-    const [globalFilter, setGlobalFilter] = React.useState('')
-    const table = useReactTable({
-        data,
-        initialState: {
-            pagination: pagination
+    const scrollBarSize = React.useMemo(() => scrollbarWidth(), [])
+    const {
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        rows,
+        totalColumnsWidth,
+        state,
+        preGlobalFilteredRows,
+        prepareRow,
+        setGlobalFilter,
+        allColumns,
+        getToggleHideAllColumnsProps,
+    } = useTable(
+        {
+            columns,
+            data,
+            defaultColumn,
+            filterTypes,
         },
-        columns,
-        filterFns: {
-            fuzzy: fuzzyFilter,
-        },
-        state: {
-            columnFilters,
-            globalFilter,
-        },
-        onColumnFiltersChange: setColumnFilters,
-        onGlobalFilterChange: setGlobalFilter,
-        globalFilterFn: fuzzyFilter,
-        getCoreRowModel: getCoreRowModel(),
-        getFilteredRowModel: getFilteredRowModel(),
-        getSortedRowModel: getSortedRowModel(),
-        getPaginationRowModel: getPaginationRowModel(),
-        getFacetedRowModel: getFacetedRowModel(),
-        getFacetedUniqueValues: getFacetedUniqueValues(),
-        getFacetedMinMaxValues: getFacetedMinMaxValues(),
-    })
-    return (
-        <div>
-            <div className={style.options}>
-                <Options globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
-            </div>
-            <table className={style.table} >
-                <thead>
-                    {table.getHeaderGroups().map(headerGroup => (
-                        <tr key={headerGroup.id}>
-                            {headerGroup.headers.map(header => {
-                                return (
-                                    <th key={header.id} colSpan={header.colSpan}>
-                                        {header.isPlaceholder ? null : (
-                                            <>
-                                                <div
-                                                    {...{
-                                                        className: header.column.getCanSort()
-                                                            ? 'cursor-pointer select-none'
-                                                            : '',
-                                                        onClick: header.column.getToggleSortingHandler(),
-                                                    }}
-                                                >
-                                                    {flexRender(
-                                                        header.column.columnDef.header,
-                                                        header.getContext()
-                                                    )}
-                                                    {{
-                                                        asc: ' 🔼',
-                                                        desc: ' 🔽',
-                                                    }[header.column.getIsSorted()] ?? null}
-                                                </div>
-                                                {header.column.getCanFilter() ? (
-                                                    <div>
-                                                        ...
-                                                    </div>
-                                                ) : null}
-                                            </>
-                                        )}
-                                    </th>
-                                )
-                            })}
-                        </tr>
-                    ))}
-                </thead>
-                <tbody>
-                    {table.getRowModel().rows.map(row => {
+        useFilters, // useFilters!
+        useGlobalFilter, // useGlobalFilter!
+        useBlockLayout,
+        useGlobalFilter,
+        useSortBy,
+        useResizeColumns
+    )
+
+    // use row to download filtered data 
+    //console.log(preGlobalFilteredRows)
+
+    const itemSize = 40
+    const heightTable = _nRows * itemSize
+    const itemScroll = heightTable / rows.length
+    const itemsView = heightTable / itemSize
+    let thumbHeight = itemsView * itemScroll
+    if (thumbHeight > heightTable) thumbHeight = 0
+    let listRef = React.createRef();
+
+    const RenderRow = React.useCallback(
+        ({ index, style }) => {
+
+            const row = rows[index]
+            prepareRow(row)
+            return (
+                <div
+                    {...row.getRowProps({
+                        style,
+                    })}
+                    className={index % 2 ? Style.rowTable : ''}
+                >
+                    {row.cells.map(cell => {
                         return (
-                            <tr key={row.id}>
-                                {row.getVisibleCells().map(cell => {
-                                    if (typeof (cell.getValue()) === "object") {
-                                        return <td key={cell.id}>{cell.getValue()}</td>
-                                    } else {
-                                        return (
-                                            <td key={cell.id}>
-                                                {flexRender(
-                                                    cell.column.columnDef.cell,
-                                                    cell.getContext()
-                                                )}
-                                            </td>
-                                        )
-                                    }
-                                })}
-                            </tr>
+                            <div {...cell.getCellProps()} className="td">
+                                {cell.render('Cell')}
+                            </div>
                         )
                     })}
-                </tbody>
-            </table>
-            <div className={style.options}>
-                <Pagination table={table} />
+                </div>
+            )
+        },
+        [prepareRow, rows]
+    )
+    // Render the UI for your table
+    return (
+        <div>
+            {
+                /* 
+                <div>
+                <GlobalFilter
+                    preGlobalFilteredRows={preGlobalFilteredRows}
+                    globalFilter={state.globalFilter}
+                    setGlobalFilter={setGlobalFilter}
+                    allColumns={allColumns}
+                />
             </div>
+                */
+            }
+            
+            <div style={{ display: "grid", gridTemplateColumns: "auto 10px" }} >
+                <TableStyles className={Style.window_table}>
+                    <div {...getTableProps()} style={{ width: "100%" }} className="table">
+                        <div >
+                            {headerGroups.map(headerGroup => (
+                                <div {...headerGroup.getHeaderGroupProps()} className="tr">
+                                    {headerGroup.headers.map((column, index) => {
+                                        //console.log(column);
+                                        return (
+                                        <div key={`table_main_${index}`} >
+                                            <div {...column.getHeaderProps()} className="th" >
+                                                {isValidString(column.render('Header')) ? (
+                                                    <div>
+                                                        <div className={Style.thLabel}  >
+                                                            <div
+                                                                className={Style.resizerRight}
+                                                            />
+                                                            <div {...column.getHeaderProps(column.getSortByToggleProps())} >
+                                                                {column.render('Header')}
+                                                                <span>
+                                                                    {column.isSorted
+                                                                        ? column.isSortedDesc
+                                                                            ? '(Z-A)'
+                                                                            : '(A-Z)'
+                                                                        : ''}
+                                                                </span>
+                                                            </div>
+                                                            <div
+                                                                {...column.getResizerProps()}
+                                                                className={`${Style.resizer} ${column.isResizing ? Style.isResizing : ''}`}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                )
+                                            :(
+                                                <div>{column.render('Header')}</div>
+                                            )}
+                                            </div>
+                                        </div>
+
+                                    )})}
+                                </div>
+                            ))}
+                        </div>
+
+                        <div  {...getTableBodyProps()} >
+                            <List
+                                height={heightTable}
+                                itemCount={rows.length}
+                                itemSize={getItemSize}
+                                width={totalColumnsWidth + scrollBarSize}
+                                className={Style.bodyTable}
+                                ref={listRef}
+                                onItemsRendered={({
+                                    visibleStartIndex,
+                                }) => {
+                                    let thumb = document.getElementById("scrollThumb")
+                                    if (thumb) {
+                                        if ((itemScroll * visibleStartIndex) > heightTable) {
+                                            thumb.style.top = `${heightTable}px`
+                                        } else {
+                                            thumb.style.top = `${itemScroll * visibleStartIndex}px`
+                                        }
+
+                                    }
+                                }}
+                            >
+                                {RenderRow}
+                            </List>
+                        </div>
+                    </div>
+                </TableStyles>
+            </div>
+
         </div>
+
     )
 }
+
+/*
+            <div className={Style.author_row}  >
+                <ColumnSelector columnsInfo={metadata.columns} getToggleHideAllColumnsProps={getToggleHideAllColumnsProps} allColumns={allColumns} />
+            </div>
+
+            
+
+
+                <div style={{overflow: "auto" }}  >
+                <table className={Style.mainTable} >
+                    <thead>
+                        {headerGroups.map(headerGroup => (
+                            <tr {...headerGroup.getHeaderGroupProps()}>
+                                {headerGroup.headers.map((column, index) => (
+                                    <th className={Style.th} key={`table_main_${index}`} {...column.getHeaderProps()} >
+                                        {isValidString(column.render('Header')) && (
+                                            <div>
+                                                <div className={Style.thLabel}  >
+                                                    <div
+                                                        className={Style.resizerRight}
+                                                    />
+                                                    <div {...column.getHeaderProps(column.getSortByToggleProps())} >
+                                                        {column.render('Header')}
+                                                        <span>
+                                                            {column.isSorted
+                                                                ? column.isSortedDesc
+                                                                    ? '(Z-A)'
+                                                                    : '(A-Z)'
+                                                                : ''}
+                                                        </span>
+                                                    </div>
+                                                    <div
+                                                        {...column.getResizerProps()}
+                                                        className={`${Style.resizer} ${column.isResizing ? Style.isResizing : ''}`}
+                                                    />
+                                                </div>
+                                                <div>
+                                                    {column.canFilter ? column.render('Filter') : null}
+                                                </div>
+                                            </div>
+                                        )}
+                                    </th>
+                                ))}
+                            </tr>
+                        ))}
+                    </thead>
+                    <tbody  {...getTableBodyProps()} >
+                            <FixedSizeList
+                                height={heightTable}
+                                itemCount={rows.length}
+                                itemSize={itemSize}
+                                width={totalColumnsWidth + scrollBarSize}
+                                className={Style.bodyTable}
+                                ref={listRef}
+                                onItemsRendered={({
+                                    visibleStartIndex,
+                                }) => {
+                                    let thumb = document.getElementById("scrollThumb")
+                                    if (thumb) {
+                                        if ((itemScroll * visibleStartIndex) > heightTable) {
+                                            thumb.style.top = `${heightTable}px`
+                                        } else {
+                                            thumb.style.top = `${itemScroll * visibleStartIndex}px`
+                                        }
+
+                                    }
+                                }}
+                            >
+                                {RenderRow}
+                            </FixedSizeList>
+                        </tbody>
+                </table>
+            </div>
+*/

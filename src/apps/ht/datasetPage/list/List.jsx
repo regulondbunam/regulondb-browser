@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { SpinnerCircle } from '../../components/ui-components_old/ui_components'
+import { DatasetTable } from './home/table'
 import { getConfOf } from '../../doc/fetchDOC'
 import { Link } from 'react-router-dom'
-
-export function  DatasetTable (){
-  return(
-      <div>Tabla</div>
-  )
-}
 
 export default function List({ datasetType, experimentType }) {
   const [_data, set_data] = useState()

@@ -1,6 +1,6 @@
 import React from 'react';
-//import Table from './Table';
-//import TextField from '@mui/material/TextField';
+import Table from './Table';
+import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
@@ -88,7 +88,11 @@ function Operon({ operons, idPanel = "regulates_operon" }) {
             <br />
             <p ><b>{`Total of operon: ${operons.length}`}</b> </p>
             <div id={idPanel} style={{overflow: "auto" }} >
-                
+                {
+                    !_operonList
+                        ? (<p>Loading...</p>)
+                        : <Table columns={OPERON_COLUMNS} data={_operonList} />
+                }
             </div>
         </div>
     );
@@ -119,10 +123,3 @@ function SelectFilter({ _filter, set_filter, attributes = [] }) {
         </FormControl>
     );
 }
-
-/*
-{
-                    !_operonList
-                        ? (<p>Loading...</p>)
-                        : <Table columns={OPERON_COLUMNS} data={_operonList} />
-                } */

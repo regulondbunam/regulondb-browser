@@ -4,6 +4,7 @@ import { AllCitations } from "../../components/datamartSchema"
 import DrawingTracesTool from "../../components/DrawingTracesTool";
 import { TranscriptionUnit } from "../../components/datamartSchema";
 import { getRelatedIdsByOperonData } from "../../components/webservices";
+import RelatedTool from "./components/relatedTool";
 
 
 const cardOptions = {
@@ -13,10 +14,13 @@ const cardOptions = {
 export default function Document({ operonData, section }) {
 
     let relatedIds = getRelatedIdsByOperonData(operonData)
-    //console.log(relatedIds);
+    console.log(relatedIds);
     //
-    console.log(operonData);
+    //console.log(operonData);
+    let relationTool = <RelatedTool operon={operonData} relatedIds={relatedIds} />
+
     let dtt = <DrawingTracesTool
+       
         context="operon"
         relatedIds={relatedIds.all}
         height={200}
@@ -62,7 +66,7 @@ export default function Document({ operonData, section }) {
 
     return (
         <div>
-            <AnchorNav sections={sections} cardOptions={cardOptions}
+            <AnchorNav sections={sections} cardOptions={cardOptions} aside={relationTool}
                 title={`Operon ${operonData.operon.name}`} header={dtt} />
         </div>
     )
