@@ -25,9 +25,8 @@ function Regulates({ regulates }) {
         <div style={{ marginLeft: "2%", marginRight: "3%" }} >
             {genes.length > 0 && (<Genes genes={genes} />)}
             {operons.length > 0 && (<Operon operons={operons} />)}
-            {sigmaFactors.length > 0 && (<SigmaFactor sigmaFactor={sigmaFactors} />)}
-            {transcriptionFactors.length > 0 && (<TranscriptionFactor transcriptionFactors={transcriptionFactors} />)}
             {transcriptionUnits.length > 0 && (<TranscriptionUnit transcriptionUnits={transcriptionUnits} />)}
+            {transcriptionFactors.length > 0 && (<TranscriptionFactor transcriptionFactors={transcriptionFactors} />)}
         </div>
 
     );

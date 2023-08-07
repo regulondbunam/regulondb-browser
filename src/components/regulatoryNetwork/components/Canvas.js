@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import CytoscapeComponent from "react-cytoscapejs";
 import cytoscape from "cytoscape";
 import svg from "cytoscape-svg";

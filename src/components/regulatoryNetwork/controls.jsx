@@ -11,23 +11,12 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import ImageIcon from '@mui/icons-material/Image';
 import LandscapeIcon from '@mui/icons-material/Landscape';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Menu from '@mui/material/Menu';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import TextField from '@mui/material/TextField';
-import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ContentCopy from '@mui/icons-material/ContentCopy';
-import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
-import Stack from '@mui/material/Stack';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
 import { saveAs } from "file-saver";
-
-
 
 export default function Controls({ regulonID, dispatch, state, cytoscape, OPTIONS, ZOOM, LAYOUTS, handleReset }) {
 

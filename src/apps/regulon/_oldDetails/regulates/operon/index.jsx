@@ -86,7 +86,7 @@ function Operon({ operons, idPanel = "regulates_operon" }) {
     return (
         <div>
             <br />
-            <p ><b>{`Total of operon: ${operons.length}`}</b> </p>
+            <p ><b>{`Regulated operons: ${operons.length}`}</b> </p>
             <div id={idPanel} style={{overflow: "auto" }} >
                 {
                     !_operonList

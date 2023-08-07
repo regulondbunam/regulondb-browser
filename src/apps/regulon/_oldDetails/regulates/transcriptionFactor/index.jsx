@@ -74,15 +74,8 @@ function TranscriptionFactor({ transcriptionFactors, idPanel = "regulates_tu" })
     return (
         <div>
             <h2>Transcription Factors</h2>
-            <p className='p_accent'> {`Total of transcriptionFactors: ${transcriptionFactors.length}`} </p>
-            <div style={styleFilter} >
-                <div><p className="p_accent" >Filter by</p></div>
-                <div><SelectFilter _filter={_filter} set_filter={set_filter} attributes={ATTRIBUTES} /></div>
-                <div><TextField size="small" sx={{ width: "100%" }} id="sgFilter-basic" label={_filter} variant="standard"
-                    onChange={_handleUpdate}
-                /></div>
-            </div>
-            <div id={idPanel} style={{ margin: "0 2% 1px 5%", overflow: "auto" }} >
+            <p> <b>{`Regulated transcription factors: ${transcriptionFactors.length}`}</b> </p>
+            <div id={idPanel} >
                 {
                     !_tuList
                         ? (<p>Loading...</p>)
