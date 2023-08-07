@@ -1,7 +1,9 @@
 .canvas {
-  border-bottom: 1px solid #a0a0a0;
-  border-left: 1px solid #a0a0a0;
-  border-right: 1px solid #a0a0a0;
+  border: 1px solid #a0a0a0;
+}
+
+.canvas :hover{
+  cursor: move 
 }
 
 .secondRow {
