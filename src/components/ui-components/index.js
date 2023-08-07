@@ -9,6 +9,7 @@ import { Cover } from "./cover/Cover";
 import DataVerifier from "./utils";
 import NavigationTabs from "./tab/NavigationTabs";
 import AnchorNav from "./anchorNav";
+import FilterTable from "./filterTable";
 //import { Tabs } from "./web/tab/tabs";
 //import Header from "./web/layout/header";
 //import TableI from "./output/table/table"
@@ -22,5 +23,6 @@ export {
   Cover,
   Card,
   DataVerifier,
+  FilterTable,
   NavigationTabs
 };
