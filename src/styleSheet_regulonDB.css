@@ -235,8 +235,9 @@ b{
 /*TABLES*/
 
 .table_data {
+	table-layout: fixed;
+	width: auto;
 	background-color: #f4f5f5;
-	width: 900px;
 	text-align: left;
 	border-collapse: collapse;
 }

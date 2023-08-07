@@ -1,5 +1,6 @@
 import React from 'react';
-import { ParagraphCitations } from '../../../../components/citations';
+//import { ParagraphCitations } from '../../../../components/citations';
+import ConformationsSchema from '../../../../components/datamartSchema/regulon/regulator/conformations';
 //import { GetOf } from '../../../../components/phrases';
 
 export default function Conformations({ conformations, allCitations }) {
@@ -17,7 +18,7 @@ export default function Conformations({ conformations, allCitations }) {
             <div style={{
                 marginLeft: "5%"
             }}>
-                vista en una tabla, columns: name, type, confidenceLevel, citations
+                <ConformationsSchema conformations={conformations} />
             </div>
         </div>
     )
