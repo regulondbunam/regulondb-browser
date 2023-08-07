@@ -5,6 +5,7 @@ import { ParagraphCitations } from "../../../../components/citations";
 import Conformations from "./conformations";
 import EncodedFrom from "./encode";
 import Products from "./products";
+import { useState } from "react";
 export default function Regulator({ regulator, allCitations }) {
     //console.log(regulator);
     const {
@@ -69,7 +70,7 @@ export default function Regulator({ regulator, allCitations }) {
                 <>
                     <p><b>Note:</b></p>
                     <div style={{ marginLeft: "1%" }}>
-                        <p dangerouslySetInnerHTML={{ __html: CitationsNote(allCitations, note) }} />
+                        <CNote citationsNote={CitationsNote(allCitations, note)} />
                     </div>
                 </>
             )}
@@ -84,5 +85,54 @@ export default function Regulator({ regulator, allCitations }) {
             )}
             <br />
         </div>
+    )
+}
+
+
+function CNote({ citationsNote = "" }) {
+    const characters = 1500
+    const [open, setOpen] = useState(false);
+    if (citationsNote.length > characters) {
+        return (
+            <>
+                <p dangerouslySetInnerHTML={{ __html: `${open ? citationsNote : citationsNote.slice(0, characters)+"..."}` }} />
+                {!open ? (
+                    <div
+                        style={{
+                            display: "flex",
+                            justifyContent: "space-evenly",
+                            position: "relative",
+                            height: "40px",
+                            top: "-35px",
+                            background: "linear-gradient(0deg, #CADBE7 0%, rgba(255,255,255,0) 100%)",
+                            alignItems: "flex-end",
+                            cursor: "pointer"
+                        }}
+                        onClick={()=>{setOpen(!open)}}
+                    >
+                        <p ><b>Show more...</b></p>
+                    </div>
+                )
+            :(
+                <div
+                        style={{
+                            display: "flex",
+                            justifyContent: "space-evenly",
+                            position: "relative",
+                            height: "20px",
+                            background: "linear-gradient(0deg, #CADBE7 0%, rgba(255,255,255,0) 100%)",
+                            alignItems: "flex-end",
+                            cursor: "pointer"
+                        }}
+                        onClick={()=>{setOpen(!open)}}
+                    >
+                        <p ><b>Show less</b></p>
+                    </div>
+            )}
+            </>
+        )
+    }
+    return (
+        <p dangerouslySetInnerHTML={{ __html: citationsNote }} />
     )
 }
