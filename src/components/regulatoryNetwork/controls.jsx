@@ -30,9 +30,9 @@ export default function Controls({ regulonID, dispatch, state, cytoscape, OPTION
 
 
     return (
-        <div style={{ height: "35px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <h2>Regulatory Network</h2>
-            <ButtonGroup variant="contained" sx={{ height: 25 }} color='secondary' aria-label="outlined primary button group">
+            <ButtonGroup variant="contained" size='small' color='secondary' aria-label="outlined primary button group">
                 <LayoutSelector dispatch={dispatch} state={state} LAYOUTS={LAYOUTS} OPTIONS={OPTIONS} />
                 <Tooltip title="zoom in">
                     <Button onClick={handleZoomIn}>

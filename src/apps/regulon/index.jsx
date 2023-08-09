@@ -31,7 +31,7 @@ function Regulon() {
         console.log(regulonData);
         return (
             <div>
-                <Title title={title} />
+                <Title title={title} regulator={regulonData && regulonData.regulator} />
                 {regulonData && (
                     <Document regulonData={regulonData} />
                 )}
@@ -40,8 +40,6 @@ function Regulon() {
     } else {
         return <Home />
     }
-
-    return null
 }
 
 export default Regulon;

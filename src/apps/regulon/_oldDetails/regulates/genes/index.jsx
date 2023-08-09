@@ -142,8 +142,7 @@ function Genes({ genes, idPanel = "regulates_genes" }) {
     return (
         <div>
             <br />
-            <p> <b>{`Regulated Genes: ${genes.length}`}</b> </p>
-            
+            <h3>{`Regulated Genes: ${genes.length}`}</h3>
             <div id={idPanel} style={{overflow: "auto" }} >
                 {
                     !_genesList

@@ -30,7 +30,7 @@ const OPTIONS = {
 
 const initOptions = {
   layout: LAYOUTS.GRID,
-  zoom: 1,
+  zoom: 0.75,
 }
 
 function reducerOptions(state, action) {

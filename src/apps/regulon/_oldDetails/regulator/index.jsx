@@ -32,7 +32,7 @@ export default function Regulator({ regulator, allCitations }) {
             case "C":
                 _confidenceLevel = <span style={{ fontWeight: "bold", color: "#000000" }} >Confirmed</span>
                 break;
-            case "w":
+            case "W":
                 _confidenceLevel = <span style={{ color: "#0C6A87" }} >Weak</span>
                 break;
             default:
