@@ -1,82 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
-import { DataProvider } from "../../components/webservices/DataProvider";
-import Home from "./home";
-import Title, { UpdateTitle } from "./Title";
-import Details from "./details";
-
+import { useGetSigmulonById } from "../../components/webservices";
+import Title from "./Title";
+import Document from "./document";
 
 function Sigmulon() {
-  const [id, setId] = useState();
-  const [_state, set_state] = useState();
   let { sigmulonId, promoterId } = useParams();
 
-  let advancedSearch = `'${sigmulonId}'[_id]`;
-  if (promoterId) {
-    advancedSearch = `${promoterId}[transcribedPromoters._id]`;
+  if (sigmulonId) {
+    return InformationBySigmulonID(sigmulonId)
   }
-
-  useEffect(() => {
-    if (!sigmulonId) {
-      UpdateTitle({ title: "sigmulon" });
-    } else {
-      switch (_state) {
-        case "loading":
-          UpdateTitle({ title: `Loading... ${sigmulonId}`, state: _state });
-          break;
-        case "error":
-          UpdateTitle({
-            title: `Error to query ${sigmulonId} information`,
-            state: _state,
-          });
-          break;
-        case "no results":
-          UpdateTitle({
-            title: `Error, sigmulon document with id ${sigmulonId} was not found.`,
-            state: "error",
-          });
-          break;
-        default:
-          UpdateTitle({ title: " ", state: _state });
-          break;
-      }
-    }
-    let idTest = sigmulonId ? sigmulonId : promoterId
-    if (idTest !== id) {
-      if (!id) {
-        setId(idTest);
-      } else {
-        setId(undefined);
-      }
-    }
-  }, [id, sigmulonId, promoterId, _state]);
-
-  const viewHome = !sigmulonId && !promoterId;
-
-  //console.log(id);
-  return (
-    <div id="sigmulon_app">
-
-      <div id="sigmulon_content">
-        {viewHome && <Home />}
-        {id && (
-          <div id="sigmulon_cover">
-            <Title title={"sigmulon"} />
-            <DataProvider
-              datamart_name="getSigmulonBy"
-              variables={{ advancedSearch: advancedSearch }}
-              getState={(state) => {
-                set_state(state);
-              }}
-            >
-              {_state === "done" && <Details promoterId={promoterId} />}
-            </DataProvider>
-          </div>
-
-        )}
-      </div>
-    </div>
-  );
+  return <div>home</div>;
 }
 
 export default Sigmulon;
+
+function InformationBySigmulonID(sigmulonId) {
+  const { loading, error, sigmulonData } = useGetSigmulonById(sigmulonId);
+  let state = "",
+    title = "";
+  if (loading) {
+    state = "loading";
+    title = "loading... Sigmulon document with id " + sigmulonId;
+  }
+  if (error) {
+    state = "error";
+    title = "... Sorry, we have an error, try again later 🥲";
+  }
+  if (sigmulonData) {
+    if (sigmulonData === null) {
+      state = "error";
+      title =
+        "Error, regulon document with id " + sigmulonId + " was not found. 😞";
+    } else {
+      state = "done";
+      title = undefined
+    }
+  }
+  return(
+    <div>
+      <Title title={title} state={state} {...sigmulonData} />
+      {!title && (
+        <Document sigmulonData={sigmulonData} />
+      )}
+    </div>
+  )
+}

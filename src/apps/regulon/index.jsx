@@ -28,7 +28,7 @@ function Regulon() {
                 title = regulonData.regulator.name
             }
         }
-        console.log(regulonData);
+        //console.log(regulonData);
         return (
             <div>
                 <Title title={title} state={state} regulator={regulonData && regulonData.regulator} />

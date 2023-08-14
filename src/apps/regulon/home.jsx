@@ -98,7 +98,7 @@ function formatData(regulons = []) {
     regulons.forEach((regulon, index) => {
       const { summary, regulator, _id } = regulon
       data.push({
-        id: regulator.name+"_"+index,
+        //id: regulator.name+"_"+index,
         //_name: <Link value={regulator.name} to={"/regulon/" + _id} >{regulator.name}</Link>,
         id: _id,
         _name: regulator.name,
@@ -114,7 +114,7 @@ function formatData(regulons = []) {
 }
 export default function Home() {
   //const { data, loading, error } = useQuery(query_GET_ALL_REGULON)
-  console.log(Data)
+  //console.log(Data)
   let data = Data.data
   let state = "done"
   let title = "Regulons"
