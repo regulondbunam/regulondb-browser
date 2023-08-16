@@ -102,51 +102,56 @@ export default function FilterTable({
         getFacetedUniqueValues: getFacetedUniqueValues(),
         getFacetedMinMaxValues: getFacetedMinMaxValues(),
     })
-    //console.log(table.getAllFlatColumns());
+    //console.log(table.getHeaderGroups());
     /**preGlobalFilteredRows={table.getPre} allColumns={allColumns} */
     return (
         <div>
             <div className={style.options}>
-                <Options globalFilter={globalFilter} fileName={fileName} setGlobalFilter={setGlobalFilter}  getAllFlatColumns={table.getAllFlatColumns} preGlobalFilteredRows={table.getGlobalFacetedRowModel} />
+                <Options globalFilter={globalFilter} fileName={fileName} setGlobalFilter={setGlobalFilter} getAllFlatColumns={table.getAllFlatColumns} preGlobalFilteredRows={table.getGlobalFacetedRowModel} />
             </div>
             <table className={style.table} >
                 <thead>
-                    {table.getHeaderGroups().map(headerGroup => (
-                        <tr key={headerGroup.id}>
-                            {headerGroup.headers.map(header => {
-                                return (
-                                    <th key={header.id} colSpan={header.colSpan}>
-                                        {header.isPlaceholder ? null : (
-                                            <>
-                                                <div
-                                                    {...{
-                                                        className: header.column.getCanSort()
-                                                            ? 'cursor-pointer select-none'
-                                                            : '',
-                                                        onClick: header.column.getToggleSortingHandler(),
-                                                    }}
-                                                >
-                                                    {flexRender(
-                                                        header.column.columnDef.header,
-                                                        header.getContext()
-                                                    )}
-                                                    {{
-                                                        asc: ' 🔼',
-                                                        desc: ' 🔽',
-                                                    }[header.column.getIsSorted()] ?? null}
-                                                </div>
-                                                {header.column.getCanFilter() ? (
-                                                    <div>
-                                                        ...
+                    {table.getHeaderGroups().map(headerGroup => {
+                        return (
+                            <tr key={headerGroup.id}>
+                                {headerGroup.headers.map(header => {
+                                    //let column = columns.find(column=>column.id===header.column.id)
+                                    //style={{ width: column ? column.width : "" }}
+                                    
+                                    return (
+                                        <th key={header.id} colSpan={header.colSpan}>
+                                            {header.isPlaceholder ? null : (
+                                                <>
+                                                    <div
+                                                        {...{
+                                                            className: header.column.getCanSort()
+                                                                ? 'cursor-pointer select-none'
+                                                                : '',
+                                                            onClick: header.column.getToggleSortingHandler(),
+                                                        }}
+                                                    >
+                                                        {flexRender(
+                                                            header.column.columnDef.header,
+                                                            header.getContext()
+                                                        )}
+                                                        {{
+                                                            asc: ' 🔼',
+                                                            desc: ' 🔽',
+                                                        }[header.column.getIsSorted()] ?? null}
                                                     </div>
-                                                ) : null}
-                                            </>
-                                        )}
-                                    </th>
-                                )
-                            })}
-                        </tr>
-                    ))}
+                                                    {header.column.getCanFilter() ? (
+                                                        <div>
+                                                            ...
+                                                        </div>
+                                                    ) : null}
+                                                </>
+                                            )}
+                                        </th>
+                                    )
+                                })}
+                            </tr>
+                        )
+                    })}
                 </thead>
                 <tbody>
                     {table.getRowModel().rows.map(row => {

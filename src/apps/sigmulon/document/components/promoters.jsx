@@ -18,6 +18,7 @@ const COLUMNS = [
     header: "TSS Position",
     accessorKey: "_tssPosition",
     filter: "fuzzyText",
+    width: "50px",
   },
   {
     id: "promoter_relationGene",
@@ -41,19 +42,8 @@ const COLUMNS = [
       },
       {
         id: "promoter_genesTSS",
-        header: "Distance from TSS",
+        header: "Distance from TSS to first gene",
         accessorKey: "_geneTSS",
-        cell: (info) => (
-          <>
-            {info.row.original.transcribedGenes.map((gene, index) => {
-              return (
-                <p key={"promoterGene_tssDistance_" + index + "_" + gene.id}>
-                  {gene.distanceFromTSS}
-                </p>
-              );
-            })}
-          </>
-        ),
       },
     ],
   },
@@ -80,15 +70,14 @@ function formatData(promoters = []) {
   let data = [];
   if (DataVerifier.isValidArray(promoters)) {
     promoters.forEach((promoter, index) => {
-      let { _id, boxes, citations, name, sequence, transcribedGenes } =
-        promoter;
+      let { _id, boxes, citations, name, sequence, TSSPosition } = promoter;
+      let transcribedGenes = [...promoter.transcribedGenes]
       let genes = "",
         genesTss = "";
       if (DataVerifier.isValidArray(transcribedGenes)) {
+        transcribedGenes.sort((a,b)=> a.distanceFromTSS - b.distanceFromTSS)
         genes = transcribedGenes.map((gene) => gene.name).join(", ");
-        genesTss = transcribedGenes
-          .map((gene) => gene.distanceFromTSS)
-          .join(", ");
+        genesTss = transcribedGenes[0].distanceFromTSS
       } else {
         transcribedGenes = [];
       }
@@ -98,7 +87,7 @@ function formatData(promoters = []) {
         boxes: boxes,
         _id: _id,
         _name: name,
-        _tssPosition: "---",
+        _tssPosition: TSSPosition,
         _geneNames: genes,
         _geneTSS: genesTss,
         _sequence: sequence,

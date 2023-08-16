@@ -66,6 +66,7 @@ query getSigmulon($advancedSearch: String){
         }
         transcribedPromoters {
           _id
+          TSSPosition
           boxes {
             leftEndPosition
             rightEndPosition
