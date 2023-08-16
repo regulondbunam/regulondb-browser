@@ -83,7 +83,7 @@ export default function LinealSequence({
                         }
                         switch (feature.type) {
                             case "promoter":
-                                return <Promoter featureStyle={featureStyle} id={feature.id} label={feature.label} height={middleHeight - 7.75} width={30} />
+                                return <Promoter {...feature} featureStyle={featureStyle} height={middleHeight - 7.75} width={30} />
                             case "measure":
                                 if (states.measure) {
                                     return <Measure featureStyle={featureStyle} id={feature.id} label={feature.label} height={height} width={8.41} />

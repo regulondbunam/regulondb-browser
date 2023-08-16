@@ -4,6 +4,7 @@ import {
   FilterTable,
 } from "../../../../components/ui-components";
 import { Link } from "react-router-dom";
+import { LinealSequence } from "../../../../components/sequence";
 
 const COLUMNS = [
   {
@@ -61,6 +62,12 @@ const COLUMNS = [
     header: "Promoter Sequence",
     accessorKey: "_sequence",
     filter: "fuzzyText",
+    cell: (info) => (
+      <SequencePromoter
+        _id={"sequence_" + info.row.original.id}
+        name={"sequence-promoter-" + info.row.original.id}
+        sequence={info.getValue()}
+      />)
   },
   {
     id: "promoter_citations",
@@ -108,4 +115,50 @@ export default function TranscribedPromoters({ promoters }) {
   }, [promoters]);
   //console.log(data);
   return <FilterTable columns={COLUMNS} data={data} />;
+}
+
+function SequencePromoter({ _id, boxes, name, transcriptionStartSite, sequence, strand }) {
+
+  const features = useMemo(() => {
+    let promoterRelativePosition = sequence.split("").findIndex(bp => bp === bp.toUpperCase())
+    let promoterFeatures = []
+
+    promoterFeatures.push({
+      id: _id + "_promoter_" + promoterRelativePosition + "_feature",
+      label: "+1",
+      showArrow: false,
+      sequencePosition: promoterRelativePosition,
+      type: "promoter",
+    })
+    /*
+    if (DataVerifier.isValidArray(boxes)) {
+        boxes.forEach((box, index) => {
+            let boxPosition = strand === "forward" ? box.leftEndPosition : box.rightEndPosition
+            const distancePromoter_BoxLeft = Math.abs(transcriptionStartSite.leftEndPosition - boxPosition)
+            const boxWidth = box.sequence.length * 8.41
+
+            promoterFeatures.push({
+                id: _id + "_box_" + index + "_feature",
+                label: box.type.replace('minus', '-'),
+                sequencePosition: promoterRelativePosition - distancePromoter_BoxLeft,
+                type: "box",
+                boxWidth: boxWidth
+            })
+        });
+    }
+    */
+    return promoterFeatures
+  }, [_id, sequence])
+
+  return <LinealSequence
+    name={name}
+    sequenceId={_id}
+    height={50}
+    controls={false}
+    sequence={sequence}
+    color={true}
+    features={features}
+    zoom={1}
+  />
+
 }

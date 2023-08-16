@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useGetSigmulonById } from "../../components/webservices";
 import Title from "./Title";
+import Home from "./home";
 import Document from "./document";
 
 function Sigmulon() {
@@ -10,7 +11,7 @@ function Sigmulon() {
   if (sigmulonId) {
     return InformationBySigmulonID(sigmulonId)
   }
-  return <div>home</div>;
+  return <Home/>;
 }
 
 export default Sigmulon;

@@ -1,7 +1,7 @@
 import { Accordion, DataVerifier } from "../../../ui-components"
 import { LinealSequence } from "../../../sequence";
 import { ParagraphCitations, NoteCitations } from "../../citations";
-import RegulatorBindingSites from "./regulatorBindingSites";
+//import RegulatorBindingSites from "./regulatorBindingSites";
 import { useMemo } from "react";
 
 export default function Promoter({

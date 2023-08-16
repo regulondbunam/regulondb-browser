@@ -52,24 +52,14 @@ export default function Document({ sigmulonData }) {
     }
     if (DataVerifier.isValidArray(allCitations)) {
       _sections.push({
-          id: "sigmaSections_allCitations",
-          label: "Citations",
-          title: "Citations",
-          component: <div style={{overflow: "auto"}} >
-              <AllCitations allCitations={allCitations} />
-          </div>,
+        id: "sigmaSections_allCitations",
+        label: "Citations",
+        title: "Citations",
+        component: <div style={{ overflow: "auto" }} >
+          <AllCitations allCitations={allCitations} />
+        </div>,
       })
-  }
-    if (DataVerifier.isValidArray(allCitations)) {
-      _sections.push({
-          id: "sigmaSections_allCitations",
-          label: "Citations",
-          title: "Citations",
-          component: <div style={{overflow: "auto"}} >
-              <AllCitations allCitations={allCitations} />
-          </div>,
-      })
-  }
+    }
     return _sections;
   }, [sigmulonData]);
   return (
