@@ -73,7 +73,8 @@ export default function FilterTable({
     pagination = {
         pageIndex: 0,
         pageSize: 20
-    }
+    },
+    fileName = "tableData"
 }) {
     const [columnFilters, setColumnFilters] = React.useState([])
     const [globalFilter, setGlobalFilter] = React.useState('')
@@ -106,7 +107,7 @@ export default function FilterTable({
     return (
         <div>
             <div className={style.options}>
-                <Options globalFilter={globalFilter} setGlobalFilter={setGlobalFilter}  getAllFlatColumns={table.getAllFlatColumns} preGlobalFilteredRows={table.getGlobalFacetedRowModel} />
+                <Options globalFilter={globalFilter} fileName={fileName} setGlobalFilter={setGlobalFilter}  getAllFlatColumns={table.getAllFlatColumns} preGlobalFilteredRows={table.getGlobalFacetedRowModel} />
             </div>
             <table className={style.table} >
                 <thead>

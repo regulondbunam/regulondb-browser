@@ -13,7 +13,6 @@ import DataVerifier from '../../utils';
 
 export function Download({
     getAllFlatColumns,
-    data,
     fileName = "data",
     preGlobalFilteredRows = [],
 }) {
@@ -49,44 +48,21 @@ export function Download({
             tsv: "\t ",
         }
         //file head
-        const fileInfo = columns.map(column => column.id).join(formatSeparator[format]) + "\n"
+        let fileInfo = columns.map(column => column.id).join(formatSeparator[format]) + "\n"
         const filename = fileName + "." + format
         //create rows file
-        console.log(rows);
         rows.forEach(row => {
-            let cells = []
-            columns.forEach(column => {
-                console.log(row.getValue(column.id));
-            });
+            fileInfo += columns.map(column => {
+                return row.getValue(column.id)
+            }).join(formatSeparator[format]) + "\n";
         });
-
-        /*
-preGlobalFilteredRows.forEach((row) => {
-let cells = []
-try {
-    visualColumns.forEach(col => {
-        cells.push(row.values[col.id])
-    })
-    fileInfo += cells.join(", ") + "\n"
-} catch (error) {
-    console.log(row);
-    console.error(error);
-}
-
-
-
-})
-const element = document.createElement('a');
-element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileInfo));
-element.setAttribute('download', filename);
-
-element.style.display = 'none';
-document.body.appendChild(element);
-
-element.click();
-
-document.body.removeChild(element);
-*/
+        const element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileInfo));
+        element.setAttribute('download', filename);
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
     }
 
     return (
