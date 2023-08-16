@@ -1,28 +1,139 @@
 import React from 'react';
 import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import KeyboardTabIcon from '@mui/icons-material/KeyboardTab';
+import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
+//import DataObjectIcon from '@mui/icons-material/DataObject';
 import DownloadIcon from '@mui/icons-material/Download';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import DataVerifier from '../../utils';
 
-function Download({ dataStage }) {
+export function Download({
+    getAllFlatColumns,
+    data,
+    fileName = "data",
+    preGlobalFilteredRows = [],
+}) {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const openMenu = Boolean(anchorEl);
 
-    const [open, setOpen] = React.useState(false)
-
-    const handleMenu = () => {
-        setOpen(true)
+    const handleClickMenu = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleCloseMenu = () => {
+        setAnchorEl(null);
     };
 
-    retun(
-        <div>
-            <Button
-                id="basic-button"
-                aria-controls={open ? 'basic-menu' : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
-                onClick={handleOpen}
+    const handleDownload = (format) => {
+        console.log(getAllFlatColumns());
+        const rows = preGlobalFilteredRows().rows
+        //check rows
+        if (!DataVerifier.isValidArray(rows)) {
+            return null
+        }
+        //check columns is visible
+        let columns = []
+        if (DataVerifier.isValidArray(getAllFlatColumns())) {
+            getAllFlatColumns().forEach(column => {
+                if (column.parent && column.columns.length === 0 && column.getIsVisible()) {
+                    columns.push(column)
+                }
+            });
+        }
+        //console.log(columns);
+        const formatSeparator = {
+            csv: ", ",
+            tsv: "\t ",
+        }
+        //file head
+        const fileInfo = columns.map(column => column.id).join(formatSeparator[format]) + "\n"
+        const filename = fileName + "." + format
+        //create rows file
+        console.log(rows);
+        rows.forEach(row => {
+            let cells = []
+            columns.forEach(column => {
+                console.log(row.getValue(column.id));
+            });
+        });
+
+        /*
+preGlobalFilteredRows.forEach((row) => {
+let cells = []
+try {
+    visualColumns.forEach(col => {
+        cells.push(row.values[col.id])
+    })
+    fileInfo += cells.join(", ") + "\n"
+} catch (error) {
+    console.log(row);
+    console.error(error);
+}
+
+
+
+})
+const element = document.createElement('a');
+element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileInfo));
+element.setAttribute('download', filename);
+
+element.style.display = 'none';
+document.body.appendChild(element);
+
+element.click();
+
+document.body.removeChild(element);
+*/
+    }
+
+    return (
+        <div style={{ marginRight: "5px" }} >
+            <Tooltip title="Download options" >
+                <Button
+                    id="demo-customized-button"
+                    variant="contained"
+                    color='secondary'
+                    disableElevation
+                    onClick={handleClickMenu}
+                    sx={{ height: 30 }}
+                >
+                    <DownloadIcon />
+                </Button>
+            </Tooltip>
+            <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={openMenu}
+                onClose={handleCloseMenu}
             >
-                <DownloadIcon />
-            </Button>
+                <MenuItem
+                    onClick={() => {
+                        handleDownload("tsv");
+                        handleCloseMenu();
+                    }}
+                >
+                    <ListItemIcon>
+                        <KeyboardTabIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>tsv format</ListItemText>
+                </MenuItem>
+                <MenuItem
+                    onClick={() => {
+                        handleDownload("csv");
+                        handleCloseMenu();
+                    }}
+                >
+                    <ListItemIcon>
+                        <FormatQuoteIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>csv format</ListItemText>
+                </MenuItem>
+            </Menu>
         </div>
     )
 }
+
+//function getColumnName

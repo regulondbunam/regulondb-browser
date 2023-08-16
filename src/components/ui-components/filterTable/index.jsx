@@ -101,10 +101,12 @@ export default function FilterTable({
         getFacetedUniqueValues: getFacetedUniqueValues(),
         getFacetedMinMaxValues: getFacetedMinMaxValues(),
     })
+    //console.log(table.getAllFlatColumns());
+    /**preGlobalFilteredRows={table.getPre} allColumns={allColumns} */
     return (
         <div>
             <div className={style.options}>
-                <Options globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
+                <Options globalFilter={globalFilter} setGlobalFilter={setGlobalFilter}  getAllFlatColumns={table.getAllFlatColumns} preGlobalFilteredRows={table.getGlobalFacetedRowModel} />
             </div>
             <table className={style.table} >
                 <thead>
