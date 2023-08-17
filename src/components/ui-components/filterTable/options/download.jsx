@@ -37,7 +37,7 @@ export function Download({
         let columns = []
         if (DataVerifier.isValidArray(getAllFlatColumns())) {
             getAllFlatColumns().forEach(column => {
-                if (column.parent && column.columns.length === 0 && column.getIsVisible()) {
+                if (column.columns.length === 0 && column.getIsVisible()) {
                     columns.push(column)
                 }
             });

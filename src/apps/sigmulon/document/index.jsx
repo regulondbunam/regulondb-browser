@@ -13,7 +13,7 @@ export default function Document({ sigmulonData }) {
   console.log(sigmulonData);
   const sections = useMemo(() => {
     let _sections = [];
-    const { allCitations, sigmaFactor, transcribedPromoters } = sigmulonData;
+    const { allCitations, sigmaFactor, transcribedPromoters, _id } = sigmulonData;
     if (DataVerifier.isValidArray(sigmaFactor.sigmulonGenes)) {
       _sections.push({
         id: "SigmaSection_01",
@@ -21,7 +21,7 @@ export default function Document({ sigmulonData }) {
         title: "Sigmulon Genes",
         component: (
           <div style={{ overflow: "auto" }}>
-            <Genes genes={sigmaFactor.sigmulonGenes} />
+            <Genes genes={sigmaFactor.sigmulonGenes} sigmulonId={_id} />
           </div>
         ),
       });
@@ -33,7 +33,7 @@ export default function Document({ sigmulonData }) {
         title: "Sigmulon Regulators",
         component: (
           <div style={{ overflow: "auto" }}>
-            <Regulators regulators={sigmaFactor.sigmulonRegulators} variant="filterTable" />
+            <Regulators regulators={sigmaFactor.sigmulonRegulators} variant="filterTable" sigmulonId={_id} />
           </div>
         ),
       });
@@ -45,7 +45,7 @@ export default function Document({ sigmulonData }) {
         title: "Transcribed Promoters",
         component: (
           <div style={{ overflow: "auto" }}>
-            <TranscribedPromoters promoters={transcribedPromoters} />
+            <TranscribedPromoters promoters={transcribedPromoters} sigmulonId={_id} />
           </div>
         ),
       });

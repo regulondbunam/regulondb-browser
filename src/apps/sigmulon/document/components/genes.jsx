@@ -4,10 +4,16 @@ import { Link } from "react-router-dom";
 
 const COLUMNS = [
   {
-    id: 'gene_name',
-    header: 'Name',
-    accessorKey: '_name',
-    cell: info => <Link to={"/gene/" + info.row.original.id} >{info.getValue()}</Link>,
+    id: 'gene',
+    header: 'Gene',
+    columns: [
+      {
+        id: 'gene_name',
+        header: 'Name',
+        accessorKey: '_name',
+        cell: info => <Link to={"/gene/" + info.row.original.id} >{info.getValue()}</Link>,
+      }
+    ]
   },
   {
     id: 'gene_ontologyTerms',
@@ -75,15 +81,15 @@ function formatData(genes = []) {
   if (DataVerifier.isValidArray(genes)) {
     genes.forEach((gene, index) => {
       const { _id, name, geneOntologyTerms } = gene
-      let _geneOntologyTerms = "", _cellularComponent = "", _molecularFunction = ""
+      let _biologicalProcess = "", _cellularComponent = "", _molecularFunction = ""
       if (DataVerifier.isValidArray(geneOntologyTerms.biologicalProcess)) {
-        _geneOntologyTerms = geneOntologyTerms.biologicalProcess.map(process => process.name).join(";");
+        _biologicalProcess = geneOntologyTerms.biologicalProcess.map(process => process.name).join("; ");
       }
       if (DataVerifier.isValidArray(geneOntologyTerms.cellularComponent)) {
-        _geneOntologyTerms = geneOntologyTerms.cellularComponent.map(process => process.name).join(";");
+        _cellularComponent = geneOntologyTerms.cellularComponent.map(process => process.name).join("; ");
       }
       if (DataVerifier.isValidArray(geneOntologyTerms.molecularFunction)) {
-        _geneOntologyTerms = geneOntologyTerms.molecularFunction.map(process => process.name).join(";");
+        _molecularFunction = geneOntologyTerms.molecularFunction.map(process => process.name).join("; ");
       }
       data.push({
         id: _id,
@@ -91,7 +97,7 @@ function formatData(genes = []) {
         ///
         _cellularComponent: _cellularComponent,
         cellularComponent: geneOntologyTerms.cellularComponent,
-        _biologicalProcess: _geneOntologyTerms,
+        _biologicalProcess: _biologicalProcess,
         biologicalProcess: geneOntologyTerms.biologicalProcess,
         _molecularFunction: _molecularFunction,
         molecularFunction: geneOntologyTerms.molecularFunction,
@@ -102,10 +108,10 @@ function formatData(genes = []) {
   return data
 }
 
-export default function Genes({ genes }) {
+export default function Genes({ genes ,sigmulonId="" }) {
   const data = useMemo(() => {
     return formatData(genes)
   }, [genes])
   //console.log(data);
-  return <FilterTable columns={COLUMNS} data={data} />
+  return <FilterTable columns={COLUMNS} data={data} fileName={sigmulonId+"_SigmulonGenes"} />
 }

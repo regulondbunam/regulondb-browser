@@ -98,12 +98,12 @@ function formatData(promoters = []) {
   return data;
 }
 
-export default function TranscribedPromoters({ promoters }) {
+export default function TranscribedPromoters({ promoters, sigmulonId }) {
   const data = useMemo(() => {
     return formatData(promoters);
   }, [promoters]);
   //console.log(data);
-  return <FilterTable columns={COLUMNS} data={data} />;
+  return <FilterTable columns={COLUMNS} data={data} fileName={sigmulonId+"_SigmulonPromoters"}  />;
 }
 
 function SequencePromoter({ _id, boxes, name, transcriptionStartSite, sequence, strand }) {
