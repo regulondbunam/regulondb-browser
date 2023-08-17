@@ -56,6 +56,8 @@ const COLUMNS = [
       <SequencePromoter
         _id={"sequence_" + info.row.original.id}
         name={"sequence-promoter-" + info.row.original.id}
+        boxes={info.row.original.boxes}
+        TSSPosition={info.row.original.TSSPosition}
         sequence={info.getValue()}
       />)
   },
@@ -75,7 +77,7 @@ function formatData(promoters = []) {
       let genes = "",
         genesTss = "";
       if (DataVerifier.isValidArray(transcribedGenes)) {
-        transcribedGenes.sort((a,b)=> a.distanceFromTSS - b.distanceFromTSS)
+        transcribedGenes.sort((a, b) => a.distanceFromTSS - b.distanceFromTSS)
         genes = transcribedGenes.map((gene) => gene.name).join(", ");
         genesTss = transcribedGenes[0].distanceFromTSS
       } else {
@@ -85,6 +87,7 @@ function formatData(promoters = []) {
         id: _id,
         transcribedGenes: transcribedGenes,
         boxes: boxes,
+        TSSPosition: TSSPosition,
         _id: _id,
         _name: name,
         _tssPosition: TSSPosition,
@@ -103,10 +106,10 @@ export default function TranscribedPromoters({ promoters, sigmulonId }) {
     return formatData(promoters);
   }, [promoters]);
   //console.log(data);
-  return <FilterTable columns={COLUMNS} data={data} fileName={sigmulonId+"_SigmulonPromoters"}  />;
+  return <FilterTable columns={COLUMNS} data={data} fileName={sigmulonId + "_SigmulonPromoters"} />;
 }
 
-function SequencePromoter({ _id, boxes, name, transcriptionStartSite, sequence, strand }) {
+function SequencePromoter({ _id, boxes, name, TSSPosition, sequence, strand }) {
 
   const features = useMemo(() => {
     let promoterRelativePosition = sequence.split("").findIndex(bp => bp === bp.toUpperCase())
@@ -119,9 +122,28 @@ function SequencePromoter({ _id, boxes, name, transcriptionStartSite, sequence, 
       sequencePosition: promoterRelativePosition,
       type: "promoter",
     })
-    /*
     if (DataVerifier.isValidArray(boxes)) {
-        boxes.forEach((box, index) => {
+      boxes.forEach((box, index) => {
+        /*if (index===0) {
+          console.log("strand?",((TSSPosition-box.leftEndPosition)>0) ? "forward" : "reverse");
+          console.log(TSSPosition);
+        }*/
+        const strand = (TSSPosition-box.leftEndPosition)>0 ? "forward" : "reverse"
+        let boxPosition = strand === "forward" ? box.leftEndPosition : box.rightEndPosition
+        const distancePromoter_BoxLeft = Math.abs(TSSPosition - boxPosition)
+        const boxWidth = box.sequence.length * 8.41
+        promoterFeatures.push({
+          id: _id + "_box_" + index + "_feature",
+          label: box.type.replace('minus', '-'),
+          sequencePosition: promoterRelativePosition - distancePromoter_BoxLeft,
+          type: "box",
+          boxWidth: boxWidth
+        })
+      })
+    }
+    /*
+   
+        
             let boxPosition = strand === "forward" ? box.leftEndPosition : box.rightEndPosition
             const distancePromoter_BoxLeft = Math.abs(transcriptionStartSite.leftEndPosition - boxPosition)
             const boxWidth = box.sequence.length * 8.41
@@ -137,7 +159,7 @@ function SequencePromoter({ _id, boxes, name, transcriptionStartSite, sequence, 
     }
     */
     return promoterFeatures
-  }, [_id, sequence])
+  }, [_id, sequence, boxes, TSSPosition])
 
   return <LinealSequence
     name={name}
