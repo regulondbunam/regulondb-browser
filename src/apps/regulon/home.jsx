@@ -78,13 +78,13 @@ const COLUMNS = [
     header: 'Total of',
     columns: [
       {
-        id: 'regulated_ri',
+        id: 'total_of_regulatory_interaction',
         header: 'Regulatory Interaction',
         accessorKey: '_ri',
         filter: "fuzzyText"
       },
       {
-        id: 'regulated_bs',
+        id: 'total_of_binding_sites',
         header: 'Binding Sites',
         accessorKey: '_bs',
         filter: "fuzzyText"
@@ -149,5 +149,5 @@ function Table({ regulons }) {
     return formatData(regulons)
   }, [regulons])
   console.log(data);
-  return <FilterTable columns={COLUMNS} data={data} />
+  return <FilterTable columns={COLUMNS} data={data} fileName="RegulonsSummaryData" />
 }

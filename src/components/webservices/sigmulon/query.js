@@ -47,6 +47,32 @@ query getSigmulon($advancedSearch: String){
           }
           name
           sigmulonGenes {
+            geneOntologyTerms{
+              biologicalProcess{
+                _id
+                citations{
+                  ...CITATIONS
+                }
+                name
+                productsIds
+              }
+              cellularComponent{
+                _id
+                citations{
+                  ...CITATIONS
+                }
+                name
+                productsIds
+              }
+              molecularFunction{
+                _id
+                citations{
+                  ...CITATIONS
+                }
+                name
+                productsIds
+              }
+            }
             name
             _id
           }
@@ -66,6 +92,7 @@ query getSigmulon($advancedSearch: String){
         }
         transcribedPromoters {
           _id
+          TSSPosition
           boxes {
             leftEndPosition
             rightEndPosition
