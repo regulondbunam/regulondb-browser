@@ -61,12 +61,14 @@ const COLUMNS = [
         sequence={info.getValue()}
       />)
   },
+  /*
   {
     id: "promoter_citations",
     header: "Citations",
     accessorKey: "_citation",
     filter: "fuzzyText",
   },
+  */
 ];
 function formatData(promoters = []) {
   let data = [];
