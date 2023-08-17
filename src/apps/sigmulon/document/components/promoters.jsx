@@ -80,7 +80,7 @@ function formatData(promoters = []) {
         genesTss = "";
       if (DataVerifier.isValidArray(transcribedGenes)) {
         transcribedGenes.sort((a, b) => a.distanceFromTSS - b.distanceFromTSS)
-        genes = transcribedGenes.map((gene) => gene.name).join(", ");
+        genes = transcribedGenes.map((gene) => gene.name).join(";");
         genesTss = transcribedGenes[0].distanceFromTSS
       } else {
         transcribedGenes = [];
