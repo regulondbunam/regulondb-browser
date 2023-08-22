@@ -4,11 +4,13 @@ import { useGetOperonByID, useGetOperonByTuId, useGetOperonBySearch, useGetOpero
 import useGetObjectList from "./objectList";
 import { getRelatedIdsByOperonData } from "./operon/related_Ids";
 import { useGetSigmulonById } from "./sigmulon";
+import {useGetAllGus} from "./gensorUnit";
 
 export {
     useGetRegulonData, useGetRegulonBySearch,
     useGetGenesBy, useGetGenesBySearch,
     useGetObjectList,
     useGetOperonByID, useGetOperonByTuId, useGetOperonBySearch, useGetOperonByAdvancedSearch, getRelatedIdsByOperonData,
-    useGetSigmulonById
+    useGetSigmulonById,
+    useGetAllGus
 }
