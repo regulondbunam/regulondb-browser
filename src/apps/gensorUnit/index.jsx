@@ -69,7 +69,7 @@ It allows us to access the GensorUnit configuration file
 */
 //import MainTable from "./mainTable/index";
 //import Paragraph from "./Paragraph";
-import { Cover } from "../../components/ui-components";
+import { Cover, DataVerifier } from "../../components/ui-components";
 //import MainQuery from "./mainQuery";
 import setting from "./conf.json";
 import { useParams } from "react-router-dom";
@@ -109,41 +109,9 @@ function GoHome() {
       <Cover state={state}>
         <h1>{title}</h1>
       </Cover>
-      <Home gusData={gusData} />
-    </div>
-  );
-}
-/*
-export default function GensorUnit() {
-  /**
-   * id of the Gu entered in the URL.
-   * @tipo {String}
-    let { guId } = useParams();
-  const /** Object [DATA, SET_DATA] = useState();
-  if (guId) {
-    return (
-      <GuInfo guInfoDescription={setting.GuInfo_Description} guId={guId} />
-    );
-  }
-  return (
-    <div>
-      {!DATA && (
-        <MainQuery
-          getData={(DATA) => {
-            SET_DATA(DATA);
-          }}
-        />
+      {DataVerifier.isValidArray(gusData) && (
+        <Home gusData={gusData} />
       )}
-
-      <Cover>
-        <h1>GensorUnit</h1>
-      </Cover>
-      <article>
-        <Paragraph description={setting.main.description} />
-        {DATA && <MainTable table={setting.main.table} guData={DATA} />}
-      </article>
     </div>
   );
 }
-
-*/
