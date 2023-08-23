@@ -69,10 +69,10 @@ function idTopData(topData = []) {
     return idList
 }
 
-function MatrixView({ geneIdList, query }) {
+function MatrixView({ selectedGenes, genesInformation  }) {
 
     const [tabValue, setTabValue] = React.useState(0);
-    const [selectedGene, setSelectedGene] = React.useState(geneIdList[0]);
+    const [selectedGene, setSelectedGene] = React.useState(selectedGenes[0]);
     const { loading, error, data } = useQuery(QUERY_getCoexpressionRank, {
         variables: {
             id: selectedGene
@@ -81,9 +81,9 @@ function MatrixView({ geneIdList, query }) {
 
     const rankingIdList = idTopData(data?.getTopCoexpressionRanking);
     //const [getTopCoexpressionRanking, { loading: loadNext, error: errorNext, data: dataNext }] = useLazyQuery(QUERY_getRankFromGeneList);
-    let gridTemplateColumns = geneIdList.map(() => ("150px")).join(" ") + " 150px"
+    let gridTemplateColumns = selectedGenes.map(() => ("150px")).join(" ") + " 150px"
     const handleChange = (event, newValue) => {
-        setSelectedGene(geneIdList[newValue])
+        setSelectedGene(selectedGenes[newValue])
         setTabValue(newValue);
     };
     return (
@@ -97,11 +97,9 @@ function MatrixView({ geneIdList, query }) {
                     scrollButtons="auto"
                     aria-label="scrollable auto tabs example"
                 >
-                    {query.map((gene, index) => {
+                    {genesInformation.map((gene, index) => {
 
-                        const InnerTab = <div dangerouslySetInnerHTML={{ __html: gene.name }}></div>
-
-                        return <Tab key={"matrixTab" + gene.id} icon={InnerTab} {...descriptionProps(index)} />
+                        return <Tab label={gene.gene.name} sx={{textTransform: "none"}} {...descriptionProps(index)} />
                     })}
                 </Tabs>
                 <br />
@@ -116,7 +114,7 @@ function MatrixView({ geneIdList, query }) {
             <div>
                 {
                     data?.getTopCoexpressionRanking && (
-                        <Matrix query={query} getTopCoexpressionRanking={data.getTopCoexpressionRanking} geneIdList={geneIdList} rankingIdList={rankingIdList} gridTemplateColumns={gridTemplateColumns} />
+                        <Matrix genesInformation={genesInformation} getTopCoexpressionRanking={data.getTopCoexpressionRanking} geneIdList={selectedGenes} rankingIdList={rankingIdList} gridTemplateColumns={gridTemplateColumns} />
                     )
                 }
             </div>
@@ -129,7 +127,7 @@ function MatrixView({ geneIdList, query }) {
 }
 export default MatrixView;
 
-function Matrix({ query, getTopCoexpressionRanking, geneIdList, rankingIdList, gridTemplateColumns }) {
+function Matrix({ genesInformation, getTopCoexpressionRanking, geneIdList, rankingIdList, gridTemplateColumns }) {
     const [rank, setRank] = React.useState(false);
     const [data, setData] = React.useState()
 
@@ -147,10 +145,10 @@ function Matrix({ query, getTopCoexpressionRanking, geneIdList, rankingIdList, g
 
     React.useEffect(() => {
         if (rank) {
-            query.forEach(gene => {
-                const cell = document.getElementById(gene.id)
+            genesInformation.forEach(gene => {
+                const cell = document.getElementById(gene._id)
                 if (cell) {
-                    cell.innerHTML = gene.name
+                    cell.innerHTML = gene.gene.name
                     cell.className = "titleCells"
                 }
             })
@@ -163,9 +161,9 @@ function Matrix({ query, getTopCoexpressionRanking, geneIdList, rankingIdList, g
                 }
             })
             if (data) {
-                query.forEach(gene => {
-                    if (data[gene.id]) {
-                        fillCell(gene.id, data[gene.id])
+                genesInformation.forEach(gene => {
+                    if (data[gene._id]) {
+                        fillCell(gene._id, data[gene._id])
                     }
 
                 })
@@ -177,7 +175,7 @@ function Matrix({ query, getTopCoexpressionRanking, geneIdList, rankingIdList, g
             setRank(false)
         }
 
-    }, [query, rank, getTopCoexpressionRanking, data]);
+    }, [genesInformation, rank, getTopCoexpressionRanking, data]);
 
     return (
         <div style={{ display: "grid", gridTemplateColumns: gridTemplateColumns }} id="matrixContainer">

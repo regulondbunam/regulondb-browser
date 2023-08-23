@@ -20,7 +20,7 @@ export function fillCell(geneId, data) {
         data.getRankFromGeneList.forEach(coexpression => {
             const cell = document.getElementById(geneId + "_" + coexpression.gene[0]._id)
             if (cell) {
-                cell.innerHTML = coexpression.rank
+                cell.innerHTML = coexpression.rank.toFixed(2)
                 cell.style.backgroundColor = "rgb(" + coexpression.rgbColor + ")"
             }
 

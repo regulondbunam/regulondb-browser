@@ -1,11 +1,8 @@
 import { textAlign } from "@mui/system";
 import MatrixView from "./matrixView";
 
-function Matrix({ query = [] }) {
+function Matrix({ selectedGenes, genesInformation }) {
 
-    const geneIdList = query.map((gene) => { 
-        return gene.id;
-    })
   
     const rankValues = [
         { rgbColor: "rgb(0, 242, 60)", rank: "1-43" },
@@ -42,7 +39,7 @@ function Matrix({ query = [] }) {
         </div>
         <br />
         <div>
-            <MatrixView query={query} geneIdList={geneIdList}/>
+            <MatrixView selectedGenes={selectedGenes} genesInformation={genesInformation} />
         </div>
     </div>
 }

@@ -67,43 +67,51 @@ It allows us to access the GensorUnit configuration file
 	
 
 */
-import React, { useState } from "react";
-import MainTable from "./mainTable/index";
-import Paragraph from "./Paragraph";
-import { Cover } from "../../components/ui-components";
-import MainQuery from "./mainQuery";
+//import MainTable from "./mainTable/index";
+//import Paragraph from "./Paragraph";
+import { Cover, DataVerifier } from "../../components/ui-components";
+//import MainQuery from "./mainQuery";
 import setting from "./conf.json";
 import { useParams } from "react-router-dom";
 import GuInfo from "./guInfo/index";
+import { useGetAllGus } from "../../components/webservices";
+import Home from "./home";
 
 export default function GensorUnit() {
   /**
    * id of the Gu entered in the URL.
    * @tipo {String}
-   */ let { guId } = useParams();
-  const /** Object */[DATA, SET_DATA] = useState();
+   */
+  let { guId } = useParams();
   if (guId) {
     return (
       <GuInfo guInfoDescription={setting.GuInfo_Description} guId={guId} />
     );
   }
+  return <GoHome />;
+}
+
+function GoHome() {
+  const { gusData, error, loading } = useGetAllGus();
+
+  let state = "done";
+  let title = "Gensor Units";
+  if (loading) {
+    state = "loading";
+    title = "loading Gensor Unit list";
+  }
+  if (error) {
+    state = "error";
+    title = "... Sorry, we have an error, try again later 🥲";
+  }
   return (
     <div>
-      {!DATA && (
-        <MainQuery
-          getData={(DATA) => {
-            SET_DATA(DATA);
-          }}
-        />
-      )}
-
-      <Cover>
-        <h1>GensorUnit</h1>
+      <Cover state={state}>
+        <h1>{title}</h1>
       </Cover>
-      <article>
-        <Paragraph description={setting.main.description} />
-        {DATA && <MainTable table={setting.main.table} guData={DATA} />}
-      </article>
+      {DataVerifier.isValidArray(gusData) && (
+        <Home gusData={gusData} />
+      )}
     </div>
   );
 }
