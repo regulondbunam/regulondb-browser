@@ -5,7 +5,9 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useGetAllGenes } from "../../components/webservices";
 import Cover from "./Cover";
 import GeneQuery from "./geneQuery";
-import GeneCoexpression from "./geneCoexpression";
+//import GeneCoexpression from "./geneCoexpression";
+import GeneCoexpression from "./tabs/geneCoexpression";
+import Matrix from "./tabs/matrix";
 
 function Coexpression() {
   let { genesId } = useParams();
@@ -44,7 +46,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         selectedGenes: [],
-        genesInformation: []
+        genesInformation: [],
       };
     case "randomGene":
       return {
@@ -54,7 +56,7 @@ const reducer = (state, action) => {
     case "addGeneInfo":
       return {
         ...state,
-        genesInformation:[ ...state.genesInformation, ...action.value],
+        genesInformation: [...state.genesInformation, ...action.value],
       };
     case "updateGeneInfo":
       return {
@@ -71,6 +73,7 @@ function IntCoexpression({ selectedGenes }) {
   const [appState, dispatch] = useReducer(reducer, {
     selectedGenes: selectedGenes,
     genesInformation: [],
+    coexpressionData: [],
   });
 
   const tabs = [
@@ -88,11 +91,19 @@ function IntCoexpression({ selectedGenes }) {
     {
       id: "tab_02_geneCoexpression",
       name: "Coexpression",
-      component: <GeneCoexpression />,
+      component: (
+        <GeneCoexpression
+          geneResults={appState.genesInformation}
+          genesInformation={appState.genesInformation}
+          coexpressionData={appState.coexpressionData}
+          dispatch={dispatch}
+        />
+      ),
     },
     {
       id: "tab_03_Matrix",
       name: "Matrix",
+      component: <Matrix genesInformation={appState.genesInformation} selectedGenes={selectedGenes}  />
     },
   ];
 

@@ -20,7 +20,7 @@ function GeneCoexpression({ geneResults }) {
     if (!geneResults) {
         return null;
     };
-    const genes = geneResults.getGenesBy.data;
+    const genes = geneResults
 
     return (
         <Box sx={{ bgcolor: 'background.paper' }}>
@@ -33,7 +33,7 @@ function GeneCoexpression({ geneResults }) {
                     aria-label="scrollable auto tabs example"
                 >
                     {genes.map((gene, index) => {
-                        return <Tab key={"tab_geneCoexpression_" + index} label={gene.gene.name} {...descriptionProps(index)} />
+                        return <Tab key={"tab_geneCoexpression_" + index} sx={{textTransform: "none"}} label={gene.gene.name} {...descriptionProps(index)} />
                     })}
                 </Tabs>
                 <h2 style={{ color: "#3d779b" }}>Gene Information</h2>

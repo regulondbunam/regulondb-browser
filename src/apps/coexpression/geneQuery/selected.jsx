@@ -33,44 +33,17 @@ function autocompleteFormat(geneList = []) {
   return options;
 }
 
-export default function Selected({ geneList, dispatch, selectedGenes }) {
+function InputGene({selectedGenes, optionList, dispatch}) {
   const [wantedGene, setGene] = useState(null);
-  const optionList = useMemo(() => {
-    return autocompleteFormat(geneList);
-  }, [geneList]);
-  let genes = [];
-  if (DataVerifier.isValidArray(selectedGenes)) {
-    selectedGenes.forEach((geneId) => {
-      let gene = geneList.find((g) => g._id === geneId);
-      if (gene) {
-        genes.push(gene);
-      }
-    });
-  }
-  const selectRandomGenes = () => {
-    let selectGenes = [];
-    for (let i = 0; i < 4; i++) {
-      let indexOption = Math.floor(Math.random() * optionList.length);
-      if (!selectGenes.find((id) => id === optionList[indexOption].id)) {
-        selectGenes.push(optionList[indexOption].id);
-      }
-    }
-    dispatch({ type: "randomGene", value: selectGenes });
-  };
+  
+  
   const handleChange = (event, newValue) => {
     setGene(newValue);
   };
 
-  const handleDeleteGene = (id) => {
-    dispatch({ type: "deleteGene", value: id });
-  };
-
   const handleAddGene = () => {
+    setGene(null);
     dispatch({ type: "addGene", value: wantedGene.id });
-  };
-
-  const handleCleanGenes = () => {
-    dispatch({ type: "cleanGene" });
   };
 
   const enableAdd = () => {
@@ -81,19 +54,8 @@ export default function Selected({ geneList, dispatch, selectedGenes }) {
     }
   };
 
-  const enableDemo = () => {
-    if (DataVerifier.isValidArray(selectedGenes)) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   return (
-    <div>
-      <div>
-        {optionList && (
-          <div style={{ display: "flex" }}>
+    <div style={{ display: "flex" }}>
             <Autocomplete
               id="geneSelector"
               size="small"
@@ -125,7 +87,60 @@ export default function Selected({ geneList, dispatch, selectedGenes }) {
               Add
             </button>
           </div>
-        )}
+  )
+}
+
+export default function Selected({ geneList, dispatch, selectedGenes }) {
+  
+  const optionList = useMemo(() => {
+    return autocompleteFormat(geneList);
+  }, [geneList]);
+  
+  let genes = [];
+  if (DataVerifier.isValidArray(selectedGenes)) {
+    selectedGenes.forEach((geneId) => {
+      let gene = geneList.find((g) => g._id === geneId);
+      if (gene) {
+        genes.push(gene);
+      }
+    });
+  }
+  const selectRandomGenes = () => {
+    let selectGenes = [];
+    for (let i = 0; i < 4; i++) {
+      let indexOption = Math.floor(Math.random() * optionList.length);
+      if (!selectGenes.find((id) => id === optionList[indexOption].id)) {
+        selectGenes.push(optionList[indexOption].id);
+      }
+    }
+    dispatch({ type: "randomGene", value: selectGenes });
+  };
+  
+
+  const handleDeleteGene = (id) => {
+    dispatch({ type: "deleteGene", value: id });
+  };
+
+  
+
+  const handleCleanGenes = () => {
+    dispatch({ type: "cleanGene" });
+  };
+
+  
+
+  const enableDemo = () => {
+    if (DataVerifier.isValidArray(selectedGenes)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  return (
+    <div>
+      <div>
+      <InputGene selectedGenes={selectedGenes} optionList={optionList} dispatch={dispatch} />
       </div>
       <br />
       <div>

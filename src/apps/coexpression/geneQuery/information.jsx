@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useGetGenes } from "./getGeneInfo";
-import { useMemo, useState } from "react";
+import { useMemo} from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { DataVerifier, FilterTable } from "../../../components/ui-components";
 
