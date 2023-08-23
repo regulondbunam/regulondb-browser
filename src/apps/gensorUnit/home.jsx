@@ -187,7 +187,7 @@ export default function Home({ gusData }) {
     <div>
       <div style={{ margin: "0 10% 0 5%" }}>
         <FormControl variant="standard" sx={{ minWidth: 120 }} size="small">
-          <InputLabel id="demo-select-small-label">TF grouped by </InputLabel>
+          <InputLabel id="demo-select-small-label">Gensor Unit grouped by </InputLabel>
           <Select
             labelId="demo-select-small-label"
             id="demo-select-small"
@@ -195,8 +195,8 @@ export default function Home({ gusData }) {
             label="groupBy"
             onChange={handleChange}
           >
-            <MenuItem value={"Gensor Unit"}>Gensor Unit</MenuItem>
-            <MenuItem value={"Functionality"}>Functionality</MenuItem>
+            <MenuItem value={"Gensor Unit"}>Name</MenuItem>
+            <MenuItem value={"Functionality"}>Functional Group</MenuItem>
           </Select>
         </FormControl>
         <FilterTable columns={columns} data={data} />

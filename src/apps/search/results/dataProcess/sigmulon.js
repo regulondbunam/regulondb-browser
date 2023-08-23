@@ -11,7 +11,7 @@ export default function sigmulonFormatResults(sigmulonData, keyword = "") {
                 for (const key in sigmulon.statistics) {
                     if (Object.hasOwnProperty.call(sigmulon.statistics, key) && key !== "__typename") {
                         const element = sigmulon.statistics[key];
-                        summary.push(`<p><b>${key}: </b>${element.total}</p>`)
+                        summary.push(`<p><b>${key}: </b>${element}</p>`)
                     }
                 }
 

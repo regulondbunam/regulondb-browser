@@ -49,9 +49,11 @@ export default function Selected({ geneList, dispatch, selectedGenes }) {
   }
   const selectRandomGenes = () => {
     let selectGenes = [];
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 4; i++) {
       let indexOption = Math.floor(Math.random() * optionList.length);
-      selectGenes.push(optionList[indexOption].id);
+      if (!selectGenes.find((id) => id === optionList[indexOption].id)) {
+        selectGenes.push(optionList[indexOption].id);
+      }
     }
     dispatch({ type: "randomGene", value: selectGenes });
   };
@@ -79,8 +81,53 @@ export default function Selected({ geneList, dispatch, selectedGenes }) {
     }
   };
 
+  const enableDemo = () => {
+    if (DataVerifier.isValidArray(selectedGenes)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <div>
+      <div>
+        {optionList && (
+          <div style={{ display: "flex" }}>
+            <Autocomplete
+              id="geneSelector"
+              size="small"
+              sx={{ width: 300 }}
+              options={optionList}
+              autoHighlight
+              getOptionDisabled={(option) => {
+                if (selectedGenes.find((geneId) => geneId === option.id)) {
+                  return true;
+                }
+                return false;
+              }}
+              renderOption={(props, option) => (
+                <div {...props}>
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: `${option.name}, ${option.productsName}`,
+                    }}
+                  />
+                </div>
+              )}
+              renderInput={(params) => (
+                <TextField {...params} label="Search Gene" />
+              )}
+              value={wantedGene}
+              onChange={handleChange}
+            />
+            <button disabled={enableAdd()} onClick={handleAddGene}>
+              Add
+            </button>
+          </div>
+        )}
+      </div>
+      <br />
       <div>
         <Stack direction="row" useFlexGap flexWrap="wrap">
           {genes.map((gene) => {
@@ -124,48 +171,17 @@ export default function Selected({ geneList, dispatch, selectedGenes }) {
         </Stack>
       </div>
       <br />
-      <div>
-        {optionList && (
-          <div style={{ display: "flex" }}>
-            <Autocomplete
-              id="geneSelector"
-              size="small"
-              sx={{ width: 300 }}
-              options={optionList}
-              autoHighlight
-              getOptionDisabled={(option) => {
-                if (selectedGenes.find((geneId) => geneId === option.id)) {
-                  return true;
-                }
-                return false;
-              }}
-              renderOption={(props, option) => (
-                <div {...props}>
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html: `${option.name}, ${option.productsName}`,
-                    }}
-                  />
-                </div>
-              )}
-              renderInput={(params) => (
-                <TextField {...params} label="Search Gene" />
-              )}
-              value={wantedGene}
-              onChange={handleChange}
-            />
-            <button disabled={enableAdd()} onClick={handleAddGene}>
-              Add
-            </button>
-          </div>
-        )}
-        <br />
-        <div style={{display: "flex", width: "100%", justifyContent: "flex-end"}} >
-          <button style={{ marginRight: "2px" }} onClick={selectRandomGenes}>Demo</button>
-          <button onClick={handleCleanGenes}>
-            Reset
-          </button>
-        </div>
+      <div
+        style={{ display: "flex", width: "100%", justifyContent: "flex-end" }}
+      >
+        <button
+          style={{ marginRight: "2px" }}
+          onClick={selectRandomGenes}
+          disabled={enableDemo()}
+        >
+          Demo
+        </button>
+        <button onClick={handleCleanGenes}>Reset</button>
       </div>
     </div>
   );

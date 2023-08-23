@@ -4,7 +4,6 @@ import { NavigationTabs } from "../../components/ui-components";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useGetAllGenes } from "../../components/webservices";
 import Cover from "./Cover";
-
 import GeneQuery from "./geneQuery";
 import GeneCoexpression from "./geneCoexpression";
 
@@ -45,11 +44,22 @@ const reducer = (state, action) => {
       return {
         ...state,
         selectedGenes: [],
+        genesInformation: []
       };
     case "randomGene":
       return {
         ...state,
-        selectedGenes: [...state.selectedGenes, ...action.value],
+        selectedGenes: action.value,
+      };
+    case "addGeneInfo":
+      return {
+        ...state,
+        genesInformation:[ ...state.genesInformation, ...action.value],
+      };
+    case "updateGeneInfo":
+      return {
+        ...state,
+        genesInformation: action.value,
       };
     default:
       return state;
