@@ -88,8 +88,9 @@ export default function SimpleTrack({
   }, [idTrack, drawPlaceId, width, height, bpWidth, features]);
 
   return (
-    <div>
+    <div style={{overflow: 'auto'}}>
       <div id={drawPlaceId} style={{ width: width, height: height }}></div>
+
       <button
         onClick={() => {
           const canva = document.getElementById(idTrack);
