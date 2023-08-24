@@ -63,11 +63,12 @@ export default function Information({ geneData }) {
         let products = geneData.products
         if (DataVerifier.isValidArray(products)) {
             products.forEach(product => {
+                let productName = DataVerifier.isValidString(product.name) ? product.name : ""
                 tabsInfo.push({
                     id: "GeneTab_Products",
-                    label: `Product: ${product.name.substring(0, 10)}...`,
-                    tooltip: `Product: ${product.name}`,
-                    title: `Product ${product.name}`,
+                    label: `Product: ${productName.substring(0, 10)}...`,
+                    tooltip: `Product: ${productName}`,
+                    title: `Product ${productName}`,
                     component:
                         <div style={{ margin: "0% 1% 1% 2%" }} >
                             <Product key={`product_${product._id}`} {...product} allCitations={geneData.allCitations} />
@@ -76,7 +77,7 @@ export default function Information({ geneData }) {
             });
         }
 
-        if (geneData.allCitations) {
+        if (DataVerifier.isValidArray(geneData.allCitations)) {
             tabsInfo.push({
                 id: "GeneTab_Citations",
                 label: "Citations",

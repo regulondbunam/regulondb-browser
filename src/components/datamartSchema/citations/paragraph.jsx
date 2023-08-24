@@ -17,7 +17,7 @@ function ParagraphCitations({
     list = false,
 }) {
     return (
-        <div style={{display: "flex", flexDirection: "column"}} >
+        <div style={{display: "grid", gridTemplateColumns: "20% 20% 20% 20% 20%"}} >
             {
                 citations.map((cit, indx) => {
                     try {
