@@ -1,6 +1,6 @@
 import { Accordion, DataVerifier } from "../../../ui-components"
-import { LinealSequence } from "../../../sequence";
 import { ParagraphCitations, NoteCitations } from "../../citations";
+import SimpleTrack from "../../../drawingTrack";
 //import RegulatorBindingSites from "./regulatorBindingSites";
 import { useMemo } from "react";
 
@@ -111,6 +111,48 @@ export default function Promoter({
 }
 
 function SequencePromoter({ _id, boxes, name, transcriptionStartSite, sequence, strand }) {
+    const drawPlaceId = "canva_sequence_"+_id
+    const width = sequence.length
+    const height = 50
+    const features = useMemo(() => {
+        let promoterRelativePosition = sequence.split("").findIndex(bp => bp === bp.toUpperCase())
+        let _features = []
+        _features.push({
+            id: "sequence_"+_id,
+            type: "sequence",
+            sequence: sequence,
+            posX: 0,
+            posY: height-30
+        })
+        _features.push({
+            id: _id + "_promoter_" + promoterRelativePosition + "_feature",
+            label: "+1",
+            posX: promoterRelativePosition,
+            posY: height-40,
+            type: "promoter",
+        })
+        if (DataVerifier.isValidArray(boxes)) {
+            boxes.forEach((box, index) => {
+                let boxPosition = strand === "forward" ? box.leftEndPosition : box.rightEndPosition
+                const distancePromoter_BoxLeft = Math.abs(transcriptionStartSite.leftEndPosition - boxPosition)
+
+                _features.push({
+                    id: _id + "_box_" + index + "_feature",
+                    label: box.type.replace('minus', '-'),
+                    posX: promoterRelativePosition - distancePromoter_BoxLeft,
+                    posY: height-30,
+                    type: "box",
+                    sequence: box.sequence
+                })
+            });
+        }
+        return _features
+    },[_id,sequence])
+    return <SimpleTrack drawPlaceId={drawPlaceId} width={width} height={height} features={features} />
+}
+
+/*
+function SequencePromoter({ _id, boxes, name, transcriptionStartSite, sequence, strand }) {
 
     const features = useMemo(() => {
         let promoterRelativePosition = sequence.split("").findIndex(bp => bp === bp.toUpperCase())
@@ -136,7 +178,6 @@ function SequencePromoter({ _id, boxes, name, transcriptionStartSite, sequence, 
             type: "promoter",
         })
         if (DataVerifier.isValidArray(boxes)) {
-
             boxes.forEach((box, index) => {
                 let boxPosition = strand === "forward" ? box.leftEndPosition : box.rightEndPosition
                 const distancePromoter_BoxLeft = Math.abs(transcriptionStartSite.leftEndPosition - boxPosition)
