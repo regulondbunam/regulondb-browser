@@ -11,9 +11,19 @@ const cardOptions = {
 
 export default function Document({ sigmulonData }) {
   console.log(sigmulonData);
+  /*
+  let statistics = <></>;
+  if (DataVerifier.isValidObject(sigmulonData.statistics)) {
+    statistics = (
+      <div style={{ display: "flex", width: "100%", justifyContent: 'space-evenly' }}>
+        
+      </div>
+    );
+  }*/
   const sections = useMemo(() => {
     let _sections = [];
-    const { allCitations, sigmaFactor, transcribedPromoters, _id } = sigmulonData;
+    const { allCitations, sigmaFactor, transcribedPromoters, _id } =
+      sigmulonData;
     if (DataVerifier.isValidArray(sigmaFactor.sigmulonGenes)) {
       _sections.push({
         id: "SigmaSection_01",
@@ -33,7 +43,11 @@ export default function Document({ sigmulonData }) {
         title: "Sigmulon Regulators",
         component: (
           <div style={{ overflow: "auto" }}>
-            <Regulators regulators={sigmaFactor.sigmulonRegulators} variant="filterTable" sigmulonId={_id} />
+            <Regulators
+              regulators={sigmaFactor.sigmulonRegulators}
+              variant="filterTable"
+              sigmulonId={_id}
+            />
           </div>
         ),
       });
@@ -45,7 +59,10 @@ export default function Document({ sigmulonData }) {
         title: "Transcribed Promoters",
         component: (
           <div style={{ overflow: "auto" }}>
-            <TranscribedPromoters promoters={transcribedPromoters} sigmulonId={_id} />
+            <TranscribedPromoters
+              promoters={transcribedPromoters}
+              sigmulonId={_id}
+            />
           </div>
         ),
       });
@@ -55,10 +72,12 @@ export default function Document({ sigmulonData }) {
         id: "sigmaSections_allCitations",
         label: "Citations",
         title: "Citations",
-        component: <div style={{ overflow: "auto" }} >
-          <AllCitations allCitations={allCitations} />
-        </div>,
-      })
+        component: (
+          <div style={{ overflow: "auto" }}>
+            <AllCitations allCitations={allCitations} />
+          </div>
+        ),
+      });
     }
     return _sections;
   }, [sigmulonData]);

@@ -81,7 +81,7 @@ function formatData(promoters = []) {
       if (DataVerifier.isValidArray(transcribedGenes)) {
         transcribedGenes.sort((a, b) => a.distanceFromTSS - b.distanceFromTSS)
         genes = transcribedGenes.map((gene) => gene.name).join(";");
-        genesTss = transcribedGenes[0].distanceFromTSS
+        genesTss = transcribedGenes[0].distanceFromTSS !== 0 ? transcribedGenes[0].distanceFromTSS : ""
       } else {
         transcribedGenes = [];
       }
@@ -133,7 +133,7 @@ function SequencePromoter({ _id, boxes, name, TSSPosition, sequence, strand }) {
         const strand = (TSSPosition-box.leftEndPosition)>0 ? "forward" : "reverse"
         let boxPosition = strand === "forward" ? box.leftEndPosition : box.rightEndPosition
         const distancePromoter_BoxLeft = Math.abs(TSSPosition - boxPosition)
-        const boxWidth = box.sequence.length * 8.41
+        const boxWidth = box.sequence.length * 8
         promoterFeatures.push({
           id: _id + "_box_" + index + "_feature",
           label: box.type.replace('minus', '-'),
