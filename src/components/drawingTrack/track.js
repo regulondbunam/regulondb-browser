@@ -70,10 +70,10 @@ export default class Track {
     posY = 16,
     font = this.font,
   }) {
-    const sequenceArray = sequence.split()
+    const sequenceArray = sequence.split("")
     sequenceArray.forEach((bp,index) => {
-      
+      this.canvas.text(bp).font(font).move(posX+(index*this.bpWidth), posY);
     });
-    this.canvas.text(sequence).font(font).move(posX, posY);
+    
   }
 }
