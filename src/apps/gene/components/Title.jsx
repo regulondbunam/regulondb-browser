@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Cover } from "../../../components/ui-components";
+import { Cover, DataVerifier } from "../../../components/ui-components";
 import DropRef from "./drop_crossref";
 import "./title.css";
 
@@ -71,49 +71,39 @@ export const Title = ({ title, geneData }) => {
   return (
     <div id={IDTitle}>
       <Cover id={"component_" + IDTitle} state={_state} message={_message}>
-        <table className="title_head" style={{ tableLayout: "fixed", width: "auto" }}>
-          <tbody>
-            <tr>
-              <td>Gene</td>
-              <td>Products</td>
-            </tr>
-            <tr>
-              <td>
-                {name ? (
-                  <h1
-                    style={{ margin: "0" }}
-                    dangerouslySetInnerHTML={{
-                      __html: `${name}`,
-                    }}
-                  ></h1>
-                ) : (
-                  <h1
-                    style={{ margin: "0" }}
-                  >
-                    Unknown Gene Name
-                  </h1>
-                )}
-              </td>
-              <td>
-                {products ? (
-                  <h1
-                    style={{ margin: "0", color: "#666666" }}
-                    dangerouslySetInnerHTML={{
-                      __html: `${products}`,
-                    }}
-                  ></h1>
-                ) : (
-                  <h1
-                    style={{ margin: "0", color: "#666666" }}
-                    dangerouslySetInnerHTML={{
-                      __html: `${products}`,
-                    }}
-                  ></h1>
-                )}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div style={{ display: "flex" }} >
+          <div>
+            Gene
+            {name ? (
+              <>
+                <h1
+                  style={{ margin: "0" }}
+                  dangerouslySetInnerHTML={{
+                    __html: `${name}`,
+                  }}
+                ></h1>
+              </>
+            ) : (
+              <h1
+                style={{ margin: "0" }}
+              >
+                Unknown Gene Name
+              </h1>
+            )}
+          </div>
+          <div style={{ marginLeft: "20px" }}>
+            {DataVerifier.isValidArray(geneData.products) && (
+              <>{geneData.products.length > 1 ? "Products" : "Product"}
+                <h1
+                  style={{ margin: "0", color: "#666666" }}
+                  dangerouslySetInnerHTML={{
+                    __html: `${products}`,
+                  }}
+                ></h1>
+              </>
+            )}
+          </div>
+        </div>
         <table className="title_data" id="title_cover_data" style={{ tableLayout: "fixed", width: "auto" }}>
           <tbody>
             <tr>
@@ -191,7 +181,7 @@ function formatDataHeader(geneData) {
       let row = "->";
       geneData.gene.strand === "reverse" && (row = "<-");
       headerData.position = `${geneData.gene.leftEndPosition} ${row} ${geneData.gene.rightEndPosition}`;
-      headerData.length = `${geneData.gene.rightEndPosition - geneData.gene.leftEndPosition+1} bp`;
+      headerData.length = `${geneData.gene.rightEndPosition - geneData.gene.leftEndPosition + 1} bp`;
     } else {
       geneData.gene.strand && (headerData.strand = geneData.gene.strand)
       geneData.gene.fragments && (headerData.fragments = geneData.gene.fragments)
