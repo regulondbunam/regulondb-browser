@@ -65,10 +65,10 @@ export default function Information({ geneData }) {
             products.forEach(product => {
                 let productName = DataVerifier.isValidString(product.name) ? product.name : ""
                 tabsInfo.push({
-                    id: "GeneTab_Products",
-                    label: `Product: ${productName.substring(0, 10)}...`,
+                    id: "GeneTab_Product_"+product._id,
+                    label: <span dangerouslySetInnerHTML={{__html: `Product: ${productName.substring(0, 10)}...`}}/>,
                     tooltip: `Product: ${productName}`,
-                    title: `Product ${productName}`,
+                    title: <span dangerouslySetInnerHTML={{__html: `Product ${productName}`}} />,
                     component:
                         <div style={{ margin: "0% 1% 1% 2%" }} >
                             <Product key={`product_${product._id}`} {...product} allCitations={geneData.allCitations} />

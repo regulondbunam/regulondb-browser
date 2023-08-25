@@ -35,7 +35,7 @@ function scrollFunction(sections = [], setIdSection, setOnTop, title = "", setNa
           const endY = endSection.getBoundingClientRect().y
           const hNav = headerNav.getBoundingClientRect().height
           if (initY <= hNav && endY >= hNav) {
-            setNavTitle(`${title}, ${section.title}`)
+            setNavTitle(<>{title}, {section.title}</>)
             setIdSection(section.id)
             animateAnchor(section.id)
           }
@@ -213,7 +213,7 @@ export default function AnchorNav({
         }
       }
       let section = sections.find(sec => sec.id === id)
-      setNavTitle(`${title}, ${section.title}`)
+      setNavTitle(<>{title}, {section.title}</>)
       animateAnchor(id)
       setIdSection(id)
     }

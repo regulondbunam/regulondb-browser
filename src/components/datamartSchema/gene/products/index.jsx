@@ -46,13 +46,13 @@ export function Product({
     //console.log(DataVerifier.isValidArray(motifs));
     return (
         <div>
-            <p style={{ fontSize: "18px" }} ><b>{name}</b></p>
+            <p style={{ fontSize: "18px" }} ><b dangerouslySetInnerHTML={{__html: name}}/></p>
             <table className="table_auto table_content">
                 <tbody>
                     {DataVerifier.isValidArray(synonyms) && (
                         <tr>
                             <td style={{ fontWeight: "bold" }}>Synonyms: </td>
-                            <td>{synonyms.join(", ")}</td>
+                            <td><p dangerouslySetInnerHTML={{__html: synonyms.join(", ")}} /></td>
                         </tr>
                     )}
                     {DataVerifier.isValidString(sequence) && (
