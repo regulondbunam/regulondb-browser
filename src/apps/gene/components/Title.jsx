@@ -191,7 +191,7 @@ function formatDataHeader(geneData) {
       let row = "->";
       geneData.gene.strand === "reverse" && (row = "<-");
       headerData.position = `${geneData.gene.leftEndPosition} ${row} ${geneData.gene.rightEndPosition}`;
-      headerData.length = `${geneData.gene.rightEndPosition - geneData.gene.leftEndPosition} bp`;
+      headerData.length = `${geneData.gene.rightEndPosition - geneData.gene.leftEndPosition+1} bp`;
     } else {
       geneData.gene.strand && (headerData.strand = geneData.gene.strand)
       geneData.gene.fragments && (headerData.fragments = geneData.gene.fragments)

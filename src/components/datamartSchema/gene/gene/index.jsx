@@ -47,7 +47,7 @@ function Gene({
     viewExternalRef = false,
     products
 }) {
-    const size = rightEndPosition - leftEndPosition;
+    const size = rightEndPosition - leftEndPosition + 1;
 
     return (
         <div>
