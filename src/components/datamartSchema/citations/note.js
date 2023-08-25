@@ -32,6 +32,11 @@ export function relCitation(allCitations, idCit, small = true) {
 export const NoteCitations = (allCitations, note) => {
     const REX = /\[\s*RDBECOLI(PRC|EVC)[0-9]{5}\]/
     const PP = /(\|CITS:)|\|\./
+    const BR = /(\r\n|\r|\n)/
+    while (BR.exec(note)) {
+        note = note.replace(BR, '<br></br>')
+        console.log("a");
+    };
     if (PP.exec(note)) {
         while (PP.exec(note)) {
             note = note.replace(PP, ' ')
@@ -40,5 +45,6 @@ export const NoteCitations = (allCitations, note) => {
             note = note.replace(REX, relCitation(allCitations, REX.exec(note)[0]))
         };
     }
+    
     return note
 }
