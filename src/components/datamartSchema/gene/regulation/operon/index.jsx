@@ -58,7 +58,7 @@ function Arrangement({
                         fun = ""
                         break;
                 }
-                return <p key={`${regulator.name}_${regulator._id}_${index}`}>{`${regulator.name}${fun}`}</p>
+                return <Link to={"/regulon/"+regulator._id} key={`${regulator.name}_${regulator._id}_${index}`}>{`${regulator.name}${fun}`}</Link>
             })}</td>
         </>
     )
