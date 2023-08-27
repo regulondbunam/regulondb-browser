@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { ModalCitation } from './modal';
+import Stack from '@mui/material/Stack';
 
 const PROP_TYPES = {
     allCitations: PropTypes.array.isRequired,
@@ -14,10 +15,10 @@ export const DEFAULT_ParagraphCitations_PROPS = {
 function ParagraphCitations({
     allCitations,
     citations,
-    list = false,
+    variant = "paragraph",
 }) {
     return (
-        <div style={{display: "grid", gridTemplateColumns: "20% 20% 20% 20% 20%"}} >
+        <Stack direction='row' useFlexGap flexWrap="wrap" >
             {
                 citations.map((cit, indx) => {
                     try {
@@ -39,7 +40,7 @@ function ParagraphCitations({
                     }
                 })
             }
-        </div>
+        </Stack>
     );
 }
 

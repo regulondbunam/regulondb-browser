@@ -19,9 +19,9 @@ export default function GeneOntologyTerms({
   }
   return (
     <div>
-        {CellularComponent(geneOntologyTerms?.cellularComponent, allCitations)}
-        {MolecularFunction(geneOntologyTerms?.molecularFunction, allCitations)}
-        {BiologicalProcess(geneOntologyTerms?.biologicalProcess, allCitations)}
+      {CellularComponent(geneOntologyTerms?.cellularComponent, allCitations)}
+      {MolecularFunction(geneOntologyTerms?.molecularFunction, allCitations)}
+      {BiologicalProcess(geneOntologyTerms?.biologicalProcess, allCitations)}
     </div>
   );
 }
@@ -112,7 +112,17 @@ function GeneOntologyItem(components, allCitations) {
       {components.map((component) => {
         return (
           <tr className={"trShadow"} style={trStyle} key={`ccT_${component._id}`}>
-            <td>{component.name}<ParagraphCitations citations={component.citations} allCitations={allCitations} /></td>
+            <td>
+              <div>
+                <div>
+                {component.name}
+                </div>
+                <div>
+                  <ParagraphCitations citations={component.citations} allCitations={allCitations} />
+                </div>
+              </div>
+            </td>
+
           </tr>
         );
       })}
