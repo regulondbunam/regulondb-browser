@@ -66,7 +66,7 @@ export function Download({
     }
 
     return (
-        <div style={{ marginRight: "5px" }} >
+        <>
             <Tooltip title="Download options" >
                 <Button
                     id="demo-customized-button"
@@ -108,7 +108,7 @@ export function Download({
                     <ListItemText>csv format</ListItemText>
                 </MenuItem>
             </Menu>
-        </div>
+        </>
     )
 }
 

@@ -1,6 +1,6 @@
 import { useMemo } from "react"
 import { DataVerifier, FilterTable } from "../../../ui-components";
-import { LinealSequence } from "../../../sequence";
+//import { LinealSequence } from "../../../sequence";
 import { ParagraphCitations } from "../../citations";
 //import { labelCitation } from "../../citations/label";
 
