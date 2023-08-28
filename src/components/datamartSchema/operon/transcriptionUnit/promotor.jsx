@@ -4,6 +4,31 @@ import SimpleTrack from "../../../drawingTrack";
 //import RegulatorBindingSites from "./regulatorBindingSites";
 import { useMemo } from "react";
 
+function confLevel(level){
+  let _confidenceLevel = <></>
+  switch (level) {
+    case "S":
+      _confidenceLevel = (
+        <span style={{ fontWeight: "bold", color: "#0C6A87" }}>Strong</span>
+      );
+      break;
+    case "C":
+      _confidenceLevel = (
+        <span style={{ fontWeight: "bold", color: "#000000" }}>
+          Confirmed
+        </span>
+      );
+      break;
+    case "W":
+      _confidenceLevel = <span style={{ color: "#0C6A87" }}>Weak</span>;
+      break;
+    default:
+      _confidenceLevel = <span>.</span>;
+      break;
+  }
+  return _confidenceLevel
+}
+
 export default function Promoter({ _id, promoter, strand, allCitations }) {
   let _confidenceLevel;
   if (DataVerifier.isValidString(promoter.confidenceLevel)) {
@@ -81,10 +106,10 @@ export default function Promoter({ _id, promoter, strand, allCitations }) {
         </div>
         {DataVerifier.isValidArray(promoter.additiveEvidences) && (
           <div>
-            <table className="tableAccent">
+            <table >
               <thead>
                 <tr>
-                  <th colSpan={3}>Additive Evidences</th>
+                  <th colSpan={3}>Additive Evidence</th>
                 </tr>
                 <tr>
                   <th>category</th>
@@ -98,7 +123,7 @@ export default function Promoter({ _id, promoter, strand, allCitations }) {
                     <tr key={"AdditiveEvidence_" + promoter._id + "_" + index}>
                       <td>{additiveEvidence.category}</td>
                       <td>{additiveEvidence.code}</td>
-                      <td>{additiveEvidence.type}</td>
+                      <td>{confLevel(additiveEvidence.type)}</td>
                     </tr>
                   );
                 })}
