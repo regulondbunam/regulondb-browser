@@ -45,6 +45,9 @@ function drawTrack({
             case "promoter":
               track.setPromoter({ ...feature });
               break;
+            case "terminator":
+              track.setTerminator({...feature})
+              break;
             default:
               console.error("Unknown feature type:" + feature.type);
               break;
@@ -122,13 +125,12 @@ export default function SimpleTrack({
       <div id={drawPlaceId} style={divStyle}></div>
 
       {
-        /*
+        
         <button
         onClick={() => {
           const canva = document.getElementById(idTrack);
           if (canva) {
             canva.remove();
-
             drawTrack({
               canva: null,
               idTrack: idTrack,
@@ -143,7 +145,7 @@ export default function SimpleTrack({
       >
         redraw
       </button>
-        */
+        
       }
     </div>
   );

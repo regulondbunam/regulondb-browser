@@ -1,4 +1,5 @@
 import { SVG } from "@svgdotjs/svg.js";
+import { DrawTerminator } from "./features";
 
 export default class Track {
   font = {
@@ -30,6 +31,27 @@ export default class Track {
       .line(0, this.height - 1, this.width, this.height - 1)
       .stroke({ color: "#00F", width: 1, linecap: "round" });
     return true;
+  }
+
+  setTerminator({
+    color = true,
+    posX = 0,
+    posY = 16,
+    label = "...",
+    font = this.font,
+    stroke = this.stroke,
+    length,
+  }) {
+    const terminatorWidth = length * this.bpWidth;
+    const rX = posX * this.bpWidth;
+    DrawTerminator({
+      id: "terminator",
+      canva: this.canvas,
+      height: 50,
+      width: terminatorWidth,
+      posX: rX,
+      posY: posY,
+    });
   }
 
   setBox({
@@ -70,10 +92,12 @@ export default class Track {
     posY = 16,
     font = this.font,
   }) {
-    const sequenceArray = sequence.split("")
-    sequenceArray.forEach((bp,index) => {
-      this.canvas.text(bp).font(font).move(posX+(index*this.bpWidth), posY);
+    const sequenceArray = sequence.split("");
+    sequenceArray.forEach((bp, index) => {
+      this.canvas
+        .text(bp)
+        .font(font)
+        .move(posX + index * this.bpWidth, posY);
     });
-    
   }
 }

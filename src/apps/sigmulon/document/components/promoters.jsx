@@ -5,7 +5,6 @@ import {
 } from "../../../../components/ui-components";
 import { Link } from "react-router-dom";
 import SimpleTrack from "../../../../components/drawingTrack";
-import { LinealSequence } from "../../../../components/sequence";
 
 const COLUMNS = [
   {
@@ -172,70 +171,4 @@ function SequencePromoter({
       controls={false}
     />
   );
-}
-
-
-function SequencePromoterOld({ _id, boxes, name, TSSPosition, sequence, strand }) {
-
-  const features = useMemo(() => {
-    let promoterRelativePosition = sequence.split("").findIndex(bp => bp === bp.toUpperCase())
-    let promoterFeatures = []
-
-    promoterFeatures.push({
-      id: _id + "_promoter_" + promoterRelativePosition + "_feature",
-      label: "+1",
-      showArrow: false,
-      sequencePosition: promoterRelativePosition,
-      type: "promoter",
-    })
-    if (DataVerifier.isValidArray(boxes)) {
-      boxes.forEach((box, index) => {
-        /*if (index===0) {
-          console.log("strand?",((TSSPosition-box.leftEndPosition)>0) ? "forward" : "reverse");
-          console.log(TSSPosition);
-        }*/
-        const strand = (TSSPosition-box.leftEndPosition)>0 ? "forward" : "reverse"
-        let boxPosition = strand === "forward" ? box.leftEndPosition : box.rightEndPosition
-        const distancePromoter_BoxLeft = Math.abs(TSSPosition - boxPosition)
-        const boxWidth = box.sequence.length * 8
-        promoterFeatures.push({
-          id: _id + "_box_" + index + "_feature",
-          label: box.type.replace('minus', '-'),
-          sequencePosition: promoterRelativePosition - distancePromoter_BoxLeft,
-          type: "box",
-          boxWidth: boxWidth
-        })
-      })
-    }
-    /*
-   
-        
-            let boxPosition = strand === "forward" ? box.leftEndPosition : box.rightEndPosition
-            const distancePromoter_BoxLeft = Math.abs(transcriptionStartSite.leftEndPosition - boxPosition)
-            const boxWidth = box.sequence.length * 8.41
-
-            promoterFeatures.push({
-                id: _id + "_box_" + index + "_feature",
-                label: box.type.replace('minus', '-'),
-                sequencePosition: promoterRelativePosition - distancePromoter_BoxLeft,
-                type: "box",
-                boxWidth: boxWidth
-            })
-        });
-    }
-    */
-    return promoterFeatures
-  }, [_id, sequence, boxes, TSSPosition])
-
-  return <LinealSequence
-    name={name}
-    sequenceId={_id}
-    height={50}
-    
-    sequence={sequence}
-    color={true}
-    features={features}
-    zoom={1}
-  />
-
 }
