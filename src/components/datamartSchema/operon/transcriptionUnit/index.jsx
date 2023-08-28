@@ -99,6 +99,7 @@ export default function TranscriptionUnit({
           <Accordion
             title={<h2 style={{ margin: 0 }}>{`Regulatory Interactions`}</h2>}
           >
+            <div style={{overflow: 'auto'}} >
             {DataVerifier.isValidObject(promoter) && (
               <>
                 {DataVerifier.isValidArray(promoter.regulatorBindingSites) && (
@@ -138,6 +139,7 @@ export default function TranscriptionUnit({
                 allCitations={allCitations}
               />
             )}
+            </div>
           </Accordion>
         )}
         <div>

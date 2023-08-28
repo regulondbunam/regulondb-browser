@@ -1,59 +1,63 @@
 import { useMemo } from "react"
-import { DataVerifier } from "../../../ui-components";
+import { DataVerifier, FilterTable } from "../../../ui-components";
 import { LinealSequence } from "../../../sequence";
-import FilterTable, { validString } from "../../../filterTable";
 import { ParagraphCitations } from "../../citations";
 //import { labelCitation } from "../../citations/label";
 
 const COLUMNS = [
     {
-        Header: 'Regulator',
-        accessor: '_regulator',
-        filter: "fuzzyText",
-        width: 80
+        id: "regulator",
+        header: 'Regulator',
+        columns: [
+            {  
+                id: "regulator_name",
+                header: "name",
+                accessorKey: '_regulator',
+            }
+        ],
     },
     {
-        Header: 'Regulatory Interactions',
+        id: "ri",
+        header: 'Regulatory Interactions',
         columns: [
             {
-                Header: 'Central Rel Pos',
-                accessor: '_absolutePosition',
-                filter: "fuzzyText",
-                width: 80
+                id: "ri_central",
+                header: 'Central Rel Pos',
+                accessorKey: '_absolutePosition',
             },
             {
-                Header: 'LeftEndPosition',
-                accessor: '_leftEndPosition',
-                filter: "fuzzyText",
-                width: 80
+                id: "ri_posLeft",
+                header: 'LeftEndPosition',
+                accessorKey: '_leftEndPosition',
             },
             {
-                Header: 'RightEndPosition',
-                accessor: '_rightEndPosition',
-                filter: "fuzzyText",
-                width: 80
+                id: "ri_posRight",
+                header: 'RightEndPosition',
+                accessorKey: '_rightEndPosition',
             },
             {
-                Header: 'Sequence',
-                accessor: '_sequence',
+                id: "ri_sequence",
+                header: 'Sequence',
+                accessorKey: '_sequence',
                 width: 400,
                 filter: "fuzzyText"
             },
             {
-                Header: 'Confidence Level',
-                accessor: '_Confidence Level',
-                width: 80,
+                id: "ri_confidence",
+                header: 'Confidence Level',
+                accessorKey: '_Confidence Level',
             },
             {
-                Header: 'citations',
-                accessor: '_citations',
-                width: 400,
+                id: "citations",
+                header: 'citations',
+                accessorKey: '_citations',
             }
         ],
     },
 ]
 
 function formatData(regulatorBindingSites = [], allCitations) {
+    console.log(regulatorBindingSites);
     let data = []
     regulatorBindingSites.forEach(rbs => {
         let spanColor = "#000"
@@ -81,34 +85,13 @@ function formatData(regulatorBindingSites = [], allCitations) {
             let _absolutePosition = "",
                 _leftEndPosition = "", _rightEndPosition = "",
                 _sequence = "", _citations = ""
-            // _confidenceLevel = confidenceLevel
-            /*switch (confidenceLevel) {
-                case "S":
-                    _confidenceLevel = <span style={{ fontWeight: "bold", color: "#0C6A87" }} >Strong</span>
-                    break;
-                case "C":
-                    _confidenceLevel = <span style={{ fontWeight: "bold", color: "#000000" }} >Confirmed</span>
-                    break;
-                case "w":
-                    _confidenceLevel = <span style={{ color: "#0C6A87" }} >Weak</span>
-                    break;
-                default:
-                    _confidenceLevel = <span>.</span>
-                    break;
-            }*/
+            
             rbs.regulatoryInteractions.forEach(regulatoryInteraction => {
                 let regulatorySite = regulatoryInteraction.regulatorySite
-                _absolutePosition = validString(regulatoryInteraction.relativeCenterPosition + "")
-                _leftEndPosition = regulatorySite.leftEndPosition + ""
-                _rightEndPosition = regulatorySite.rightEndPosition + ""
-                _sequence = <LinealSequence
-                    value={validString(regulatorySite.sequence)}
-                    id={"sequence_bs_" + regulatorySite._id}
-                    sequence={validString(regulatorySite.sequence)}
-                    controls={false}
-                    zoom={1}
-                    color
-                />
+                _absolutePosition = regulatoryInteraction.relativeCenterPosition
+                _leftEndPosition = regulatorySite.leftEndPosition 
+                _rightEndPosition = regulatorySite.rightEndPosition
+                _sequence = regulatorySite.sequence
                 let citationValues = []
                 if (DataVerifier.isValidArray(regulatorySite.citations)) {
                     regulatorySite.citations.forEach(citation => {
@@ -125,6 +108,7 @@ function formatData(regulatorBindingSites = [], allCitations) {
                 _citations = <ParagraphCitations value={""} values={citationValues}
                     citations={regulatorySite.citations} allCitations={allCitations} />
                 data.push({
+                    id: regulatoryInteraction._id,
                     _regulator,
                     _absolutePosition,
                     _leftEndPosition,
@@ -142,7 +126,6 @@ function formatData(regulatorBindingSites = [], allCitations) {
 
 export default function RegulatorBindingSites({
     regulatorBindingSites = [],
-    confidenceLevel,
     allCitations,
 }) {
 
@@ -152,3 +135,19 @@ export default function RegulatorBindingSites({
 
     return <FilterTable columns={COLUMNS} data={data} />
 }
+
+// _confidenceLevel = confidenceLevel
+            /*switch (confidenceLevel) {
+                case "S":
+                    _confidenceLevel = <span style={{ fontWeight: "bold", color: "#0C6A87" }} >Strong</span>
+                    break;
+                case "C":
+                    _confidenceLevel = <span style={{ fontWeight: "bold", color: "#000000" }} >Confirmed</span>
+                    break;
+                case "w":
+                    _confidenceLevel = <span style={{ color: "#0C6A87" }} >Weak</span>
+                    break;
+                default:
+                    _confidenceLevel = <span>.</span>
+                    break;
+            }*/
