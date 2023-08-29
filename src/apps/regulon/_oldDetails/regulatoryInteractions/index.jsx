@@ -31,6 +31,7 @@ const COLUMNS = [
         id: "activeConformation_name",
         header: "name",
         accessorKey: "_activeConformation_name",
+        cell: (info) => (<p dangerouslySetInnerHTML={{__html: info.getValue()}} />),
       },
       {
         id: "activeConformation_type",

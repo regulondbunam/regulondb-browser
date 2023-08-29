@@ -1,6 +1,7 @@
 import "./regulator.css"
 import { DataVerifier } from "../../../../components/ui-components";
-import { CitationsNote } from "../../../../components/citations/citations_note";
+//import { CitationsNote } from "../../../../components/citations/citations_note";
+import { NoteCitations } from '../../../../components/datamartSchema/citations'
 import { ParagraphCitations } from "../../../../components/citations";
 import Conformations from "./conformations";
 import EncodedFrom from "./encode";
@@ -70,7 +71,7 @@ export default function Regulator({ regulator, allCitations }) {
                 <>
                     <p><b>Note:</b></p>
                     <div style={{ marginLeft: "1%" }}>
-                        <CNote citationsNote={CitationsNote(allCitations, note)} />
+                        <CNote citationsNote={NoteCitations(allCitations, note)} />
                     </div>
                 </>
             )}

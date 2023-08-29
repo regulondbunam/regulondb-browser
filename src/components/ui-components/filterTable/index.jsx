@@ -83,7 +83,7 @@ export default function FilterTable({
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
   });
-  //console.log(table.getHeaderGroups());
+  //console.log();
   /**preGlobalFilteredRows={table.getPre} allColumns={allColumns} */
   return (
     <div>
@@ -160,7 +160,9 @@ export default function FilterTable({
         </tbody>
       </table>
       <div className={style.options}>
-        <Pagination table={table} />
+        {table.getPageCount()>1&&(
+          <Pagination table={table} />
+        )}
       </div>
     </div>
   );
