@@ -6,7 +6,7 @@
   "options": [
     {
       "id": "subMenuSearching",
-      "title": "By Term",
+      "title": "Search by catalog",
       "link": "/search",
       "type": "SUBMENU",
       "options": [
@@ -50,13 +50,13 @@
     },
     {
       "id": "browsing_Searching",
-      "title": "Browsing",
+      "title": "Collections",
       "link": "/browsing",
       "type": "SUBMENU",
       "options": [
         {
           "id": "ht-browser",
-          "title": "High Throughput Collection",
+          "title": "High Throughput",
           "state": "enabled",
           "link" : "/ht"
         },
@@ -100,15 +100,14 @@
     },
     {
       "id": "wservices",
-      "title": "Web Services",
+      "title": "Search by WS",
       "link": "/ws",
       "type": "SUBMENU",
       "options": [
         {
           "id": "api-ws",
-          "title": "API",
-          "state": "disabled",
-          "link" : "/ws/api"
+          "title": "Web services PlayGround",
+          "link" : "/graphql"
         }
       ]
     },
