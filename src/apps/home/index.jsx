@@ -15,7 +15,6 @@ const Home = () => {
                     {conf.version}
                 </p>
             </div>
-
         </div>
     );
 }
