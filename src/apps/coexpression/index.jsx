@@ -1,15 +1,14 @@
 import { useParams } from "react-router-dom";
-import { useReducer } from "react";
-import { NavigationTabs } from "../../components/ui-components";
+import { useReducer, useState } from "react";
+import { DataVerifier, NavigationTabs } from "../../components/ui-components";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useGetAllGenes } from "../../components/webservices";
+import { useGetAllGenes, useLazyLoadGenesBySearch } from "../../components/webservices";
 import Cover from "./Cover";
 import GeneQuery from "./geneQuery";
-//import GeneCoexpression from "./geneCoexpression";
-import GeneCoexpression from "./tabs/geneCoexpression";
-import Matrix from "./matrix";
+
 
 function Coexpression() {
+  const { geneList, loading /*error*/ } = useGetAllGenes();
   let { genesId } = useParams();
 
   let selectedGenes = [];
@@ -22,7 +21,14 @@ function Coexpression() {
   return (
     <div>
       <Cover />
-      <IntCoexpression selectedGenes={selectedGenes} />
+      {loading && (
+        <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+          <CircularProgress />
+        </div>
+      )}
+      {DataVerifier.isValidArray(geneList) && (
+        <IntCoexpression selectedGenes={selectedGenes} geneList={geneList} />
+      )}
     </div>
   );
 }
@@ -32,31 +38,31 @@ const reducer = (state, action) => {
     case "addGene":
       return {
         ...state,
-        selectedGenes: [...state.selectedGenes, action.value],
+        genesId: [...state.genesId, action.value],
       };
     case "deleteGene":
-      const index = state.selectedGenes.findIndex((id) => id === action.value);
-      let selectedGenes = [...state.selectedGenes];
-      selectedGenes.splice(index, 1);
+      const index = state.genesId.findIndex((id) => id === action.value);
+      let genesId = [...state.genesId];
+      genesId.splice(index, 1);
       return {
         ...state,
-        selectedGenes: selectedGenes,
+        genesId: genesId,
       };
     case "cleanGene":
       return {
         ...state,
-        selectedGenes: [],
+        genesId: [],
         genesInformation: [],
       };
     case "randomGene":
       return {
         ...state,
-        selectedGenes: action.value,
+        genesId: action.value,
       };
     case "addGeneInfo":
       return {
         ...state,
-        genesInformation: [...state.genesInformation, ...action.value],
+        genesInformation: [...state.genesInformation, action.value],
       };
     case "updateGeneInfo":
       return {
@@ -68,33 +74,34 @@ const reducer = (state, action) => {
   }
 };
 
-function IntCoexpression({ selectedGenes }) {
-  const { geneList, loading, error } = useGetAllGenes();
-  const [appState, dispatch] = useReducer(reducer, {
-    selectedGenes: selectedGenes,
-    genesInformation: [],
-    coexpressionData: [],
-  });
+function IntCoexpression({ selectedGenes = [], geneList }) {
+  const [genesId,setGenesId] = useState([...selectedGenes])
+  const [unload, setUnload] = useState([...selectedGenes])
+  const [genes,setGenes] = useState([])
+  const {loading, error, loadState} = useLazyLoadGenesBySearch(unload,genes,setGenes,genesId.length)
+  console.log(loadState);
+
+  const selectGene = (geneId)=>{
+    setGenesId([...genesId, geneId])
+    setUnload([geneId])
+  }
 
   const tabs = [
     {
       id: "tab_01_geneQuery",
       name: "Query",
       component: (
-        <GeneQuery
-          appState={appState}
-          dispatch={dispatch}
-          genesList={geneList}
-        />
+        <GeneQuery genesId={genesId} genes={genes} genesList={geneList} selectGene={selectGene} />
       ),
     },
+    /*
     {
       id: "tab_02_geneCoexpression",
       name: "Coexpression",
       component: (
         <GeneCoexpression
-          geneResults={appState.genesInformation}
-          genesInformation={appState.genesInformation}
+          geneResults={genes}
+          genesInformation={genes}
           coexpressionData={appState.coexpressionData}
           dispatch={dispatch}
         />
@@ -103,23 +110,22 @@ function IntCoexpression({ selectedGenes }) {
     {
       id: "tab_03_Matrix",
       name: "Matrix",
-      component: <Matrix genesInformation={appState.genesInformation} selectedGenes={selectedGenes}  />
-    },
+      component: (
+        <Matrix
+          genesInformation={genes}
+          selectedGenes={selectedGenes}
+        />
+      ),
+    },*/
   ];
 
-  if (error) {
-    return <>Error</>;
-  }
-
-  if (loading) {
+  if (geneList) {
     return (
-      <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-        <CircularProgress />
+      <div>
+        {loading && "Loading gene information"}
+        <NavigationTabs tabs={tabs} tabSelect="tab_01_geneQuery" />
       </div>
     );
-  }
-  if (geneList) {
-    return <NavigationTabs tabs={tabs} tabSelect="tab_01_geneQuery" />;
   }
   return <></>;
 }

@@ -264,3 +264,45 @@ query GetGeneInfo(
       }
     }
   }`
+
+  export const query_getMainGeneBySearch = gql`
+  query getGeneById($search: String!) {
+    getGenesBy(search: $search) {
+      data {
+        _id
+        gene {
+          _id
+          name
+        }
+        regulation {
+          operon {
+            _id
+            name
+          }
+          regulators {
+            _id
+            name
+          }
+        }
+        products {
+          _id
+          name
+          geneOntologyTerms {
+            cellularComponent {
+              _id
+              name
+            }
+            biologicalProcess {
+              _id
+              name
+            }
+            molecularFunction {
+              _id
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+`;

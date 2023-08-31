@@ -4,19 +4,22 @@ import Selected from './selected';
 import Information from './information';
 
 export default function GeneQuery({
-  appState,
-  dispatch,
-  genesList
+  genes,
+  genesId,
+  genesList,
+  selectGene
 }) {
-  console.log(appState);
+  //console.log(state);
   return (
     <div>
-      <Accordion title={"Gene Select ("+appState.selectedGenes.length+")"}>
-        <Selected geneList={genesList} selectedGenes={appState.selectedGenes} dispatch={dispatch} />
-      </Accordion>
-      <Accordion title={"Gene Information"}>
-        <Information selectedGenes={appState.selectedGenes} genesInformation={appState.genesInformation} dispatch={dispatch} />
+      <Accordion title={"Gene Select ("+genesId.length+")"}>
+        <Selected geneList={genesList} genesId={genesId} selectGene={selectGene} />
       </Accordion>
     </div>
   )
 }
+/*
+<Accordion title={"Gene Information"}>
+        <Information selectedGenes={appState.selectedGenes} genesInformation={appState.genesInformation} dispatch={dispatch} />
+      </Accordion>
+*/
