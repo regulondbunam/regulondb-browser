@@ -7,7 +7,7 @@ import Cover from "./Cover";
 import GeneQuery from "./geneQuery";
 //import GeneCoexpression from "./geneCoexpression";
 import GeneCoexpression from "./tabs/geneCoexpression";
-import Matrix from "./tabs/matrix";
+import Matrix from "./matrix";
 
 function Coexpression() {
   let { genesId } = useParams();

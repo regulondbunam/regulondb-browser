@@ -1,0 +1,9 @@
+.cellFirstColumn {
+  border: 1px solid #32617d;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}

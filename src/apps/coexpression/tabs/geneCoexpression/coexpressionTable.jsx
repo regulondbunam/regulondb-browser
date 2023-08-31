@@ -17,8 +17,8 @@ import OTModal from '../query/ontologyTermsModal';
 
 
 export const QUERY_getCoexpressionRank = gql`
-query getCoexpressionRank($id:String, $limit:Int=50){
-    getTopCoexpressionRanking(id:$id, limit:$limit)
+query getCoexpressionRank($name:String){
+    getTopCoexpressionRanking(gene:$name)
     {
         gene {
             _id
@@ -31,8 +31,8 @@ query getCoexpressionRank($id:String, $limit:Int=50){
 }
 `
 
-function CoexpressionTable({ idGene }) {
-    const { loading, error, data } = useQuery(QUERY_getCoexpressionRank, { variables: { "id": idGene } });
+function CoexpressionTable({ geneName }) {
+    const { loading, error, data } = useQuery(QUERY_getCoexpressionRank, { variables: { "name": geneName } });
 
     if (loading) {
         return (
@@ -47,7 +47,7 @@ function CoexpressionTable({ idGene }) {
         return (
             <Alert severity="error">
                 <AlertTitle>Error</AlertTitle>
-                No se pudo — <strong>check it out!</strong>
+                <strong>check it out!</strong>
             </Alert>
         );
     } if (data) {
@@ -159,7 +159,7 @@ function InnerTable({ getTopCoexpressionRanking = [] }) {
                                         key={geneId}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
-                                        <TableCell component="th" scope="row">{ranks[index]}</TableCell>
+                                        <TableCell component="th" scope="row">{ranks[index].toFixed(2)}</TableCell>
                                         <TableCell component="th" scope="row">{gene.gene.name}</TableCell>
                                         <TableCell align="right">{gene.products.map}</TableCell>
                                         <TableCell align="right">{row.operon}</TableCell>

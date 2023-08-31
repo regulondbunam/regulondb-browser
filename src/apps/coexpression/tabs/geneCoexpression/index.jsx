@@ -36,7 +36,7 @@ function GeneCoexpression({ geneResults }) {
                         return <Tab key={"tab_geneCoexpression_" + index} sx={{textTransform: "none"}} label={gene.gene.name} {...descriptionProps(index)} />
                     })}
                 </Tabs>
-                <h2 style={{ color: "#3d779b" }}>Gene Information</h2>
+                <h2>Gene Information</h2>
                 <br />
             </Box>
             {genes.map((gene, index) => {

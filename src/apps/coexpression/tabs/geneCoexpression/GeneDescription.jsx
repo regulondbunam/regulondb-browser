@@ -17,9 +17,9 @@ function GeneDescription(props) {
                     <ResultsTable genesData={[gene]}/>
                     <br/>
                     <br/>
-                    <h2 style={{color: "#3d779b"}}>Top 50 Coexpression Ranking</h2>
+                    <h2>Top 50 Coexpression Ranking</h2>
                     <br/>
-                    <CoexpressionTable idGene={gene.gene._id} />
+                    <CoexpressionTable geneName={gene.gene.name} />
                 </div>
             )}
         </div>
