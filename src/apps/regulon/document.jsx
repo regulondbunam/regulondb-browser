@@ -9,6 +9,7 @@ import RegulatoryInteractions from "./_oldDetails/regulatoryInteractions";
 import Regulator from "./_oldDetails/regulator";
 import Citations from "./_oldDetails/Citations";
 import Terms from "./_oldDetails/terms";
+import RelatedTool from "./related";
 
 
 
@@ -18,7 +19,7 @@ const cardOptions = {
 
 export default function Document({ regulonData, section }) {
 
-    
+    const related = <RelatedTool genes={regulonData.regulates.genes} />
 
     const sections = useMemo(() => {
 
@@ -89,7 +90,7 @@ export default function Document({ regulonData, section }) {
 
     return (
         <div>
-            <AnchorNav sections={sections} cardOptions={cardOptions}
+            <AnchorNav sections={sections} cardOptions={cardOptions} aside={related}
                 title={`Regulon ${regulonData.regulator.name}`} />
         </div>
     )
