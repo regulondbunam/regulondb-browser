@@ -84,6 +84,14 @@ function IntCoexpression({ selectedGenes = [], geneList }) {
   const selectGene = (geneId)=>{
     setGenesId([...genesId, geneId])
     setUnload([geneId])
+    let href = window.location.href
+    const regex = /n$/gm.test(href)
+    if(regex){
+      href = href+"/geneId="+geneId
+    }else{
+      href = href+"&geneId="+geneId
+    }
+    window.history.replaceState(null, "", href)
   }
 
   const tabs = [

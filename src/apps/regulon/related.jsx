@@ -36,7 +36,7 @@ export default function RelatedTool({ genes }) {
     <div className="noPrint">
       {DataVerifier.isValidArray(genes) && (
         <Tool title={"Related Tools"}>
-          {genes.length < 50 && (
+          {genes.length < 800 && (
             <List>
               <ListItemButton
                 sx={{ pl: 4 }}
