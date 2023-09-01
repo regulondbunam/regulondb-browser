@@ -9,6 +9,7 @@ import {
 import Cover from "./Cover";
 import GeneQuery from "./geneQuery";
 import GeneCoexpression from "./geneCoexpression";
+import Matrix from "./matrix";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -119,18 +120,17 @@ function IntCoexpression({ selectedGenes = [], geneList }) {
       disabled: loadGeneState.loading,
       component: <GeneCoexpression genes={genes} />,
     },
-    /*
-
     {
       id: "tab_03_Matrix",
       name: "Matrix",
+      disabled: loadGeneState.loading,
       component: (
         <Matrix
           genesInformation={genes}
           selectedGenes={selectedGenes}
         />
       ),
-    },*/
+    },
   ];
 
   if (geneList) {
