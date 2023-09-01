@@ -2,10 +2,18 @@ import { useParams } from "react-router-dom";
 import { useReducer, useState } from "react";
 import { DataVerifier, NavigationTabs } from "../../components/ui-components";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useGetAllGenes, useLazyLoadGenesBySearch } from "../../components/webservices";
+import {
+  useGetAllGenes,
+  useLazyLoadGenesBySearch,
+} from "../../components/webservices";
 import Cover from "./Cover";
 import GeneQuery from "./geneQuery";
-
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 function Coexpression() {
   const { geneList, loading /*error*/ } = useGetAllGenes();
@@ -75,41 +83,74 @@ const reducer = (state, action) => {
 };
 
 function IntCoexpression({ selectedGenes = [], geneList }) {
-  const [genesId,setGenesId] = useState([...selectedGenes])
-  const [unload, setUnload] = useState([...selectedGenes])
-  const [genes,setGenes] = useState([])
-  const loadGeneState = useLazyLoadGenesBySearch(unload,setUnload,genes,setGenes,genesId)
+  const [genesId, setGenesId] = useState([...selectedGenes]);
+  const [unload, setUnload] = useState([...selectedGenes]);
+  const [genes, setGenes] = useState([]);
+  const loadGeneState = useLazyLoadGenesBySearch(
+    unload,
+    setUnload,
+    genes,
+    setGenes,
+    genesId
+  );
   //let loading
   //console.log("genes",genes);
-  //console.log("ids",genesId);
+  console.log("ul",genesId);
   //console.log(loadGeneState.loadState);
 
-  const selectGene = (geneId)=>{
-    setGenesId([...genesId, geneId])
-    setUnload([geneId])
-    let href = window.location.href
-    const regex = /n$/gm.test(href)
-    if(regex){
-      href = href+"/geneId="+geneId
-    }else{
-      href = href+"&geneId="+geneId
-    }
-    window.history.replaceState(null, "", href)
-  }
+  const reset = () => {
+    setGenesId([]);
+    setGenes([]);
+  };
 
-  const deleteGene = (geneId)=>{
+  const setDemo = (ids) => {
+    setGenesId([...ids]);
+    setUnload([...ids]);
+    let href = window.location.href;
+    const regex = /n$/gm.test(href);
+    if (regex) {
+      href = href + "/geneId=" + ids.join("&geneId=");
+    } else {
+      href = href + "&geneId=" + ids.join("&geneId=");
+    }
+    window.history.replaceState(null, "", href);
+  };
+
+  const selectGene = (geneId) => {
+    setGenesId([...genesId, geneId]);
+    setUnload([geneId]);
+    let href = window.location.href;
+    const regex = /n$/gm.test(href);
+    if (regex) {
+      href = href + "/geneId=" + geneId;
+    } else {
+      href = href + "&geneId=" + geneId;
+    }
+    window.history.replaceState(null, "", href);
+  };
+
+  const deleteGene = (geneId) => {
     const iId = genesId.findIndex((id) => id === geneId);
-    let ids = [...genesId]
+    let ids = [...genesId];
     ids.splice(iId, 1);
     setGenesId(ids);
-  }
+  };
 
   const tabs = [
     {
       id: "tab_01_geneQuery",
       name: "Query",
       component: (
-        <GeneQuery deleteGene={deleteGene} genesId={genesId} loadGeneState={loadGeneState} genes={genes} genesList={geneList} selectGene={selectGene} />
+        <GeneQuery
+          deleteGene={deleteGene}
+          genesId={genesId}
+          loadGeneState={loadGeneState}
+          genes={genes}
+          genesList={geneList}
+          selectGene={selectGene}
+          setDemo={setDemo}
+          reset={reset}
+        />
       ),
     },
     /*
@@ -140,7 +181,9 @@ function IntCoexpression({ selectedGenes = [], geneList }) {
   if (geneList) {
     return (
       <div>
-        {loadGeneState.loading && "Loading gene information"}
+        {genesId.length > 50 && loadGeneState.loading && (
+          <ModalLoad loadState={loadGeneState.loadState} />
+        )}
         <NavigationTabs tabs={tabs} tabSelect="tab_01_geneQuery" />
       </div>
     );
@@ -149,3 +192,25 @@ function IntCoexpression({ selectedGenes = [], geneList }) {
 }
 
 export default Coexpression;
+
+function ModalLoad({ loadState = 0, abort }) {
+  return (
+    <Dialog open={true}>
+      <DialogTitle id="alert-dialog-title">
+        {"Loading gene information"}
+      </DialogTitle>
+      <DialogContent>
+        <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+          <CircularProgress variant="determinate" value={loadState} />
+        </div>
+        <DialogContentText id="alert-dialog-description">
+          The query is too big, please wait a moment, while we load the
+          information of the selected genes.
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={abort}>CANCEL</Button>
+      </DialogActions>
+    </Dialog>
+  );
+}

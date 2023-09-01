@@ -92,6 +92,8 @@ export default function Selected({
   genesId,
   selectGene,
   deleteGene,
+  setDemo,
+  reset
 }) {
   const optionList = useMemo(() => {
     return autocompleteFormat(geneList);
@@ -116,16 +118,15 @@ export default function Selected({
         selectGenes.push(optionList[indexOption].id);
       }
     }
-    //dispatch({ type: "randomGene", value: selectGenes });
+    setDemo(selectGenes)
   };
 
   const handleDeleteGene = (id) => {
     deleteGene(id);
-    //dispatch({ type: "deleteGene", value: id });
   };
 
   const handleCleanGenes = () => {
-    //dispatch({ type: "cleanGene" });
+    reset()
   };
 
   const enableDemo = () => {
@@ -205,7 +206,7 @@ export default function Selected({
         >
           Demo
         </button>
-        <button onClick={handleCleanGenes}>Reset</button>
+        <button onClick={handleCleanGenes}>Clean</button>
       </div>
     </div>
   );

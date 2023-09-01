@@ -16,17 +16,19 @@ export function useLazyLoadGenesBySearch(
   );
 
   if (totalOfElements < genes.length) {
-    console.log(totalOfElements+" - "+ genes.length);
-    let nGenes = [];
-    genesId.forEach(id => {
-      const gn = genes.find(gene=>gene._id===id)
-      if(gn){
-        nGenes.push(gn)
+    if (totalOfElements === 0) {
+      setGenes([]);
+    } else {
+      let nGenes = [];
+      genesId.forEach((id) => {
+        const gn = genes.find((gene) => gene._id === id);
+        if (gn) {
+          nGenes.push(gn);
+        }
+      });
+      if (DataVerifier.isValidArray(nGenes)) {
+        setGenes(nGenes);
       }
-    });
-    console.log(genes);
-    if (DataVerifier.isValidArray(nGenes)) {
-      setGenes(nGenes);
     }
   }
 
