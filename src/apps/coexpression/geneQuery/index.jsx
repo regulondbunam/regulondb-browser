@@ -4,6 +4,7 @@ import Selected from './selected';
 import Information from './information';
 
 export default function GeneQuery({
+  deleteGene,
   genes,
   genesId,
   genesList,
@@ -14,7 +15,7 @@ export default function GeneQuery({
   return (
     <div>
       <Accordion title={"Gene Select ("+genesId.length+")"}>
-        <Selected geneList={genesList} genesId={genesId} selectGene={selectGene} />
+        <Selected geneList={genesList} genesId={genesId} selectGene={selectGene} deleteGene={deleteGene} />
       </Accordion>
       {!loadGeneState.loading ? (
         <Accordion title={"Gene Information"}>

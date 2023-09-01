@@ -4,22 +4,38 @@ import { useState } from "react";
 import { DataVerifier } from "../../ui-components";
 
 export function useLazyLoadGenesBySearch(
-  genesId = [],
+  unLoad = [],
   setUnload,
   genes,
   setGenes,
-  totalOfElements = -1
+  genesId
 ) {
+  const totalOfElements = genesId.length;
   const [getGene, { data, loading: geneLoad, error: geneError }] = useLazyQuery(
     query_getMainGeneBySearch
   );
 
+  if (totalOfElements < genes.length) {
+    console.log(totalOfElements+" - "+ genes.length);
+    let nGenes = [];
+    genesId.forEach(id => {
+      const gn = genes.find(gene=>gene._id===id)
+      if(gn){
+        nGenes.push(gn)
+      }
+    });
+    console.log(genes);
+    if (DataVerifier.isValidArray(nGenes)) {
+      setGenes(nGenes);
+    }
+  }
+
   const inxLimit = 10;
   const [id, setId] = useState();
-  const loading = genesId.length > 0;
+  const loading = unLoad.length > 0;
   let loadState = null;
   if (totalOfElements > 0) {
-    loadState = 100 - (100 / totalOfElements) * genesId.length;
+    loadState = 100 - (100 / totalOfElements) * unLoad.length;
   }
   const [error, setError] = useState();
   let genesData;
@@ -34,36 +50,35 @@ export function useLazyLoadGenesBySearch(
     console.log("query getGeneBySearch", query_GET_GENE_BY);
   }
 
-  if (!id && DataVerifier.isValidArray(genesId)) {
+  if (!id && DataVerifier.isValidArray(unLoad)) {
     let _id = [];
     [...Array(inxLimit).keys()].forEach((n) => {
-      let __id = genesId.pop();
+      let __id = unLoad.pop();
       if (__id) {
         _id.push(__id);
       }
     });
-    
+
     if (DataVerifier.isValidArray(_id)) {
       setId(_id);
       getGene({ variables: { search: _id.join(" ") } });
       //console.log("ids:", _id);
     }
   } else {
-    if (genesData) {
-      let nGenes = []
-      genesData.forEach(geneData => {
-        if(!(genes.find(gene=>gene._id===geneData._id))){
-          nGenes.push(geneData)
+    if (genesData && totalOfElements > genes.length) {
+      let nGenes = [];
+      genesData.forEach((geneData) => {
+        if (!genes.find((gene) => gene._id === geneData._id)) {
+          nGenes.push(geneData);
         }
       });
-      if(DataVerifier.isValidArray(nGenes)){
+      if (DataVerifier.isValidArray(nGenes)) {
         setTimeout(() => {
           setGenes([...genes, ...genesData]);
         }, 25);
-        if(id){
-          setId(undefined)
+        if (id) {
+          setId(undefined);
         }
-        
       }
     }
   }

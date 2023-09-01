@@ -78,10 +78,11 @@ function IntCoexpression({ selectedGenes = [], geneList }) {
   const [genesId,setGenesId] = useState([...selectedGenes])
   const [unload, setUnload] = useState([...selectedGenes])
   const [genes,setGenes] = useState([])
-  const loadGeneState = useLazyLoadGenesBySearch(unload,setUnload,genes,setGenes,genesId.length)
+  const loadGeneState = useLazyLoadGenesBySearch(unload,setUnload,genes,setGenes,genesId)
   //let loading
-  console.log(genes.length);
-  console.log(loadGeneState.loadState);
+  //console.log("genes",genes);
+  //console.log("ids",genesId);
+  //console.log(loadGeneState.loadState);
 
   const selectGene = (geneId)=>{
     setGenesId([...genesId, geneId])
@@ -96,12 +97,19 @@ function IntCoexpression({ selectedGenes = [], geneList }) {
     window.history.replaceState(null, "", href)
   }
 
+  const deleteGene = (geneId)=>{
+    const iId = genesId.findIndex((id) => id === geneId);
+    let ids = [...genesId]
+    ids.splice(iId, 1);
+    setGenesId(ids);
+  }
+
   const tabs = [
     {
       id: "tab_01_geneQuery",
       name: "Query",
       component: (
-        <GeneQuery genesId={genesId} loadGeneState={loadGeneState} genes={genes} genesList={geneList} selectGene={selectGene} />
+        <GeneQuery deleteGene={deleteGene} genesId={genesId} loadGeneState={loadGeneState} genes={genes} genesList={geneList} selectGene={selectGene} />
       ),
     },
     /*
