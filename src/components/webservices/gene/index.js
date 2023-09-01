@@ -3,15 +3,22 @@ import { query_GET_GENE_BY, query_getMainGeneBySearch } from "./queries";
 import { useState } from "react";
 import { DataVerifier } from "../../ui-components";
 
-export function useLazyLoadGenesBySearch(genesId = [], genes, setGenes, totalOfElements = -1) {
+export function useLazyLoadGenesBySearch(
+  genesId = [],
+  setUnload,
+  genes,
+  setGenes,
+  totalOfElements = -1
+) {
   const [getGene, { data, loading: geneLoad, error: geneError }] = useLazyQuery(
     query_getMainGeneBySearch
   );
+
   const inxLimit = 10;
   const [id, setId] = useState();
   const loading = genesId.length > 0;
-  let loadState = null
-  if(totalOfElements > 0){
+  let loadState = null;
+  if (totalOfElements > 0) {
     loadState = 100 - (100 / totalOfElements) * genesId.length;
   }
   const [error, setError] = useState();
@@ -26,32 +33,37 @@ export function useLazyLoadGenesBySearch(genesId = [], genes, setGenes, totalOfE
     console.error("assign geneData value:", error);
     console.log("query getGeneBySearch", query_GET_GENE_BY);
   }
-  if (DataVerifier.isValidArray(genesId) && loading) {
-    if (!id) {
-      let _id = [];
-      [...Array(inxLimit).keys()].forEach((n) => {
-        let __id = genesId.pop();
-        if (__id) {
-          _id.push(__id);
+
+  if (!id && DataVerifier.isValidArray(genesId)) {
+    let _id = [];
+    [...Array(inxLimit).keys()].forEach((n) => {
+      let __id = genesId.pop();
+      if (__id) {
+        _id.push(__id);
+      }
+    });
+    
+    if (DataVerifier.isValidArray(_id)) {
+      setId(_id);
+      getGene({ variables: { search: _id.join(" ") } });
+      //console.log("ids:", _id);
+    }
+  } else {
+    if (genesData) {
+      let nGenes = []
+      genesData.forEach(geneData => {
+        if(!(genes.find(gene=>gene._id===geneData._id))){
+          nGenes.push(geneData)
         }
       });
-      if (DataVerifier.isValidArray(_id)) {
-        setId(_id);
-        getGene({ variables: { search: _id.join(" ") } });
-        //console.log("ids:", _id);
-      }
-    } else {
-      if (genesData) {
+      if(DataVerifier.isValidArray(nGenes)){
         setTimeout(() => {
-          if (
-            !genes.find((gene) => {
-              return id.find((_id) => _id === gene._id);
-            })
-          ) {
-            setGenes([...genes, ...genesData]);
-          }
-          setId(undefined);
+          setGenes([...genes, ...genesData]);
         }, 25);
+        if(id){
+          setId(undefined)
+        }
+        
       }
     }
   }

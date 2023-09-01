@@ -7,19 +7,26 @@ export default function GeneQuery({
   genes,
   genesId,
   genesList,
+  loadGeneState,
   selectGene
 }) {
-  //console.log(state);
+  //console.log(genes);
   return (
     <div>
       <Accordion title={"Gene Select ("+genesId.length+")"}>
         <Selected geneList={genesList} genesId={genesId} selectGene={selectGene} />
       </Accordion>
+      {!loadGeneState.loading ? (
+        <Accordion title={"Gene Information"}>
+        <Information genes={genes} />
+      </Accordion>
+      ):(
+        <div>Loading</div>
+      )}
+      
     </div>
   )
 }
 /*
-<Accordion title={"Gene Information"}>
-        <Information selectedGenes={appState.selectedGenes} genesInformation={appState.genesInformation} dispatch={dispatch} />
-      </Accordion>
+
 */

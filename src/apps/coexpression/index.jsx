@@ -78,8 +78,10 @@ function IntCoexpression({ selectedGenes = [], geneList }) {
   const [genesId,setGenesId] = useState([...selectedGenes])
   const [unload, setUnload] = useState([...selectedGenes])
   const [genes,setGenes] = useState([])
-  const {loading, error, loadState} = useLazyLoadGenesBySearch(unload,genes,setGenes,genesId.length)
-  console.log(loadState);
+  const loadGeneState = useLazyLoadGenesBySearch(unload,setUnload,genes,setGenes,genesId.length)
+  //let loading
+  console.log(genes.length);
+  console.log(loadGeneState.loadState);
 
   const selectGene = (geneId)=>{
     setGenesId([...genesId, geneId])
@@ -99,7 +101,7 @@ function IntCoexpression({ selectedGenes = [], geneList }) {
       id: "tab_01_geneQuery",
       name: "Query",
       component: (
-        <GeneQuery genesId={genesId} genes={genes} genesList={geneList} selectGene={selectGene} />
+        <GeneQuery genesId={genesId} loadGeneState={loadGeneState} genes={genes} genesList={geneList} selectGene={selectGene} />
       ),
     },
     /*
@@ -130,7 +132,7 @@ function IntCoexpression({ selectedGenes = [], geneList }) {
   if (geneList) {
     return (
       <div>
-        {loading && "Loading gene information"}
+        {loadGeneState.loading && "Loading gene information"}
         <NavigationTabs tabs={tabs} tabSelect="tab_01_geneQuery" />
       </div>
     );
