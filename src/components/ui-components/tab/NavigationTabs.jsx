@@ -40,6 +40,7 @@ function NavigationTabs({ tabSelect = "init", tabs = [], title = "" }) {
                 );
                 return (
                   <StyledTab
+                    disabled={tab.disabled}
                     value={tab.id}
                     key={`operon_tab${index}_${tab.id}`}
                     icon={TabElement}

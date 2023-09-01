@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useReducer, useState } from "react";
+import { useState } from "react";
 import { DataVerifier, NavigationTabs } from "../../components/ui-components";
 import CircularProgress from "@mui/material/CircularProgress";
 import {
@@ -8,6 +8,7 @@ import {
 } from "../../components/webservices";
 import Cover from "./Cover";
 import GeneQuery from "./geneQuery";
+import GeneCoexpression from "./geneCoexpression";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -41,47 +42,6 @@ function Coexpression() {
   );
 }
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "addGene":
-      return {
-        ...state,
-        genesId: [...state.genesId, action.value],
-      };
-    case "deleteGene":
-      const index = state.genesId.findIndex((id) => id === action.value);
-      let genesId = [...state.genesId];
-      genesId.splice(index, 1);
-      return {
-        ...state,
-        genesId: genesId,
-      };
-    case "cleanGene":
-      return {
-        ...state,
-        genesId: [],
-        genesInformation: [],
-      };
-    case "randomGene":
-      return {
-        ...state,
-        genesId: action.value,
-      };
-    case "addGeneInfo":
-      return {
-        ...state,
-        genesInformation: [...state.genesInformation, action.value],
-      };
-    case "updateGeneInfo":
-      return {
-        ...state,
-        genesInformation: action.value,
-      };
-    default:
-      return state;
-  }
-};
-
 function IntCoexpression({ selectedGenes = [], geneList }) {
   const [genesId, setGenesId] = useState([...selectedGenes]);
   const [unload, setUnload] = useState([...selectedGenes]);
@@ -95,7 +55,7 @@ function IntCoexpression({ selectedGenes = [], geneList }) {
   );
   //let loading
   //console.log("genes",genes);
-  console.log("ul",genesId);
+  //console.log(loadGeneState.loading);
   //console.log(loadGeneState.loadState);
 
   const reset = () => {
@@ -153,19 +113,14 @@ function IntCoexpression({ selectedGenes = [], geneList }) {
         />
       ),
     },
-    /*
     {
       id: "tab_02_geneCoexpression",
       name: "Coexpression",
-      component: (
-        <GeneCoexpression
-          geneResults={genes}
-          genesInformation={genes}
-          coexpressionData={appState.coexpressionData}
-          dispatch={dispatch}
-        />
-      ),
+      disabled: loadGeneState.loading,
+      component: <GeneCoexpression genes={genes} />,
     },
+    /*
+
     {
       id: "tab_03_Matrix",
       name: "Matrix",
@@ -214,3 +169,46 @@ function ModalLoad({ loadState = 0, abort }) {
     </Dialog>
   );
 }
+
+/*
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "addGene":
+      return {
+        ...state,
+        genesId: [...state.genesId, action.value],
+      };
+    case "deleteGene":
+      const index = state.genesId.findIndex((id) => id === action.value);
+      let genesId = [...state.genesId];
+      genesId.splice(index, 1);
+      return {
+        ...state,
+        genesId: genesId,
+      };
+    case "cleanGene":
+      return {
+        ...state,
+        genesId: [],
+        genesInformation: [],
+      };
+    case "randomGene":
+      return {
+        ...state,
+        genesId: action.value,
+      };
+    case "addGeneInfo":
+      return {
+        ...state,
+        genesInformation: [...state.genesInformation, action.value],
+      };
+    case "updateGeneInfo":
+      return {
+        ...state,
+        genesInformation: action.value,
+      };
+    default:
+      return state;
+  }
+};
+*/
