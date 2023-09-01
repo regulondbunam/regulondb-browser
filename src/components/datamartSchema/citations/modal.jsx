@@ -43,8 +43,7 @@ MIT License
 
 ## Author 
 	
-RegulonDB Team: 
-Francisco Javier Hernandez Sanchez
+RegulonDB Team
 
 
 # Component (technical guide)

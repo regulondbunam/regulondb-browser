@@ -42,8 +42,7 @@ MIT License
 
 ## Author 
 	
-RegulonDB Team: 
-[full developer name]
+RegulonDB Team
 
 
 # Component (technical guide)
