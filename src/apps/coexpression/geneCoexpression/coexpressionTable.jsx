@@ -65,7 +65,7 @@ const COLUMNS = [
             <div>
               {regulators.map((regulator, index) => {
                 return (
-                  <Link to={"/regulon/" + regulator._id}>{regulator.name}</Link>
+                  <Link to={"/regulon/" + regulator._id}><span style={{marginRight: "10px"}} dangerouslySetInnerHTML={{__html: regulator.name}}/></Link>
                 );
               })}
             </div>

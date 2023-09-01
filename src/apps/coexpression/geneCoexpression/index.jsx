@@ -75,6 +75,7 @@ function Info({ gene }) {
   });
   return (
     <div>
+      <h2>{`Gene ${gene.gene.name}`}</h2>
       <GeneTable gene={gene} />
       <div>
         {loading && (

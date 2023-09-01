@@ -5,26 +5,10 @@ import OTModal from "../ontologyTermsModal";
 
 const COLUMNS = [
   {
-    id: "gene",
-    header: "Gene",
-    columns: [
-      {
-        id: "gene_name",
-        header: "name",
-        accessorKey: "_geneName",
-        cell: (info) => (
-          <Link to={"/gene/" + info.row.original.geneId}>
-            <p dangerouslySetInnerHTML={{ __html: info.getValue() }} />
-          </Link>
-        ),
-      },
-      {
-        id: "gene_products",
-        header: "products",
-        accessorKey: "_products",
-        cell: (info) => <p dangerouslySetInnerHTML={{ __html: info.getValue() }} />,
-      },
-    ],
+    id: "gene_products",
+    header: "products",
+    accessorKey: "_products",
+    cell: (info) => <p dangerouslySetInnerHTML={{ __html: info.getValue() }} />,
   },
   {
     id: "operon",
@@ -46,7 +30,7 @@ const COLUMNS = [
         <div>
           {regulators.map((regulator, index) => {
             return (
-              <Link to={"/regulon/" + regulator._id}>{regulator.name}</Link>
+              <Link to={"/regulon/" + regulator._id}><span style={{marginRight: "10px"}} dangerouslySetInnerHTML={{__html: regulator.name}}/></Link>
             );
           })}
         </div>

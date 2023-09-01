@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useMemo} from "react";
 import { DataVerifier, FilterTable } from "../../../components/ui-components";
+import OTModal from "../ontologyTermsModal";
+
 
 const COLUMNS = [
   {
@@ -39,7 +41,7 @@ const COLUMNS = [
         <div>
           {regulators.map((regulator, index) => {
             return (
-              <Link to={"/regulon/" + regulator._id}>{regulator.name}</Link>
+              <Link to={"/regulon/" + regulator._id}><span style={{marginRight: "10px"}} dangerouslySetInnerHTML={{__html: regulator.name}}/></Link>
             );
           })}
         </div>
@@ -50,6 +52,9 @@ const COLUMNS = [
     id: "ontologyTerms",
     header: "Ontology Terms",
     accessorKey: "_terms",
+    cell: (info) => (
+      <OTModal products={info.row.original.products} />
+    ),
   },
 ];
 

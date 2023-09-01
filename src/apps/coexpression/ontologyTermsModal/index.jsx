@@ -24,7 +24,7 @@ export default function OTModal({ products = [] }) {
 
 
     return (
-        <div><Button size="small" sx={{ textTransform: 'none' }} onClick={handleOpen}>Show Ontology Terms</Button>
+        <div><Button size="small" sx={{ textTransform: 'none', fontSize: "10px" }} onClick={handleOpen}>Show Ontology Terms</Button>
             <Modal
                 open={open}
                 onClose={handleClose}
