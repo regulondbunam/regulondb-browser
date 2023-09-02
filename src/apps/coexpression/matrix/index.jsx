@@ -4,7 +4,7 @@ import "./matrix.css"
 
 export default function Matrix({genesInformation}) {
 
-  console.log(genesInformation);
+  //console.log(genesInformation);
 
   const rankValues = [
     { rgbColor: "rgb(0, 242, 60)", rank: "1-43" },

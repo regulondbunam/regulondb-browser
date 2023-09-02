@@ -32,7 +32,7 @@ export function useLazyLoadGenesBySearch(
     }
   }
 
-  const inxLimit = 10;
+  const inxLimit = 50;
   const [id, setId] = useState();
   const loading = unLoad.length > 0;
   let loadState = null;

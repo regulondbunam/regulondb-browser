@@ -55,7 +55,7 @@ function IntCoexpression({ selectedGenes = [], geneList }) {
     genesId
   );
   //let loading
-  //console.log("genes",genes);
+  //console.log("genes",genes.map(gene=>gene.gene.name).join(" "));
   //console.log(loadGeneState.loading);
   //console.log(loadGeneState.loadState);
 

@@ -15,17 +15,33 @@ const QUERY_getRankFromGeneList = gql`
   }
 `;
 
-export default function ColumFill({ gene, rankingGenes = [] }) {
+export function Columns({ matrix, rankingGenes, widthCell }) {
+  return (
+    <React.Fragment>
+      {matrix.map((coexpression, index) => {
+        return (
+          <ColumFill
+            gene={coexpression.gene.name}
+            rankingGenes={rankingGenes}
+            widthCell={widthCell}
+          />
+        );
+      })}
+    </React.Fragment>
+  );
+}
+
+export default function ColumFill({ gene, rankingGenes = [], widthCell,  }) {
   const geneList = rankingGenes.map((gene) => gene.name);
   const { loading, error, data } = useQuery(QUERY_getRankFromGeneList, {
     variables: { gene: gene, geneList: geneList },
   });
-  console.log(data);
+  //console.log(data);
   return (
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "150px",
+        gridTemplateColumns: `${widthCell}px`,
         gridTemplateRows: `repeat(${rankingGenes.length}, 30px)`,
         rowGap: "2px",
       }}
@@ -35,7 +51,7 @@ export default function ColumFill({ gene, rankingGenes = [] }) {
           {[...Array(rankingGenes.length).keys()].map((n, i) => {
             return (
               <div key={gene + "_" + n + "_" + i}>
-                <Skeleton variant="rounded" width={150} height={30} />
+                <Skeleton variant="rounded" width={widthCell} height={30} />
               </div>
             );
           })}
@@ -49,7 +65,7 @@ export default function ColumFill({ gene, rankingGenes = [] }) {
                 key={"Rank_" + coexpression.gene[0]._id + "_" + index}
                 style={{
                   height: "30px",
-                  width: "150px",
+                  width: `${widthCell}px`,
                   backgroundColor: "rgb(" + coexpression.rgbColor + ")",
                 }}
               >
