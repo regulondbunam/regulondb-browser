@@ -1,5 +1,84 @@
+/**
+ # Component (user guide)
+
+# Evidence
+	
+## Description  
+	
+It is used to display evidence information in a specific format and uses the properties provided to customize the content.
+
+## Category   
+	
+[Visual]  
+
+## Live demo 
+	
+[code to iframe CodeSandbox]
+
+## Installation or Implementation
+
+[example: npm install --save react-awesome-button]
+
+## Usage 
+	
+[example: <protvista-tooltip>  </protvista-tooltip> ]
+
+## Props 
+
+| Attribute              | Type | Default | Description |
+| ---------------------  | ---- | ------- | ----------- |
+|   _id                  |      |String   |It is expected to be a chain and is required.|
+|additiveEvidenceCodeRule|      |  number |It can be a number, but it is not required.|
+|       code             |      | String  |It is expected to be a chain, but is not required.|
+|          name          |      | String  |It is expected to be a chain, but is not required.|
+|additiveEvidenceCodeRule|      | String  |It is expected to be a chain, but is not required.|
+
+## Exception
+
+--
+
+## License
+
+MIT License
+
+## Author 
+	
+RegulonDB Team
+
+
+# Component (technical guide)
+
+## Component Type 
+
+[ Visual ]
+
+
+## Dependencies
+PropTypes: It is used to define the expected types and requirements of the props passed to the EvidenceTitle component. 
+
+## States
+	
+| Property | Value | Description |
+| -------- | ----- | ----------- |
+|          |       |             |
+
+## Hooks
+|  Name  | Description |  Syntax  | Additional Notes or References | 
+| ------ | ----------- | -------- | ------------------------------ |
+|        |             |          |                                |
+
+
+ **/
+
+
 import PropTypes from 'prop-types';
 
+
+/**
+ * Description placeholder
+ * @constant
+ * @type {{ _id: any; additiveEvidenceCodeRule: any; code: any; name: any; type: any; }}
+ */
 const PROP_TYPES = {
     _id: PropTypes.string.isRequired,
     additiveEvidenceCodeRule: PropTypes.number,
@@ -8,6 +87,19 @@ const PROP_TYPES = {
     type: PropTypes.string,
 };
 
+
+/**
+ * Description placeholder
+ * @export
+ * @param {{ _id: any; additiveEvidenceCodeRule?: number; code?: string; name?: string; type?: string; }} {
+    _id,
+    additiveEvidenceCodeRule = 0,
+    code = "",
+    name = "",
+    type = "",
+}
+ * @returns {React.JSX}
+ */
 export function EvidenceTitle({
     _id,
     additiveEvidenceCodeRule = 0,
@@ -15,6 +107,12 @@ export function EvidenceTitle({
     name = "",
     type = "",
 }) {
+
+    
+    /**
+     * Description placeholder
+     * @type {HTMLElement}
+     */
     let evidenceType
     switch (type) {
         case "S":

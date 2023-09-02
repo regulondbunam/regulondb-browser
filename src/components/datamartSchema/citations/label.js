@@ -12,6 +12,8 @@
  */
 export function labelCitation({publication = {}, evidence = {}, small = true, index}) {
     //console.log(publication, evidence);
+    
+   
     const {
         authors,
         citation,
@@ -19,9 +21,30 @@ export function labelCitation({publication = {}, evidence = {}, small = true, in
         //title,
         //url,
         year, } = publication
+    
+    /**
+     * Description placeholder
+     *
+     * @type {boolean}
+     */
     const code = evidence?.code
+
+    
+    /**
+     * Description placeholder
+     *
+     * @type {string}
+     */
     const numIndex = index ? `[${index}]` : ""
     //W->weak S->strong
+
+
+    
+    /**
+     * Description placeholder
+     *
+     * @returns {string}
+     */
     const codeLabel = () => {
         if (code) {
             if (evidence.type === 'S') {
