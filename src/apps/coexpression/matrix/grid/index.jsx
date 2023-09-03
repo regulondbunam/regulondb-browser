@@ -4,6 +4,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useQuery, useLazyQuery, gql } from "@apollo/client";
 import Header from "./header";
 import FirstColumn from "./firstColumn";
+import { useLazyLoadCoexpression } from "./load";
 
 const ColumFill = lazy(() => import("./columFill"));
 
@@ -50,15 +51,12 @@ function LoadGrid({ fData, genesInformation }) {
   if (data) {
     if (DataVerifier.isValidArray(data.getTopCoexpressionRanking)) {
       rankingGenes = data.getTopCoexpressionRanking.map(
-        (coexpression) => coexpression.gene[0]
+        (coexpression) => coexpression.gene[0].name
       );
     }
   }
+  const genesList = genesInformation.map(inf=>inf.gene.name)
   const widthCell = 60;
-  const columnsLoad = 50;
-  const [columns, setColumns] = useState(
-    genesInformation.slice(0, columnsLoad)
-  );
   const gridTemplateColumns = `repeat(${
     genesInformation.length + 1
   }, ${widthCell}px)`;
@@ -96,13 +94,13 @@ function LoadGrid({ fData, genesInformation }) {
               width: `${(genesInformation.length + 1) * (widthCell + 2)}px`,
             }}
           >
-            <Header
+{/*            <Header
               columns={columns}
               genesInformation={genesInformation}
               handleSetGene={handleSetGene}
               rankingGenes={rankingGenes}
               widthCell={widthCell}
-            />
+          />*/}
           </div>
           <div
             style={{
@@ -112,7 +110,7 @@ function LoadGrid({ fData, genesInformation }) {
               width: `${(widthCell + 2) * genesInformation.length}px`,
             }}
           >
-            <FirstColumn rankingGenes={rankingGenes} widthCell={widthCell} />
+            {/*<FirstColumn rankingGenes={rankingGenes} widthCell={widthCell} />*/}
             <div
               style={{
                 display: "grid",
@@ -121,7 +119,41 @@ function LoadGrid({ fData, genesInformation }) {
                 zIndex: -1,
               }}
             >
-              {columns.map((coexpression, index) => {
+              <Columns rankingGenes={rankingGenes} geneList={genesList} widthCell={widthCell} />
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+
+function Columns({rankingGenes,geneList,widthCell}){
+  const {loading,matrixData} = useLazyLoadCoexpression(geneList,rankingGenes)
+  return (
+    <>
+    {loading && (<p>Loading ...</p>)}
+    {matrixData.map((columnData,index)=>{
+      return (
+        <Suspense
+          key={"column_" + index }
+          fallback={<>...</>}
+        >
+          <ColumFill
+            columnData={columnData}
+            rankingGenes={rankingGenes}
+            widthCell={widthCell}
+          />
+        </Suspense>
+      );
+    })}
+    </>
+  )
+}
+
+/*
+{columns.map((coexpression, index) => {
                 return (
                   <Suspense
                     key={"column_" + index + "_idGene_" + coexpression.gene._id}
@@ -135,10 +167,4 @@ function LoadGrid({ fData, genesInformation }) {
                   </Suspense>
                 );
               })}
-            </div>
-          </div>
-        </div>
-      )}
-    </>
-  );
-}
+*/
