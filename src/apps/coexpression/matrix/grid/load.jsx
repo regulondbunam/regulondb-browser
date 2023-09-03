@@ -15,7 +15,7 @@ const QUERY_getRankFromGeneList = gql`
   }
 `;
 
-export function useLazyLoadCoexpression(geneList = [], rankingGenes = [], matrices, setMatrices, gene) {
+export function useLazyLoadCoexpression(geneList = [], rankingGenes = [], matrices, addMatrix, gene) {
   const [getCoexpression, { loading: coLoading, error, data: nData }] =
     useLazyQuery(QUERY_getRankFromGeneList);
   const [matrixData, setMatrixData] = useState([]);
@@ -59,9 +59,7 @@ export function useLazyLoadCoexpression(geneList = [], rankingGenes = [], matric
     }
   } else {
     if(progress === 100){
-        let newMatrix = {}
-        newMatrix[gene] = matrixData
-        setMatrices({...matrices, ...newMatrix})
+      addMatrix(gene,matrixData)
     }
     if (matrixData.length < totalOfElements && !coLoading) {
       console.log(loadGenes);

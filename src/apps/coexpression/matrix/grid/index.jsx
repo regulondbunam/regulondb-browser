@@ -20,32 +20,9 @@ export const QUERY_getCoexpressionRank = gql`
     }
   }
 `;
-/*
-export default function Grid({ genesInformation = [] }) {
-  const { loading, error, data } = useQuery(QUERY_getCoexpressionRank, {
-    variables: {
-      geneName: genesInformation[0].gene.name,
-    },
-  });
-  if (loading) {
-    return (
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <div>
-          <CircularProgress />
-        </div>
-      </div>
-    );
-  }
-  if (error) {
-    return <div>error</div>;
-  }
-  return <LoadGrid fData={data} genesInformation={genesInformation} />;
-}
-*/
-export default function Grid({ genesInformation = [] }) {
-  const [gene, setGene] = useState(genesInformation[0].gene.name);
-  const [matrices, setMatrices] = useState({});
 
+export default function Grid({ genesInformation = [], matrices, addMatrix }) {
+  const [gene, setGene] = useState(genesInformation[0].gene.name);
   const { loading, error, data } = useQuery(QUERY_getCoexpressionRank, {
     variables: {
       geneName: gene,
@@ -125,7 +102,7 @@ export default function Grid({ genesInformation = [] }) {
               <Columns
                 gene={gene}
                 matrices={matrices}
-                setMatrices={setMatrices}
+                addMatrix={addMatrix}
                 rankingGenes={rankingGenes}
                 geneList={genesList}
                 widthCell={widthCell}
@@ -138,8 +115,8 @@ export default function Grid({ genesInformation = [] }) {
   );
 }
 
-function Columns({ rankingGenes, geneList, widthCell, matrices, setMatrices, gene }) {
-  const { matrixData } = useLazyLoadCoexpression(geneList, rankingGenes, matrices, setMatrices, gene);
+function Columns({ rankingGenes, geneList, widthCell, matrices, addMatrix, gene }) {
+  const { matrixData } = useLazyLoadCoexpression(geneList, rankingGenes, matrices, addMatrix, gene);
   if(!matrixData){
     return <></>
   }

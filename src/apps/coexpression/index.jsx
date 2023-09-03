@@ -47,6 +47,7 @@ function IntCoexpression({ selectedGenes = [], geneList }) {
   const [genesId, setGenesId] = useState([...selectedGenes]);
   const [unload, setUnload] = useState([...selectedGenes]);
   const [genes, setGenes] = useState([]);
+  const [matrices, setMatrices] = useState({});
   const loadGeneState = useLazyLoadGenesBySearch(
     unload,
     setUnload,
@@ -59,6 +60,11 @@ function IntCoexpression({ selectedGenes = [], geneList }) {
   //console.log(loadGeneState.loading);
   //console.log(loadGeneState.loadState);
 
+  const addMatrix = (gene, data) => {
+    let newMatrix = {};
+    newMatrix[gene] = data;
+    setMatrices({ ...matrices, ...newMatrix });
+  };
   const reset = () => {
     setGenesId([]);
     setGenes([]);
@@ -125,10 +131,7 @@ function IntCoexpression({ selectedGenes = [], geneList }) {
       name: "Matrix",
       disabled: loadGeneState.loading,
       component: (
-        <Matrix
-          genesInformation={genes}
-          selectedGenes={selectedGenes}
-        />
+        <Matrix genesInformation={genes} selectedGenes={selectedGenes} matrices={matrices} addMatrix={addMatrix} />
       ),
     },
   ];

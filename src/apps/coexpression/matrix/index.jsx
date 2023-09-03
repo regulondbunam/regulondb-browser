@@ -2,7 +2,7 @@ import React from 'react'
 import Grid from './grid';
 import "./matrix.css"
 
-export default function Matrix({genesInformation}) {
+export default function Matrix({genesInformation,matrices, addMatrix}) {
 
   //console.log(genesInformation);
 
@@ -43,7 +43,7 @@ export default function Matrix({genesInformation}) {
         <br />
         <h2>Coexpression Matrix</h2>
         <div>
-            <Grid genesInformation={genesInformation} />
+            <Grid genesInformation={genesInformation} matrices={matrices} addMatrix={addMatrix} />
         </div>
     </div>
   )
