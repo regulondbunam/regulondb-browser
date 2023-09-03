@@ -20,7 +20,7 @@ export const QUERY_getCoexpressionRank = gql`
     }
   }
 `;
-
+/*
 export default function Grid({ genesInformation = [] }) {
   const { loading, error, data } = useQuery(QUERY_getCoexpressionRank, {
     variables: {
@@ -41,12 +41,16 @@ export default function Grid({ genesInformation = [] }) {
   }
   return <LoadGrid fData={data} genesInformation={genesInformation} />;
 }
+*/
+export default function Grid({ genesInformation = [] }) {
+  const [gene, setGene] = useState(genesInformation[0].gene.name);
+  const [matrices, setMatrices] = useState({});
 
-function LoadGrid({ fData, genesInformation }) {
-  const [getCoexpression, { loading, error, data: nData }] = useLazyQuery(
-    QUERY_getCoexpressionRank
-  );
-  const data = nData ? nData : fData;
+  const { loading, error, data } = useQuery(QUERY_getCoexpressionRank, {
+    variables: {
+      geneName: gene,
+    },
+  });
   let rankingGenes = [];
   if (data) {
     if (DataVerifier.isValidArray(data.getTopCoexpressionRanking)) {
@@ -55,18 +59,18 @@ function LoadGrid({ fData, genesInformation }) {
       );
     }
   }
-  const genesList = genesInformation.map(inf=>inf.gene.name)
+  const genesList = genesInformation.map((inf) => inf.gene.name);
   const widthCell = 60;
   const gridTemplateColumns = `repeat(${
     genesInformation.length + 1
   }, ${widthCell}px)`;
 
-  const handleSetGene = (geneName) =>{
-    getCoexpression({variables: {geneName: geneName}})
-  }
+  const handleSetGene = (geneName) => {
+    setGene(geneName);
+  };
 
-  if(error){
-    return <div>Error</div>
+  if (error) {
+    return <div>Error</div>;
   }
 
   if (loading) {
@@ -94,13 +98,12 @@ function LoadGrid({ fData, genesInformation }) {
               width: `${(genesInformation.length + 1) * (widthCell + 2)}px`,
             }}
           >
-{/*            <Header
-              columns={columns}
+            <Header
               genesInformation={genesInformation}
               handleSetGene={handleSetGene}
               rankingGenes={rankingGenes}
               widthCell={widthCell}
-          />*/}
+            />
           </div>
           <div
             style={{
@@ -110,7 +113,7 @@ function LoadGrid({ fData, genesInformation }) {
               width: `${(widthCell + 2) * genesInformation.length}px`,
             }}
           >
-            {/*<FirstColumn rankingGenes={rankingGenes} widthCell={widthCell} />*/}
+            <FirstColumn rankingGenes={rankingGenes} widthCell={widthCell} />
             <div
               style={{
                 display: "grid",
@@ -119,7 +122,14 @@ function LoadGrid({ fData, genesInformation }) {
                 zIndex: -1,
               }}
             >
-              <Columns rankingGenes={rankingGenes} geneList={genesList} widthCell={widthCell} />
+              <Columns
+                gene={gene}
+                matrices={matrices}
+                setMatrices={setMatrices}
+                rankingGenes={rankingGenes}
+                geneList={genesList}
+                widthCell={widthCell}
+              />
             </div>
           </div>
         </div>
@@ -128,28 +138,26 @@ function LoadGrid({ fData, genesInformation }) {
   );
 }
 
-
-function Columns({rankingGenes,geneList,widthCell}){
-  const {loading,matrixData} = useLazyLoadCoexpression(geneList,rankingGenes)
+function Columns({ rankingGenes, geneList, widthCell, matrices, setMatrices, gene }) {
+  const { matrixData } = useLazyLoadCoexpression(geneList, rankingGenes, matrices, setMatrices, gene);
+  if(!matrixData){
+    return <></>
+  }
   return (
     <>
-    {loading && (<p>Loading ...</p>)}
-    {matrixData.map((columnData,index)=>{
-      return (
-        <Suspense
-          key={"column_" + index }
-          fallback={<>...</>}
-        >
-          <ColumFill
-            columnData={columnData}
-            rankingGenes={rankingGenes}
-            widthCell={widthCell}
-          />
-        </Suspense>
-      );
-    })}
+      {matrixData.map((columnData, index) => {
+        return (
+          <Suspense key={"column_" + index} fallback={<>...</>}>
+            <ColumFill
+              columnData={columnData}
+              rankingGenes={rankingGenes}
+              widthCell={widthCell}
+            />
+          </Suspense>
+        );
+      })}
     </>
-  )
+  );
 }
 
 /*

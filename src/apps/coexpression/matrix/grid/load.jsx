@@ -15,13 +15,18 @@ const QUERY_getRankFromGeneList = gql`
   }
 `;
 
-export function useLazyLoadCoexpression(geneList = [], rankingGenes = []) {
+export function useLazyLoadCoexpression(geneList = [], rankingGenes = [], matrices, setMatrices, gene) {
   const [getCoexpression, { loading: coLoading, error, data: nData }] =
     useLazyQuery(QUERY_getRankFromGeneList);
   const [matrixData, setMatrixData] = useState([]);
   const [loadGenes, setLoadGenes] = useState([...geneList]);
   const [onBuff, setBuff] = useState(false);
   const loading = loadGenes.length > 0;
+
+  if(DataVerifier.isValidArray(matrices[gene])){
+    return{ matrixData: matrices[gene] }
+  }
+
   const totalOfElements = geneList.length;
   let progress = null;
   if (totalOfElements > 0) {
@@ -53,6 +58,11 @@ export function useLazyLoadCoexpression(geneList = [], rankingGenes = []) {
       }
     }
   } else {
+    if(progress === 100){
+        let newMatrix = {}
+        newMatrix[gene] = matrixData
+        setMatrices({...matrices, ...newMatrix})
+    }
     if (matrixData.length < totalOfElements && !coLoading) {
       console.log(loadGenes);
       /*
@@ -65,7 +75,7 @@ export function useLazyLoadCoexpression(geneList = [], rankingGenes = []) {
     }
   }
 
-  console.log("load:" + progress, matrixData);
+  //console.log("load:" + progress, matrixData);
 
   let matrixTable = undefined;
 

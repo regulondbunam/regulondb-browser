@@ -15,11 +15,11 @@ export default function FirstColumn({ rankingGenes, widthCell }) {
         {rankingGenes.map((gene, index) => {
           return (
             <div
-              key={"geneRanking_" + index + "_" + gene._id}
+              key={"geneRanking_" + index + "_" + gene}
               className="cellFirstColumn"
             >
               <p>
-                <b dangerouslySetInnerHTML={{ __html: gene.name }} />
+                <b dangerouslySetInnerHTML={{ __html: gene }} />
               </p>
             </div>
           );
