@@ -15,20 +15,52 @@ const QUERY_getRankFromGeneList = gql`
   }
 `;
 
-export function useLazyLoadCoexpression(geneList = [], rankingGenes = [], matrices, addMatrix, gene) {
-  const [getCoexpression, { loading: coLoading, error, data: nData }] =
-    useLazyQuery(QUERY_getRankFromGeneList);
+export function useLazyLoadCoexpression(
+  geneList = [],
+  rankingGenes = [],
+  matrices,
+  addMatrix,
+  gene
+) {
+  const [getCoexpression, { loading: coLoading, error }] = useLazyQuery(
+    QUERY_getRankFromGeneList
+  );
   const [matrixData, setMatrixData] = useState([]);
   const [loadGenes, setLoadGenes] = useState([...geneList]);
+  const [loadGene, setLoadGene] = useState();
   const [onBuff, setBuff] = useState(false);
+  const [matrixBuff, setMatrixBuff] = useState();
   const loading = loadGenes.length > 0;
+  let progress = null;
 
-  if(DataVerifier.isValidArray(matrices[gene])){
-    return{ matrixData: matrices[gene] }
+  if (DataVerifier.isValidArray(matrices[gene])) {
+    if(matrices[gene] !== matrixData){
+      
+      if (!matrixBuff || loadGene !== gene) {
+        setLoadGene(gene);
+        setMatrixBuff([...matrices[gene]]);
+        setMatrixData([]);
+        setBuff(false);
+      } else {
+        if (!onBuff && DataVerifier.isValidArray(matrixBuff)) {
+          //console.log("hola");
+          let column = matrixBuff[0];
+          setBuff(true);
+          if (column) {
+            setTimeout(() => {
+              console.log("hola");
+              setMatrixData([...matrixData, column]);
+              setMatrixBuff(matrixBuff.slice(1, matrixBuff.length));
+              setBuff(false);
+            }, 100);
+          }
+        }
+      }
+    }
+    return { loading, progress, matrixData };
   }
 
   const totalOfElements = geneList.length;
-  let progress = null;
   if (totalOfElements > 0) {
     progress = (100 / totalOfElements) * matrixData.length;
   }
@@ -58,8 +90,8 @@ export function useLazyLoadCoexpression(geneList = [], rankingGenes = [], matric
       }
     }
   } else {
-    if(progress === 100){
-      addMatrix(gene,matrixData)
+    if (progress === 100) {
+      addMatrix(gene, matrixData);
     }
     if (matrixData.length < totalOfElements && !coLoading) {
       console.log(loadGenes);
