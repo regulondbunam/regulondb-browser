@@ -67,9 +67,13 @@ It allows us to access the GensorUnit configuration file
 	
 
 */
-
+//import MainTable from "./mainTable/index";
+//import Paragraph from "./Paragraph";
 import { Cover, DataVerifier } from "../../components/ui-components";
+//import MainQuery from "./mainQuery";
+import setting from "./conf.json";
 import { useParams } from "react-router-dom";
+import GuInfo from "./guInfo/index";
 import { useGetAllGus } from "../../components/webservices";
 import Home from "./home";
 
@@ -81,7 +85,7 @@ export default function GensorUnit() {
   let { guId } = useParams();
   if (guId) {
     return (
-      <></>
+      <GuInfo guInfoDescription={setting.GuInfo_Description} guId={guId} />
     );
   }
   return <GoHome />;

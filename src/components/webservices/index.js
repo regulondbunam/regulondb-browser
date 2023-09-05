@@ -4,7 +4,7 @@ import { useGetOperonByID, useGetOperonByTuId, useGetOperonBySearch, useGetOpero
 import useGetObjectList from "./objectList";
 import { getRelatedIdsByOperonData } from "./operon/related_Ids";
 import { useGetSigmulonById, useGetSigmulonBySearch } from "./sigmulon";
-import {useGetAllGus} from "./gensorUnit";
+import {useGetAllGus, useGetGuById} from "./gensorUnit";
 import { useGetAllGenes } from "./coexpression";
 
 export {
@@ -13,5 +13,5 @@ export {
     useGetObjectList,
     useGetOperonByID, useGetOperonByTuId, useGetOperonBySearch, useGetOperonByAdvancedSearch, getRelatedIdsByOperonData,
     useGetSigmulonById, useGetSigmulonBySearch,
-    useGetAllGus
+    useGetAllGus, useGetGuById
 }
