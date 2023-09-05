@@ -1,10 +1,12 @@
 import React, { Suspense, useState, lazy } from "react";
 import { DataVerifier } from "../../../../components/ui-components";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useQuery, useLazyQuery, gql } from "@apollo/client";
+import { useQuery, gql } from "@apollo/client";
 import Header from "./header";
 import FirstColumn from "./firstColumn";
 import { useLazyLoadCoexpression } from "./load";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
 
 const ColumFill = lazy(() => import("./columFill"));
 
@@ -23,6 +25,7 @@ export const QUERY_getCoexpressionRank = gql`
 
 export default function Grid({ genesInformation = [], matrices, addMatrix }) {
   const [gene, setGene] = useState(genesInformation[0].gene.name);
+  const [showRank, setShowRank] = useState(false);
   const { loading, error, data } = useQuery(QUERY_getCoexpressionRank, {
     variables: {
       geneName: gene,
@@ -64,6 +67,19 @@ export default function Grid({ genesInformation = [], matrices, addMatrix }) {
     <>
       {data && (
         <div id="matrixContainer" style={{ height: "500px", overflow: "auto" }}>
+          <div className="controls_matrix">
+            <FormControlLabel
+              control={
+                <Switch
+                  value={showRank}
+                  onChange={() => {
+                    setShowRank(!showRank);
+                  }}
+                />
+              }
+              label="View Coexpression value"
+            />
+          </div>
           <div
             style={{
               display: "grid",
@@ -96,7 +112,6 @@ export default function Grid({ genesInformation = [], matrices, addMatrix }) {
                 display: "grid",
                 columnGap: "2px",
                 gridTemplateColumns: `repeat(${genesInformation.length}, ${widthCell}px)`,
-                zIndex: -1,
               }}
             >
               <Columns
@@ -106,6 +121,7 @@ export default function Grid({ genesInformation = [], matrices, addMatrix }) {
                 rankingGenes={rankingGenes}
                 geneList={genesList}
                 widthCell={widthCell}
+                showRank={showRank}
               />
             </div>
           </div>
@@ -115,10 +131,24 @@ export default function Grid({ genesInformation = [], matrices, addMatrix }) {
   );
 }
 
-function Columns({ rankingGenes, geneList, widthCell, matrices, addMatrix, gene }) {
-  const { matrixData } = useLazyLoadCoexpression(geneList, rankingGenes, matrices, addMatrix, gene);
-  if(!matrixData){
-    return <></>
+function Columns({
+  rankingGenes,
+  geneList,
+  widthCell,
+  matrices,
+  addMatrix,
+  gene,
+  showRank,
+}) {
+  const { matrixData } = useLazyLoadCoexpression(
+    geneList,
+    rankingGenes,
+    matrices,
+    addMatrix,
+    gene
+  );
+  if (!matrixData) {
+    return <></>;
   }
   return (
     <>
@@ -126,9 +156,12 @@ function Columns({ rankingGenes, geneList, widthCell, matrices, addMatrix, gene 
         return (
           <Suspense key={"column_" + index} fallback={<>...</>}>
             <ColumFill
+              columnIndex={index}
               columnData={columnData}
+              geneList={geneList}
               rankingGenes={rankingGenes}
               widthCell={widthCell}
+              showRank={showRank}
             />
           </Suspense>
         );

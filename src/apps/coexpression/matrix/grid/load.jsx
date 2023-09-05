@@ -48,7 +48,7 @@ export function useLazyLoadCoexpression(
           setBuff(true);
           if (column) {
             setTimeout(() => {
-              console.log("hola");
+              //console.log("hola");
               setMatrixData([...matrixData, column]);
               setMatrixBuff(matrixBuff.slice(1, matrixBuff.length));
               setBuff(false);
