@@ -25,10 +25,11 @@ export function useGetAllGus() {
 export function useGetGuById(guId) {
     const { data, loading, error } = useQuery(query_getGuById,{variables:{advancedSearch: `${guId}[_id]`}})
     let guData = []
+    console.log(data);
     try {
         if (data) {
-            if(DataVerifier.isValidArray(data.getGuById.data)){
-              guData = data.getGuById.data[0]
+            if(DataVerifier.isValidArray(data.getGUsBy.data)){
+              guData = data.getGUsBy.data[0]
             }else{
                 guData = null
             }

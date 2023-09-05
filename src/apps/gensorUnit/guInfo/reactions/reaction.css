@@ -1,0 +1,5 @@
+.singleReaction_controls_selectReaction{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

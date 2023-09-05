@@ -70,7 +70,8 @@ It allows us to access the GensorUnit configuration file
 
 import { Cover, DataVerifier } from "../../components/ui-components";
 import { useParams } from "react-router-dom";
-import { useGetAllGus } from "../../components/webservices";
+import { useGetAllGus, useGetGuById } from "../../components/webservices";
+import GuInfo from "./guInfo";
 import Home from "./home";
 
 export default function GensorUnit() {
@@ -81,10 +82,41 @@ export default function GensorUnit() {
   let { guId } = useParams();
   if (guId) {
     return (
-      <></>
+      <GoInfo guId={guId}/>
     );
   }
   return <GoHome />;
+}
+
+function GoInfo({guId}){
+const {guData, loading, error} = useGetGuById(guId)
+console.log(guData);
+if(loading){
+  return (
+    <div>
+      <Cover state="loading" >
+        <h1>{`Loading .... Gensor Unit`}</h1>
+      </Cover>
+    </div>
+  )
+}
+if(error){
+  return <>error</>
+}
+if(guData?._id){
+  return (
+    <div>
+      <Cover >
+        <h1>{`Gensor Unit ${guData.gensorUnit.name}`}</h1>
+      </Cover>
+      <GuInfo nReactions={guData.reactions.length} {...guData} />
+    </div>
+  )
+}
+return(
+  <div>info</div>
+)
+
 }
 
 function GoHome() {
