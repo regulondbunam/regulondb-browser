@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import { AnchorNav, DataVerifier } from "../../../components/ui-components";
 import Reactions from './reactions';
+import GeneOntology from './geneOntology';
 
 export default function GuInfo({
   gensorUnit,
@@ -10,6 +11,12 @@ export default function GuInfo({
 
   const sections = useMemo(()=>{
     let _sections = []
+    const {
+      biologicalProcess,
+      cellularComponent,
+      molecularFunction
+    } = gensorUnit.geneOntology
+    console.log(gensorUnit);
     if(DataVerifier.isValidArray(reactions)){
       _sections.push({
         id: "gi_section1_reactions",
@@ -18,6 +25,18 @@ export default function GuInfo({
         component: (
           <div >
             <Reactions reactions={reactions} nodes={gensorUnit.components} />
+          </div>
+        ),
+      });
+    }
+    if(DataVerifier.isValidArray(biologicalProcess) || DataVerifier.isValidArray(cellularComponent) || DataVerifier.isValidArray(molecularFunction)){
+      _sections.push({
+        id: "gi_section2_geneOntology",
+        label: `Gene Ontology`,
+        title: `Gene Ontology`,
+        component: (
+          <div >
+           <GeneOntology {...gensorUnit.geneOntology}/>
           </div>
         ),
       });

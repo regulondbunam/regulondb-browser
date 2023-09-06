@@ -29,15 +29,12 @@ export const /** object */ query_getGuById = gql`
             description
             geneOntology {
               biologicalProcess {
-                _id
                 name
               }
               cellularComponent {
-                _id
                 name
               }
               molecularFunction {
-                _id
                 name
               }
             }

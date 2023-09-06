@@ -108,6 +108,12 @@ if(guData?._id){
     <div>
       <Cover >
         <h1>{`Gensor Unit ${guData.gensorUnit.name}`}</h1>
+        {DataVerifier.isValidArray(guData.gensorUnit.groups) && (
+          <p><b>{`Functional Group${guData.gensorUnit.groups.length > 1 ? "s" : ""}: `}</b>
+          {guData.gensorUnit.groups.join(", ")}
+          </p>
+        )}
+        <br />
       </Cover>
       <GuInfo nReactions={guData.reactions.length} {...guData} />
     </div>
