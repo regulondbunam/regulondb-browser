@@ -107,7 +107,8 @@
         {
           "id": "api-ws",
           "title": "Web services PlayGround",
-          "link" : "/graphql"
+          "link" : "/graphql",
+          "type": "graphql"
         }
       ]
     },
