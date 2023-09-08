@@ -14,6 +14,7 @@ export default function Regulator({ regulator, allCitations }) {
         confidenceLevel,
         conformations,
         encodedFrom,
+        encodedBy,
         // name,
         note,
         products,
@@ -61,6 +62,9 @@ export default function Regulator({ regulator, allCitations }) {
                 )}
                 {encodedFrom && (
                     <EncodedFrom encodedFrom={encodedFrom} />
+                )}
+                {encodedBy && (
+                    <EncodedFrom encodedFrom={encodedBy} />
                 )}
                 {DataVerifier.isValidArray(products) && (
                     <Products products={products} />

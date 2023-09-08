@@ -4,7 +4,7 @@ function EncodedFrom({ encodedFrom }) {
     return (
         <div>
             {encodedFrom.genes.length > 0 || encodedFrom.operon.length > 0 ? (
-                <p><b>Encoded From</b></p>
+                <p><b>Encoded By</b></p>
             ) : (<div />)}
             <div style={{ marginLeft: "1%" }} >
                 {encodedFrom.genes.length > 0 && (
