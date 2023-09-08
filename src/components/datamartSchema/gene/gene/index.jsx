@@ -77,6 +77,11 @@ DataVerifier: the component have a role in data verification or validation befor
 Accordion: it is a component commonly used to control the expansion and collapse of content in the user interface
 ParagraphCitations: it is a component related to the presentation of citations in paragraph format.
 NoteCitations: display notes with a particular format.
+Citations: This child component renders citations related to the gene.
+Fragments:  This child component renders information about gene fragments.
+ExternalCrossReferences:  This child component  renders external cross-references related to the gene.
+
+
 
 ## States
 	
@@ -303,7 +308,7 @@ export { Gene };
 
 
 /**
- * Description placeholder
+ * This function renders citations related to the gene.
  *
  * @param {{ citations: any; allCitations: any; }} { citations, allCitations }
  * @returns {React.JSX}
