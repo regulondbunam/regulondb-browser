@@ -1,3 +1,11 @@
+
+/**
+ * Description placeholder
+ *
+ * @export
+ * @param {{ multifunTerms?: {}; }} { multifunTerms=[] }
+ * @returns {React.JSX}
+ */
 export function MultifunTerms({ multifunTerms=[] }) {
     return (
         <div >

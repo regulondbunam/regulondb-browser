@@ -1,3 +1,81 @@
+/**
+ # Component (user guide)
+
+# ViewSecuence
+	
+## Description  
+	
+ViewSecuence allows the user to select and view data sequences in two different formats (FASTA and GenBank) through interactive modal windows. Each modal allows customization of sequence display and download.
+
+## Category   
+	
+Visual  
+
+## Live demo 
+	
+--
+
+## Installation or Implementation
+
+--
+
+## Usage 
+ <ViewSecuence secuence = "" _id={id} name = "" products = {products}/> ]
+
+## Props 
+Identifier or sequence name.
+| Attribute | Type | Default | Description                                                  |
+| --------- | ---- | ------- | -------------------------------------------------------------|
+|secuence   |string|         |It represents the sequence of the gene that has been queried. |
+|    _id    |string|         |Identifier or sequence name.                                  |
+|    name   |string|         |Identifier or sequence name.                                  |
+| products  |string|         |Identifier or sequence name.                                  |
+
+
+## Exception
+
+--
+
+## License
+
+MIT License
+
+## Author 
+	
+RegulonDB Team: 
+Francisco Javier Hernandez Sanchez
+
+
+# Component (technical guide)
+
+## Component Type 
+
+Visual
+
+## Dependencies
+React
+Modal: The Modal component of Material-UI is used to create modal pop-up windows in web applications.
+Box: The Box component is a versatile container that is used to wrap other elements and apply styles or layout to those elements. 
+FormGroup: It is used to group related form elements, such as checkboxes and radio buttons.
+FormControlLabel: It is a component used to create human-readable labels for form controls such as checkboxes and radio buttons.
+Switch: It is used to create on/off switches in applications.
+
+## States
+	
+| Property                | Value | Description                                                                   |
+| --------                | ----- | ------------------------------------------------------------------------------|
+|_viewFastaSequence	      | false |Controls the visibility of the FASTA format modal window. Initializes to false.|
+|_viewGenebankSequence		| false |Controls the visibility of the GenBank format modal window. Initializes to false.|
+|_color	                  | false |Controls the display of colors in the sequence within the modes. Initializes to false.|
+
+## Hooks
+|  Name  | Description                                                                                                                 |  Syntax                                               | Additional Notes or References | 
+| ------ | --------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------ |
+|useState|It is one of the fundamental hooks provided by React that allows functional components to maintain and manage internal state.|const [state, setState] = React.useState(initialState);|                                |
+
+
+
+ *  **/
 import React from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
@@ -9,14 +87,38 @@ import {
   GenebankSequence,
 } from "../../../../sequence";
 
+
+
+/**
+ * Description placeholder
+ *
+ * @export
+ * @param {{ sequence: any; _id: any; name: any; products: any; }} { sequence, _id, name, products }
+ * @returns {React.JSX}
+ */
 export default function ViewSequence({ sequence, _id, name, products }) {
-  console.log(products);
+  // console.log(products);
+  
+  
   const [_viewFastaSequence, set_viewFastaSequence] = React.useState(false);
   const [_viewGenebankSequence, set_viewGenebankSequence] =
     React.useState(false);
 
-  const viewFastaSequence = () => set_viewFastaSequence(!_viewFastaSequence);
-  const viewGenebankSequence = () =>
+    
+  const viewFastaSequence = 
+  /**
+   * Description placeholder
+   * 
+   * @returns {boolean}
+   */
+  () => set_viewFastaSequence(!_viewFastaSequence);
+  const viewGenebankSequence = 
+  /**
+   * Description placeholder
+   * 
+   * @returns {boolean}
+   */
+  () =>
     set_viewGenebankSequence(!_viewGenebankSequence);
 
   return (
@@ -55,16 +157,65 @@ export default function ViewSequence({ sequence, _id, name, products }) {
   );
 }
 
+
+/**
+ * Description placeholder
+ *
+ * @type {React.JSX}
+ */
 const GenebankModal = React.forwardRef((props, ref) => {
-    const { sequence, title, onView = () => {} } = props;
+    const { sequence, title, onView = 
+      
+      /**
+       * Description placeholder
+       */
+      () => {} } = props;
   const [_color, set_color] = React.useState(false);
 
-  const color = () => set_color(!_color);
+  
+  /**
+   * Description placeholder
+   * @returns {boolean}
+   */
+  const color = 
+  
+  /**
+   * Description placeholder
+   * @returns {boolean}
+   */
+  () => set_color(!_color);
 
-  const download = () => {
+  
+  /**
+   * Description placeholder
+   */
+  const download = 
+  
+  /**
+   * Description placeholder
+   */
+  () => {
+
+    
+    /**
+     * Description placeholder
+     * @type {HTMLElement}
+     */
     let e = document.getElementById("rdb_p_sequence");
     if (e.innerText) {
+      
+      /**
+       * Description placeholder
+       * 
+       * @type {Object}
+       */
       const blob = new Blob([e.innerText]);
+
+      
+      /**
+       * Description placeholder
+       * @type {HTMLElement}
+       */
       const element = document.createElement("a");
       element.href = window.URL.createObjectURL(blob);
       element.download = `${title}.txt`;
@@ -74,6 +225,12 @@ const GenebankModal = React.forwardRef((props, ref) => {
     }
   };
 
+  
+  /**
+   * Description placeholder
+   * 
+   * @type {{ position: string; top: string; left: string; transform: string; bgcolor: string; border: string; boxShadow: number; p: number; }}
+   */
   const style = {
     position: "absolute",
     top: "50%",
@@ -112,16 +269,66 @@ const GenebankModal = React.forwardRef((props, ref) => {
   );
 })
 
+
+/**
+ * Description placeholder
+ *
+ * @type {React.JSX}
+ */
 const FastaModal = React.forwardRef((props, ref) => {
-  const { sequence, title, onView = () => {} } = props;
+  const { sequence, title, onView = 
+    
+    /**
+     * Description placeholder
+     * 
+     */
+    () => {} } = props;
   const [_color, set_color] = React.useState(false);
 
-  const color = () => set_color(!_color);
+  const color =
+  
+  /**
+   * Description placeholder
+   * 
+   * @returns {void}
+   */
+  () => set_color(!_color);
 
-  const download = () => {
+
+  
+  /**
+   * Description placeholder
+   * 
+   */
+  const download = 
+  
+  /**
+   * Description placeholder
+   * @returns {void}
+   */
+  () => {
+    
+    /**
+     * Description placeholder
+     *
+     * @type {HTMLElement}
+     */
     let e = document.getElementById("rdb_p_sequence");
     if (e.innerText) {
+      
+      /**
+       * Description placeholder
+       *
+       * @type {object}
+       */
       const blob = new Blob([e.innerText]);
+
+      
+      /**
+       * Description placeholder
+       *
+       * @type {HTMLElement}
+       */
       const element = document.createElement("a");
       element.href = window.URL.createObjectURL(blob);
       element.download = `${title}.txt`;
@@ -131,6 +338,12 @@ const FastaModal = React.forwardRef((props, ref) => {
     }
   };
 
+  
+  /**
+   * Description placeholder
+   *
+   * @type {{ position: string; top: string; left: string; transform: string; bgcolor: string; border: string; boxShadow: number; p: number; }}
+   */
   const style = {
     position: "absolute",
     top: "50%",
