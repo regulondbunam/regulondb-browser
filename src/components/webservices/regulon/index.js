@@ -39,7 +39,8 @@ export function useGetRegulonData(id) {
     
     if (error) {
         if(!data2 && !loading2){
-            getData()
+            regulonData = undefined
+            //getData()
         }
         if (error2) {
             err = error2
