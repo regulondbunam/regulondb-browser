@@ -183,6 +183,24 @@ export const fragment_ENCODEFROM = gql`fragment ENCODEFROM on EncodedFrom {
   }
 }`
 
+export const fragment_ENCODEBY = gql`fragment ENCODEBY on EncodedBy {
+  genes {
+    _id
+    name
+    leftEndPosition
+    rightEndPosition
+    length
+  }
+  operon {
+    name
+    _id
+    tusEncodingRegulator {
+      promoterName
+      transcriptionUnitName
+    }
+  }
+}`
+
 export const fragment_REGULATOR = gql`fragment REGULATOR on Regulator {
   _id
   additiveEvidences {
@@ -257,7 +275,7 @@ export const fragment_REGULATORv2 = gql`fragment REGULATOR on Regulator {
   confidenceLevel
   connectivityClass
   encodedBy {
-    ...ENCODEFROM
+    ...ENCODEBY
   }
   family
   name
@@ -370,7 +388,6 @@ ${fragment_GO}
 ${fragment_REGULATES}
 ${fragment_RI}
 ${fragment_TERMS}
-${fragment_ENCODEFROM}
 ${fragment_SUMMARY}
 query GetRegulonInfo($advancedSearch: String, $fullMatchOnly: Boolean = false, $limit: Int = 10, $organismName: String, $page: Int = 0, $search: String) {
   getRegulonBy(
@@ -425,7 +442,7 @@ ${fragment_GO}
 ${fragment_REGULATES}
 ${fragment_RI}
 ${fragment_TERMS}
-${fragment_ENCODEFROM}
+${fragment_ENCODEBY}
 ${fragment_REGULATORv2}
 ${fragment_SUMMARY}
 query GetRegulonInfo($advancedSearch: String, $fullMatchOnly: Boolean = false, $limit: Int = 10, $organismName: String, $page: Int = 0, $search: String) {
