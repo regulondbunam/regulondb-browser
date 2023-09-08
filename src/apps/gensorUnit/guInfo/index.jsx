@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { AnchorNav, DataVerifier } from "../../../components/ui-components";
-import Reactions from './reactions';
+import Reactions, {MapReactions} from './reactions';
 import GeneOntology from './geneOntology';
 
 export default function GuInfo({
@@ -8,7 +8,10 @@ export default function GuInfo({
   reactions,
   nReactions
 }) {
-
+  let header =  <></>
+  if(DataVerifier.isValidArray(reactions)){
+    header =  <MapReactions reactions={reactions} nodes={gensorUnit.components} />
+  }
   const sections = useMemo(()=>{
     let _sections = []
     const {
@@ -45,7 +48,7 @@ export default function GuInfo({
   },[reactions, nReactions, gensorUnit])
 
   return <AnchorNav
-  sections={sections}
+  sections={sections} header={header}
   title={`Gensor Unit ${gensorUnit.name}`}
 />
 }
