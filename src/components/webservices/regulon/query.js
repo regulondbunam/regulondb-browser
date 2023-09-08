@@ -228,6 +228,51 @@ export const fragment_REGULATOR = gql`fragment REGULATOR on Regulator {
   type
 }`
 
+export const fragment_REGULATORv2 = gql`fragment REGULATOR on Regulator {
+  _id
+  additiveEvidences {
+    category
+    code
+    type
+  }
+  citations {
+    ...CITATIONS
+  }
+  conformations {
+    additiveEvidences{
+    category
+    code
+    type
+  }
+    citations {
+      ...CITATIONS
+    }
+    confidenceLevel
+    effectorInteractionType
+    functionalType
+    _id
+    name
+    type
+  }
+  confidenceLevel
+  connectivityClass
+  encodedBy {
+    ...ENCODEFROM
+  }
+  family
+  name
+  note
+  products {
+    _id
+    name
+  }
+  siteLength
+  sensingClass
+  symmetry
+  synonyms
+  type
+}`
+
 export const fragment_SUMMARY = gql`fragment SUMOBJ on SummaryObject {
   activated
   dual
@@ -315,6 +360,116 @@ query GetRegulonInfo($advancedSearch: String, $fullMatchOnly: Boolean = false, $
   }
 }`
 
+export const query_GET_REGULON_BYSearch = gql`
+${fragment_CITATIONS}
+${fragment_PAGINATION}
+${fragment_ALIGMENTMATRIX}
+${fragment_EVOLUTIONARYCONSERVATION}
+${fragment_GeneTerms}
+${fragment_GO}
+${fragment_REGULATES}
+${fragment_RI}
+${fragment_TERMS}
+${fragment_ENCODEFROM}
+${fragment_SUMMARY}
+query GetRegulonInfo($advancedSearch: String, $fullMatchOnly: Boolean = false, $limit: Int = 10, $organismName: String, $page: Int = 0, $search: String) {
+  getRegulonBy(
+    advancedSearch: $advancedSearch
+    fullMatchOnly: $fullMatchOnly
+    limit: $limit
+    organismName: $organismName
+    page: $page
+    search: $search
+  ) {
+    data {
+      _id
+      allCitations {
+        ...CITATIONS
+      }
+      aligmentMatrix {
+        ...ALIGMENTMATRIX
+      }
+      evolutionaryConservation {
+        ...EVOLUTIONARYCONSERVATION
+      }
+      regulates {
+        ...REGULATES
+      }
+      regulatoryInteractions {
+        ...RI
+      }
+      terms {
+        ...TERMS
+      }
+      regulator {
+        name
+        _id
+      }
+      summary{
+        ...SUMMARY
+      }
+    }
+    pagination {
+      ...PAGINATION
+    }
+  }
+}`
+
+export const query_GET_REGULON_BYV2 = gql`
+${fragment_CITATIONS}
+${fragment_PAGINATION}
+${fragment_ALIGMENTMATRIX}
+${fragment_EVOLUTIONARYCONSERVATION}
+${fragment_GeneTerms}
+${fragment_GO}
+${fragment_REGULATES}
+${fragment_RI}
+${fragment_TERMS}
+${fragment_ENCODEFROM}
+${fragment_REGULATORv2}
+${fragment_SUMMARY}
+query GetRegulonInfo($advancedSearch: String, $fullMatchOnly: Boolean = false, $limit: Int = 10, $organismName: String, $page: Int = 0, $search: String) {
+  getRegulonBy(
+    advancedSearch: $advancedSearch
+    fullMatchOnly: $fullMatchOnly
+    limit: $limit
+    organismName: $organismName
+    page: $page
+    search: $search
+  ) {
+    data {
+      _id
+      allCitations {
+        ...CITATIONS
+      }
+      aligmentMatrix {
+        ...ALIGMENTMATRIX
+      }
+      evolutionaryConservation {
+        ...EVOLUTIONARYCONSERVATION
+      }
+      regulates {
+        ...REGULATES
+      }
+      regulatoryInteractions {
+        ...RI
+      }
+      terms {
+        ...TERMS
+      }
+      regulator {
+        ...REGULATOR
+      }
+      summary{
+        ...SUMMARY
+      }
+    }
+    pagination {
+      ...PAGINATION
+    }
+  }
+}`
+
 export const query_GET_ALL_REGULON = gql`
 ${fragment_REGULATOR}
 ${fragment_CITATIONS}
@@ -324,7 +479,7 @@ ${fragment_ENCODEFROM}
       data{
         _id
         regulator {
-          ...REGULATOR
+          name
         }
       }
       pagination{
