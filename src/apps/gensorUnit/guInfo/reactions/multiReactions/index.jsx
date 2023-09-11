@@ -1,46 +1,39 @@
 import cytoscape from "cytoscape";
 import sbgnStylesheet from "cytoscape-sbgn-stylesheet";
 import CytoscapeComponent from "react-cytoscapejs";
-import styles from "./GensorUnitMap.module.css";
+import styles from "../GensorUnitMap.module.css";
 import { useMemo, useState } from "react";
 import { generateElements } from "./generateElements";
 import Options from "./options";
-
+import Search from "./search";
 
 const LAYOUTS = {
   cose: "cose",
   dagre: "dagre",
   breadthfirst: "breadthfirst",
   grid: "grid",
-  concentric: "concentric"
+  concentric: "concentric",
 };
 
 export default function MultiReactions({ reactions, nodes }) {
   const cyStylesheet = sbgnStylesheet(cytoscape);
-  const [layout,setLayout] = useState(LAYOUTS.breadthfirst)
+  const [layout, setLayout] = useState(LAYOUTS.dagre);
   const [_cy, select_cy] = useState();
 
-  const elements = useMemo(()=>{
+  const elements = useMemo(() => {
     return generateElements(nodes, reactions);
-  },[nodes, reactions])
+  }, [nodes, reactions]);
 
-  const handleLayout = (value)=>{
-    setLayout(value)
-    _cy.layout({
+  const handleLayout = (value) => {
+    setLayout(value);
+    _cy
+      .layout({
         name: value,
         // Otras opciones de configuración del layout
-      }).run();
-  }
-/*
-  useEffect(()=>{
-    if (_cy) {
-      _cy.layout({
-        name: layout,
-      }).run()
-    }
-  },[layout,_cy])
+      })
+      .run();
+  };
 
-*/
   const cyEffects = (cy) => {
     select_cy(cy);
     cy.fit();
@@ -82,25 +75,28 @@ export default function MultiReactions({ reactions, nodes }) {
     });
     cy.layout({
       name: layout,
-    }).run()
+    }).run();
   };
 
   return (
-    <div>
+    <div className="guMap">
+      <Search elements={elements} reactions={reactions} components={nodes} cy={_cy} />
       <div>
-        <CytoscapeComponent
-          elements={elements}
-          style={{ width: "100%", height: "400px" }}
-          zoomingEnabled={true}
-          maxZoom={2}
-          minZoom={0.1}
-          autounselectify={false}
-          boxSelectionEnabled={true}
-          stylesheet={styles}
-          cy={cyEffects}
-        />
+        <Options LAYOUT={LAYOUTS} layout={layout} handleLayout={handleLayout} />
+        <div>
+          <CytoscapeComponent
+            elements={elements}
+            style={{ width: "100%", height: "400px" }}
+            zoomingEnabled={true}
+            maxZoom={2}
+            minZoom={0.1}
+            autounselectify={false}
+            boxSelectionEnabled={true}
+            stylesheet={styles}
+            cy={cyEffects}
+          />
+        </div>
       </div>
-      <Options LAYOUT={LAYOUTS} layout={layout} handleLayout={handleLayout} />
     </div>
   );
 }

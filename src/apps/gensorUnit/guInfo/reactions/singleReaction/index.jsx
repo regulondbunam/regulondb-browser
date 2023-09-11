@@ -1,7 +1,7 @@
 import cytoscape from "cytoscape";
 import sbgnStylesheet from "cytoscape-sbgn-stylesheet";
 import CytoscapeComponent from "react-cytoscapejs";
-import styles from "./GensorUnitMap.module.css";
+import styles from "../GensorUnitMap.module.css";
 import { useState } from "react";
 import { generateElements } from "./generateElements";
 import Options from "./options";
