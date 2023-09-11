@@ -78,7 +78,17 @@ export function BodyDesktop({ submenuData }) {
                         key={itemm.id}
                         style={{ paddingTop: "5%", paddingBottom: "1%" }}
                       >
-                        <a target="_tab" href={ process.env.REACT_APP_WEB_SERVICE_URL}>{itemm.title}</a>
+                        <a style={{color: "white"}}  target="_tab" href={ process.env.REACT_APP_WEB_SERVICE_URL}>{itemm.title}</a>
+                      </div>
+                    );
+                  }
+                  if (itemm.type === "apolloSandbox") {
+                    return (
+                      <div
+                        key={itemm.id}
+                        style={{ paddingTop: "5%", paddingBottom: "1%" }}
+                      >
+                        <a style={{color: "white"}} target="_tab" href={"https://studio.apollographql.com/sandbox/explorer?endpoint="+process.env.REACT_APP_WEB_SERVICE_URL}>{itemm.title}</a>
                       </div>
                     );
                   }
