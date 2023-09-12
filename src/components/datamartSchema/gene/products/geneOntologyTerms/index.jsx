@@ -1,39 +1,35 @@
 /**
  # Component (user guide)
 
-# [Component name]
+GeneOntologyTerms
 	
 ## Description  
 	
-[Description Details]
+This is the main component and is responsible for rendering the information related to the Gene Ontology terms.
 
 ## Category   
 	
-[Visual, Structural, Functional]  
+Visual 
 
 ## Live demo 
-	
-[code to iframe CodeSandbox]
+--
 
 ## Installation or Implementation
-
-[example: npm install --save react-awesome-button]
+--
 
 ## Usage 
-	
-[example: <protvista-tooltip>  </protvista-tooltip> ]
+--
 
 ## Props 
 
-| Attribute | Type | Default | Description |
-| --------- | ---- | ------- | ----------- |
-|           |      |         |             |
-
+| Attribute       | Type | Default | Description                                                                                                                                                 |
+| --------------- | ---- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|geneOntologyTerms|object|         |It is used to provide data to the React component so that it can render and display relevant information about the Gene Ontology terms in the user interface.|
+|allCitations     |array |         |Provides information on the sources or bibliographic references that support the Gene Ontology terms.                                                        |
 
 ## Exception
 
-__Category: [Error, Warning or Message]__
-[Description of the exception (if necessary)]
+--
 
 ## License
 
@@ -41,23 +37,22 @@ MIT License
 
 ## Author 
 	
-RegulonDB Team: 
-[full developer name]
+RegulonDB Team
 
 
 # Component (technical guide)
 
 ## Component Type 
 
-[ Driver, Visual, Application, Custom Hook, ClassComponent ]
-// Driver: It is a Component that controls interactions with users, browser, API requests, manage status or processes as well as logic related to data.
-// Visual: This component will take care of the structure and styles of our application.
-// Application: Application: is the main component of a web application or library.
-// Custom Hook: is a custom React function, which unlike the other components can return variables.
-// ClassComponent: is a tradicional React component class
+Visual
 
 ## Dependencies
-[Dependency name][ Dependency details ]
+React: Imports the main React library, which is used to create components and manage state.
+ParagraphCitations: It is used to display and format citations or references to bibliographic sources in a paragraph format within the context of information related to Gene Ontology (GO) terms in the user interface.
+CellularComponent: It is a function of the React component that is used to represent and display information about the "cell location" category of Gene Ontology terms.
+MolecularFunction: It is a function within a React component that is used to display information about the "molecular function" category of Gene Ontology terms.
+BiologicalProcess: It aims to present in a structured and readable way details about the biological processes in which specific genes or proteins are involved.
+GeneOntologyItem: Its main function is to represent and display detailed information about a specific Gene Ontology term along with its corresponding citations or references to sources.
 
 ## States
 	
@@ -70,52 +65,42 @@ RegulonDB Team:
 | ------ | ----------- | -------- | ------------------------------ |
 |        |             |          |                                |
 
-# Functions description
-
-## [function name]
-
-__Description:__  
-
-[Description of the function]
-
-
-__Usage:__
-
-```javascript
-&function(Parameters, if any);
-```
-
-__Scope: __
-
-[Scope details]
-
-__Input Parameter:__  
-​__[Name]:__ [Description]
-__[Name]:__ [Description]
-
-
-__Return:__  
-​__[Type]:__ [Name]
-​[Description (if necessary)]
-
  
 **/
 
 import React from "react";
 import { ParagraphCitations } from "../../../citations";
 
+/**
+ * Description placeholder
+ *
+ * @type {{ fontWeight: string; textAlign: string; }}
+ */
 const thStyle = {
   fontWeight: "bold",
   textAlign: "inherit",
 };
+
+/**
+ * Description placeholder
+ *
+ * @type {{ textAlign: string; }}
+ */
 const trStyle = {
   textAlign: "inherit",
 };
 
-export default function GeneOntologyTerms({
+/**
+ * Description placeholder
+ *
+ * @export
+ * @param {{ geneOntologyTerms: any; allCitations: any; }} {
   geneOntologyTerms,
   allCitations
-}) {
+}
+ * @returns {React.JSX}
+ */
+export default function GeneOntologyTerms({ geneOntologyTerms, allCitations }) {
   //console.log(geneOntology)
   if (!geneOntologyTerms) {
     return null;
@@ -129,6 +114,17 @@ export default function GeneOntologyTerms({
   );
 }
 
+/**
+ * Description placeholder
+ *
+ * @param {Array} cc - An array of objects containing information about Gene Ontology terms
+ *                     related to cellular location.
+ * @param {Array} allCitations - An array of objects containing information about citations
+ *                               or references to bibliographic sources supporting the Gene Ontology terms.
+ *
+ * @returns {React.JSX|null} - A JSX element representing the cellular location information and its citations,
+ *                              or `null` if no information is available.
+ */
 function CellularComponent(cc, allCitations) {
   //console.log(cc)
   if (!cc || cc.length === 0) {
@@ -146,9 +142,7 @@ function CellularComponent(cc, allCitations) {
       <tbody>
         <tr>
           <td>
-            <table>
-              {GeneOntologyItem(cc, allCitations)}
-            </table>
+            <table>{GeneOntologyItem(cc, allCitations)}</table>
           </td>
         </tr>
       </tbody>
@@ -156,6 +150,16 @@ function CellularComponent(cc, allCitations) {
   );
 }
 
+/**
+ * Description placeholder
+ * @param {Array} cc - An array of objects containing information about Gene Ontology terms
+ *                     related to molecular functions.
+ * @param {Array} allCitations - An array of objects containing information about citations
+ *                               or references to bibliographic sources supporting the Gene Ontology terms.
+ *
+ * @returns {React.JSX|null} - A JSX element representing the molecular function information and its citations,
+ *                              or `null` if no information is available.
+ */
 function MolecularFunction(cc, allCitations) {
   if (!cc || cc.length === 0) {
     return null;
@@ -172,9 +176,7 @@ function MolecularFunction(cc, allCitations) {
       <tbody>
         <tr>
           <td>
-            <table>
-              {GeneOntologyItem(cc, allCitations)}
-            </table>
+            <table>{GeneOntologyItem(cc, allCitations)}</table>
           </td>
         </tr>
       </tbody>
@@ -182,6 +184,16 @@ function MolecularFunction(cc, allCitations) {
   );
 }
 
+/**
+ * Description placeholder
+ * @param {Array} cc - An array of objects containing information about Gene Ontology terms
+ *                     related to molecular functions.
+ * @param {Array} allCitations - An array of objects containing information about citations
+ *                               or references to bibliographic sources supporting the Gene Ontology terms.
+ *
+ * @returns {React.JSX|null} - A JSX element representing the molecular function information and its citations,
+ *                              or `null` if no information is available.
+ */
 function BiologicalProcess(cc, allCitations) {
   if (!cc || cc.length === 0) {
     return null;
@@ -198,9 +210,7 @@ function BiologicalProcess(cc, allCitations) {
       <tbody>
         <tr>
           <td>
-            <table>
-              {GeneOntologyItem(cc, allCitations)}
-            </table>
+            <table>{GeneOntologyItem(cc, allCitations)}</table>
           </td>
         </tr>
       </tbody>
@@ -208,28 +218,47 @@ function BiologicalProcess(cc, allCitations) {
   );
 }
 
+/**
+ * Description placeholder
+ * @param {Array} components - An array of objects containing information about individual  Gene Ontology terms.
+ * @param {Array} allCitations - An array of objects containing information about citations or references
+ *                               to bibliographic sources supporting the Gene Ontology terms.
+ *
+ * @returns {React.JSX} - A JSX element representing the individual Gene Ontology terms and their associated citations.
+ */
 function GeneOntologyItem(components, allCitations) {
   //console.log(genes)
   return (
     <tbody>
-      {components.map((component) => {
-        return (
-          <tr className={"trShadow"} style={trStyle} key={`ccT_${component._id}`}>
-            <td>
-              <div>
+      {components.map(
+        /**
+         * Description placeholder
+         *
+         * @param {object} component - An object containing information about an individual  Gene Ontology term.
+         * @returns {React.JSX} - A JSX element representing the individual  Gene Ontology term and its associated citations.
+         */
+        (component) => {
+          return (
+            <tr
+              className={"trShadow"}
+              style={trStyle}
+              key={`ccT_${component._id}`}
+            >
+              <td>
                 <div>
-                {component.name}
+                  <div>{component.name}</div>
+                  <div>
+                    <ParagraphCitations
+                      citations={component.citations}
+                      allCitations={allCitations}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <ParagraphCitations citations={component.citations} allCitations={allCitations} />
-                </div>
-              </div>
-            </td>
-
-          </tr>
-        );
-      })}
+              </td>
+            </tr>
+          );
+        }
+      )}
     </tbody>
   );
 }
-

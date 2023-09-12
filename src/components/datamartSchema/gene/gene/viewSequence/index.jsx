@@ -52,7 +52,7 @@ RegulonDB Team
 Visual
 
 ## Dependencies
-React
+React:Imports the main React library, which is used to create components and manage state.
 Modal: The Modal component of Material-UI is used to create modal pop-up windows in web applications.
 Box: The Box component is a versatile container that is used to wrap other elements and apply styles or layout to those elements. 
 FormGroup: It is used to group related form elements, such as checkboxes and radio buttons.
