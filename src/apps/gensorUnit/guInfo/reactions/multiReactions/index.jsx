@@ -16,23 +16,16 @@ const LAYOUTS = {
 };
 
 export default function MultiReactions({ reactions, nodes }) {
+  const layoutDefault = LAYOUTS.dagre
   const cyStylesheet = sbgnStylesheet(cytoscape);
-  const [layout, setLayout] = useState(LAYOUTS.dagre);
+  
   const [_cy, select_cy] = useState();
 
   const elements = useMemo(() => {
     return generateElements(nodes, reactions);
   }, [nodes, reactions]);
 
-  const handleLayout = (value) => {
-    setLayout(value);
-    _cy
-      .layout({
-        name: value,
-        // Otras opciones de configuración del layout
-      })
-      .run();
-  };
+  
 
   const cyEffects = (cy) => {
     select_cy(cy);
@@ -74,7 +67,7 @@ export default function MultiReactions({ reactions, nodes }) {
       width: "160px",
     });
     cy.layout({
-      name: layout,
+      name: layoutDefault,
     }).run();
   };
 
@@ -82,12 +75,12 @@ export default function MultiReactions({ reactions, nodes }) {
     <div className="guMap">
       <Search elements={elements} reactions={reactions} components={nodes} cy={_cy} />
       <div>
-        <Options LAYOUT={LAYOUTS} layout={layout} handleLayout={handleLayout} />
+        <Options LAYOUT={LAYOUTS} cy={_cy} />
         <div>
           <CytoscapeComponent
             elements={elements}
             style={{ width: "100%", height: "400px" }}
-            zoomingEnabled={true}
+            zoomingEnabled={false}
             maxZoom={2}
             minZoom={0.1}
             autounselectify={false}

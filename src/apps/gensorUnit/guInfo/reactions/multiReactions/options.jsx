@@ -5,12 +5,25 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { useState } from "react";
 
 export default function Options({
-  handleLayout = () => {},
-  layout,
-  LAYOUT = {},
+  cy,
+  LAYOUTS = {},
 }) {
+
+  const [layout, setLayout] = useState(LAYOUTS.dagre);
+
+  const handleLayout = (value) => {
+    setLayout(value);
+    cy
+      .layout({
+        name: value,
+        // Otras opciones de configuración del layout
+      })
+      .run();
+  };
+
   return (
     <div style={{ display: "flex", flexDirection: "row-reverse" }}>
       <Tooltip title="select diagram layout" placement="top">
@@ -24,13 +37,13 @@ export default function Options({
               handleLayout(e.target.value);
             }}
           >
-            {Object.keys(LAYOUT).map((lay, index) => {
+            {Object.keys(LAYOUTS).map((lay, index) => {
               return (
                 <MenuItem
                   key={"layoutSet_" + lay + "_" + index}
-                  value={LAYOUT[lay]}
+                  value={LAYOUTS[lay]}
                 >
-                  {LAYOUT[lay]}
+                  {LAYOUTS[lay]}
                 </MenuItem>
               );
             })}
