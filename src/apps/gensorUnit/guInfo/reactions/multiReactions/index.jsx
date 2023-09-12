@@ -5,12 +5,16 @@ import styles from "../GensorUnitMap.module.css";
 import { useMemo, useState } from "react";
 import { generateElements } from "./generateElements";
 import Options from "./options";
+import cola from 'cytoscape-cola';
+
+cytoscape.use( cola );
 
 const LAYOUTS = {
   dagre: "dagre",
   breadthfirst: "breadthfirst",
   grid: "grid",
   concentric: "concentric",
+  cola: "cola"
 };
 
 export default function MultiReactions({ reactions, nodes, name }) {
@@ -75,13 +79,14 @@ export default function MultiReactions({ reactions, nodes, name }) {
         reactions={reactions}
         components={nodes}
         cy={_cy}
+        LAYOUTS={LAYOUTS}
       />
       <div>
         <CytoscapeComponent
           elements={elements}
           style={{ width: "100%", height: "400px" }}
           zoomingEnabled={true}
-          userZoomingEnabled={false}
+          userZoomingEnabled={true}
           zoom={1}
           maxZoom={2}
           minZoom={0.1}

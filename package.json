@@ -20,6 +20,7 @@
     "@testing-library/user-event": "^13.5.0",
     "chart.js": "^4.2.1",
     "cytoscape": "^3.25.0",
+    "cytoscape-cola": "^2.5.1",
     "cytoscape-dagre": "^2.4.0",
     "cytoscape-fcose": "^2.2.0",
     "cytoscape-popper": "^2.0.0",
