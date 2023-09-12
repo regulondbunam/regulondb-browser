@@ -4,21 +4,8 @@
   align-items: center;
 }
 
-.searchGuElements {
-  background-color: #f4f5f5c4;
-  position: absolute;
-  width: 250px;
-  height: 400px;
-  z-index: 10;
-  overflow: auto;
-  margin-top: 30px;
+.GuOptions{
+  display: flex;
+  justify-content: space-between;
 }
 
-.searchGuElement{
-    position: sticky;
-    top: 0;
-    z-index: 3;
-    background-color: white;
-    display: flex;
-    align-items: center;
-}

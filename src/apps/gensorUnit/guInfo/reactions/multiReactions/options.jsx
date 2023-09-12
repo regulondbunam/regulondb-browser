@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Tooltip from "@mui/material/Tooltip";
@@ -14,9 +15,24 @@ import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import ImageIcon from "@mui/icons-material/Image";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import ZoomOutIcon from "@mui/icons-material/ZoomOut";
-import React, { useState } from "react";
+import Search from "./search"
 
-export default function Options({ cy, LAYOUTS = {}, name }) {
+
+export default function Options(props) {
+  
+
+  return (
+    <div className="GuOptions" >
+      <div>
+       GU map
+      </div>
+      <Search {...props} />
+      <MapControls {...props} />
+    </div>
+  );
+}
+
+function MapControls({ cy, LAYOUTS = {}, name}){
   const [layout, setLayout] = useState(LAYOUTS.dagre);
 
   const handleLayout = (value) => {
@@ -39,15 +55,9 @@ export default function Options({ cy, LAYOUTS = {}, name }) {
     cy.reset()
     cy.zoom(0.5);
   }
-
   return (
-    <div style={{ display: "flex" }}>
-      <div style={{ width: "250px", paddingLeft: "10px" }}>
-        <p>
-          <b>GensorUnit Map</b>
-        </p>
-      </div>
-      <Tooltip title="select diagram layout" placement="top">
+    <div>
+    <Tooltip title="select diagram layout" placement="top">
         <FormControl size="small" variant="standard">
           <Select
             labelId="demo-select-small-label"
@@ -91,7 +101,7 @@ export default function Options({ cy, LAYOUTS = {}, name }) {
         <DownloadOptions cy={cy} name={name} />
       </ButtonGroup>
     </div>
-  );
+  )
 }
 
 function DownloadOptions({ cy, variant = "contained", name = "GUmap" }) {

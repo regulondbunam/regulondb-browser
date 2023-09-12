@@ -1,18 +1,21 @@
-import React, { useMemo } from 'react'
-import { AnchorNav, DataVerifier } from "../../../components/ui-components";
-import Reactions, {MapReactions} from './reactions';
-import GeneOntology from './geneOntology';
+import {  DataVerifier } from "../../../components/ui-components";
+import {MapReactions} from './reactions';
+//import GeneOntology from './geneOntology';
 
 export default function GuInfo({
   gensorUnit,
   reactions,
   nReactions
 }) {
-  let header =  <></>
   if(DataVerifier.isValidArray(reactions)){
-    header =  <MapReactions reactions={reactions} nodes={gensorUnit.components} name={gensorUnit.name} />
+    return <MapReactions reactions={reactions} nodes={gensorUnit.components} name={gensorUnit.name} />
   }
-  const sections = useMemo(()=>{
+  return <div>error... no reactions</div>
+}
+
+
+/* 
+const sections = useMemo(()=>{
     let _sections = []
     const {
       biologicalProcess,
@@ -46,9 +49,4 @@ export default function GuInfo({
     }
     return _sections
   },[reactions, nReactions, gensorUnit])
-
-  return <AnchorNav
-  sections={sections} header={header}
-  title={`Gensor Unit ${gensorUnit.name}`}
-/>
-}
+*/

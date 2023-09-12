@@ -5,7 +5,6 @@ import styles from "../GensorUnitMap.module.css";
 import { useMemo, useState } from "react";
 import { generateElements } from "./generateElements";
 import Options from "./options";
-import Search from "./search";
 
 const LAYOUTS = {
   dagre: "dagre",
@@ -63,7 +62,7 @@ export default function MultiReactions({ reactions, nodes, name }) {
       "shape-polygon-points": "-0.7, -0.6,   1, -0.6,   0.7, 0.5,   -1, 0.5",
       width: "160px",
     });
-    
+
     cy.layout({
       name: layoutDefault,
     }).run();
@@ -71,29 +70,26 @@ export default function MultiReactions({ reactions, nodes, name }) {
 
   return (
     <div className="guMap">
-      <Search
+      <Options
         elements={elements}
         reactions={reactions}
         components={nodes}
         cy={_cy}
       />
       <div>
-        <Options LAYOUTS={LAYOUTS} cy={_cy} name={name} />
-        <div>
-          <CytoscapeComponent
-            elements={elements}
-            style={{ width: "100%", height: "400px" }}
-            zoomingEnabled={true}
-            userZoomingEnabled={false}
-            zoom={1}
-            maxZoom={2}
-            minZoom={0.1}
-            autounselectify={false}
-            boxSelectionEnabled={true}
-            stylesheet={styles}
-            cy={cyEffects}
-          />
-        </div>
+        <CytoscapeComponent
+          elements={elements}
+          style={{ width: "100%", height: "400px" }}
+          zoomingEnabled={true}
+          userZoomingEnabled={false}
+          zoom={1}
+          maxZoom={2}
+          minZoom={0.1}
+          autounselectify={false}
+          boxSelectionEnabled={true}
+          stylesheet={styles}
+          cy={cyEffects}
+        />
       </div>
     </div>
   );
