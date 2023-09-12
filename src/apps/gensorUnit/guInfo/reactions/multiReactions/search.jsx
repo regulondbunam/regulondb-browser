@@ -23,7 +23,7 @@ function InputSearch({ elements, cy }) {
     let x = elemento.position("x") + 80;
     let y = elemento.position("y") + 90;
     //map.fit(elemento);
-
+    cy.zoom(1.5);
     cy.center(elemento);
     elemento.animate({
       position: { x, y },
@@ -102,6 +102,7 @@ export default function Search({ reactions, elements, components, cy }) {
       elemento = cy.nodes().filter(function (ele) {
         return ele.data("associatedReaction").includes(key);
       });
+      cy.zoom(1.5);
       cy.center(elemento);
 
       elemento.select();
@@ -110,7 +111,7 @@ export default function Search({ reactions, elements, components, cy }) {
       let x = elemento.position("x") + 80;
       let y = elemento.position("y") + 90;
       //map.fit(elemento);
-
+      cy.zoom(1.5);
       cy.center(elemento);
       elemento.animate({
         position: { x, y },

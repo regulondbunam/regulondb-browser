@@ -6,7 +6,6 @@ import { useState } from "react";
 import { generateElements } from "./generateElements";
 import Options from "./options";
 
-
 const LAYOUTS = {
   cose: "cose",
   dagre: "dagre",
@@ -16,28 +15,11 @@ const LAYOUTS = {
 
 export default function SingleReaction({ reaction, nodes }) {
   const cyStylesheet = sbgnStylesheet(cytoscape);
-  const [layout,setLayout] = useState(LAYOUTS.dagre)
+  const layout = LAYOUTS.dagre
   const [_cy, select_cy] = useState();
 
   const elements = generateElements(nodes, [reaction]);
 
-  const handleLayout = (value)=>{
-    setLayout(value)
-    _cy.layout({
-        name: value,
-        // Otras opciones de configuración del layout
-      }).run();
-  }
-/*
-  useEffect(()=>{
-    if (_cy) {
-      _cy.layout({
-        name: layout,
-      }).run()
-    }
-  },[layout,_cy])
-
-*/
   const cyEffects = (cy) => {
     select_cy(cy);
     cy.fit();
@@ -79,25 +61,27 @@ export default function SingleReaction({ reaction, nodes }) {
     });
     cy.layout({
       name: layout,
-    }).run()
+    }).run();
   };
 
   return (
     <div>
+      <Options LAYOUTS={LAYOUTS} cy={_cy} name={reaction.name} />
       <div>
         <CytoscapeComponent
           elements={elements}
           style={{ width: "100%", height: "400px" }}
           zoomingEnabled={true}
+          userZoomingEnabled={false}
+          zoom={1}
           maxZoom={2}
-          minZoom={0.5}
+          minZoom={0.1}
           autounselectify={false}
           boxSelectionEnabled={true}
           stylesheet={styles}
           cy={cyEffects}
         />
       </div>
-      <Options LAYOUT={LAYOUTS} layout={layout} handleLayout={handleLayout} />
     </div>
   );
 }

@@ -33,14 +33,14 @@ export default function Reactions({ reactions, nodes }) {
   return (
     <div>
       <div>
+        <SingleReaction reaction={reactions[indxReaction]} nodes={nodes} />
+      </div>
+      <div>
         <Controls
           reactions={reactions}
           page={indxReaction + 1}
           onChange={handleChange}
         />
-      </div>
-      <div>
-        <SingleReaction reaction={reactions[indxReaction]} nodes={nodes} />
       </div>
       <div>
         <Data {...reactions[indxReaction]} />

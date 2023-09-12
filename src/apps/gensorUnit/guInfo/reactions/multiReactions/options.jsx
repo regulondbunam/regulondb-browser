@@ -7,6 +7,7 @@ import Select from "@mui/material/Select";
 //import FullscreenIcon from "@mui/icons-material/Fullscreen";
 //import ZoomInMapIcon from "@mui/icons-material/ZoomInMap";
 //import ZoomOutMapIcon from "@mui/icons-material/ZoomOutMap";
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import DataObjectIcon from "@mui/icons-material/DataObject";
 import Menu from "@mui/material/Menu";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
@@ -33,6 +34,11 @@ export default function Options({ cy, LAYOUTS = {}, name }) {
   const handleZoomOut = () => {
     cy.zoom(cy.zoom() - 0.1);
   };
+
+  const handleReset =()=>{
+    cy.reset()
+    cy.zoom(0.5);
+  }
 
   return (
     <div style={{ display: "flex" }}>
@@ -75,6 +81,11 @@ export default function Options({ cy, LAYOUTS = {}, name }) {
         <Tooltip title="Zoom Out" placement="top">
           <Button onClick={handleZoomOut}>
             <ZoomOutIcon />
+          </Button>
+        </Tooltip>
+        <Tooltip title="Reset Map" placement="top">
+          <Button onClick={handleReset}>
+            <RestartAltIcon />
           </Button>
         </Tooltip>
         <DownloadOptions cy={cy} name={name} />
