@@ -11,6 +11,7 @@
   height: 400px;
   z-index: 10;
   overflow: auto;
+  margin-top: 30px;
 }
 
 .searchGuElement{

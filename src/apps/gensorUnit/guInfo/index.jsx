@@ -10,7 +10,7 @@ export default function GuInfo({
 }) {
   let header =  <></>
   if(DataVerifier.isValidArray(reactions)){
-    header =  <MapReactions reactions={reactions} nodes={gensorUnit.components} />
+    header =  <MapReactions reactions={reactions} nodes={gensorUnit.components} name={gensorUnit.name} />
   }
   const sections = useMemo(()=>{
     let _sections = []

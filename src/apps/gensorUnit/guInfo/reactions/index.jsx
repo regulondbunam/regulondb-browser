@@ -1,33 +1,27 @@
-import { useState } from "react";
+import { useState, Suspense, lazy } from "react";
+import CircularProgress from "@mui/material/CircularProgress";
 import SingleReaction from "./singleReaction";
 import Controls from "./controls";
 import "./reaction.css";
 import Data from "./data";
-import MultiReactions from "./multiReactions";
+const MultiReactions = lazy(() => import("./multiReactions"));
 
+export function MapReactions({ reactions, nodes, name }) {
+  return (
+    <Suspense fallback={<Loading />}>
+      <MultiReactions reactions={reactions} nodes={nodes} name={name} />
+    </Suspense>
+  );
+}
 
-const LAYERS = [
-  "transcription",
-  "translation",
-  "state transition",
-  "transport",
-];
-/*
-function SelectReactions(levelLayer, reactions) {
-  let _reactions = [];
-  console.log(reactions);
-  reactions.forEach((reaction) => {
-    [...Array(levelLayer)].forEach((n, i) => {
-      if (reaction.type === LAYERS[i]) {
-        _reactions.push(reaction);
-      }
-    });
-  });
-  return _reactions;
-}*/
-
-export function MapReactions({ reactions, nodes }) {
-  return <MultiReactions reactions={reactions} nodes={nodes} />;
+function Loading() {
+  return (
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <div>
+        <CircularProgress />
+      </div>
+    </div>
+  );
 }
 
 export default function Reactions({ reactions, nodes }) {
@@ -54,3 +48,25 @@ export default function Reactions({ reactions, nodes }) {
     </div>
   );
 }
+
+/*
+
+const LAYERS = [
+  "transcription",
+  "translation",
+  "state transition",
+  "transport",
+];
+
+function SelectReactions(levelLayer, reactions) {
+  let _reactions = [];
+  console.log(reactions);
+  reactions.forEach((reaction) => {
+    [...Array(levelLayer)].forEach((n, i) => {
+      if (reaction.type === LAYERS[i]) {
+        _reactions.push(reaction);
+      }
+    });
+  });
+  return _reactions;
+}*/

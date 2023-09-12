@@ -128,7 +128,7 @@ export default function Search({ reactions, elements, components, cy }) {
 
   if(!menu){
     return(
-      <div style={{position: "absolute"}} >
+      <div style={{position: "absolute", marginTop: "30px", zIndex: 30}} >
           <Tooltip title={"Hide Menu"}>
             <IconButton
               onClick={handleMenu}
