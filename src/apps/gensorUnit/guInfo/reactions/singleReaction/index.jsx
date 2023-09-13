@@ -14,12 +14,12 @@ const LAYOUTS = {
   circle: "circle",
 };
 
-export default function SingleReaction({ reaction, nodes }) {
+export default function SingleReaction({ reaction, reactions = [], nodes }) {
   const cyStylesheet = sbgnStylesheet(cytoscape);
   const layout = LAYOUTS.dagre;
   const [_cy, select_cy] = useState();
 
-  const elements = generateElements(nodes, [reaction]);
+  const elements = generateElements(nodes, [reaction, ...reactions]);
 
   const cyEffects = (cy) => {
     select_cy(cy);
@@ -67,7 +67,7 @@ export default function SingleReaction({ reaction, nodes }) {
 
   return (
     <div>
-      <Accordion title={"Graphic"} expand={false} backgroundColor="#d5d5d7">
+      <Accordion title={"Graphic"} expand={reactions.length>0} backgroundColor="#d5d5d7">
         <div>
           <CytoscapeComponent
             elements={elements}
@@ -84,13 +84,14 @@ export default function SingleReaction({ reaction, nodes }) {
           />
         </div>
       </Accordion>
-      <Accordion
+      {reaction && (
+        <Accordion
         title={"Reaction Data"}
-        expand={false}
         backgroundColor="#d5d5d7"
       >
         <Data {...reaction} />
       </Accordion>
+      )}
     </div>
   );
 }

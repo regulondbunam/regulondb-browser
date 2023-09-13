@@ -1,18 +1,19 @@
 import FloatingWindow from "./FloatingWindow";
 import React, { useState } from "react";
 import SingleReaction from "../../singleReaction";
+import { DataVerifier } from "../../../../../../components/ui-components";
 
-export default function Windows({ nodes, reactions, nodeData, closeWindow = () => {} }) {
-  console.log(nodeData);
-  const [showComponents, setShowComponents] = useState(false);
-  const [showSingleReaction, setShowSingleReaction] = useState(false);
+export default function Windows({
+  nodes,
+  reactions,
+  nodeData,
+  closeWindow = () => {},
+}) {
   const positions = { x: nodeData.x, y: nodeData.y };
-  const associatedReaction = nodeData.associatedReaction
-  console.log(reactions);
 
   return (
     <>
-    <FloatingWindow
+      <FloatingWindow
         positions={{ x: positions.x, y: positions.y - 200 }}
         title={nodeData.label}
         size={{ width: "400px", height: "300px" }}
@@ -20,9 +21,13 @@ export default function Windows({ nodes, reactions, nodeData, closeWindow = () =
       >
         <div>
           {nodeData.class === "process" ? (
-            <ReactionData reactions={reactions} reactionID={nodeData.id} nodes={nodes} />
-          ):(
-            <NodeData />
+            <ReactionData
+              reactions={reactions}
+              reactionID={nodeData.id}
+              nodes={nodes}
+            />
+          ) : (
+            <NodeData reactions={reactions} nodeData={nodeData} nodes={nodes} />
           )}
         </div>
       </FloatingWindow>
@@ -30,22 +35,30 @@ export default function Windows({ nodes, reactions, nodeData, closeWindow = () =
   );
 }
 
-function NodeData(nodeData) {
-  return (<div>
-    element
-  </div>)
+function NodeData({ nodeData, nodes, reactions }) {
+  let selReactions = [];
+  if (DataVerifier.isValidArray(nodeData.associatedReaction)) {
+    reactions.forEach((ar) => {
+      if (nodeData.associatedReaction.find((re) => "R" + ar.number === re)) {
+        selReactions.push(ar);
+      }
+    });
+  }
+  return (
+    <div>
+      <SingleReaction reactions={selReactions} nodes={nodes} />
+    </div>
+  );
 }
 
-function ReactionData({reactions, reactionID, nodes}){
-  const reaction = reactions.find(
-    (re) => "R" + re.number === reactionID
-  );
+function ReactionData({ reactions, reactionID, nodes }) {
+  const reaction = reactions.find((re) => "R" + re.number === reactionID);
   console.log(reaction);
-  return(
+  return (
     <div>
       <SingleReaction reaction={reaction} nodes={nodes} />
     </div>
-  )
+  );
 }
 
 /*
