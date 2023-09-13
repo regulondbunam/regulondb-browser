@@ -96,26 +96,17 @@ export default function MultiReactions({ reactions, nodes, name }) {
     });
     //Evento on click para visualizar las ventanita
     cy.on("click", "node", function (event) {
-      var node = event.target;
-      if (node.data().class === "process") {
-        let componentes = cy.nodes().filter(function (ele) {
-          return ele.data("associatedReaction").includes(node.id());
-        });
-
-        let nodeSelected = reactions.filter(
-          (reaction) => "R" + reaction.number === node.id()
-        );
-        const position = node.renderedPosition();
+      const node = event.target;
+      const position = node.renderedPosition();
         const windowDisplay = document.getElementById("window_GU");
         if (windowDisplay) {
-          let detail = {node: { ...nodeSelected[0], ...position }};
+          let detail = { node: { ...node.data(), ...position } };
           const windowDisplay_REACTION = new CustomEvent(EVENT_WINDOW, {
             bubbles: true,
             detail: detail,
           });
           windowDisplay.dispatchEvent(windowDisplay_REACTION);
         }
-      }
     });
     let layout = cy.layout(LAYOUTS.elk);
     layout.pon("layoutstop").then(function (event) {
@@ -128,7 +119,7 @@ export default function MultiReactions({ reactions, nodes, name }) {
 
   return (
     <div className="guMap" id="guMap">
-      <WindowManager />
+      <WindowManager reactions={reactions} nodes={nodes} />
       <Options
         elements={elements}
         reactions={reactions}
@@ -155,8 +146,8 @@ export default function MultiReactions({ reactions, nodes, name }) {
   );
 }
 
-function WindowManager() {
-  const [selectedNode, setSelectedNode] = useState(null);
+function WindowManager(props) {
+  const [nodeData, setNodeData] = useState();
 
   useEffect(() => {
     const windowDisplay = document.getElementById("window_GU");
@@ -166,7 +157,7 @@ function WindowManager() {
         function (e) {
           //console.log(`state`, e.detail)
           if (e.detail.node) {
-            setSelectedNode(e.detail.node);
+            setNodeData(e.detail.node);
           }
         },
         false
@@ -176,10 +167,11 @@ function WindowManager() {
 
   return (
     <div id="window_GU">
-      {selectedNode && (
+      {nodeData && (
         <Windows
-          infoNode={{ selectedNode }}
-          setSelectedNode={() => setSelectedNode(false)}
+          {...props}
+          nodeData={nodeData}
+          closeWindow={() => setNodeData(undefined)}
         />
       )}
     </div>

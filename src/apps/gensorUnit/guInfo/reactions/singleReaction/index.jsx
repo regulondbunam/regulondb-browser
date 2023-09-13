@@ -4,7 +4,8 @@ import CytoscapeComponent from "react-cytoscapejs";
 import styles from "../GensorUnitMap.module.css";
 import { useState } from "react";
 import { generateElements } from "./generateElements";
-import Options from "./options";
+import Data from "../data";
+import { Accordion } from "../../../../../components/ui-components";
 
 const LAYOUTS = {
   cose: "cose",
@@ -15,7 +16,7 @@ const LAYOUTS = {
 
 export default function SingleReaction({ reaction, nodes }) {
   const cyStylesheet = sbgnStylesheet(cytoscape);
-  const layout = LAYOUTS.dagre
+  const layout = LAYOUTS.dagre;
   const [_cy, select_cy] = useState();
 
   const elements = generateElements(nodes, [reaction]);
@@ -66,22 +67,30 @@ export default function SingleReaction({ reaction, nodes }) {
 
   return (
     <div>
-      <Options LAYOUTS={LAYOUTS} cy={_cy} name={reaction.name} />
-      <div>
-        <CytoscapeComponent
-          elements={elements}
-          style={{ width: "100%", height: "400px" }}
-          zoomingEnabled={true}
-          userZoomingEnabled={false}
-          zoom={1}
-          maxZoom={2}
-          minZoom={0.1}
-          autounselectify={false}
-          boxSelectionEnabled={true}
-          stylesheet={styles}
-          cy={cyEffects}
-        />
-      </div>
+      <Accordion title={"Graphic"} expand={false} backgroundColor="#d5d5d7">
+        <div>
+          <CytoscapeComponent
+            elements={elements}
+            style={{ width: "400px", height: "200px" }}
+            zoomingEnabled={true}
+            userZoomingEnabled={true}
+            zoom={1}
+            maxZoom={2}
+            minZoom={0.1}
+            autounselectify={false}
+            boxSelectionEnabled={true}
+            stylesheet={styles}
+            cy={cyEffects}
+          />
+        </div>
+      </Accordion>
+      <Accordion
+        title={"Reaction Data"}
+        expand={false}
+        backgroundColor="#d5d5d7"
+      >
+        <Data {...reaction} />
+      </Accordion>
     </div>
   );
 }

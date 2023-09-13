@@ -1,21 +1,86 @@
 import FloatingWindow from "./FloatingWindow";
 import React, { useState } from "react";
+import SingleReaction from "../../singleReaction";
 
-export default function Windows({ infoNode, setSelectedNode = () => {} }) {
+export default function Windows({ nodes, reactions, nodeData, closeWindow = () => {} }) {
+  console.log(nodeData);
   const [showComponents, setShowComponents] = useState(false);
-  let positions = { x: infoNode.selectedNode.x, y: infoNode.selectedNode.y };
+  const [showSingleReaction, setShowSingleReaction] = useState(false);
+  const positions = { x: nodeData.x, y: nodeData.y };
+  const associatedReaction = nodeData.associatedReaction
+  console.log(reactions);
 
-  const styleTitulos = {
-    textAlign: "center",
-    border: "1px solid #999999",
-    backgroundColor: "#D5E2EA",
-  };
-  const styleColumnas = {
-    paddingLeft: "2%",
-    borderBottom: "1px solid #C4C4C4",
-  };
   return (
     <>
+    <FloatingWindow
+        positions={{ x: positions.x, y: positions.y - 200 }}
+        title={nodeData.label}
+        size={{ width: "400px", height: "300px" }}
+        closeWindow={closeWindow}
+      >
+        <div>
+          {nodeData.class === "process" ? (
+            <ReactionData reactions={reactions} reactionID={nodeData.id} nodes={nodes} />
+          ):(
+            <NodeData />
+          )}
+        </div>
+      </FloatingWindow>
+    </>
+  );
+}
+
+function NodeData(nodeData) {
+  return (<div>
+    element
+  </div>)
+}
+
+function ReactionData({reactions, reactionID, nodes}){
+  const reaction = reactions.find(
+    (re) => "R" + re.number === reactionID
+  );
+  console.log(reaction);
+  return(
+    <div>
+      <SingleReaction reaction={reaction} nodes={nodes} />
+    </div>
+  )
+}
+
+/*
+<div style={{ margin: "5% 5% 5% 5% " }}>
+          {nodeData.name && (
+            <p style={{ fontSize: "17px", marginBottom: "8px" }}>
+              <strong>Name:</strong> {nodeData.name}
+            </p>
+          )}
+          {nodeData.description && (
+            <p style={{ fontSize: "17px", marginBottom: "8px" }}>
+              <strong>Description:</strong> {nodeData.description}
+            </p>
+          )}
+          {nodeData.type && (
+            <p style={{ fontSize: "17px", marginBottom: "8px" }}>
+              <strong>Type:</strong> {nodeData.type}
+            </p>
+          )}
+          <p
+            style={{
+              textDecoration: "underline",
+              color: "#72A7C7",
+              cursor: "pointer",
+            }}
+            onClick={(e) => {
+              setShowComponents(true);
+            }}
+          >
+            Components
+          </p>
+        </div>
+
+
+<>
       {showComponents && (
         <FloatingWindow
           positions={{ x: positions.x - 300, y: positions.y + 70 }}
@@ -35,7 +100,7 @@ export default function Windows({ infoNode, setSelectedNode = () => {} }) {
                 </tr>
               </thead>
               <tbody>
-                {infoNode.selectedNode.components.map((component) => {
+                {nodeData.components.map((component) => {
                   return (
                     <tr>
                       <td style={styleColumnas}>{component.function}</td>
@@ -50,46 +115,6 @@ export default function Windows({ infoNode, setSelectedNode = () => {} }) {
         </FloatingWindow>
       )}
 
-      <FloatingWindow
-        positions={{ x: positions.x, y: positions.y - 200 }}
-        header={{
-          title: "Reaction R" + infoNode.selectedNode.number,
-          color: "#D5E2EA",
-          border: "1px solid darkgray",
-        }}
-        size={{ width: "400px", height: "200px" }}
-        setSelectedNode={setSelectedNode}
-      >
-        <div style={{ margin: "5% 5% 5% 5% " }}>
-          {infoNode.selectedNode.name && (
-            <p style={{ fontSize: "17px", marginBottom: "8px" }}>
-              <strong>Name:</strong> {infoNode.selectedNode.name}
-            </p>
-          )}
-          {infoNode.selectedNode.description && (
-            <p style={{ fontSize: "17px", marginBottom: "8px" }}>
-              <strong>Description:</strong> {infoNode.selectedNode.description}
-            </p>
-          )}
-          {infoNode.selectedNode.type && (
-            <p style={{ fontSize: "17px", marginBottom: "8px" }}>
-              <strong>Type:</strong> {infoNode.selectedNode.type}
-            </p>
-          )}
-          <p
-            style={{
-              textDecoration: "underline",
-              color: "#72A7C7",
-              cursor: "pointer",
-            }}
-            onClick={(e) => {
-              setShowComponents(true);
-            }}
-          >
-            Components
-          </p>
-        </div>
-      </FloatingWindow>
+      
     </>
-  );
-}
+*/
