@@ -7,11 +7,12 @@ import { generateElements } from "./generateElements";
 import Options from "./options";
 import cola from "cytoscape-cola";
 import elk from "cytoscape-elk";
+import Windows from "./windows";
 import { useEffect } from "react";
 
 cytoscape.use(cola);
 cytoscape.use(elk);
-
+const EVENT_WINDOW = "initWindow";
 const LAYOUTS = {
   dagre: {
     name: "dagre",
@@ -93,19 +94,41 @@ export default function MultiReactions({ reactions, nodes, name }) {
       "shape-polygon-points": "-0.7, -0.6,   1, -0.6,   0.7, 0.5,   -1, 0.5",
       width: "160px",
     });
-    let layout = cy.layout(LAYOUTS.elk);
+    //Evento on click para visualizar las ventanita
+    cy.on("click", "node", function (event) {
+      var node = event.target;
+      if (node.data().class === "process") {
+        let componentes = cy.nodes().filter(function (ele) {
+          return ele.data("associatedReaction").includes(node.id());
+        });
 
+        let nodeSelected = reactions.filter(
+          (reaction) => "R" + reaction.number === node.id()
+        );
+        const position = node.renderedPosition();
+        const windowDisplay = document.getElementById("window_GU");
+        if (windowDisplay) {
+          let detail = {node: { ...nodeSelected[0], ...position }};
+          const windowDisplay_REACTION = new CustomEvent(EVENT_WINDOW, {
+            bubbles: true,
+            detail: detail,
+          });
+          windowDisplay.dispatchEvent(windowDisplay_REACTION);
+        }
+      }
+    });
+    let layout = cy.layout(LAYOUTS.elk);
     layout.pon("layoutstop").then(function (event) {
       let element = cy.nodes('node[type = "transcription_factor"]')[0];
       cy.zoom(1);
       cy.center(cy.getElementById(element.id()));
     });
-
     layout.run();
   };
 
   return (
     <div className="guMap" id="guMap">
+      <WindowManager />
       <Options
         elements={elements}
         reactions={reactions}
@@ -128,6 +151,37 @@ export default function MultiReactions({ reactions, nodes, name }) {
           cy={cyEffects}
         />
       </div>
+    </div>
+  );
+}
+
+function WindowManager() {
+  const [selectedNode, setSelectedNode] = useState(null);
+
+  useEffect(() => {
+    const windowDisplay = document.getElementById("window_GU");
+    if (windowDisplay) {
+      windowDisplay.addEventListener(
+        EVENT_WINDOW,
+        function (e) {
+          //console.log(`state`, e.detail)
+          if (e.detail.node) {
+            setSelectedNode(e.detail.node);
+          }
+        },
+        false
+      );
+    }
+  }, []);
+
+  return (
+    <div id="window_GU">
+      {selectedNode && (
+        <Windows
+          infoNode={{ selectedNode }}
+          setSelectedNode={() => setSelectedNode(false)}
+        />
+      )}
     </div>
   );
 }
