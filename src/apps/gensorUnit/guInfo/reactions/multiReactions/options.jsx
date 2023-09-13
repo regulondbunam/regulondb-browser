@@ -15,6 +15,8 @@ import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import ImageIcon from "@mui/icons-material/Image";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import ZoomOutIcon from "@mui/icons-material/ZoomOut";
+import FullscreenIcon from '@mui/icons-material/Fullscreen';
+import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import Search from "./search"
 
 
@@ -34,13 +36,12 @@ export default function Options(props) {
 
 function MapControls({ cy, LAYOUTS = {}, name}){
   const [layout, setLayout] = useState(LAYOUTS.dagre);
+  const [isFullScreen, setFullScreen] = useState(false);
+
 
   const handleLayout = (value) => {
     setLayout(value);
-    cy.layout({
-      name: value,
-      // Otras opciones de configuración del layout
-    }).run();
+    cy.layout(value).run();
   };
 
   const handleZoomIn = () => {
@@ -55,6 +56,19 @@ function MapControls({ cy, LAYOUTS = {}, name}){
     cy.reset()
     cy.zoom(0.5);
   }
+
+  const handleFullScreen = () =>{
+    if (!isFullScreen) {
+      const map = document.getElementById("guMap")
+      if(map){
+        map.scrollIntoView();
+      }
+    }else{
+      window.scrollTo({top: 0})
+    }
+    setFullScreen(!isFullScreen)
+  }
+
   return (
     <div>
     <Tooltip title="select diagram layout" placement="top">
@@ -75,7 +89,7 @@ function MapControls({ cy, LAYOUTS = {}, name}){
                   key={"layoutSet_" + lay + "_" + index}
                   value={LAYOUTS[lay]}
                 >
-                  {LAYOUTS[lay]}
+                  {LAYOUTS[lay].name}
                 </MenuItem>
               );
             })}
@@ -96,6 +110,11 @@ function MapControls({ cy, LAYOUTS = {}, name}){
         <Tooltip title="Reset Map" placement="top">
           <Button onClick={handleReset}>
             <RestartAltIcon />
+          </Button>
+        </Tooltip>
+        <Tooltip title={isFullScreen ? "Exit fullscreen" : "Full screen"} placement="top">
+          <Button onClick={handleFullScreen}>
+            {isFullScreen ? <FullscreenExitIcon />: <FullscreenIcon />}
           </Button>
         </Tooltip>
         <DownloadOptions cy={cy} name={name} />

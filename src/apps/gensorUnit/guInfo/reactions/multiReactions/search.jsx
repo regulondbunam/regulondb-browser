@@ -129,6 +129,7 @@ function GuElementsMenu({ cy, reactions, components }) {
       //map.fit(elemento);
       cy.zoom(1.5);
       cy.center(elemento);
+      //console.log("el",elemento);
       elemento.animate({
         position: { x, y },
         duration: 500,

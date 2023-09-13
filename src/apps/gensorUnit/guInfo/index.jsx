@@ -8,7 +8,11 @@ export default function GuInfo({
   nReactions
 }) {
   if(DataVerifier.isValidArray(reactions)){
-    return <MapReactions reactions={reactions} nodes={gensorUnit.components} name={gensorUnit.name} />
+    return (
+      <div id="guMap" style={{width: "100%", height: "100vh"}} >
+        <MapReactions reactions={reactions} nodes={gensorUnit.components} name={gensorUnit.name} />
+      </div>
+    )
   }
   return <div>error... no reactions</div>
 }
