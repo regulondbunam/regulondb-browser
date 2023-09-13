@@ -341,7 +341,7 @@ export default function GensorUnitMap({ data }) {
       "shape-polygon-points": "-0.7, -0.6,   1, -0.6,   0.7, 0.5,   -1, 0.5",
       width: "160px",
     });
-
+    //Evento on click para visualizar las ventanita
     cy.on("click", "node", function (event) {
       var node = event.target;
       if (node.data().class === "process") {
@@ -472,7 +472,6 @@ export default function GensorUnitMap({ data }) {
       <CytoscapeComponent
         elements={elements}
         style={{ width: "100%", height: "600px" }}
-        zoomingEnabled={true}
         maxZoom={3}
         minZoom={0.1}
         autounselectify={false}

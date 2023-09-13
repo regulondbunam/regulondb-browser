@@ -67,11 +67,14 @@ It allows us to access the GensorUnit configuration file
 	
 
 */
-
+//import MainTable from "./mainTable/index";
+//import Paragraph from "./Paragraph";
 import { Cover, DataVerifier } from "../../components/ui-components";
+//import MainQuery from "./mainQuery";
+import setting from "./conf.json";
 import { useParams } from "react-router-dom";
-import { useGetAllGus, useGetGuById } from "../../components/webservices";
-import GuInfo from "./guInfo";
+import GuInfo from "./guInfo/index";
+import { useGetAllGus } from "../../components/webservices";
 import Home from "./home";
 
 export default function GensorUnit() {
@@ -82,47 +85,10 @@ export default function GensorUnit() {
   let { guId } = useParams();
   if (guId) {
     return (
-      <GoInfo guId={guId}/>
+      <GuInfo guInfoDescription={setting.GuInfo_Description} guId={guId} />
     );
   }
   return <GoHome />;
-}
-
-function GoInfo({guId}){
-const {guData, loading, error} = useGetGuById(guId)
-console.log(guData);
-if(loading){
-  return (
-    <div>
-      <Cover state="loading" >
-        <h1>{`Loading .... Gensor Unit`}</h1>
-      </Cover>
-    </div>
-  )
-}
-if(error){
-  return <>error</>
-}
-if(guData?._id){
-  return (
-    <div>
-      <Cover >
-        <h1>{`Gensor Unit ${guData.gensorUnit.name}`}</h1>
-        {DataVerifier.isValidArray(guData.gensorUnit.groups) && (
-          <p><b>{`Functional Group${guData.gensorUnit.groups.length > 1 ? "s" : ""}: `}</b>
-          {guData.gensorUnit.groups.join(", ")}
-          </p>
-        )}
-        <br />
-      </Cover>
-      <GuInfo nReactions={guData.reactions.length} {...guData} />
-    </div>
-  )
-}
-return(
-  <div>info</div>
-)
-
 }
 
 function GoHome() {

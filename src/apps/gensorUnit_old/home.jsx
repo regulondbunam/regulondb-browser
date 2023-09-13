@@ -85,7 +85,7 @@ function formatDataByGensorUnit(gusData = []) {
       const gu = guData.gensorUnit;
       let groups = "";
       if (DataVerifier.isValidArray(gu.groups)) {
-        groups = gu.groups.join(" ; ");
+        groups = gu.groups.join(";");
       }
       data.push({
         id: gu._id,

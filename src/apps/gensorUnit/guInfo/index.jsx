@@ -1,44 +1,56 @@
-import { Cover } from "../../../components/ui-components";
-import TabsPanel from "./Tabs";
+import {  DataVerifier } from "../../../components/ui-components";
+import {MapReactions} from './reactions';
+//import GeneOntology from './geneOntology';
 
-import { QUERY_GETGUBY } from "./query";
-import { useQuery } from "@apollo/client";
-
-export default function GuInfo({ guInfoDescription, guId }) {
-  const variables = {
-    advancedSearch: guId + "[_id]",
-  };
-
-  const { loading, error, data } = useQuery(QUERY_GETGUBY, {
-    variables: variables,
-  });
-
-  if (loading) {
-    return <div>Loading</div>;
-  }
-
-  if (error) {
-    console.error("error al consultar getGuBy", error);
-    return <div>Error</div>;
-  }
-  if (data) {
-    let /** object */ informationGus = data.getGUsBy.data;
-    if (informationGus.length === 0) {
-      return <div>Id don't found</div>;
-    }
-    const { gensorUnit } = informationGus[0];
+export default function GuInfo({
+  gensorUnit,
+  reactions,
+  nReactions
+}) {
+  if(DataVerifier.isValidArray(reactions)){
     return (
-      <div>
-        <Cover>
-          <h1>{gensorUnit.name + "  -  " + guId}</h1>
-        </Cover>
-        <TabsPanel
-          guInfoDescription={guInfoDescription}
-          gensorUnit={gensorUnit}
-          data={data}
-        />
+      <div id="guMap" style={{width: "100%", height: "100vh"}} >
+        <MapReactions reactions={reactions} nodes={gensorUnit.components} name={gensorUnit.name} />
       </div>
-    );
+    )
   }
-  return <div>Algo salio mal</div>;
+  return <div>error... no reactions</div>
 }
+
+
+/* 
+const sections = useMemo(()=>{
+    let _sections = []
+    const {
+      biologicalProcess,
+      cellularComponent,
+      molecularFunction
+    } = gensorUnit.geneOntology
+    console.log(gensorUnit);
+    if(DataVerifier.isValidArray(reactions)){
+      _sections.push({
+        id: "gi_section1_reactions",
+        label: `Reactions (${nReactions})`,
+        title: `Reactions (${nReactions})`,
+        component: (
+          <div >
+            <Reactions reactions={reactions} nodes={gensorUnit.components} />
+          </div>
+        ),
+      });
+    }
+    if(DataVerifier.isValidArray(biologicalProcess) || DataVerifier.isValidArray(cellularComponent) || DataVerifier.isValidArray(molecularFunction)){
+      _sections.push({
+        id: "gi_section2_geneOntology",
+        label: `Gene Ontology`,
+        title: `Gene Ontology`,
+        component: (
+          <div >
+           <GeneOntology {...gensorUnit.geneOntology}/>
+          </div>
+        ),
+      });
+    }
+    return _sections
+  },[reactions, nReactions, gensorUnit])
+*/
