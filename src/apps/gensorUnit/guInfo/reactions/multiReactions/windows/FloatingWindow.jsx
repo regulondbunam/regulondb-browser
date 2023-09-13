@@ -61,6 +61,9 @@ export default function FloatingWindow({
             </div>
             {children}
           </div>
+          <div className="guWindow_header">
+            <br />
+          </div>
         </Paper>
       </Box>
     </Draggable>

@@ -14,6 +14,31 @@ import Paper from "@mui/material/Paper";
 //import FormatIndentDecreaseIcon from "@mui/icons-material/FormatIndentDecrease";
 //import { styled, lighten, darken } from '@mui/system';
 
+function findElement(idElement, cy) {
+  let element = cy.getElementById(idElement);
+  cy.center(element);
+  let x = element.position("x");
+  let y = element.position("y");
+  cy.zoom({
+    level: 1.5,
+    position: { x, y },
+  });
+  console.log(element);
+  let anis = [10,-10,10,-10,5].map((n,i)=>{
+    return element.animation({
+      position: { x: x+n, y: y },
+      duration: 200,
+    });
+  })
+  anis.forEach((ani,i)=>{
+    setTimeout(() => {
+      ani.play()
+    }, 50+(i*200));
+    
+  })
+  
+}
+
 function InputSearch({ elements, cy }) {
   const options = useMemo(() => {
     return elements.map((element) => {
@@ -23,26 +48,6 @@ function InputSearch({ elements, cy }) {
 
   //
 
-  const findElement = (inputValue) => {
-    let elemento = cy.$("#" + inputValue);
-    let x = elemento.position("x") + 80;
-    let y = elemento.position("y") + 90;
-    //map.fit(elemento);
-    cy.zoom(1.5);
-    cy.center(elemento);
-    elemento.animate({
-      position: { x, y },
-      duration: 500,
-    });
-    x -= 80;
-    y -= 90;
-    elemento.animate({
-      position: { x, y },
-      duration: 500,
-    });
-    elemento.select();
-  };
-
   return (
     <div id="autoCompleat">
       <Autocomplete
@@ -50,7 +55,7 @@ function InputSearch({ elements, cy }) {
         sx={{ width: 200 }}
         options={options}
         onChange={(e, inputValue) => {
-          if (inputValue) findElement(inputValue);
+          if (inputValue) findElement(inputValue, cy);
         }}
         renderInput={(params) => (
           <TextField {...params} label="search component" />
@@ -111,38 +116,6 @@ function GuElementsMenu({ cy, reactions, components }) {
     return filterInfoList(reactions, components);
   }, [reactions, components]);
 
-  const findComponent = (element) => {
-    let elemento;
-    if (element.includes(":")) {
-      element = element.split(":")[0];
-      elemento = cy.nodes().filter(function (ele) {
-        return ele.data("associatedReaction").includes(element);
-      });
-      cy.zoom(1.5);
-      cy.center(elemento);
-
-      elemento.select();
-    } else {
-      elemento = cy.$("#" + element);
-      let x = elemento.position("x") + 80;
-      let y = elemento.position("y") + 90;
-      //map.fit(elemento);
-      cy.zoom(1.5);
-      cy.center(elemento);
-      //console.log("el",elemento);
-      elemento.animate({
-        position: { x, y },
-        duration: 500,
-      });
-      x -= 80;
-      y -= 90;
-      elemento.animate({
-        position: { x, y },
-        duration: 500,
-      });
-      elemento.select();
-    }
-  };
   return (
     <div>
       <Tooltip
@@ -182,7 +155,8 @@ function GuElementsMenu({ cy, reactions, components }) {
                 key={"guMenu" + title + "_" + i}
                 title={title}
                 elements={options[title]}
-                findComponent={findComponent}
+                cy={cy}
+                onClose={handleClose}
               />
             );
           })}
@@ -192,7 +166,7 @@ function GuElementsMenu({ cy, reactions, components }) {
   );
 }
 
-function MenuElement({ title, elements, findComponent }) {
+function MenuElement({ title, elements, cy, onClose }) {
   const [showElements, setSowElements] = useState(false);
   return (
     <React.Fragment>
@@ -217,7 +191,15 @@ function MenuElement({ title, elements, findComponent }) {
             return (
               <MenuItem
                 onClick={() => {
-                  findComponent(element);
+                  let idElement = "";
+                  if (element.includes(":")) {
+                    idElement = element.split(":")[0];
+                    //console.log(element);
+                  } else {
+                    idElement = element;
+                  }
+                  findElement(idElement, cy);
+                  onClose();
                 }}
                 sx={{ backgroundColor: "#d5d5d7" }}
                 key={"guMenuElement" + element + "_" + i}
@@ -235,42 +217,36 @@ function MenuElement({ title, elements, findComponent }) {
 }
 
 /**
- <List
-          sx={{
-            "padding-top": 0,
-            "padding-bottom": 0,
-            "& .MuiListSubheader-root": {
-              height: "40px",
-              color: "white",
-              fontFamily: "Arial",
-              fontWeight: 700,
-              fontSize: " 18px",
-              textAlign: "center",
-            },
-          }}
-        >
-          <div style={{ backgroundColor: "#3D779B", height: "30px" }}>
-            <h1
-              style={{
-                color: "white",
-                fontFamily: "Arial",
-                fontWeight: 700,
-                fontSize: " 18px",
-                textAlign: "center",
-                paddingTop: "5px",
-              }}
-            >
-              GU Elements
-            </h1>
-          </div>
-          {subList.map((title) => {
-            return (
-              <DropDownList
-                title={title}
-                elements={options[title]}
-                onClick={findComponent}
-              />
-            );
-          })}
-        </List>
+ * const findComponent = (element) => {
+    let elemento;
+    if (element.includes(":")) {
+      element = element.split(":")[0];
+      elemento = cy.nodes().filter(function (ele) {
+        return ele.data("associatedReaction").includes(element);
+      });
+      cy.zoom(1.5);
+      cy.center(elemento);
+
+      elemento.select();
+    } else {
+      elemento = cy.$("#" + element);
+      let x = elemento.position("x") + 80;
+      let y = elemento.position("y") + 90;
+      //map.fit(elemento);
+      cy.zoom(1.5);
+      cy.center(elemento);
+      //console.log("el",elemento);
+      elemento.animate({
+        position: { x, y },
+        duration: 500,
+      });
+      x -= 80;
+      y -= 90;
+      elemento.animate({
+        position: { x, y },
+        duration: 500,
+      });
+      elemento.select();
+    }
+  };
  */
