@@ -36,16 +36,58 @@ const COLUMNS = [
         id: "component_name",
         header: "Name",
         accessorKey: "_compName",
+        cell: (info) => {
+            const names = info.row.original.compName
+            const id = info.row.original.id
+            if(DataVerifier.isValidArray(names)){
+                return (
+                    <>
+                    {names.map((name,i)=>{
+                        return <p key={"comName_"+id+"_"+i+"_"+name} >{name}</p>
+                    })}
+                    </>
+                  )
+            }
+            return info.getValue()
+        },
       },
       {
         id: "component_Function",
         header: "Function",
         accessorKey: "_compFunction",
+        cell: (info) => {
+            const funct = info.row.original.compFunction
+            const id = info.row.original.id
+            if(DataVerifier.isValidArray(funct)){
+                return (
+                    <>
+                    {funct.map((fun,i)=>{
+                        return <p key={"comFunction_"+id+"_"+i+"_"+fun} >{fun}</p>
+                    })}
+                    </>
+                  )
+            }
+            return info.getValue()
+        },
       },
       {
         id: "component_Type",
         header: "Type",
         accessorKey: "_compType",
+        cell: (info) => {
+            const types = info.row.original.compType
+            const id = info.row.original.id
+            if(DataVerifier.isValidArray(types)){
+                return (
+                    <>
+                    {types.map((type,i)=>{
+                        return <p key={"comType_"+id+"_"+i+"_"+type} >{type}</p>
+                    })}
+                    </>
+                  )
+            }
+            return info.getValue()
+        },
       },
     ],
   }
@@ -59,14 +101,21 @@ function formatData(reactions = []) {
       let _compName = "",
         _compFunction = "",
         _compType = "";
+        let compName = [],
+        compFunction = [],
+        compType = [];
         if (DataVerifier.isValidArray(components)) {
             components.forEach(component => {
                 _compName += " "+component.name
+                compName.push(component.name)
                 _compFunction += " "+component.function
+                compFunction.push(component.function)
                 _compType += " "+component.type
+                compType.push(component.type)
             });
         }
       _data.push({
+        id: "R"+reaction.number,
         _number: reaction.number,
         _name: reaction.name,
         _type: reaction.type,
@@ -74,6 +123,9 @@ function formatData(reactions = []) {
         _compName: _compName,
         _compFunction: _compFunction,
         _compType: _compType,
+        compName: compName,
+        compFunction: compFunction,
+        compType: compType,
       });
     });
   }

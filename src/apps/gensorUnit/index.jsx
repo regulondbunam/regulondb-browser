@@ -177,7 +177,7 @@ function SelectDisplay(display, setDisplay) {
       >
         {Object.keys(DISPLAY_TYPES).map((key, i) => {
           return (
-            <MenuItem value={DISPLAY_TYPES[key]}>{DISPLAY_TYPES[key]}</MenuItem>
+            <MenuItem key={"displayOption_"+key+"_"+i}  value={DISPLAY_TYPES[key]}>{DISPLAY_TYPES[key]}</MenuItem>
           );
         })}
       </Select>
