@@ -26,7 +26,7 @@ export default function Options(props) {
   return (
     <div className="GuOptions" >
       <div>
-       GU map
+
       </div>
       <Search {...props} />
       <MapControls {...props} />

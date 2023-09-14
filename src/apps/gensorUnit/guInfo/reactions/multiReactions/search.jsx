@@ -24,19 +24,17 @@ function findElement(idElement, cy) {
     position: { x, y },
   });
   console.log(element);
-  let anis = [10,-10,10,-10,5].map((n,i)=>{
+  let anis = [10, -10, 10, -10, 5].map((n, i) => {
     return element.animation({
-      position: { x: x+n, y: y },
+      position: { x: x + n, y: y },
       duration: 200,
     });
-  })
-  anis.forEach((ani,i)=>{
+  });
+  anis.forEach((ani, i) => {
     setTimeout(() => {
-      ani.play()
-    }, 50+(i*200));
-    
-  })
-  
+      ani.play();
+    }, 50 + i * 200);
+  });
 }
 
 function InputSearch({ elements, cy }) {
@@ -140,11 +138,9 @@ function GuElementsMenu({ cy, reactions, components }) {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        sx={{ width: 200 }}
         PaperProps={{
           style: {
-            maxHeight: 300,
-            width: "20ch",
+            maxHeight: 400,
           },
         }}
       >
@@ -177,12 +173,7 @@ function MenuElement({ title, elements, cy, onClose }) {
         }}
       >
         <p>
-          <b>
-            {title.toLowerCase().replace("_", " ") +
-              " (" +
-              elements.length +
-              ")"}
-          </b>
+          {title.toLowerCase().replace("_", " ") + " (" + elements.length + ")"}
         </p>
       </MenuItem>
       {showElements && (
@@ -204,9 +195,7 @@ function MenuElement({ title, elements, cy, onClose }) {
                 sx={{ backgroundColor: "#d5d5d7" }}
                 key={"guMenuElement" + element + "_" + i}
               >
-                <p>
-                  <b>{element.toLowerCase()}</b>
-                </p>
+                <p>{element.toLowerCase()}</p>
               </MenuItem>
             );
           })}

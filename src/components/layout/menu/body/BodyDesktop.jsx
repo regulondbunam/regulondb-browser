@@ -82,13 +82,15 @@ export function BodyDesktop({ submenuData }) {
                       </div>
                     );
                   }
-                  if (itemm.type === "apolloSandbox") {
+                  if (itemm.type === "sandbox") {
+                    const host = window.location.hostname
+                    let url=host+"/graphql"
                     return (
                       <div
                         key={itemm.id}
                         style={{ paddingTop: "5%", paddingBottom: "1%" }}
                       >
-                        <a style={{color: "white"}} target="_tab" href={"https://studio.apollographql.com/sandbox/explorer?endpoint="+process.env.REACT_APP_WEB_SERVICE_URL}>{itemm.title}</a>
+                        <a style={{color: "white"}}  target="_tab" href={"https://studio.apollographql.com/sandbox/explorer?endpoint="+ url }>{itemm.title}</a>
                       </div>
                     );
                   }
