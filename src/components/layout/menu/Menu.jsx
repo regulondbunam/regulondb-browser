@@ -19,7 +19,7 @@ const BUTTON_HOME_STYLE = {
 };
 
 const MENU_CONF = MenuData.menu;
-
+export const idMenu = "rdbMenu"
 function Menu() {
   const [_menuView, set_menuView] = useState();
   const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -27,7 +27,7 @@ function Menu() {
   let MenuComponent = isMobile ? MenuMovil : MenuDesktop;
 
   return (
-    <div className="noPrint" >
+    <div id={idMenu} className="noPrint" >
       <MenuComponent
         menuView={_menuView}
         SetMenuView={(menuView) => {

@@ -45,10 +45,18 @@ const LAYOUTS = {
   },
 };
 
-export default function MultiReactions({ reactions, nodes, name }) {
+export default function MultiReactions({ reactions, nodes, name, idSite }) {
   const cyStylesheet = sbgnStylesheet(cytoscape);
-
+  let heightCover = 50;
+  let heightSite = 500;
+  if (document.getElementById(idSite + "_cover")) {
+    heightCover = document.getElementById(idSite + "_cover").clientHeight;
+  }
+  if (document.getElementById(idSite)) {
+    heightSite = document.getElementById(idSite).clientHeight;
+  }
   const [_cy, select_cy] = useState();
+  const [heightCanva, setHeightCanva] = useState(heightSite - 40 + "px");
 
   const elements = useMemo(() => {
     return generateElements(nodes, reactions);
@@ -98,15 +106,15 @@ export default function MultiReactions({ reactions, nodes, name }) {
     cy.on("click", "node", function (event) {
       const node = event.target;
       const position = node.renderedPosition();
-        const windowDisplay = document.getElementById("window_GU");
-        if (windowDisplay) {
-          let detail = { node: { ...node.data(), ...position } };
-          const windowDisplay_REACTION = new CustomEvent(EVENT_WINDOW, {
-            bubbles: true,
-            detail: detail,
-          });
-          windowDisplay.dispatchEvent(windowDisplay_REACTION);
-        }
+      const windowDisplay = document.getElementById("window_GU");
+      if (windowDisplay) {
+        let detail = { node: { ...node.data(), ...position } };
+        const windowDisplay_REACTION = new CustomEvent(EVENT_WINDOW, {
+          bubbles: true,
+          detail: detail,
+        });
+        windowDisplay.dispatchEvent(windowDisplay_REACTION);
+      }
     });
     let layout = cy.layout(LAYOUTS.elk);
     layout.pon("layoutstop").then(function (event) {
@@ -121,6 +129,9 @@ export default function MultiReactions({ reactions, nodes, name }) {
     <div className="guMap" id="guMap">
       <WindowManager reactions={reactions} nodes={nodes} />
       <Options
+        heightCover={heightCover}
+        heightCanva={heightSite - 40 + "px"}
+        setHeightCanva={setHeightCanva}
         elements={elements}
         reactions={reactions}
         components={nodes}
@@ -130,9 +141,9 @@ export default function MultiReactions({ reactions, nodes, name }) {
       <div>
         <CytoscapeComponent
           elements={elements}
-          style={{ width: "100%", height: "100vh" }}
+          style={{ width: "100%", height: heightCanva }}
           zoomingEnabled={true}
-          userZoomingEnabled={true}
+          userZoomingEnabled={false}
           zoom={1}
           maxZoom={2}
           minZoom={0.1}

@@ -10,10 +10,12 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { useState } from "react"
 
+export const idFooter = "rdbFooter"
+
 
 export default function Footer() {
     return(
-        <div className={Style.footer} >
+        <div id={idFooter} className={Style.footer} >
             <div className={Style.footerHeight} >
                 <div className={Style.logos}>
                     <img src={unamLogo} alt="unam logo" className={Style.imageLogo} />

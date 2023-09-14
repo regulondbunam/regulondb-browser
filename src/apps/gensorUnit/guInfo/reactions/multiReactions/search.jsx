@@ -65,7 +65,7 @@ function InputSearch({ elements, cy }) {
 
 export default function Search(props) {
   return (
-    <div style={{ display: "flex", alignItems: "center" }}>
+    <div style={{ display: "flex", alignItems: "center", backgroundColor: "white" }}>
       <InputSearch {...props} />
       <GuElementsMenu {...props} />
     </div>

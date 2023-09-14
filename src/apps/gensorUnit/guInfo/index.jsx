@@ -3,15 +3,14 @@ import {MapReactions} from './reactions';
 //import GeneOntology from './geneOntology';
 
 export default function GuInfo({
+  idSite, 
   gensorUnit,
   reactions,
   nReactions
 }) {
   if(DataVerifier.isValidArray(reactions)){
     return (
-      <div id="guMap" style={{width: "100%", height: "100vh"}} >
-        <MapReactions reactions={reactions} nodes={gensorUnit.components} name={gensorUnit.name} />
-      </div>
+      <MapReactions idSite={idSite} reactions={reactions} nodes={gensorUnit.components} name={gensorUnit.name} />
     )
   }
   return <div>error... no reactions</div>

@@ -81,48 +81,55 @@ export default function GensorUnit() {
    */
   let { guId } = useParams();
   if (guId) {
-    return (
-      <GoInfo guId={guId}/>
-    );
+    return <GoInfo guId={guId} />;
   }
   return <GoHome />;
 }
 
-function GoInfo({guId}){
-const {guData, loading, error} = useGetGuById(guId)
-console.log(guData);
-if(loading){
-  return (
-    <div>
-      <Cover state="loading" >
-        <h1>{`Loading .... Gensor Unit`}</h1>
-      </Cover>
-    </div>
-  )
-}
-if(error){
-  return <>error</>
-}
-if(guData?._id){
-  return (
-    <div>
-      <Cover >
-        <h1>{`Gensor Unit ${guData.gensorUnit.name}`}</h1>
-        {DataVerifier.isValidArray(guData.gensorUnit.groups) && (
-          <p><b>{`Functional Group${guData.gensorUnit.groups.length > 1 ? "s" : ""}: `}</b>
-          {guData.gensorUnit.groups.join(", ")}
-          </p>
-        )}
-        <br />
-      </Cover>
-      <GuInfo nReactions={guData.reactions.length} {...guData} />
-    </div>
-  )
-}
-return(
-  <div>info</div>
-)
-
+function GoInfo({ guId }) {
+  const { guData, loading, error } = useGetGuById(guId);
+  console.log(guData);
+  if (loading) {
+    return (
+      <div>
+        <Cover state="loading">
+          <h1>{`Loading [${guId}] Gensor Unit `}</h1>
+        </Cover>
+      </div>
+    );
+  }
+  if (error) {
+    return <>error</>;
+  }
+  if (guData?._id) {
+    let idSite = "site_" + guData._id;
+    return (
+      <div id={idSite} style={{ width: "100%", position: "absolute", top: "0", bottom: "0"}} >
+        <Cover
+          coverId={idSite + "_cover"}
+          coverStyle={{ position: "absolute", zIndex: "10" }}
+          coverBackgroundStile={{backgroundColor: "#f4f5f5e8"}}
+        >
+          <h1>{`Gensor Unit ${guData.gensorUnit.name}`}</h1>
+          {DataVerifier.isValidArray(guData.gensorUnit.groups) && (
+            <p>
+              <b>{`Functional Group${
+                guData.gensorUnit.groups.length > 1 ? "s" : ""
+              }: `}</b>
+              {guData.gensorUnit.groups.join(", ")}
+            </p>
+          )}
+          <br />
+        </Cover>
+        <GuInfo
+          idSite={idSite}
+          nReactions={guData.reactions.length}
+          {...guData}
+        />
+      </div>
+    );
+  }
+  return <div>info</div>;
 }
 
 function GoHome() {
@@ -143,9 +150,7 @@ function GoHome() {
       <Cover state={state}>
         <h1>{title}</h1>
       </Cover>
-      {DataVerifier.isValidArray(gusData) && (
-        <Home gusData={gusData} />
-      )}
+      {DataVerifier.isValidArray(gusData) && <Home gusData={gusData} />}
     </div>
   );
 }

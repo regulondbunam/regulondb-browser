@@ -6,10 +6,10 @@ import "./reaction.css";
 import Data from "./data";
 const MultiReactions = lazy(() => import("./multiReactions"));
 
-export function MapReactions({ reactions, nodes, name }) {
+export function MapReactions({ idSite, reactions, nodes, name }) {
   return (
-    <Suspense fallback={<Loading />}>
-      <MultiReactions reactions={reactions} nodes={nodes} name={name} />
+    <Suspense fallback={<Loading idSite={idSite} />}>
+      <MultiReactions reactions={reactions} idSite={idSite} nodes={nodes} name={name} />
     </Suspense>
   );
 }

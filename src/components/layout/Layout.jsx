@@ -1,20 +1,34 @@
 import React from "react";
-import Header from "./header/Header";
-import Menu from "./menu/Menu";
-import Footer from "./footer/Footer";
+import Header, {idHeader} from "./header/Header";
+import Menu, {idMenu} from "./menu/Menu";
+import Footer, {idFooter} from "./footer/Footer";
 import { Outlet } from "react-router-dom";
 import { Observer } from "./Observer";
+
+export function fullScreen(activate = false) {
+  if(activate){
+    document.getElementById(idHeader).style.display = "none"
+    document.getElementById(idMenu).style.display = "none"
+    document.getElementById(idFooter).style.display = "none"
+  }else{
+    document.getElementById(idHeader).style.display = "inline"
+    document.getElementById(idMenu).style.display = "inline"
+    document.getElementById(idFooter).style.display = "inline"
+  }
+}
 
 const Layout = () => {
   const isHome =
     window.location.pathname === "/home" || window.location.pathname === "/";
   //console.log(window.location.pathname);
   return (
-    <div style={{display: "flex", flexDirection: "column"}}>
+    <div
+      style={{ display: "flex", flexDirection: "column" }}
+    >
       <Observer />
-      <Header isHome={isHome} />
+      <Header  isHome={isHome} />
       <Menu />
-      <div style={{minHeight: "78vh"}} >
+      <div style={{ minHeight: "75vh", position: "relative" }}>
         <Outlet />
       </div>
       <Footer />
