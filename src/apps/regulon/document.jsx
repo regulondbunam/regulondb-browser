@@ -19,8 +19,8 @@ const cardOptions = {
 
 export default function Document({ regulonData, section }) {
 
-    const related = <RelatedTool genes={regulonData.regulates.genes} />
-
+    const related = <RelatedTool regulonData={regulonData} />
+    
     const sections = useMemo(() => {
 
         const {

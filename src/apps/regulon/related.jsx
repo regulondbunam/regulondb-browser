@@ -27,7 +27,11 @@ const style = {
   p: 4,
 };
 
-export default function RelatedTool({ genes }) {
+export default function RelatedTool({ regulonData }) {
+  let genes = []
+  if (DataVerifier.isValidObject(regulonData.regulates)) {
+    genes = regulonData.regulates.genes
+  }
   const [open, setOpen] = React.useState(false);
 
   const navigate = useNavigate();
