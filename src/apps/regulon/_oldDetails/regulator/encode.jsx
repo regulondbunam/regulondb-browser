@@ -9,7 +9,7 @@ function EncodedFrom({ encodedFrom }) {
             <div style={{ marginLeft: "1%" }} >
                 {encodedFrom.genes.length > 0 && (
                     <div>
-                        <p><b>Genes:</b>{" "}
+                        <p><b>{encodedFrom.genes.length > 1 ? "Genes:" : "Gene:"}</b>{" "}
                             {encodedFrom.genes.map(gene => {
                                 return (
                                     <Link key={gene.gene_id} to={"/gene/" + gene._id} >
@@ -22,7 +22,7 @@ function EncodedFrom({ encodedFrom }) {
                 )}
                 {encodedFrom.operon.length > 0 && (
                     <div>
-                        <p><b>Operons:</b>{" "}
+                        <p><b>{encodedFrom.operon.length > 1 ? "Operons:": "Operon:"}</b>{" "}
                         {encodedFrom.operon.map(operon => {
                                 return (
                                     <Link key={operon.operon_id} to={"/operon/" + operon._id} >

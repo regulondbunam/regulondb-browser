@@ -73,8 +73,7 @@ function TranscriptionFactor({ transcriptionFactors, idPanel = "regulates_tu" })
 
     return (
         <div>
-            <h2>Transcription Factors</h2>
-            <p> <b>{`Regulated transcription factors: ${transcriptionFactors.length}`}</b> </p>
+            <h3>{`Regulated transcription factors: ${transcriptionFactors.length}`}</h3>
             <div id={idPanel} >
                 {
                     !_tuList
