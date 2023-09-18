@@ -23,6 +23,7 @@ import ReleaseNotes from './apps/releasesNotes';
 import GensorUnit from "./apps/gensorUnit"
 import AboutUs from './apps/aboutUs';
 import { EmbeddedSandbox } from './apps/wsSandbox';
+import Manual from './apps/manual';
 
 //wsSandbox
 const router = createBrowserRouter([
@@ -159,6 +160,20 @@ const router = createBrowserRouter([
                     path: ":info"
                   }
                 ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        path: "manual",
+        element: <Manual />,
+        children: [
+          {
+            path: ":site",
+            children: [
+              {
+                path: ":section",
               }
             ]
           }
