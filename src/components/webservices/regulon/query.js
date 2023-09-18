@@ -234,6 +234,7 @@ export const fragment_REGULATOR = gql`fragment REGULATOR on Regulator {
   }
   family
   name
+  abbreviatedName
   note
   products {
     _id
@@ -279,6 +280,7 @@ export const fragment_REGULATORv2 = gql`fragment REGULATOR on Regulator {
   }
   family
   name
+  abbreviatedName
   note
   products {
     _id
@@ -419,6 +421,7 @@ query GetRegulonInfo($advancedSearch: String, $fullMatchOnly: Boolean = false, $
         ...TERMS
       }
       regulator {
+        abbreviatedName
         name
         _id
       }
@@ -497,6 +500,7 @@ ${fragment_ENCODEFROM}
         _id
         regulator {
           name
+          abbreviatedName
         }
       }
       pagination{

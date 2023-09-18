@@ -79,7 +79,7 @@ export default function Manual() {
           pb: 6,
         }}
       >
-        <Container maxWidth="sm">
+      </Box><Container maxWidth="sm">
           <Typography
             component="h1"
             variant="h2"
@@ -89,19 +89,7 @@ export default function Manual() {
           >
             RegulonDB Manual
           </Typography>
-          <Stack
-            sx={{ pt: 4 }}
-            direction="row"
-            spacing={2}
-            justifyContent="center"
-          >
-            <TextField id="outlined-basic" label="Search" variant="outlined" />
-            <Button variant="contained" color="secondary">
-              Search
-            </Button>
-          </Stack>
         </Container>
-      </Box>
       <Container sx={{ py: 8 }} maxWidth="md">
         <Grid container spacing={4}>
           {sites.map((site, i) => (
@@ -143,3 +131,29 @@ export default function Manual() {
     </div>
   );
 }
+
+
+/*
+<Container maxWidth="sm">
+          <Typography
+            component="h1"
+            variant="h2"
+            align="center"
+            color="text.primary"
+            gutterBottom
+          >
+            RegulonDB Manual
+          </Typography>
+          <Stack
+            sx={{ pt: 4 }}
+            direction="row"
+            spacing={2}
+            justifyContent="center"
+          >
+            <TextField id="outlined-basic" label="Search" variant="outlined" />
+            <Button variant="contained" color="secondary">
+              Search
+            </Button>
+          </Stack>
+        </Container>
+*/

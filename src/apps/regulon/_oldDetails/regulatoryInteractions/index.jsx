@@ -32,12 +32,7 @@ const COLUMNS = [
         header: "name",
         accessorKey: "_activeConformation_name",
         cell: (info) => (<p dangerouslySetInnerHTML={{__html: info.getValue()}} />),
-      },
-      {
-        id: "activeConformation_type",
-        header: "type",
-        accessorKey: "_activeConformation_type",
-      },
+      }
     ],
   },
   {
@@ -166,7 +161,7 @@ function formatData(regulatoryInteractions = [], allCitations) {
         ) {
           _regulatoryBindingSite_position =
             ri.regulatoryBindingSites.leftEndPosition +
-            " - " +
+            "-" +
             ri.regulatoryBindingSites.rightEndPosition;
         }
         _regulatoryBindingSite_strand = ri.regulatoryBindingSites.strand;

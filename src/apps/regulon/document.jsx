@@ -38,7 +38,7 @@ export default function Document({ regulonData, section }) {
             _sections.push({
                 id: "RegulonTab_Regulator",
                 label: "Regulator",
-                title: "Regulator "+regulator.name,
+                title: "Regulator "+regulator.abbreviatedName,
                 component: <div style={{ overflow: "auto" }} >
                     <Regulator regulator={regulator} allCitations={allCitations} />
                 </div>,
@@ -91,7 +91,7 @@ export default function Document({ regulonData, section }) {
     return (
         <div>
             <AnchorNav sections={sections} cardOptions={cardOptions} aside={related}
-                title={`Regulon ${regulonData.regulator.name}`} />
+                title={`Regulon ${regulonData.regulator.abbreviatedName}`} />
         </div>
     )
 }

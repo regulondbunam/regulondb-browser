@@ -90,7 +90,7 @@ export function BodyDesktop({ submenuData }) {
                         key={itemm.id}
                         style={{ paddingTop: "5%", paddingBottom: "1%" }}
                       >
-                        <a style={{color: "white"}}  target="_tab" href={"https://studio.apollographql.com/sandbox/explorer?endpoint="+ url }>{itemm.title}</a>
+                        <a style={{color: "white"}}  target="_tab" href={"https://studio.apollographql.com/sandbox/explorer?endpoint=https://"+ url }>{itemm.title}</a>
                       </div>
                     );
                   }
