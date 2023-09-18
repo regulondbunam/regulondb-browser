@@ -59,6 +59,7 @@ ${fragment_regulons}
   query getSummaryHistoryData{
     getDatabaseInfo{
       releaseDate
+      route
       regulonDBVersion
       ecocycVersion
       lcVersion
