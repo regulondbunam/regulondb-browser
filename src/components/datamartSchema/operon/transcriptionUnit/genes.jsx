@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import {DataVerifier } from "../../../ui-components"
 import { ParagraphCitations, NoteCitations } from "../../citations";
 import { Divider } from "@mui/material";
+import IsPropertyPhrases from "../../phrases";
 
 export default function Genes({
     allCitations,
@@ -43,7 +44,7 @@ let _confidenceLevel
     return (
         <div>
             <div style={{ marginLeft: "5px" }}>
-            <p><b>Strand:</b>{" "+strand}</p>
+            <p><IsPropertyPhrases property="strand" propertiesPhrase={propertiesPhrase} />{" "+strand}</p>
                 <div onMouseEnter={()=>{
                     let drawGene = document.getElementById("draw_"+tuId+"_"+firstGene._id)
                     if(drawGene){
@@ -67,7 +68,7 @@ let _confidenceLevel
                     )}
                 {DataVerifier.isValidString(note) && (
                     <div>
-                        <p><b>Note:</b></p>
+                        <p><IsPropertyPhrases property="note" propertiesPhrase={propertiesPhrase} /></p>
                         <p dangerouslySetInnerHTML={{ __html: NoteCitations(allCitations, note) }} />
                     </div>
                 )}
