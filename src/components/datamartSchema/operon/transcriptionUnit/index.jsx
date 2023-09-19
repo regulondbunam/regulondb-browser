@@ -3,7 +3,7 @@ import Genes from "./genes";
 import Promoter from "./promotor";
 import Divider from "@mui/material/Divider";
 import Terminators from "./terminators";
-
+import { useGetPhraseByObjectId } from "../../../webservices";
 import { Accordion, DataVerifier } from "../../../ui-components";
 import RegulatorBindingSites from "./regulatorBindingSites";
 
@@ -26,6 +26,7 @@ export default function TranscriptionUnit({
   synonyms = [],
   terminators = [],
 }) {
+  const {propertiesPhrase} = useGetPhraseByObjectId(_id)
   let isPromoterRi = false;
   if (DataVerifier.isValidObject(promoter)) {
     if (DataVerifier.isValidArray(promoter.regulatorBindingSites)) {
@@ -43,7 +44,6 @@ export default function TranscriptionUnit({
     }
   }
   let isTuRi = DataVerifier.isValidArray(regulatorBindingSites);
-
   return (
     <div>
       <div
@@ -68,9 +68,7 @@ export default function TranscriptionUnit({
         />
       </div>
       <div>
-        <Accordion
-          title={<h2 style={{ margin: 0 }}>{`Transcription Unit ${name}`}</h2>}
-        >
+        <Accordion>
           {DataVerifier.isValidObject(firstGene) && (
             <Genes
               tuId={_id}
@@ -82,6 +80,7 @@ export default function TranscriptionUnit({
               confidenceLevel={confidenceLevel}
               note={note}
               citations={citations}
+              propertiesPhrase={propertiesPhrase}
             />
           )}
         </Accordion>

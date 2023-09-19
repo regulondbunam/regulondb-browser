@@ -11,7 +11,8 @@ export default function Genes({
     confidenceLevel,
     strand,
     note,
-    citations
+    citations,
+    propertiesPhrase
 }) {
 
     //let orderGenes = genes.reverse()
