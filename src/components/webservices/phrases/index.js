@@ -10,7 +10,7 @@ export function useGetPhraseByObjectId(id) {
     });
 
     let phrases
-    let propertiesPhrase
+    let propertiesPhrase = {}
     try {
         if (data) {
             if(DataVerifier.isValidArray(data.getPhraseOf)){
@@ -28,7 +28,6 @@ export function useGetPhraseByObjectId(id) {
               
             }else{
                 phrases = null
-                propertiesPhrase = null
             }
         }
     } catch (error) {
