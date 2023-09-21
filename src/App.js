@@ -171,12 +171,7 @@ const router = createBrowserRouter([
         element: <ExperimentalDatasets />,
         children: [
           {
-            path: ":dataset",
-            children: [
-              {
-                path: ":fileInfo",
-              }
-            ]
+            path: ":idFile",
           }
         ]
       },

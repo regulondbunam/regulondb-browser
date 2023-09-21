@@ -7,6 +7,7 @@ import { useGetSigmulonById, useGetSigmulonBySearch } from "./sigmulon";
 import {useGetAllGus, useGetGuById} from "./gensorUnit";
 import { useGetAllGenes } from "./coexpression";
 import { useGetPhraseByObjectId } from "./phrases";
+import { useGetDataFile } from "./dataOfFile";
 
 export {
     useGetRegulonData, useGetRegulonBySearch,
@@ -16,4 +17,5 @@ export {
     useGetSigmulonById, useGetSigmulonBySearch,
     useGetAllGus, useGetGuById,
     useGetPhraseByObjectId,
+    useGetDataFile
 }

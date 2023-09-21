@@ -5,7 +5,8 @@ import DownloadIcon from "@mui/icons-material/Download";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import BrowserFilter from "./browserFilter";
 
 const CATEGORIES_FILE = [
   {
@@ -15,7 +16,10 @@ const CATEGORIES_FILE = [
       {
         id: "ecoli_k12_sequence",
         name: "E. coli K-12 genome sequence raw format",
-        path: "/media/raw/datasets/ecoli_k12/E_coli_K12_MG1655_U00096.3.txt",
+        path: {
+            url: "/media/raw/datasets/ecoli_k12/E_coli_K12_MG1655_U00096.3.txt",
+            type: "inner"
+        },
         version: "",
         format: "txt",
         type: "sequence",
@@ -23,7 +27,10 @@ const CATEGORIES_FILE = [
       {
         id: "ecoli_k12_genebank",
         name: "E. coli K-12 genebank",
-        path: "/media/raw/datasets/ecoli_k12/U00096.3.gbk",
+        path: {
+            url: "/media/raw/datasets/ecoli_k12/U00096.3.gbk",
+            type: "inner"
+        },
         version: "",
         format: "gbk",
         type: "sequence",
@@ -31,7 +38,10 @@ const CATEGORIES_FILE = [
       {
         id: "ecoli_k12_genebank_refseq",
         name: "E. coli K-12 genebank refseq",
-        path: "/media/raw/datasets/ecoli_k12/refseq_NC_000913.3.gbk",
+        path: {
+            url: "/media/raw/datasets/ecoli_k12/refseq_NC_000913.3.gbk",
+            type: "inner"
+        },
         version: "",
         format: "gbk",
         type: "sequence",
@@ -45,7 +55,10 @@ const CATEGORIES_FILE = [
       {
         id: "RISet",
         name: "RISet",
-        path: "graphQLservice",
+        path: {
+          url: "",
+          type: "graphQLservice",
+        },
         version: "",
         format: "tsv",
         type: "table",
@@ -53,7 +66,10 @@ const CATEGORIES_FILE = [
       {
         id: "TUSet",
         name: "TUSet",
-        path: "graphQLservice",
+        path: {
+          url: "",
+          type: "graphQLservice",
+        },
         version: "",
         format: "tsv",
         type: "table",
@@ -61,7 +77,10 @@ const CATEGORIES_FILE = [
       {
         id: "OperonSet",
         name: "OperonSet",
-        path: "graphQLservice",
+        path: {
+          url: "",
+          type: "graphQLservice",
+        },
         version: "",
         format: "tsv",
         type: "table",
@@ -69,7 +88,10 @@ const CATEGORIES_FILE = [
       {
         id: "GeneProductSet",
         name: "GeneProductSet",
-        path: "graphQLservice",
+        path: {
+          url: "",
+          type: "graphQLservice",
+        },
         version: "",
         format: "tsv",
         type: "table",
@@ -77,7 +99,10 @@ const CATEGORIES_FILE = [
       {
         id: "TerminatorSet",
         name: "TerminatorSet",
-        path: "graphQLservice",
+        path: {
+          url: "",
+          type: "graphQLservice",
+        },
         version: "",
         format: "tsv",
         type: "table",
@@ -85,7 +110,10 @@ const CATEGORIES_FILE = [
       {
         id: "Gene_sequence",
         name: "Gene_sequence",
-        path: "graphQLservice",
+        path: {
+          url: "",
+          type: "graphQLservice",
+        },
         version: "",
         format: "tsv",
         type: "table",
@@ -93,7 +121,10 @@ const CATEGORIES_FILE = [
       {
         id: "TFSet",
         name: "TFSet",
-        path: "graphQLservice",
+        path: {
+          url: "",
+          type: "graphQLservice",
+        },
         version: "",
         format: "tsv",
         type: "table",
@@ -101,7 +132,10 @@ const CATEGORIES_FILE = [
       {
         id: "RegulatorSet",
         name: "RegulatorSet",
-        path: "graphQLservice",
+        path: {
+          url: "",
+          type: "graphQLservice",
+        },
         version: "",
         format: "tsv",
         type: "table",
@@ -109,7 +143,10 @@ const CATEGORIES_FILE = [
       {
         id: "PromoterSet",
         name: "PromoterSet",
-        path: "graphQLservice",
+        path: {
+          url: "",
+          type: "graphQLservice",
+        },
         version: "",
         format: "tsv",
         type: "table",
@@ -117,7 +154,10 @@ const CATEGORIES_FILE = [
       {
         id: "NetworkTFGene",
         name: "NetworkTFGene",
-        path: "graphQLservice",
+        path: {
+          url: "",
+          type: "graphQLservice",
+        },
         version: "",
         format: "tsv",
         type: "table",
@@ -125,7 +165,10 @@ const CATEGORIES_FILE = [
       {
         id: "NetworkTFGene_release4",
         name: "NetworkTFGene_release4",
-        path: "graphQLservice",
+        path: {
+          url: "",
+          type: "graphQLservice",
+        },
         version: "",
         format: "tsv",
         type: "table",
@@ -135,8 +178,24 @@ const CATEGORIES_FILE = [
 ];
 
 export default function ExperimentalDatasets() {
-  const handleDownload = (file) => {};
+  const { idFile } = useParams();
 
+  const handleDownload = (file) => {};
+  if (idFile) {
+    let file;
+    // eslint-disable-next-line no-unused-vars
+    const category = CATEGORIES_FILE.find((category) => {
+      file = category.files.find((file) => file.id === idFile);
+      if (file) {
+        return true;
+      }
+      return false;
+    });
+    if (!file) {
+      return <>there is no file with this id:{idFile}</>;
+    }
+    return <BrowserFilter fileName={file.name} filePath={file.path} file={file} />;
+  }
   return (
     <div>
       <Cover>
