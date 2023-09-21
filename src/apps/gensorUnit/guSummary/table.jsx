@@ -12,20 +12,15 @@ const COLUMNS = [
         accessorKey: "_number",
       },
       {
-        id: "Reaction_Name",
-        header: "Name",
-        accessorKey: "_name",
+        id: "Reaction_pathwayComponents",
+        header: "pathwayComponents",
+        accessorKey: "_pathwayComponents",
       },
       {
         id: "Reaction_Type",
         header: "Type",
         accessorKey: "_type",
-      },
-      {
-        id: "Reaction_pathwayComponents",
-        header: "pathwayComponents",
-        accessorKey: "_pathwayComponents",
-      },
+      }
     ],
   },
   {

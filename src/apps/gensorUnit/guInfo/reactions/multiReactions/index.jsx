@@ -117,11 +117,10 @@ export default function MultiReactions({ reactions, nodes, name, idSite }) {
       }
     });
     let layout = cy.layout(LAYOUTS.elk);
-    layout.pon("layoutstop").then(function (event) {
+    /*layout.pon("layoutstop").then(function (event) {
       let element = cy.nodes('node[type = "transcription_factor"]')[0];
-      cy.zoom(1);
       cy.center(cy.getElementById(element.id()));
-    });
+    });*/
     layout.run();
   };
 
@@ -144,7 +143,7 @@ export default function MultiReactions({ reactions, nodes, name, idSite }) {
           style={{ width: "100%", height: heightCanva }}
           zoomingEnabled={true}
           userZoomingEnabled={false}
-          zoom={1}
+          zoom={0.5}
           maxZoom={2}
           minZoom={0.1}
           autounselectify={false}

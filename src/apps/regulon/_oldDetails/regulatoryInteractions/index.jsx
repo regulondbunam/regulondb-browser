@@ -94,9 +94,14 @@ const COLUMNS = [
     header: "Regulatory BindingSite",
     columns: [
       {
-        id: "regulatoryBindingSite_position",
-        header: "Position",
-        accessorKey: "_regulatoryBindingSite_position",
+        id: "regulatoryBindingSite_leftPos",
+        header: "LeftPos",
+        accessorKey: "_regulatoryBindingSite_LeftPos",
+      },
+      {
+        id: "regulatoryBindingSite_RightPos",
+        header: "RightPos",
+        accessorKey: "_regulatoryBindingSite_RightPos",
       },
       {
         id: "regulatoryBindingSite_strand",
@@ -152,17 +157,16 @@ function formatData(regulatoryInteractions = [], allCitations) {
       let _distanceGene = ri.distanceToFirstGene;
       let _distancePromoter = ri.distanceToPromoter;
       let citations = ri.citations;
-      let _regulatoryBindingSite_position = "";
+      let _regulatoryBindingSite_LeftPos = "";
+      let _regulatoryBindingSite_RightPos = "";
       let _regulatoryBindingSite_strand = "";
       let _regulatoryBindingSite_sequence = "";
       if (DataVerifier.isValidObject(ri.regulatoryBindingSites)) {
         if (
           DataVerifier.isValidNumber(ri.regulatoryBindingSites.leftEndPosition)
         ) {
-          _regulatoryBindingSite_position =
-            ri.regulatoryBindingSites.leftEndPosition +
-            "-" +
-            ri.regulatoryBindingSites.rightEndPosition;
+          _regulatoryBindingSite_LeftPos = ri.regulatoryBindingSites.leftEndPosition;
+          _regulatoryBindingSite_RightPos = ri.regulatoryBindingSites.rightEndPosition;
         }
         _regulatoryBindingSite_strand = ri.regulatoryBindingSites.strand;
         _regulatoryBindingSite_sequence = ri.regulatoryBindingSites.sequence;
@@ -182,7 +186,8 @@ function formatData(regulatoryInteractions = [], allCitations) {
         _regulatoryInteraction_function: _regulatoryInteraction_function,
         _distanceGene: _distanceGene,
         _distancePromoter: _distancePromoter,
-        _regulatoryBindingSite_position: _regulatoryBindingSite_position,
+        _regulatoryBindingSite_RightPos: _regulatoryBindingSite_RightPos,
+        _regulatoryBindingSite_LeftPos: _regulatoryBindingSite_LeftPos,
         _regulatoryBindingSite_strand: _regulatoryBindingSite_strand,
         _regulatoryBindingSite_sequence: _regulatoryBindingSite_sequence,
         citations: citations,

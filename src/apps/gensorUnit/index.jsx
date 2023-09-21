@@ -115,6 +115,38 @@ function GoInfo({ guId }) {
   }
   if (guData?._id) {
     let idSite = "site_" + guData._id;
+    if(display === DISPLAY_TYPES.summary){
+      return (
+        <div>
+          <Cover
+          coverId={idSite + "_cover"}
+          coverStyle={display === DISPLAY_TYPES.graphic ? { position: "absolute", zIndex: "10" } : {}}
+          coverBackgroundStile={{
+            backgroundColor: "#f4f5f5e8",
+            padding: "10px 0 10px 0",
+          }}
+        >
+          <div style={{ display: "flex" }}>
+            <div>{SelectDisplay(display, setDisplay)}</div>
+            <div>
+              <h1>{`Gensor Unit ${guData.gensorUnit.name}`}</h1>
+              {DataVerifier.isValidArray(guData.gensorUnit.groups) && (
+                <p>
+                  <b>{`Functional Group${
+                    guData.gensorUnit.groups.length > 1 ? "s" : ""
+                  }: `}</b>
+                  {guData.gensorUnit.groups.join(", ")}
+                </p>
+              )}
+              <br />
+            </div>
+          </div>
+        </Cover>
+        <Summary idSite={idSite} {...guData} />
+        </div>
+        
+      )
+    }
     return (
       <div
         id={idSite}
@@ -151,9 +183,7 @@ function GoInfo({ guId }) {
             {...guData}
           />
         )}
-        {display === DISPLAY_TYPES.summary && (
-          <Summary idSite={idSite} {...guData} />
-        )}
+        
       </div>
     );
   }

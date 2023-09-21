@@ -7,6 +7,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 
 const HtmlTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} arrow />
@@ -27,25 +28,24 @@ export default function IsPropertyPhrases({ property = "", propertiesPhrase }) {
     return <b>{label}:</b>;
   }
   return (
-    <HtmlTooltip
-      title={
-        <React.Fragment>
-          <PhrasePanel phrases={phrases} />
-        </React.Fragment>
-      }
-    >
-      <Badge color="secondary" badgeContent=" " variant="dot">
-        <Box>
-          <b>{label}:</b>
-        </Box>
-      </Badge>
-    </HtmlTooltip>
+    <>
+      <HtmlTooltip
+        title={
+          <React.Fragment>
+            <PhrasePanel phrases={phrases} />
+          </React.Fragment>
+        }
+      >
+        <MenuBookIcon />
+      </HtmlTooltip>
+      <b>{label}:</b>
+    </>
   );
 }
 
 function PhrasePanel({ phrases = [] }) {
-  const [inx, setInx] = useState(0)
-  const phrase = phrases[inx]
+  const [inx, setInx] = useState(0);
+  const phrase = phrases[inx];
   return (
     <div>
       <div
@@ -73,18 +73,22 @@ function PhrasePanel({ phrases = [] }) {
                 height: 20,
               }}
             >
-              <Button onClick={() => {
-                if (inx > 0) {
-                  setInx(inx-1)
-                }
-              }}>
+              <Button
+                onClick={() => {
+                  if (inx > 0) {
+                    setInx(inx - 1);
+                  }
+                }}
+              >
                 <NavigateBeforeIcon />
               </Button>
-              <Button onClick={() => {
-                if (inx < phrases.length) {
-                  setInx(inx+1)
-                }
-              }}>
+              <Button
+                onClick={() => {
+                  if (inx < phrases.length) {
+                    setInx(inx + 1);
+                  }
+                }}
+              >
                 <NavigateNextIcon />
               </Button>
             </ButtonGroup>
@@ -93,12 +97,19 @@ function PhrasePanel({ phrases = [] }) {
       </div>
       <div>
         <p
-        style={{
-          fontFamily: "Times New Roman, Times, serif",
-          fontStyle: "italic"
-        }}
-         dangerouslySetInnerHTML={{__html: phrase.phrase}} />
-         <a href={"https://pubmed.ncbi.nlm.nih.gov/"+phrase.pmid} target="_blank" rel="noopener noreferrer">go to article</a>
+          style={{
+            fontFamily: "Times New Roman, Times, serif",
+            fontStyle: "italic",
+          }}
+          dangerouslySetInnerHTML={{ __html: phrase.phrase }}
+        />
+        <a
+          href={"https://pubmed.ncbi.nlm.nih.gov/" + phrase.pmid}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          go to article
+        </a>
       </div>
     </div>
   );
