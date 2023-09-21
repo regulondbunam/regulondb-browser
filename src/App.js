@@ -24,6 +24,7 @@ import GensorUnit from "./apps/gensorUnit"
 import AboutUs from './apps/aboutUs';
 import { EmbeddedSandbox } from './apps/wsSandbox';
 import Manual from './apps/manual';
+import ExperimentalDatasets from './apps/experimentalDatasets';
 
 //wsSandbox
 const router = createBrowserRouter([
@@ -160,6 +161,20 @@ const router = createBrowserRouter([
                     path: ":info"
                   }
                 ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        path: "datasets",
+        element: <ExperimentalDatasets />,
+        children: [
+          {
+            path: ":dataset",
+            children: [
+              {
+                path: ":fileInfo",
               }
             ]
           }
