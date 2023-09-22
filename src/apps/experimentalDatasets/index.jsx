@@ -111,8 +111,8 @@ export default function ExperimentalDatasets() {
   }
 
   if (data) {
-    const listFilesNames = data.listAllFileNames;
-
+    let listFilesNames = [...data.listAllFileNames]
+    listFilesNames.sort();
     if (idFile) {
       const fileName = listFilesNames.find((fileName) => fileName === idFile);
       if (!fileName) {
