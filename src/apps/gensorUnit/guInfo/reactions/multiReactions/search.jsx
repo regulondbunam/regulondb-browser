@@ -195,7 +195,7 @@ function MenuElement({ title, elements, cy, onClose }) {
                 sx={{ backgroundColor: "#d5d5d7" }}
                 key={"guMenuElement" + element + "_" + i}
               >
-                <p>{element.toLowerCase()}</p>
+                <p>{element}</p>
               </MenuItem>
             );
           })}

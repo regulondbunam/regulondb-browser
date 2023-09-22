@@ -10,6 +10,7 @@ import DataVerifier from "./utils";
 import NavigationTabs from "./tab/NavigationTabs";
 import AnchorNav from "./anchorNav";
 import FilterTable from "./filterTable";
+import Circular from "./spinners";
 //import { Tabs } from "./web/tab/tabs";
 //import Header from "./web/layout/header";
 //import TableI from "./output/table/table"
@@ -21,6 +22,7 @@ export {
   AnchorNav,
   Button, IconButton, DropDown, Split,
   Cover,
+  Circular,
   Card,
   DataVerifier,
   FilterTable,

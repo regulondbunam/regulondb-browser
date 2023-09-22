@@ -6,6 +6,8 @@ import { getRelatedIdsByOperonData } from "./operon/related_Ids";
 import { useGetSigmulonById, useGetSigmulonBySearch } from "./sigmulon";
 import {useGetAllGus, useGetGuById} from "./gensorUnit";
 import { useGetAllGenes } from "./coexpression";
+import { useGetPhraseByObjectId } from "./phrases";
+import { useGetDataFile, useLazyGetDataFile } from "./dataOfFile";
 
 export {
     useGetRegulonData, useGetRegulonBySearch,
@@ -13,5 +15,7 @@ export {
     useGetObjectList,
     useGetOperonByID, useGetOperonByTuId, useGetOperonBySearch, useGetOperonByAdvancedSearch, getRelatedIdsByOperonData,
     useGetSigmulonById, useGetSigmulonBySearch,
-    useGetAllGus, useGetGuById
+    useGetAllGus, useGetGuById,
+    useGetPhraseByObjectId,
+    useGetDataFile, useLazyGetDataFile
 }

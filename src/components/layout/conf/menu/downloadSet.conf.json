@@ -20,9 +20,9 @@
         },
         {
             "id": "ht",
-            "title": "High-throughput Datasets",
-            "link": "/htweb",
-            "state": "disabled",
+            "title": "Experimental Datasets",
+            "link": "/datasets",
+            "state": "enabled",
             "type": "LINK"
         },
         {
