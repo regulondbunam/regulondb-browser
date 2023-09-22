@@ -6,7 +6,7 @@ export const query_GET_DATA_FILE = gql`query GetDataOfFile($fileName: String) {
       citation
       columnsDetails
       contact {
-        personName
+        person
         email
         webPage
       }

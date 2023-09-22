@@ -1,6 +1,6 @@
 import React from "react";
 import "./exData.css";
-import { Cover, DataVerifier } from "../../components/ui-components";
+import { Cover, DataVerifier, Circular } from "../../components/ui-components";
 import DownloadIcon from "@mui/icons-material/Download";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import Button from "@mui/material/Button";
@@ -8,7 +8,240 @@ import Tooltip from "@mui/material/Tooltip";
 import { Link, useParams } from "react-router-dom";
 import BrowserFilter from "./browserFilter";
 import { useLazyGetDataFile } from "../../components/webservices";
+import { gql, useQuery } from "@apollo/client";
+
+const query_GET_AllFilesNames = gql`
+  query Query {
+    listAllFileNames
+  }
+`;
+
+function formatMetaData(str = "") {
+  /*let newStr = ""
+  for (let index = 0; index < str.length; index += 50) {
+    let endCut = 50 > str.length ? str.length : 50
+    newStr += str.slice(index,endCut)
+  }*/
+  return str.replace("\t", "\n#\t");
+}
+
+export default function ExperimentalDatasets() {
+  const {
+    data,
+    loading: loadingFilesNames,
+    error,
+  } = useQuery(query_GET_AllFilesNames);
+  const [getFile, { loading: loadingFileData }] = useLazyGetDataFile();
+  const { idFile } = useParams();
+
+  const handleDownload = (file) => {
+    //console.log(file);
+    switch (file.path.type) {
+      case "graphQLservice":
+        getFile({
+          variables: { fileName: file.name },
+          onCompleted: (data) => {
+            const fileData = data.getDataOfFile;
+            //console.log(fileData);
+            let fileInfo = "";
+            if (DataVerifier.isValidString(fileData.license)) {
+              fileInfo +=
+                "# Copies and Copyright-Notice \n#\t" +
+                formatMetaData(fileData.license) +
+                "\n#\n";
+            }
+            if (DataVerifier.isValidString(fileData.citation)) {
+              fileInfo +=
+                "# Citation\n#\t" + formatMetaData(fileData.citation) + "\n";
+            }
+            if (DataVerifier.isValidObject(fileData.contact)) {
+              fileInfo += `# Contact\n${
+                DataVerifier.isValidString(fileData.personName)
+                  ? "#\tperson:" + fileData.personName + "\n"
+                  : ""
+              }${
+                DataVerifier.isValidString(fileData.email)
+                  ? "#\temail:" + fileData.email + "\n"
+                  : ""
+              }${
+                DataVerifier.isValidString(fileData.webPage)
+                  ? "#\twebPage:" + fileData.webPage + "\n"
+                  : ""
+              }`;
+            }
+            if (DataVerifier.isValidString(fileData.creationDate)) {
+              fileInfo += "#Date: " + fileData.creationDate + "\n";
+            }
+            if (DataVerifier.isValidString(fileData.content)) {
+              fileInfo += fileData.content;
+            }
+            //console.log(fileInfo);
+            const element = document.createElement("a");
+            element.setAttribute(
+              "href",
+              "data:text/plain;charset=utf-8," + encodeURIComponent(fileInfo)
+            );
+            element.setAttribute("download", fileData.fileName);
+            element.style.display = "none";
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+            element.remove();
+          },
+          onError: (error) => {
+            console.log(error);
+          },
+        });
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  if (loadingFilesNames) {
+    return (
+      <div>
+        <Cover>
+          <h1>Loading Files...</h1>
+        </Cover>
+        <Circular />
+      </div>
+    );
+  }
+
+  if (data) {
+    const listFilesNames = data.listAllFileNames;
+
+    if (idFile) {
+      const fileName = listFilesNames.find((fileName) => fileName === idFile);
+      if (!fileName) {
+        return <>there is no file with this name or id:{idFile}</>;
+      }
+      return (
+        <BrowserFilter
+          fileName={fileName}
+          filePath={{
+            url: "",
+            type: "graphQLservice",
+          }}
+          file={{
+            name: fileName,
+            type: "table",
+          }}
+        />
+      );
+    }
+    return (
+      <div>
+        <Cover>
+          <h1>Downloadable Experimental Datasets</h1>
+        </Cover>
+        <div style={{ margin: "1% 5% 1% 5%" }}>
+          <table className="tableED">
+            <thead>
+              <tr>
+                <th>File</th>
+                <th>Download</th>
+                <th>Browse and Filter</th>
+              </tr>
+            </thead>
+            <tbody>
+              {listFilesNames.map((fileName, i) => {
+                return (
+                  <tr key={"file_" + fileName + "_" + i}>
+                    <td>{fileName}</td>
+                    <td>
+                      <Tooltip title="Download File">
+                        <Button
+                          disabled={loadingFileData}
+                          onClick={() => {
+                            handleDownload({
+                              id: fileName,
+                              name: fileName,
+                              path: {
+                                url: "",
+                                type: "graphQLservice",
+                              },
+                              version: "",
+                              format: "tsv",
+                              type: "table",
+                            });
+                          }}
+                          variant="outlined"
+                        >
+                          <DownloadIcon />
+                        </Button>
+                      </Tooltip>
+                    </td>
+                    <td>
+                      <Tooltip title="Browse & Filter">
+                        <Link to={"/datasets/" + fileName}>
+                          <Button variant="outlined">
+                            <ManageSearchIcon />
+                          </Button>
+                        </Link>
+                      </Tooltip>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  }
+
+  return <></>;
+}
+
 /*
+{CATEGORIES_FILE.map((category, i) => {
+                return (
+                  <React.Fragment key={"category_" + i + "_" + category.id}>
+                    {category.files.map((file, i) => {
+                      return (
+                        <tr
+                          key={
+                            "file_" +
+                            file.id +
+                            "_" +
+                            i +
+                            "_category_" +
+                            category.id
+                          }
+                        >
+                          <td>{file.name}</td>
+                          <td>
+                            <Tooltip title="Download File">
+                              <Button
+                                disabled={loadingFileData}
+                                onClick={() => {
+                                  handleDownload(file);
+                                }}
+                                variant="outlined"
+                              >
+                                <DownloadIcon />
+                              </Button>
+                            </Tooltip>
+                          </td>
+                          <td>
+                            <Tooltip title="Browse & Filter">
+                              <Link to={"/datasets/" + file.id}>
+                                <Button variant="outlined">
+                                  <ManageSearchIcon />
+                                </Button>
+                              </Link>
+                            </Tooltip>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </React.Fragment>
+                );
+              })}
+
  {
     id: "Files01",
     description: "E. coli K-12 genome sequence used into RegulonDB",
@@ -48,7 +281,7 @@ import { useLazyGetDataFile } from "../../components/webservices";
       },
     ],
   },
-*/
+
 const CATEGORIES_FILE = [
  
   {
@@ -179,168 +412,7 @@ const CATEGORIES_FILE = [
     ],
   },
 ];
-
-function formatMetaData(str=""){
-  /*let newStr = ""
-  for (let index = 0; index < str.length; index += 50) {
-    let endCut = 50 > str.length ? str.length : 50
-    newStr += str.slice(index,endCut)
-  }*/
-  return str.replace("\t","\n#\t")
-}
-
-export default function ExperimentalDatasets() {
-  const [getFile, { loading }] = useLazyGetDataFile();
-  const { idFile } = useParams();
-
-  const handleDownload = (file) => {
-    //console.log(file);
-    switch (file.path.type) {
-      case "graphQLservice":
-        getFile({
-          variables: { fileName: file.name },
-          onCompleted: (data) => {
-            const fileData = data.getDataOfFile;
-            //console.log(fileData);
-            let fileInfo = "";
-            if (DataVerifier.isValidString(fileData.license)) {
-              fileInfo += "# Copies and Copyright-Notice \n#\t" +formatMetaData(fileData.license)+ "\n#\n";
-            }
-            if (DataVerifier.isValidString(fileData.citation)) {
-              fileInfo += "# Citation\n#\t" + formatMetaData(fileData.citation)+ "\n";
-            }
-            if (DataVerifier.isValidObject(fileData.contact)) {
-              fileInfo += `# Contact\n${
-                DataVerifier.isValidString(fileData.personName) ?
-                "#\tperson:" + fileData.personName + "\n" : ""
-              }${
-                DataVerifier.isValidString(fileData.email) ?
-                "#\temail:" + fileData.email + "\n" : ""
-              }${
-                DataVerifier.isValidString(fileData.webPage) ?
-                "#\twebPage:" + fileData.webPage + "\n" : ""
-              }`;
-            }
-            if (DataVerifier.isValidString(fileData.creationDate)) {
-              fileInfo += "#Date: " + fileData.creationDate + "\n";
-            }
-            if (DataVerifier.isValidString(fileData.content)) {
-              fileInfo += fileData.content;
-            }
-            //console.log(fileInfo);
-            const element = document.createElement("a");
-            element.setAttribute(
-              "href",
-              "data:text/plain;charset=utf-8," + encodeURIComponent(fileInfo)
-            );
-            element.setAttribute("download", fileData.fileName);
-            element.style.display = "none";
-            document.body.appendChild(element);
-            element.click();
-            document.body.removeChild(element);
-            element.remove();
-          },
-          onError: (error) => {
-            console.log(error);
-          },
-        });
-        break;
-      
-      default:
-        break;
-    }
-
-    /*const element = document.createElement('a');
-        //element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileInfo));
-        element.setAttribute('download', file.name);
-        element.style.display = 'none';
-        document.body.appendChild(element);
-        element.click();
-        document.body.removeChild(element);
-        */
-  };
-  if (idFile) {
-    let file;
-    // eslint-disable-next-line no-unused-vars
-    const category = CATEGORIES_FILE.find((category) => {
-      file = category.files.find((file) => file.id === idFile);
-      if (file) {
-        return true;
-      }
-      return false;
-    });
-    if (!file) {
-      return <>there is no file with this id:{idFile}</>;
-    }
-    return (
-      <BrowserFilter fileName={file.name} filePath={file.path} file={file} />
-    );
-  }
-  return (
-    <div>
-      <Cover>
-        <h1>Downloadable Experimental Datasets</h1>
-      </Cover>
-      <div style={{ margin: "1% 5% 1% 5%" }}>
-        <table className="tableED">
-          <thead>
-            <tr>
-              <th>File</th>
-              <th>Download</th>
-              <th>Browse and Filter</th>
-            </tr>
-          </thead>
-          <tbody>
-            {CATEGORIES_FILE.map((category, i) => {
-              return (
-                <React.Fragment key={"category_" + i + "_" + category.id}>
-                  {category.files.map((file, i) => {
-                    return (
-                      <tr
-                        key={
-                          "file_" +
-                          file.id +
-                          "_" +
-                          i +
-                          "_category_" +
-                          category.id
-                        }
-                      >
-                        <td>{file.name}</td>
-                        <td>
-                          <Tooltip title="Download File">
-                            <Button
-                              disabled={loading}
-                              onClick={() => {
-                                handleDownload(file);
-                              }}
-                              variant="outlined"
-                            >
-                              <DownloadIcon />
-                            </Button>
-                          </Tooltip>
-                        </td>
-                        <td>
-                          <Tooltip title="Browse & Filter">
-                            <Link to={"/datasets/" + file.id}>
-                              <Button variant="outlined">
-                                <ManageSearchIcon />
-                              </Button>
-                            </Link>
-                          </Tooltip>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </React.Fragment>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-}
+*/
 
 /**
   {i === 0 && (
