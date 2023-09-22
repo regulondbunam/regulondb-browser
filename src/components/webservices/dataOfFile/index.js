@@ -1,4 +1,4 @@
-import { useQuery} from "@apollo/client";
+import { useQuery, useLazyQuery} from "@apollo/client";
 import { DataVerifier } from "../../ui-components";
 import { query_GET_DATA_FILE } from "./queries";
 
@@ -23,4 +23,10 @@ export function useGetDataFile(fileName) {
       }
 
     return {fileData, loading, error}
+}
+
+export function useLazyGetDataFile() {
+  const [getFile, {loading} ]= useLazyQuery(query_GET_DATA_FILE)
+
+  return [getFile, {loading}]
 }
