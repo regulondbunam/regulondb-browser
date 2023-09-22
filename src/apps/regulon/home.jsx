@@ -12,6 +12,7 @@ const query_GET_ALL_REGULON = gql`
         _id
         regulator {
           name
+          abbreviatedName
         }
         summary {
           bindingSites {
@@ -106,7 +107,7 @@ function formatData(regulons = []) {
         //id: regulator.name+"_"+index,
         //_name: <Link value={regulator.name} to={"/regulon/" + _id} >{regulator.name}</Link>,
         id: _id,
-        _name: regulator.name,
+        _name: regulator.abbreviatedName,
         _genes: summary.genes.total,
         _operon: summary.operons.total,
         _tu: summary.transcriptionUnits.total,

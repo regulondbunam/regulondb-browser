@@ -106,8 +106,16 @@
       "options": [
         {
           "id": "api-ws",
-          "title": "Web services PlayGround",
-          "link" : "/graphql"
+          "title": "Web services in PlayGround",
+          "link" : "/graphql",
+          "type": "graphql"
+        },
+        {
+          "id": "api-ws2",
+          "title":  "Web services in ApolloSandbox",
+          "link" : "/wsSandbox",
+          "type": "sandbox",
+          "state": "enabled"
         }
       ]
     },

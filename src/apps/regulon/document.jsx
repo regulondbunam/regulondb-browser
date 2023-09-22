@@ -9,6 +9,7 @@ import RegulatoryInteractions from "./_oldDetails/regulatoryInteractions";
 import Regulator from "./_oldDetails/regulator";
 import Citations from "./_oldDetails/Citations";
 import Terms from "./_oldDetails/terms";
+import RelatedTool from "./related";
 
 
 
@@ -18,8 +19,8 @@ const cardOptions = {
 
 export default function Document({ regulonData, section }) {
 
+    const related = <RelatedTool regulonData={regulonData} />
     
-
     const sections = useMemo(() => {
 
         const {
@@ -37,7 +38,7 @@ export default function Document({ regulonData, section }) {
             _sections.push({
                 id: "RegulonTab_Regulator",
                 label: "Regulator",
-                title: "Regulator "+regulator.name,
+                title: "Regulator "+regulator.abbreviatedName,
                 component: <div style={{ overflow: "auto" }} >
                     <Regulator regulator={regulator} allCitations={allCitations} />
                 </div>,
@@ -89,8 +90,8 @@ export default function Document({ regulonData, section }) {
 
     return (
         <div>
-            <AnchorNav sections={sections} cardOptions={cardOptions}
-                title={`Regulon ${regulonData.regulator.name}`} />
+            <AnchorNav sections={sections} cardOptions={cardOptions} aside={related}
+                title={`Regulon ${regulonData.regulator.abbreviatedName}`} />
         </div>
     )
 }

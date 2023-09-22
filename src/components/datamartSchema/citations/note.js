@@ -107,7 +107,7 @@ export const NoteCitations = (allCitations, note) => {
     const BR = /(\r\n|\r|\n)/
     while (BR.exec(note)) {
         note = note.replace(BR, '<br></br>')
-        console.log("a");
+        //console.log("a");
     };
     if (PP.exec(note)) {
         while (PP.exec(note)) {

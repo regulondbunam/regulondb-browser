@@ -6,14 +6,14 @@
   "options": [
     {
       "id": "api_sw_docker",
-      "title": "Doker",
-      "link": "/doker",
+      "title": "Docker",
+      "link": "/docker",
       "type": "SUBMENU",
       "options":[
         {
           "id": "db_docker",
-          "title": "Doker",
-          "link" : "/doker",
+          "title": "Docker",
+          "link" : "/docker",
           "state": "disabled"
         }
       ]
@@ -49,7 +49,7 @@
           "id": "F-ui",
           "title": "components repository",
           "link" : "/testComponents",
-          "state": "enabled"
+          "state": "disabled"
         },
         {
           "id": "regulondb-browser",

@@ -33,17 +33,16 @@ function autocompleteFormat(geneList = []) {
   return options;
 }
 
-function InputGene({selectedGenes, optionList, dispatch}) {
+function InputGene({ selectedGenes, optionList, selectGene }) {
   const [wantedGene, setGene] = useState(null);
-  
-  
+
   const handleChange = (event, newValue) => {
     setGene(newValue);
   };
 
   const handleAddGene = () => {
     setGene(null);
-    dispatch({ type: "addGene", value: wantedGene.id });
+    selectGene(wantedGene.id);
   };
 
   const enableAdd = () => {
@@ -56,52 +55,58 @@ function InputGene({selectedGenes, optionList, dispatch}) {
 
   return (
     <div style={{ display: "flex" }}>
-            <Autocomplete
-              id="geneSelector"
-              size="small"
-              sx={{ width: 300 }}
-              options={optionList}
-              autoHighlight
-              getOptionDisabled={(option) => {
-                if (selectedGenes.find((geneId) => geneId === option.id)) {
-                  return true;
-                }
-                return false;
+      <Autocomplete
+        id="geneSelector"
+        size="small"
+        sx={{ width: 300 }}
+        options={optionList}
+        autoHighlight
+        getOptionDisabled={(option) => {
+          if (selectedGenes.find((geneId) => geneId === option.id)) {
+            return true;
+          }
+          return false;
+        }}
+        renderOption={(props, option) => (
+          <div {...props}>
+            <p
+              dangerouslySetInnerHTML={{
+                __html: `${option.name}, ${option.productsName}`,
               }}
-              renderOption={(props, option) => (
-                <div {...props}>
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html: `${option.name}, ${option.productsName}`,
-                    }}
-                  />
-                </div>
-              )}
-              renderInput={(params) => (
-                <TextField {...params} label="Search Gene" />
-              )}
-              value={wantedGene}
-              onChange={handleChange}
             />
-            <button disabled={enableAdd()} onClick={handleAddGene}>
-              Add
-            </button>
           </div>
-  )
+        )}
+        renderInput={(params) => <TextField {...params} label="Search Gene" />}
+        value={wantedGene}
+        onChange={handleChange}
+      />
+      <button disabled={enableAdd()} onClick={handleAddGene}>
+        Add
+      </button>
+    </div>
+  );
 }
 
-export default function Selected({ geneList, dispatch, selectedGenes }) {
-  
+export default function Selected({
+  geneList,
+  genesId,
+  selectGene,
+  deleteGene,
+  setDemo,
+  reset
+}) {
   const optionList = useMemo(() => {
     return autocompleteFormat(geneList);
   }, [geneList]);
-  
+
   let genes = [];
-  if (DataVerifier.isValidArray(selectedGenes)) {
-    selectedGenes.forEach((geneId) => {
+  if (DataVerifier.isValidArray(genesId)) {
+    genesId.forEach((geneId) => {
       let gene = geneList.find((g) => g._id === geneId);
       if (gene) {
-        genes.push(gene);
+        if (!genes.find((gn) => gn._id === gene._id)) {
+          genes.push(gene);
+        }
       }
     });
   }
@@ -113,24 +118,19 @@ export default function Selected({ geneList, dispatch, selectedGenes }) {
         selectGenes.push(optionList[indexOption].id);
       }
     }
-    dispatch({ type: "randomGene", value: selectGenes });
+    setDemo(selectGenes)
   };
-  
 
   const handleDeleteGene = (id) => {
-    dispatch({ type: "deleteGene", value: id });
+    deleteGene(id);
   };
-
-  
 
   const handleCleanGenes = () => {
-    dispatch({ type: "cleanGene" });
+    reset()
   };
 
-  
-
   const enableDemo = () => {
-    if (DataVerifier.isValidArray(selectedGenes)) {
+    if (DataVerifier.isValidArray(genesId)) {
       return true;
     } else {
       return false;
@@ -140,11 +140,15 @@ export default function Selected({ geneList, dispatch, selectedGenes }) {
   return (
     <div>
       <div>
-      <InputGene selectedGenes={selectedGenes} optionList={optionList} dispatch={dispatch} />
+        <InputGene
+          selectedGenes={genesId}
+          optionList={optionList}
+          selectGene={selectGene}
+        />
       </div>
       <br />
       <div>
-        <Stack direction="row" useFlexGap flexWrap="wrap">
+        <Stack direction="row" flexWrap="wrap">
           {genes.map((gene) => {
             return (
               <HtmlTooltip
@@ -169,12 +173,18 @@ export default function Selected({ geneList, dispatch, selectedGenes }) {
                 }
               >
                 <Chip
-                  color="secondary"
+                  sx={{
+                    backgroundColor: "#ffffff",
+                    border: "1px solid #666666",
+                  }}
                   label={
-                    <p
-                      style={{ color: "#ffffff" }}
-                      dangerouslySetInnerHTML={{ __html: gene.name }}
-                    />
+                    <div>
+                      <p style={{ color: "#666666", fontSize: "8px" }}>Gene:</p>
+                      <p
+                        style={{ color: "#666666" }}
+                        dangerouslySetInnerHTML={{ __html: gene.name }}
+                      />
+                    </div>
                   }
                   onDelete={() => {
                     handleDeleteGene(gene._id);
@@ -196,7 +206,7 @@ export default function Selected({ geneList, dispatch, selectedGenes }) {
         >
           Demo
         </button>
-        <button onClick={handleCleanGenes}>Reset</button>
+        <button onClick={handleCleanGenes}>Clean</button>
       </div>
     </div>
   );

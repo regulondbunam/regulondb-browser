@@ -85,7 +85,7 @@ function TranscriptionUnit({ transcriptionUnits, idPanel = "regulates_tu" }) {
 
     return (
         <div>
-            <p ><b>{`Regulated transcription units: ${transcriptionUnits.length}`} </b></p>
+            <h3>{`Regulated transcription units: ${transcriptionUnits.length}`}</h3>
             <div id={idPanel}>
                 {
                     !_tuList

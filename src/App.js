@@ -22,8 +22,10 @@ import SummaryHistory from './apps/summaryHistory'
 import ReleaseNotes from './apps/releasesNotes';
 import GensorUnit from "./apps/gensorUnit"
 import AboutUs from './apps/aboutUs';
+import { EmbeddedSandbox } from './apps/wsSandbox';
+import Manual from './apps/manual';
 
-
+//wsSandbox
 const router = createBrowserRouter([
   {
     path: "/",
@@ -36,6 +38,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: "wsSandbox",
+        element: <EmbeddedSandbox />,
       },
       {
         path: "aboutUs",
@@ -154,6 +160,20 @@ const router = createBrowserRouter([
                     path: ":info"
                   }
                 ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        path: "manual",
+        element: <Manual />,
+        children: [
+          {
+            path: ":site",
+            children: [
+              {
+                path: ":section",
               }
             ]
           }

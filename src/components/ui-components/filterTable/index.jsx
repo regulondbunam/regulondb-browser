@@ -43,6 +43,7 @@ const fuzzyFilter = (row, columnId, value, addMeta) => {
 
 export default function FilterTable({
   columns,
+  disableOptions = false,
   data,
   getItemSize = () => {
     return 30;
@@ -87,15 +88,17 @@ export default function FilterTable({
   /**preGlobalFilteredRows={table.getPre} allColumns={allColumns} */
   return (
     <div>
-      <div className={style.options}>
-        <Options
-          globalFilter={globalFilter}
-          fileName={fileName}
-          setGlobalFilter={setGlobalFilter}
-          preGlobalFilteredRows={table.getGlobalFacetedRowModel}
-          {... table}
-        />
-      </div>
+      {!disableOptions && (
+        <div className={style.options}>
+          <Options
+            globalFilter={globalFilter}
+            fileName={fileName}
+            setGlobalFilter={setGlobalFilter}
+            preGlobalFilteredRows={table.getGlobalFacetedRowModel}
+            {...table}
+          />
+        </div>
+      )}
       <table className={style.table}>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => {
@@ -159,11 +162,11 @@ export default function FilterTable({
           })}
         </tbody>
       </table>
-      <div className={style.options}>
-        {table.getPageCount()>1&&(
+      {table.getPageCount() > 1 && (
+        <div className={style.options}>
           <Pagination table={table} />
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { useGetGenes } from "./getGeneInfo";
 import { useMemo} from "react";
-import CircularProgress from "@mui/material/CircularProgress";
 import { DataVerifier, FilterTable } from "../../../components/ui-components";
+import OTModal from "../ontologyTermsModal";
+
 
 const COLUMNS = [
   {
@@ -41,7 +41,7 @@ const COLUMNS = [
         <div>
           {regulators.map((regulator, index) => {
             return (
-              <Link to={"/regulon/" + regulator._id}>{regulator.name}</Link>
+              <Link to={"/regulon/" + regulator._id}><span style={{marginRight: "10px"}} dangerouslySetInnerHTML={{__html: regulator.name}}/></Link>
             );
           })}
         </div>
@@ -52,6 +52,9 @@ const COLUMNS = [
     id: "ontologyTerms",
     header: "Ontology Terms",
     accessorKey: "_terms",
+    cell: (info) => (
+      <OTModal products={info.row.original.products} />
+    ),
   },
 ];
 
@@ -88,40 +91,15 @@ function formatData(geneData = []) {
 }
 
 export default function Information({
-  dispatch,
-  selectedGenes,
-  genesInformation,
+  genes
 }) {
   const data = useMemo(() => {
-    return formatData(genesInformation);
-  }, [genesInformation]);
+    return formatData(genes);
+  }, [genes]);
   return (
     <div>
-      {selectedGenes.length !== genesInformation.length && (
-        <GetGeneInfo
-          selectedGenes={selectedGenes}
-          genesInformation={genesInformation}
-          dispatch={dispatch}
-        />
-      )}
       {DataVerifier.isValidArray(data) && <FilterTable columns={COLUMNS} data={data} />}
     </div>
   );
 }
 
-function GetGeneInfo({ selectedGenes, genesInformation, dispatch }) {
-  const { genesData } = useGetGenes(selectedGenes);
-  if (
-    DataVerifier.isValidArray(genesData) &&
-    (!DataVerifier.isValidArray(genesInformation) ||
-      selectedGenes.length !== genesInformation.length)
-  ) {
-    dispatch({ type: "updateGeneInfo", value: genesData });
-  }
-  //console.log(genesData);
-  return (
-    <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-      <CircularProgress />
-    </div>
-  );
-}

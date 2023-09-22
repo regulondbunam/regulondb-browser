@@ -23,10 +23,10 @@ function findParentNode(reactionComponents, addedElements) {
   reactionComponents.forEach((component) => {
     if (
       addedElements.includes(component.name) &&
-      component.function != "activator"
+      component.function !== "activator"
     ) {
       father = addedElements.filter((elemento) => {
-        return elemento.data.id == component.name;
+        return elemento.data.id === component.name;
       })[0];
     }
   });

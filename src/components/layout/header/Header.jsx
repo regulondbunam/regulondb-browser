@@ -4,12 +4,12 @@ import InputSearch from "../../../apps/search/InputSearch";
 import "./header.css";
 //import conf from './conf/header.conf.json'
 let eventName = "HEADER_UPDATE"
-const idElement = "layout_header";
+export const idHeader = "layout_header";
 
 export function UpdateHeader(isHome) {
   let detail = {isHome: isHome};
 
-  const HEADER = document.getElementById(idElement);
+  const HEADER = document.getElementById(idHeader);
   if (HEADER) {
     const HEADER_REACTION = new CustomEvent(eventName, {
       bubbles: true,
@@ -24,7 +24,7 @@ export default function Header({ isHome }) {
   const [_isHome,set_isHome] = useState(isHome)
 
     useEffect(()=>{
-      const HEADER = document.getElementById(idElement)
+      const HEADER = document.getElementById(idHeader)
       if(HEADER){
         HEADER.addEventListener(
           eventName,
@@ -39,7 +39,7 @@ export default function Header({ isHome }) {
   
 
   return (
-    <header  id={idElement} className="layout_header_background">
+    <header  id={idHeader} className="layout_header_background">
       <div className="header_right">
         <img
           className="layout_header_LogoRDB"

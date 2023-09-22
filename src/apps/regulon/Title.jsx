@@ -70,6 +70,6 @@ function Conformation({
   note = "",
   type = "",
 }) {
-  return <p><b>{name}</b>({type})</p>
+  return <p>{name}</p>
 }
 
