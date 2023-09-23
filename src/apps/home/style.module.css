@@ -1,37 +1,35 @@
 .cover{
     width: 100%;
-    height: 340px;
+    height: 300px;
     background-image: url("./media/coli.webp");
     background-color: #000000;
     background-position: center;
-    padding-top: 30px;
-    padding-bottom: 50px;
-    padding-right: 2%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    padding: 1% 10% 2% 10%;
 }
+.coverTitle{
+    width: 100%;
+}
+
+.coverH1{
+    color: white;
+    font-size: 4vw;
+}
+
+.coverH2{
+    color: white;
+    font-size: 2vw;
+}
+
 .coverTop{
     height: 100px;
     display: flex;
     justify-content: space-between;
 }
-.coverTitle{
-    width: 100%;
-}
-.coverH1{
-    color: white;
-    font-size: 57px;
-    padding-left: 5%;
-}
-.coverH2{
-    color: white;
-    font-size: 24px;
-    padding-left: 8%;
-}
+
 .coverComet{
     display: flex;
 }
+
 .coverCometText{
     width: 114px;
     color: white;
@@ -40,8 +38,14 @@
     margin-right: 10px;
 }
 .coverUnamLogo{
-    background-image: url("./media/unamLogo.png");
-    width: 90px;
+    width: 100%;
+    max-width: 90px;
+    height: auto;
+}
+
+.coverSearch{
+    width: 100%;
+    margin: 2%;
 }
 
 .coverBottom{
