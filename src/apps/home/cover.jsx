@@ -2,6 +2,11 @@ import { Link } from "react-router-dom";
 import { useSpring, animated } from "@react-spring/web";
 import Search from "./search";
 import unamLogo from "./media/unamLogo.png";
+import ecoliImg from "./media/EcoliRegulonDB.webp";
+import ecoliImgT from "./media/EcoliRegulonDBT.webp";
+import ecoliImgT3 from "./media/EcoliRegulonDBT3.webp";
+
+
 import Style from "./style.module.css";
 
 const searchLinks = [
@@ -52,22 +57,19 @@ export function Cover(params) {
       className={Style.cover}
     >
       <div id={"homeCoverTitle"} className="noAnimate">
+        <img
+          className={Style.coverEcoliImg}
+          src={ecoliImgT3}
+          alt="Ecoli RegulonDB"
+        />
         <div className={Style.coverTop}>
           <div className={Style.coverTitle}>
-            <h1 className={Style.coverH1}>The RegulonDB Browser</h1>
+            <h1 className={Style.coverH1}>The RegulonDB Database</h1>
             <h2 className={Style.coverH2}>
-              Escherichia coli K-12 Transcriptional Regulatory Network
+              <i>Escherichia coli</i> K-12 Transcriptional Regulatory Network
             </h2>
           </div>
-          <div className={Style.coverComet}>
-            <div>
-              <img
-                className={Style.coverUnamLogo}
-                src={unamLogo}
-                alt="Logo RegulonDB"
-              />
-            </div>
-          </div>
+
         </div>
       </div>
       <br />

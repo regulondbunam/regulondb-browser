@@ -5,19 +5,20 @@
     background-color: #000000;
     background-position: center;
     padding: 1% 10% 2% 10%;
+    background-color: rgba(93, 93, 255, 0.281);
 }
 .coverTitle{
     width: 100%;
 }
 
 .coverH1{
-    color: white;
+    color: rgb(255, 255, 255);
     font-size: 4vw;
 }
 
 .coverH2{
-    color: white;
-    font-size: 2vw;
+    color: rgb(255, 255, 255);
+    font-size: 1.5vw;
 }
 
 .coverTop{
@@ -37,6 +38,14 @@
     text-align: end;
     margin-right: 10px;
 }
+
+.coverEcoliImg{
+    position: absolute;
+    width: 1360px;
+    right: -503px;
+    top: -314px;
+    z-index: 1;
+}
 .coverUnamLogo{
     width: 100%;
     max-width: 90px;
@@ -44,8 +53,10 @@
 }
 
 .coverSearch{
-    width: 100%;
+    width: 80%;
+    position: relative;
     margin: 2%;
+    z-index: 5;
 }
 
 .coverBottom{
