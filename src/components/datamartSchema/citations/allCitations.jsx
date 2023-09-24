@@ -128,6 +128,7 @@ export default function useIndexedCitation(allCitations, OrderProperties) {
   const { publications, evidences, indexedCitations } = useMemo(() => {
     return getUniquePublication(allCitations);
   }, [allCitations]);
+  //console.log(allCitations);
   return { publications, evidences, indexedCitations };
 }
 
@@ -184,8 +185,20 @@ function getUniquePublication(allCitations = []) {
     allCitations.forEach((citation) => {
       let publication = null;
       let evidence = null;
-      const hasEvidence = DataVerifier.isValidObject(citation.evidence);
-      const hasPublication = DataVerifier.isValidObject(citation.publication);
+      const verifiedPublication = ()=>{
+        if (DataVerifier.isValidObject(citation.publication)) {
+          return DataVerifier.isValidString(citation.publication._id)
+        }
+        return false
+      }
+      const verifiedEvidence = ()=>{
+        if (DataVerifier.isValidObject(citation.evidence)) {
+          return DataVerifier.isValidString(citation.evidence._id)
+        }
+        return false
+      }
+      const hasEvidence = verifiedEvidence();
+      const hasPublication = verifiedPublication();
       if (hasPublication) {
         if (!publications.hasOwnProperty(citation.publication._id)) {
           publications[citation.publication._id] = {
@@ -282,6 +295,7 @@ export function Evidences({ evidences, publications, small = false }) {
 }
 
 export function Publications({ evidences, publications, small = false }) {
+  //console.log(publications);
   return (
     <>
       <h3>Publications</h3>

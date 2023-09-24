@@ -134,7 +134,7 @@ function ParagraphCitations({
                   citation?.publication?._id === cit?.publication?._id &&
                   citation?.evidence?._id === cit?.evidence?._id
               );
-              console.log(_citation);
+              //console.log(_citation);
             return (
               <div>
                 <ModalCitation
