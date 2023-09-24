@@ -73,6 +73,9 @@ Stack: It is used to create and control the arrangement of elements in a vertica
 import PropTypes from "prop-types";
 import { ModalCitation } from "./modal";
 import Stack from "@mui/material/Stack";
+import { CITATION_SIZE } from ".";
+import { useMemo } from "react";
+import { DataVerifier } from "../../ui-components";
 
 /**
  * Description placeholder
@@ -85,14 +88,60 @@ const PROP_TYPES = {
   list: PropTypes.bool,
 };
 
-/**
- * Description placeholder
- *
- * @type {{ list: boolean; }}
- */
-export const DEFAULT_ParagraphCitations_PROPS = {
-  list: false,
+export const PC_VARIANTS = {
+  list: "list",
+  paragraph: "paragraph",
 };
+
+const verifiedPublication = (citation) => {
+  if (DataVerifier.isValidObject(citation.publication)) {
+    return DataVerifier.isValidString(citation.publication._id) ? citation.publication._id : undefined
+  }
+  return undefined;
+};
+const verifiedEvidence = (citation) => {
+  if (DataVerifier.isValidObject(citation.evidence)) {
+    return DataVerifier.isValidString(citation.evidence._id) ? citation.evidence._id : undefined;
+  }
+  return undefined;
+};
+
+function formatParagraph(citations = [], indexedCitations) {
+  let publications = {};
+  if (DataVerifier.isValidArray(citations)) {
+    citations.forEach((citation) => {
+      const publicationId = verifiedPublication(citation)
+      const evidenceId = verifiedEvidence(citation)
+      let indexedCitation = indexedCitations.find(
+        /**
+         * Find citation in indexed citation
+         *
+         * @param {object} citation
+         * @returns {boolean}
+         */
+        (_indexedCitation) => {
+          const indxPublicationId = verifiedPublication(_indexedCitation)
+          const indxEvidenceId = verifiedEvidence(_indexedCitation)
+          return publicationId === indxPublicationId && evidenceId === indxEvidenceId
+        }
+      );
+      const indxPublicationId = verifiedPublication(indexedCitation) ? indexedCitation.publication._id : "noPub"
+      const evidence = verifiedEvidence(indexedCitation) ? indexedCitation.evidence : undefined
+      if (!publications.hasOwnProperty(indxPublicationId)) {
+        publications[indxPublicationId] = {
+          ...indexedCitation.publication,
+          evidences: evidence ? [evidence] : []
+        }
+      }else{
+        publications[indxPublicationId] = {
+          ...publications[indxPublicationId],
+          evidences: evidence ? [...publications[indxPublicationId].evidences, evidence] : publications[indxPublicationId].evidences
+        }
+      }
+    });
+  }
+  return publications;
+}
 
 /**
  * Description placeholder
@@ -107,11 +156,15 @@ export const DEFAULT_ParagraphCitations_PROPS = {
 function ParagraphCitations({
   allCitations,
   citations,
-  variant = "paragraph",
+  variant = PC_VARIANTS.paragraph,
+  citationSize = CITATION_SIZE.LARGE,
 }) {
+  const publications = useMemo(() => {
+    return formatParagraph(citations, allCitations);
+  }, [citations, allCitations]);
   return (
     <Stack direction="row" useFlexGap flexWrap="wrap">
-      {citations.map(
+      {Object.keys(publications).map(
         /**
          * Description placeholder
          *
@@ -119,41 +172,22 @@ function ParagraphCitations({
          * @param {string} indx
          * @returns {React.JSX}
          */
-        (cit, indx) => {
-          try {
-            //console.log(cit);
-            let _citation =
-              allCitations.find(
-                /**
-                 * Description placeholder
-                 *
-                 * @param {object} citation
-                 * @returns {boolean}
-                 */
-                (citation) =>
-                  citation?.publication?._id === cit?.publication?._id &&
-                  citation?.evidence?._id === cit?.evidence?._id
-              );
-              //console.log(_citation);
+        (publicationId, indx) => {
+          const publication = publications[publicationId]
             return (
               <div>
                 <ModalCitation
-                  key={`CitaitopnPH_${cit?.publication?._id}_${cit?.evidence?._id}_${indx}`}
-                  evidence={_citation.evidence}
-                  publication={_citation.publication}
+                  key={`publication_${publication.index}_${indx}_${publicationId}`}
+                  publication={publication}
+                  citationSize={citationSize}
                 />
               </div>
             );
-          } catch (error) {
-            return null;
-          }
         }
       )}
     </Stack>
   );
 }
-
-ParagraphCitations.defaultProps = DEFAULT_ParagraphCitations_PROPS;
 
 ParagraphCitations.propTypes = PROP_TYPES;
 

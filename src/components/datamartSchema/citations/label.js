@@ -1,4 +1,5 @@
 import { DataVerifier } from "../../ui-components";
+import { CITATION_SIZE } from ".";
 
 /**
  * Citation label in specific format
@@ -8,17 +9,14 @@ import { DataVerifier } from "../../ui-components";
  * @param {number} index citation index
  * @param {object} publication is a type Publication of datamart
  * @param {object} evidence is a type Evidence of datamart
- * @param {boolean} [small=true] format of label
  * @returns {String}
  */
 export function labelCitation({
   publication = {},
   evidence = {},
-  evidences = {},
-  small = true,
+  citationSize = CITATION_SIZE.LARGE,
   isEvidence = false,
-  showIndex = true,
-  index,
+  showIndex = true
 }) {
   if (isEvidence) {
     let code = "";
@@ -28,49 +26,71 @@ export function labelCitation({
       }
       code = `[${evidence.code}]`;
     }
-    return `${showIndex ? "e" + evidence.index + "." : ""}${
-      evidence?.name ? evidence.name : ""
-    } ${code}`;
-  }
 
-  const { authors, citation, year } = publication;
-
-  /**
-   * Description placeholder
-   *
-   * @type {string}
-   */
-  const numIndex = `${showIndex ? publication.index + "." : ""}`;
-  //W->weak S->strong
-  let code = "";
-  if(DataVerifier.isValidObject(evidence)){
-    if (evidence?.code) {
-      if (evidence.type === "S") {
-        code = `Evidence: <b>[${evidence.code}]</b>`;
-      }
-      code = `Evidence: [${evidence.code}]`;
+    switch (citationSize) {
+      case CITATION_SIZE.LARGE:
+        return `${showIndex ? "e" + evidence.index + "." : ""}${
+          evidence?.name ? evidence.name : ""
+        } ${code}`;
+      case CITATION_SIZE.SMALL:
+        return `${showIndex ? "e" + evidence.index + "." : ""}${code}`;
+      case CITATION_SIZE.ONLY_INDEX:
+        return `[e${evidence.index}]`;
+      default:
+        return `${showIndex ? "e" + evidence.index + "." : ""}${
+          evidence?.name ? evidence.name : ""
+        } ${code}`;
     }
   }
-  /*
+  let index = "",
+    authors = "",
+    citation = "",
+    year = "";
 
-  if (DataVerifier.isValidArray(publication.evidences)) {
-    let evidenceLabel =
-      publication.evidences.length < 2 ? "Evidence: " : "Evidences: ";
-    publication.evidences.forEach((evidenceId) => {
-      const _evidence = evidences[evidenceId];
-      if (evidenceId.type === "S") {
-        codes += `${evidenceLabel}<b>[${_evidence.code}]</b>`;
-      }
-      codes += `${evidenceLabel}[${_evidence.code}]`;
-    });
-  }*/
+  const evidences = publication.evidences
 
-  if (small) {
-    if (DataVerifier.isValidArray(authors)) {
-      return `${numIndex} ${authors[0]}., et al. ${year ? year : ""} ${code}`;
-    }
-    return ``;
+  if (publication?._id) {
+    index = showIndex ? publication.index : ""
+    authors = publication.authors;
+    citation = publication.citation;
+    year = publication.year;
   }
-  return `${numIndex} ${citation ? `${citation},` : ""} ${code}`;
-  // [i]autor., et al. año [evidence]
+
+  const evidenceCode = () => {
+    let codesA = []
+    let codesIndexA = []
+    if(DataVerifier.isValidArray(evidences)){
+      evidences.forEach(evidence => {
+        if (DataVerifier.isValidObject(evidence)) {
+          if (evidence?.code) {
+            if (evidence.type === "S") {
+              codesA.push(`<b>[${evidence.code}]</b>`);
+              codesIndexA.push(`<b>e${evidence.index}</b>`);
+            }
+            codesA.push(`[${evidence.code}]`);
+            codesIndexA.push(`e${evidence.index}`);
+
+          }
+        }
+      });
+    }
+    let codes = ""
+    if(codesA.length>0){
+      codes = codesA.length > 1 ? "Evidences: "+codesA.join(" ") : "Evidence: "+codesA.join(" ")
+    }
+    return {codes, codesIndex: codesIndexA.join(", ") }
+  }
+
+  const {codes, codesIndex} = evidenceCode()
+  
+  switch (citationSize) {
+    case CITATION_SIZE.LARGE:
+      return `${index} ${citation ? `${citation},` : ""} ${codes}`;
+    case CITATION_SIZE.SMALL:
+      return `${index} ${authors[0]}., et al. ${year ? year : ""} ${codes}`;
+    case CITATION_SIZE.ONLY_INDEX:
+      return `[${index},${codesIndex}]`;
+    default:
+      return `${index} ${citation ? `${citation},` : ""} ${codes}`;
+  }
 }

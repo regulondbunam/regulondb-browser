@@ -84,7 +84,7 @@ import Modal from "@mui/material/Modal";
 import { Publication } from "./publication";
 import { EvidenceTitle } from "./evidence";
 import { labelCitation } from "./label";
-
+import { CITATION_SIZE } from ".";
 /**
  * Description placeholder
  *
@@ -122,9 +122,9 @@ export function ModalCitation({
   evidence = {},
   evidences = {},
   publication = {},
-  small = true,
   isEvidence = false,
-  showIndex = true
+  showIndex = true,
+  citationSize = CITATION_SIZE.LARGE
 }) {
   const [open, setOpen] = React.useState(false);
 
@@ -151,7 +151,7 @@ export function ModalCitation({
         onClick={handleOpen}
         dangerouslySetInnerHTML={{
           __html: labelCitation({
-            small: small,
+            citationSize: citationSize,
             isEvidence: isEvidence,
             publication: publication,
             evidence: evidence,
