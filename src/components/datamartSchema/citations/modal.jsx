@@ -83,8 +83,10 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { Publication } from "./publication";
 import { EvidenceTitle } from "./evidence";
+import { Evidences } from "./evidences";
 import { labelCitation } from "./label";
 import { CITATION_SIZE } from ".";
+import { DataVerifier } from "../../ui-components";
 /**
  * Description placeholder
  *
@@ -124,7 +126,7 @@ export function ModalCitation({
   publication = {},
   isEvidence = false,
   showIndex = true,
-  citationSize = CITATION_SIZE.LARGE
+  citationSize = CITATION_SIZE.LARGE,
 }) {
   const [open, setOpen] = React.useState(false);
 
@@ -156,7 +158,7 @@ export function ModalCitation({
             publication: publication,
             evidence: evidence,
             evidences: evidences,
-            showIndex: showIndex
+            showIndex: showIndex,
           }),
         }}
       />
@@ -167,8 +169,11 @@ export function ModalCitation({
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          {evidence?._id && <EvidenceTitle {...evidence} />}
           {publication?._id && <Publication {...publication} />}
+          {DataVerifier.isValidArray(publication.evidences) && (
+            <Evidences evidences={publication.evidences} />
+          )}
+          {evidence?._id && <EvidenceTitle {...evidence} />}
         </Box>
       </Modal>
     </>

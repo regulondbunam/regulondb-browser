@@ -16,7 +16,7 @@ export function labelCitation({
   evidence = {},
   citationSize = CITATION_SIZE.LARGE,
   isEvidence = false,
-  showIndex = true
+  showIndex = true,
 }) {
   if (isEvidence) {
     let code = "";
@@ -47,42 +47,45 @@ export function labelCitation({
     citation = "",
     year = "";
 
-  const evidences = publication.evidences
+  const evidences = publication.evidences;
 
   if (publication?._id) {
-    index = showIndex ? publication.index : ""
+    index = showIndex ? publication.index : "";
     authors = publication.authors;
     citation = publication.citation;
     year = publication.year;
   }
 
   const evidenceCode = () => {
-    let codesA = []
-    let codesIndexA = []
-    if(DataVerifier.isValidArray(evidences)){
-      evidences.forEach(evidence => {
+    let codesA = [];
+    let codesIndexA = [];
+    if (DataVerifier.isValidArray(evidences)) {
+      evidences.forEach((evidence) => {
         if (DataVerifier.isValidObject(evidence)) {
           if (evidence?.code) {
             if (evidence.type === "S") {
               codesA.push(`<b>[${evidence.code}]</b>`);
               codesIndexA.push(`<b>e${evidence.index}</b>`);
+            } else {
+              codesA.push(`[${evidence.code}]`);
+              codesIndexA.push(`e${evidence.index}`);
             }
-            codesA.push(`[${evidence.code}]`);
-            codesIndexA.push(`e${evidence.index}`);
-
           }
         }
       });
     }
-    let codes = ""
-    if(codesA.length>0){
-      codes = codesA.length > 1 ? "Evidences: "+codesA.join(" ") : "Evidence: "+codesA.join(" ")
+    let codes = "";
+    if (codesA.length > 0) {
+      codes =
+        codesA.length > 1
+          ? "Evidences: " + codesA.join(" ")
+          : "Evidence: " + codesA.join(" ");
     }
-    return {codes, codesIndex: codesIndexA.join(", ") }
-  }
+    return { codes, codesIndex: codesIndexA.join(", ") };
+  };
 
-  const {codes, codesIndex} = evidenceCode()
-  
+  const { codes, codesIndex } = evidenceCode();
+
   switch (citationSize) {
     case CITATION_SIZE.LARGE:
       return `${index} ${citation ? `${citation},` : ""} ${codes}`;

@@ -5,7 +5,7 @@ import {
   PC_VARIANTS,
   CITATION_SIZE,
 } from "../../citations";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 
 const COLUMNS = [
   {
@@ -71,11 +71,6 @@ const COLUMNS = [
         accessorKey: "_sequence",
         width: 400,
         filter: "fuzzyText",
-      },
-      {
-        id: "ri_confidence",
-        header: "Confidence Level",
-        accessorKey: "_Confidence Level",
       },
       {
         id: "citations",
