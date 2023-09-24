@@ -207,7 +207,7 @@ function getUniquePublication(allCitations = []) {
         }
         publication = {
           ...citation.publication,
-          index: publicationIndex,
+          index: publications[citation.publication._id].index,
           evidences: publications[citation.publication._id].evidences,
         };
       }
@@ -232,7 +232,7 @@ function getUniquePublication(allCitations = []) {
         }
         evidence = {
           ...citation.evidence,
-          index: evidenceIndex,
+          index: evidences[citation.evidence._id].index,
           publications: evidences[citation.evidence._id].evidences,
         };
       }

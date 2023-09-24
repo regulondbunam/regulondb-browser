@@ -122,8 +122,8 @@ function ParagraphCitations({
         (cit, indx) => {
           try {
             //console.log(cit);
-            let index =
-              allCitations.findIndex(
+            let _citation =
+              allCitations.find(
                 /**
                  * Description placeholder
                  *
@@ -133,17 +133,14 @@ function ParagraphCitations({
                 (citation) =>
                   citation?.publication?._id === cit?.publication?._id &&
                   citation?.evidence?._id === cit?.evidence?._id
-              ) + 1;
-              console.log(index);
-            let evidence = cit?.evidence ? cit.evidence : undefined;
-            let publication = cit?.publication ? cit.publication : undefined;
+              );
+              console.log(_citation);
             return (
               <div>
                 <ModalCitation
                   key={`CitaitopnPH_${cit?.publication?._id}_${cit?.evidence?._id}_${indx}`}
-                  index={index}
-                  evidence={evidence}
-                  publication={publication}
+                  evidence={_citation.evidence}
+                  publication={_citation.publication}
                 />
               </div>
             );

@@ -42,8 +42,17 @@ export function labelCitation({
    */
   const numIndex = `${showIndex ? publication.index + "." : ""}`;
   //W->weak S->strong
+  let code = "";
+  if(DataVerifier.isValidObject(evidence)){
+    if (evidence?.code) {
+      if (evidence.type === "S") {
+        code = `Evidence: <b>[${evidence.code}]</b>`;
+      }
+      code = `Evidence: [${evidence.code}]`;
+    }
+  }
   /*
-  let codes = "";
+
   if (DataVerifier.isValidArray(publication.evidences)) {
     let evidenceLabel =
       publication.evidences.length < 2 ? "Evidence: " : "Evidences: ";
@@ -58,10 +67,10 @@ export function labelCitation({
 
   if (small) {
     if (DataVerifier.isValidArray(authors)) {
-      return `${numIndex} ${authors[0]}., et al. ${year ? year : ""}`;
+      return `${numIndex} ${authors[0]}., et al. ${year ? year : ""} ${code}`;
     }
     return ``;
   }
-  return `${numIndex} ${citation ? `${citation},` : ""}`;
+  return `${numIndex} ${citation ? `${citation},` : ""} ${code}`;
   // [i]autor., et al. año [evidence]
 }
