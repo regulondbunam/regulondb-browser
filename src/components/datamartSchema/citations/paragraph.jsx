@@ -70,11 +70,9 @@ Stack: It is used to create and control the arrangement of elements in a vertica
 
  **/
 
-
-import PropTypes from 'prop-types';
-import { ModalCitation } from './modal';
-import Stack from '@mui/material/Stack';
-
+import PropTypes from "prop-types";
+import { ModalCitation } from "./modal";
+import Stack from "@mui/material/Stack";
 
 /**
  * Description placeholder
@@ -82,11 +80,10 @@ import Stack from '@mui/material/Stack';
  * @type {{ allCitations: any; citations: any; list: any; }}
  */
 const PROP_TYPES = {
-    allCitations: PropTypes.array.isRequired,
-    citations: PropTypes.array.isRequired,
-    list: PropTypes.bool
+  allCitations: PropTypes.array.isRequired,
+  citations: PropTypes.array.isRequired,
+  list: PropTypes.bool,
 };
-
 
 /**
  * Description placeholder
@@ -94,9 +91,8 @@ const PROP_TYPES = {
  * @type {{ list: boolean; }}
  */
 export const DEFAULT_ParagraphCitations_PROPS = {
-    list: false,
-}
-
+  list: false,
+};
 
 /**
  * Description placeholder
@@ -109,57 +105,59 @@ export const DEFAULT_ParagraphCitations_PROPS = {
  * @returns
  */
 function ParagraphCitations({
-    allCitations,
-    citations,
-    variant = "paragraph",
+  allCitations,
+  citations,
+  variant = "paragraph",
 }) {
-    return (
-        <Stack direction='row' useFlexGap flexWrap="wrap" >
-            {
-                citations.map(
-                    
-                    /**
-                     * Description placeholder
-                     *
-                     * @param {object} cit
-                     * @param {string} indx
-                     * @returns {React.JSX}
-                     */
-                    (cit, indx) => {
-                    try {
-                        //console.log(cit);
-                        let index = allCitations.findIndex(
-                            
-                            /**
-                             * Description placeholder
-                             *
-                             * @param {object} citation
-                             * @returns {boolean}
-                             */
-                            (citation) => citation?.publication?._id === cit?.publication?._id && citation?.evidence?._id === cit?.evidence?._id)+1
-                        let evidence = cit?.evidence ? cit.evidence : undefined
-                        let publication = cit?.publication ? cit.publication : undefined
-                        return (
-                            <div>
-                                <ModalCitation key={`CitaitopnPH_${cit?.publication?._id}_${cit?.evidence?._id}_${indx}`}
-                                index={index}
-                                evidence={evidence}
-                                publication={publication}
-                            />
-                            </div>
-                        )
-                    } catch (error) {
-                        return null
-                    }
-                })
-            }
-        </Stack>
-    );
+  return (
+    <Stack direction="row" useFlexGap flexWrap="wrap">
+      {citations.map(
+        /**
+         * Description placeholder
+         *
+         * @param {object} cit
+         * @param {string} indx
+         * @returns {React.JSX}
+         */
+        (cit, indx) => {
+          try {
+            //console.log(cit);
+            let index =
+              allCitations.findIndex(
+                /**
+                 * Description placeholder
+                 *
+                 * @param {object} citation
+                 * @returns {boolean}
+                 */
+                (citation) =>
+                  citation?.publication?._id === cit?.publication?._id &&
+                  citation?.evidence?._id === cit?.evidence?._id
+              ) + 1;
+              console.log(index);
+            let evidence = cit?.evidence ? cit.evidence : undefined;
+            let publication = cit?.publication ? cit.publication : undefined;
+            return (
+              <div>
+                <ModalCitation
+                  key={`CitaitopnPH_${cit?.publication?._id}_${cit?.evidence?._id}_${indx}`}
+                  index={index}
+                  evidence={evidence}
+                  publication={publication}
+                />
+              </div>
+            );
+          } catch (error) {
+            return null;
+          }
+        }
+      )}
+    </Stack>
+  );
 }
 
+ParagraphCitations.defaultProps = DEFAULT_ParagraphCitations_PROPS;
 
-ParagraphCitations.defaultProps = DEFAULT_ParagraphCitations_PROPS
+ParagraphCitations.propTypes = PROP_TYPES;
 
-ParagraphCitations.propTypes = PROP_TYPES
-
-export { ParagraphCitations }
+export { ParagraphCitations };

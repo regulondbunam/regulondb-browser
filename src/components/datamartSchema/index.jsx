@@ -1,4 +1,4 @@
-import {ModalCitation, ParagraphCitations, NoteCitations, AllCitations} from "./citations"
+import {ModalCitation, ParagraphCitations, NoteCitations,AllCitations, AllCitationsDeprecated, useIndexedCitation} from "./citations"
 import {ExternalCrossReferences, ExternalCrossReference} from "./externalCrossReferences"
 import { Gene } from "./gene/gene";
 import { MultifunTerms } from "./gene/gene/multifunTerms";
@@ -8,7 +8,7 @@ import TranscriptionUnit from "./operon/transcriptionUnit";
 
 
 
-export {ModalCitation, ParagraphCitations, AllCitations,
+export {ModalCitation, ParagraphCitations, AllCitationsDeprecated, useIndexedCitation,AllCitations,
     ExternalCrossReferences, ExternalCrossReference, 
     NoteCitations, Gene, MultifunTerms,
     Product, Regulation,

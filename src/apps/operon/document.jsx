@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { AnchorNav, DataVerifier } from "../../components/ui-components"
-import { AllCitations } from "../../components/datamartSchema"
+import { AllCitationsDeprecated } from "../../components/datamartSchema"
 import DrawingTracesTool from "../../components/DrawingTracesTool";
 import { TranscriptionUnit } from "../../components/datamartSchema";
 import { getRelatedIdsByOperonData } from "../../components/webservices";
@@ -57,7 +57,7 @@ export default function Document({ operonData, section }) {
                 label: "Citations",
                 title: "Citations",
                 component: <div style={{ overflow: "auto" }} >
-                    <AllCitations allCitations={operonData.allCitations} />
+                    <AllCitationsDeprecated allCitations={operonData.allCitations} />
                 </div>,
             })
         }

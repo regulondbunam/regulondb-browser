@@ -1,3 +1,4 @@
+import { DataVerifier } from "../../ui-components";
 
 /**
  * Citation label in specific format
@@ -10,59 +11,57 @@
  * @param {boolean} [small=true] format of label
  * @returns {String}
  */
-export function labelCitation({publication = {}, evidence = {}, small = true, index}) {
-    //console.log(publication, evidence);
-    
-   
-    const {
-        authors,
-        citation,
-        //pmid,
-        //title,
-        //url,
-        year, } = publication
-    
-    /**
-     * Description placeholder
-     *
-     * @type {boolean}
-     */
-    const code = evidence?.code
-
-    
-    /**
-     * Description placeholder
-     *
-     * @type {string}
-     */
-    const numIndex = index ? `[${index}]` : ""
-    //W->weak S->strong
-
-
-    
-    /**
-     * Description placeholder
-     *
-     * @returns {string}
-     */
-    const codeLabel = () => {
-        if (code) {
-            if (evidence.type === 'S') {
-                return `Evidence: <b>[${code}]</b>`
-            }
-            return `Evidence: [${code}]`
-        }
-        return ''
+export function labelCitation({
+  publication = {},
+  evidence = {},
+  evidences = {},
+  small = true,
+  isEvidence = false,
+  showIndex = true,
+  index,
+}) {
+  if (isEvidence) {
+    let code = "";
+    if (evidence?.code) {
+      if (evidence.type === "S") {
+        code = `<b>[${evidence.code}]</b>`;
+      }
+      code = `[${evidence.code}]`;
     }
-    if (small) {
-        if (!authors) {
-            return `${numIndex} ${codeLabel()}`.trim()
-        }
-        if (authors[0]) {
-            return `${numIndex} ${authors[0]}., et al. ${year ? year : ''} ${codeLabel()}`
-        }
-        return `${numIndex} ${codeLabel()}`.trim()
+    return `${showIndex ? "e" + evidence.index + "." : ""}${
+      evidence?.name ? evidence.name : ""
+    } ${code}`;
+  }
+
+  const { authors, citation, year } = publication;
+
+  /**
+   * Description placeholder
+   *
+   * @type {string}
+   */
+  const numIndex = `${showIndex ? publication.index + "." : ""}`;
+  //W->weak S->strong
+  /*
+  let codes = "";
+  if (DataVerifier.isValidArray(publication.evidences)) {
+    let evidenceLabel =
+      publication.evidences.length < 2 ? "Evidence: " : "Evidences: ";
+    publication.evidences.forEach((evidenceId) => {
+      const _evidence = evidences[evidenceId];
+      if (evidenceId.type === "S") {
+        codes += `${evidenceLabel}<b>[${_evidence.code}]</b>`;
+      }
+      codes += `${evidenceLabel}[${_evidence.code}]`;
+    });
+  }*/
+
+  if (small) {
+    if (DataVerifier.isValidArray(authors)) {
+      return `${numIndex} ${authors[0]}., et al. ${year ? year : ""}`;
     }
-    return `${numIndex} ${citation ? `${citation},` : ''} ${codeLabel()}`
-    // [i]autor., et al. año [evidence]
+    return ``;
+  }
+  return `${numIndex} ${citation ? `${citation},` : ""}`;
+  // [i]autor., et al. año [evidence]
 }

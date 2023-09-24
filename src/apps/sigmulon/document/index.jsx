@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { AnchorNav, DataVerifier } from "../../../components/ui-components";
-import { AllCitations } from "../../../components/datamartSchema";
+import { AllCitationsDeprecated } from "../../../components/datamartSchema";
 import Genes from "./components/genes";
 import Regulators from "../../../components/datamartSchema/gene/regulation/regulators";
 import TranscribedPromoters from "./components/promoters";
@@ -74,7 +74,7 @@ export default function Document({ sigmulonData }) {
         title: "Citations",
         component: (
           <div style={{ overflow: "auto" }}>
-            <AllCitations allCitations={allCitations} />
+            <AllCitationsDeprecated allCitations={allCitations} />
           </div>
         ),
       });
