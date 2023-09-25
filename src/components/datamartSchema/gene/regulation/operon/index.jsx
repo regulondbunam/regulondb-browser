@@ -79,13 +79,17 @@ import { DataVerifier } from "../../../../ui-components";
 export default function Operon({ _id, arrangement, name }) {
   return (
     <div>
+      <div style={{display: "flex"}}>
+      <p><b>Operon: </b></p>
       <Link to={"/operon/" + _id}>
-        <p style={{ fontSize: "18px" }}>
-          <b>{`Operon ${name}`}</b>
+        <p style={{marginLeft: "5px"}} >
+          <b>{`${name}`}</b>
         </p>
       </Link>
+      </div>
+      
       {DataVerifier.isValidArray(arrangement) && (
-        <div style={{ marginLeft: "1%" }}>
+        <div>
           <p style={{ fontSize: "14px" }}>
             <b>Arrangement: </b>
           </p>
@@ -163,6 +167,7 @@ function Arrangement({ promoters, regulators, transcriptionUnit }) {
               <Link
                 to={"/regulon/" + regulator._id}
                 key={`${regulator.name}_${regulator._id}_${index}`}
+                style={{marginLeft: "10px"}}
               >{`${regulator.name}${fun}`}</Link>
             );
           }

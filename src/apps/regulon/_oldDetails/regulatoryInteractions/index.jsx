@@ -52,6 +52,7 @@ const COLUMNS = [
                   key={
                     "ri_" + info.row.original.id + "_regulatedGene_" + gene._id
                   }
+                  to={"/gene/"+gene._id}
                 >
                   <p dangerouslySetInnerHTML={{ __html: gene.name }} />
                 </Link>

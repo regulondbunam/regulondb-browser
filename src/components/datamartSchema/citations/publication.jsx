@@ -124,10 +124,18 @@ export function Publication({ citation = "", pmid = "", url = "", index }) {
             <td colSpan={2}>
               <p>
                 {DataVerifier.isValidString(pmid) ? `pmid:${pmid} ` : " "}
-                {url !== "" && (
-                  <a href={url} target="_blank" rel="noopener noreferrer">
-                    Go to Reference
+                {DataVerifier.isValidString(url) && (
+                  <>
+                  {/GO.references/.test(url) ? (
+                    <a href="http://current.geneontology.org/metadata/go-refs.json" target="_blank" rel="noopener noreferrer">
+                    go to Gene Ontology references
                   </a>
+                  ):(
+                    <a href={url} target="_blank" rel="noopener noreferrer">
+                    go to reference
+                  </a>
+                  )}
+                  </>
                 )}
               </p>
             </td>

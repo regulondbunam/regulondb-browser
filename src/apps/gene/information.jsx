@@ -81,7 +81,7 @@ export default function Information({ geneData }) {
             tabsInfo.push({
                 id: "GeneTab_Citations",
                 label: "Citations",
-                title: "Citations",
+                title: "All Citations",
                 component: <div style={{overflow: "auto"}} >
                     <AllCitations {...citations} />
                 </div>,

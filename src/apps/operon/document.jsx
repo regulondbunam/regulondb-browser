@@ -56,7 +56,7 @@ export default function Document({ operonData, section }) {
             _sections.push({
                 id: "GeneTab_Citations",
                 label: "Citations",
-                title: "Citations",
+                title: "All Citations",
                 component: <div style={{ overflow: "auto" }} >
                     <AllCitations {...citations} />
                 </div>,

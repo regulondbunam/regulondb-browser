@@ -90,7 +90,7 @@ export function labelCitation({
     case CITATION_SIZE.LARGE:
       return `${index} ${citation ? `${citation},` : ""} ${codes}`;
     case CITATION_SIZE.SMALL:
-      return `${index} ${authors[0]}., et al. ${year ? year : ""} ${codes}`;
+      return `(${authors[0]}., et al. ${year ? year : ""})<sup>${index}</sup>`;
     case CITATION_SIZE.ONLY_INDEX:
       return `[${index},${codesIndex}]`;
     default:
