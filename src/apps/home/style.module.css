@@ -1,37 +1,36 @@
 .cover{
     width: 100%;
-    height: 340px;
+    height: 300px;
     background-image: url("./media/coli.webp");
     background-color: #000000;
     background-position: center;
-    padding-top: 30px;
-    padding-bottom: 50px;
-    padding-right: 2%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.coverTop{
-    height: 100px;
-    display: flex;
-    justify-content: space-between;
+    padding: 1% 10% 2% 10%;
+    background-color: rgba(93, 93, 255, 0.281);
 }
 .coverTitle{
     width: 100%;
 }
+
 .coverH1{
-    color: white;
-    font-size: 57px;
-    padding-left: 5%;
+    color: rgb(255, 255, 255);
+    font-size: 4vw;
 }
+
 .coverH2{
-    color: white;
-    font-size: 24px;
-    padding-left: 8%;
+    color: rgb(255, 255, 255);
+    font-size: 1.5vw;
 }
+
+.coverTop{
+    height: 100px;
+    position:relative;
+    z-index: 5;
+}
+
 .coverComet{
     display: flex;
 }
+
 .coverCometText{
     width: 114px;
     color: white;
@@ -39,9 +38,25 @@
     text-align: end;
     margin-right: 10px;
 }
+
+.coverEcoliImg{
+    position: absolute;
+    width: 682px;
+    right: 0;
+    top: 0;
+    z-index: 1;
+}
 .coverUnamLogo{
-    background-image: url("./media/unamLogo.png");
-    width: 90px;
+    width: 100%;
+    max-width: 90px;
+    height: auto;
+}
+
+.coverSearch{
+    width: 80%;
+    position: relative;
+    margin: 2%;
+    z-index: 5;
 }
 
 .coverBottom{

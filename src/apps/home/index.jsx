@@ -1,22 +1,23 @@
-import { Cover } from './cover';
-import { Body } from './body';
-import conf from './conf/home.conf.json'
-
+import { Cover } from "./cover";
+import { Body } from "./body";
+import conf from "./conf/home.conf.json";
 
 const Home = () => {
-
-    return (
+  return (
+    <div>
+      <Cover />
+      <div className="noAnimate">
+        <Body />
         <div>
-            <Cover />
-            <br />
-            <Body />
-            <div>
-                <p style={{ color: "white" }} >
-                    {conf.version}
-                </p>
-            </div>
+          <p style={{ color: "white" }}>{conf.version}</p>
         </div>
-    );
-}
+      </div>
+    </div>
+  );
+};
 
 export default Home;
+
+/*
+
+*/
