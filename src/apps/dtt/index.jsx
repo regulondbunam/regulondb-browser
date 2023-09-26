@@ -51,9 +51,10 @@ Visual
 ## Dependencies
 Tabs: this component is related to tabbed navigation in the user interface.
 useParams: it is a hook provided by the "react-router-dom" library that is used to access the URL parameters.
-RDBdata:
-DDTE:
-Title:
+UserData: React component used to display user data in the application interface.
+RDBdata: React component related to retrieving and displaying drawing data from "RegulonDB".
+DDTE: Component used to display or embed trace or genetic related data in a part of the application.
+Title: React component used to display titles in different parts of the application UI, with the ability to dynamically update the title and display status related messages.
 
 ## States
 	
@@ -62,37 +63,10 @@ Title:
 |          |       |             |
 
 ## Hooks
-|  Name  | Description |  Syntax  | Additional Notes or References | 
-| ------ | ----------- | -------- | ------------------------------ |
-|        |             |          |                                |
+|  Name   | Description                                                                                                         |  Syntax    | Additional Notes or References | 
+| ------  | ------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------------ |
+|useParams|returns an object of key/value pairs of the dynamic params from the current URL that were matched by the <Route path>|useParams();|                                |
 
-# Functions description
-
-## [function name]
-
-__Description:__  
-
-[Description of the function]
-
-
-__Usage:__
-
-```javascript
-&function(Parameters, if any);
-```
-
-__Scope: __
-
-[Scope details]
-
-__Input Parameter:__  
-​__[Name]:__ [Description]
-__[Name]:__ [Description]
-
-
-__Return:__  
-​__[Type]:__ [Name]
-​[Description (if necessary)]
 
  
 **/
@@ -103,11 +77,23 @@ import RDBdata from "./rdb_data";
 import DDTE from "./embed";
 import Title from "./title";
 
+
+/**
+ * Description placeholder
+ *
+ * @type {array}
+ */
 const tabsInfo = [
   { id: "1", name: "RegulonDB-Data", disabled: false },
   { id: "2", name: "User Data", disabled: false },
 ];
 
+
+/**
+ * Description placeholder
+ *
+ * @type {array}
+ */
 const geneticElements = [
   "gene",
   "promoter",
@@ -120,13 +106,32 @@ const geneticElements = [
   "ppGpp",
 ];
 
+
+/**
+ * Description placeholder
+ *
+ * @param {{ params: any; embed?: boolean; }} { params, embed = false }
+ * @returns {React.JSX}
+ */
 function DrawingTracesInterface({ params, embed = false }) {
+
+  
+  /**
+   * Description placeholder
+   *
+   * @type {URLSearchParams}
+   */
   let parameters = new URLSearchParams(useParams().parameters);
 
   if (embed === true) {
     return <DDTE params={params} />;
   }
   
+  /**
+   * Description placeholder
+   *
+   * @type {undefined}
+   */
   let dataForm = undefined;
   if (parameters.get("leftEndPosition") && parameters.get("leftEndPosition")) {
     try{
@@ -143,6 +148,12 @@ function DrawingTracesInterface({ params, embed = false }) {
     
   }
 
+  
+  /**
+   * Description placeholder
+   *
+   * @type {array}
+   */
   const tabs = [
     <div id="1">
       <RDBdata dataForm={dataForm} />

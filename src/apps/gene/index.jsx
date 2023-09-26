@@ -1,27 +1,24 @@
 /**
 # Component (user guide)
 
-# [Component name]
+# Gene
 	
 ## Description  
 	
-[Description Details]
+it is responsible for deciding whether to display information about a specific gene (GeneDescription) or the home page (Home) based on the URL parameters.
 
 ## Category   
 	
-[Visual, Structural, Functional]  
+Visual
 
 ## Live demo 
-	
-[code to iframe CodeSandbox]
+--
 
 ## Installation or Implementation
-
-[example: npm install --save react-awesome-button]
+--
 
 ## Usage 
-	
-[example: <protvista-tooltip>  </protvista-tooltip> ]
+--
 
 ## Props 
 
@@ -31,9 +28,7 @@
 
 
 ## Exception
-
-__Category: [Error, Warning or Message]__
-[Description of the exception (if necessary)]
+--
 
 ## License
 
@@ -42,22 +37,23 @@ MIT License
 ## Author 
 	
 RegulonDB Team: 
-[full developer name]
 
 
 # Component (technical guide)
 
 ## Component Type 
+Visual
 
-[ Driver, Visual, Application, Custom Hook, ClassComponent ]
-// Driver: It is a Component that controls interactions with users, browser, API requests, manage status or processes as well as logic related to data.
-// Visual: This component will take care of the structure and styles of our application.
-// Application: Application: is the main component of a web application or library.
-// Custom Hook: is a custom React function, which unlike the other components can return variables.
-// ClassComponent: is a tradicional React component class
 
 ## Dependencies
-[Dependency name][ Dependency details ]
+React: it is the core library used to build user interfaces in web applications.
+useEffect: it is a hook provided by React that allows you to perform side effects on functional components.
+useParams: it is a hook provided by React Router that is used to get parameters from the current URL. In this case, it is used to get the geneId parameter of the URL.
+useGetGenesBy: it is used to perform a query or request for specific gene-related data.
+Title: Title is an imported component used to display the page title.
+UpdateTitle: UpdateTitle is an imported component or function that is used to update the page title. It is used in conjunction with useEffect to manage the page title based on the state of the query.
+Information: it is an imported component that is designed to display detailed information about a gene.
+Home: it is an imported component that represents the home page or main page of the application.
 
 ## States
 	
@@ -66,37 +62,10 @@ RegulonDB Team:
 |          |       |             |
 
 ## Hooks
-|  Name  | Description |  Syntax  | Additional Notes or References | 
-| ------ | ----------- | -------- | ------------------------------ |
-|        |             |          |                                |
-
-# Functions description
-
-## [function name]
-
-__Description:__  
-
-[Description of the function]
-
-
-__Usage:__
-
-```javascript
-&function(Parameters, if any);
-```
-
-__Scope: __
-
-[Scope details]
-
-__Input Parameter:__  
-​__[Name]:__ [Description]
-__[Name]:__ [Description]
-
-
-__Return:__  
-​__[Type]:__ [Name]
-​[Description (if necessary)]
+|  Name   |                 Description                                                                                               |          Syntax               | Additional Notes or References | 
+| ------- | ------------------------------------------------------------------------------------------------------------------------- | ----------------------------- | ------------------------------ |
+|useEffect|it is a React Hook that lets you synchronize a component with an external system.                                          |useEffect(setup, dependencies?)|                                |
+|useParams|hook returns an object of key/value pairs of the dynamic params from the current URL that were matched by the <Route path> |useParams();                   |                                |
 
  
 **/
@@ -108,7 +77,15 @@ import Information from './information';
 import Home from "./Home";
 
 
+/**
+ * Description placeholder
+ *
+ * @export
+ * @returns {React.JSX}
+ */
 export default function Gene() {
+
+  
   let { geneId } = useParams();
 
   if (geneId) {
@@ -120,11 +97,19 @@ export default function Gene() {
   return <Home />
 }
 
+
+/**
+ * Description placeholder
+ * @date 9/25/2023 - 5:28:16 PM
+ *
+ * @param {{ geneId: any; }} { geneId }
+ * @returns {HTMLElement}
+ */
 function GeneDescription({ geneId }) {
 
   const [title, setTitle] = React.useState("gene");
   const { geneData, loading, error } = useGetGenesBy({ _id: geneId })
-  console.log(geneData);
+  // console.log(geneData);
   useEffect(() => {
     if (loading) {
       UpdateTitle({ state: "loading" })

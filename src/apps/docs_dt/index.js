@@ -48,7 +48,7 @@ Visual
 
 
 ## Dependencies
-React
+React: It is a JavaScript library for building interactive and reusable user interfaces (UI).
 Cover: it is used for rendering a cover or header section in the documentation.
 useParams: it s a hook from the "react-router-dom" library. It is used for extracting route parameters from the URL. 
 MenuAside: it is used for rendering a menu or navigation sidebar in the documentation.

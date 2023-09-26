@@ -44,27 +44,39 @@ RegulonDB Team:
 ## Component Type 
 Visual
 
-
 ## Dependencies
 useParams: it is a hook provided by React Router. It is used to get the URL parameters in a React component.
-useReducer: it is a React hook used to manage complex state in the application. It allows to manage state through actions and a reducer similar to Redux.
+useState: it is a React hook used to manage complex state in the application. It allows to manage state through actions and a reducer similar to Redux.
 NavigationTabs: It is a custom component that is a navigation tab to switch between different views or sections within the application.
+DataVerifier: It is a component used for data verification or validation.
 CircularProgress: it  is a Material-UI component that represents a circular progress bar, typically used to indicate loading or processing in progress in the user interface.
 useGetAllGenes: it is a custom hook that is used to obtain data related to genes.
+useLazyLoadGenesBySearch: This component is designed to facilitate the lazy loading of gene-related data in a React application using GraphQL queries and the Apollo Client. 
 Cover: it is a component that displays some form of cover page or header in the user interface.
 GeneQuery: it is a component that is related to gene query and selection.
-GeneCoexpression: it is a component that displays information related to gene co-expression. It allows users to see details about how genes are expressed together.
 Matrix: it is a component that displays information related to gene co-expression. It allows users to see details about how genes are expressed together.
-
+GeneCoexpression:this component provides a tabbed interface for switching between genes and displays co-expression ranking information for the selected gene. 
+Button: It is a Material-UI component representing a button element that can trigger various actions or interactions within the application.
+Dialog: It is a Material-UI component that represents a dialog or modal window, typically used for displaying messages, alerts, or additional content within an overlay.
+DialogActions: It is a Material-UI component that provides actions or buttons within a dialog or modal window, allowing users to perform actions related to the content displayed in the dialog.
+DialogContent: It is a Material-UI component that represents the main content area within a dialog or modal window, where the primary content or message is displayed.
+DialogContentText: It is a Material-UI component used to display text content within a dialog or modal window, typically for providing additional information or descriptions.
+DialogTitle: It is a Material-UI component representing the title or heading of a dialog or modal window, used to provide a title or label for the content displayed.
 
 ## States
 	
-| Property       | Value| Description                  |
-| -------------- | ----| --------------------------------------------- |
-|selectedGenes   |array|Represents an array of selected genes.         |
-|genesInformation|array|Represents information about genes.            |
-|coexpressionData|array|	Represents data related to gene coexpression.|
-
+| Property       | Value            | Description                  |
+| -------------- | ---------------  | --------------------------------------------- |
+|selectedGenes   |array             |Represents an array of selected genes.         |
+|genesInformation|array             |Represents information about genes.            |
+|coexpressionData|array             |	Represents data related to gene coexpression.|
+| unload         | array            | Represents genes that are yet to be loaded.  |
+| genes          | array            | Represents the currently loaded genes.       |
+| matrices       | object           | Represents matrices related to gene data.     |
+| loadGeneState  | object           | Represents the state of gene data loading.    |
+| genesId        | array            | Represents an array of gene IDs.              |
+| error          | any              | Represents an error that may occur.           |
+| loadState      | number (or null) | Represents the loading progress as a percentage (or null). |
 
 ## Hooks
 |  Name        | Description                                                      |  Syntax                                                       | Additional Notes or References               | 
@@ -165,11 +177,25 @@ function Coexpression() {
   );
 }
 
+
+/**
+ * Description placeholder
+ *
+ * @param {{ selectedGenes?: {}; geneList: any; }} { selectedGenes = [], geneList }
+ * @returns {HTMLElement}
+ */
 function IntCoexpression({ selectedGenes = [], geneList }) {
   const [genesId, setGenesId] = useState([...selectedGenes]);
   const [unload, setUnload] = useState([...selectedGenes]);
   const [genes, setGenes] = useState([]);
   const [matrices, setMatrices] = useState({});
+
+  
+  /**
+   * Description placeholder
+   *
+   * @type {function}
+   */
   const loadGeneState = useLazyLoadGenesBySearch(
     unload,
     setUnload,
@@ -182,16 +208,40 @@ function IntCoexpression({ selectedGenes = [], geneList }) {
   //console.log(loadGeneState.loading);
   //console.log(loadGeneState.loadState);
 
+  
+  /**
+   * Description placeholder
+   *
+   * @param {number} gene - Represents a gene identifier.
+   * @param {*} data - Represents data related to the gene.
+   */
   const addMatrix = (gene, data) => {
+    
+    /**
+     * Description placeholder
+     *
+     * @type {array}
+     */
     let newMatrix = {};
     newMatrix[gene] = data;
     setMatrices({ ...matrices, ...newMatrix });
   };
+
+  
+  /**
+   * Description placeholder
+   */
   const reset = () => {
     setGenesId([]);
     setGenes([]);
   };
 
+  
+  /**
+   * Description placeholder
+   *
+   * @param {*} ids - An array of values to be used in the URL.
+   */
   const setDemo = (ids) => {
     setGenesId([...ids]);
     setUnload([...ids]);
@@ -205,10 +255,29 @@ function IntCoexpression({ selectedGenes = [], geneList }) {
     window.history.replaceState(null, "", href);
   };
 
+  
+  /**
+   * Description placeholder
+   *
+   * @param {*} geneId - The identifier of the gene to be selected.
+   */
   const selectGene = (geneId) => {
     setGenesId([...genesId, geneId]);
     setUnload([geneId]);
+    
+    /**
+     * Description placeholder
+     *
+     * @type {object}
+     */
     let href = window.location.href;
+
+    
+    /**
+     * Description placeholder
+     *
+     * @type {boolean}
+     */
     const regex = /n$/gm.test(href);
     if (regex) {
       href = href + "/geneId=" + geneId;
@@ -218,13 +287,31 @@ function IntCoexpression({ selectedGenes = [], geneList }) {
     window.history.replaceState(null, "", href);
   };
 
+  
+  /**
+   * Description placeholder
+   *
+   * @param {*} geneId - The identifier of the gene to be selected.
+   */
   const deleteGene = (geneId) => {
+    
+    /**
+     * Description placeholder
+     *
+     * @type {number}
+     */
     const iId = genesId.findIndex((id) => id === geneId);
     let ids = [...genesId];
     ids.splice(iId, 1);
     setGenesId(ids);
   };
 
+  
+  /**
+   * Description placeholder
+   *
+   * @type {array}
+   */
   const tabs = [
     {
       id: "tab_01_geneQuery",
@@ -273,6 +360,13 @@ function IntCoexpression({ selectedGenes = [], geneList }) {
 
 export default Coexpression;
 
+
+/**
+ * Description placeholder
+ *
+ * @param {{ loadState?: number; abort: any; }} { loadState = 0, abort }
+ * @returns {React.JSX}
+ */
 function ModalLoad({ loadState = 0, abort }) {
   return (
     <Dialog open={true}>

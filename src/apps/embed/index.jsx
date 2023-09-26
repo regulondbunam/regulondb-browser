@@ -1,27 +1,24 @@
 /**
 # Component (user guide)
 
-# [Component name]
+# Embed
 	
 ## Description  
 	
-[Description Details]
+It is a controller that decides which application to embed based on the URL parameters and displays them within the user interface.
 
 ## Category   
 	
-[Visual, Structural, Functional]  
+Visual
 
 ## Live demo 
-	
-[code to iframe CodeSandbox]
+--
 
 ## Installation or Implementation
-
-[example: npm install --save react-awesome-button]
+--
 
 ## Usage 
-	
-[example: <protvista-tooltip>  </protvista-tooltip> ]
+--
 
 ## Props 
 
@@ -31,9 +28,7 @@
 
 
 ## Exception
-
-__Category: [Error, Warning or Message]__
-[Description of the exception (if necessary)]
+--
 
 ## License
 
@@ -41,23 +36,19 @@ MIT License
 
 ## Author 
 	
-RegulonDB Team: 
-[full developer name]
+RegulonDB Team
 
 
 # Component (technical guide)
 
 ## Component Type 
 
-[ Driver, Visual, Application, Custom Hook, ClassComponent ]
-// Driver: It is a Component that controls interactions with users, browser, API requests, manage status or processes as well as logic related to data.
-// Visual: This component will take care of the structure and styles of our application.
-// Application: Application: is the main component of a web application or library.
-// Custom Hook: is a custom React function, which unlike the other components can return variables.
-// ClassComponent: is a tradicional React component class
+Visual
 
 ## Dependencies
-[Dependency name][ Dependency details ]
+useParams: The useParams hook returns an object of key/value pairs of the dynamic params from the current URL that were matched by the <Route path>.
+DrawingTracesInterface: This component is related to the user interface for drawing traces or genetic elements.
+HtParameters: This component is used to route and render different pages and content related to a high performance data set in a web application.
 
 ## States
 	
@@ -66,48 +57,31 @@ RegulonDB Team:
 |          |       |             |
 
 ## Hooks
-|  Name  | Description |  Syntax  | Additional Notes or References | 
-| ------ | ----------- | -------- | ------------------------------ |
-|        |             |          |                                |
+|  Name   | Description                                                                                                                      |  Syntax    | Additional Notes or References | 
+| ------- | -------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------------ |
+|useParams|A hook provided by React Router to access the current URL parameters and extract values from the URL for use in application logic.|useParams();|                                |
 
-# Functions description
-
-## [function name]
-
-__Description:__  
-
-[Description of the function]
-
-
-__Usage:__
-
-```javascript
-&function(Parameters, if any);
-```
-
-__Scope: __
-
-[Scope details]
-
-__Input Parameter:__  
-​__[Name]:__ [Description]
-__[Name]:__ [Description]
-
-
-__Return:__  
-​__[Type]:__ [Name]
-​[Description (if necessary)]
-
- 
 **/
 import { useParams } from "react-router-dom";
 import DrawingTracesInterface from "../dtt";
 import { HtParameters } from "../ht/HighThroughput";
 
+
+/**
+ * Description placeholder
+ *
+ * @returns {HTMLElement|React.JSX}
+ */
 function Embed () {
 
     // eslint-disable-next-line no-unused-vars
     const { application, parameters, parameterA, parameterB, parameterC} = useParams()
+    
+    /**
+     * Description placeholder
+     *
+     * @type {*}
+     */
     let params
     switch (application) {
         case "dtt":
