@@ -23,8 +23,8 @@
 
 .coverTop{
     height: 100px;
-    display: flex;
-    justify-content: space-between;
+    position:relative;
+    z-index: 5;
 }
 
 .coverComet{
@@ -41,9 +41,9 @@
 
 .coverEcoliImg{
     position: absolute;
-    width: 1360px;
-    right: -503px;
-    top: -314px;
+    width: 682px;
+    right: 0;
+    top: 0;
     z-index: 1;
 }
 .coverUnamLogo{

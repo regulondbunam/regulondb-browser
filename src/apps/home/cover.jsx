@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
 import { useSpring, animated } from "@react-spring/web";
 import Search from "./search";
-import unamLogo from "./media/unamLogo.png";
-import ecoliImg from "./media/EcoliRegulonDB.webp";
-import ecoliImgT from "./media/EcoliRegulonDBT.webp";
 import ecoliImgT3 from "./media/EcoliRegulonDBT3.webp";
+
 
 
 import Style from "./style.module.css";
@@ -30,7 +28,10 @@ const searchLinks = [
 
 export function Cover(params) {
   const [springs, api] = useSpring(() => ({
-    from: { height: "300px" },
+    from: { height: "300px", opacity: 1 },
+  }));
+  const [animateSearch, serchA] = useSpring(() => ({
+    from: { x:0 },
   }));
 
   const handleAnimateSearch = () => {
@@ -40,12 +41,22 @@ export function Cover(params) {
         elements[i].innerHTML = "";
       }
     }
+    serchA.start({
+      from: {
+        y: 0,
+      },
+      to: {
+       y: -300,
+      },
+    })
     api.start({
       from: {
         height: "300px",
+        opacity: 1
       },
       to: {
-        height: "0px",
+        height: "75px",
+        opacity: 0.3
       },
     });
   };
@@ -69,13 +80,12 @@ export function Cover(params) {
               <i>Escherichia coli</i> K-12 Transcriptional Regulatory Network
             </h2>
           </div>
-
         </div>
       </div>
       <br />
-      <div className={Style.coverSearch + " noAnimate"}>
+      <animated.div style={{...animateSearch}} className={Style.coverSearch }>
         <Search onClick={handleAnimateSearch} />
-      </div>
+      </animated.div>
       <div id={"homeCoverBottom"} className="noAnimate">
         {searchLinks.map((link) => {
           return (
@@ -83,7 +93,7 @@ export function Cover(params) {
               key={"cover_link" + link}
               style={{ paddingLeft: "10px", float: "left" }}
             >
-              <Link to={link.link}>{link.label}</Link>
+              <Link style={{color: "#ffffff"}} to={link.link}>{link.label}</Link>
             </div>
           );
         })}

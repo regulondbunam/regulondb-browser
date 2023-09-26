@@ -16,9 +16,18 @@ import {
   sigmulonFormatResults,
 } from "./dataProcess";
 import CircularProgress from '@mui/material/CircularProgress';
+import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
+import InputBase from "@mui/material/InputBase";
+import { useState } from "react";
+import SearchIcon from '@mui/icons-material/Search';
 
-export default function Results({ keyword }) {
-  
+export default function Results({ keyword: inKeyword }) {
+  const [keyword, setKeyword] = useState(inKeyword ? inKeyword : "")
+  const [value, setValue] = useState(inKeyword ? inKeyword : "")
+  const handleSearch = () => {
+    setKeyword(value)
+  }
   
 
   let section = [
@@ -28,13 +37,41 @@ export default function Results({ keyword }) {
     SigmulonResult(keyword)
   ]
 
-  let title = `Search results for ${keyword}`;
+  let title = `Results for ${keyword}`;
 
 
   return (
     <div>
       <Cover>
-        <h1>{title}</h1>
+        <h1>Search</h1>
+        <div style={{ display: "grid", gridTemplateColumns: "70% 1% 20%" }}>
+      <Paper
+        sx={{
+          p: "2px 4px",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <SearchIcon />
+        <InputBase
+          sx={{ ml: 1, flex: 1 }}
+          placeholder='Example "arac OR fimb " "arac OR arabinose"'
+          value={value}
+          onChange={(e)=>{setValue(e.target.value)}}
+          inputProps={{ "aria-label": "regulonDB search" }}
+          onKeyUp={(event) => {
+            if (event.key === "Enter") {
+              handleSearch()
+            }
+          }}
+        />
+      </Paper>
+      <div></div>
+        <Button sx={{ width: "100%" }} onClick={handleSearch} color="error" variant="contained">
+          Search
+        </Button>
+    </div>
+        <h2>{title}</h2>
       </Cover>
       <AnchorNav title="Results" sections={section} />
     </div>
