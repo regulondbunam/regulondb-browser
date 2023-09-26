@@ -1,27 +1,23 @@
 /**
 # Component (user guide)
 
-# [Component name]
+# Regulon
 	
-## Description  
-	
-[Description Details]
+## Description  	
+it is responsible for displaying the details of a regulon based on an ID provided in the URL.
 
 ## Category   
-	
-[Visual, Structural, Functional]  
+Functional
 
 ## Live demo 
-	
-[code to iframe CodeSandbox]
+--
 
 ## Installation or Implementation
-
-[example: npm install --save react-awesome-button]
+--
 
 ## Usage 
 	
-[example: <protvista-tooltip>  </protvista-tooltip> ]
+[example: <Regulon/> ]
 
 ## Props 
 
@@ -31,9 +27,7 @@
 
 
 ## Exception
-
-__Category: [Error, Warning or Message]__
-[Description of the exception (if necessary)]
+--
 
 ## License
 
@@ -42,22 +36,25 @@ MIT License
 ## Author 
 	
 RegulonDB Team: 
-[full developer name]
 
 
 # Component (technical guide)
 
 ## Component Type 
 
-[ Driver, Visual, Application, Custom Hook, ClassComponent ]
-// Driver: It is a Component that controls interactions with users, browser, API requests, manage status or processes as well as logic related to data.
-// Visual: This component will take care of the structure and styles of our application.
-// Application: Application: is the main component of a web application or library.
-// Custom Hook: is a custom React function, which unlike the other components can return variables.
-// ClassComponent: is a tradicional React component class
+Visual
 
 ## Dependencies
-[Dependency name][ Dependency details ]
+useParams: This is a hook provided by the React Router library (from "react-router-dom"). It is used to access URL parameters in a React Router application, allowing the component to get information from the current URL.
+
+Title: It is used to represent titles or headings in the UI.
+
+useGetRegulonData: . Its exact functionality depends on how it is implemented in that file, but its name suggests that it is used to get data related to regulons, possibly from web services.
+
+Home: it is related to the representation of the application's home page.
+
+Document: It displays documents or detailed information about regulons in the application user interface.
+
 
 ## States
 	
@@ -66,37 +63,10 @@ RegulonDB Team:
 |          |       |             |
 
 ## Hooks
-|  Name  | Description |  Syntax  | Additional Notes or References | 
-| ------ | ----------- | -------- | ------------------------------ |
-|        |             |          |                                |
+|  Name   | Description                                                                                                                       |  Syntax  | Additional Notes or References | 
+| ------- | --------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------ |
+|useParams| hook returns an object of key/value pairs of the dynamic params from the current URL that were matched by the <Route path></Route>|useParams |                                |
 
-# Functions description
-
-## [function name]
-
-__Description:__  
-
-[Description of the function]
-
-
-__Usage:__
-
-```javascript
-&function(Parameters, if any);
-```
-
-__Scope: __
-
-[Scope details]
-
-__Input Parameter:__  
-​__[Name]:__ [Description]
-__[Name]:__ [Description]
-
-
-__Return:__  
-​__[Type]:__ [Name]
-​[Description (if necessary)]
 
  
 **/
@@ -107,11 +77,29 @@ import Home from "./home";
 import Document from "./document";
 
 
+/**
+ * Description placeholder
+ *
+ * @returns {HTMLElement|React.JSX}
+ */
 function Regulon() {
     let { regulonId } = useParams();
     const { regulonData: regulons, loading, error } = useGetRegulonData(regulonId)
     if (regulonId) {
+        
+        /**
+         * Description placeholder
+         *
+         * @type {*}
+         */
         const regulonData = regulons
+
+        
+        /**
+         * Description placeholder
+         *
+         * @type {string}
+         */
         let state = "", title = ""
         if (loading) {
             state = "loading"

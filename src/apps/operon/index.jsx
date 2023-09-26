@@ -1,27 +1,24 @@
 /**
 # Component (user guide)
 
-# [Component name]
+# Operon
 	
 ## Description  
 	
-[Description Details]
+it is a React component that acts as a path controller in a web application. Its main function is to determine which component should be displayed based on the parameters of the current path URL.
 
 ## Category   
 	
-[Visual, Structural, Functional]  
+Structural
 
 ## Live demo 
-	
-[code to iframe CodeSandbox]
+--
 
 ## Installation or Implementation
-
-[example: npm install --save react-awesome-button]
+--
 
 ## Usage 
-	
-[example: <protvista-tooltip>  </protvista-tooltip> ]
+	example: < Operon /> 
 
 ## Props 
 
@@ -31,9 +28,7 @@
 
 
 ## Exception
-
-__Category: [Error, Warning or Message]__
-[Description of the exception (if necessary)]
+--
 
 ## License
 
@@ -42,63 +37,40 @@ MIT License
 ## Author 
 	
 RegulonDB Team: 
-[full developer name]
 
 
 # Component (technical guide)
 
 ## Component Type 
-
-[ Driver, Visual, Application, Custom Hook, ClassComponent ]
-// Driver: It is a Component that controls interactions with users, browser, API requests, manage status or processes as well as logic related to data.
-// Visual: This component will take care of the structure and styles of our application.
-// Application: Application: is the main component of a web application or library.
-// Custom Hook: is a custom React function, which unlike the other components can return variables.
-// ClassComponent: is a tradicional React component class
+Visual
 
 ## Dependencies
-[Dependency name][ Dependency details ]
+React: React is the core library used to build user interfaces in single-page web applications (SPAs). React provides the functionality to define components, manage state and manage the lifecycle of components.
+useParams: useParams is a hook provided by the react-router-dom library, which is widely used for path management and navigation in React applications. useParams allows accessing the parameters of the current URL, which is useful for getting data from the URL and using it in component rendering.
+"./operon.css": This is a local stylesheet file called "operon.css". It contains CSS styles specific to the visual representation of the Operon component and other related components in the current file.
+Home: it is a React functional component that represents the home page of our application. It consists of a cover, body content, and displays a version number from a configuration file.
+useGetOperonByID: it is used to retrieve data from an operon by ID
+useGetOperonByTuId: it  is used to obtain data from an operon by the ID of a transcription unit.
+Title: component used to display the title or header on the application pages.
+Document:  component used to display detailed content or information on the application pages, possibly related to operons.
 
-## States
-	
-| Property | Value | Description |
-| -------- | ----- | ----------- |
-|          |       |             |
+#States
+| Name     | Value                     | Description                                                           |
+| -------- | ------------------------- | --------------------------------------------------------------------  |
+|state     |"done"                     | Successful operon validation status (RedirectToOperon)                |
+|          |"loading"                  | Loading status in progress (RedirectToOperon)                         |
+|          |"error"                    | Query error status (RedirectToOperon)                                 |
+|title     | Varies depending on state | Page title based on current state (RedirectToOperon)                  |
+|operonData| null or operon data       | Operon data obtained from the query (RedirectToOperon and LoadOperon) |
 
-## Hooks
-|  Name  | Description |  Syntax  | Additional Notes or References | 
-| ------ | ----------- | -------- | ------------------------------ |
-|        |             |          |                                |
+#Hooks
+| Name               | Description                                                 | Syntax                          | Additional Notes or References                                          |
+| ------------------ | ----------------------------------------------------------- | ------------------------------- | ----------------------------------------------------------------------- |
+| useParams          | Access the parameters of the current URL.                   | `useParams()`                   | -                                                                       |
+| useGetOperonByID   | Gets data from an operon by its ID.                         | `useGetOperonByID({ _id })`     | Use Apollo Client for GraphQL queries.                                  |
+| useGetOperonByTuId | Gets data from an operon by the ID of a transcription unit. | `useGetOperonByTuId({ _tuId })` | Use Apollo Client for GraphQL queries.                                  |
+| useQuery           | Perform GraphQL queries using Apollo Client.                | `useQuery(query, options)`      | Used in `useGetOperonByID` and `useGetOperonByTuId` to get operon data. |
 
-# Functions description
-
-## [function name]
-
-__Description:__  
-
-[Description of the function]
-
-
-__Usage:__
-
-```javascript
-&function(Parameters, if any);
-```
-
-__Scope: __
-
-[Scope details]
-
-__Input Parameter:__  
-​__[Name]:__ [Description]
-__[Name]:__ [Description]
-
-
-__Return:__  
-​__[Type]:__ [Name]
-​[Description (if necessary)]
-
- 
 **/
 
 import React from "react";
@@ -110,6 +82,13 @@ import Title from "./Title";
 import Document from "./document";
 
 
+
+/**
+ * Description placeholder
+ *
+ * @export
+ * @returns {React.JSX|null}
+ */
 export default function Operon() {
   let { operonId, tuId, section } = useParams();
   if (!operonId && !tuId) {
@@ -124,10 +103,29 @@ export default function Operon() {
   return null
 }
 
+
+/**
+ * Description placeholder
+ *
+ * @param {{ tuId: any; }} { tuId }
+ * @returns {React.JSX}
+ */
 function RedirectToOperon({ tuId }) {
   const { operonData, loading, error } = useGetOperonByTuId({ _tuId: tuId })
 
+  
+  /**
+   * Description placeholder
+   *
+   * @type {string}
+   */
   let state = "done"
+  
+  /**
+   * Description placeholder
+   *
+   * @type {string}
+   */
   let title = "Validating TU id " + tuId
   if (loading) {
     state = "loading"
@@ -160,9 +158,28 @@ function RedirectToOperon({ tuId }) {
   )
 }
 
+/**
+ * Description placeholder
+ *
+ * @param {{ operonId: any; section: any; }} { operonId, section }
+ * @returns {React.JSX}
+ */
 function LoadOperon({ operonId, section }) {
   const { operonData, loading, error } = useGetOperonByID({ _id: operonId })
+  
+  /**
+   * Description placeholder
+   *
+   * @type {string}
+   */
   let state = "done"
+
+  
+  /**
+   * Description placeholder
+   *
+   * @type {string}
+   */
   let title = "Operons"
   if (loading) {
     state = "loading"

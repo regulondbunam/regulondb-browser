@@ -1,27 +1,23 @@
 /**
 # Component (user guide)
 
-# [Component name]
+# Sigmulon
 	
 ## Description  
 	
-[Description Details]
+It is used to display information about a sigmulon based on its ID provided in the URL.
 
 ## Category   
-	
-[Visual, Structural, Functional]  
+Visual
 
 ## Live demo 
-	
-[code to iframe CodeSandbox]
+--
 
 ## Installation or Implementation
-
-[example: npm install --save react-awesome-button]
+--
 
 ## Usage 
-	
-[example: <protvista-tooltip>  </protvista-tooltip> ]
+example: <Sigmulon/> 
 
 ## Props 
 
@@ -31,9 +27,7 @@
 
 
 ## Exception
-
-__Category: [Error, Warning or Message]__
-[Description of the exception (if necessary)]
+--
 
 ## License
 
@@ -42,22 +36,22 @@ MIT License
 ## Author 
 	
 RegulonDB Team: 
-[full developer name]
 
 
 # Component (technical guide)
 
 ## Component Type 
-
-[ Driver, Visual, Application, Custom Hook, ClassComponent ]
-// Driver: It is a Component that controls interactions with users, browser, API requests, manage status or processes as well as logic related to data.
-// Visual: This component will take care of the structure and styles of our application.
-// Application: Application: is the main component of a web application or library.
-// Custom Hook: is a custom React function, which unlike the other components can return variables.
-// ClassComponent: is a tradicional React component class
+Visual
 
 ## Dependencies
-[Dependency name][ Dependency details ]
+useParams: This is a hook provided by the React Router library (from "react-router-dom"). It is used to access URL parameters in a React Router application, allowing the component to get information from the current URL.
+React: The React import is the core React library used to create components and manage the user interface.
+Title: It is used to represent titles or headings in the UI.
+
+Home: it is related to the representation of the application's home page.
+useGetSigmulonById: This hook is designed to fetch sigmulon data based on a specific sigmulon ID. It takes one argument, sigmulonId, which represents the ID of the sigmulon to retrieve.
+Document: It displays documents or detailed information about regulons in the application user interface.
+
 
 ## States
 	
@@ -69,34 +63,6 @@ RegulonDB Team:
 |  Name  | Description |  Syntax  | Additional Notes or References | 
 | ------ | ----------- | -------- | ------------------------------ |
 |        |             |          |                                |
-
-# Functions description
-
-## [function name]
-
-__Description:__  
-
-[Description of the function]
-
-
-__Usage:__
-
-```javascript
-&function(Parameters, if any);
-```
-
-__Scope: __
-
-[Scope details]
-
-__Input Parameter:__  
-​__[Name]:__ [Description]
-__[Name]:__ [Description]
-
-
-__Return:__  
-​__[Type]:__ [Name]
-​[Description (if necessary)]
 
  
 **/
@@ -118,8 +84,21 @@ function Sigmulon() {
 
 export default Sigmulon;
 
+
+/**
+ * Retrieves and displays information about a sigmulon based on its ID.
+ *
+ * @param {string} sigmulonId - The ID of the sigmulon to fetch information for.
+ * @returns {React.JSX} - A React JSX element representing the sigmulon information.
+ */
 function InformationBySigmulonID(sigmulonId) {
   const { loading, error, sigmulonData } = useGetSigmulonById(sigmulonId);
+  
+  /**
+   * Description placeholder
+   *
+   * @type {string}
+   */
   let state = "",
     title = "";
   if (loading) {

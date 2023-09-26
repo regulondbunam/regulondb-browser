@@ -1,27 +1,24 @@
 /**
 # Component (user guide)
 
-# [Component name]
+# Home
 	
 ## Description  
-	
-[Description Details]
+The Home component is a React functional component that represents the home page of our application. It consists of a cover, body content, and displays a version number from a configuration file.
+
 
 ## Category   
-	
-[Visual, Structural, Functional]  
+Visual
 
 ## Live demo 
-	
-[code to iframe CodeSandbox]
+--
 
 ## Installation or Implementation
-
-[example: npm install --save react-awesome-button]
+--
 
 ## Usage 
 	
-[example: <protvista-tooltip>  </protvista-tooltip> ]
+example: <Home /> 
 
 ## Props 
 
@@ -31,9 +28,7 @@
 
 
 ## Exception
-
-__Category: [Error, Warning or Message]__
-[Description of the exception (if necessary)]
+--
 
 ## License
 
@@ -42,22 +37,17 @@ MIT License
 ## Author 
 	
 RegulonDB Team: 
-[full developer name]
 
 
 # Component (technical guide)
 
 ## Component Type 
-
-[ Driver, Visual, Application, Custom Hook, ClassComponent ]
-// Driver: It is a Component that controls interactions with users, browser, API requests, manage status or processes as well as logic related to data.
-// Visual: This component will take care of the structure and styles of our application.
-// Application: Application: is the main component of a web application or library.
-// Custom Hook: is a custom React function, which unlike the other components can return variables.
-// ClassComponent: is a tradicional React component class
+Visual
 
 ## Dependencies
-[Dependency name][ Dependency details ]
+Cover: it represents the cover or header of some part of the application. The specific functionality of this component will depend on its implementation in the 'cover' file.
+Body: it represents the main section or central content of a page or screen.
+conf: it contains configuration information related to your application's home page, such as version, colors, default text, or any other data you need to customize the home page.
 
 ## States
 	
@@ -70,41 +60,18 @@ RegulonDB Team:
 | ------ | ----------- | -------- | ------------------------------ |
 |        |             |          |                                |
 
-# Functions description
 
-## [function name]
-
-__Description:__  
-
-[Description of the function]
-
-
-__Usage:__
-
-```javascript
-&function(Parameters, if any);
-```
-
-__Scope: __
-
-[Scope details]
-
-__Input Parameter:__  
-​__[Name]:__ [Description]
-__[Name]:__ [Description]
-
-
-__Return:__  
-​__[Type]:__ [Name]
-​[Description (if necessary)]
-
- 
 **/
 import { Cover } from './cover';
 import { Body } from './body';
 import conf from './conf/home.conf.json'
 
 
+/**
+ * Description placeholder
+ *
+ * @returns {HTMLElement}
+ */
 const Home = () => {
 
     return (
