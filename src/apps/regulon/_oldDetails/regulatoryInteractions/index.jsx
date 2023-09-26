@@ -4,7 +4,7 @@ import {
   DataVerifier,
 } from "../../../../components/ui-components";
 import { Link } from "react-router-dom";
-import { ParagraphCitations } from "../../../../components/datamartSchema/citations/paragraph";
+import { ParagraphCitations, PC_VARIANTS, CITATION_SIZE  } from "../../../../components/datamartSchema";
 
 const COLUMNS = [
   {
@@ -52,6 +52,7 @@ const COLUMNS = [
                   key={
                     "ri_" + info.row.original.id + "_regulatedGene_" + gene._id
                   }
+                  to={"/gene/"+gene._id}
                 >
                   <p dangerouslySetInnerHTML={{ __html: gene.name }} />
                 </Link>
@@ -123,7 +124,7 @@ const COLUMNS = [
       const citations = info.row.original.citations;
       const allCitations = info.row.original.allCitations;
       return (
-        <ParagraphCitations allCitations={allCitations} citations={citations} />
+        <ParagraphCitations variant={PC_VARIANTS.paragraph} citationSize={CITATION_SIZE.ONLY_INDEX}  allCitations={allCitations} citations={citations} />
       );
     },
   },

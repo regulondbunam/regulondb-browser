@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { AnchorNav, DataVerifier } from "../../components/ui-components"
-import { AllCitations } from "../../components/datamartSchema"
+import { AllCitations, useIndexedCitation } from "../../components/datamartSchema"
 import DrawingTracesTool from "../../components/DrawingTracesTool";
 import { TranscriptionUnit } from "../../components/datamartSchema";
 import { getRelatedIdsByOperonData } from "../../components/webservices";
@@ -12,6 +12,7 @@ const cardOptions = {
 }
 
 export default function Document({ operonData, section }) {
+    const citations = useIndexedCitation(operonData.allCitations)
 
     let relatedIds = getRelatedIdsByOperonData(operonData)
     console.log(relatedIds);
@@ -46,23 +47,23 @@ export default function Document({ operonData, section }) {
                     label: tu.name+promoterName,
                     title: "TU: "+tu.name+promoterName,
                     component: <div>
-                        <TranscriptionUnit {...tu} relatedIds={tuRelatedIds} allCitations={operonData.allCitations} regulationPositions={operonData.operon.regulationPositions} strand={operonData.operon.strand} />
+                        <TranscriptionUnit {...tu} relatedIds={tuRelatedIds} allCitations={citations.indexedCitations} regulationPositions={operonData.operon.regulationPositions} strand={operonData.operon.strand} />
                     </div>
                 })
             });
         }
-        if (DataVerifier.isValidArray(operonData.allCitations)) {
+        if (DataVerifier.isValidArray(citations.indexedCitations)) {
             _sections.push({
                 id: "GeneTab_Citations",
                 label: "Citations",
-                title: "Citations",
+                title: "All Citations",
                 component: <div style={{ overflow: "auto" }} >
-                    <AllCitations allCitations={operonData.allCitations} />
+                    <AllCitations {...citations} />
                 </div>,
             })
         }
         return _sections
-    }, [operonData, relatedIds])
+    }, [operonData, relatedIds, citations])
 
     return (
         <div>

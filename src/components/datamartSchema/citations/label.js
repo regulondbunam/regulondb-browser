@@ -1,3 +1,5 @@
+import { DataVerifier } from "../../ui-components";
+import { CITATION_SIZE } from ".";
 
 /**
  * Citation label in specific format
@@ -7,62 +9,91 @@
  * @param {number} index citation index
  * @param {object} publication is a type Publication of datamart
  * @param {object} evidence is a type Evidence of datamart
- * @param {boolean} [small=true] format of label
  * @returns {String}
  */
-export function labelCitation({publication = {}, evidence = {}, small = true, index}) {
-    //console.log(publication, evidence);
-    
-   
-    const {
-        authors,
-        citation,
-        //pmid,
-        //title,
-        //url,
-        year, } = publication
-    
-    /**
-     * Description placeholder
-     *
-     * @type {boolean}
-     */
-    const code = evidence?.code
+export function labelCitation({
+  publication = {},
+  evidence = {},
+  citationSize = CITATION_SIZE.LARGE,
+  isEvidence = false,
+  showIndex = true,
+}) {
+  if (isEvidence) {
+    let code = "";
+    if (evidence?.code) {
+      if (evidence.type === "S") {
+        code = `<b>[${evidence.code}]</b>`;
+      }
+      code = `[${evidence.code}]`;
+    }
 
-    
-    /**
-     * Description placeholder
-     *
-     * @type {string}
-     */
-    const numIndex = index ? `[${index}]` : ""
-    //W->weak S->strong
+    switch (citationSize) {
+      case CITATION_SIZE.LARGE:
+        return `${showIndex ? "e" + evidence.index + "." : ""}${
+          evidence?.name ? evidence.name : ""
+        } ${code}`;
+      case CITATION_SIZE.SMALL:
+        return `${showIndex ? "e" + evidence.index + "." : ""}${code}`;
+      case CITATION_SIZE.ONLY_INDEX:
+        return `[e${evidence.index}]`;
+      default:
+        return `${showIndex ? "e" + evidence.index + "." : ""}${
+          evidence?.name ? evidence.name : ""
+        } ${code}`;
+    }
+  }
+  let index = "",
+    authors = "",
+    citation = "",
+    year = "";
 
+  const evidences = publication.evidences;
 
-    
-    /**
-     * Description placeholder
-     *
-     * @returns {string}
-     */
-    const codeLabel = () => {
-        if (code) {
-            if (evidence.type === 'S') {
-                return `Evidence: <b>[${code}]</b>`
+  if (publication?._id) {
+    index = showIndex ? publication.index : "";
+    authors = publication.authors;
+    citation = publication.citation;
+    year = publication.year;
+  }
+
+  const evidenceCode = () => {
+    let codesA = [];
+    let codesIndexA = [];
+    if (DataVerifier.isValidArray(evidences)) {
+      evidences.forEach((evidence) => {
+        if (DataVerifier.isValidObject(evidence)) {
+          if (evidence?.code) {
+            if (evidence.type === "S") {
+              codesA.push(`<b>[${evidence.code}]</b>`);
+              codesIndexA.push(`<b>e${evidence.index}</b>`);
+            } else {
+              codesA.push(`[${evidence.code}]`);
+              codesIndexA.push(`e${evidence.index}`);
             }
-            return `Evidence: [${code}]`
+          }
         }
-        return ''
+      });
     }
-    if (small) {
-        if (!authors) {
-            return `${numIndex} ${codeLabel()}`.trim()
-        }
-        if (authors[0]) {
-            return `${numIndex} ${authors[0]}., et al. ${year ? year : ''} ${codeLabel()}`
-        }
-        return `${numIndex} ${codeLabel()}`.trim()
+    let codes = "";
+    if (codesA.length > 0) {
+      codes =
+        codesA.length > 1
+          ? "Evidences: " + codesA.join(" ")
+          : "Evidence: " + codesA.join(" ");
     }
-    return `${numIndex} ${citation ? `${citation},` : ''} ${codeLabel()}`
-    // [i]autor., et al. año [evidence]
+    return { codes, codesIndex: codesIndexA.join(", ") };
+  };
+
+  const { codes, codesIndex } = evidenceCode();
+
+  switch (citationSize) {
+    case CITATION_SIZE.LARGE:
+      return `${index} ${citation ? `${citation},` : ""} ${codes}`;
+    case CITATION_SIZE.SMALL:
+      return `(${authors[0]}., et al. ${year ? year : ""})<sup>${index}</sup>`;
+    case CITATION_SIZE.ONLY_INDEX:
+      return `[${index},${codesIndex}]`;
+    default:
+      return `${index} ${citation ? `${citation},` : ""} ${codes}`;
+  }
 }

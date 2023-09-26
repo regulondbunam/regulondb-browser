@@ -69,7 +69,7 @@ GeneOntologyItem: Its main function is to represent and display detailed informa
 **/
 
 import React from "react";
-import { ParagraphCitations } from "../../../citations";
+import { ParagraphCitations, CITATION_SIZE } from "../../../citations";
 
 /**
  * Description placeholder
@@ -249,6 +249,7 @@ function GeneOntologyItem(components, allCitations) {
                   <div>{component.name}</div>
                   <div>
                     <ParagraphCitations
+                    citationSize={CITATION_SIZE.SMALL}
                       citations={component.citations}
                       allCitations={allCitations}
                     />

@@ -5,6 +5,7 @@ export const fragment_RegulatorBS = gql`fragment RegulatorBS on RegulatorBinding
     regulator {
       _id
       name
+      abbreviatedName
       function
       conformations{
         name
