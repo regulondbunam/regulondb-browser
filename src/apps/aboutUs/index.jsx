@@ -3,6 +3,7 @@ import { Funding } from "./funding"
 import { WRegulonDB } from "./whatIsRegulonDB"
 import { TermsConditions } from "./termsConditions"
 import { useParams } from "react-router-dom"
+import ImpactRDB from "./impact"
 
 
 
@@ -19,6 +20,15 @@ export default function AboutUs() {
             component:
                 <div style={{ margin: "0% 1% 1% 2%" }} >
                    <WRegulonDB/>
+                </div>
+        },
+        {
+            id: "impact",
+            label: "impact",
+            title: "Impact of RegulonDB",
+            component:
+                <div style={{ margin: "0% 1% 1% 2%" }} >
+                   <ImpactRDB/>
                 </div>
         },
         {
