@@ -23,6 +23,7 @@ import Button from "@mui/material/Button";
 import InputBase from "@mui/material/InputBase";
 import { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import CoexpressionResults from "../coexpression";
 
 export default function Results({ keyword: inKeyword }) {
   const [keyword, setKeyword] = useState(inKeyword ? inKeyword : "");
@@ -40,6 +41,10 @@ export default function Results({ keyword: inKeyword }) {
   ];
 
   let title = `Results for ${keyword}`;
+
+  if(/coexpression/.test(keyword)){
+    return <CoexpressionResults keyword={keyword} />
+}
 
   return (
     <div>
