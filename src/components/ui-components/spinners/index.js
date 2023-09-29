@@ -1,10 +1,11 @@
 import React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 
-function Circular() {
+
+function Circular(props) {
   return (
     <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-      <CircularProgress />
+      <CircularProgress {...props} />
     </div>
   );
 }
