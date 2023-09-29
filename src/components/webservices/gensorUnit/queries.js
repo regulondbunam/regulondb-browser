@@ -15,6 +15,21 @@ export const query_getAllGUs = gql`
   }
 `;
 
+export const /** object */ query_getGuBySearch = gql`
+    query GetGUsBy($search: String) {
+      getGUsBy(search: $search) {
+        data {
+          _id
+          gensorUnit {
+            groups
+            _id
+            name
+          }
+        }
+      }
+    }
+  `;
+
 export const /** object */ query_getGuById = gql`
     query GetGUsBy($advancedSearch: String) {
       getGUsBy(advancedSearch: $advancedSearch) {

@@ -4,7 +4,7 @@ import { useGetOperonByID, useGetOperonByTuId, useGetOperonBySearch, useGetOpero
 import useGetObjectList from "./objectList";
 import { getRelatedIdsByOperonData } from "./operon/related_Ids";
 import { useGetSigmulonById, useGetSigmulonBySearch } from "./sigmulon";
-import {useGetAllGus, useGetGuById} from "./gensorUnit";
+import {useGetAllGus, useGetGuById, useGetGuBySearch} from "./gensorUnit";
 import { useGetAllGenes } from "./coexpression";
 import { useGetPhraseByObjectId } from "./phrases";
 import { useGetDataFile, useLazyGetDataFile } from "./dataOfFile";
@@ -15,7 +15,7 @@ export {
     useGetObjectList,
     useGetOperonByID, useGetOperonByTuId, useGetOperonBySearch, useGetOperonByAdvancedSearch, getRelatedIdsByOperonData,
     useGetSigmulonById, useGetSigmulonBySearch,
-    useGetAllGus, useGetGuById,
+    useGetAllGus, useGetGuById, useGetGuBySearch,
     useGetPhraseByObjectId,
     useGetDataFile, useLazyGetDataFile
 }

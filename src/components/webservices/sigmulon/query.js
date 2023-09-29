@@ -36,9 +36,6 @@ export const fragment_PAGINATION = gql`fragment PAGINATION on Pagination {
         }
         data {
           _id
-          allCitations {
-            ...CITATIONS
-          }
           sigmaFactor {
             _id
             gene {
@@ -46,36 +43,6 @@ export const fragment_PAGINATION = gql`fragment PAGINATION on Pagination {
               name
             }
             name
-            sigmulonGenes {
-              geneOntologyTerms{
-                biologicalProcess{
-                  _id
-                  citations{
-                    ...CITATIONS
-                  }
-                  name
-                  productsIds
-                }
-                cellularComponent{
-                  _id
-                  citations{
-                    ...CITATIONS
-                  }
-                  name
-                  productsIds
-                }
-                molecularFunction{
-                  _id
-                  citations{
-                    ...CITATIONS
-                  }
-                  name
-                  productsIds
-                }
-              }
-              name
-              _id
-            }
             sigmulonRegulators {
               _id
               name
@@ -89,41 +56,6 @@ export const fragment_PAGINATION = gql`fragment PAGINATION on Pagination {
             sigmaFactors
             transcriptionFactors
             transcriptionUnits
-          }
-          transcribedPromoters {
-            _id
-            TSSPosition
-            boxes {
-              leftEndPosition
-              rightEndPosition
-              sequence
-              type
-            }
-            name
-            operonId
-            sequence
-            transcribedGenes {
-              _id
-              distanceFromTSS
-              name
-            }
-            citations {
-              evidence {
-                code
-                _id
-                name
-                type
-              }
-              publication {
-                authors
-                citation
-                _id
-                pmid
-                title
-                url
-                year
-              }
-            }
           }
         }
       }
