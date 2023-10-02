@@ -22,6 +22,7 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import InputBase from "@mui/material/InputBase";
 import { useState } from "react";
+import { Div } from "../../../components/ui-components/searchKeys/code";
 import SearchIcon from "@mui/icons-material/Search";
 import CoexpressionResults from "../coexpression";
 
@@ -86,6 +87,7 @@ export default function Results({ keyword: inKeyword }) {
         </div>
         <h2>{title}</h2>
       </Cover>
+      <Div name={inKeyword} />
       <AnchorNav title="Results" sections={section} disabledSearchTool />
     </div>
   );
