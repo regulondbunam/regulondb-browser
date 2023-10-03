@@ -72,10 +72,9 @@ React: React is a JavaScript library developed by Facebook that is used to build
 
  **/
 
-
-import PropTypes from 'prop-types';
-import React from 'react';
-
+import PropTypes from "prop-types";
+import React from "react";
+import { DataVerifier } from "../../ui-components";
 
 /**
  * Description placeholder
@@ -83,15 +82,14 @@ import React from 'react';
  * @type {{ _id: any; authors: any; citation: any; pmid: any; title: any; url: any; year: any; }}
  */
 const PROP_TYPES = {
-    _id: PropTypes.string.isRequired,
-    authors: PropTypes.arrayOf(PropTypes.string),
-    citation: PropTypes.string,
-    pmid: PropTypes.string,
-    title: PropTypes.string,
-    url: PropTypes.string,
-    year: PropTypes.number,
+  _id: PropTypes.string.isRequired,
+  authors: PropTypes.arrayOf(PropTypes.string),
+  citation: PropTypes.string,
+  pmid: PropTypes.string,
+  title: PropTypes.string,
+  url: PropTypes.string,
+  year: PropTypes.number,
 };
-
 
 /**
  * Description placeholder
@@ -108,23 +106,44 @@ const PROP_TYPES = {
 }
  * @returns {React.JSX}
  */
-export function Publication({
-    _id,
-    authors = [],
-    citation = "",
-    pmid = "",
-    title = "",
-    url = "",
-    year = 0,
-}) {
-    return (
-        <div>
-            <h2>Reference:</h2>
-            {url !== "" && <a href={url} target="_blank" rel="noopener noreferrer" >Go to Reference</a>}
-            <p>{pmid !== "" ? `pmid: ${pmid}` : ""}</p>
-            <p ><b>{citation !== "" ? citation : ""}</b></p>
-        </div>
-    );
+export function Publication({ citation = "", pmid = "", url = "", index }) {
+  return (
+    <div>
+      <h2>Reference:</h2>
+      <table>
+        <tbody>
+          <tr>
+            <td>[{index}]</td>
+            <td>
+              <p>
+                <b>{citation !== "" ? citation : ""}</b>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td colSpan={2}>
+              <p>
+                {DataVerifier.isValidString(pmid) ? `pmid:${pmid} ` : " "}
+                {DataVerifier.isValidString(url) && (
+                  <>
+                  {/GO.references/.test(url) ? (
+                    <a href="http://current.geneontology.org/metadata/go-refs.json" target="_blank" rel="noopener noreferrer">
+                    go to Gene Ontology references
+                  </a>
+                  ):(
+                    <a href={url} target="_blank" rel="noopener noreferrer">
+                    go to reference
+                  </a>
+                  )}
+                  </>
+                )}
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
 }
 
-Publication.propTypes = PROP_TYPES
+Publication.propTypes = PROP_TYPES;

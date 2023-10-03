@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { AnchorNav, DataVerifier } from "../../../components/ui-components";
-import { AllCitations } from "../../../components/datamartSchema";
+import { AllCitations, useIndexedCitation } from "../../../components/datamartSchema";
 import Genes from "./components/genes";
 import Regulators from "../../../components/datamartSchema/gene/regulation/regulators";
 import TranscribedPromoters from "./components/promoters";
@@ -10,16 +10,8 @@ const cardOptions = {
 };
 
 export default function Document({ sigmulonData }) {
-  console.log(sigmulonData);
-  /*
-  let statistics = <></>;
-  if (DataVerifier.isValidObject(sigmulonData.statistics)) {
-    statistics = (
-      <div style={{ display: "flex", width: "100%", justifyContent: 'space-evenly' }}>
-        
-      </div>
-    );
-  }*/
+  const {publications, evidences} = useIndexedCitation(sigmulonData.allCitations)
+
   const sections = useMemo(() => {
     let _sections = [];
     const { allCitations, sigmaFactor, transcribedPromoters, _id } =
@@ -74,13 +66,13 @@ export default function Document({ sigmulonData }) {
         title: "Citations",
         component: (
           <div style={{ overflow: "auto" }}>
-            <AllCitations allCitations={allCitations} />
+            <AllCitations publications={publications} evidences={evidences} />
           </div>
         ),
       });
     }
     return _sections;
-  }, [sigmulonData]);
+  }, [sigmulonData, publications, evidences]);
   return (
     <div>
       <AnchorNav

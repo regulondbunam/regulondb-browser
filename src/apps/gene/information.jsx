@@ -1,13 +1,13 @@
 import { useMemo } from "react"
 import { AnchorNav, DataVerifier } from "../../components/ui-components"
 import DrawingTracesTool from "../../components/DrawingTracesTool";
-import { Gene, Product, Regulation, AllCitations, MultifunTerms } from "../../components/datamartSchema"
+import { Gene, Product, Regulation, useIndexedCitation, AllCitations, MultifunTerms } from "../../components/datamartSchema"
 import RelatedTool from "./components/relatedTool";
 
 
 
 export default function Information({ geneData }) {
-
+    const citations = useIndexedCitation(geneData.allCitations)
     let relationTool = null
     let dtt = null
 
@@ -34,7 +34,7 @@ export default function Information({ geneData }) {
                 title: "Description",
                 component:
                     <div style={{ margin: "0% 1% 1% 2%" }} >
-                        <Gene {...geneData.gene} allCitations={geneData.allCitations} viewTitle={false} products={geneData.products} />
+                        <Gene {...geneData.gene} allCitations={citations.indexedCitations} viewTitle={false} products={geneData.products} />
                     </div>
             })
             if(DataVerifier.isValidArray(geneData.gene.multifunTerms)){
@@ -71,7 +71,7 @@ export default function Information({ geneData }) {
                     title: <span dangerouslySetInnerHTML={{__html: `Product ${productName}`}} />,
                     component:
                         <div style={{ margin: "0% 1% 1% 2%" }} >
-                            <Product key={`product_${product._id}`} {...product} allCitations={geneData.allCitations} />
+                            <Product key={`product_${product._id}`} {...product} allCitations={citations.indexedCitations} />
                         </div>
                 })
             });
@@ -81,14 +81,14 @@ export default function Information({ geneData }) {
             tabsInfo.push({
                 id: "GeneTab_Citations",
                 label: "Citations",
-                title: "Citations",
+                title: "All Citations",
                 component: <div style={{overflow: "auto"}} >
-                    <AllCitations allCitations={geneData.allCitations} />
+                    <AllCitations {...citations} />
                 </div>,
             })
         }
         return tabsInfo
-    }, [geneData])
+    }, [geneData,citations])
 
     return <AnchorNav sections={sections} header={dtt} aside={relationTool}
         title={`Gene ${geneData.gene.name}`} />

@@ -4,9 +4,32 @@ import {
   DataVerifier,
 } from "../../../../components/ui-components";
 import { Link } from "react-router-dom";
-import { ParagraphCitations } from "../../../../components/datamartSchema/citations/paragraph";
+import { ParagraphCitations, PC_VARIANTS, CITATION_SIZE  } from "../../../../components/datamartSchema";
 
 const COLUMNS = [
+  {
+    id: "activeConformation",
+    header: "Active Conformation",
+    columns: [
+      {
+        id: "activeConformation_name",
+        header: "name",
+        accessorKey: "_activeConformation_name",
+        cell: (info) => (<p dangerouslySetInnerHTML={{__html: info.getValue()}} />),
+      }
+    ],
+  },
+  {
+    id: "regulatoryInteraction",
+    header: "Regulatory Interaction",
+    columns: [
+      {
+        id: "regulatoryInteraction_function",
+        header: "Function",
+        accessorKey: "_regulatoryInteraction_function",
+      },
+    ],
+  },
   {
     id: "regulatedEntity",
     header: "Regulated Entity",
@@ -24,15 +47,19 @@ const COLUMNS = [
     ],
   },
   {
-    id: "activeConformation",
-    header: "Active Conformation",
+    id: "regulatoryInteraction_distanceTo",
+    header: "Distance to",
     columns: [
       {
-        id: "activeConformation_name",
-        header: "name",
-        accessorKey: "_activeConformation_name",
-        cell: (info) => (<p dangerouslySetInnerHTML={{__html: info.getValue()}} />),
-      }
+        id: "regulatoryInteraction_distanceTo_gene",
+        header: "First Gene",
+        accessorKey: "_distanceGene",
+      },
+      {
+        id: "regulatoryInteraction_distanceTo_promoter",
+        header: "Promoter",
+        accessorKey: "_distancePromoter",
+      },
     ],
   },
   {
@@ -52,6 +79,7 @@ const COLUMNS = [
                   key={
                     "ri_" + info.row.original.id + "_regulatedGene_" + gene._id
                   }
+                  to={"/gene/"+gene._id}
                 >
                   <p dangerouslySetInnerHTML={{ __html: gene.name }} />
                 </Link>
@@ -59,33 +87,6 @@ const COLUMNS = [
             </>
           );
         },
-      },
-    ],
-  },
-  {
-    id: "regulatoryInteraction",
-    header: "Regulatory Interaction",
-    columns: [
-      {
-        id: "regulatoryInteraction_function",
-        header: "Function",
-        accessorKey: "_regulatoryInteraction_function",
-      },
-    ],
-  },
-  {
-    id: "regulatoryInteraction_distanceTo",
-    header: "Distance to",
-    columns: [
-      {
-        id: "regulatoryInteraction_distanceTo_gene",
-        header: "First Gene",
-        accessorKey: "_distanceGene",
-      },
-      {
-        id: "regulatoryInteraction_distanceTo_promoter",
-        header: "Promoter",
-        accessorKey: "_distancePromoter",
       },
     ],
   },
@@ -123,7 +124,7 @@ const COLUMNS = [
       const citations = info.row.original.citations;
       const allCitations = info.row.original.allCitations;
       return (
-        <ParagraphCitations allCitations={allCitations} citations={citations} />
+        <ParagraphCitations variant={PC_VARIANTS.paragraph} citationSize={CITATION_SIZE.ONLY_INDEX}  allCitations={allCitations} citations={citations} />
       );
     },
   },
@@ -137,7 +138,7 @@ function formatData(regulatoryInteractions = [], allCitations) {
       let _regulatedEntity_type = "";
       if (DataVerifier.isValidObject(ri.regulatedEntity)) {
         _regulatedEntity_name = ri.regulatedEntity.name;
-        _regulatedEntity_type = ri.regulatedEntity.type;
+        _regulatedEntity_type = ri.regulatedEntity.type === "transcriptionUnit" ? "TU" : ri.regulatedEntity.type ;
       }
       let _activeConformation_name = "";
       let _activeConformation_type = "";

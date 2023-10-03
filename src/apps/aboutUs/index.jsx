@@ -75,13 +75,12 @@ useParams: it  is a hook provided by the react-router-dom library. It is used to
 
  
 **/
-
-import { Cover, AnchorNav } from "../../components/ui-components";
-import { Funding } from "./funding";
-import { WRegulonDB } from "./whatIsRegulonDB";
-import { TermsConditions } from "./termsConditions";
-import { useParams } from "react-router-dom";
-
+import { Cover, AnchorNav } from "../../components/ui-components"
+import { Funding } from "./funding"
+import { WRegulonDB } from "./whatIsRegulonDB"
+import { TermsConditions } from "./termsConditions"
+import { useParams } from "react-router-dom"
+import ImpactRDB from "./impact"
 
 /**
  * Description placeholder
@@ -90,48 +89,48 @@ import { useParams } from "react-router-dom";
  * @returns {React.JSX}
  */
 export default function AboutUs() {
-    
-  let { section } = useParams();
 
-  
-  /**
-   * Description placeholder
-   *
-   * @type {array}
-   */
-  const sections = [
-    {
-      id: "whatIsRegulonDB",
-      label: "what is RegulonDB?",
-      title: "What is RegulonDB?",
-      component: (
-        <div style={{ margin: "0% 1% 1% 2%" }}>
-          <WRegulonDB />
-        </div>
-      ),
-    },
-    {
-      id: "funding",
-      label: "Funding",
-      title: "Funding",
-      component: (
-        <div style={{ margin: "0% 1% 1% 2%" }}>
-          <Funding />
-        </div>
-      ),
-    },
-    {
-      id: "terms_and_conditions",
-      label: "Terms & Conditions",
-      title:
-        "End User License Agreement for Academic/Noncommercial Use of RegulonDB.",
-      component: (
-        <div style={{ margin: "0% 1% 1% 2%" }}>
-          <TermsConditions />
-        </div>
-      ),
-    },
-  ];
+    let { section } = useParams();
+    
+    const sections = [
+        {
+            id: "whatIsRegulonDB",
+            label: "what is RegulonDB?",
+            title: "What is RegulonDB?",
+            component:
+                <div style={{ margin: "0% 1% 1% 2%" }} >
+                   <WRegulonDB/>
+                </div>
+        },
+        {
+          id: "impact",
+          label: "impact",
+          title: "Impact of RegulonDB",
+          component:
+              <div style={{ margin: "0% 1% 1% 2%" }} >
+                 <ImpactRDB/>
+              </div>
+      },
+        {
+            id: "funding",
+            label: "Funding",
+            title: "Funding",
+            component:
+                <div style={{ margin: "0% 1% 1% 2%" }} >
+                   <Funding />
+                </div>
+        },
+        {
+            id: "terms_and_conditions",
+            label: "Terms & Conditions",
+            title: "End User License Agreement for Academic/Noncommercial Use of RegulonDB.",
+            component:
+                <div style={{ margin: "0% 1% 1% 2%" }} >
+                   <TermsConditions />
+                </div>
+        },
+        
+    ]
 
   return (
     <div>

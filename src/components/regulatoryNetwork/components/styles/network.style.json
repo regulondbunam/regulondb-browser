@@ -20,6 +20,14 @@
     }
   },
   {
+    "selector": "node[network='Small RNA']",
+    "style": {
+      "backgroundColor": "#F3B15A",
+      "shape": "polygon",
+      "shape-polygon-points": "-1 0, -0.6 -0.8, 0.7 -0.8, 1 -0.5, 1 0.5, 0.7 0.8, -0.6 0.8"
+    }
+  },
+  {
     "selector": "node[network='Transcription Factor']",
     "style": {
       "backgroundColor": "#F3B15A",

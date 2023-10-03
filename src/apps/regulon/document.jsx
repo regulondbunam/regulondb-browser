@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { AnchorNav, DataVerifier } from "../../components/ui-components"
-import { AllCitations } from "../../components/datamartSchema"
+import { useIndexedCitation, AllCitations } from "../../components/datamartSchema"
 import NavigationTabs, { idNavTabs } from "./_oldDetails/NavigationTabs";
 import Regulates from "./_oldDetails/regulates";
 import Summary from "./_oldDetails/summary";
@@ -18,6 +18,8 @@ const cardOptions = {
 }
 
 export default function Document({ regulonData, section }) {
+
+    const {indexedCitations, publications, evidences} = useIndexedCitation(regulonData.allCitations)
 
     const related = <RelatedTool regulonData={regulonData} />
     
@@ -40,7 +42,7 @@ export default function Document({ regulonData, section }) {
                 label: "Regulator",
                 title: "Regulator "+regulator.abbreviatedName,
                 component: <div style={{ overflow: "auto" }} >
-                    <Regulator regulator={regulator} allCitations={allCitations} />
+                    <Regulator regulator={regulator} allCitations={indexedCitations} />
                 </div>,
             })
         }
@@ -51,7 +53,7 @@ export default function Document({ regulonData, section }) {
                 title: "Regulon",
                 component: <div style={{ overflow: "auto" }} >
                     <DiagramRegulatoryNetwork regulonId={_id} />
-                    <Regulates regulates={regulates} allCitations={allCitations} />
+                    <Regulates regulates={regulates} allCitations={indexedCitations} />
                 </div>,
             })
         }
@@ -61,7 +63,7 @@ export default function Document({ regulonData, section }) {
                 label: "Regulatory Interactions",
                 title: "Regulatory Interactions",
                 component: <div style={{ overflow: "auto" }} >
-                    <RegulatoryInteractions regulatoryInteractions={regulatoryInteractions} allCitations={allCitations} />
+                    <RegulatoryInteractions regulatoryInteractions={regulatoryInteractions} allCitations={indexedCitations} />
                 </div>,
             })
         }
@@ -71,7 +73,7 @@ export default function Document({ regulonData, section }) {
                 label: "Terms of regulated genes",
                 title: "Terms of regulated genes ",
                 component: <div style={{ overflow: "auto" }} >
-                    <Terms geneOntology={terms.geneOntology} multifun={terms.multifun} allCitations={allCitations} />
+                    <Terms geneOntology={terms.geneOntology} multifun={terms.multifun} allCitations={indexedCitations} />
                 </div>,
             })
         }
@@ -81,7 +83,7 @@ export default function Document({ regulonData, section }) {
                 label: "Citations",
                 title: "Citations ",
                 component: <div style={{ overflow: "auto" }} >
-                    <Citations allCitations={allCitations} />
+                    <AllCitations evidences={evidences} publications={publications}/>
                 </div>,
             })
         }

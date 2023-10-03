@@ -124,7 +124,7 @@ export default function SimpleTrack({
       )}
       <div id={drawPlaceId} style={divStyle}></div>
 
-      {
+      {/*
         
         <button
         onClick={() => {
@@ -145,7 +145,7 @@ export default function SimpleTrack({
       >
         redraw
       </button>
-        
+        */
       }
     </div>
   );

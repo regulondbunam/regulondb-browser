@@ -23,10 +23,10 @@ export default function Site(siteData,section) {
   return (
     <div>
       <Cover>
-        <h1 style={{ fontSize: "xxx-large" }}>About us</h1>
+        <h1 style={{ fontSize: "xxx-large" }}>{siteData.title}</h1>
       </Cover>
       <AnchorNav
-        title="About us"
+        title={siteData.title}
         sections={sections}
         idSelectSection={section}
       />

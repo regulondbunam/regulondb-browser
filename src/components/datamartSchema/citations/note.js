@@ -1,6 +1,6 @@
 
 import { labelCitation } from "./label"
-
+import {CITATION_SIZE} from "."
 
 /**
  * Description placeholder
@@ -70,7 +70,7 @@ export function relCitation(allCitations, idCit, small = true) {
         console.log(index);
         return ""
     }
-    return `<a class='citation' data-tip='${publication}' target="_blank" rel="noopener noreferrer" href="${url}">${labelCitation({ publication: fullCit.publication, evidence: fullCit.evidence, index: index+1 })}</a>&nbsp;`
+    return `<a class='citation' data-tip='${publication}' target="_blank" rel="noopener noreferrer" href="${url}">${labelCitation({ citationSize:CITATION_SIZE.SMALL, publication: fullCit.publication, evidence: fullCit.evidence, index: index+1 })}</a>&nbsp;`
 }
 
 

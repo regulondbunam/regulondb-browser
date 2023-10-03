@@ -1,6 +1,24 @@
 import { ModalCitation } from "./modal";
-import { ParagraphCitations } from "./paragraph";
+import { ParagraphCitations, PC_VARIANTS } from "./paragraph";
 import { NoteCitations } from "./note";
-import { AllCitations } from "./allCitations";
+import useIndexedCitation, {
+  AllCitationsDeprecated,
+  AllCitations,
+} from "./allCitations";
 
-export { ModalCitation, ParagraphCitations, NoteCitations, AllCitations }
+const CITATION_SIZE = {
+  LARGE: "large",
+  SMALL: "small",
+  ONLY_INDEX: "index"
+}
+
+export {
+  ModalCitation,
+  ParagraphCitations,
+  PC_VARIANTS,
+  CITATION_SIZE,
+  NoteCitations,
+  AllCitationsDeprecated,
+  AllCitations,
+  useIndexedCitation,
+};

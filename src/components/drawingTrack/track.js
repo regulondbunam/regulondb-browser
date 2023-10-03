@@ -5,9 +5,8 @@ export default class Track {
   font = {
     size: "14px",
     family: "'Courier New',Courier,monospace",
-    weight: "700",
   };
-  stroke = { color: "#000000", width: 1, linecap: "round" };
+  stroke = { color: "#000000", width: 1 };
   constructor(id, drawPlaceId, width, height, bpWidth) {
     this.id = id;
     this.drawPlaceId = drawPlaceId;
