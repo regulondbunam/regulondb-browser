@@ -32,7 +32,7 @@ const GRID_CONTENT = [
         label: "RegulonDB CCG UNAM",
       },
       {
-        url: "/manual/docker",
+        url: "/manual/apiSoftware/docker",
         label: "RegulonDB Docker (local instance)"
       }
     ],
