@@ -26,12 +26,12 @@ import { Div } from "../../../components/ui-components/searchKeys/code";
 import SearchIcon from "@mui/icons-material/Search";
 import CoexpressionResults from "../coexpression";
 
-export default function Results({ keyword: inKeyword }) {
-  const [keyword, setKeyword] = useState(inKeyword ? inKeyword : "");
-  const [value, setValue] = useState(inKeyword ? inKeyword : "");
-  const handleSearch = () => {
-    setKeyword(value);
-  };
+export default function Results({ keyword }) {
+  //const [keyword, setKeyword] = useState(inKeyword ? inKeyword : "");
+  //const [value, setValue] = useState(inKeyword ? inKeyword : "");
+  //const handleSearch = () => {
+  //  setKeyword(value);
+  //};
 
   let section = [
     GeneResult(keyword),
@@ -41,7 +41,7 @@ export default function Results({ keyword: inKeyword }) {
     GUsResult(keyword)
   ];
 
-  let title = `Results for ${keyword}`;
+  let title = `${keyword}`;
 
   if(/coexpression/.test(keyword)){
     return <CoexpressionResults keyword={keyword} />
@@ -50,8 +50,10 @@ export default function Results({ keyword: inKeyword }) {
   return (
     <div>
       <Cover>
-        <h1>Search</h1>
+        <br />
+        <h1>Search in results {title} </h1>
         <div style={{ display: "grid", gridTemplateColumns: "70% 1% 20%" }}>
+          {/* 
           <Paper
             sx={{
               p: "2px 4px",
@@ -84,10 +86,10 @@ export default function Results({ keyword: inKeyword }) {
           >
             Search
           </Button>
+          */}
         </div>
-        <h2>{title}</h2>
       </Cover>
-      <Div name={inKeyword} />
+      <Div name={keyword} />
       <AnchorNav title="Results" sections={section} disabledSearchTool />
     </div>
   );
