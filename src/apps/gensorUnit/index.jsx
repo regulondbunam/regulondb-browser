@@ -4,13 +4,11 @@
 # GensorUnit
 	
 ## Description  
-
-It is a structural component on which all components are mounted
-from the main view
+It is a structural component on which all components are mounted from the main view.
 
 ## Category   
 	
-[Structural]  
+Visual
 
 ## Usage 
 	
@@ -24,9 +22,7 @@ from the main view
 
 
 ## Exception
-
-__Category: [Error, Warning or Message]__
-[Description of the exception (if necessary)]
+--
 
 ## License
 
@@ -35,36 +31,40 @@ MIT License
 ## Author 
 	
 RegulonDB Team: 
-    Francisco Mendez Hernandez <jklmopkrst@gmail.com>
-    Gabriel Alarcon Carranza <galarcon@ccg.unam.mx>
+
 
 # Component (technical guide)
 
 ## Component Type 
 
-[An Application]
+Visual
 
 ## Dependencies
+Cover: A custom component used to display information on the front page of the application, such as loading messages or featured content.
+DataVerifier: A custom component designed to verify the validity of data in the application, ensuring that it meets certain criteria or restrictions before displaying it.
+useParams: A hook provided by React Router that is used to get and manage URL parameters in the application. In this case, it is used to get the value of guId from the URL.
+useGetAllGus: A custom hook used to make a request to a web service and get all data related to "Gensor Units."
+useGetGuById: A custom hook used to make a request to a web service and get data specific to a "Gensor Unit" based on its ID.
+GuInfo: it is responsible for representing data such as the unit name, information about related functional groups and other characteristics specific to a "Gensor Unit."
+Home: it displays a list of "Gensor Units" or other relevant information on the main page of the application.
+useState: A hook provided by React used to manage local state in functional components. In this case, it is used to control the state related to the type of display in the application (graphical or summary view).
+InputLabel: A component used to label form elements, providing a description or title for the input elements.
+MenuItem: A component used to create menu items in forms or selections.
+FormControl: A component that wraps form input elements, such as selection fields or text input.
+Select: A component used to create selective drop-down lists in the user interface, allowing users to choose from various options.
+Summary: it is used to display a summary or summary view of data related to a "Gensor Unit."
 
-__{MainTable} from "./mainTable/index"__
-Dependency that allows to use the MainTable component
-
-__{Paragraph} from "./Paragraph"__
-Using this dependency we can display the Paragraph component
-
-__{cover} from "../../components/ui-components" __
-With this dependency we can use the cover component of the 
-ui-components library 
-
-__{conf}  from "./conf.json"__
-It allows us to access the GensorUnit configuration file
-
-## States
+#States
+|State  |Type  | Default  | Description                                                                                                                                                                          |
+|------ | ---- | -------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|guId   |String| N/A      |The ID of the "Gensor Unit" obtained from the URL. If present, it is used to display detailed information about a specific unit.                                                      |
+|display|String| "Graphic"| The display type that controls whether a graphical view or a summary of the "Gensor Unit" is displayed. The default is "Graphic," but may change depending on user interaction.  |
 	
-|   State   | Type | Default | Description |
-| --------- | ---- | ------- | ----------- |
-|           |      |         |             |
-	
+#Hooks
+| Name      | Description                                                            | Syntax                                                           | Additional Notes or References                          | 
+| --------- | -------------------------------------------------------------------    | ---------------------------------------------------------------- | ------------------------------------------------------- |
+| useParams | Hook provided by React Router to extract and manage URL parameters.    | let { guId } = useParams();                                      | Used to get the "Gensor Unit" ID of the URL.            |
+| useState  | Hook provided by React to manage local state in functional components. |  const [display, setDisplay] = useState(DISPLAY_TYPES.graphic);  | Used to switch between the graphic view and the summary.|     
 
 */
 
@@ -80,6 +80,14 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Summary from "./guSummary";
 
+
+
+/**
+ * Description placeholder
+ *
+ * @export
+ * @returns {React.JSX}
+ */
 export default function GensorUnit() {
   /**
    * id of the Gu entered in the URL.
@@ -92,15 +100,28 @@ export default function GensorUnit() {
   return <GoHome />;
 }
 
+
+/**
+ * Description placeholder
+ *
+ * @type {{ graphic: string; summary: string; }}
+ */
 const DISPLAY_TYPES = {
   graphic: "Graphic",
   summary: "Summary",
 };
 
+
+/**
+ * Description placeholder
+ *
+ * @param {{ guId: any; }} { guId }
+ * @returns {React.JSX|HTMLElement}
+ */
 function GoInfo({ guId }) {
   const [display, setDisplay] = useState(DISPLAY_TYPES.graphic);
   const { guData, loading, error } = useGetGuById(guId);
-  console.log(guData);
+  // console.log(guData);
   if (loading) {
     return (
       <div>
@@ -114,6 +135,12 @@ function GoInfo({ guId }) {
     return <>error</>;
   }
   if (guData?._id) {
+    
+    /**
+     * Description placeholder
+     *
+     * @type {string}
+     */
     let idSite = "site_" + guData._id;
     if(display === DISPLAY_TYPES.summary){
       return (
@@ -190,6 +217,13 @@ function GoInfo({ guId }) {
   return <div>info</div>;
 }
 
+
+/**
+ *
+ * @param {string} display - The current display type.
+ * @param {function} setDisplay - Function to update the display type.
+ * @returns {React.JSX} - Display type selection component.
+ */
 function SelectDisplay(display, setDisplay) {
   const handleChange = (event) => {
     setDisplay(event.target.value);
@@ -215,10 +249,29 @@ function SelectDisplay(display, setDisplay) {
   );
 }
 
+
+/**
+ * Description placeholder
+ *
+ * @returns {HTMLElement}
+ */
 function GoHome() {
   const { gusData, error, loading } = useGetAllGus();
 
+  
+  /**
+   * Description placeholder
+   *
+   * @type {string}
+   */
   let state = "done";
+
+  
+  /**
+   * Description placeholder
+   *
+   * @type {string}
+   */
   let title = "Gensor Units";
   if (loading) {
     state = "loading";

@@ -1,3 +1,82 @@
+/*
+# Component (user guide)
+
+# ExperimentalDatasets
+	
+## Description  
+	
+Its main function is to display a list of downloadable file names and to provide download and browse functionality for these files.
+
+## Category   
+	
+Visual
+
+## Live demo 
+--
+
+## Installation or Implementation
+--
+
+## Usage 
+--
+
+## Props 
+
+| Attribute | Type | Default | Description |
+| --------- | ---- | ------- | ----------- |
+|           |      |         |             |
+
+
+## Exception
+--
+
+## License
+
+MIT License
+
+## Author 
+	
+RegulonDB Team:
+
+
+# Component (technical guide)
+
+## Component Type 
+Visual
+
+## Dependencies
+React: React is the core library used to build user interfaces in web applications. It allows the creation of reusable components and facilitates application state management.
+exData.css: This is a style sheet (CSS) file that provides specific styles for the ExperimentalDatasets component.
+Cover: Cover is a custom component that is used to display a kind of header or cover page in the user interface.
+DataVerifier:It is a custom utility or component that is likely to be used to check the validity of certain data or strings.
+Circular: It is a component used to display a circular load indicator.
+DownloadIcon: it is an icon provided by Material-UI that is used in a button to represent the action of downloading a file.
+ManageSearchIcon: it is another icon provided by Material-UI that is used on a button to represent the file browsing and filtering action.
+Button: it  is a Material-UI component used to create buttons in the user interface. In this context, it is used to create download and navigation buttons.
+Tooltip: it is a Material-UI component that provides pop-up information when the user hovers over an element.
+Link: it is a React Router component used to create navigation links within a React application.
+useParams: it is a hook provided by React Router that is used to obtain parameters from the current URL.
+BrowserFilter: it is custom component used to browse and filter files.
+useLazyGetDataFile: it is a custom hook used to obtain data from a file asynchronously.
+gql: it  is a function provided by Apollo Client that is used to define GraphQL queries as template strings.
+useQuery: it is a hook provided by Apollo Client that is used to execute GraphQL queries and manage the results.
+
+## States
+	
+| Property | Value | Description |
+| -------- | ----- | ----------- |
+|          |       |             |
+
+## Hooks
+|  Name   | Description                                                                                          |  Syntax   | Additional Notes or References | 
+| --------| ---------------------------------------------------------------------------------------------------- | --------- | ------------------------------ |
+|useQuery |it is a hook provided by Apollo Client that is used to execute GraphQL queries and manage the results.|useQuery();|                                |
+|useParams|it is a hook provided by React Router that is used to obtain parameters from the current URL.         |useParams();|   
+
+
+
+*/
+
 import React from "react";
 import "./exData.css";
 import { Cover, DataVerifier, Circular } from "../../components/ui-components";
@@ -10,12 +89,25 @@ import BrowserFilter from "./browserFilter";
 import { useLazyGetDataFile } from "../../components/webservices";
 import { gql, useQuery } from "@apollo/client";
 
+
+/**
+ * Description placeholder
+ *
+ * @type {*}
+ */
 const query_GET_AllFilesNames = gql`
   query Query {
     listAllFileNames
   }
 `;
 
+
+/**
+ * Description placeholder
+ *
+ * @param {string} [str=""]
+ * @returns {string}
+ */
 function formatMetaData(str = "") {
   /*let newStr = ""
   for (let index = 0; index < str.length; index += 50) {
@@ -25,6 +117,13 @@ function formatMetaData(str = "") {
   return str.replace("\t", "\n#\t");
 }
 
+
+/**
+ * Description placeholder
+ *
+ * @export
+ * @returns {React.JSX|HTMLElement}
+ */
 export default function ExperimentalDatasets() {
   const {
     data,
@@ -34,6 +133,12 @@ export default function ExperimentalDatasets() {
   const [getFile, { loading: loadingFileData }] = useLazyGetDataFile();
   const { idFile } = useParams();
 
+  
+  /**
+   * Description placeholder
+   *
+   * @param {*} file
+   */
   const handleDownload = (file) => {
     //console.log(file);
     switch (file.path.type) {
@@ -41,8 +146,20 @@ export default function ExperimentalDatasets() {
         getFile({
           variables: { fileName: file.name },
           onCompleted: (data) => {
+            
+            /**
+             * Description placeholder
+             *
+             * @type {*}
+             */
             const fileData = data.getDataOfFile;
             //console.log(fileData);
+            
+            /**
+             * Description placeholder
+             *
+             * @type {string}
+             */
             let fileInfo = "";
             if (DataVerifier.isValidString(fileData.license)) {
               fileInfo +=
@@ -76,6 +193,12 @@ export default function ExperimentalDatasets() {
               fileInfo += fileData.content;
             }
             //console.log(fileInfo);
+            
+            /**
+             * Description placeholder
+             *
+             * @type {HTMLElement}
+             */
             const element = document.createElement("a");
             element.setAttribute(
               "href",
@@ -111,9 +234,22 @@ export default function ExperimentalDatasets() {
   }
 
   if (data) {
+
+    
+    /**
+     * Description placeholder
+     *
+     * @type {*}
+     */
     let listFilesNames = [...data.listAllFileNames]
     listFilesNames.sort();
     if (idFile) {
+      
+      /**
+       * Description placeholder
+       *
+       * @type {*}
+       */
       const fileName = listFilesNames.find((fileName) => fileName === idFile);
       if (!fileName) {
         return <>there is no file with this name or id:{idFile}</>;

@@ -5,18 +5,17 @@
 # Overviews
 	
 ## Description  
-
-[Main component used to initialize the program]
+It is an important part of the user interface of a React application that is responsible for displaying an overview of data. It can interact with other components to fetch data and react to URL parameters, making it dynamic and versatile depending on the application requirements.
 
 ## Category   
 	
 Estructural
 
 ## Live demo 
-[-]
+--
 
 ## Installation 
-[-]
+--
 
 ## Usage 
 '''
@@ -52,29 +51,25 @@ RegulonDB Team:
 # Component (development use)
 
 ## Component Type 
-
-    Application
-  [Simple Component,Stateful Component,An Application]
+Visual
 
 ## Dependencies
-
-'''
-import React from 'react'
-import Menu from "./menu"
-import {Cover} from "../componets/ui-components"
-import Paragraph from "./Paragraph"
-import Consulta  from "./Consulta"
-import Conf from "./Conf"
-import { Routes, Route, useParams } from 'react-router-dom';
-import Graph from './graph';
-'''
+React: The first import, import React, imports the core React library. React is the JavaScript library used to create component-based user interfaces and is fundamental to any React application.
+useState: Imports the React useState hook. The useState hook allows you to add local state to functional React components. It is used to define and manage state variables within a component.
+Menu: The Menu component is used to represent a navigation menu or a list of options in the user interface.
+Cover: custom component used to wrap content and possibly provide styling or decorative elements around that content.
+Paragraph:  This component is used to represent paragraphs of text in the user interface.
+Query:  This component is used to perform queries or data requests within the application and possibly communicate with a server to obtain information.
+Conf: It is used for the configuration or structure of the application.
+useParams: Imports the hook useParams from the react-router-dom library. This hook is used to access the parameters passed in the application URL, which allows React components to react to changes in the URL and make decisions based on those parameters.
+Graph: This component is probably used to represent and visualize data in the form of graphs or charts, and is used conditionally based on the URL parameters.
 
 ## States
 	
-| Property | Type | Default | Description |
-| --------- | ---- | ------- | ----------- |
-|      overviewsData     |   Object   |    undefined     | Object that contains the information of Overviews coming from the web service   |
-|      state     |   String   |    undefined     |     state of the query to the web service "loading" => it is loading, "error" => there is an error, "done" => the query is ready|
+| Property    | Type | Default | Description |
+| ----------- | ---- | ------- | ----------- |
+|overviewsData|Object|undefined| Object that contains the information of Overviews coming from the web service   |
+|    state    |String|undefined|     state of the query to the web service "loading" => it is loading, "error" => there is an error, "done" => the query is ready|
 
 
 # Functions description
@@ -137,7 +132,13 @@ export default function Overviews() {
 
     const [overviewsData, setOverviewsData] = useState()
     const [state, setState] = useState()
-    let  { overviewsId } = useParams();
+    let { overviewsId } = useParams();
+    
+    /**
+     * Description placeholder
+     *
+     * @type {*}
+     */
     const mainView = Conf.mainView
 
     /**
@@ -162,8 +163,8 @@ export default function Overviews() {
     if (overviewsId) {
         return (<Graph overviewsId={overviewsId} />)
     }
-    
- console.log(overviewsData)
+
+    //  console.log(overviewsData)
     return (
         <div id="overviews_component" >
             <Cover state={state}>
@@ -171,13 +172,13 @@ export default function Overviews() {
             </Cover>
             <Paragraph description={mainView.description} />
             <Consulta
-                getOverviewsData={(data)=>{setOverviewsData(data)}}
+                getOverviewsData={(data) => { setOverviewsData(data) }}
                 getState={updateOverviewsState}
-            />  
+            />
             {overviewsData && (
                 <Menu overviewsData={overviewsData} />
             )}
-            
+
         </div>
     )
 }
