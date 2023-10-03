@@ -120,22 +120,22 @@ No explicit return value, as it operates asynchronously. It updates the rawConf 
 **/
 
 import { useParams, Link } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
+//import Stack from "@mui/material/Stack";
+//import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import CircularProgress from "@mui/material/CircularProgress";
-import TextField from "@mui/material/TextField";
-import { DataVerifier } from "../../components/ui-components";
-import Site from "./site";
-
+//import TextField from "@mui/material/TextField";
+import { DataVerifier, Cover, AnchorNav } from "../../components/ui-components";
+import Topic from "./topic";
+//import Topic from "./topic";
 
 /**
  *
@@ -148,9 +148,18 @@ const downloadConf = async (setRawConf) => {
     const response = await fetch(
       "https://raw.githubusercontent.com/regulondbunam/RegulonDBManual/master/conf.json"
     );
-    const jsonData = await response.json();
-    //console.log(jsonData);
-    setRawConf(jsonData);
+    try {
+      const jsonData = await response.json();
+      setRawConf(jsonData);
+    } catch (error) {
+      console.error(error);
+      setRawConf({
+        error: {
+          type: "fetch",
+          log: error,
+        },
+      });
+    }
   } catch (error) {
     console.error("fetch error", error);
     setRawConf({
@@ -161,7 +170,6 @@ const downloadConf = async (setRawConf) => {
     });
   }
 };
-
 
 /**
  * Description placeholder
@@ -192,116 +200,118 @@ export default function Manual() {
       </div>
     );
   }
-
-  
   /**
    * Description placeholder
    * @date 9/26/2023 - 8:24:57 AM
    *
    * @type {array}
    */
-  let sites = [];
-  if (DataVerifier.isValidArray(rawConf.sites)) {
-    sites = rawConf.sites;
+  let sites = DataVerifier.isValidArray(rawConf.sites) ? rawConf.sites : [];
+
+  if (sites.length > 0 && section) {
+    const _site = sites.find(s=>s._url ===site)
+    if(_site){
+      const _section = _site.sections.find(ss=>ss._url === section) 
+      if(_section){
+        return <Topic {..._section} />
+      }
+    }
   }
-
-  if (site) {
-    
-    /**
-     * Description placeholder
-     *
-     * @type {*}
-     */
-    let siteData = sites.find(s=>s._url===site)
-    return Site(siteData,section);
-  }
-
-
 
   return (
     <div>
-      <Box
-        sx={{
-          bgcolor: "background.paper",
-          pt: 8,
-          pb: 6,
-        }}
-      >
-      </Box><Container maxWidth="sm">
-          <Typography
-            component="h1"
-            variant="h2"
-            align="center"
-            color="text.primary"
-            gutterBottom
-          >
-            RegulonDB Manual
-          </Typography>
-        </Container>
-      <Container sx={{ py: 8 }} maxWidth="md">
-        <Grid container spacing={4}>
-          {sites.map((site, i) => (
-            <Grid item key={"site_n_" + i} xs={12} sm={6} md={4}>
-              <Card
-                sx={{
-                  height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                {site?.imgUrl && (
-                  <CardMedia
-                    component="div"
-                    sx={{
-                      // 16:9
-                      pt: "56.25%",
-                    }}
-                    image={site.imgUrl}
-                  />
-                )}
-
-                <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    {site.title}
-                  </Typography>
-                  <Typography>{site.description}</Typography>
-                </CardContent>
-                <CardActions>
-                  <Link to={"/manual/"+site._url} >
-                    <Button size="small">View</Button>
-                  </Link>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
+      <Cover>
+        <br />
+        <h1>Manual topics</h1>
+        <br />
+      </Cover>
+      <ManualNav sites={sites} site={site} />
     </div>
   );
 }
 
+function ManualNav({ sites = [], site }) {
 
-/*
-<Container maxWidth="sm">
-          <Typography
-            component="h1"
-            variant="h2"
-            align="center"
-            color="text.primary"
-            gutterBottom
-          >
-            RegulonDB Manual
-          </Typography>
-          <Stack
-            sx={{ pt: 4 }}
-            direction="row"
-            spacing={2}
-            justifyContent="center"
-          >
-            <TextField id="outlined-basic" label="Search" variant="outlined" />
-            <Button variant="contained" color="secondary">
-              Search
-            </Button>
-          </Stack>
-        </Container>
-*/
+  useEffect(()=>{
+    const docSite = document.getElementById(site)
+    if (docSite) {
+      docSite.scrollIntoView()
+    }
+  },[site])
+
+  const sections = useMemo(() => {
+    let sections = sites.map((section, i) => {
+      return {
+        id: "section_" + i,
+        label: section.title,
+        title: section.title,
+        component: (
+          <div id={section._url}  style={{ margin: "0% 1% 1% 2%" }}>
+            <Topics
+              section={section}
+              sections={section.sections}
+              img={section.imgUrl}
+            />
+          </div>
+        ),
+      };
+    });
+    return sections;
+  }, [sites]);
+  return (
+    <div>
+      {
+        sections.map(section=>(<div key={section._id} >{section.component}</div>))
+      }
+    </div>
+  );
+}
+
+function Topics({ section, sections, img }) {
+  if (!DataVerifier.isValidArray(sections)) {
+    return null
+  }
+  return (
+    <div>
+      <h2>{section.title}</h2>
+      <p>{section.description}</p>
+      <Container sx={{ py: 2 }} maxWidth="md">
+      <Grid container spacing={4}>
+        {sections.map((site, i) => (
+          <Grid item key={"site_n_" + i} xs={12} sm={6} md={4}>
+            <Card
+              sx={{
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              {img && (
+                  <CardMedia
+                    component="div"
+                    sx={{
+                      // 16:9
+                      pt: "10%",
+                    }}
+                    image={img}
+                  />
+                )}
+              <CardContent sx={{ flexGrow: 1 }}>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {site.title}
+                </Typography>
+                <Typography variant="body2">{site.description}</Typography>
+              </CardContent>
+              <CardActions>
+                <Link to={"/manual/" + section._url+"/"+site._url}>
+                  <Button size="small">View</Button>
+                </Link>
+              </CardActions>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
+    </div>
+  );
+}
