@@ -77,6 +77,7 @@ export default function AnchorNav({
   aside,
   bottom,
 }) {
+  sections = sections.filter((section) => section !== null)
   const [idSection, setIdSection] = useState();
   const [navTitle, setNavTitle] = useState(title);
   const [viewMenu, setViewMenu] = useState(true);

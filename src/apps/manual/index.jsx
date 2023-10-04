@@ -121,16 +121,6 @@ No explicit return value, as it operates asynchronously. It updates the rawConf 
 
 import { useParams, Link } from "react-router-dom";
 import React, { useEffect, useMemo, useState } from "react";
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Grid from "@mui/material/Grid";
-//import Stack from "@mui/material/Stack";
-//import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import CircularProgress from "@mui/material/CircularProgress";
 //import TextField from "@mui/material/TextField";
 import { DataVerifier, Cover, AnchorNav } from "../../components/ui-components";
@@ -181,6 +171,10 @@ export default function Manual() {
   const { site, section } = useParams();
   const [rawConf, setRawConf] = useState();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [site, section]);
+
   if (!rawConf) {
     downloadConf(setRawConf);
   }
@@ -209,11 +203,11 @@ export default function Manual() {
   let sites = DataVerifier.isValidArray(rawConf.sites) ? rawConf.sites : [];
 
   if (sites.length > 0 && section) {
-    const _site = sites.find(s=>s._url ===site)
-    if(_site){
-      const _section = _site.sections.find(ss=>ss._url === section) 
-      if(_section){
-        return <Topic {..._section} />
+    const _site = sites.find((s) => s._url === site);
+    if (_site) {
+      const _section = _site.sections.find((ss) => ss._url === section);
+      if (_section) {
+        return <Topic {..._section} />;
       }
     }
   }
@@ -231,22 +225,24 @@ export default function Manual() {
 }
 
 function ManualNav({ sites = [], site }) {
-
-  useEffect(()=>{
-    const docSite = document.getElementById(site)
+  useEffect(() => {
+    const docSite = document.getElementById(site);
     if (docSite) {
-      docSite.scrollIntoView()
+      docSite.scrollIntoView();
     }
-  },[site])
+  }, [site]);
 
   const sections = useMemo(() => {
     let sections = sites.map((section, i) => {
+      if(!DataVerifier.isValidArray(section.sections)){
+        return null
+      }
       return {
         id: "section_" + i,
         label: section.title,
         title: section.title,
         component: (
-          <div id={section._url}  style={{ margin: "0% 1% 1% 2%" }}>
+          <div id={section._url} style={{ margin: "0% 1% 1% 2%" }}>
             <Topics
               section={section}
               sections={section.sections}
@@ -260,13 +256,33 @@ function ManualNav({ sites = [], site }) {
   }, [sites]);
   return (
     <div>
-      {
-        sections.map(section=>(<div key={section._id} >{section.component}</div>))
-      }
+      <AnchorNav
+        title={"Manual"}
+        sections={sections}
+        idSelectSection={site}
+      />
     </div>
   );
 }
-
+function Topics({ section, sections, img }) {
+  if (!DataVerifier.isValidArray(sections)) {
+    return null;
+  }
+  return (
+    <div>
+      <p>{section.description}</p>
+      {sections.map((site, i) => (
+        <div style={{marginLeft: "10px"}} key={"site_n_" + i}>
+          <Link to={"/manual/" + section._url + "/" + site._url}>
+            <h3 style={{color: "#72a7c7"}} >{site.title}</h3>
+          </Link>
+          <p>{site.description}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+/*
 function Topics({ section, sections, img }) {
   if (!DataVerifier.isValidArray(sections)) {
     return null
@@ -315,3 +331,4 @@ function Topics({ section, sections, img }) {
     </div>
   );
 }
+*/

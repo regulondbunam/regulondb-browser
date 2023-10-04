@@ -2,28 +2,34 @@ import { Remarkable } from "remarkable";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useState } from "react";
 
-const gitUrl = (rawUrl, imgUrl) => {
+const gitUrl = (urlRaw, imgUrl) => {
   return (
-    "https://github.com/" +
-    rawUrl.replace(
-      /^https:\/\/raw\.githubusercontent\.com\/(.*\/)([^/]+)\.md$/,
+    "https://github.com/regulondbunam/RegulonDBManual/raw/" +
+    urlRaw.replace(
+      /^https:\/\/raw\.githubusercontent\.com\/regulondbunam\/RegulonDBManual\/(.*\/)([^/]+)\.md$/,
       "$1"
     ) +
-    imgUrl.replace(/^\.\//, "") +
-    "?raw=true"
+    imgUrl.replace(/^\.\//, "")
   );
 };
-function urlReplace(markdown) {
-  const reg = /!\[.*\]\((\..*\/.*\.[a-zA-Z0-9]+)\)/
-  const urlImages = markdown.match(reg);
-  return null
+
+function insertAbsoluteUrl(markdown = "", urlRaw) {
+  const reg = /\.\/[^)|"|\s]+/gm
+  const matches = markdown.match(reg)
+  if (matches) {
+    matches.forEach(match => {
+      let url = gitUrl(urlRaw,match)
+      markdown = markdown.replace(new RegExp(match,"g"),url)
+    });
+  }
+  return markdown
 }
 
 const downloadMD = async (setMarkdown, urlRaw) => {
   try {
     const response = await fetch(urlRaw);
-    const markdown = await response.text();
-
+    let markdown = await response.text();
+    markdown = insertAbsoluteUrl(markdown,urlRaw)
     setMarkdown(markdown);
   } catch (error) {
     console.error("fetch error", error);
@@ -56,6 +62,7 @@ export default function Topic({ rawUrl, _url, title }) {
       </div>
     );
   }
+  
   if (markdown?.error) {
     return (
       <div>
@@ -66,8 +73,9 @@ export default function Topic({ rawUrl, _url, title }) {
   }
 
   return (
-    <div style={{ margin: "2%" }}>
+    <div>
       <p dangerouslySetInnerHTML={{ __html: md.render(markdown) }} />
     </div>
+    
   );
 }

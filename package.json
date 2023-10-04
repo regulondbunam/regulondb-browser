@@ -33,7 +33,6 @@
     "graphql": "^16.5.0",
     "html2canvas": "^1.4.1",
     "igv": "^2.13.3",
-    "markdown-navbar": "^1.4.3",
     "md-2-json": "^2.0.0",
     "react": "^18.1.0",
     "react-chartjs-2": "^5.2.0",
