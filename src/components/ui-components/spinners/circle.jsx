@@ -3,6 +3,12 @@
 
 import React from "react";
 import "./circle.css";
+
+/**
+ * Description placeholder
+ *
+ * @returns {*}
+ */
 const Circle = () => {
   //console.log(Style.loader_circle);
   return (

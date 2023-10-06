@@ -2,9 +2,26 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { styled } from "@mui/material/styles";
 
+
+/**
+ * Hexadecimal color
+ *
+ * @type {"#f4f5f5"}
+ */
 const backgroundColor = "#f4f5f5";
+/**
+ * Hexadecimal color
+ *
+ * @type {"#f4f5f5"}
+ */
 const lineColor = "#32617D";
 
+
+/**
+ * Description placeholder
+ *
+ * @type {{ WebkitBoxShadow: string; MozBoxShadow: string; boxShadow: string; backgroundColor: "#f4f5f5"; }}
+ */
 const headerStyle = {
     WebkitBoxShadow: "inset -1px -10px 0px -6px " + lineColor,
     MozBoxShadow: "inset -1px -10px 0px -6px " + lineColor,
@@ -12,7 +29,21 @@ const headerStyle = {
     backgroundColor: backgroundColor,
 };
 
-const StyledTabs = styled((props) => (
+
+/**
+ * Description placeholder
+ *
+ * @type {*}
+ */
+const StyledTabs = styled(
+    
+    /**
+     * Description placeholder
+     *
+     * @param {*} props
+     * @returns {*}
+     */
+    (props) => (
     <Tabs
         {...props}
         TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
@@ -30,7 +61,21 @@ const StyledTabs = styled((props) => (
     },
 });
 
-const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
+
+/**
+ * Description placeholder
+ *
+ * @type {*}
+ */
+const StyledTab = styled(
+    
+    /**
+     * Description placeholder
+     *
+     * @param {*} props
+     * @returns {*}
+     */
+    (props) => <Tab disableRipple {...props} />)(
     ({ theme }) => ({
         textTransform: "none",
         height: "30px",
