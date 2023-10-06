@@ -1,4 +1,20 @@
+
+
+/**
+ * Description placeholder
+ *
+ * @class DataVerifier
+ * @typedef {DataVerifier}
+ */
 class DataVerifier {
+  
+  /**
+   * Description placeholder
+   *
+   * @static
+   * @param {{}} [obj={}]
+   * @returns {boolean}
+   */
   static isValidObject(obj = {}) {
     if (!obj) {
       return false;
@@ -12,6 +28,13 @@ class DataVerifier {
     return true;
   }
 
+  /**
+   * Description placeholder
+   *
+   * @static
+   * @param {*} array
+   * @returns {boolean}
+   */
   static isValidArray(array) {
     if (!array) {
       return false;
@@ -28,6 +51,14 @@ class DataVerifier {
     return true;
   }
 
+  
+  /**
+   * Description placeholder
+   *
+   * @static
+   * @param {*} num
+   * @returns {boolean}
+   */
   static isValidNumber(num) {
     if (!num) {
       return false;
@@ -47,6 +78,14 @@ class DataVerifier {
     return true;
   }
 
+  
+  /**
+   * Description placeholder
+   *
+   * @static
+   * @param {*} str
+   * @returns {string}
+   */
   static toValidString(str) {
     if(this.isValidString(str+"")){
         return str+""
@@ -54,6 +93,14 @@ class DataVerifier {
     return ""
   }
 
+  
+  /**
+   * Description placeholder
+¿   *
+   * @static
+   * @param {*} str
+   * @returns {boolean}
+   */
   static isValidString(str) {
     if (!str) {
       return false;
