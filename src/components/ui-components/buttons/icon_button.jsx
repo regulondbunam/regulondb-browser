@@ -4,7 +4,7 @@
 
 # Component name 
 
-[IconButton --v0.5.0]
+IconButton
 
 ## Description  
 
@@ -38,31 +38,29 @@
 | style         | object  | {}                        | style of button by object                                    |
 
 ## Exception
-
-__Category (Error, Warning or Message)__  
-Description of the exception (if necessary)
+--
 
 ## License
 
-[MIT]
+MIT License
 
 ## Author 
 
-[CCG-UNAM-RegulonDB]
+RegulonDB Team: 
 
-**/
-
-/**
 
 # Component (technical guide)
 
 ## Component Type 
 
-[Stateless functional component]
+[Stateless functional component, ClassComponent ]
 
 ## Dependencies
 
-[React, { Component },PropTypes]
+React : React is an open source JavaScript library used to build user interfaces (UI) in web applications. In this case, it is used to define a class component.
+Component: Component is a React-specific module used to create class components in React. Class components are an older way of defining components in React, and are less commonly used compared to functional components with hooks.
+PropTypes: PropTypes is a library used to specify the types of properties expected in React components. It helps to validate the properties passed to components, improving security and code documentation.
+Styles (imported from "./Buttons.module.css"): Styles refers to a local CSS file named "Buttons.module.css". This file contains specific styles for the IconButton component and is used to customize its appearance.
 
 ## States
 
@@ -121,8 +119,23 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Styles from "./Buttons.module.css";
 
+
+/**
+ * Description placeholder
+ *
+ * @export
+ * @class IconButton
+ * @typedef {IconButton}
+ * @extends {Component}
+ */
 export default class IconButton extends Component {
-  handleOnClickLink = (event) => {
+  handleOnClickLink = 
+  /**
+   * Description placeholder
+   *
+   * @param {Event} event - The click event.
+   */
+  (event) => {
     if (!this.props.disabled) {
       this.props.onClick(event);
     }
@@ -157,16 +170,29 @@ export default class IconButton extends Component {
   }
 }
 
+
+/**
+ * Description placeholder
+ *
+  * @param {boolean} disabled - Indicates if the icon button is disabled.
+ * @param {string} className - Additional CSS classes provided to the icon button.
+ * @returns {string} - A string of CSS classes for styling the icon button.
+ */
 function selectStyle(disabled, className) {
   let styleClass = className + " " + Styles.iconButton + " " + Styles.default;
   disabled ? (styleClass += " " + Styles.disabled) : (styleClass += " ");
   return styleClass;
 }
 
+/**
+ * Warns in the console if the button does not have an action assigned to it.
+ */
 function warn_noAction() {
   console.warn("Button has no activity");
 }
-
+/**
+ * Definition of the properties (props) expected by the IconButton component.
+ */
 IconButton.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
@@ -176,7 +202,9 @@ IconButton.propTypes = {
   onClick: PropTypes.func,
   style: PropTypes.object
 };
-
+/**
+ * Default values for IconButton component properties.
+ */
 IconButton.defaultProps = {
   className: "",
   disabled: false,
