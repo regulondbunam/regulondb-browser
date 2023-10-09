@@ -137,6 +137,7 @@ import {
   rankItem,
   compareItems,
 } from "@tanstack/match-sorter-utils";
+import InfoColumns from "./infoColumns";
 
 
 /**
@@ -189,6 +190,8 @@ const fuzzyFilter = (row, columnId, value, addMeta) => {
  */
 export default function FilterTable({
   columns,
+  showColumnsInfo = false,
+  columnsInfo,
   disableOptions = false,
   data,
   getItemSize = () => {
@@ -240,10 +243,14 @@ export default function FilterTable({
   /**preGlobalFilteredRows={table.getPre} allColumns={allColumns} */
   return (
     <div>
+      {showColumnsInfo && (
+        <InfoColumns {...table} columnsInfo={columnsInfo} />
+      )}
       {!disableOptions && (
         <div className={style.options}>
           <Options
             globalFilter={globalFilter}
+            columnsInfo={columnsInfo}
             fileName={fileName}
             setGlobalFilter={setGlobalFilter}
             preGlobalFilteredRows={table.getGlobalFacetedRowModel}

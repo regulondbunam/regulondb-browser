@@ -1,11 +1,30 @@
 import { DataVerifier } from "../../../../components/ui-components";
 
 export default function createColumns(columnsDetails = "") {
-    let columns = []
-    if(DataVerifier.isValidString(columnsDetails)){
-        columns = columnsDetails.split("\n")
-    }
-    return columns
+  let columnsData = [];
+  if (DataVerifier.isValidString(columnsDetails)) {
+    const columns = columnsDetails.split("\n");
+    columns.forEach((line) => {
+      if (/Columns/.test(line)) {
+        return null;
+      }
+      const regex = /\((\d+)\)\s*([\w.]+)\s+(.+)/;
+      const match = line.match(regex);
+
+      if (match) {
+        columnsData.push({
+          accessorKey: "column_"+match[1],
+          header: match[2],
+          description: match[3],
+        });
+      } else {
+        console.warn(
+          "No se encontró un patrón válido en la información de la columna"
+        );
+      }
+    });
+  }
+  return columnsData;
 }
 
 /*Columns:

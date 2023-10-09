@@ -8,6 +8,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { useState } from "react";
 
 export function Columns({
+  columnsInfo,
   getIsAllColumnsVisible,
   getToggleAllColumnsVisibilityHandler,
   getAllLeafColumns,

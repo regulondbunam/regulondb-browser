@@ -11,7 +11,7 @@ export default function Table({fileData}) {
    
   return (
     <div>
-        <FilterTable columns={columns} data={data} />
+        <FilterTable showColumnsInfo columnsInfo={columnsInfo} columns={columns} data={data} />
     </div>
   )
 }

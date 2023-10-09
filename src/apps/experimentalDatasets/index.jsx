@@ -128,7 +128,6 @@ export default function ExperimentalDatasets() {
   const {
     data,
     loading: loadingFilesNames,
-    error,
   } = useQuery(query_GET_AllFilesNames);
   const [getFile, { loading: loadingFileData }] = useLazyGetDataFile();
   const { idFile } = useParams();
@@ -284,6 +283,9 @@ export default function ExperimentalDatasets() {
             </thead>
             <tbody>
               {listFilesNames.map((fileName, i) => {
+                if(/internal/.test(fileName)){
+                  return null
+                }
                 return (
                   <tr key={"file_" + fileName + "_" + i}>
                     <td>{fileName}</td>

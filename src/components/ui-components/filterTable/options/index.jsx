@@ -7,6 +7,7 @@ export default function Options({
   getAllFlatColumns,
   globalFilter,
   setGlobalFilter,
+  columnsInfo,
   data,
   fileName,
   preGlobalFilteredRows,
@@ -26,6 +27,7 @@ export default function Options({
     >
       <ButtonGroup variant="contained" size="small" color="secondary">
         <Columns
+        columnsInfo 
           getIsAllColumnsVisible={getIsAllColumnsVisible}
           getToggleAllColumnsVisibilityHandler={
             getToggleAllColumnsVisibilityHandler

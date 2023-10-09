@@ -10,20 +10,22 @@ export default function formatData(content = "") {
         const cells = line.split("\t");
         if (i === 0) {
             cells.forEach((cell,ci)=>{
+              let indx = ci+1
                 columns.push({
                     id: cell,
                     header: cell,
-                    accessorKey: "column_"+ci,
+                    accessorKey: "column_"+indx,
                   },)
             })
         } else {
           const row = {};
           cells.forEach((cell, ci) => {
+            let indx = ci+1
             if (i === 0) {
               //column_2
               row["id"] = cell;
             } else {
-              row["column_" + ci] = cell;
+              row["column_" + indx] = cell;
             }
           });
           data.push(row);

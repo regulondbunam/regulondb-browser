@@ -126,7 +126,7 @@ export default function List({ datasetType, experimentType }) {
               <td>
                 <p>Would you like to make more specific queries?</p>
                 <Link to={`${window.IN_URL.finder}${datasetType}`} >
-                  <button>Query Bulder</button>
+                  <button>Query </button>
                 </Link>
               </td>
               </tr>
