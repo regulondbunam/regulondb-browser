@@ -13,6 +13,7 @@ const setStyleLink = (id, state) => {
       };
     case "disabled":
       return {
+        display: "none",
         textDecoration: "none",
         fontSize: "16",
         fontFamily: "sans-serif",

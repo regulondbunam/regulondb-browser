@@ -39,13 +39,14 @@ export function ReleaseCard() {
                                 <NewspaperIcon sx={{ fontSize: 100 }} />
                             </ListItemAvatar>
                             <ListItemText
-                                primary="Release"
+                                primary={"Release "}
                                 secondary={
                                     <>
+                                        <p>{"date: " + dbInfo.releaseDate} </p>
                                         <p>{"RegulonDB version: " + dbInfo.regulonDBVersion} </p>
-                                        <p>{"Release date: " + dbInfo.releaseDate}</p>
-                                        <p>{"Ecocyc version: " + dbInfo.ecocycVersion}</p>
-                                        <p>{"LC version: " + dbInfo.lcVersion}</p>
+                                        <p> synchronized with:</p>
+                                        <p>{"    - Ecocyc version: " + dbInfo.ecocycVersion}</p>
+                                        <p>{"     - Lisen&Curate version: " + dbInfo.lcVersion}</p>
                                         <Link to={"/releasesNote"}>
                                             <Typography color="secondary">
                                                 Read release notes

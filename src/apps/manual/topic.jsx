@@ -1,6 +1,8 @@
 import { Remarkable } from "remarkable";
 import CircularProgress from "@mui/material/CircularProgress";
+import MarkdownNavbar from 'markdown-navbar';
 import { useState } from "react";
+import 'markdown-navbar/dist/navbar.css';
 
 const gitUrl = (urlRaw, imgUrl) => {
   return (
@@ -73,8 +75,15 @@ export default function Topic({ rawUrl, _url, title }) {
   }
 
   return (
-    <div>
-      <p dangerouslySetInnerHTML={{ __html: md.render(markdown) }} />
+    <div style={{display: "grid", gridTemplateColumns: "150px 100%", marginTop: "20px"}}>
+      <div >
+        <div style={{position: "sticky", top:0, height: "80vh", overflow: 'auto'}}  >
+        <MarkdownNavbar source={markdown} />
+        </div>
+      </div>
+     <div>
+     <p dangerouslySetInnerHTML={{ __html: md.render(markdown) }} />
+     </div>
     </div>
     
   );

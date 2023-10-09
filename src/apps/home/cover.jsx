@@ -73,6 +73,8 @@ export function Cover(params) {
           src={ecoliImgT3}
           alt="Ecoli RegulonDB"
         />
+        <div className={Style.coverCometText} >
+         </div>
         <div className={Style.coverTop}>
           <div className={Style.coverTitle}>
             <h1 className={Style.coverH1}>The RegulonDB Database</h1>
