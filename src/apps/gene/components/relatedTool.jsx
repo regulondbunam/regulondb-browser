@@ -85,6 +85,8 @@ export default function RelatedTool({ gene, products, regulation }) {
     }
   }
 
+  console.log(regulonRelated);
+
   const navigate = useNavigate();
 
   return (

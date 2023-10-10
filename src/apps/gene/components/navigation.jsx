@@ -87,7 +87,7 @@ export default function Navigation({
                     navigate("/regulon/" + regulon._id);
                   }}
                 >
-                  <p>Gene {" " + regulon.name}</p>
+                  <p>Regulon {" " + regulon.name}</p>
                 </ListItemButton>
                 )
               })}
