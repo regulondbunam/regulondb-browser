@@ -8,16 +8,19 @@ const COLUMNS = [
     columns: [
       {
         id: "Reaction_Number",
+        filter: "fuzzyText",
         header: "#",
         accessorKey: "_number",
       },
       {
         id: "Reaction_pathwayComponents",
+        filter: "fuzzyText",
         header: "pathwayComponents",
         accessorKey: "_pathwayComponents",
       },
       {
         id: "Reaction_Type",
+        filter: "fuzzyText",
         header: "Type",
         accessorKey: "_type",
       }
@@ -29,6 +32,7 @@ const COLUMNS = [
     columns: [
       {
         id: "component_name",
+        filter: "fuzzyText",
         header: "Name",
         accessorKey: "_compName",
         cell: (info) => {
@@ -48,6 +52,7 @@ const COLUMNS = [
       },
       {
         id: "component_Function",
+        filter: "fuzzyText",
         header: "Function",
         accessorKey: "_compFunction",
         cell: (info) => {
@@ -67,6 +72,7 @@ const COLUMNS = [
       },
       {
         id: "component_Type",
+        filter: "fuzzyText",
         header: "Type",
         accessorKey: "_compType",
         cell: (info) => {

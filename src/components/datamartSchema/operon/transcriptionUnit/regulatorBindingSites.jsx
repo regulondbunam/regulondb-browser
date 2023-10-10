@@ -16,6 +16,7 @@ const COLUMNS = [
         id: "regulator_name",
         header: "name",
         accessorKey: "_regulatorName",
+        filter: "fuzzyText",
         cell: (info) => {
           let spanColor = "#000";
           let fun = "";
@@ -53,16 +54,19 @@ const COLUMNS = [
       {
         id: "ri_central",
         header: "Central Rel Pos",
+        filter: "fuzzyText",
         accessorKey: "_absolutePosition",
       },
       {
         id: "ri_posLeft",
         header: "LeftEndPosition",
+        filter: "fuzzyText",
         accessorKey: "_leftEndPosition",
       },
       {
         id: "ri_posRight",
         header: "RightEndPosition",
+        filter: "fuzzyText",
         accessorKey: "_rightEndPosition",
       },
       {
@@ -76,6 +80,7 @@ const COLUMNS = [
         id: "citations",
         header: "citations",
         accessorKey: "_citations",
+        filter: "fuzzyText",
         cell: (info) => {
           return (
             <ParagraphCitations

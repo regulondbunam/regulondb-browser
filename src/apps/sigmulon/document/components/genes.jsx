@@ -11,6 +11,7 @@ const COLUMNS = [
         id: 'gene_name',
         header: 'Name',
         accessorKey: '_name',
+        filter: "fuzzyText",
         cell: info => <Link to={"/gene/" + info.row.original.id} >{info.getValue()}</Link>,
       }
     ]
@@ -41,6 +42,7 @@ const COLUMNS = [
         id: 'ontologyTerms_cellularComponent',
         header: 'Cellular Component',
         accessorKey: '_cellularComponent',
+        filter: "fuzzyText",
         cell: (info)=>{
           return(
             <div style={{ overflow: "auto" }} >
@@ -59,6 +61,7 @@ const COLUMNS = [
         id: 'ontologyTerms_molecularFunction',
         header: 'Molecular Function',
         accessorKey: '_molecularFunction',
+        filter: "fuzzyText",
         cell: (info)=>{
           return(
             <div style={{ overflow: "auto" }} >

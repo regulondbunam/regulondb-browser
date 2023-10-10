@@ -28,6 +28,7 @@ const COLUMNS = [
         id: "promoter_genes",
         header: "name",
         accessorKey: "_geneNames",
+        filter: "fuzzyText",
         cell: (info) => (
           <>
             {info.row.original.transcribedGenes.map((gene, index) => {
@@ -44,6 +45,7 @@ const COLUMNS = [
         id: "promoter_genesTSS",
         header: "Distance from TSS to first gene",
         accessorKey: "_geneTSS",
+        filter: "fuzzyText",
       },
     ],
   },

@@ -14,6 +14,7 @@ const COLUMNS = [
       {
         id: "activeConformation_name",
         header: "name",
+        filter: "fuzzyText",
         accessorKey: "_activeConformation_name",
         cell: (info) => (<p dangerouslySetInnerHTML={{__html: info.getValue()}} />),
       }
@@ -26,6 +27,7 @@ const COLUMNS = [
       {
         id: "regulatoryInteraction_function",
         header: "Function",
+        filter: "fuzzyText",
         accessorKey: "_regulatoryInteraction_function",
       },
     ],
@@ -36,11 +38,13 @@ const COLUMNS = [
     columns: [
       {
         id: "regulatedEntity_name",
+        filter: "fuzzyText",
         header: "name",
         accessorKey: "_regulatedEntity_name",
       },
       {
         id: "regulatedEntity_type",
+        filter: "fuzzyText",
         header: "type",
         accessorKey: "_regulatedEntity_type",
       },
@@ -52,11 +56,13 @@ const COLUMNS = [
     columns: [
       {
         id: "regulatoryInteraction_distanceTo_gene",
+        filter: "fuzzyText",
         header: "First Gene",
         accessorKey: "_distanceGene",
       },
       {
         id: "regulatoryInteraction_distanceTo_promoter",
+        filter: "fuzzyText",
         header: "Promoter",
         accessorKey: "_distancePromoter",
       },
@@ -70,6 +76,7 @@ const COLUMNS = [
         id: "regulatedGenes_name",
         header: "name",
         accessorKey: "_regulatedGenes_name",
+        filter: "fuzzyText",
         cell: (info) => {
           const genes = info.row.original.regulatedGenes;
           return (
@@ -96,21 +103,25 @@ const COLUMNS = [
     columns: [
       {
         id: "regulatoryBindingSite_leftPos",
+        filter: "fuzzyText",
         header: "LeftPos",
         accessorKey: "_regulatoryBindingSite_LeftPos",
       },
       {
         id: "regulatoryBindingSite_RightPos",
+        filter: "fuzzyText",
         header: "RightPos",
         accessorKey: "_regulatoryBindingSite_RightPos",
       },
       {
         id: "regulatoryBindingSite_strand",
+        filter: "fuzzyText",
         header: "Strand",
         accessorKey: "_regulatoryBindingSite_strand",
       },
       {
         id: "regulatoryBindingSite_sequence",
+        filter: "fuzzyText",
         header: "Sequence",
         accessorKey: "_regulatoryBindingSite_sequence",
       },
@@ -120,6 +131,7 @@ const COLUMNS = [
     id: "citations",
     header: "Citations",
     accessorKey: "_citations",
+    filter: "fuzzyText",
     cell: (info) => {
       const citations = info.row.original.citations;
       const allCitations = info.row.original.allCitations;

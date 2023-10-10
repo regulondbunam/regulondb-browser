@@ -13,11 +13,13 @@ const COLUMNS = [
     columns: [
       {
         id: "coexpression_rank",
+        filter: "fuzzyText",
         header: "Rank",
         accessorKey: "_rank",
       },
       {
         id: "locusTag",
+        filter: "fuzzyText",
         header: "locusTag",
         accessorKey: "_locusTag",
       },
@@ -29,6 +31,7 @@ const COLUMNS = [
     columns: [
       {
         id: "gene_name",
+        filter: "fuzzyText",
         header: "name",
         accessorKey: "_geneName",
         cell: (info) => (
@@ -39,6 +42,7 @@ const COLUMNS = [
       },
       {
         id: "gene_products",
+        filter: "fuzzyText",
         header: "products",
         accessorKey: "_products",
         cell: (info) => (
@@ -47,6 +51,7 @@ const COLUMNS = [
       },
       {
         id: "gene_operon",
+        filter: "fuzzyText",
         header: "operon",
         accessorKey: "_operon",
         cell: (info) => (
@@ -57,6 +62,7 @@ const COLUMNS = [
       },
       {
         id: "gene_regulators",
+        filter: "fuzzyText",
         header: "regulators",
         accessorKey: "_regulators",
         cell: (info) => {
@@ -74,6 +80,7 @@ const COLUMNS = [
       },
       {
         id: "ontologyTerms",
+        filter: "fuzzyText",
         header: "Ontology Terms",
         accessorKey: "_terms",
         cell: (info) => <OTModal products={info.row.original.products} />,

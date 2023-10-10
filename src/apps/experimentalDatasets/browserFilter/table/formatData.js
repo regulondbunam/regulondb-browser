@@ -14,6 +14,7 @@ export default function formatData(content = "") {
                 columns.push({
                     id: cell,
                     header: cell,
+                    filter: "fuzzyText",
                     accessorKey: "column_"+indx,
                   },)
             })
