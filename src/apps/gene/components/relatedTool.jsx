@@ -59,10 +59,12 @@ export default function RelatedTool({ gene, products, regulation }) {
     },
   });
   const [open, setOpen] = React.useState(false);
-
-  let operonRelated = [
-    { _id: regulation.operon._id, name: regulation.operon.name },
-  ];
+  let operonRelated = []
+  if(DataVerifier.isValidObject(regulation?.operon)){
+    operonRelated = [
+      { _id: regulation.operon._id, name: regulation.operon.name },
+    ];
+  }
   let regulonRelated = [];
   let guIdRelated;
   let htIdRelated;

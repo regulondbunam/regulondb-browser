@@ -18,7 +18,7 @@ const COLUMNS = [
             accessorKey: "_name",
             filter: "fuzzyText",
             cell: (info) => (
-                <Link to={"/sigmulon" + info.row.original.id} ><span dangerouslySetInnerHTML={{ __html: info.getValue() }} /></Link>
+                <Link to={"/sigmulon/" + info.row.original.id} ><span dangerouslySetInnerHTML={{ __html: info.getValue() }} /></Link>
               ),
           },
           {
