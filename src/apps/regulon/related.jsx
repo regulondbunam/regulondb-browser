@@ -14,6 +14,26 @@ import ListItemText from "@mui/material/ListItemText";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import Divider from "@mui/material/Divider";
 import Collapse from "@mui/material/Collapse";
+import Navigation from "./navigation";
+import { gql, useQuery } from "@apollo/client";
+
+const query_getDataset = gql`
+  query getDataset($advancedSearch: String) {
+    getDatasetsFromSearch(advancedSearch: $advancedSearch) {
+      _id
+    }
+  }
+`;
+
+const query_getGu = gql`
+  query getGu($advancedSearch: String) {
+    getGUsBy(advancedSearch: $advancedSearch) {
+      data {
+        _id
+      }
+    }
+  }
+`;
 
 const style = {
   position: "absolute",
@@ -28,16 +48,46 @@ const style = {
 };
 
 export default function RelatedTool({ regulonData }) {
-  let genes = []
+  const { data: ht } = useQuery(query_getDataset, {
+    variables: {
+      advancedSearch: `('TFBINDING'[datasetType]) AND '${regulonData.regulator?.abbreviatedName}'[objectsTested.name]`,
+    },
+  });
+  const {data:gu} = useQuery(query_getGu,{
+    variables:{
+      advancedSearch: `${regulonData.regulator?.abbreviatedName}[gensorUnit.name]`
+    }
+  })
+  let genes = [];
+  let genesRelated;
+  let operonsRelated;
+  let htIdRelated;
+  let guIdRelated;
   if (DataVerifier.isValidObject(regulonData.regulates)) {
-    genes = regulonData.regulates.genes
+    genes = regulonData.regulates.genes;
   }
+  if (ht) {
+    if (DataVerifier.isValidArray(ht.getDatasetsFromSearch)) {
+      htIdRelated = ht.getDatasetsFromSearch[0]._id;
+    }
+  }
+  if (gu) {
+    if (DataVerifier.isValidArray(gu.getGUsBy.data)) {
+      guIdRelated = gu.getGUsBy.data[0]._id;
+    }
+  }
+  if (regulonData.regulator.encodedBy) {
+    genesRelated = regulonData.regulator.encodedBy.genes;
+    operonsRelated = regulonData.regulator.encodedBy.operon;
+  }
+  //console.log(regulonData.regulator?.name);
   const [open, setOpen] = React.useState(false);
 
   const navigate = useNavigate();
 
   return (
     <div className="noPrint">
+      <Navigation genes={genesRelated} operons={operonsRelated} htIds={[htIdRelated]} guIds={[guIdRelated]} />
       {DataVerifier.isValidArray(genes) && (
         <Tool title={"Related Tools"}>
           {genes.length < 800 && (

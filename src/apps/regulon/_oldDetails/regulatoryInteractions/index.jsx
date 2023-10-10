@@ -201,7 +201,7 @@ function formatData(regulatoryInteractions = [], allCitations) {
 }
 
 function RegulatoryInteractions({ regulatoryInteractions, allCitations }) {
-  console.log(regulatoryInteractions);
+  //console.log(regulatoryInteractions);
   const data = useMemo(() => {
     return formatData(regulatoryInteractions, allCitations);
   }, [regulatoryInteractions, allCitations]);

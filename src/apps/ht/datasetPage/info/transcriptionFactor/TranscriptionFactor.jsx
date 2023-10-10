@@ -15,7 +15,7 @@ const query = gql`
 `;
 
 export function ObjectTested({ obj, i }) {
-  const { data, loading, error } = useQuery(query, {
+  const { data } = useQuery(query, {
     variables: {
       advanceSearch: `${obj.name}[regulator.name]`,
     },
