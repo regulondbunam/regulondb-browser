@@ -50,7 +50,7 @@ export default function Publications({ publications }) {
                                 {
                                     publication?.doi
                                         ? <p style={{ float: "left", marginRight: "5px" }} >DOI:
-                                            <a href={`https://journals.asm.org/doi/${publication?.doi}`} className="p_accent" style={{ fontSize: "14px" }} target="_blank" rel="noreferrer">
+                                            <a href={`https://doi.org/${publication?.doi}`} className="p_accent" style={{ fontSize: "14px" }} target="_blank" rel="noreferrer">
                                                 {publication?.doi}
                                             </a></p>
                                         : null
