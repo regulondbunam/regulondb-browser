@@ -37,27 +37,6 @@
           "state": "disabled"
         }
       ]
-    },
-
-    {
-      "id": "Web_Front",
-      "title": "Frontend",
-      "link": "/gs",
-      "type": "SUBMENU",
-      "options": [
-        {
-          "id": "F-ui",
-          "title": "components repository",
-          "link" : "/testComponents",
-          "state": "disabled"
-        },
-        {
-          "id": "regulondb-browser",
-          "title": "frontend applications",
-          "link" : "/webService",
-          "state": "disabled"
-        }
-      ]
     }
   ]
 }

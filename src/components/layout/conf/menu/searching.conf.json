@@ -118,26 +118,6 @@
           "state": "enabled"
         }
       ]
-    },
-    {
-      "id": "menu_tutorials",
-      "title": "Tutorials",
-      "link": "/guide",
-      "type": "SUBMENU",
-      "options": [
-        {
-          "id": "gsurdb",
-          "title": "Getting started using RegulonDB",
-          "state": "disabled",
-          "link" : "/tutorial/gettingStarted/regulondb"
-        },
-        {
-          "id": "gsurdb_guide",
-          "title": "Guide",
-          "state": "disabled",
-          "link" : "/guide"
-        }
-      ]
     }
   ]
 }

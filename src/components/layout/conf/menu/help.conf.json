@@ -47,50 +47,6 @@
                     "link":"/frequent"
                 }
             ]
-        },
-        {
-            "id": "subMenuDocs",
-            "title": "DOCUMENTATION",
-            "link": "/docs",
-            "type": "SUBMENU",
-            "options": [
-                {
-                    "id": "Annotation Process",
-                    "title": "Annotation Process",
-                    "state": "disabled",
-                    "link" : "/annot"
-                },
-                {
-                    "id": "BioNLP research",
-                    "title": "BioNLP research",
-                    "state": "disabled",
-                    "link" : "/biosearch"
-                },
-                {
-                    "id": "Annotation Process for HT experiments",
-                    "title": "Annotation Process for HT experiments",
-                    "state": "disabled",
-                    "link" : "/annotationHT"
-                },
-                {
-                    "id": "RegulonDB Papers",
-                    "title": "RegulonDB Papers",
-                    "state": "disabled",
-                    "link" : "/papers"
-                },
-                {
-                    "id": "Related Papers",
-                    "title": "Related Papers",
-                    "state": "disabled",
-                    "link" : "/relatedPapers"
-                },
-                {
-                    "id": "Evidence Classification",
-                    "title": "Evidence Classification",
-                    "state": "disabled",
-                    "link" : "/evidence"
-                }
-            ]
         }
     ]
 }

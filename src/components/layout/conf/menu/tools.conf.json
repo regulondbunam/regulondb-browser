@@ -35,39 +35,6 @@
                     "link": "/clustering_pwms"
                 }
             ]
-        },
-        {
-            "id": "SubMenuExternal",
-            "title": "External Tools",
-            "link": "/externalTools",
-            "type": "SUBMENU",
-            "options": [
-                {
-                    "id": "rsaTOols",
-                    "title": "RSA Tools",
-                    "url" : "http://embnet.ccg.unam.mx/rsat/",
-                    "state": "disabled",
-                    "target": "_blank"
-                },
-                {
-                    "id": "geneCons",
-                    "title": "Gene Context Tool",
-                    "state": "disabled",
-                    "link" : "/"
-                },
-                {
-                    "id": "esAtools",
-                    "title": "Gene Expression Analysis Tools",
-                    "state": "disabled",
-                    "link" : "/"
-                },
-                {
-                    "id": "promos",
-                    "title": "Promoter Analysis Tool",
-                    "state": "disabled",
-                    "link" : "/"
-                }
-            ]
         }
     ]
 }

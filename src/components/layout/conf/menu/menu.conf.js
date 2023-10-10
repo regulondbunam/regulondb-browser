@@ -1,7 +1,7 @@
 
 import home from './home.conf.json'
 import tools from './tools.conf.json'
-import overviews from './overviews.conf.json'
+//import overviews from './overviews.conf.json'
 import downloadSets from './downloadSet.conf.json'
 import help from './help.conf.json'
 import search from './searching.conf.json'
@@ -12,7 +12,7 @@ const menuConf = {
         home,
         search,
         tools,
-        overviews,
+//        overviews,
         downloadSets,
         software,
         help
