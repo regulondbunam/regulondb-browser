@@ -3,12 +3,13 @@
     "title": "Overviews",
     "type": "MENU",
     "icon": "bar_chart",
+    "state": "disabled",
     "options":[
         {
             "id": "iocs",
             "title": "Integrated Overview",
             "link": "/Overviews",
-            "state": "enabled",
+            "state": "disabled",
             "type": "LINK"
         },
         {

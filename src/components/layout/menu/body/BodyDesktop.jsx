@@ -68,9 +68,7 @@ export function BodyDesktop({ submenuData }) {
           case "SUBMENU":
             return (
               <div key={item.id} style={styleSubmenu}>
-                <Link to={item.link} style={styleSubTitle}>
                   {item.title}
-                </Link>
                 {item.options.map((itemm) => {
                   
                   if (itemm.type === "graphql") {

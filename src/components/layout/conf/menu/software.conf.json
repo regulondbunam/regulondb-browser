@@ -12,9 +12,9 @@
       "options":[
         {
           "id": "db_docker",
-          "title": "Docker",
-          "link" : "/docker",
-          "state": "disabled"
+          "title": "install a local instance",
+          "link" : "/manual/apiSoftware/docker",
+          "state": "enabled"
         }
       ]
     },
