@@ -1,11 +1,22 @@
-import { Link } from "react-router-dom";
 import { useSpring, animated } from "@react-spring/web";
-import Search from "./search";
 import ecoliImgT3 from "./media/EcoliRegulonDBT3.webp";
+import EcoliWall from "./media/coli.webp";
+import UNAM_LOGO from "./media/unamLogo.png";
+import Paper from "@mui/material/Paper";
+import Search from "./search";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
+import Stack from "@mui/material/Stack";
+import { styled } from "@mui/material/styles";
 
-
-
-import Style from "./style.module.css";
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: "transparent",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
 
 const searchLinks = [
   {
@@ -24,88 +35,98 @@ const searchLinks = [
     label: "Sigmulon",
     link: "/sigmulon",
   },
+  {
+    label: "GENSOR Unit",
+    link: "/gu",
+  },
 ];
 
-export function Cover(params) {
-  const [springs, api] = useSpring(() => ({
-    from: { height: "300px", opacity: 1 },
-  }));
-  const [animateSearch, serchA] = useSpring(() => ({
-    from: { x:0 },
-  }));
-
-  const handleAnimateSearch = () => {
-    let elements = document.getElementsByClassName("noAnimate");
-    if (elements) {
-      for (let i = 0; i < elements.length; i++) {
-        elements[i].innerHTML = "";
-      }
-    }
-    serchA.start({
-      from: {
-        y: 0,
-      },
-      to: {
-       y: -300,
-      },
-    })
-    api.start({
-      from: {
-        height: "300px",
-        opacity: 1
-      },
-      to: {
-        height: "75px",
-        opacity: 0.3
-      },
-    });
-  };
+export default function Cover() {
   return (
-    <animated.div
-      style={{
-        ...springs,
+    <Paper
+      elevation={0}
+      square
+      sx={{
+        width: "100%",
+        position: "relative",
+        backgroundColor: "grey.800",
+        color: "#fff",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundImage: `url(${EcoliWall})`,
+        p: "2% 8% 2% 8%",
       }}
-      className={Style.cover}
     >
-      <div id={"homeCoverTitle"} className="noAnimate">
-        <img
-          className={Style.coverEcoliImg}
-          src={ecoliImgT3}
-          alt="Ecoli RegulonDB"
-        />
-        <div className={Style.coverCometText} >
-         </div>
-        <div className={Style.coverTop}>
-          <div className={Style.coverTitle}>
-            <h1 className={Style.coverH1}>The RegulonDB Database</h1>
-            <h2 className={Style.coverH2}>
-              <i>Escherichia coli</i> K-12 Transcriptional Regulatory Network
-            </h2>
+        <img src={ecoliImgT3} alt="Ecoli RegulonDB" className="coverEcoliImg" />
+      <Grid container >
+        <Grid
+          item
+          xs={1}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            zIndex: 10
+          }}
+        >
+          <div>
+            <img
+              src={UNAM_LOGO}
+              alt="logo unam"
+              style={{ height: "auto", width: "100%", maxWidth: "90px" }}
+            />
           </div>
-        </div>
-      </div>
-      <br />
-      <animated.div style={{...animateSearch}} className={Style.coverSearch }>
-        <Search onClick={handleAnimateSearch} />
-      </animated.div>
-      <div id={"homeCoverBottom"} className="noAnimate">
-        {searchLinks.map((link) => {
-          return (
-            <div
-              key={"cover_link" + link}
-              style={{ paddingLeft: "10px", float: "left" }}
-            >
-              <Link style={{color: "#ffffff"}} to={link.link}>{link.label}</Link>
-            </div>
-          );
-        })}
-      </div>
-    </animated.div>
+        </Grid>
+        <Grid
+          item
+          xs={8}
+          sx={{
+            display: "flex",
+            alignItems: "flex-start",
+            flexDirection: "column",
+            zIndex: 10
+          }}
+        >
+          <Typography variant="h1">The RegulonDB Database</Typography>
+          <Typography variant="h2">
+            Escherichia coli K-12 Transcriptional Regulatory Network
+          </Typography>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            zIndex: 10
+          }}
+        >
+          <div className="coverSearch">
+            <Search />
+          </div>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            zIndex: 10
+          }}
+        >
+          <Stack direction="row" spacing={1}>
+            {searchLinks.map((link) => {
+              return (
+                <Item elevation={0} key={"cover_link" + link}>
+                  <Link style={{ color: "#ffffff" }} to={link.link}>
+                    {link.label}
+                  </Link>
+                </Item>
+              );
+            })}
+          </Stack>
+        </Grid>
+      </Grid>
+    </Paper>
   );
 }
-
-/*
-<div className={Style.coverCometText} >
-                        Currently the best electronically-encoded regulatory network of any free-living organism.
-                        </div>
-*/

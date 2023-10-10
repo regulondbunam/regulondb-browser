@@ -232,6 +232,18 @@ const THEME = createTheme({
       contrastText: '#ffffff',
     }
   },
+  typography: {
+    h1:{
+      fontSize: '4vw',
+      color: 'white',
+      fontWeight: 700,
+    },
+    h2:{
+      fontSize: '2vw',
+      color: 'white',
+      fontWeight: 700
+    }
+  },
 });
 
 function App() {

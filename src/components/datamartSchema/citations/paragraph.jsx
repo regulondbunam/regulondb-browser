@@ -94,14 +94,18 @@ export const PC_VARIANTS = {
 };
 
 const verifiedPublication = (citation) => {
-  if (DataVerifier.isValidObject(citation.publication)) {
-    return DataVerifier.isValidString(citation.publication._id) ? citation.publication._id : undefined
+  if (DataVerifier.isValidObject(citation?.publication)) {
+    return DataVerifier.isValidString(citation.publication._id)
+      ? citation.publication._id
+      : undefined;
   }
   return undefined;
 };
 const verifiedEvidence = (citation) => {
-  if (DataVerifier.isValidObject(citation.evidence)) {
-    return DataVerifier.isValidString(citation.evidence._id) ? citation.evidence._id : undefined;
+  if (DataVerifier.isValidObject(citation?.evidence)) {
+    return DataVerifier.isValidString(citation.evidence._id)
+      ? citation.evidence._id
+      : undefined;
   }
   return undefined;
 };
@@ -110,8 +114,8 @@ function formatParagraph(citations = [], indexedCitations) {
   let publications = {};
   if (DataVerifier.isValidArray(citations)) {
     citations.forEach((citation) => {
-      const publicationId = verifiedPublication(citation)
-      const evidenceId = verifiedEvidence(citation)
+      const publicationId = verifiedPublication(citation);
+      const evidenceId = verifiedEvidence(citation);
       let indexedCitation = indexedCitations.find(
         /**
          * Find citation in indexed citation
@@ -120,22 +124,32 @@ function formatParagraph(citations = [], indexedCitations) {
          * @returns {boolean}
          */
         (_indexedCitation) => {
-          const indxPublicationId = verifiedPublication(_indexedCitation)
-          const indxEvidenceId = verifiedEvidence(_indexedCitation)
-          return publicationId === indxPublicationId && evidenceId === indxEvidenceId
+          const indxPublicationId = verifiedPublication(_indexedCitation);
+          const indxEvidenceId = verifiedEvidence(_indexedCitation);
+          return (
+            publicationId === indxPublicationId && evidenceId === indxEvidenceId
+          );
         }
       );
-      const indxPublicationId = verifiedPublication(indexedCitation) ? indexedCitation.publication._id : "noPub"
-      const evidence = verifiedEvidence(indexedCitation) ? indexedCitation.evidence : undefined
-      if (!publications.hasOwnProperty(indxPublicationId)) {
-        publications[indxPublicationId] = {
-          ...indexedCitation.publication,
-          evidences: evidence ? [evidence] : []
-        }
-      }else{
-        publications[indxPublicationId] = {
-          ...publications[indxPublicationId],
-          evidences: evidence ? [...publications[indxPublicationId].evidences, evidence] : publications[indxPublicationId].evidences
+      if (indexedCitation) {
+        const indxPublicationId = verifiedPublication(indexedCitation)
+          ? indexedCitation.publication._id
+          : "noPub";
+        const evidence = verifiedEvidence(indexedCitation)
+          ? indexedCitation.evidence
+          : undefined;
+        if (!publications.hasOwnProperty(indxPublicationId)) {
+          publications[indxPublicationId] = {
+            ...indexedCitation.publication,
+            evidences: evidence ? [evidence] : [],
+          };
+        } else {
+          publications[indxPublicationId] = {
+            ...publications[indxPublicationId],
+            evidences: evidence
+              ? [...publications[indxPublicationId].evidences, evidence]
+              : publications[indxPublicationId].evidences,
+          };
         }
       }
     });
@@ -173,16 +187,16 @@ function ParagraphCitations({
          * @returns {React.JSX}
          */
         (publicationId, indx) => {
-          const publication = publications[publicationId]
-            return (
-              <div>
-                <ModalCitation
-                  key={`publication_${publication.index}_${indx}_${publicationId}`}
-                  publication={publication}
-                  citationSize={citationSize}
-                />
-              </div>
-            );
+          const publication = publications[publicationId];
+          return (
+            <div>
+              <ModalCitation
+                key={`publication_${publication.index}_${indx}_${publicationId}`}
+                publication={publication}
+                citationSize={citationSize}
+              />
+            </div>
+          );
         }
       )}
     </Stack>

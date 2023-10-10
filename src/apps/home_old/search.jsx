@@ -19,7 +19,6 @@ export default function Search({ onClick = () => {} }) {
     <div style={{ display: "grid", gridTemplateColumns: "70% 1% 20%" }}>
       <Paper
         sx={{
-          width: "100%",
           p: "2px 4px",
           display: "flex",
           alignItems: "center",

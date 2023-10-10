@@ -1,93 +1,26 @@
-/**
-# Component (user guide)
-
-# Home
-	
-## Description  
-The Home component is a React functional component that represents the home page of our application. It consists of a cover, body content, and displays a version number from a configuration file.
-
-
-## Category   
-Visual
-
-## Live demo 
---
-
-## Installation or Implementation
---
-
-## Usage 
-	
-example: <Home /> 
-
-## Props 
-
-| Attribute | Type | Default | Description |
-| --------- | ---- | ------- | ----------- |
-|           |      |         |             |
-
-
-## Exception
---
-
-## License
-
-MIT License
-
-## Author 
-	
-RegulonDB Team: 
-
-
-# Component (technical guide)
-
-## Component Type 
-Visual
-
-## Dependencies
-Cover: it represents the cover or header of some part of the application. The specific functionality of this component will depend on its implementation in the 'cover' file.
-Body: it represents the main section or central content of a page or screen.
-conf: it contains configuration information related to your application's home page, such as version, colors, default text, or any other data you need to customize the home page.
-
-## States
-	
-| Property | Value | Description |
-| -------- | ----- | ----------- |
-|          |       |             |
-
-## Hooks
-|  Name  | Description |  Syntax  | Additional Notes or References | 
-| ------ | ----------- | -------- | ------------------------------ |
-|        |             |          |                                |
-
-
-**/
-import { Cover } from './cover';
+import React from "react";
+import CssBaseline from "@mui/material/CssBaseline";
+import Container from "@mui/material/Container";
 import { Body } from './body';
-import conf from './conf/home.conf.json'
+import "./home.css";
+import Cover from "./cover";
 
 
-/**
- * Description placeholder
- *
- * @returns {HTMLElement}
- */
-const Home = () => {
+export default function Home() {
   return (
     <div>
-      <Cover />
-      <div className="noAnimate">
+      <CssBaseline />
+      <Container
+        maxWidth={false}
+        sx={{
+          "&.MuiContainer-root": {
+            padding: 0,
+          },
+        }}
+      >
+        <Cover />
         <Body />
-        <div>
-          <p style={{ color: "white" }}>{conf.version}</p>
-        </div>
-      </div>
+      </Container>
     </div>
   );
-};
-
-export default Home;
-
-/*
-
-*/
+}

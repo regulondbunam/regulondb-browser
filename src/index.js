@@ -5,6 +5,10 @@ import reportWebVitals from './reportWebVitals';
 import { ApolloProvider } from '@apollo/react-hooks';
 import Client from './webServices/apollo_client';
 import "./styleSheet_regulonDB.css"
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
