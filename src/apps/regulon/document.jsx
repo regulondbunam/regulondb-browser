@@ -1,13 +1,10 @@
 import { useMemo } from "react";
 import { AnchorNav, DataVerifier } from "../../components/ui-components"
 import { useIndexedCitation, AllCitations } from "../../components/datamartSchema"
-import NavigationTabs, { idNavTabs } from "./_oldDetails/NavigationTabs";
 import Regulates from "./_oldDetails/regulates";
-import Summary from "./_oldDetails/summary";
 import DiagramRegulatoryNetwork from "./_oldDetails/regulatoryNetwork";
 import RegulatoryInteractions from "./_oldDetails/regulatoryInteractions";
 import Regulator from "./_oldDetails/regulator";
-import Citations from "./_oldDetails/Citations";
 import Terms from "./_oldDetails/terms";
 import RelatedTool from "./related";
 
@@ -88,7 +85,7 @@ export default function Document({ regulonData, section }) {
             })
         }
         return _sections
-    }, [regulonData])
+    }, [regulonData,evidences,indexedCitations,publications])
 
     return (
         <div>

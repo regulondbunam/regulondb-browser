@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DataVerifier } from "../../components/ui-components";
+import { DataVerifier } from "../../../components/ui-components";
 //import { ExternalCrossReferences } from "../../../components/datamartSchema"
 import { useNavigate } from "react-router-dom";
 import List from "@mui/material/List";
@@ -35,8 +35,12 @@ export default function Navigation({
         <List component="div" disablePadding>
           {DataVerifier.isValidArray(genes) && (
             <>
-              {genes.map((gene) => (
-                <ListItemButton
+              {genes.map((gene) => {
+                if(!DataVerifier.isValidString(gene._id)){
+                  return null
+                }
+                return (
+                  <ListItemButton
                 key={gene._id}
                   sx={{ pl: 4 }}
                   onClick={() => {
@@ -45,22 +49,48 @@ export default function Navigation({
                 >
                   <p>Gene {" " + gene.name}</p>
                 </ListItemButton>
-              ))}
+                )
+              })}
             </>
           )}
           {DataVerifier.isValidArray(operons) && (
             <>
-              {operons.map((operon) => (
-                <ListItemButton
-                key={operon._id}
+              {operons.map((operon) => {
+                if(!DataVerifier.isValidString(operon._id)){
+                  return null
+                }
+                return (
+                  <ListItemButton
+                  key={operon._id}
+                    sx={{ pl: 4 }}
+                    onClick={() => {
+                      navigate("/operon/" + operon._id);
+                    }}
+                  >
+                    <p>Operon {" " + operon.name}</p>
+                  </ListItemButton>
+                )
+              })}
+            </>
+          )}
+          {DataVerifier.isValidArray(regulons) && (
+            <>
+              {regulons.map((regulon) => {
+                if(!DataVerifier.isValidString(regulon._id)){
+                  return null
+                }
+                return (
+                  <ListItemButton
+                key={regulon._id}
                   sx={{ pl: 4 }}
                   onClick={() => {
-                    navigate("/operon/" + operon._id);
+                    navigate("/regulon/" + regulon._id);
                   }}
                 >
-                  <p>Operon {" " + operon.name}</p>
+                  <p>Gene {" " + regulon.name}</p>
                 </ListItemButton>
-              ))}
+                )
+              })}
             </>
           )}
           {DataVerifier.isValidArray(htIds) && (

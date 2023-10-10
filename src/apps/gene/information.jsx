@@ -10,7 +10,7 @@ export default function Information({ geneData }) {
     const citations = useIndexedCitation(geneData.allCitations)
     let relationTool = null
     let dtt = null
-
+    console.log(geneData);
     if (geneData?.gene) {
         relationTool = <RelatedTool {...geneData} />
         dtt = <DrawingTracesTool
