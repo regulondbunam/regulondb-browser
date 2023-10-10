@@ -60,7 +60,6 @@ function Home() {
   const { objectsList, loading, error } = useGetObjectList({
     datamartType: "operon",
   });
-  console.log(objectsList);
   let state = "done";
   let title = "Operons";
   if (loading) {
@@ -89,7 +88,7 @@ function LoadTable({ objectsList }) {
     return formatData(objectsList);
   }, [objectsList]);
   return (
-    <div style={{ marginLeft: "3%" }}>
+    <div style={{ margin: "10px 3% 10px 3%" }}>
       <FilterTable data={data} columns={COLUMNS} fileName="GeneSummaryData" />
     </div>
   );

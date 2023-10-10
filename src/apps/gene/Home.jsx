@@ -85,7 +85,7 @@ function LoadTable({ objectsList }) {
     return formatData(objectsList);
   }, [objectsList]);
   return (
-    <div style={{ marginLeft: "3%" }}>
+    <div style={{ margin: "10px 3% 10px 3%" }}>
       <FilterTable
         data={data}
         columns={COLUMNS}
