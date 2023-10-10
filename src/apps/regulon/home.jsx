@@ -157,7 +157,7 @@ function Table({ regulons }) {
   const data = useMemo(() => {
     return formatData(regulons);
   }, [regulons]);
-  console.log(data);
+  //console.log(data);
   return (
     <FilterTable columns={COLUMNS} data={data} fileName="RegulonsSummaryData" />
   );
