@@ -7,7 +7,7 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import ZoomOutIcon from "@mui/icons-material/ZoomOut";
 import Tooltip from "@mui/material/Tooltip";
-import WarningAmberIcon from "@mui/icons-material/WarningAmber";
+//import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import ZoomInMapIcon from "@mui/icons-material/ZoomInMap";
 import ZoomOutMapIcon from "@mui/icons-material/ZoomOutMap";
@@ -97,6 +97,7 @@ function Controls({
           </Tooltip>
           <Tooltip title={"zoom in"}>
             <Button
+            disabled={(currentRightEndPosition-currentLeftEndPosition)< zoom}
               onClick={() => {
                 setGeneticElements(undefined);
                 set_expand(true);
@@ -109,6 +110,7 @@ function Controls({
           </Tooltip>
           <Tooltip title={"zoom out"}>
             <Button
+            disabled={(currentRightEndPosition-currentLeftEndPosition)> 50000}
               onClick={() => {
                 setGeneticElements(undefined);
                 setPosLeft(currentLeftEndPosition - zoom);
