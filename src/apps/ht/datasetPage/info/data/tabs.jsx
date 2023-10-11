@@ -54,7 +54,7 @@ export default function Tabs({ id_dataset, data }) {
         case "TTS":
         case "TUS":
         case "GENE_EXPRESSION":
-            tabTitle1 = "Uniformized"
+            tabTitle1 = "Uniformize"
             break;
         default:
             tabTitle1 = undefined

@@ -64,7 +64,7 @@ export function Table({ columns, data }) {
                                     if (cell.column.id === "_gene") {
                                        // console.log(cell.value[0]);
                                         return <td {...cell.getCellProps()}>
-                                            <a style={{ marginLeft: "5px" }} href={`http://regulondb.ccg.unam.mx/search?term=${cell.value[0].name}&organism=ECK12&type=gene`} target="_blank" rel="noreferrer">{cell.value[0].name}</a>
+                                            <a style={{ marginLeft: "5px" }} href={`/gene/${cell.value[0]._id}`} target="_blank" rel="noreferrer">{cell.value[0].name}</a>
                                         </td>
                                     }
                                     return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>

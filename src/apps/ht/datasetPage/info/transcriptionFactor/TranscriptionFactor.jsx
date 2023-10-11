@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import ExternalRef from "./externalRef";
 import Note from "./note";
 import { gql, useQuery } from "@apollo/client";
+import {DataVerifier} from "../../../../../components/ui-components"
 
 const query = gql`
   query getIDRegulon($advanceSearch: String) {
@@ -22,7 +23,7 @@ export function ObjectTested({ obj, i }) {
   });
   let regulonId;
   if (data) {
-    regulonId = data.getRegulonBy.data[0]._id;
+    regulonId = DataVerifier.isValidArray(data.getRegulonBy.data) ?  data.getRegulonBy.data[0]._id : undefined;
   }
   return (
     <div>
