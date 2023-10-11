@@ -3,23 +3,12 @@ import imgDataset from "./media/datasetsExp.png";
 import imgDataset1 from "./media/datasetsExp1.png";
 import imgDataset2 from "./media/datasetsExp2.png";
 import imgDataset3 from "./media/datasetsExp3.png";
-import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import PageMap from "./pageMap";
 import InfoApp from "./infoApp";
 import { Card,CardActions, CardMedia, CardContent, Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
-
 
 const GRID_CONTENT = [
   {
@@ -107,12 +96,12 @@ export function Body() {
                 <Typography variant="h5" component="div">
                   {card.title}
                 </Typography>
-                <Typography variant="body2">{card.description}</Typography>
+                <Typography variant="body1">{card.description}</Typography>
               </CardContent>
               <CardActions>
                 {card.url && (
                   <Link to={card.url}>
-                    <Button color="secondary" size="small">
+                    <Button color="secondary" >
                       let's go!
                     </Button>
                   </Link>
