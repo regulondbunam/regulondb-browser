@@ -3,41 +3,25 @@ import imgDataset from "./media/datasetsExp.png";
 import imgDataset1 from "./media/datasetsExp1.png";
 import imgDataset2 from "./media/datasetsExp2.png";
 import imgDataset3 from "./media/datasetsExp3.png";
-import Grid from "@mui/material/Grid";
-import { ReleaseCard } from "./releaseCard";
-import { SummaryCard } from "./summary";
-import Stack from "@mui/material/Stack";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import PageMap from "./pageMap";
+import InfoApp from "./infoApp";
+import { Card,CardActions, CardMedia, CardContent, Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
+
+
 const GRID_CONTENT = [
-  {
-    id: "ligth_regulonDB",
-    xs: 3,
-    section: "tool",
-    title: "RegulonDB mirror sites ",
-    description: `Our RegulonDB mirror sites in the cities of Cuernavaca Morelos and Querétaro. Additionally, you have the option to download and install a local instance of RegulonDB application on your computer.`,
-    links: [
-      {
-        url: "https://regulondb.liigh.unam.mx",
-        label: "RegulonDB Liigh UNAM",
-      },
-      {
-        url: "https://testregulondb.ccg.unam.mx/",
-        label: "RegulonDB CCG UNAM",
-      },
-      {
-        url: "/manual/apiSoftware/docker",
-        label: "RegulonDB Docker (local instance)"
-      }
-    ],
-    imgUrl: imgDataset3,
-  },
   {
     id: "High_Throughput",
     xs: 3,
@@ -89,21 +73,18 @@ const GRID_CONTENT = [
 ];
 
 export function Body() {
-  return (
-    <div style={{ margin: "10px 5% 10px 5%" }}>
-      <Stack
-        direction="row"
-        spacing={{ xs: 3, sm: 5 }}
-        useFlexGap
-        flexWrap="wrap"
-      >
-        <ReleaseCard />
-        <SummaryCard />
-      </Stack>
-      <br />
-      <Grid container spacing={2}>
+
+  return(
+    <Box sx={{ flexGrow: 1, p:"10px 6% 10px 6%" }}>
+      <Grid container spacing={1} >
+        <Grid item xs={4}>
+          <PageMap />
+        </Grid>
+        <Grid item xs={8}>
+          <InfoApp />
+        </Grid>
         {GRID_CONTENT.map((card, index) => (
-          <Grid item xs={card.xs} key={"card_" + index + "_" + card.id}>
+          <Grid item xs={12} sm={6} md={4} key={"card_" + index + "_" + card.id}>
             <Card sx={{ minWidth: 275, minHeight: 450 }} elevation={3}>
               {card?.imgUrl && (
                 <CardMedia
@@ -155,6 +136,7 @@ export function Body() {
           </Grid>
         ))}
       </Grid>
-    </div>
-  );
+    </Box>
+  )
+
 }

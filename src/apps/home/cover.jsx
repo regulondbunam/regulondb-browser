@@ -127,6 +127,8 @@ export default function Cover() {
           </Stack>
         </Grid>
       </Grid>
+      <br />
+      
     </Paper>
   );
 }
