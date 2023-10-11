@@ -2,15 +2,15 @@
     "links":[
         {
             "name":"Terms and conditions",
-            "url":"/TermsConditions"
+            "url":"/manual/aboutUs/terms-conditions"
         },
         {
             "name":"Contact Us",
-            "url":"/Contact"
+            "url":"/manual/aboutUs/contact"
         },
         {
             "name":"Funding",
-            "url":"/funding"
+            "url":"/manual/aboutUs/funding"
         }
     ]
 }

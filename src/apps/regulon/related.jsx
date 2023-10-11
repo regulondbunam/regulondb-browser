@@ -21,6 +21,13 @@ const query_getDataset = gql`
   query getDataset($advancedSearch: String) {
     getDatasetsFromSearch(advancedSearch: $advancedSearch) {
       _id
+      datasetType
+      sourceSerie {
+        strategy
+      }
+      sample {
+        title
+      }
     }
   }
 `;
@@ -50,25 +57,26 @@ const style = {
 export default function RelatedTool({ regulonData }) {
   const { data: ht } = useQuery(query_getDataset, {
     variables: {
-      advancedSearch: `('TFBINDING'[datasetType]) AND '${regulonData.regulator?.abbreviatedName}'[objectsTested.name]`,
+      advancedSearch: `'${regulonData.regulator?.abbreviatedName}'[objectsTested.name]`,
     },
   });
-  const {data:gu} = useQuery(query_getGu,{
-    variables:{
-      advancedSearch: `${regulonData.regulator?.abbreviatedName}[gensorUnit.name]`
-    }
-  })
+  const { data: gu } = useQuery(query_getGu, {
+    variables: {
+      advancedSearch: `${regulonData.regulator?.abbreviatedName}[gensorUnit.name]`,
+    },
+  });
+  console.log(ht);
   let genes = [];
   let genesRelated;
   let operonsRelated;
-  let htIdRelated;
+  let htIdRelated = [];
   let guIdRelated;
   if (DataVerifier.isValidObject(regulonData.regulates)) {
     genes = regulonData.regulates.genes;
   }
   if (ht) {
     if (DataVerifier.isValidArray(ht.getDatasetsFromSearch)) {
-      htIdRelated = ht.getDatasetsFromSearch[0]._id;
+      htIdRelated = ht.getDatasetsFromSearch;
     }
   }
   if (gu) {
@@ -87,7 +95,12 @@ export default function RelatedTool({ regulonData }) {
 
   return (
     <div className="noPrint">
-      <Navigation genes={genesRelated} operons={operonsRelated} htIds={[htIdRelated]} guIds={[guIdRelated]} />
+      <Navigation
+        genes={genesRelated}
+        operons={operonsRelated}
+        htIds={htIdRelated}
+        guIds={[guIdRelated]}
+      />
       {DataVerifier.isValidArray(genes) && (
         <Tool title={"Related Tools"}>
           {genes.length < 800 && (

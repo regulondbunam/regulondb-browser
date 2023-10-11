@@ -6,7 +6,7 @@
     "options":[
         {
             "id": "releasesNotes",
-            "title": "Version Notes",
+            "title": "Release Note and Summary",
             "link": "/releasesNote",
             "state": "enabled",
             "type": "LINK"
