@@ -31,6 +31,13 @@ const query_getDataset = gql`
   query getDataset($advancedSearch: String) {
     getDatasetsFromSearch(advancedSearch: $advancedSearch) {
       _id
+      datasetType
+      sourceSerie {
+        strategy
+      }
+      sample {
+        title
+      }
     }
   }
 `;
@@ -48,26 +55,33 @@ const style = {
 };
 
 export default function RelatedTool({ gene, products, regulation }) {
+  let regulonName = ""
+  if(DataVerifier.isValidString(gene.name)){
+    regulonName = gene.name.charAt(0).toUpperCase() + gene.name.slice(1)
+  }
   const { data: gu } = useQuery(query_getGu, {
     variables: {
-      advancedSearch: `${gene.name}[gensorUnit.name]`,
+      advancedSearch: `${regulonName}[gensorUnit.name]`,
     },
   });
+  //console.log(gu);
   const { data: ht } = useQuery(query_getDataset, {
     variables: {
-      advancedSearch: `('TFBINDING'[datasetType]) AND '${gene.name}'[objectsTested.genes.name]`,
+      advancedSearch: `'${regulonName}'[objectsTested.name]`,
     },
   });
+
   const [open, setOpen] = React.useState(false);
-  let operonRelated = []
-  if(DataVerifier.isValidObject(regulation?.operon)){
-    operonRelated = [
-      { _id: regulation.operon._id, name: regulation.operon.name },
-    ];
+  let operonRelated = {};
+  if (DataVerifier.isValidObject(regulation?.operon)) {
+    operonRelated = {
+      _id: regulation.operon._id,
+      name: regulation.operon.name,
+    };
   }
   let regulonRelated = [];
   let guIdRelated;
-  let htIdRelated;
+  let htDatasetsRelated = [];
   if (DataVerifier.isValidArray(products)) {
     products.forEach((product) => {
       regulonRelated.push({
@@ -78,7 +92,7 @@ export default function RelatedTool({ gene, products, regulation }) {
   }
   if (ht) {
     if (DataVerifier.isValidArray(ht.getDatasetsFromSearch)) {
-      htIdRelated = ht.getDatasetsFromSearch[0]._id;
+      htDatasetsRelated = ht.getDatasetsFromSearch;
     }
   }
   if (gu) {
@@ -87,17 +101,15 @@ export default function RelatedTool({ gene, products, regulation }) {
     }
   }
 
-  console.log(regulonRelated);
-
   const navigate = useNavigate();
 
   return (
     <div className="noPrint">
       <Navigation
-        operons={operonRelated}
+        operon={operonRelated}
         regulons={regulonRelated}
-        guIds={[guIdRelated]}
-        htIds={[htIdRelated]}
+        guId={guIdRelated}
+        htDatasets={htDatasetsRelated}
       />
       {DataVerifier.isValidObject(gene) && (
         <Tool title={"Related Tools"}>

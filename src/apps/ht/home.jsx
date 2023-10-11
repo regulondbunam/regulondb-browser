@@ -42,7 +42,7 @@ export default function Home() {
   return (
     <>
       <Cover>
-        <Typography variant="h1">{conf.title}</Typography>
+        <Typography variant="h1">High Throughput Collection</Typography>
       </Cover>
       <Box sx={{ flexGrow: 1, p: "10px 6% 10px 6%" }}>
         {DataVerifier.isValidArray(conf.collection) && (

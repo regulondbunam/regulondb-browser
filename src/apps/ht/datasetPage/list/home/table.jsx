@@ -252,7 +252,7 @@ export function DatasetTable({ jsonTable, datasetType }) {
             }
         });
     }
-    console.log(jsonTable);
+
     return (
         <Table columns={jsonTable.columns} datasetType={datasetType} data={jsonTable.data} hiddenColumns={hiddenColumns} ignoreColumns={ignoreColumns} />
     )
