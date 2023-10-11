@@ -43,7 +43,7 @@ export default function InfoColumns({
             />
 
             {getAllLeafColumns().map((column) => {
-                console.log(columnsInfo[0].accessorKey,column.columnDef.accessorKey);
+                //console.log(columnsInfo[0].accessorKey,column.columnDef.accessorKey);
                 const info = columnsInfo.find(c=>c.accessorKey===column.columnDef.accessorKey)
               return (
                 <React.Fragment key={column.id} >
