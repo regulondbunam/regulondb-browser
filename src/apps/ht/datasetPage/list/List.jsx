@@ -3,40 +3,17 @@ import { SpinnerCircle } from '../../components/ui-components_old/ui_components'
 import { DatasetTable } from './home/table'
 import { getConfOf } from '../../doc/fetchDOC'
 import { Link } from 'react-router-dom'
+import { GEData } from './geneExpresion'
 
-export default function List({ datasetType, experimentType }) {
+export default function List({datasetType, title, advancedSearch }) {
   const [_data, set_data] = useState()
   const [_state, set_state] = useState()
   const [_conf, set_conf] = useState()
+  
 
-  let advancedSearch = `${datasetType}[datasetType]`
-  let srtDatasetType = datasetType
-  switch (datasetType) {
-    case "TFBINDING":
-      srtDatasetType = " TF Binding Sites"
-      if (experimentType) {
-        srtDatasetType = ` TF Binding Sites with strategy ${experimentType}`
-        advancedSearch = `'${experimentType}'[sourceSerie.strategy] AND TFBINDING[datasetType]`
-      }
-      break;
-    case "TUS":
-      srtDatasetType = " Transcription Units"
-      break;
-    case "TTS":
-      srtDatasetType = " Transcription Termination Sites"
-      break;
-    case "TSS":
-      srtDatasetType = " Transcription Start Sites"
-      break;
-    case "GENE_EXPRESSION":
-      srtDatasetType = " Gene Expression"
-      break;
-    default:
-      advancedSearch = undefined
-      break;
-  }
+  //console.log(_data);
 
-  let _title = "Dataset list of " + srtDatasetType
+  let _title = "Dataset list of " + title
 
   useEffect(() => {
     const COVER = document.getElementById("title-cover-ht")
@@ -50,7 +27,7 @@ export default function List({ datasetType, experimentType }) {
       });
       COVER.dispatchEvent(COVER_REACTION);
     }
-    if (!_data && _state !== "error") {
+    if (!_data && _state !== "error" && datasetType !== "GENE_EXPRESSION") {
       try {
         (async () => {
           set_state("loading")
@@ -66,6 +43,7 @@ export default function List({ datasetType, experimentType }) {
             .then((response) => response.json())
             .then(data => {
               set_data(data)
+              //console.log(data);
               set_state("done")
             })
             .catch((error) => {
@@ -78,7 +56,6 @@ export default function List({ datasetType, experimentType }) {
         console.error("prosses_Services_error: ", error);
         set_state("error")
       }
-
     }
     if (!_conf && _state !== "error") {
       try {
@@ -92,9 +69,9 @@ export default function List({ datasetType, experimentType }) {
         set_state("error")
       }
     }
-  }, [_state, _conf, _data, _title, advancedSearch])
+  }, [_state, _conf, _data, _title, advancedSearch, datasetType])
 
-  console.log();
+  //console.log();
   if (!advancedSearch) {
     return (
       <article>
@@ -103,9 +80,16 @@ export default function List({ datasetType, experimentType }) {
     )
   }
 
-  if (_conf && _data) {
+  if (_conf) {
     return (
       <div>
+        {datasetType === "GENE_EXPRESSION" && !_data
+        ?(
+          <GEData getData={(data)=>{set_data(data)}} getState={(state)=>{set_state(state)}} />
+        )
+      :(
+        <></>
+      )}
         <article>
           <p>{_conf.description}</p>
           {
@@ -116,7 +100,6 @@ export default function List({ datasetType, experimentType }) {
           }
         </article>
         <aside>
-          <p className='p_accent'>Related Tools</p>
           <table className='table_content' >
             <thead>
               <tr><th>Query Builder</th></tr>
@@ -126,7 +109,7 @@ export default function List({ datasetType, experimentType }) {
               <td>
                 <p>Would you like to make more specific queries?</p>
                 <Link to={`${window.IN_URL.finder}${datasetType}`} >
-                  <button>Query </button>
+                  <button>Query Builder</button>
                 </Link>
               </td>
               </tr>

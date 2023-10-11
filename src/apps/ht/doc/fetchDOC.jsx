@@ -37,6 +37,7 @@ export async function getConfOf(page, fun = () => { }) {
       break;
     default:
       console.error("parameter page is not supported")
+      fun({"error": "parameter page is not supported"})
       break;
   }
   if (url) {
@@ -54,5 +55,7 @@ export async function getMD(url, fun = () => { }) {
   if (url) {
     let mdData = await (await getRaw(url)).text()
     fun(mdData)
+  }else{
+    fun({error: "urlError"})
   }
 }

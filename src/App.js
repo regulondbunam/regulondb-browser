@@ -11,7 +11,7 @@ import Gene from './apps/gene';
 import DrawingTracesInterface from './apps/dtt';
 import Operon from './apps/operon';
 import Embed from "./apps/embed";
-import HT from './apps/ht/HighThroughput';
+import HT from './apps/ht';
 import Regulon from './apps/regulon';
 import Sigmulon from './apps/sigmulon';
 import Coexpression from "./apps/coexpression"
@@ -234,11 +234,21 @@ const THEME = createTheme({
   },
   typography: {
     h1:{
+      fontSize: '2vw',
+      color: '#32617D',
+      fontWeight: 700,
+    },
+    h2:{
+      fontSize: '1vw',
+      color: '#32617D',
+      fontWeight: 700
+    },
+    h1Cover:{
       fontSize: '4vw',
       color: 'white',
       fontWeight: 700,
     },
-    h2:{
+    h2Cover:{
       fontSize: '2vw',
       color: 'white',
       fontWeight: 700

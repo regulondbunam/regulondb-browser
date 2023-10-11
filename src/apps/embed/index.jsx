@@ -64,7 +64,6 @@ HtParameters: This component is used to route and render different pages and con
 **/
 import { useParams } from "react-router-dom";
 import DrawingTracesInterface from "../dtt";
-import { HtParameters } from "../ht/HighThroughput";
 
 
 /**
@@ -89,8 +88,6 @@ function Embed () {
             return (
                 <DrawingTracesInterface params={params} embed={true} />
             );
-        case "ht":
-            return <HtParameters site={parameters} datasetType={parameterA} info={parameterB} isEmbed />
         default:
             return (
                 <div>application no embed permission</div>

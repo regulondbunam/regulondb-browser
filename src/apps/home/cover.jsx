@@ -87,8 +87,8 @@ export default function Cover() {
             zIndex: 10
           }}
         >
-          <Typography variant="h1">The RegulonDB Database</Typography>
-          <Typography variant="h2">
+          <Typography variant="h1Cover">The RegulonDB Database</Typography>
+          <Typography variant="h2Cover">
             Escherichia coli K-12 Transcriptional Regulatory Network
           </Typography>
         </Grid>
