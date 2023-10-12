@@ -35,6 +35,44 @@
                     "link": "/clustering_pwms"
                 }
             ]
+        },
+        {
+            "id": "subMenuBrosing",
+            "title": "High Throughput Query Builder",
+            "link": "/ht",
+            "type": "SUBMENU",
+            "options": [
+                {
+                    "id": "builderTFbinding",
+                    "title": "Transcription Factors Binding Sites",
+                    "state": "enabled",
+                    "link" : "ht/finder/TFBINDING"
+                },
+                {
+                    "id": "builderTUs",
+                    "title": "Transcription Units",
+                    "state": "enabled",
+                    "link" : "/ht/finder/TUS"
+                },
+                {
+                    "id": "builderTTS",
+                    "title": "Transcription Termination Sites",
+                    "state": "enabled",
+                    "link" : "/ht/finder/TTS"
+                },
+                {
+                    "id": "tssBuilding",
+                    "title": "Transcription Start Sites",
+                    "state": "enabled",
+                    "link": "/ht/finder/TSS"
+                },
+                {
+                    "id": "builderGE",
+                    "title": "Gene Expression",
+                    "state": "enabled",
+                    "link" : "/ht/finder/GENE_EXPRESSION"
+                }
+            ]
         }
     ]
 }
