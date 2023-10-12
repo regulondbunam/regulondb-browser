@@ -14,6 +14,7 @@ import ListItemText from '@mui/material/ListItemText';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import Divider from '@mui/material/Divider';
 import Collapse from '@mui/material/Collapse';
+import Navigation from './navigation';
 
 const style = {
     position: "absolute",
@@ -35,6 +36,7 @@ export default function RelatedTool({ relatedIds, operonData }) {
 
     return (
         <div className="noPrint" >
+            <Navigation idValue={relatedIds.idValue} />
             {DataVerifier.isValidArray(relatedIds.genes) && (
                 <Tool title={"Related Tools"} >
                     <List>

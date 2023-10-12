@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DataVerifier } from "../../components/ui-components";
+import { DataVerifier } from "../../../components/ui-components";
 //import { ExternalCrossReferences } from "../../../components/datamartSchema"
 import { useNavigate, Link } from "react-router-dom";
 import List from "@mui/material/List";
@@ -23,17 +23,27 @@ const style = {
   p: 4,
 };
 
-export default function Navigation({
-  genes = [],
-  operons = [],
-  sigmulon = [],
-  regulons = [],
-  htIds = [],
-  guIds = [],
-}) {
+export default function Navigation({ idValue }) {
   const [open, setOpen] = useState(true);
   const navigate = useNavigate();
-
+  let regulons = [];
+  let genes = [];
+  Object.keys(idValue).forEach((id) => {
+    const value = idValue[id];
+    if (!DataVerifier.isValidArray(value)) {
+      return null;
+    }
+    switch (value[1]) {
+      case "regulon":
+        regulons.push({ _id: id, name: value[0] });
+        break;
+      case "gene":
+        genes.push({ _id: id, name: value[0] });
+        break;
+      default:
+        break;
+    }
+  });
   return (
     <List dense>
       <ListItemButton
@@ -46,10 +56,10 @@ export default function Navigation({
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          {DataVerifier.isValidArray(genes) && (
+          {genes.length > 0 && (
             <>
               {genes.length > 1 ? (
-                <Genes type="gene" elements={genes} />
+                <OpenModal type="gene" elements={genes} />
               ) : (
                 <ListItemButton
                   sx={{ pl: 4 }}
@@ -62,42 +72,20 @@ export default function Navigation({
               )}
             </>
           )}
-          {DataVerifier.isValidArray(operons) && (
+          {regulons.length > 0 && (
             <>
-              {operons.length > 1 ? (
-                <Genes type="operon" elements={operons} />
+              {regulons.length > 1 ? (
+                <OpenModal type="regulon" elements={regulons} />
               ) : (
                 <ListItemButton
                   sx={{ pl: 4 }}
                   onClick={() => {
-                    navigate("/operon/" + operons[0]._id);
+                    navigate("/regulon/" + regulons[0]._id);
                   }}
                 >
-                  <p>operon</p>
+                  <p>regulon</p>
                 </ListItemButton>
               )}
-            </>
-          )}
-          {DataVerifier.isValidArray(htIds) && (
-            <HtDatasets htDatasets={htIds} />
-          )}
-          {DataVerifier.isValidArray(guIds) && (
-            <>
-              {guIds.map((guId) => {
-                if (!guId) {
-                  return null;
-                }
-                return (
-                  <ListItemButton
-                    sx={{ pl: 4 }}
-                    onClick={() => {
-                      navigate("/gu/" + guId);
-                    }}
-                  >
-                    <p>GENSOR Unit</p>
-                  </ListItemButton>
-                );
-              })}
             </>
           )}
         </List>
@@ -106,7 +94,7 @@ export default function Navigation({
   );
 }
 
-function Genes({ elements, type = "" }) {
+function OpenModal({ elements, type = "" }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

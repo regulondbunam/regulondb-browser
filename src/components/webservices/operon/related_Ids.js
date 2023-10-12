@@ -19,18 +19,22 @@ export function getRelatedIdsByOperonData(operon) {
     let regulatoryInteractions = [];
     let terminators = [];
     let groupByTu = {}
+    let idValue = {}
     if (DataVerifier.isValidArray(operon.transcriptionUnits)) {
       operon.transcriptionUnits.forEach((transcriptionUnit) => {
         let groupTu = []
         tus = IfNoExistPush(tus, transcriptionUnit._id);
+        idValue[transcriptionUnit._id] = [transcriptionUnit.name,"tu"]
         if (DataVerifier.isValidArray(transcriptionUnit.genes)) {
           transcriptionUnit?.genes.forEach((gene) => {
             genes = IfNoExistPush(genes, gene._id);
+            idValue[gene._id] = [gene.name,"gene"]
             groupTu = IfNoExistPush(groupTu, gene._id);
             if (DataVerifier.isValidArray(gene.regulatorBindingSites)) {
               gene.regulatorBindingSites.forEach((rbs) => {
                 if (rbs?.regulator) {
                   regulator = IfNoExistPush(regulator, rbs.regulator._id);
+                  idValue[rbs.regulator._id] = [rbs.regulator.name,"regulon"]
                   groupTu = IfNoExistPush(groupTu, rbs.regulator._id);
                 }
                 if (DataVerifier.isValidArray(rbs.regulatoryInteractions)) {
@@ -45,11 +49,13 @@ export function getRelatedIdsByOperonData(operon) {
         }
         if (DataVerifier.isValidObject(transcriptionUnit.promoter)) {
           promoters = IfNoExistPush(promoters, transcriptionUnit.promoter._id);
+          idValue[transcriptionUnit.promoter._id] = [transcriptionUnit.promoter.name,"promoter"]
           groupTu = IfNoExistPush(groupTu, transcriptionUnit.promoter._id);
           if (DataVerifier.isValidArray(transcriptionUnit.promoter.regulatorBindingSites)) {
             transcriptionUnit.promoter.regulatorBindingSites.forEach((rbs) => {
               if (rbs?.regulator) {
                 regulator = IfNoExistPush(regulator, rbs.regulator._id);
+                idValue[rbs.regulator._id] = [rbs.regulator.name,"regulon"]
                 groupTu = IfNoExistPush(groupTu, rbs.regulator._id);
               }
               if (DataVerifier.isValidArray(rbs.regulatoryInteractions)) {
@@ -78,6 +84,7 @@ export function getRelatedIdsByOperonData(operon) {
         if (DataVerifier.isValidArray(transcriptionUnit.terminators)) {
           transcriptionUnit.terminators.forEach((terminator) => {
             terminators = IfNoExistPush(terminators, terminator._id);
+            idValue[terminator._id] = [transcriptionUnit.promoter.name+"_terminator","terminator"]
             groupTu = IfNoExistPush(groupTu, terminator._id);
           });
         }
@@ -92,7 +99,8 @@ export function getRelatedIdsByOperonData(operon) {
       regulatoryInteractions: regulatoryInteractions,
       terminators: terminators,
       all: genes.concat(promoters).concat(regulator).concat(regulatoryInteractions).concat(terminators),
-      groupByTu:  groupByTu
+      groupByTu:  groupByTu,
+      idValue:idValue
     };
   } catch (error) {
     console.error("get Ids operon", error);

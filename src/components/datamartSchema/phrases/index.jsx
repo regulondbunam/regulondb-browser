@@ -20,7 +20,7 @@ const HtmlTooltip = styled(({ className, ...props }) => (
 
 export default function IsPropertyPhrases({ property = "", propertiesPhrase }) {
   const label = property.charAt(0).toUpperCase() + property.slice(1);
-  console.log(propertiesPhrase[property]);
+  //console.log(propertiesPhrase[property]);
   let phrases = propertiesPhrase[property];
   if (!phrases) {
     return <b>{label}:</b>;

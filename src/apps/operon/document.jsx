@@ -15,10 +15,8 @@ export default function Document({ operonData, section }) {
     const citations = useIndexedCitation(operonData.allCitations)
 
     let relatedIds = getRelatedIdsByOperonData(operonData)
-    console.log(relatedIds);
-    //
     //console.log(operonData);
-    let relationTool = <RelatedTool operon={operonData} relatedIds={relatedIds} />
+    let relationTool = <RelatedTool operonData={operonData} relatedIds={relatedIds} />
 
     let dtt = <DrawingTracesTool
        

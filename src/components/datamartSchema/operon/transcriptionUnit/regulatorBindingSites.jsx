@@ -97,7 +97,6 @@ const COLUMNS = [
 ];
 
 function formatData(regulatorBindingSites = [], allCitations) {
-  console.log(regulatorBindingSites);
   let data = [];
   regulatorBindingSites.forEach((rbs) => {
     const _regulatorName = DataVerifier.isValidString(
