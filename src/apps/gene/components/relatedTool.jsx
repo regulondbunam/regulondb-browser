@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { DataVerifier } from "../../../components/ui-components";
 import { ExternalCrossReferences } from "../../../components/datamartSchema";
 import { useNavigate } from "react-router-dom";
@@ -168,6 +168,7 @@ export default function RelatedTool({ gene, products, regulation }) {
   return (
     <div id="relatedActive" className="noPrint">
       <Navigation
+      regulonName={regulonName}
         operon={operonRelated}
         regulons={regulonRelated}
         guId={guIdRelated}

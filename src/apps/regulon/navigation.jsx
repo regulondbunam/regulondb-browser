@@ -24,6 +24,7 @@ const style = {
 };
 
 export default function Navigation({
+  regulonName,
   genes = [],
   operons = [],
   sigmulon = [],
@@ -79,7 +80,7 @@ export default function Navigation({
             </>
           )}
           {DataVerifier.isValidArray(htIds) && (
-            <HtDatasets htDatasets={htIds} />
+            <HtDatasets htDatasets={htIds} regulonName={regulonName} />
           )}
           {DataVerifier.isValidArray(guIds) && (
             <>
@@ -154,72 +155,49 @@ function Genes({ elements, type = "" }) {
   );
 }
 
-function HtDatasets({ htDatasets }) {
+function HtDatasets({ htDatasets, regulonName }) {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  console.log(htDatasets);
+  const handleOpen = () => setOpen(!open);
+  /*
+  let tfBinding = []
+  let geneExpression = []
+  htDatasets.forEach((dataset)=>{
+    switch (dataset.datasetType.toUpperCase()) {
+      case "GENE_EXPRESSION":
+        tfBinding.push()
+        break;
+      case "TFBINDING":
+        
+      break;
+      default:
+        break;
+    }
+  })*/
   return (
     <>
       <ListItemButton sx={{ pl: 4 }} onClick={handleOpen}>
         <p>HT-Datasets</p>
       </ListItemButton>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row-reverse",
-              justifyContent: "space-between",
-            }}
-          >
-            <Button color="error" variant="contained" onClick={handleClose}>
-              Exit
-            </Button>
-            <p>
-              <b>High Throughput Collection Datasets Found</b>
-            </p>
-          </div>
-          <div style={{ height: "40vh", overflow: "auto" }}>
-            <table>
-              <thead>
-                <tr>
-                  <th>title</th>
-                  <th>datasetType</th>
-                  <th>strategy</th>
-                </tr>
-              </thead>
-              <tbody>
-                {htDatasets.map((dataset) => {
-                  return (
-                    <tr key={dataset.id}>
-                      <td>
-                        <Link
-                          to={
-                            "/ht/dataset/" +
-                            dataset.datasetType.toUpperCase() +
-                            "/datasetId=" +
-                            dataset._id
-                          }
-                        >
-                          {dataset.sample.title}
-                        </Link>
-                      </td>
-                      <td>{dataset.datasetType}</td>
-                      <td>{dataset.sourceSerie.strategy}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        </Box>
-      </Modal>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          {htDatasets.find(
+            (dt) => dt.datasetType.toUpperCase() === "TFBINDING"
+          ) && (
+            <Link to={"/ht/dataset/TFBINDING/tf=" + regulonName}>
+              <ListItemButton>TF Binding</ListItemButton>
+            </Link>
+          )}
+        </List>
+        <List component="div" disablePadding>
+          {htDatasets.find(
+            (dt) => dt.datasetType.toUpperCase() === "GENE_EXPRESSION"
+          ) && (
+            <Link to={"/ht/dataset/GENE_EXPRESSION/"}>
+              <ListItemButton>GENE_EXPRESSION</ListItemButton>
+            </Link>
+          )}
+        </List>
+      </Collapse>
     </>
   );
 }

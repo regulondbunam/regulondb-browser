@@ -55,17 +55,18 @@ const style = {
 };
 
 export default function RelatedTool({ regulonData }) {
+  const regulonName = regulonData.regulator?.abbreviatedName 
   const { data: ht } = useQuery(query_getDataset, {
     variables: {
-      advancedSearch: `'${regulonData.regulator?.abbreviatedName}'[objectsTested.name]`,
+      advancedSearch: `'${regulonName}'[objectsTested.name]`,
     },
   });
   const { data: gu } = useQuery(query_getGu, {
     variables: {
-      advancedSearch: `${regulonData.regulator?.abbreviatedName}[gensorUnit.name]`,
+      advancedSearch: `${regulonName}[gensorUnit.name]`,
     },
   });
-  console.log(ht);
+  //console.log(ht);
   let genes = [];
   let genesRelated;
   let operonsRelated;
@@ -96,6 +97,7 @@ export default function RelatedTool({ regulonData }) {
   return (
     <div className="noPrint">
       <Navigation
+      regulonName={regulonName}
         genes={genesRelated}
         operons={operonsRelated}
         htIds={htIdRelated}
