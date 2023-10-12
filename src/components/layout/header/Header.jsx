@@ -1,6 +1,9 @@
 import React, { useEffect,  useState } from "react";
 import LogoRegulonDB from "../logos/regulonDB.png";
 import InputSearch from "../../../apps/search/InputSearch";
+import conf from "../conf/header.conf.json"
+import { Link } from "react-router-dom";
+import { Typography } from "@mui/material";
 import "./header.css";
 //import conf from './conf/header.conf.json'
 let eventName = "HEADER_UPDATE"
@@ -49,30 +52,13 @@ export default function Header({ isHome }) {
       </div>
       <div className="header_left">
         {_isHome ? (
-          <div>
-            <>
-              <a
-                className="aAccent header_link"
-                href="/TermsConditions"
-                style={{ paddingLeft: "10px" }}
-              >
-                Terms and conditions
-              </a>
-              <a
-                className="aAccent header_link"
-                href="/Contact"
-                style={{ paddingLeft: "10px" }}
-              >
-                Contact US
-              </a>
-              <a
-                className="aAccent header_link"
-                href="/Funding"
-                style={{ paddingLeft: "10px" }}
-              >
-                Funding
-              </a>
-            </>
+          <div style={{display: "flex"}} >
+            {conf.links.map((link,index)=>{
+              return (<Link key={"linkHeader_"+index} to={link.url}  >
+                <Typography color="secondary" sx={{mr: 5}} >{link.name}</Typography>
+              </Link>)
+            })}
+              
           </div>
         ) : (
           <InputSearch />

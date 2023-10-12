@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { DataVerifier } from "../../../components/ui-components";
 import { ExternalCrossReferences } from "../../../components/datamartSchema";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import Divider from "@mui/material/Divider";
 import Collapse from "@mui/material/Collapse";
 import Navigation from "./navigation";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery, useLazyQuery } from "@apollo/client";
 
 const query_getGu = gql`
   query getGu($advancedSearch: String) {
@@ -27,8 +27,8 @@ const query_getGu = gql`
   }
 `;
 
-const query_getDataset = gql`
-  query getDataset($advancedSearch: String) {
+const query_GetDatasetsID = gql`
+  query GetDataset($advancedSearch: String) {
     getDatasetsFromSearch(advancedSearch: $advancedSearch) {
       _id
       datasetType
@@ -37,6 +37,27 @@ const query_getDataset = gql`
       }
       sample {
         title
+      }
+    }
+  }
+`;
+
+const query_getDataset = gql`
+  query getDataset($advancedSearch: String, $gene: String) {
+    getDatasetsFromSearch(advancedSearch: $advancedSearch) {
+      _id
+      datasetType
+      sourceSerie {
+        strategy
+      }
+      sample {
+        title
+      }
+    }
+    getGeneExpressionFromSearch(advancedSearch: $gene, limit: 50) {
+      datasetIds
+      gene {
+        name
       }
     }
   }
@@ -55,9 +76,11 @@ const style = {
 };
 
 export default function RelatedTool({ gene, products, regulation }) {
-  let regulonName = ""
-  if(DataVerifier.isValidString(gene.name)){
-    regulonName = gene.name.charAt(0).toUpperCase() + gene.name.slice(1)
+  let regulonName = "";
+  let geneName = "";
+  if (DataVerifier.isValidString(gene.name)) {
+    geneName = gene.name;
+    regulonName = gene.name.charAt(0).toUpperCase() + gene.name.slice(1);
   }
   const { data: gu } = useQuery(query_getGu, {
     variables: {
@@ -68,8 +91,35 @@ export default function RelatedTool({ gene, products, regulation }) {
   const { data: ht } = useQuery(query_getDataset, {
     variables: {
       advancedSearch: `'${regulonName}'[objectsTested.name]`,
+      gene: `${geneName}[gene.name]`,
     },
   });
+  const [getGE,{data: htExpression}] = useLazyQuery(query_GetDatasetsID);
+
+  useEffect(() => {
+    if (
+      DataVerifier.isValidArray(ht?.getGeneExpressionFromSearch) &&
+      document.getElementById("relatedActive") && 
+      !htExpression
+    ) {
+      let htIds = [];
+      ht.getGeneExpressionFromSearch.forEach((ge) => {
+        if (DataVerifier.isValidArray(ge.datasetIds)) {
+          ge.datasetIds.forEach((id) => {
+            const label = id.split("_")[2];
+            htIds.push(label + "[_id]");
+          });
+        }
+      });
+      getGE({
+        variables: {
+          advancedSearch: htIds.join(" or "),
+        },
+      });
+    }
+  });
+
+  //console.log("ht", ht);
 
   const [open, setOpen] = React.useState(false);
   let operonRelated = {};
@@ -90,9 +140,21 @@ export default function RelatedTool({ gene, products, regulation }) {
       });
     });
   }
+  if(htExpression){
+    if(DataVerifier.isValidArray(htExpression.getDatasetsFromSearch)){
+      let hts =[]
+      htExpression.getDatasetsFromSearch.forEach((dataset)=>{
+        hts.push({
+          ...dataset,
+          _id: dataset._id.split("_")[2]
+        })
+      })
+      htDatasetsRelated = [...htDatasetsRelated, ...hts]
+    }
+  }
   if (ht) {
     if (DataVerifier.isValidArray(ht.getDatasetsFromSearch)) {
-      htDatasetsRelated = ht.getDatasetsFromSearch;
+      htDatasetsRelated = [...htDatasetsRelated, ...ht.getDatasetsFromSearch]
     }
   }
   if (gu) {
@@ -104,7 +166,7 @@ export default function RelatedTool({ gene, products, regulation }) {
   const navigate = useNavigate();
 
   return (
-    <div className="noPrint">
+    <div id="relatedActive" className="noPrint">
       <Navigation
         operon={operonRelated}
         regulons={regulonRelated}

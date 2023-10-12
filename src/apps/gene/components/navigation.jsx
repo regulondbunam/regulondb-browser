@@ -124,7 +124,7 @@ function HtDatasets({ htDatasets }) {
               Exit
             </Button>
             <p>
-              <b>High Throughput Collection Datasets Found</b>
+              <b>High Throughput Collection Datasets Related</b>
             </p>
           </div>
           <div style={{ height: "40vh", overflow: "auto" }}>
@@ -138,6 +138,10 @@ function HtDatasets({ htDatasets }) {
             </thead>
             <tbody>
               {htDatasets.map((dataset) => {
+                let title = dataset._id
+                if(DataVerifier.isValidObject(dataset.sample)){
+                  title = dataset.sample.title ? dataset.sample.title : dataset._id
+                }
                 return (
                   <tr key={dataset.id}>
                     <td>
@@ -149,11 +153,11 @@ function HtDatasets({ htDatasets }) {
                           dataset._id
                         }
                       >
-                        {dataset.sample.title}
+                        {title}
                       </Link>
                     </td>
                     <td>{dataset.datasetType}</td>
-                    <td>{dataset.sourceSerie.strategy}</td>
+                    <td>{DataVerifier.isValidObject(dataset.sourceSerie) ? dataset.sourceSerie.strategy : ""}</td>
                   </tr>
                 );
               })}
@@ -166,49 +170,3 @@ function HtDatasets({ htDatasets }) {
     </>
   );
 }
-
-/*
-{DataVerifier.isValidArray(operons) && (
-            <>
-
-
-          
-          {DataVerifier.isValidArray(htIds) && (
-            <>
-              {htIds.map((htId) => {
-                if (!htId) {
-                    return null
-                }
-                return(
-                    <ListItemButton
-                  sx={{ pl: 4 }}
-                  onClick={() => {
-                    navigate("/ht/dataset/TFBINDING/datasetId=" + htId);
-                  }}
-                >
-                  <p>HT Dataset [{htId}]</p>
-                </ListItemButton>
-                )
-              })}
-            </>
-          )}
-          {DataVerifier.isValidArray(guIds) && (
-            <>
-              {guIds.map((guId) => {
-                if (!guId) {
-                    return null
-                }
-                return(
-                    <ListItemButton
-                  sx={{ pl: 4 }}
-                  onClick={() => {
-                    navigate("/gu/" + guId);
-                  }}
-                >
-                  <p>Gensor Unit [{guId}]</p>
-                </ListItemButton>
-                )
-              })}
-            </>
-          )}
-*/
