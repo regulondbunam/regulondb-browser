@@ -63,7 +63,7 @@ function Conformation({
   additiveEvidences = [],
   citations = [],
   confidenceLevel = "",
-  effector,
+  effector = [],
   effectorInteractionType = "",
   functionalType = "",
   name = "",

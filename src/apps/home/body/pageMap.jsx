@@ -22,7 +22,7 @@ const mirrorData = {
   links: [
     {
       url: "https://regulondb.liigh.unam.mx",
-      label: "RegulonDB Liigh UNAM",
+      label: "RegulonDB LIIGH UNAM",
     },
     {
       url: "https://testregulondb.ccg.unam.mx/",
