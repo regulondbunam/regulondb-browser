@@ -237,6 +237,7 @@ function SigmulonResult(keyword) {
     loading,
     error,
   } = useGetSigmulonBySearch(keyword);
+  console.log(keyword);
   let results = [];
   let title = type + " (0)";
   if (DataVerifier.isValidArray(data)) {
