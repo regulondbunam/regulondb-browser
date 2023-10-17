@@ -200,7 +200,7 @@ export default function ExperimentalDatasets() {
               "href",
               "data:text/plain;charset=utf-8," + encodeURIComponent(fileInfo)
             );
-            element.setAttribute("download", fileData.fileName);
+            element.setAttribute("download", fileData.fileName+".tsv");
             element.style.display = "none";
             document.body.appendChild(element);
             element.click();

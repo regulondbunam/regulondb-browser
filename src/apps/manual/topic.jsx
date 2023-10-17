@@ -1,8 +1,8 @@
 import { Remarkable } from "remarkable";
 import CircularProgress from "@mui/material/CircularProgress";
-import MarkdownNavbar from 'markdown-navbar';
+import MarkdownNavbar from "markdown-navbar";
 import { useState } from "react";
-import 'markdown-navbar/dist/navbar.css';
+import "markdown-navbar/dist/navbar.css";
 
 const gitUrl = (urlRaw, imgUrl) => {
   return (
@@ -16,22 +16,22 @@ const gitUrl = (urlRaw, imgUrl) => {
 };
 
 function insertAbsoluteUrl(markdown = "", urlRaw) {
-  const reg = /\.\/[^)|"|\s]+/gm
-  const matches = markdown.match(reg)
+  const reg = /\.\/[^)|"|\s]+/gm;
+  const matches = markdown.match(reg);
   if (matches) {
-    matches.forEach(match => {
-      let url = gitUrl(urlRaw,match)
-      markdown = markdown.replace(new RegExp(match,"g"),url)
+    matches.forEach((match) => {
+      let url = gitUrl(urlRaw, match);
+      markdown = markdown.replace(new RegExp(match, "g"), url);
     });
   }
-  return markdown
+  return markdown;
 }
 
 const downloadMD = async (setMarkdown, urlRaw) => {
   try {
     const response = await fetch(urlRaw);
     let markdown = await response.text();
-    markdown = insertAbsoluteUrl(markdown,urlRaw)
+    markdown = insertAbsoluteUrl(markdown, urlRaw);
     setMarkdown(markdown);
   } catch (error) {
     console.error("fetch error", error);
@@ -64,7 +64,7 @@ export default function Topic({ rawUrl, _url, title }) {
       </div>
     );
   }
-  
+
   if (markdown?.error) {
     return (
       <div>
@@ -75,16 +75,28 @@ export default function Topic({ rawUrl, _url, title }) {
   }
 
   return (
-    <div style={{display: "grid", gridTemplateColumns: "150px 100%", marginTop: "20px"}}>
-      <div >
-        <div style={{position: "sticky", top:0, height: "80vh", overflow: 'auto'}}  >
-        <MarkdownNavbar source={markdown} />
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "15% 85%",
+        marginTop: "20px",
+      }}
+    >
+      <div>
+        <div
+          style={{
+            position: "sticky",
+            top: 0,
+            height: "80vh",
+            overflow: "auto",
+          }}
+        >
+          <MarkdownNavbar source={markdown} />
         </div>
       </div>
-     <div>
-     <p dangerouslySetInnerHTML={{ __html: md.render(markdown) }} />
-     </div>
+      <div>
+        <p dangerouslySetInnerHTML={{ __html: md.render(markdown) }} />
+      </div>
     </div>
-    
   );
 }
