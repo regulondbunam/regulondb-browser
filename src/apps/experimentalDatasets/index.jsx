@@ -89,7 +89,6 @@ import BrowserFilter from "./browserFilter";
 import { useLazyGetDataFile } from "../../components/webservices";
 import { gql, useQuery } from "@apollo/client";
 
-
 /**
  * Description placeholder
  *
@@ -100,7 +99,6 @@ const query_GET_AllFilesNames = gql`
     listAllFileNames
   }
 `;
-
 
 /**
  * Description placeholder
@@ -117,7 +115,6 @@ function formatMetaData(str = "") {
   return str.replace("\t", "\n#\t");
 }
 
-
 /**
  * Description placeholder
  *
@@ -125,14 +122,12 @@ function formatMetaData(str = "") {
  * @returns {React.JSX|HTMLElement}
  */
 export default function ExperimentalDatasets() {
-  const {
-    data,
-    loading: loadingFilesNames,
-  } = useQuery(query_GET_AllFilesNames);
+  const { data, loading: loadingFilesNames } = useQuery(
+    query_GET_AllFilesNames
+  );
   const [getFile, { loading: loadingFileData }] = useLazyGetDataFile();
   const { idFile } = useParams();
 
-  
   /**
    * Description placeholder
    *
@@ -145,7 +140,6 @@ export default function ExperimentalDatasets() {
         getFile({
           variables: { fileName: file.name },
           onCompleted: (data) => {
-            
             /**
              * Description placeholder
              *
@@ -153,7 +147,7 @@ export default function ExperimentalDatasets() {
              */
             const fileData = data.getDataOfFile;
             //console.log(fileData);
-            
+
             /**
              * Description placeholder
              *
@@ -188,11 +182,14 @@ export default function ExperimentalDatasets() {
             if (DataVerifier.isValidString(fileData.creationDate)) {
               fileInfo += "#Date: " + fileData.creationDate + "\n";
             }
+            if (DataVerifier.isValidString(fileData.columnsDetails)) {
+              fileInfo += "#"+fileData.columnsDetails.replaceAll("\n","\n#") + "\n";
+            }
             if (DataVerifier.isValidString(fileData.content)) {
               fileInfo += fileData.content;
             }
             //console.log(fileInfo);
-            
+
             /**
              * Description placeholder
              *
@@ -233,17 +230,14 @@ export default function ExperimentalDatasets() {
   }
 
   if (data) {
-
-    
     /**
      * Description placeholder
      *
      * @type {*}
      */
-    let listFilesNames = [...data.listAllFileNames]
+    let listFilesNames = [...data.listAllFileNames];
     listFilesNames.sort();
     if (idFile) {
-      
       /**
        * Description placeholder
        *
@@ -283,8 +277,8 @@ export default function ExperimentalDatasets() {
             </thead>
             <tbody>
               {listFilesNames.map((fileName, i) => {
-                if(/internal/.test(fileName)){
-                  return null
+                if (/internal/.test(fileName)) {
+                  return null;
                 }
                 return (
                   <tr key={"file_" + fileName + "_" + i}>

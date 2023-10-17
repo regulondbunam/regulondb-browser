@@ -39,6 +39,10 @@ const searchLinks = [
     label: "GENSOR Unit",
     link: "/gu",
   },
+  {
+    label: "High Throughput",
+    link: "/ht",
+  },
 ];
 
 export default function Cover() {
