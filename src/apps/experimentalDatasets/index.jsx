@@ -236,7 +236,6 @@ export default function ExperimentalDatasets() {
      * @type {*}
      */
     let listFilesNames = [...data.listAllFileNames];
-    listFilesNames.sort();
     if (idFile) {
       /**
        * Description placeholder
