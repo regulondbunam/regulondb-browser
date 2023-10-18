@@ -94,7 +94,7 @@ export default function Topic({ rawUrl, _url, title }) {
           <MarkdownNavbar source={markdown} />
         </div>
       </div>
-      <div>
+      <div style={{padding: "2%"}} >
         <p dangerouslySetInnerHTML={{ __html: md.render(markdown) }} />
       </div>
     </div>
