@@ -75,6 +75,9 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import Results from './results';
 import CoexpressionResults from "./coexpression";
+import ReactGA from "react-ga4";
+
+ReactGA.initialize(process.env.REACT_APP_GA4_KEY);
 
 
 
@@ -86,6 +89,15 @@ import CoexpressionResults from "./coexpression";
  */
 function Search() {
     let { keyword } = useParams()
+
+    ReactGA.event({
+        category: "searchTool",
+        action: "search keyword",
+        label: keyword, // optional
+        value: 99, // optional, must be a number
+        nonInteraction: true, // optional, true/false
+        transport: "xhr", // optional, beacon/xhr/image
+      });
     
     if(/coexpression/.test(keyword)){
         return <CoexpressionResults keyword={keyword} />
