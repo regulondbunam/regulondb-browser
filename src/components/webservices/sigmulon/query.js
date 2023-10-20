@@ -27,7 +27,6 @@ export const fragment_PAGINATION = gql`fragment PAGINATION on Pagination {
   }`
 
   export const query_getSigmulonBySearch = gql`
-  ${fragment_CITATIONS}
   ${fragment_PAGINATION}
   query getSigmulon($search: String){
       getSigmulonBy(search:$search){

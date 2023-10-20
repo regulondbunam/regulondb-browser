@@ -100,12 +100,12 @@ function Summary(params) {
           )}
           {statistics.operon?.total && (
               <p>
-                <b>{statistics.operon.total}{" "}</b>Operon
+                <b>{statistics.operon.total}{" "}</b>Operons
               </p>
             )}
           {statistics.regulons?.total && (
               <p>
-                <b>{statistics.regulons.total}</b>{" "}Regulon
+                <b>{statistics.regulons.total}</b>{" "}Regulons
               </p>
             )}
           {statistics.transcriptionUnits?.total && (

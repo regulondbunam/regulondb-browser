@@ -25,6 +25,7 @@ import AboutUs from './apps/aboutUs';
 import { EmbeddedSandbox } from './apps/wsSandbox';
 import Manual from './apps/manual';
 import ExperimentalDatasets from './apps/experimentalDatasets';
+import MCO from './apps/mco';
 
 //wsSandbox
 const router = createBrowserRouter([
@@ -45,10 +46,10 @@ const router = createBrowserRouter([
         element: <EmbeddedSandbox />,
       },
       {
-        path: "aboutUs",
-        element: <AboutUs />,
+        path: "mco",
+        element: <MCO />,
         children: [
-          { path: ":section" }
+          { path: ":tree" }
         ],
       },
       {

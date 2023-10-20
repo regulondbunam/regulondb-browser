@@ -5,7 +5,7 @@
     "icon": "handyman",
     "options": [
         {
-            "id": "subMenuBrosing",
+            "id": "subMenuTool",
             "title": "RegulonDB Tools",
             "link": "/tools",
             "type": "SUBMENU",
@@ -37,7 +37,21 @@
             ]
         },
         {
-            "id": "subMenuBrosing",
+            "id": "subMenuBrowser",
+            "title": "Browser",
+            "link": "/browser",
+            "type": "SUBMENU",
+            "options": [
+                {
+                    "id": "mco_explorer",
+                    "title": "Microbial Conditions Ontology (MCO) Browser",
+                    "state": "enabled",
+                    "link" : "/mco"
+                }
+            ]
+        },
+        {
+            "id": "subMenuHTBuilder",
             "title": "High Throughput Query Builder",
             "link": "/ht",
             "type": "SUBMENU",

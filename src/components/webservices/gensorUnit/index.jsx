@@ -25,7 +25,7 @@ export function useGetAllGus() {
 export function useGetGuBySearch(keyword) {
     const { data, loading, error } = useQuery(query_getGuBySearch,{variables:{search: keyword}})
     let gusData = []
-    console.log(data);
+    //console.log(data);
     try {
         if (data) {
             if(DataVerifier.isValidArray(data.getGUsBy.data)){

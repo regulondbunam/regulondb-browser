@@ -30,7 +30,7 @@ export default function Footer() {
         <>
               <Link
                 
-                to="/aboutUs/terms_and_conditions"
+                to="/manual/aboutUs/terms-conditions"
                 style={{ paddingLeft: "10px" }}
               >
                 <p className={Style.link} >
@@ -39,7 +39,7 @@ export default function Footer() {
                
               </Link>
               <Link
-                to="/aboutUs/funding"
+                to="/manual/aboutUs/funding"
                 style={{ paddingLeft: "10px" }}
               >
                 <p className={Style.link}>

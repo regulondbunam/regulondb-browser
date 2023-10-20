@@ -89,7 +89,7 @@ function formatDataByGensorUnit(gusData = []) {
       }
       data.push({
         id: gu._id,
-        _name: gu.name,
+        _name: gu.name+" ",
         groups: gu.groups,
         _groups: groups,
       });
