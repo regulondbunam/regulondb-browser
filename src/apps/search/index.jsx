@@ -77,7 +77,7 @@ import Results from './results';
 import CoexpressionResults from "./coexpression";
 import ReactGA from "react-ga4";
 
-ReactGA.initialize(process.env.REACT_APP_GA4_KEY);
+ReactGA.initialize("G-DR1DFRPFLP");
 
 
 

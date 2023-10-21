@@ -36,7 +36,7 @@ const Layout = () => {
     setOpen(false);
   };
 
-  console.log(cookiePolicy,  (cookiePolicy !== "true" || cookiePolicy !== "false"));
+  //console.log(cookiePolicy,  (cookiePolicy !== "true" || cookiePolicy !== "false"));
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>

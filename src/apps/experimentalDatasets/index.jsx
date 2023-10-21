@@ -88,6 +88,7 @@ import { Link, useParams } from "react-router-dom";
 import BrowserFilter from "./browserFilter";
 import { useLazyGetDataFile } from "../../components/webservices";
 import { gql, useQuery } from "@apollo/client";
+import LoadingButton from '@mui/lab/LoadingButton';
 
 /**
  * Description placeholder
@@ -134,85 +135,57 @@ export default function ExperimentalDatasets() {
    * @param {*} file
    */
   const handleDownload = (file) => {
-    //console.log(file);
     switch (file.path.type) {
       case "graphQLservice":
         getFile({
           variables: { fileName: file.name },
           onCompleted: (data) => {
-            /**
-             * Description placeholder
-             *
-             * @type {*}
-             */
+            console.log(data);
             const fileData = data.getDataOfFile;
-            //console.log(fileData);
-
-            /**
-             * Description placeholder
-             *
-             * @type {string}
-             */
             let fileInfo = "";
             if (DataVerifier.isValidString(fileData.license)) {
-              fileInfo +=
-                "# Copies and Copyright-Notice \n#\t" +
-                formatMetaData(fileData.license) +
-                "\n#\n";
+              fileInfo += "# License\n#\t" +fileData.license + "\n"
             }
             if (DataVerifier.isValidString(fileData.citation)) {
-              fileInfo +=
-                "# Citation\n#\t" + formatMetaData(fileData.citation) + "\n";
+              fileInfo += "# Citation\n#\t" + fileData.citation + "\n";
             }
             if (DataVerifier.isValidObject(fileData.contact)) {
               fileInfo += `# Contact\n${
-                DataVerifier.isValidString(fileData.personName)
-                  ? "#\tperson:" + fileData.personName + "\n"
+                DataVerifier.isValidString(fileData.contact.personName)
+                  ? "#\tperson:" + fileData.contact.personName + "\n"
                   : ""
               }${
-                DataVerifier.isValidString(fileData.email)
-                  ? "#\temail:" + fileData.email + "\n"
+                DataVerifier.isValidString(fileData.contact.email)
+                  ? "#\temail:" + fileData.contact.email + "\n"
                   : ""
               }${
-                DataVerifier.isValidString(fileData.webPage)
-                  ? "#\twebPage:" + fileData.webPage + "\n"
+                DataVerifier.isValidString(fileData.contact.webPage)
+                  ? "#\twebPage:" + fileData.contact.webPage + "\n"
                   : ""
               }`;
             }
             if (DataVerifier.isValidString(fileData.creationDate)) {
-              fileInfo += "#Date: " + fileData.creationDate + "\n";
+              fileInfo += "#Date:\n#\t" +fileData.creationDate + "\n";
             }
             if (DataVerifier.isValidString(fileData.columnsDetails)) {
-              fileInfo += "#"+fileData.columnsDetails.replaceAll("\n","\n#") + "\n";
+              fileInfo +=
+                "#" + fileData.columnsDetails.replaceAll("\n", "\n#") + "\n";
             }
             if (DataVerifier.isValidString(fileData.content)) {
               fileInfo += fileData.content;
             }
+            const blob = new Blob([fileInfo], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileData.fileName + ".tsv"
+            a.click();
+            window.URL.revokeObjectURL(url);
+            a.remove()
             //console.log(fileInfo);
-
-            /**
-             * Description placeholder
-             *
-             * @type {HTMLElement}
-             */
-            const element = document.createElement("a");
-            element.setAttribute(
-              "href",
-              "data:text/plain;charset=utf-8," + encodeURIComponent(fileInfo)
-            );
-            element.setAttribute("download", fileData.fileName+".tsv");
-            element.style.display = "none";
-            document.body.appendChild(element);
-            element.click();
-            document.body.removeChild(element);
-            element.remove();
-          },
-          onError: (error) => {
-            console.log(error);
           },
         });
         break;
-
       default:
         break;
     }
@@ -284,8 +257,8 @@ export default function ExperimentalDatasets() {
                     <td>{fileName}</td>
                     <td>
                       <Tooltip title="Download File">
-                        <Button
-                          disabled={loadingFileData}
+                        <LoadingButton
+                          loading={loadingFileData}
                           onClick={() => {
                             handleDownload({
                               id: fileName,
@@ -302,7 +275,7 @@ export default function ExperimentalDatasets() {
                           variant="outlined"
                         >
                           <DownloadIcon />
-                        </Button>
+                        </LoadingButton>
                       </Tooltip>
                     </td>
                     <td>
