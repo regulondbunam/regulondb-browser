@@ -140,7 +140,7 @@ export default function ExperimentalDatasets() {
         getFile({
           variables: { fileName: file.name },
           onCompleted: (data) => {
-            console.log(data);
+            //console.log(data);
             const fileData = data.getDataOfFile;
             let fileInfo = "";
             if (DataVerifier.isValidString(fileData.license)) {
