@@ -102,25 +102,25 @@ function HtCard({ collection, index }) {
                   style={{ marginRight: "10px" }}
                   to={`${window.IN_URL.dataset}${datasetType}/experimentType=ChIP-seq`}
                 >
-                  <Button>ChIP-seq</Button>
+                  <Button sx={{textTransform: "inherit"}} >ChIP-seq</Button>
                 </Link>
                 <Link
                   style={{ marginRight: "10px" }}
                   to={`${window.IN_URL.dataset}${datasetType}/experimentType=ChIP-exo`}
                 >
-                  <Button>ChIP-exo</Button>
+                  <Button sx={{textTransform: "inherit"}} >ChIP-exo</Button>
                 </Link>
                 <Link
                   style={{ marginRight: "10px" }}
                   to={`${window.IN_URL.dataset}${datasetType}/experimentType=gSELEX-chip`}
                 >
-                  <Button>gSELEX-chip</Button>
+                  <Button sx={{textTransform: "inherit"}} >gSELEX-chip</Button>
                 </Link>
                 <Link
                   style={{ marginRight: "10px" }}
                   to={`${window.IN_URL.dataset}${datasetType}/experimentType=DAP`}
                 >
-                  <Button>gSELEX-chip</Button>
+                  <Button sx={{textTransform: "inherit"}} >DAP</Button>
                 </Link>
               </div>
             )}
