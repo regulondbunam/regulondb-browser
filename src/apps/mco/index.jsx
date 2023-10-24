@@ -1,11 +1,10 @@
 import { useMemo, useState } from "react";
-import { Cover } from "../../components/ui-components";
+import { Cover, DataVerifier } from "../../components/ui-components";
 import formatMCOData from "./formatMCOdata";
 import "react-complex-tree/lib/style-modern.css";
 import {
-  UncontrolledTreeEnvironment,
-  Tree,
-  StaticTreeDataProvider,
+  ControlledTreeEnvironment,
+  Tree
 } from "react-complex-tree";
 import TERMS from "./terms_v2.json";
 import Term from "./term";
@@ -25,37 +24,54 @@ export default function MCO(params) {
 }
 
 function TreeMCO({ terms }) {
-  const [term, setTerm] = useState()
+  const [focusedItem, setFocusedItem] = useState("RDBONTOLMCO00012");
+  const [expandedItems, setExpandedItems] = useState(['RDBONTOLMCO00002', 'RDBONTOLMCO00007', 'RDBONTOLMCO00011']);
+  const [selectedItems, setSelectedItems] = useState(['RDBONTOLMCO00012']);
   const items = useMemo(() => {
     return formatMCOData(terms);
   }, [terms]);
-  //console.log(term);
+  let term
+  if(DataVerifier.isValidObject(items[focusedItem])){
+    term = items[focusedItem].term
+  }
+  //console.log(selectedItems);
   return (
-    <div style={{display:"grid", gridTemplateColumns: "30% 70%"}} >
-      <div style={{overflow: "auto"}} >
-        <UncontrolledTreeEnvironment
-          dataProvider={
-            new StaticTreeDataProvider(items, (item, data) => ({
-              ...item,
-              data,
-            }))
-          }
+    <div style={{ display: "grid", gridTemplateColumns: "30% 70%" }}>
+      <div style={{ overflow: "auto" }}>
+        <ControlledTreeEnvironment
+          items={items}
           getItemTitle={(item) => item.data}
-          viewState={{}}
-          onFocusItem={(item,treeId)=>{
-            console.log(treeId)
-            setTerm(item.term)
+          viewState={{
+            "tree-1": {
+              focusedItem,
+              expandedItems,
+              selectedItems,
+            },
           }}
+          onFocusItem={(item) => setFocusedItem(item.index)}
+          onExpandItem={(item) =>
+            setExpandedItems([...expandedItems, item.index])
+          }
+          onCollapseItem={(item) =>
+            setExpandedItems(
+              expandedItems.filter(
+                (expandedItemIndex) => expandedItemIndex !== item.index
+              )
+            )
+          }
+          onSelectItems={(items) => setSelectedItems(items)}
         >
           <Tree treeId="tree-1" rootItem="root" treeLabel="Tree Example" />
-        </UncontrolledTreeEnvironment>
+        </ControlledTreeEnvironment>
       </div>
-      <div style={{
-            position: "sticky",
-            top: 0,
-            height: "80vh",
-            overflow: "auto",
-          }}>
+      <div
+        style={{
+          position: "sticky",
+          top: 0,
+          height: "80vh",
+          overflow: "auto",
+        }}
+      >
         <Term {...term} />
       </div>
     </div>

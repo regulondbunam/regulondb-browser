@@ -23,6 +23,7 @@
         "operons",
         "pmid",
         "ppgpp",
+        "PSSMs",
         "regulon",
         "Regulon",
         "REGULON",
@@ -32,6 +33,7 @@
         "sigmulon",
         "srna",
         "TFBINDING",
+        "TFPSSMs",
         "trascriptional",
         "unam",
         "webservices"

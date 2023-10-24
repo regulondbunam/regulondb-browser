@@ -21,11 +21,11 @@ import Overviews from './apps/overviews'
 import SummaryHistory from './apps/summaryHistory'
 import ReleaseNotes from './apps/releasesNotes';
 import GensorUnit from "./apps/gensorUnit"
-import AboutUs from './apps/aboutUs';
 import { EmbeddedSandbox } from './apps/wsSandbox';
 import Manual from './apps/manual';
 import ExperimentalDatasets from './apps/experimentalDatasets';
 import MCO from './apps/mco';
+import TFPSSMs, {TFPSSMsTest} from './apps/TF-PSSMs';
 
 //wsSandbox
 const router = createBrowserRouter([
@@ -44,6 +44,14 @@ const router = createBrowserRouter([
       {
         path: "wsSandbox",
         element: <EmbeddedSandbox />,
+      },
+      {
+        path: "TF-PSSMs",
+        element: <TFPSSMs />,
+      },
+      {
+        path: "TF-PSSMsTest",
+        element: <TFPSSMsTest />,
       },
       {
         path: "mco",
