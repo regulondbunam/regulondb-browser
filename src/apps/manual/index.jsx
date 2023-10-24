@@ -170,10 +170,13 @@ const downloadConf = async (setRawConf) => {
 export default function Manual() {
   const { site, section } = useParams();
   const [rawConf, setRawConf] = useState();
-
+  //console.log(section);
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [site, section]);
+    return ()=>{
+      setRawConf(undefined)
+    }
+  }, [site,section]);
 
   if (!rawConf) {
     downloadConf(setRawConf);
