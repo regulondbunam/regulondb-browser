@@ -1,6 +1,6 @@
 {
   "name": "regulondb_browser",
-  "version": "0.9.8",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.6.4",
