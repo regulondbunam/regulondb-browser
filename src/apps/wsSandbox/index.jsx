@@ -88,7 +88,7 @@ export function EmbeddedSandbox() {
      */
     const host = window.location.hostname
     if (host==="localhost") {
-        url = process.env.REACT_APP_WEB_SERVICE_URL
+        url = "https://regulondb.ccg.unam.mx/graphql"
     }else{
         url=host+"/graphql"
     }
