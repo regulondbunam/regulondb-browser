@@ -51,7 +51,7 @@
                 {
                     "id":"RegulonDB_Glossary",
                     "title":"RegulonDB Glossary",
-                    "state":"enabled",
+                    "state":"disabled",
                     "link":"/manual/help/glossary"
                 },
                 {

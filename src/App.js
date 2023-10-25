@@ -33,14 +33,14 @@ const router = createBrowserRouter([
     path: "/",
     element: <Layout />,
     children: [
-      {
-        path: "*",
-        element: <>site no found</>
-      },
-      {
-        index: true,
-        element: <Home />,
-      },
+        {
+          path: "*",
+          element: <>site no found</>
+        },
+        {
+          index: true,
+          element: <Home />,
+        },
       {
         path: "wsSandbox",
         element: <EmbeddedSandbox />,
