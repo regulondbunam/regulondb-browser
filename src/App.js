@@ -46,11 +46,11 @@ const router = createBrowserRouter([
         element: <EmbeddedSandbox />,
       },
       {
-        path: "TF-PSSMs",
+        path: "TF-PSSMsTest",
         element: <TFPSSMsTest />,
       },
       {
-        path: "TF-PSSMsTest",
+        path: "TF-PSSMs",
         element: <TFPSSMs />,
       },
       {
