@@ -11,6 +11,8 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import ArticleIcon from "@mui/icons-material/Article";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
+//import IconButton from '@mui/material/IconButton';
+//import DownloadIcon from '@mui/icons-material/Download';
 import "./pss.css"
 
 //metadata/meme/
@@ -80,7 +82,7 @@ export default function TFPSSMs() {
           {document ? (
             <div className="documentContainer">
               <iframe
-                style={{ width: "100%", height: "100%" }}
+                style={{ width: "100%", height: "100%", backgroundColor: "white" }}
                 src={process.env.REACT_APP_PROSSES_SERVICE+document.url}
                 title="TF PSSMs Browser"
               />
@@ -195,6 +197,7 @@ function CollectionList({ collection, setDocument, document }) {
                     setDocument({...TF, url: url});
                   }}
                   selected={document?.url === url}
+                  
                 >
                   <ListItemIcon>
                     <ArticleIcon />
