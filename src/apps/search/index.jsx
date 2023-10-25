@@ -77,7 +77,7 @@ import Results from './results';
 import CoexpressionResults from "./coexpression";
 import ReactGA from "react-ga4";
 
-ReactGA.initialize("G-DR1DFRPFLP");
+ReactGA.initialize("G-0ZFSS5E5YD");
 
 
 
