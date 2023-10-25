@@ -10,7 +10,7 @@ const COLUMNS = [
     header: "Gene Name",
     accessorKey: "_geneName",
     cell: (info) => (
-      <Link to={"/gene/" + info.row.original.geneId}>
+      <Link to={"/gene/" + info.row.original.id}>
         <p dangerouslySetInnerHTML={{ __html: info.getValue() }} />
       </Link>
     ),
@@ -78,7 +78,7 @@ function formatData(geneData = []) {
       }
 
       data.push({
-        id: gene._id,
+        id: gene.gene._id,
         _geneName: gene.gene.name,
         _products: products,
         operonId: operon._id,

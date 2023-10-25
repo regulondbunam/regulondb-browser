@@ -113,6 +113,8 @@ function formatData(rankings, genesData) {
       }
 
       data.push({
+        id: geneData.gene._id,
+        geneId: geneData.gene._id,
         _rank: rank.rank.toFixed(2),
         _locusTag: rank.gene[0].locusTag,
         _geneName: geneData.gene.name,

@@ -25,7 +25,7 @@ const mirrorData = {
       label: "RegulonDB LIIGH UNAM",
     },
     {
-      url: "https://testregulondb.ccg.unam.mx/",
+      url: "https://regulondb.ccg.unam.mx/",
       label: "RegulonDB CCG UNAM",
     },
     {
