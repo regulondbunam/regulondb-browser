@@ -27,7 +27,7 @@ export function TFPSSMsTest() {
           <h1>TF PSSMs Browser</h1>
         </Cover>
         <div>
-        <iframe src={process.env.REACT_APP_PROSSES_SERVICE+"/metadata/meme"} title="TF PSSMs Browser"/>
+        <iframe style={{width:"100%", height: "80vh"}} src={process.env.REACT_APP_PROSSES_SERVICE+"/meme/"} title="TF PSSMs Browser"/>
         </div>
       </div>
     );

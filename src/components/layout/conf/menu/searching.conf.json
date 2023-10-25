@@ -114,7 +114,6 @@
           "id": "api-ws2",
           "title":  "Web services in ApolloSandbox",
           "link" : "/wsSandbox",
-          "type": "sandbox",
           "state": "enabled"
         }
       ]

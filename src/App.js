@@ -47,11 +47,11 @@ const router = createBrowserRouter([
       },
       {
         path: "TF-PSSMs",
-        element: <TFPSSMs />,
+        element: <TFPSSMsTest />,
       },
       {
         path: "TF-PSSMsTest",
-        element: <TFPSSMsTest />,
+        element: <TFPSSMs />,
       },
       {
         path: "mco",

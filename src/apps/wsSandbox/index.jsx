@@ -94,8 +94,11 @@ export function EmbeddedSandbox() {
     }
 
   return (
-        <ApolloSandbox
+    <div style={{width: "100%", height: "100vh", display: "grid"}} >
+      <ApolloSandbox
       initialEndpoint={url}
     />
+    </div>
+        
   );
 }

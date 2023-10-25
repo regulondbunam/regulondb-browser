@@ -40,7 +40,7 @@
                     "id": "pssms05",
                     "title": "TF PSSMs Browser",
                     "link": "/TF-PSSMs",
-                    "state": "disabled"
+                    "state": "enabled"
                 }
             ]
         }
