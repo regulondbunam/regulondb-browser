@@ -90,7 +90,7 @@ export function EmbeddedSandbox() {
     if (host==="localhost") {
         url = "https://regulondb.ccg.unam.mx/graphql"
     }else{
-        url=host+"/graphql"
+        url="https://regulondb.ccg.unam.mx/graphql"
     }
 
   return (
