@@ -77,24 +77,6 @@
           "title": "Microbial Condition Ontology",
           "state": "disabled",
           "link" : "/mco"
-        },
-        {
-          "id": "tf-Matrix-browsing",
-          "title": "Transcription Factor",
-          "state": "disabled",
-          "link" : "/tf"
-        },
-        {
-          "id": "tf-Matrix-browsing-family",
-          "title": "Transcription Factor Family",
-          "state": "disabled",
-          "link" : "/tf/family"
-        },
-        {
-          "id": "tf-Matrix-browsing-mtrix",
-          "title": "TF-Matrix",
-          "state": "disabled",
-          "link" : "/tf/matrix"
         }
       ]
     },

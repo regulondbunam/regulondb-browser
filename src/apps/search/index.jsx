@@ -90,19 +90,22 @@ ReactGA.initialize("G-0ZFSS5E5YD");
 function Search() {
     let { keyword } = useParams()
 
-    ReactGA.event({
-        category: "searchTool",
-        action: "search keyword",
-        label: keyword, // optional
-        value: 99, // optional, must be a number
-        nonInteraction: true, // optional, true/false
-        transport: "xhr", // optional, beacon/xhr/image
-      });
-    
-    if(/coexpression/.test(keyword)){
-        return <CoexpressionResults keyword={keyword} />
+    if(keyword){
+        ReactGA.event({
+            category: "searchTool",
+            action: "search keyword",
+            label: keyword, // optional
+            value: 99, // optional, must be a number
+            nonInteraction: true, // optional, true/false
+            transport: "xhr", // optional, beacon/xhr/image
+          });
+        
+        if(/coexpression/.test(keyword)){
+            return <CoexpressionResults keyword={keyword} />
+        }
+        return <Results keyword={keyword} />
     }
-    return <Results keyword={keyword} />
+    return <Results keyword={""} />
 }
 
 export default Search;

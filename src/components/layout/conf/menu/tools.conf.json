@@ -15,24 +15,6 @@
                     "title": "Drawing Traces Tool",
                     "state": "enabled",
                     "link" : "/dtt"
-                },
-                {
-                    "id": "tracks-browsing",
-                    "title": "Tracks (Gbrowser)",
-                    "state": "disabled",
-                    "link" : "/gbrowser"
-                },
-                {
-                    "id": "tps-browsing",
-                    "title": "TextPreso Search",
-                    "state": "disabled",
-                    "link" : "/textpreso"
-                },
-                {
-                    "id": "pwms-browsing",
-                    "title": "Clustering for PWMs",
-                    "state": "disabled",
-                    "link": "/clustering_pwms"
                 }
             ]
         },
