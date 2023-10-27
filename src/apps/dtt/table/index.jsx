@@ -1,9 +1,5 @@
-import Paper from "@mui/material/Paper";
-import IconButton from "@mui/material/IconButton";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import DataTable from "./dataTable";
-import { useState, useMemo } from "react";
+import {  useMemo } from "react";
 import { Accordion } from "../../../components/ui-components";
 
 function Table({geneticElements,height = "100px"}) {

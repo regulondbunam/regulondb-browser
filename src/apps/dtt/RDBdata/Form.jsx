@@ -1,21 +1,14 @@
 import React, { useState } from "react";
 import { Accordion, DataVerifier } from "../../../components/ui-components";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import FormHelperText from "@mui/material/FormHelperText";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
 import Select from "@mui/material/Select";
 import MenuList from "@mui/material/MenuList";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import ForwardIcon from "@mui/icons-material/Forward";
 import Tooltip from "@mui/material/Tooltip";
@@ -28,7 +21,6 @@ import {
   secureRange,
   STATE_FORM,
   FORM_ACTIONS,
-  MAX_RANGE,
   STRAND,
   GE_DEFs,
 } from "./definitions";
@@ -67,6 +59,12 @@ export default function Form({ state = { ...STATE_FORM }, dispatch }) {
     let geElements = [...state.objectType];
     geElements[index] = { ...element, isCheck: !element.isCheck };
     dispatch({ type: FORM_ACTIONS.setGeneticsElements, value: geElements });
+    if(state.draw){
+      dispatch({type: FORM_ACTIONS.refresh})
+      setTimeout(() => {
+        dispatch({type: FORM_ACTIONS.draw})
+      }, 200);
+    }
   };
 
   return (

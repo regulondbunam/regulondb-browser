@@ -21,7 +21,7 @@ const GE_DEFs = [
     isCheck: true,
   },
   {
-    key: "tf binding site",
+    key: "tf_binding_site",
     label: "TF Binding Site",
     isCheck: true,
   },
@@ -74,6 +74,7 @@ const FORM_ACTIONS = {
   draw: 5,
   clean: 6,
   demo: 7,
+  refresh: 8,
 };
 
 export {

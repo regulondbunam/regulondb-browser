@@ -18,7 +18,7 @@ function DrawTrace({
       objectType.push(ge.key)
     }
   });
-  console.log(objectType);
+  //console.log(objectType);
   return (
     <div>
       <div>{load && <LinearProgress />}</div>

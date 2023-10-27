@@ -3,7 +3,7 @@ import Tabs from "./tabs";
 import RDBdata from './RDBdata';
 import { useParams } from "react-router-dom";
 import { Cover } from '../../components/ui-components'
-
+import { secureRange } from './RDBdata/definitions';
 /**
  * Description placeholder
  *
@@ -14,32 +14,26 @@ const tabsInfo = [
   //{ id: "2", name: "User Data", disabled: false },
 ];
 
-const geneticElements = [
-  "gene",
-  "promoter",
-  "operon",
-  "tf binding site",
-  "rna",
-  "riboswitch",
-  "transnational_attenuator",
-  "transcriptional_attenuator",
-  "ppGpp",
-];
-
 export default function DrawingTracesInterface({ params, embed = false }) {
   let{ parameters} = useParams()
+  
   let dataForm = undefined;
   if(parameters){
-    parameters = new URLSearchParams();
+    parameters = new URLSearchParams(parameters);
+
     if (parameters.get("leftEndPosition") && parameters.get("leftEndPosition")) {
       try{
         dataForm = {
           covered: false,
           leftEndPosition: parseInt(parameters.get("leftEndPosition")),
-          objectType: geneticElements,
           rightEndPosition: parseInt(parameters.get("rightEndPosition")),
           strand: "both",
+          draw:true
         };
+        if (!secureRange(dataForm.leftEndPosition,dataForm.rightEndPosition)) {
+          alert("Incorrect positions, please check that the left position is smaller than the right position and that the difference is less than 100,000bp.")
+          dataForm = {}
+        }
       }catch{
         console.error("left or right position invalid");
       }
@@ -49,7 +43,7 @@ export default function DrawingTracesInterface({ params, embed = false }) {
 
   const tabs = [
     <div id="1">
-      <RDBdata />
+      <RDBdata dataForm={dataForm} />
     </div>,
     <div id="2">
       userData

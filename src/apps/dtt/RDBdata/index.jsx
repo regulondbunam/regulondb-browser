@@ -1,9 +1,8 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer } from "react";
 import Form from "./Form";
 import "./form.css";
 import { STRAND, RANGE, GE_DEFs, FORM_ACTIONS } from "./definitions";
 import DrawTrace from "./drawTrace";
-import Table from "../table";
 
 const initForm = {
   leftEndPosition: 0,
@@ -28,15 +27,17 @@ function reducer(state, action) {
       return (state = { ...state, objectType: action.value });
     case FORM_ACTIONS.draw:
       return (state = { ...state, draw: true });
+    case FORM_ACTIONS.refresh:
+      return (state = { ...state, draw: false });
     case FORM_ACTIONS.clean:
-        return {
-            leftEndPosition: 0,
-            rightEndPosition: 0,
-            strand: STRAND.both,
-            covered: false,
-            objectType: [...GE_DEFs],
-            draw: false,
-          };
+      return {
+        leftEndPosition: 0,
+        rightEndPosition: 0,
+        strand: STRAND.both,
+        covered: false,
+        objectType: [...GE_DEFs],
+        draw: false,
+      };
     case FORM_ACTIONS.demo:
       let posL = 1;
       let posR = 0;
@@ -58,16 +59,13 @@ function reducer(state, action) {
 }
 
 export default function RDBdata({ dataForm }) {
-  const [state, dispatch] = useReducer(reducer, initForm);
-  
-  console.log(state);
+  const [state, dispatch] = useReducer(reducer, { ...initForm, ...dataForm });
+
+  //console.log(state);
   return (
     <div>
       <Form state={state} dispatch={dispatch} initForm={initForm} />
-      {state.draw && (
-        <DrawTrace state={state}  />
-      )}
-      
+      {state.draw && <DrawTrace state={state} />}
     </div>
   );
 }

@@ -67,7 +67,7 @@ class DrawingTracesTool extends Component {
   }
 
   render() {
-    console.log(this.props)
+    //console.log(this.props)
     const { currentLeftEndPosition, currentRightEndPosition, geneticElements } =
       this.state;
     return (
