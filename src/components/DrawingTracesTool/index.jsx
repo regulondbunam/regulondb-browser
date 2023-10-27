@@ -67,6 +67,7 @@ class DrawingTracesTool extends Component {
   }
 
   render() {
+    console.log(this.props)
     const { currentLeftEndPosition, currentRightEndPosition, geneticElements } =
       this.state;
     return (
@@ -77,6 +78,9 @@ class DrawingTracesTool extends Component {
             variables={{
               leftEndPosition: currentLeftEndPosition,
               rightEndPosition: currentRightEndPosition,
+              covered: this.props.covered,
+              objectType: this.props.objectType,
+              strand: this.props.strand
             }}
             getData={(data) => {
               this.props.getGeneticElements(data.GE)

@@ -33,3 +33,9 @@
     background-color: #dfdfdf;
     color: #0037ff;
 }
+
+.genomePositionSelect{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

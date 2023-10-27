@@ -4,9 +4,9 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import DataTable from "./dataTable";
 import { useState, useMemo } from "react";
+import { Accordion } from "../../../components/ui-components";
 
 function Table({geneticElements,height = "100px"}) {
-    const [_show, set_show] = useState(true);
 
     const jsonTable = useMemo(()=>{
       const columns = [
@@ -60,25 +60,9 @@ function Table({geneticElements,height = "100px"}) {
 
     //console.log(jsonTable)
     return ( 
-        <div id="rdb_table_GE" >
-        <div className="rdb_form_title">
-          <IconButton
-            sx={{ width: "10px", height: "10px" }}
-            aria-label="view"
-            onClick={() => {
-              set_show(!_show);
-            }}
-          >
-            {_show ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-          <h3>Genetic elements data table</h3>
-        </div>
-        {_show && (
-          <Paper elevation={3} sx={{ padding: "5px", height: height }}>
-            <DataTable columns={jsonTable.columns} rows={jsonTable.rows} />
-            </Paper>
-        )}
-        </div>
+        <Accordion title={"Genetic elements data table"} >
+          <DataTable columns={jsonTable.columns} rows={jsonTable.rows} />
+        </Accordion>
      );
 }
 
