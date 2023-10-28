@@ -15,8 +15,8 @@ export default function Information({ geneData }) {
   const citations = useIndexedCitation(geneData.allCitations);
   let relationTool = null;
   let dtt = null;
-
-  if (geneData.gene.leftEndPosition) {
+  console.log(geneData.gene);
+  if (geneData.gene.leftEndPosition || DataVerifier.isValidArray(geneData.gene.fragments) ) {
     relationTool = <RelatedTool {...geneData} />;
     dtt = (
       <DrawingTracesTool
