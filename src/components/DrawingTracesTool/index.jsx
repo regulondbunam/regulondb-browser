@@ -171,7 +171,8 @@ DrawingTracesTool.defaultProps = {
   controls: true,
   height: 200,
   getStatus: ()=>{},
-  labelTitle: ""
+  labelTitle: "",
+  strand: "both"
 } 
 
 DrawingTracesTool.propTypes = {
