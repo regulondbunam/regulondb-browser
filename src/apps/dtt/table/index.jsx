@@ -56,7 +56,7 @@ function Table({geneticElements,height = "100px"}) {
 
     //console.log(jsonTable)
     return ( 
-        <Accordion title={"Genetic elements data table"} >
+        <Accordion title={<p><b>Genetic elements annotated in RegulonDB</b></p>} >
           <DataTable columns={jsonTable.columns} rows={jsonTable.rows} />
         </Accordion>
      );

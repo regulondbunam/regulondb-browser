@@ -46,35 +46,7 @@ const query_GetDataBaseStatistics = gql`
   }
 `;
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
-
-export default function InfoApp() {
-  return (
-    <Grid container>
-      <Grid item xs={12}>
-        <Grid container spacing={1}>
-          <Grid item xs={6}>
-            <Item>
-              <ReleaseInfo />
-            </Item>
-          </Grid>
-          <Grid item xs={6}>
-            <Item><Summary/></Item>
-          </Grid>
-        </Grid>
-      </Grid>
-      <Grid item xs={12}></Grid>
-    </Grid>
-  );
-}
-
-function Summary(params) {
+export function Summary(params) {
   const { data, loading, error } = useQuery(query_GetDataBaseStatistics);
   if (error) {
     return null;
@@ -125,7 +97,7 @@ function Summary(params) {
   return null;
 }
 
-function ReleaseInfo() {
+export function ReleaseInfo() {
   const { data, loading, error } = useQuery(query_GetDataBaseInfo);
   if (error) {
     return null;

@@ -1,0 +1,8 @@
+{
+    "id": "homeItemMenu",
+    "icon": "home",
+    "label": "Home",
+    "link": "/",
+    "options": [],
+    "type": "HOME"
+}

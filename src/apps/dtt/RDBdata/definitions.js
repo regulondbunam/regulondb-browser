@@ -1,6 +1,6 @@
 const MAX_RANGE = 4_639_676;
 const RANGE = { min: 1, max: MAX_RANGE };
-const SECURE_RANGE = 100_000;
+const SECURE_RANGE = 250_000;
 const secureRange = (leftEndPosition, rightEndPosition) => {
   return (rightEndPosition - leftEndPosition < SECURE_RANGE) && (leftEndPosition < rightEndPosition);
 };
@@ -77,6 +77,8 @@ const FORM_ACTIONS = {
   refresh: 8,
 };
 
+const HELP = `This graphical tool allows you to visualize the genetic regulatory elements. `
+
 export {
   SECURE_RANGE,
   secureRange,
@@ -86,4 +88,21 @@ export {
   GE_DEFs,
   STATE_FORM,
   FORM_ACTIONS,
+  HELP
 };
+
+/*
+
+ 
+
+1. Set the interval: Specify the genomic range you want to visualize. Easily input the start and end positions, and the tool will generate a graph corresponding to that specific region.
+
+ 
+
+2. Choose the elements: Select the genetic elements you wish to display, including genes, promoters, terminators, and more. Mix and match elements as needed, tailoring your graph to your specific requirements.
+
+ 
+
+3. Choose the strand: Select the genomic orientation you want to visualize, allowing you to focus on specific genetic strands.
+
+*/

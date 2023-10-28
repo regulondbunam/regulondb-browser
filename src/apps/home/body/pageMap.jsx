@@ -5,13 +5,6 @@ import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
 
 const mirrorData = {
   id: "ligth_regulonDB",
@@ -37,7 +30,7 @@ const mirrorData = {
 
 export default function PageMap() {
   return (
-    <Item>
+    <div>
       <div style={{ display: "flex", alignItems: "center" }}>
         <AccountTreeIcon />
         <p>
@@ -54,6 +47,6 @@ export default function PageMap() {
           );
         })}
       </div>
-    </Item>
+    </div>
   );
 }

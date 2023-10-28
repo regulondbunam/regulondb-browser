@@ -15,15 +15,20 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import Check from "@mui/icons-material/Check";
 import ListItemIcon from "@mui/material/ListItemIcon";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import { HELP } from "./definitions";
 
 import {
   RANGE,
   secureRange,
   STATE_FORM,
+  SECURE_RANGE,
   FORM_ACTIONS,
   STRAND,
   GE_DEFs,
 } from "./definitions";
+import { Box } from "@mui/material";
 
 export default function Form({ state = { ...STATE_FORM }, dispatch }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -59,30 +64,59 @@ export default function Form({ state = { ...STATE_FORM }, dispatch }) {
     let geElements = [...state.objectType];
     geElements[index] = { ...element, isCheck: !element.isCheck };
     dispatch({ type: FORM_ACTIONS.setGeneticsElements, value: geElements });
-    if(state.draw){
-      dispatch({type: FORM_ACTIONS.refresh})
+    if (state.draw) {
+      dispatch({ type: FORM_ACTIONS.refresh });
       setTimeout(() => {
-        dispatch({type: FORM_ACTIONS.draw})
+        dispatch({ type: FORM_ACTIONS.draw });
       }, 200);
     }
   };
 
   return (
     <div>
-      <Accordion title={"Trace Selection Form"}>
+      <div style={{display:"flex", flexDirection: "column", alignItems: "center"}}  >
+          <Typography variant="body1" >{HELP}</Typography>
+          <Typography variant="body1" gutterBottom >
+          The tool accepts positions between 1 and 4,639,676, with a maximum range of up to 250,000 base pairs.
+          </Typography>
+
+        </div>
+      <Accordion
+        title={
+          <>
+            <p>
+              <b>DTT parameters</b>
+            </p>
+          </>
+        }
+      >
+        
         <div style={{ display: "flex", columnGap: "20px" }}>
           <div className="genomePositionSelect">
+            <Box sx={{display: "flex"}}>
             <Typography variant="button" display="block">
               Genome Position
             </Typography>
-            <div style={{ display: "flex", alignItems: "center" }}>
+            </Box>
+            <div
+              style={{
+                display: "flex",
+                columnGap: "5px",
+                alignItems: "center",
+              }}
+            >
               <Tooltip title="Absolute genome left position">
                 <TextField
                   id="rdb_input_leftEndPosition"
                   disabled={state.draw}
                   size="small"
-                  label="LeftEndPosition"
+                  label="Left Position"
                   type="number"
+                  InputProps={{
+                    inputProps: {
+                      step: "any",
+                    },
+                  }}
                   inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
                   value={
                     state.leftEndPosition === 0 ? "" : state.leftEndPosition
@@ -108,44 +142,19 @@ export default function Form({ state = { ...STATE_FORM }, dispatch }) {
                   sx={{ width: 120 }}
                 />
               </Tooltip>
-              <div className="rdb_middle_input">
-                <Tooltip placement="top" title="select strand">
-                  <Select
-                    variant="standard"
-                    size="small"
-                    value={state.strand}
-                    label="Strand"
-                    onChange={(event) => {
-                      dispatch({
-                        type: FORM_ACTIONS.setStrand,
-                        value: event.target.value,
-                      });
-                    }}
-                  >
-                    <MenuItem value={STRAND.both}>
-                      <Tooltip title={STRAND.both} placement="right">
-                        <CompareArrowsIcon />
-                      </Tooltip>
-                    </MenuItem>
-                    <MenuItem value={STRAND.forward}>
-                      <Tooltip title={STRAND.forward} placement="right">
-                        <ForwardIcon />
-                      </Tooltip>
-                    </MenuItem>
-                    <MenuItem value={STRAND.reverse}>
-                      <Tooltip title={STRAND.reverse} placement="right">
-                        <ForwardIcon sx={{ transform: "rotate(180deg)" }} />
-                      </Tooltip>
-                    </MenuItem>
-                  </Select>
-                </Tooltip>
-              </div>
-              <Tooltip title="Absolute genome left position">
+              <Tooltip title="Absolute genome right position">
                 <TextField
-                  id="rdb_input_leftEndPosition"
+                  id="rdb_input_rightEndPosition"
                   disabled={state.draw}
                   size="small"
-                  label="RightEndPosition"
+                  InputProps={{
+                    style: {
+                      // Estilos personalizados para ocultar los botones de incremento y decremento
+                      WebkitAppearance: "none",
+                      appearance: "none",
+                    },
+                  }}
+                  label="Right Position"
                   inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
                   type="number"
                   value={
@@ -171,10 +180,41 @@ export default function Form({ state = { ...STATE_FORM }, dispatch }) {
                   sx={{ width: 120 }}
                 />
               </Tooltip>
+              <FormControl>
+                <InputLabel id="demo-simple-select-label">Strand</InputLabel>
+                <Tooltip placement="top" title="select strand">
+                  <Select
+                    value={state.strand}
+                    size="small"
+                    label="Strand"
+                    onChange={(event) => {
+                      dispatch({
+                        type: FORM_ACTIONS.setStrand,
+                        value: event.target.value,
+                      });
+                    }}
+                    sx={{ width: 80, height: 40 }}
+                  >
+                    <MenuItem value={STRAND.both}>
+                      <Tooltip title={STRAND.both} placement="right">
+                        <CompareArrowsIcon />
+                      </Tooltip>
+                    </MenuItem>
+                    <MenuItem value={STRAND.forward}>
+                      <Tooltip title={STRAND.forward} placement="right">
+                        <ForwardIcon />
+                      </Tooltip>
+                    </MenuItem>
+                    <MenuItem value={STRAND.reverse}>
+                      <Tooltip title={STRAND.reverse} placement="right">
+                        <ForwardIcon sx={{ transform: "rotate(180deg)" }} />
+                      </Tooltip>
+                    </MenuItem>
+                  </Select>
+                </Tooltip>
+              </FormControl>
             </div>
-            <Typography variant="caption" display="block" gutterBottom>
-              range {RANGE.min}-{RANGE.max}
-            </Typography>
+            
           </div>
           <div>
             <Typography variant="button" display="block">
@@ -218,12 +258,8 @@ export default function Form({ state = { ...STATE_FORM }, dispatch }) {
                 </MenuList>
               </Menu>
             </div>
-            <FormHelperText>
-              Draws the selected elements, provided they are in the selected
-              range.
-            </FormHelperText>
           </div>
-          <div style={{display: "flex", alignItems: "center"}}>
+          <div style={{ display: "flex", alignItems: "center" }}>
             {state.draw ? (
               <Button
                 sx={{ marginRight: "2px" }}
@@ -242,15 +278,18 @@ export default function Form({ state = { ...STATE_FORM }, dispatch }) {
                 size="medium"
                 color="secondary"
                 onClick={() => {
-                  if(secureRange(state.leftEndPosition,state.rightEndPosition)){
+                  if (
+                    secureRange(state.leftEndPosition, state.rightEndPosition)
+                  ) {
                     dispatch({ type: FORM_ACTIONS.draw });
-                  }else{
-                    alert("Incorrect positions, please check that the left position is smaller than the right position and that the difference is less than 100,000bp.")
+                  } else {
+                    alert(
+                      "Incorrect positions, please check that the left position is smaller than the right position and that the difference is less than 100,000bp."
+                    );
                   }
-                  
                 }}
               >
-                Draw Track
+                Draw
               </Button>
             )}
 

@@ -1,71 +1,57 @@
 {
     "id":"menuTools",
-    "title": "Tools",
-    "type": "MENU",
-    "icon": "handyman",
+    "label": "Tools",
+    "icon": "tools",
     "options": [
         {
             "id": "subMenuTool",
-            "title": "RegulonDB Tools",
-            "link": "/tools",
-            "type": "SUBMENU",
+            "label": "RegulonDB Tools",
             "options": [
                 {
                     "id": "dtt-browsing",
-                    "title": "Drawing Traces Tool",
-                    "state": "enabled",
+                    "label": "Drawing Traces Tool",
                     "link" : "/dtt"
                 }
             ]
         },
         {
             "id": "subMenuBrowser",
-            "title": "Browser",
-            "link": "/browser",
-            "type": "SUBMENU",
+            "label": "Browser",
             "options": [
                 {
                     "id": "mco_explorer",
-                    "title": "Microbial Conditions Ontology (MCO) Browser",
-                    "state": "enabled",
+                    "label": "Microbial Conditions Ontology (MCO) Browser",
                     "link" : "/mco"
                 }
             ]
         },
         {
             "id": "subMenuHTBuilder",
-            "title": "High Throughput Query Builder",
-            "link": "/ht",
-            "type": "SUBMENU",
+            "label": "High Throughput Query Builder",
             "options": [
                 {
                     "id": "builderTFbinding",
-                    "title": "Transcription Factors Binding Sites",
-                    "state": "enabled",
+                    "label": "Transcription Factors Binding Sites",
                     "link" : "ht/finder/TFBINDING"
                 },
                 {
                     "id": "builderTUs",
-                    "title": "Transcription Units",
-                    "state": "enabled",
+                    "label": "Transcription Units",
                     "link" : "/ht/finder/TUS"
                 },
                 {
                     "id": "builderTTS",
-                    "title": "Transcription Termination Sites",
-                    "state": "enabled",
+                    "label": "Transcription Termination Sites",
                     "link" : "/ht/finder/TTS"
                 },
                 {
                     "id": "tssBuilding",
-                    "title": "Transcription Start Sites",
-                    "state": "enabled",
+                    "label": "Transcription Start Sites",
                     "link": "/ht/finder/TSS"
                 },
                 {
                     "id": "builderGE",
-                    "title": "Gene Expression",
-                    "state": "enabled",
+                    "label": "Gene Expression",
                     "link" : "/ht/finder/GENE_EXPRESSION"
                 }
             ]

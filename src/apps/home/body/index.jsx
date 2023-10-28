@@ -6,9 +6,12 @@ import imgDataset3 from "./media/datasetsExp3.png";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import PageMap from "./pageMap";
-import InfoApp from "./infoApp";
+import {Summary, ReleaseInfo} from "./infoApp";
 import { Card,CardActions, CardMedia, CardContent, Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const GRID_CONTENT = [
   {
@@ -63,16 +66,58 @@ const GRID_CONTENT = [
 
 export function Body() {
 
+  const carruselSettings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]}
+
+  const cardData = [
+    <PageMap />, <ReleaseInfo />, <Summary />
+  ];
+
   return(
     <Box sx={{ flexGrow: 1, p:"10px 6% 10px 6%" }}>
-      <Grid container spacing={1} >
-        <Grid item xs={4}>
-          <PageMap />
-        </Grid>
-        <Grid item xs={8}>
-          <InfoApp />
-        </Grid>
-        {GRID_CONTENT.map((card, index) => (
+     <div>
+     <Slider {...carruselSettings}>
+      {cardData.map((card, index) => (
+        <div key={index}>
+          {card}
+        </div>
+      ))}
+    </Slider>
+     </div>
+     <div>
+     <Grid container spacing={1} >
+     {GRID_CONTENT.map((card, index) => (
           <Grid item xs={12} sm={6} md={4} key={"card_" + index + "_" + card.id}>
             <Card sx={{ minWidth: 275, minHeight: 450 }} elevation={3}>
               {card?.imgUrl && (
@@ -124,7 +169,8 @@ export function Body() {
             </Card>
           </Grid>
         ))}
-      </Grid>
+     </Grid>
+     </div>
     </Box>
   )
 

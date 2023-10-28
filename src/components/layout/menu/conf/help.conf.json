@@ -1,89 +1,73 @@
 {
     "id":"menuHelp",
-    "title": "Help",
-    "type": "MENU",
+    "label": "Help",
     "icon": "help",
     "options": [
         {
             "id": "subMenuAboutUs",
-            "title": "ABOUT US!",
-            "link": "/aboutUs",
-            "type": "SUBMENU",
+            "label": "ABOUT US!",
             "options": [
                 {
                     "id": "credits",
-                    "title": "Credits",
-                    "state": "enabled",
-                    "link" : "manual/aboutUs/credits"
+                    "label": "Credits",
+                    "link" : "/manual/aboutUs/credits"
                 },
                 {
                     "id": "Funding",
-                    "title": "RegulonDB Funding",
-                    "state": "enabled",
+                    "label": "RegulonDB Funding",
                     "link" : "/manual/aboutUs/funding"
                 },
                 {
                     "id":"How_to_cite",
-                    "title":"How to cite",
-                    "state": "enabled",
+                    "label":"How to cite",
                     "link": "/manual/aboutUs/howToCite"
                 },
                 {
                     "id":"Terms_and_conditions",
-                    "title":"Terms and conditions",
-                    "state":"enabled",
+                    "label":"Terms and conditions",
                     "link":"/manual/aboutUs/terms-conditions"
                 },
                 {
                     "id":"What_is_RegulonDB",
-                    "title":"What is RegulonDB",
-                    "state":"enabled",
+                    "label":"What is RegulonDB",
                     "link":"/manual/aboutUs/whats-regulonDB"
                 }
             ]
         },
         {
             "id": "subHelp",
-            "title": "Help",
-            "link": "/aboutUs",
-            "type": "SUBMENU",
+            "label": "Help",
             "options": [
                 {
                     "id":"RegulonDB_Glossary",
-                    "title":"RegulonDB Glossary",
-                    "state":"disabled",
+                    "label":"RegulonDB Glossary",
+                    "disabled": true,
                     "link":"/manual/help/glossary"
                 },
                 {
                     "id":"evidence&class",
-                    "title":"Evidence Classification",
-                    "state":"enabled",
+                    "label":"Evidence Classification",
                     "link":"/manual/help/evidenceclassification"
                 },
                 {
                     "id":"cookies_01",
-                    "title":"COOKIE POLICY",
-                    "state":"enabled",
+                    "label":"COOKIE POLICY",
                     "link":"/manual/help/cookiePolicy"
                 }
             ]
         },
         {
             "id": "apiHelp",
-            "title": "Api & Software",
-            "link": "/aboutUs",
-            "type": "SUBMENU",
+            "label": "Api & Software",
             "options": [
                 {
                     "id":"menu_docker_02",
-                    "title":"Docker Install",
-                    "state":"enabled",
+                    "label":"Docker Install",
                     "link":"/manual/apiSoftware/docker"
                 },
                 {
                     "id":"menu_webService_03",
-                    "title":"GraphQL Web Services",
-                    "state":"enabled",
+                    "label":"GraphQL Web Services",
                     "link":"/doc_datamarts"
                 }
             ]

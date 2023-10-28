@@ -1,4 +1,3 @@
-
 import home from './home.conf.json'
 import tools from './tools.conf.json'
 //import overviews from './overviews.conf.json'
@@ -7,8 +6,7 @@ import help from './help.conf.json'
 import search from './searching.conf.json'
 import software from './software.conf.json'
 
-const menuConf = {
-    "menu": [
+const menuConf = [
         home,
         search,
         tools,
@@ -17,6 +15,5 @@ const menuConf = {
         software,
         help
     ]
-}
 
 export default menuConf
