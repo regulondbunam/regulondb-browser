@@ -3,15 +3,23 @@ import imgDataset from "./media/datasetsExp.png";
 import imgDataset1 from "./media/datasetsExp1.png";
 import imgDataset2 from "./media/datasetsExp2.png";
 import imgDataset3 from "./media/datasetsExp3.png";
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import PageMap from "./pageMap";
-import {Summary, ReleaseInfo} from "./infoApp";
-import { Card,CardActions, CardMedia, CardContent, Typography, Button } from "@mui/material";
+import { Summary, ReleaseInfo } from "./infoApp";
+import {
+  Card,
+  CardActions,
+  CardMedia,
+  CardContent,
+  Typography,
+  Button,
+  Paper,
+} from "@mui/material";
 import { Link } from "react-router-dom";
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const GRID_CONTENT = [
   {
@@ -65,113 +73,110 @@ const GRID_CONTENT = [
 ];
 
 export function Body() {
-
   const carruselSettings = {
-    dots: true,
+    dots: false,
     infinite: false,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    initialSlide: 0,
+    slidesToShow: 2,
+    slidesToScroll: 2,
+    autoplay: false,
+    speed: 1000,
+    autoplaySpeed: 2000,
+    cssEase: "linear",
+    variableWidth: true,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1600,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          dots: true,
           infinite: true,
-          dots: true
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
-        }
+          slidesToScroll: 1,
+          autoplay: true,
+          speed: 1000,
+          autoplaySpeed: 2000,
+          cssEase: "linear",
+          variableWidth: true,
+        },
       }
-    ]}
+    ],
+  };
 
-  const cardData = [
-    <PageMap />, <ReleaseInfo />, <Summary />
-  ];
+  const cardData = [<PageMap />, <ReleaseInfo />, <Summary />];
 
-  return(
-    <Box sx={{ flexGrow: 1, p:"10px 6% 10px 6%" }}>
-     <div>
-     <Slider {...carruselSettings}>
-      {cardData.map((card, index) => (
-        <div key={index}>
-          {card}
-        </div>
-      ))}
-    </Slider>
-     </div>
-     <div>
-     <Grid container spacing={1} >
-     {GRID_CONTENT.map((card, index) => (
-          <Grid item xs={12} sm={6} md={4} key={"card_" + index + "_" + card.id}>
-            <Card sx={{ minWidth: 275, minHeight: 450 }} elevation={3}>
-              {card?.imgUrl && (
-                <CardMedia
-                  component="div"
-                  sx={{
-                    // 16:9
-                    pt: "10.25%",
-                  }}
-                  image={card.imgUrl}
-                />
-              )}
-              <CardContent>
-                <Typography
-                  sx={{ fontSize: 12 }}
-                  color="text.secondary"
-                  gutterBottom
-                >
-                  {card.section}
-                </Typography>
-                <Typography variant="h5" component="div">
-                  {card.title}
-                </Typography>
-                <Typography variant="body1">{card.description}</Typography>
-              </CardContent>
-              <CardActions>
-                {card.url && (
-                  <Link to={card.url}>
-                    <Button color="secondary" >
-                      let's go!
-                    </Button>
-                  </Link>
+  return (
+    <Box sx={{ flexGrow: 1, p: "10px 6% 10px 6%" }}>
+      <div style={{ height: "170px" }}>
+        <Slider {...carruselSettings}>
+          {cardData.map((card, index) => (
+            <div style={{ width: 500 }}>
+              <div style={{ width: 450 }}>
+                <Card key={"card_" + index}>{card}</Card>
+              </div>
+            </div>
+          ))}
+        </Slider>
+      </div>
+      <br />
+      <div>
+        <Grid container spacing={1}>
+          {GRID_CONTENT.map((card, index) => (
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              key={"card_" + index + "_" + card.id}
+            >
+              <Card sx={{ minWidth: 275, minHeight: 450 }} elevation={3}>
+                {card?.imgUrl && (
+                  <CardMedia
+                    component="div"
+                    sx={{
+                      // 16:9
+                      pt: "10.25%",
+                    }}
+                    image={card.imgUrl}
+                  />
                 )}
-                {card.links && (
-                  <div>
-                    {card.links.map((link) => (
-                      <div key={link.url}>
-                        <Link key={link.url} to={link.url}>
-                          <Button color="secondary" size="small">
-                            {link.label}
-                          </Button>
-                        </Link>
-                        <br />
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </CardActions>
-            </Card>
-          </Grid>
-        ))}
-     </Grid>
-     </div>
+                <CardContent>
+                  <Typography
+                    sx={{ fontSize: 12 }}
+                    color="text.secondary"
+                    gutterBottom
+                  >
+                    {card.section}
+                  </Typography>
+                  <Typography variant="h5" component="div">
+                    {card.title}
+                  </Typography>
+                  <Typography variant="body1">{card.description}</Typography>
+                </CardContent>
+                <CardActions>
+                  {card.url && (
+                    <Link to={card.url}>
+                      <Button color="secondary">let's go!</Button>
+                    </Link>
+                  )}
+                  {card.links && (
+                    <div>
+                      {card.links.map((link) => (
+                        <div key={link.url}>
+                          <Link key={link.url} to={link.url}>
+                            <Button color="secondary" size="small">
+                              {link.label}
+                            </Button>
+                          </Link>
+                          <br />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </div>
     </Box>
-  )
-
+  );
 }

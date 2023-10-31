@@ -52,12 +52,12 @@ export function Summary(params) {
     return null;
   }
   if (loading) {
-    return <Skeleton variant="rectangular" width={250} height={176} />;
+    return <Skeleton variant="rectangular" />;
   }
   if (data) {
     const statistics = data.getDatabaseInfo[0].statistics;
     return (
-      <Box sx={{width: 250, height:176}} >
+      <Box >
         <div style={{ display: "flex", alignItems: "center" }}>
           <BarChartIcon />
           <p>
@@ -103,12 +103,12 @@ export function ReleaseInfo() {
     return null;
   }
   if (loading) {
-    return <Skeleton variant="rectangular" width={250} height={176} />;
+    return <Skeleton variant="rectangular" />;
   }
   if (data) {
     const dbInfo = data.getDatabaseInfo[0];
     return (
-      <Box sx={{width: 250, height:176}}>
+      <Box >
         <div style={{ display: "flex", alignItems: "center" }}>
           <NewspaperIcon />
           <p>
