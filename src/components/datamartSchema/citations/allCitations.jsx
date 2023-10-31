@@ -141,7 +141,7 @@ export function AllCitations({ publications, evidences }) {
   return (
     <div>
       <div>
-        <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <FormControl size="small" sx={{ m: 1, minWidth: 120 }}>
           <Select
             value={view}
             onChange={handleChange}
@@ -149,8 +149,8 @@ export function AllCitations({ publications, evidences }) {
             inputProps={{ "aria-label": "Without label" }}
           >
             <MenuItem value={1}>Publications</MenuItem>
-            <MenuItem value={2}>Evidences</MenuItem>
-            <MenuItem value={3}>Publications & Evidences</MenuItem>
+            <MenuItem value={2}>Evidence</MenuItem>
+            <MenuItem value={3}>Publications & Evidence</MenuItem>
           </Select>
           <FormHelperText>
             Select the view of publications or evidence, related to
@@ -259,7 +259,7 @@ export function Evidences({ evidences, publications, small = false }) {
   //console.log(evidences);
   return (
     <>
-      <h3>Evidences</h3>
+      <h3>Evidence</h3>
       <table>
         <tbody>
           {Object.keys(evidences).map((evidenceId) => {
