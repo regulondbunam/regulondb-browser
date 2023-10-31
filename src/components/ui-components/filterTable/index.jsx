@@ -235,125 +235,146 @@ export default function FilterTable({
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
   });
 
-  console.log(table.getAllLeafColumns().length);
+  //console.log(table.getAllLeafColumns().length);
   /**preGlobalFilteredRows={table.getPre} allColumns={allColumns} */
   return (
-    <div>
+    <div style={{ margin: "20px" }}>
       {showColumnsInfo && <InfoColumns {...table} columnsInfo={columnsInfo} />}
-      <table className={style.table}>
-        <thead className={style.tableHead}>
-          {!disableOptions && (
-            <tr className={style.options}>
-              <th colSpan={table.getAllLeafColumns().length}>
-                <div style={{width: "99vw"}} >
-                  <Options
-                    columnsInfo={columnsInfo}
-                    fileName={fileName}
-                    preGlobalFilteredRows={table.getGlobalFacetedRowModel}
-                    {...table}
-                  />
-                </div>
-              </th>
-            </tr>
-          )}
-          {table.getHeaderGroups().map(
-            /**
-             * Description placeholder
-             *
-             * @param {*} headerGroup
-             * @returns {*}
-             */
-            (headerGroup) => {
-              return (
-                <tr key={headerGroup.id}>
-                  {headerGroup.headers.map(
-                    /**
-                     * Description placeholder
-                     *
-                     * @param {*} header
-                     * @returns {*}
-                     */
-                    (header) => {
-                      //let column = columns.find(column=>column.id===header.column.id)
-                      //style={{ width: column ? column.width : "" }}
+      <div>
+        <table className={style.table}>
+          <thead className={style.tableHead}>
+            {!disableOptions && (
+              <tr>
+                <th colSpan={table.getAllLeafColumns().length}>
+                  <div
+                    style={{
+                      width: "95vw",
+                      position: "sticky",
+                      top: 0,
+                      left: 0,
+                    }}
+                  >
+                    <Options
+                      columnsInfo={columnsInfo}
+                      fileName={fileName}
+                      preGlobalFilteredRows={table.getGlobalFacetedRowModel}
+                      {...table}
+                    />
+                  </div>
+                </th>
+              </tr>
+            )}
+            {table.getHeaderGroups().map(
+              /**
+               * Description placeholder
+               *
+               * @param {*} headerGroup
+               * @returns {*}
+               */
+              (headerGroup) => {
+                return (
+                  <tr key={headerGroup.id}>
+                    {headerGroup.headers.map(
+                      /**
+                       * Description placeholder
+                       *
+                       * @param {*} header
+                       * @returns {*}
+                       */
+                      (header) => {
+                        //let column = columns.find(column=>column.id===header.column.id)
+                        //style={{ width: column ? column.width : "" }}
 
-                      return (
-                        <th key={header.id} colSpan={header.colSpan}>
-                          {header.isPlaceholder ? null : (
-                            <>
-                              <div
-                                {...{
-                                  className: header.column.getCanSort()
-                                    ? "cursor-pointer select-none"
-                                    : "",
-                                  onClick:
-                                    header.column.getToggleSortingHandler(),
-                                }}
-                              >
-                                {flexRender(
-                                  header.column.columnDef.header,
-                                  header.getContext()
-                                )}
-                                {{
-                                  asc: " 🔼",
-                                  desc: " 🔽",
-                                }[header.column.getIsSorted()] ?? null}
-                              </div>
-                              {header.column.getCanFilter() ? (
-                                <div>
-                                  <Simple
-                                    column={header.column}
-                                    table={table}
-                                  />
+                        return (
+                          <th key={header.id} colSpan={header.colSpan}>
+                            {header.isPlaceholder ? null : (
+                              <>
+                                <div
+                                  {...{
+                                    className: header.column.getCanSort()
+                                      ? "cursor-pointer select-none"
+                                      : "",
+                                    onClick:
+                                      header.column.getToggleSortingHandler(),
+                                  }}
+                                >
+                                  {flexRender(
+                                    header.column.columnDef.header,
+                                    header.getContext()
+                                  )}
+                                  {{
+                                    asc: " 🔼",
+                                    desc: " 🔽",
+                                  }[header.column.getIsSorted()] ?? null}
                                 </div>
-                              ) : null}
-                            </>
-                          )}
-                        </th>
-                      );
-                    }
-                  )}
-                </tr>
-              );
-            }
-          )}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map(
-            /**
-             * Description placeholder
-             *
-             * @param {*} row
-             * @returns {HTMLElement}
-             */
-            (row) => {
-              return (
-                <tr key={row.id}>
-                  {row.getVisibleCells().map((cell) => {
-                    if (typeof cell.getValue() === "object") {
-                      return <td key={cell.id}>{cell.getValue()}</td>;
-                    } else {
-                      return (
-                        <td key={cell.id}>
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                        </td>
-                      );
-                    }
-                  })}
-                </tr>
-              );
-            }
-          )}
-        </tbody>
-      </table>
-      {table.getPageCount() > 1 && (
-        <div className={style.options}>
-          <Pagination table={table} />
-        </div>
-      )}
+                                {header.column.getCanFilter() ? (
+                                  <div>
+                                    <Simple
+                                      column={header.column}
+                                      table={table}
+                                    />
+                                  </div>
+                                ) : null}
+                              </>
+                            )}
+                          </th>
+                        );
+                      }
+                    )}
+                  </tr>
+                );
+              }
+            )}
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map(
+              /**
+               * Description placeholder
+               *
+               * @param {*} row
+               * @returns {HTMLElement}
+               */
+              (row) => {
+                return (
+                  <tr key={row.id}>
+                    {row.getVisibleCells().map((cell) => {
+                      if (typeof cell.getValue() === "object") {
+                        return <td key={cell.id}>{cell.getValue()}</td>;
+                      } else {
+                        return (
+                          <td key={cell.id}>
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
+                          </td>
+                        );
+                      }
+                    })}
+                  </tr>
+                );
+              }
+            )}
+            {table.getPageCount() > 1 && (
+              <tr>
+                <td colSpan={table.getAllLeafColumns().length}>
+                  <div
+                    style={{
+                      width: "95vw",
+                      position: "sticky",
+                      top: 0,
+                      left: 0,
+                    }}
+                    className={style.options}
+                  >
+                    <Pagination table={table} />
+                  </div>
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
