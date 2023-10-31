@@ -16,37 +16,38 @@ export default function Options({
   getAllLeafColumns,
 }) {
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        width: "100%",
-        height: "100%",
-        flexDirection: "row-reverse",
-      }}
-    >
-      <ButtonGroup variant="contained" size="small" color="secondary">
-        <Columns
-        columnsInfo 
-          getIsAllColumnsVisible={getIsAllColumnsVisible}
-          getToggleAllColumnsVisibilityHandler={
-            getToggleAllColumnsVisibilityHandler
-          }
-          getAllLeafColumns={getAllLeafColumns}
-        />
-        <Download
-          data={data}
-          fileName={fileName}
-          preGlobalFilteredRows={preGlobalFilteredRows}
-          getAllFlatColumns={getAllFlatColumns}
-        />
-      </ButtonGroup>
-
-      <GlobalFilter
-        value={globalFilter}
-        onChange={setGlobalFilter}
-        placeholder="Search in all columns..."
-      />
+    <div style={{display: "flex"}} >
+      <div>
+        <p>
+          <b>TABLE</b>
+        </p>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          width: "100%",
+          height: "100%",
+          flexDirection: "row-reverse",
+        }}
+      >
+        <ButtonGroup variant="contained" size="small" color="secondary">
+          <Columns
+            columnsInfo
+            getIsAllColumnsVisible={getIsAllColumnsVisible}
+            getToggleAllColumnsVisibilityHandler={
+              getToggleAllColumnsVisibilityHandler
+            }
+            getAllLeafColumns={getAllLeafColumns}
+          />
+          <Download
+            data={data}
+            fileName={fileName}
+            preGlobalFilteredRows={preGlobalFilteredRows}
+            getAllFlatColumns={getAllFlatColumns}
+          />
+        </ButtonGroup>
+      </div>
     </div>
   );
 }

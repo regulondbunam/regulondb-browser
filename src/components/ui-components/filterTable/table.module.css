@@ -31,3 +31,8 @@
 columnSel:hover{
     background-color: lightsteelblue;
 }
+
+.tableHead{
+    position: sticky;
+    top: 0;
+}

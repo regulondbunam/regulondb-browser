@@ -112,6 +112,7 @@ import style from "./table.module.css";
 import React from "react";
 import Options from "./options";
 import Pagination from "./pagination";
+import { Simple } from "./Filters";
 import {
   Column,
   Table,
@@ -139,7 +140,6 @@ import {
 } from "@tanstack/match-sorter-utils";
 import InfoColumns from "./infoColumns";
 
-
 /**
  * Description placeholder
  *
@@ -151,7 +151,7 @@ import InfoColumns from "./infoColumns";
  */
 const fuzzyFilter = (row, columnId, value, addMeta) => {
   // Rank the item
-  
+
   /**
    * Description placeholder
    *
@@ -167,7 +167,6 @@ const fuzzyFilter = (row, columnId, value, addMeta) => {
   // Return if the item should be filtered in/out
   return itemRank.passed;
 };
-
 
 /**
  * Description placeholder
@@ -204,10 +203,8 @@ export default function FilterTable({
   fileName = "tableData",
 }) {
   const [columnFilters, setColumnFilters] = React.useState([]);
-  const [globalFilter, setGlobalFilter] = React.useState("");
   const [columnVisibility, setColumnVisibility] = React.useState({});
 
-  
   /**
    * Description placeholder
    *
@@ -225,11 +222,9 @@ export default function FilterTable({
     state: {
       columnVisibility,
       columnFilters,
-      globalFilter,
     },
     onColumnVisibilityChange: setColumnVisibility,
     onColumnFiltersChange: setColumnFilters,
-    onGlobalFilterChange: setGlobalFilter,
     globalFilterFn: fuzzyFilter,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -239,29 +234,29 @@ export default function FilterTable({
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
   });
-  //console.log();
+
+  console.log(table.getAllLeafColumns().length);
   /**preGlobalFilteredRows={table.getPre} allColumns={allColumns} */
   return (
     <div>
-      {showColumnsInfo && (
-        <InfoColumns {...table} columnsInfo={columnsInfo} />
-      )}
-      {!disableOptions && (
-        <div className={style.options}>
-          <Options
-            globalFilter={globalFilter}
-            columnsInfo={columnsInfo}
-            fileName={fileName}
-            setGlobalFilter={setGlobalFilter}
-            preGlobalFilteredRows={table.getGlobalFacetedRowModel}
-            {...table}
-          />
-        </div>
-      )}
+      {showColumnsInfo && <InfoColumns {...table} columnsInfo={columnsInfo} />}
       <table className={style.table}>
-        <thead>
+        <thead className={style.tableHead}>
+          {!disableOptions && (
+            <tr className={style.options}>
+              <th colSpan={table.getAllLeafColumns().length}>
+                <div style={{width: "99vw"}} >
+                  <Options
+                    columnsInfo={columnsInfo}
+                    fileName={fileName}
+                    preGlobalFilteredRows={table.getGlobalFacetedRowModel}
+                    {...table}
+                  />
+                </div>
+              </th>
+            </tr>
+          )}
           {table.getHeaderGroups().map(
-            
             /**
              * Description placeholder
              *
@@ -269,54 +264,62 @@ export default function FilterTable({
              * @returns {*}
              */
             (headerGroup) => {
-            return (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map(
-                  
-                  /**
-                   * Description placeholder
-                   *
-                   * @param {*} header
-                   * @returns {*}
-                   */
-                  (header) => {
-                  //let column = columns.find(column=>column.id===header.column.id)
-                  //style={{ width: column ? column.width : "" }}
+              return (
+                <tr key={headerGroup.id}>
+                  {headerGroup.headers.map(
+                    /**
+                     * Description placeholder
+                     *
+                     * @param {*} header
+                     * @returns {*}
+                     */
+                    (header) => {
+                      //let column = columns.find(column=>column.id===header.column.id)
+                      //style={{ width: column ? column.width : "" }}
 
-                  return (
-                    <th key={header.id} colSpan={header.colSpan}>
-                      {header.isPlaceholder ? null : (
-                        <>
-                          <div
-                            {...{
-                              className: header.column.getCanSort()
-                                ? "cursor-pointer select-none"
-                                : "",
-                              onClick: header.column.getToggleSortingHandler(),
-                            }}
-                          >
-                            {flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
-                            {{
-                              asc: " 🔼",
-                              desc: " 🔽",
-                            }[header.column.getIsSorted()] ?? null}
-                          </div>
-                          {header.column.getCanFilter() ? <div>...</div> : null}
-                        </>
-                      )}
-                    </th>
-                  );
-                })}
-              </tr>
-            );
-          })}
+                      return (
+                        <th key={header.id} colSpan={header.colSpan}>
+                          {header.isPlaceholder ? null : (
+                            <>
+                              <div
+                                {...{
+                                  className: header.column.getCanSort()
+                                    ? "cursor-pointer select-none"
+                                    : "",
+                                  onClick:
+                                    header.column.getToggleSortingHandler(),
+                                }}
+                              >
+                                {flexRender(
+                                  header.column.columnDef.header,
+                                  header.getContext()
+                                )}
+                                {{
+                                  asc: " 🔼",
+                                  desc: " 🔽",
+                                }[header.column.getIsSorted()] ?? null}
+                              </div>
+                              {header.column.getCanFilter() ? (
+                                <div>
+                                  <Simple
+                                    column={header.column}
+                                    table={table}
+                                  />
+                                </div>
+                              ) : null}
+                            </>
+                          )}
+                        </th>
+                      );
+                    }
+                  )}
+                </tr>
+              );
+            }
+          )}
         </thead>
         <tbody>
           {table.getRowModel().rows.map(
-            
             /**
              * Description placeholder
              *
@@ -324,25 +327,26 @@ export default function FilterTable({
              * @returns {HTMLElement}
              */
             (row) => {
-            return (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => {
-                  if (typeof cell.getValue() === "object") {
-                    return <td key={cell.id}>{cell.getValue()}</td>;
-                  } else {
-                    return (
-                      <td key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </td>
-                    );
-                  }
-                })}
-              </tr>
-            );
-          })}
+              return (
+                <tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => {
+                    if (typeof cell.getValue() === "object") {
+                      return <td key={cell.id}>{cell.getValue()}</td>;
+                    } else {
+                      return (
+                        <td key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </td>
+                      );
+                    }
+                  })}
+                </tr>
+              );
+            }
+          )}
         </tbody>
       </table>
       {table.getPageCount() > 1 && (
