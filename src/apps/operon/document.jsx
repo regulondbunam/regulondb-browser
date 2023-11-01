@@ -13,23 +13,21 @@ const cardOptions = {
 
 export default function Document({ operonData, section }) {
     const citations = useIndexedCitation(operonData.allCitations)
-
+    //console.log(operonData)
     let relatedIds = getRelatedIdsByOperonData(operonData)
     //console.log(operonData);
     let relationTool = <RelatedTool operonData={operonData} relatedIds={relatedIds} />
 
     let dtt = <DrawingTracesTool
-       
         context="operon"
         relatedIds={relatedIds.all}
         height={200}
         id={operonData._id}
         leftEndPosition={operonData.operon.regulationPositions.leftEndPosition - 1000}
         rightEndPosition={operonData.operon.regulationPositions.rightEndPosition + 1000}
-        strand={operonData.operon.strand}
         labelTitle={`Operon ${operonData.operon.name} general context`}
     />
-
+    
     const sections = useMemo(() => {
         let _sections = []
         if (DataVerifier.isValidArray(operonData.transcriptionUnits)) {

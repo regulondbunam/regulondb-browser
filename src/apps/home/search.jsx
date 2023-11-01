@@ -2,8 +2,23 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import InputBase from "@mui/material/InputBase";
-import { useState } from "react";
+import React, { useState } from "react";
 import SearchIcon from '@mui/icons-material/Search';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import { styled } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+
+const HtmlTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: '#fff8a6',
+    color: 'rgba(0, 0, 0, 0.87)',
+    maxWidth: 220,
+    fontSize: theme.typography.pxToRem(12),
+    border: '1px solid #dadde9',
+  },
+}));
 
 
 export default function Search({ onClick = () => {} }) {
@@ -25,10 +40,21 @@ export default function Search({ onClick = () => {} }) {
           alignItems: "center",
         }}
       >
+        <HtmlTooltip
+        title={
+          <React.Fragment>
+            <Typography color="inherit">RegulonDB TIP!</Typography>
+            Use double quotes to search for phrases like product names; <br/>
+            You can use the OR or AND operators to make your search more precise.
+          </React.Fragment>
+        }
+      >
         <SearchIcon />
+      </HtmlTooltip>
+        
         <InputBase
           sx={{ ml: 1, flex: 1 }}
-          placeholder='Example "arac OR fimb " "arac OR arabinose"'
+          placeholder='Example "Putative Membrane", arac OR fimb'
           value={value}
           onChange={(e)=>{setValue(e.target.value)}}
           inputProps={{ "aria-label": "regulonDB search" }}

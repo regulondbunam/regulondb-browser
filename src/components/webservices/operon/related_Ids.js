@@ -84,7 +84,7 @@ export function getRelatedIdsByOperonData(operon) {
         if (DataVerifier.isValidArray(transcriptionUnit.terminators)) {
           transcriptionUnit.terminators.forEach((terminator) => {
             terminators = IfNoExistPush(terminators, terminator._id);
-            idValue[terminator._id] = [transcriptionUnit.promoter.name+"_terminator","terminator"]
+            idValue[terminator._id] = [transcriptionUnit.name+"_terminator","terminator"]
             groupTu = IfNoExistPush(groupTu, terminator._id);
           });
         }
