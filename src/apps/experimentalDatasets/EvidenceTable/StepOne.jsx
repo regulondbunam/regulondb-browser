@@ -13,11 +13,6 @@ import { DataVerifier } from "../../../components/ui-components";
 import { useState } from "react";
 import { useEffect } from "react";
 
-const schema_EVIDENCE = {
-  name: "",
-  level: "",
-};
-
 function getEvidencesList(content = "") {
   let evidences = {
     tfrsEvidence: {
@@ -27,11 +22,7 @@ function getEvidencesList(content = "") {
     riEvidence: {
       _nColumn: -1,
       elements: {},
-    },
-    addEvidence: {
-      _nColumn: -1,
-      elements: {},
-    },
+    }
   };
   if (DataVerifier.isValidString(content)) {
     const rawContent = content.split("\n");
@@ -51,20 +42,13 @@ function getEvidencesList(content = "") {
               evidences.riEvidence._nColumn = ci;
               return null;
             }
-            regex = new RegExp("addEvidence");
-            if (regex.test(cell)) {
-              evidences.addEvidence._nColumn = ci;
-              return null;
-            }
           });
         } else {
           const col_tfrsEvidence = cells[evidences.tfrsEvidence._nColumn];
           const col_riEvidence = cells[evidences.riEvidence._nColumn];
-          const col_addEvidence = cells[evidences.addEvidence._nColumn];
           const regex = /\[([^\]]+)\]/g;
           const codes_tfrsEvidence = col_tfrsEvidence.match(regex);
           const codes_riEvidence = col_riEvidence.match(regex);
-          const codes_addEvidence = col_addEvidence.match(regex);
           if (codes_tfrsEvidence) {
             codes_tfrsEvidence.forEach(function (coincidencia) {
               const evidence = coincidencia.slice(1, -1).split(":"); // Elimina los corchetes
@@ -75,12 +59,6 @@ function getEvidencesList(content = "") {
             codes_riEvidence.forEach(function (coincidencia) {
               const evidence = coincidencia.slice(1, -1).split(":"); // Elimina los corchetes
               evidences.riEvidence.elements[evidence[0]] = evidence[1];
-            });
-          }
-          if (codes_addEvidence) {
-            codes_addEvidence.forEach(function (coincidencia) {
-              const evidence = coincidencia.slice(1, -1).split(":"); // Elimina los corchetes
-              evidences.addEvidence.elements[evidence[0]] = evidence[1];
             });
           }
         }

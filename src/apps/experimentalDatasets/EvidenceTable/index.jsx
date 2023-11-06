@@ -70,12 +70,7 @@ export default function EvidenceTable({ fileName, filePath, file }) {
           />
         </Suspense>
       ),
-    },
-    {
-      label: "Download",
-      description: `description`,
-      component: <></>,
-    },
+    }
   ];
 
   const handleNext = () => {

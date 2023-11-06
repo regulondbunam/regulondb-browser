@@ -2,13 +2,13 @@ import { DataVerifier } from "../../../../components/ui-components";
 
 function evidenceCalc(evidence=""){
   if (/c/.test(evidence.toLowerCase())) {
-    return "Confirmed"
+    return "C"
   }
   if (/s/.test(evidence.toLowerCase())) {
-    return "Strong"
+    return "S"
   }
   if (/w/.test(evidence.toLowerCase())) {
-    return "Weak"
+    return "W"
   }
   return ""
 }

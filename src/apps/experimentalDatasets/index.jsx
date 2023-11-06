@@ -307,13 +307,15 @@ export default function ExperimentalDatasets() {
                           </Button>
                         </Link>
                       </Tooltip>
-                      <Tooltip title="Evidence Calculator">
+                      {["TF-RISet","TFSet"].find(f=>f===fileName) && (
+                        <Tooltip title="Confidence Level Calculator Tool">
                         <Link to={"/datasets/evidence/" + fileName}>
                           <Button variant="outlined">
                             <ScienceIcon />
                           </Button>
                         </Link>
                       </Tooltip>
+                      )}
                     </td>
                   </tr>
                 );
