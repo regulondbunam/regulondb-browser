@@ -89,6 +89,8 @@ import BrowserFilter from "./browserFilter";
 import { useLazyGetDataFile } from "../../components/webservices";
 import { gql, useQuery } from "@apollo/client";
 import LoadingButton from '@mui/lab/LoadingButton';
+import ScienceIcon from '@mui/icons-material/Science';
+import EvidenceTable from "./EvidenceTable";
 
 /**
  * Description placeholder
@@ -127,7 +129,7 @@ export default function ExperimentalDatasets() {
     query_GET_AllFilesNames
   );
   const [getFile, { loading: loadingFileData }] = useLazyGetDataFile();
-  const { idFile } = useParams();
+  const { idFile, tool } = useParams();
 
   /**
    * Description placeholder
@@ -219,19 +221,38 @@ export default function ExperimentalDatasets() {
       if (!fileName) {
         return <>there is no file with this name or id:{idFile}</>;
       }
-      return (
-        <BrowserFilter
-          fileName={fileName}
-          filePath={{
-            url: "",
-            type: "graphQLservice",
-          }}
-          file={{
-            name: fileName,
-            type: "table",
-          }}
-        />
-      );
+      if(tool==="browser"){
+        return (
+          <BrowserFilter
+            fileName={fileName}
+            filePath={{
+              url: "",
+              type: "graphQLservice",
+            }}
+            file={{
+              name: fileName,
+              type: "table",
+            }}
+          />
+        );
+      }
+      if(tool==="evidence"){
+        return (
+          <EvidenceTable
+            fileName={fileName}
+            filePath={{
+              url: "",
+              type: "graphQLservice",
+            }}
+            file={{
+              name: fileName,
+              type: "table",
+            }}
+          />
+        );
+      }
+      return <>{tool+" tool error"}</>;
+      
     }
     return (
       <div>
@@ -244,7 +265,7 @@ export default function ExperimentalDatasets() {
               <tr>
                 <th>File</th>
                 <th>Download</th>
-                <th>Browse and Filter</th>
+                <th>Tools</th>
               </tr>
             </thead>
             <tbody>
@@ -280,9 +301,16 @@ export default function ExperimentalDatasets() {
                     </td>
                     <td>
                       <Tooltip title="Browse & Filter">
-                        <Link to={"/datasets/" + fileName}>
+                        <Link to={"/datasets/browser/" + fileName}>
                           <Button variant="outlined">
                             <ManageSearchIcon />
+                          </Button>
+                        </Link>
+                      </Tooltip>
+                      <Tooltip title="Evidence Calculator">
+                        <Link to={"/datasets/evidence/" + fileName}>
+                          <Button variant="outlined">
+                            <ScienceIcon />
                           </Button>
                         </Link>
                       </Tooltip>

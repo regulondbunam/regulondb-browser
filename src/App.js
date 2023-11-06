@@ -180,7 +180,12 @@ const router = createBrowserRouter([
         element: <ExperimentalDatasets />,
         children: [
           {
-            path: ":idFile",
+            path: ":tool",
+            children: [
+              {
+                path: ":idFile",
+              }
+            ]
           }
         ]
       },

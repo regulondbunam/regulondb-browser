@@ -19,7 +19,7 @@ export default function BrowserFilter({fileName, filePath, file}) {
 function ByWebServices({ id, name, path, version, format, type }) {
     const {fileData, loading, error} = useGetDataFile(name)
 
-    console.log(name);
+    //console.log(name);
     if(loading){
         return <Circular/>
     }
