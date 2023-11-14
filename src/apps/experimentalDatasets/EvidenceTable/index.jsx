@@ -26,11 +26,7 @@ export default function EvidenceTable({ fileName, filePath, file }) {
     riEvidence: {
       remove: {},
       selected: {},
-    },
-    addEvidence: {
-      remove: {},
-      selected: {},
-    },
+    }
   });
 
   if (loading) {
@@ -46,7 +42,7 @@ export default function EvidenceTable({ fileName, filePath, file }) {
   const steps = [
     {
       label: "Select Evidences",
-      description: `select evidence`,
+      description: `As a first step, uncheck the evidences to be removed from the calculation.`,
       component: (
         <Suspense fallback={<Circular />}>
           <StepOne
