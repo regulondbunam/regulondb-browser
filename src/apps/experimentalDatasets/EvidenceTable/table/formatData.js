@@ -66,39 +66,41 @@ export default function formatData(content = "", evidenceOptions) {
             }
           });
         } else {
-          let new_tfrsEvidence = "";
-          let new_riEvidence = "";
+          let new_tfrsEvidence = [];
+          let new_riEvidence = [];
           let new_addEvidence = "";
           let new_confidenceLevel = "";
-          const regex = /\[([^\]]+)\]/g;
           if (evidences.tfrsEvidence._nColumn >= 0) {
             const col_tfrsEvidence = cells[evidences.tfrsEvidence._nColumn];
-            const codes_tfrsEvidence = col_tfrsEvidence.match(regex);
+            const codes_tfrsEvidence = col_tfrsEvidence.split(";")
             if (codes_tfrsEvidence) {
               codes_tfrsEvidence.forEach(function (coincidencia) {
                 const { selected } = evidenceOptions.tfrsEvidence;
-                const evidence = coincidencia.slice(1, -1).split(":"); // Elimina los corchetes
+                const evidence = coincidencia.split(":"); // Elimina los corchetes
                 if (selected[evidence[0]]) {
-                  new_tfrsEvidence += coincidencia;
+                  new_tfrsEvidence.push(coincidencia);
                   new_confidenceLevel += evidence[1];
                 }
               });
             }
           }
+          new_tfrsEvidence = new_tfrsEvidence.join(";")
           if (evidences.riEvidence._nColumn >= 0) {
             const col_riEvidence = cells[evidences.riEvidence._nColumn];
-            const codes_riEvidence = col_riEvidence.match(regex);
+            const codes_riEvidence = col_riEvidence.split(";")
             if (codes_riEvidence) {
               codes_riEvidence.forEach(function (coincidencia) {
                 const { selected } = evidenceOptions.riEvidence;
-                const evidence = coincidencia.slice(1, -1).split(":"); // Elimina los corchetes
+                const evidence = coincidencia.split(":"); // Elimina los corchetes
                 if (selected[evidence[0]]) {
-                  new_riEvidence += coincidencia;
+                  new_riEvidence.push(coincidencia);
                   new_confidenceLevel += evidence[1];
                 }
               });
             }
           }
+          new_riEvidence = new_riEvidence.join(";")
+          /*
           if (evidences.addEvidence._nColumn >= 0) {
             const col_addEvidence = cells[evidences.addEvidence._nColumn];
             const codes_addEvidence = col_addEvidence.match(regex);
@@ -113,6 +115,7 @@ export default function formatData(content = "", evidenceOptions) {
               });
             }
           }
+          */
           const row = {};
           cells.forEach((cell, ci) => {
             let indx = ci + 1;

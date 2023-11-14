@@ -26,7 +26,7 @@ export default function EvidenceTable({ fileName, filePath, file }) {
     riEvidence: {
       remove: {},
       selected: {},
-    }
+    },
   });
 
   if (loading) {
@@ -57,16 +57,13 @@ export default function EvidenceTable({ fileName, filePath, file }) {
     {
       label: "View Table Result",
       description:
-        "An ad group contains one or more ads which target a shared set of keywords.",
+        "Table of results with the calculation of the confidence level of each item.",
       component: (
         <Suspense fallback={<Circular />}>
-          <TablePreview
-            fileData={fileData}
-            evidenceOptions={evidenceOptions}
-          />
+          <TablePreview fileData={fileData} evidenceOptions={evidenceOptions} />
         </Suspense>
       ),
-    }
+    },
   ];
 
   const handleNext = () => {
@@ -104,20 +101,25 @@ export default function EvidenceTable({ fileName, filePath, file }) {
                 {step.component}
                 <Box sx={{ mb: 2 }}>
                   <div>
-                    <Button
-                      variant="contained"
-                      onClick={handleNext}
-                      sx={{ mt: 1, mr: 1 }}
-                    >
-                      {index === steps.length - 1 ? "Finish" : "Continue"}
-                    </Button>
-                    <Button
-                      disabled={index === 0}
-                      onClick={handleBack}
-                      sx={{ mt: 1, mr: 1 }}
-                    >
-                      Back
-                    </Button>
+                    {index === 0 && (
+                      <Button
+                        variant="contained"
+                        onClick={handleNext}
+                        sx={{ mt: 1, mr: 1 }}
+                      >
+                        Continue
+                      </Button>
+                    )}
+
+                    {index > 0 && (
+                      <Button
+                       variant="contained"
+                        onClick={handleBack}
+                        sx={{ mt: 1, mr: 1 }}
+                      >
+                        Back
+                      </Button>
+                    )}
                   </div>
                 </Box>
               </StepContent>

@@ -4,6 +4,7 @@ import formatData from './formatData';
 import { FilterTable } from '../../../../components/ui-components';
 
 export default function Table({fileData, evidenceOptions}) {
+  console.log(evidenceOptions);
     const columnsInfo = createColumns(fileData.columnsDetails)
     const {columns,data} = formatData(fileData.content, evidenceOptions)
    
