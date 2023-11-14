@@ -42,7 +42,7 @@ export default function EvidenceTable({ fileName, filePath, file }) {
   const steps = [
     {
       label: "Select Evidences",
-      description: `As a first step, uncheck the evidences to be removed from the calculation.`,
+      description: `As a first step, select the evidence to be removed`,
       component: (
         <Suspense fallback={<Circular />}>
           <StepOne
@@ -81,9 +81,10 @@ export default function EvidenceTable({ fileName, filePath, file }) {
   return (
     <div>
       <Cover>
-        <h1>Evidence {fileName}</h1>
+        <h1>Confidence Level Calculator Tool {fileName}</h1>
       </Cover>
       <Box sx={{ pl: "10%" }}>
+      <p>Our tool is designed to remove assigned evidence from objects and calculate their confidence level. This empowers users to filter records based on their desired evidence, ensuring the quality of the data they need.</p>
         <Stepper activeStep={activeStep} orientation="vertical">
           {steps.map((step, index) => (
             <Step key={step.label}>

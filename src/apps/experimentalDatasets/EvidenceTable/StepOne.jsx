@@ -166,7 +166,7 @@ function TransferList({
     });
     // Ordenar la lista filtrada
     filteredItems.sort();
-    console.log(dir);
+    //console.log(dir);
     //setItems(Object.keys(dir));
     let objEvidence = { ...evidenceOptions };
     objEvidence[nameKey] = {
@@ -208,7 +208,7 @@ function TransferList({
       <div>
         <Grid container spacing={2}>
           <Grid item>
-            <Typography variant="h6">Selected Evidences</Typography>
+            <Typography variant="h6">Select Evidence</Typography>
             <CustomList
               type="selected"
               items={selected}

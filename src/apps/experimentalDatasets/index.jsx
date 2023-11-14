@@ -307,7 +307,7 @@ export default function ExperimentalDatasets() {
                           </Button>
                         </Link>
                       </Tooltip>
-                      {["TF-RISet","TFSet"].find(f=>f===fileName) && (
+                      {["TF-RISet","RISet"].find(f=>f===fileName) && (
                         <Tooltip title="Confidence Level Calculator Tool">
                         <Link to={"/datasets/evidence/" + fileName}>
                           <Button variant="outlined">

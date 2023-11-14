@@ -1,16 +1,16 @@
 import { DataVerifier } from "../../../../components/ui-components";
 
-function evidenceCalc(evidence=""){
+function evidenceCalc(evidence = "") {
   if (/c/.test(evidence.toLowerCase())) {
-    return "C"
+    return "C";
   }
   if (/s/.test(evidence.toLowerCase())) {
-    return "S"
+    return "S";
   }
   if (/w/.test(evidence.toLowerCase())) {
-    return "W"
+    return "W";
   }
-  return ""
+  return "";
 }
 
 export default function formatData(content = "", evidenceOptions) {
@@ -68,11 +68,11 @@ export default function formatData(content = "", evidenceOptions) {
         } else {
           let new_tfrsEvidence = [];
           let new_riEvidence = [];
-          let new_addEvidence = "";
+          let new_addEvidence = [];
           let new_confidenceLevel = "";
           if (evidences.tfrsEvidence._nColumn >= 0) {
             const col_tfrsEvidence = cells[evidences.tfrsEvidence._nColumn];
-            const codes_tfrsEvidence = col_tfrsEvidence.split(";")
+            const codes_tfrsEvidence = col_tfrsEvidence.split(";");
             if (codes_tfrsEvidence) {
               codes_tfrsEvidence.forEach(function (coincidencia) {
                 const { selected } = evidenceOptions.tfrsEvidence;
@@ -84,10 +84,10 @@ export default function formatData(content = "", evidenceOptions) {
               });
             }
           }
-          new_tfrsEvidence = new_tfrsEvidence.join(";")
+          new_tfrsEvidence = new_tfrsEvidence.join(";");
           if (evidences.riEvidence._nColumn >= 0) {
             const col_riEvidence = cells[evidences.riEvidence._nColumn];
-            const codes_riEvidence = col_riEvidence.split(";")
+            const codes_riEvidence = col_riEvidence.split(";");
             if (codes_riEvidence) {
               codes_riEvidence.forEach(function (coincidencia) {
                 const { selected } = evidenceOptions.riEvidence;
@@ -99,23 +99,38 @@ export default function formatData(content = "", evidenceOptions) {
               });
             }
           }
-          new_riEvidence = new_riEvidence.join(";")
-          /*
+          new_riEvidence = new_riEvidence.join(";");
           if (evidences.addEvidence._nColumn >= 0) {
             const col_addEvidence = cells[evidences.addEvidence._nColumn];
-            const codes_addEvidence = col_addEvidence.match(regex);
-            if (codes_addEvidence) {
-              codes_addEvidence.forEach(function (coincidencia) {
-                const { selected } = evidenceOptions.addEvidence;
-                const evidence = coincidencia.slice(1, -1).split(":"); // Elimina los corchetes
-                if (selected[evidence[0]]) {
-                  new_addEvidence += coincidencia;
-                  new_confidenceLevel += evidence[1];
+            const additiveEvidences = col_addEvidence.split(";");
+            const { remove: tfrsRemove } = evidenceOptions.tfrsEvidence;
+            const { remove: riRemove } = evidenceOptions.riEvidence;
+            if (DataVerifier.isValidArray(additiveEvidences)) {
+              additiveEvidences.forEach((additiveEvidence) => {
+                let flag = true
+                const codes_addEvidence = additiveEvidence.match(/\(([^)]+)\)/);
+                if (codes_addEvidence) {
+                  const evidences = codes_addEvidence[1].split("/")
+                  if (DataVerifier.isValidArray(evidences)) {
+                    for (let index = 0; index < evidences.length; index++) {
+                      const evidence = evidences[index];
+                      if (
+                        tfrsRemove.hasOwnProperty(evidence) || riRemove.hasOwnProperty(evidence)
+                      ) {
+                        flag = false
+                        index = evidences.length+1;
+                      }
+                    }
+                    if(flag){
+                      new_addEvidence.push(additiveEvidence);
+                    }
+                  }
                 }
+
               });
             }
           }
-          */
+          new_addEvidence = new_addEvidence.join(";");
           const row = {};
           cells.forEach((cell, ci) => {
             let indx = ci + 1;
@@ -155,3 +170,6 @@ export default function formatData(content = "", evidenceOptions) {
 RDBECOLITUC03781	spy	spy	spy;	spyp	[EXP-IDA-TRANSCRIPT-LEN-DETERMINATION:S][EXP-IDA-BOUNDARIES-DEFINED:W]		S 
 RDBECOLITUC03782	ycaC	ycaC	ycaC;		[COMP-AINF-SINGLE-DIRECTON:W]		W 
 */
+
+/*
+ */
