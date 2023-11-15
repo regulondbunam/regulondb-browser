@@ -238,7 +238,7 @@ export default function FilterTable({
   //console.log(table.getAllLeafColumns().length);
   /**preGlobalFilteredRows={table.getPre} allColumns={allColumns} */
   return (
-    <div style={{ margin: "20px" }}>
+    <div>
       {showColumnsInfo && <InfoColumns {...table} columnsInfo={columnsInfo} />}
       <div>
         <table className={style.table}>

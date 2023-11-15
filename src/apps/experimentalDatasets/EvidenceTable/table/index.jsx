@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import createColumns from './createColumns';
 import formatData from './formatData';
 import { FilterTable } from '../../../../components/ui-components';
