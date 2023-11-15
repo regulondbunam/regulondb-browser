@@ -9,7 +9,7 @@ export default function Table({fileData, evidenceOptions}) {
     const {columns,data} = formatData(fileData.content, evidenceOptions)
    
   return (
-    <div>
+    <div id='table-container' >
         <FilterTable columnsInfo={columnsInfo} columns={columns} data={data} />
     </div>
   )

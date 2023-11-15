@@ -174,8 +174,8 @@ function TransferList({ evidenceList, evidenceOptions, setEvidenceOptions }) {
   };
 
   return (
-    <div>
-      <div>
+    <div style={{display: "flex", justifyContent: "space-around", marginBottom: "20px"}} >
+      <div  >
         <Grid container spacing={2}>
           <Grid item>
             <Typography variant="h6">Select Evidence to be removed</Typography>
@@ -197,8 +197,6 @@ function TransferList({ evidenceList, evidenceOptions, setEvidenceOptions }) {
           </Grid>
         </Grid>
       </div>
-      <br />
-      <br />
     </div>
   );
 }
@@ -250,7 +248,6 @@ const CustomList = ({
           >
             {Object.keys(items).map((value) => {
               const labelId = `transfer-list-item-${value}-label`;
-
               return (
                 <ListItem
                   key={value}

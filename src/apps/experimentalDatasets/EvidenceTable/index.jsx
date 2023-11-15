@@ -79,14 +79,16 @@ export default function EvidenceTable({ fileName, filePath, file }) {
       <Cover>
         <h1>Confidence Level Calculator Tool {fileName}</h1>
       </Cover>
-      <Box sx={{ pl: "10%", pr: "10%" }}>
+      <Box>
+        
+        <Box sx={{ pl: "10%", pr: "10%" }}>
         <p>
           Our tool is designed to remove assigned evidence from objects and
           calculate their confidence level. This empowers users to filter
           records based on their desired evidence, ensuring the quality of the
           data they need.
         </p>
-        <Box sx={{ pl: "10%", pr: "10%" }}>
+        <br />
           <Stepper nonLinear activeStep={activeStep}>
             {steps.map((step, index) => (
               <Step key={step.label}>
@@ -104,6 +106,7 @@ export default function EvidenceTable({ fileName, filePath, file }) {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
+              padding: "0 5% 0 5%"
             }}
           >
             <div>
@@ -121,7 +124,6 @@ export default function EvidenceTable({ fileName, filePath, file }) {
               </Button>
             </div>
           </div>
-
           <div>{steps[activeStep].component}</div>
         </Box>
       </Box>
