@@ -75,7 +75,7 @@ export default function formatData(content = "", evidenceOptions) {
             const codes_tfrsEvidence = col_tfrsEvidence.split(";");
             if (codes_tfrsEvidence) {
               codes_tfrsEvidence.forEach(function (coincidencia) {
-                const { selected } = evidenceOptions.tfrsEvidence;
+                const { selected } = evidenceOptions;
                 const evidence = coincidencia.split(":"); // Elimina los corchetes
                 if (selected[evidence[0]]) {
                   new_tfrsEvidence.push(coincidencia);
@@ -90,7 +90,7 @@ export default function formatData(content = "", evidenceOptions) {
             const codes_riEvidence = col_riEvidence.split(";");
             if (codes_riEvidence) {
               codes_riEvidence.forEach(function (coincidencia) {
-                const { selected } = evidenceOptions.riEvidence;
+                const { selected } = evidenceOptions;
                 const evidence = coincidencia.split(":"); // Elimina los corchetes
                 if (selected[evidence[0]]) {
                   new_riEvidence.push(coincidencia);
@@ -103,8 +103,7 @@ export default function formatData(content = "", evidenceOptions) {
           if (evidences.addEvidence._nColumn >= 0) {
             const col_addEvidence = cells[evidences.addEvidence._nColumn];
             const additiveEvidences = col_addEvidence.split(";");
-            const { remove: tfrsRemove } = evidenceOptions.tfrsEvidence;
-            const { remove: riRemove } = evidenceOptions.riEvidence;
+            const { remove} = evidenceOptions;
             if (DataVerifier.isValidArray(additiveEvidences)) {
               additiveEvidences.forEach((additiveEvidence) => {
                 let flag = true
@@ -115,7 +114,7 @@ export default function formatData(content = "", evidenceOptions) {
                     for (let index = 0; index < evidences.length; index++) {
                       const evidence = evidences[index];
                       if (
-                        tfrsRemove.hasOwnProperty(evidence) || riRemove.hasOwnProperty(evidence)
+                        remove.hasOwnProperty(evidence)
                       ) {
                         flag = false
                         index = evidences.length+1;

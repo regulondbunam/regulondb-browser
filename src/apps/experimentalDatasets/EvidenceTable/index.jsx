@@ -4,6 +4,7 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import StepContent from "@mui/material/StepContent";
+import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
@@ -18,15 +19,10 @@ const StepOne = lazy(() => delayForDemo(import("./StepOne")));
 export default function EvidenceTable({ fileName, filePath, file }) {
   const { fileData, loading, error } = useGetDataFile(fileName);
   const [activeStep, setActiveStep] = React.useState(0);
+
   const [evidenceOptions, setEvidenceOptions] = useState({
-    tfrsEvidence: {
-      remove: {},
-      selected: {},
-    },
-    riEvidence: {
-      remove: {},
-      selected: {},
-    },
+    remove: {},
+    selected: {},
   });
 
   if (loading) {
@@ -38,11 +34,12 @@ export default function EvidenceTable({ fileName, filePath, file }) {
   }
 
   //console.log(evidenceOptions);
+  //Select Evidence to be removed
 
   const steps = [
     {
-      label: "Select Evidences",
-      description: `As a first step, select the evidence to be removed`,
+      label: "Select Evidence",
+      description: `Select the evidence to be removed from the first list, the removed evidence will be displayed in the second list.`,
       component: (
         <Suspense fallback={<Circular />}>
           <StepOne
@@ -50,7 +47,6 @@ export default function EvidenceTable({ fileName, filePath, file }) {
             evidenceOptions={evidenceOptions}
             setEvidenceOptions={setEvidenceOptions}
           />
-          ,
         </Suspense>
       ),
     },
@@ -66,16 +62,16 @@ export default function EvidenceTable({ fileName, filePath, file }) {
     },
   ];
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleReset = () => {
+  const handleFirst = () => {
     setActiveStep(0);
+  };
+
+  const handleTable = () => {
+    setActiveStep(1);
+  };
+
+  const handleStep = (step) => () => {
+    setActiveStep(step);
   };
 
   return (
@@ -83,58 +79,51 @@ export default function EvidenceTable({ fileName, filePath, file }) {
       <Cover>
         <h1>Confidence Level Calculator Tool {fileName}</h1>
       </Cover>
-      <Box sx={{ pl: "10%" }}>
-      <p>Our tool is designed to remove assigned evidence from objects and calculate their confidence level. This empowers users to filter records based on their desired evidence, ensuring the quality of the data they need.</p>
-        <Stepper activeStep={activeStep} orientation="vertical">
-          {steps.map((step, index) => (
-            <Step key={step.label}>
-              <StepLabel
-                optional={
-                  index === 2 ? (
-                    <Typography variant="caption">Last step</Typography>
-                  ) : null
-                }
+      <Box sx={{ pl: "10%", pr: "10%" }}>
+        <p>
+          Our tool is designed to remove assigned evidence from objects and
+          calculate their confidence level. This empowers users to filter
+          records based on their desired evidence, ensuring the quality of the
+          data they need.
+        </p>
+        <Box sx={{ pl: "10%", pr: "10%" }}>
+          <Stepper nonLinear activeStep={activeStep}>
+            {steps.map((step, index) => (
+              <Step key={step.label}>
+                <StepButton color="inherit" onClick={handleStep(index)}>
+                  {step.label}
+                </StepButton>
+              </Step>
+            ))}
+          </Stepper>
+        </Box>
+        <Box sx={{ mt: "1%" }}>
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <div>
+              <p>{steps[activeStep].description}</p>
+            </div>
+            <div>
+              <Button
+                variant="contained"
+                onClick={activeStep === 0 ? handleTable : handleFirst}
               >
-                {step.label}
-              </StepLabel>
-              <StepContent>
-                <Typography>{step.description}</Typography>
-                {step.component}
-                <Box sx={{ mb: 2 }}>
-                  <div>
-                    {index === 0 && (
-                      <Button
-                        variant="contained"
-                        onClick={handleNext}
-                        sx={{ mt: 1, mr: 1 }}
-                      >
-                        Continue
-                      </Button>
-                    )}
+                {" "}
+                {activeStep === 0
+                  ? "Continue to Table Result"
+                  : "Return to Select Evidence"}{" "}
+              </Button>
+            </div>
+          </div>
 
-                    {index > 0 && (
-                      <Button
-                       variant="contained"
-                        onClick={handleBack}
-                        sx={{ mt: 1, mr: 1 }}
-                      >
-                        Back
-                      </Button>
-                    )}
-                  </div>
-                </Box>
-              </StepContent>
-            </Step>
-          ))}
-        </Stepper>
-        {activeStep === steps.length && (
-          <Paper square elevation={0} sx={{ p: 3 }}>
-            <Typography>All steps completed - you&apos;re finished</Typography>
-            <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-              Reset
-            </Button>
-          </Paper>
-        )}
+          <div>{steps[activeStep].component}</div>
+        </Box>
       </Box>
     </div>
   );

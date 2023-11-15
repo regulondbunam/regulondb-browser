@@ -16,16 +16,9 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 function getEvidencesList(content = "") {
-  let evidences = {
-    tfrsEvidence: {
-      _nColumn: -1,
-      elements: {},
-    },
-    riEvidence: {
-      _nColumn: -1,
-      elements: {},
-    },
-  };
+  let tfrsEvidence_nColumn = -1;
+  let riEvidence_nColumn = -1;
+  let evidences = {};
   if (DataVerifier.isValidString(content)) {
     const rawContent = content.split("\n");
     if (DataVerifier.isValidArray(rawContent)) {
@@ -36,18 +29,18 @@ function getEvidencesList(content = "") {
           cells.forEach((cell, ci) => {
             let regex = new RegExp("tfrsEvidence");
             if (regex.test(cell)) {
-              evidences.tfrsEvidence._nColumn = ci;
+              tfrsEvidence_nColumn = ci;
               return null;
             }
             regex = new RegExp("riEvidence");
             if (regex.test(cell)) {
-              evidences.riEvidence._nColumn = ci;
+              riEvidence_nColumn = ci;
               return null;
             }
           });
         } else {
-          const col_tfrsEvidence = cells[evidences.tfrsEvidence._nColumn];
-          const col_riEvidence = cells[evidences.riEvidence._nColumn];
+          const col_tfrsEvidence = cells[tfrsEvidence_nColumn];
+          const col_riEvidence = cells[riEvidence_nColumn];
           //const regex = /\[([^\]]+)\]/g;
           const codes_tfrsEvidence = col_tfrsEvidence.split(";");
           const codes_riEvidence = col_riEvidence.split(";");
@@ -55,7 +48,7 @@ function getEvidencesList(content = "") {
             codes_tfrsEvidence.forEach(function (coincidencia) {
               const evidence = coincidencia.split(":");
               if (DataVerifier.isValidString(evidence[0])) {
-                evidences.tfrsEvidence.elements[evidence[0]] = evidence[1];
+                evidences[evidence[0]] = evidence[1];
               }
             });
           }
@@ -63,7 +56,7 @@ function getEvidencesList(content = "") {
             codes_riEvidence.forEach(function (coincidencia) {
               const evidence = coincidencia.split(":");
               if (DataVerifier.isValidString(evidence[0])) {
-                evidences.riEvidence.elements[evidence[0]] = evidence[1];
+                evidences[evidence[0]] = evidence[1];
               }
             });
           }
@@ -86,22 +79,219 @@ export default function StepOne({
 
   return (
     <div>
-      {Object.keys(evidenceList).map((key) => {
-        let evidence = evidenceList[key];
-        return (
-          <TransferList
-            key={"list_" + key}
-            nameKey={key}
-            evidenceList={evidence.elements}
-            evidenceOptions={evidenceOptions}
-            setEvidenceOptions={setEvidenceOptions}
-          />
-        );
-      })}
+      <TransferList
+        evidenceList={evidenceList}
+        evidenceOptions={evidenceOptions}
+        setEvidenceOptions={setEvidenceOptions}
+      />
     </div>
   );
 }
 
+function TransferList({ evidenceList, evidenceOptions, setEvidenceOptions }) {
+  const { remove, selected } = evidenceOptions;
+  //console.log(evidenceOptions);
+  useEffect(() => {
+    if (DataVerifier.isValidObject(evidenceOptions)) {
+      if (
+        !DataVerifier.isValidObject(evidenceOptions.selected) &&
+        !DataVerifier.isValidObject(evidenceOptions.remove)
+      ) {
+        let objEvidence = {
+          remove: {},
+          selected: { ...evidenceList },
+        };
+        setEvidenceOptions(objEvidence);
+      }
+    }
+  }, [evidenceList, evidenceOptions, setEvidenceOptions]);
+
+  const handleSelect = (key) => {
+    let newSelection = { ...selected };
+    newSelection[key] = remove[key];
+    let newRemove = { ...remove };
+    delete newRemove[key];
+    let objEvidence = {
+      remove: newRemove,
+      selected: newSelection,
+    };
+    setEvidenceOptions(objEvidence);
+  };
+
+  const handleRemove = (key) => {
+    let newSelection = { ...selected };
+    let newRemove = { ...remove };
+    newRemove[key] = selected[key];
+    delete newSelection[key];
+    let objEvidence = {
+      remove: newRemove,
+      selected: newSelection,
+    };
+    setEvidenceOptions(objEvidence);
+  };
+
+  const handleFilterSelect = (text) => {
+    let dir = {};
+    // Filtrar la lista de elementos
+    const filteredItems = Object.keys(selected).filter((item) =>
+      item.toLowerCase().includes(text.toLowerCase())
+    );
+    filteredItems.forEach((key) => {
+      dir[key] = selected[key];
+    });
+    Object.keys(selected).forEach((key) => {
+      dir[key] = selected[key];
+    });
+    // Ordenar la lista filtrada
+    filteredItems.sort();
+    //console.log(dir);
+    //setItems(Object.keys(dir));
+    let objEvidence = {
+      remove: remove,
+      selected: dir,
+    };
+    setEvidenceOptions(objEvidence);
+  };
+
+  const handleFilterRemove = (text) => {
+    let dir = {};
+    // Filtrar la lista de elementos
+    const filteredItems = Object.keys(remove).filter((item) =>
+      item.toLowerCase().includes(text.toLowerCase())
+    );
+    filteredItems.forEach((key) => {
+      dir[key] = remove[key];
+    });
+    Object.keys(remove).forEach((key) => {
+      dir[key] = remove[key];
+    });
+    filteredItems.sort();
+    let objEvidence = {
+      remove: dir,
+      selected: selected,
+    };
+    setEvidenceOptions(objEvidence);
+  };
+
+  return (
+    <div>
+      <div>
+        <Grid container spacing={2}>
+          <Grid item>
+            <Typography variant="h6">Select Evidence to be removed</Typography>
+            <CustomList
+              type="selected"
+              items={selected}
+              onSelectItemList={handleRemove}
+              handleFilter={handleFilterSelect}
+            />
+          </Grid>
+          <Grid item>
+            <Typography variant="h6">Evidence removed</Typography>
+            <CustomList
+              type="remove"
+              items={remove}
+              onSelectItemList={handleSelect}
+              handleFilter={handleFilterRemove}
+            />
+          </Grid>
+        </Grid>
+      </div>
+      <br />
+      <br />
+    </div>
+  );
+}
+
+const CustomList = ({
+  type = "",
+  items = {},
+  onSelectItemList = () => {},
+  handleFilter = () => {},
+}) => {
+  const [filterText, setFilterText] = useState("");
+
+  const handleFilterChange = (event) => {
+    const text = event.target.value;
+    handleFilter(text);
+    setFilterText(text);
+  };
+
+  return (
+    <Paper elevation={3} sx={{ width: "35vw", height: 400, overflow: "auto" }}>
+      <div>
+        <div
+          style={{
+            position: "sticky",
+            top: 0,
+            zIndex: 99,
+            backgroundColor: "white",
+          }}
+        >
+          <TextField
+            label="Filter"
+            fullWidth
+            size="small"
+            variant="filled"
+            value={filterText}
+            onChange={handleFilterChange}
+          />
+        </div>
+        <div>
+          <List
+            dense
+            component="div"
+            role="list"
+            sx={{
+              "& :hover": {
+                background: "#aaaaaa",
+              },
+            }}
+          >
+            {Object.keys(items).map((value) => {
+              const labelId = `transfer-list-item-${value}-label`;
+
+              return (
+                <ListItem
+                  key={value}
+                  role="listitem"
+                  secondaryAction={
+                    type === "selected" && (
+                      <IconButton
+                        onClick={() => {
+                          onSelectItemList(value);
+                        }}
+                      >
+                        <DeleteForeverIcon fontSize="small" />
+                      </IconButton>
+                    )
+                  }
+                >
+                  {type === "remove" && (
+                    <ListItemIcon>
+                      <IconButton
+                        onClick={() => {
+                          onSelectItemList(value);
+                        }}
+                      >
+                        <AddBoxIcon fontSize="small" />
+                      </IconButton>
+                    </ListItemIcon>
+                  )}
+
+                  <ListItemText id={labelId} primary={`${value}`} />
+                </ListItem>
+              );
+            })}
+          </List>
+        </div>
+      </div>
+    </Paper>
+  );
+};
+
+/**
+ * 
 function TransferList({
   evidenceList,
   nameKey,
@@ -217,139 +407,22 @@ function TransferList({
             />
           </Grid>
           <Grid item>
-            {/*<Grid container direction="column" alignItems="center">
-              <Button
-                sx={{ my: 0.5 }}
-                variant="outlined"
-                size="small"
-                onClick={handleAllRight}
-                disabled={left.length === 0}
-                aria-label="move all right"
-              >
-                ≫
-              </Button>
-              <Button
-                sx={{ my: 0.5 }}
-                variant="outlined"
-                size="small"
-                onClick={handleCheckedRight}
-                disabled={leftChecked.length === 0}
-                aria-label="move selected right"
-              >
-                &gt;
-              </Button>
-              <Button
-                sx={{ my: 0.5 }}
-                variant="outlined"
-                size="small"
-                onClick={handleCheckedLeft}
-                disabled={rightChecked.length === 0}
-                aria-label="move selected left"
-              >
-                &lt;
-              </Button>
-              <Button
-                sx={{ my: 0.5 }}
-                variant="outlined"
-                size="small"
-                onClick={handleAllLeft}
-                disabled={right.length === 0}
-                aria-label="move all left"
-              >
-                ≪
-              </Button>
-            </Grid>*/}
+            
+            </Grid>
+            <Grid item>
+              <Typography variant="h6">Evidence removed</Typography>
+              <CustomList
+                type="remove"
+                items={remove}
+                onSelectItemList={handleSelect}
+                handleFilter={handleFilterRemove}
+              />
+            </Grid>
           </Grid>
-          <Grid item>
-            <Typography variant="h6">Evidence removed</Typography>
-            <CustomList
-              type="remove"
-              items={remove}
-              onSelectItemList={handleSelect}
-              handleFilter={handleFilterRemove}
-            />
-          </Grid>
-        </Grid>
-      </div>
-      <br />
-      <br />
-    </div>
-  );
-}
-
-const CustomList = ({
-  type = "",
-  items = {},
-  onSelectItemList = () => {},
-  handleFilter = () => {},
-}) => {
-  const [filterText, setFilterText] = useState("");
-
-  const handleFilterChange = (event) => {
-    const text = event.target.value;
-    handleFilter(text)
-    setFilterText(text);
-  };
-
-  return (
-    <Paper elevation={3} sx={{ width: "35vw", height: 400, overflow: "auto" }}>
-      <div>
-        <div
-          style={{
-            position: "sticky",
-            top: 0,
-            zIndex: 99,
-            backgroundColor: "white",
-          }}
-        >
-          <TextField
-            label="Filter"
-            fullWidth
-            variant="filled"
-            value={filterText}
-            onChange={handleFilterChange}
-          />
         </div>
-        <div>
-          <List dense component="div" role="list">
-            {Object.keys(items).map((value) => {
-              const labelId = `transfer-list-item-${value}-label`;
-
-              return (
-                <ListItem
-                  key={value}
-                  role="listitem"
-                  secondaryAction={
-                    type === "selected" && (
-                      <IconButton
-                        onClick={() => {
-                          onSelectItemList(value);
-                        }}
-                      >
-                        <DeleteForeverIcon />
-                      </IconButton>
-                    )
-                  }
-                >
-                  {type === "remove" && (
-                    <ListItemIcon>
-                      <IconButton
-                        onClick={() => {
-                          onSelectItemList(value);
-                        }}
-                      >
-                        <AddBoxIcon />
-                      </IconButton>
-                    </ListItemIcon>
-                  )}
-
-                  <ListItemText id={labelId} primary={`${value}`} />
-                </ListItem>
-              );
-            })}
-          </List>
-        </div>
+        <br />
+        <br />
       </div>
-    </Paper>
-  );
-};
+    );
+  }
+ */
