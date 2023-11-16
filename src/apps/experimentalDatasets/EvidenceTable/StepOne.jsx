@@ -64,7 +64,13 @@ function getEvidencesList(content = "") {
     }
   }
   //console.log(evidences);
-  return evidences;
+  let keysSorted = Object.keys(evidences).sort()
+  let evidenceSorted = {}
+  console.log(keysSorted);
+  keysSorted.forEach(key => {
+    evidenceSorted[key] = evidences[key]
+  });
+  return evidenceSorted;
 }
 
 export default function StepOne({

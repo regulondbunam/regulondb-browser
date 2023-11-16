@@ -75,8 +75,9 @@ export function Download({
                     disableElevation
                     onClick={handleClickMenu}
                     sx={{ height: 30 }}
+                    endIcon={<DownloadIcon />}
                 >
-                    <DownloadIcon />
+                    Download
                 </Button>
             </Tooltip>
             <Menu

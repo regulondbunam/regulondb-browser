@@ -1,4 +1,4 @@
-import { GlobalFilter } from "./globalFilter";
+//import { GlobalFilter } from "./globalFilter";
 import { Download } from "./download";
 import { Columns } from "./columns";
 import ButtonGroup from "@mui/material/ButtonGroup";
@@ -19,7 +19,7 @@ export default function Options({
     <div style={{display: "flex"}} >
       <div>
         <p>
-          <b>TABLE</b>
+          <b></b>
         </p>
       </div>
       <div

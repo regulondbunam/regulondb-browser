@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepButton from "@mui/material/StepButton";
-import Button from "@mui/material/Button";
 import { Cover, Circular } from "../../../components/ui-components";
 import { useGetDataFile } from "../../../components/webservices/dataOfFile";
 //import Table from "./table";
@@ -58,14 +57,6 @@ export default function EvidenceTable({ fileName, filePath, file }) {
     },
   ];
 
-  const handleFirst = () => {
-    setActiveStep(0);
-  };
-
-  const handleTable = () => {
-    setActiveStep(1);
-  };
-
   const handleStep = (step) => () => {
     setActiveStep(step);
   };
@@ -85,6 +76,7 @@ export default function EvidenceTable({ fileName, filePath, file }) {
           data they need.
         </p>
         <br />
+          <Box sx={{width: "40%"}} >
           <Stepper nonLinear activeStep={activeStep}>
             {steps.map((step, index) => (
               <Step key={step.label}>
@@ -94,6 +86,7 @@ export default function EvidenceTable({ fileName, filePath, file }) {
               </Step>
             ))}
           </Stepper>
+          </Box>
         </Box>
         <Box sx={{ mt: "1%" }}>
           <div
@@ -109,7 +102,7 @@ export default function EvidenceTable({ fileName, filePath, file }) {
               <p>{steps[activeStep].description}</p>
             </div>
             <div>
-              <Button
+              {/*<Button
                 variant="contained"
                 onClick={activeStep === 0 ? handleTable : handleFirst}
               >
@@ -117,7 +110,7 @@ export default function EvidenceTable({ fileName, filePath, file }) {
                 {activeStep === 0
                   ? "Continue to Table Result"
                   : "Return to Select Evidence"}{" "}
-              </Button>
+                </Button>*/}
             </div>
           </div>
           <div>{steps[activeStep].component}</div>

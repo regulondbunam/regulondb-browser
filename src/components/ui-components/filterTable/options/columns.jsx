@@ -2,7 +2,8 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import ListItemText from "@mui/material/ListItemText";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { useState } from "react";
@@ -32,8 +33,9 @@ export function Columns({
           disableElevation
           onClick={handleClickMenu}
           sx={{ height: 30 }}
+          endIcon={openMenu ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
         >
-          Columns
+          Hide Columns
         </Button>
       </Tooltip>
       <Menu
