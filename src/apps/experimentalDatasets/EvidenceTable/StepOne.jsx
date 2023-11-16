@@ -7,12 +7,11 @@ import ListItemText from "@mui/material/ListItemText";
 import IconButton from "@mui/material/IconButton";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { useGetDataFile } from "../../../components/webservices/dataOfFile";
 import Paper from "@mui/material/Paper";
-import { Typography, TextField } from "@mui/material";
-import { useMemo } from "react";
-import { DataVerifier } from "../../../components/ui-components";
-import { useState } from "react";
-import { useEffect } from "react";
+import { Typography, TextField, Tooltip } from "@mui/material";
+import { useMemo, useState, useEffect } from "react";
+import { DataVerifier, Circular } from "../../../components/ui-components";
 
 function getEvidencesList(content = "") {
   let tfrsEvidence_nColumn = -1;
@@ -66,7 +65,6 @@ function getEvidencesList(content = "") {
   //console.log(evidences);
   let keysSorted = Object.keys(evidences).sort()
   let evidenceSorted = {}
-  console.log(keysSorted);
   keysSorted.forEach(key => {
     evidenceSorted[key] = evidences[key]
   });
@@ -78,22 +76,62 @@ export default function StepOne({
   evidenceOptions,
   setEvidenceOptions,
 }) {
+  const { fileData: fileEvidence, loading, error } = useGetDataFile("EvidenceSet");
   const evidenceList = useMemo(() => {
     return getEvidencesList(fileData.content);
   }, [fileData]);
+  if(loading){
+    return <Circular />
+  }
+
+  if(error){
+    console.error("error read evidence set");
+  }
 
   return (
     <div>
       <TransferList
         evidenceList={evidenceList}
         evidenceOptions={evidenceOptions}
+        fileEvidence={fileEvidence}
         setEvidenceOptions={setEvidenceOptions}
       />
     </div>
   );
 }
 
-function TransferList({ evidenceList, evidenceOptions, setEvidenceOptions }) {
+
+function formatEvidenceData(fileEvidence,evidenceList={}){
+  let evidenceData = {}
+  if (fileEvidence?.content) {
+    const content = fileEvidence.content
+    const rows = content.split("\n")
+    if (DataVerifier.isValidArray(rows)) {
+      rows.forEach((row,index) => {
+        if (index===0) {
+          //const cells = row.split("\t")
+          //1)evidence_code => 0
+          //2)evidence_name => 1
+        }else{
+          const cells = row.split("\t")
+        if (DataVerifier.isValidArray(cells)) {
+          const code = cells[0]
+          const name = cells[1]
+          if(evidenceList.hasOwnProperty(code)){
+            evidenceData[code] = name
+          }
+        }
+        }
+      });
+    }
+  }
+  return evidenceData
+}
+
+function TransferList({ evidenceList, evidenceOptions, fileEvidence, setEvidenceOptions }) {
+  const evidenceData = useMemo(() => {
+    return formatEvidenceData(fileEvidence,evidenceList)
+  }, [fileEvidence, evidenceList])
   const { remove, selected } = evidenceOptions;
   //console.log(evidenceOptions);
   useEffect(() => {
@@ -187,6 +225,7 @@ function TransferList({ evidenceList, evidenceOptions, setEvidenceOptions }) {
             <CustomList
               type="selected"
               items={selected}
+              evidenceData={evidenceData}
               onSelectItemList={handleRemove}
               handleFilter={handleFilterSelect}
             />
@@ -196,6 +235,7 @@ function TransferList({ evidenceList, evidenceOptions, setEvidenceOptions }) {
             <CustomList
               type="remove"
               items={remove}
+              evidenceData={evidenceData}
               onSelectItemList={handleSelect}
               handleFilter={handleFilterRemove}
             />
@@ -209,6 +249,7 @@ function TransferList({ evidenceList, evidenceOptions, setEvidenceOptions }) {
 const CustomList = ({
   type = "",
   items = {},
+  evidenceData = {},
   onSelectItemList = () => {},
   handleFilter = () => {},
 }) => {
@@ -280,8 +321,9 @@ const CustomList = ({
                       </IconButton>
                     </ListItemIcon>
                   )}
-
-                  <ListItemText id={labelId} primary={`${value}`} />
+                  <Tooltip title={evidenceData.hasOwnProperty(value)?evidenceData[value]:""} placement="right" >
+                    <ListItemText id={labelId} primary={`${value}`} />
+                  </Tooltip>
                 </ListItem>
               );
             })}
