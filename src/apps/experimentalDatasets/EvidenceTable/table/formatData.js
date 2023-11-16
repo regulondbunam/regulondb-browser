@@ -103,7 +103,7 @@ export default function formatData(content = "", evidenceOptions) {
           if (evidences.addEvidence._nColumn >= 0) {
             const col_addEvidence = cells[evidences.addEvidence._nColumn];
             const additiveEvidences = col_addEvidence.split(";");
-            const { remove} = evidenceOptions;
+            const {remove} = evidenceOptions;
             if (DataVerifier.isValidArray(additiveEvidences)) {
               additiveEvidences.forEach((additiveEvidence) => {
                 let flag = true
@@ -122,6 +122,8 @@ export default function formatData(content = "", evidenceOptions) {
                     }
                     if(flag){
                       new_addEvidence.push(additiveEvidence);
+                      const additiveEvidenceData = additiveEvidence.split(":")
+                      new_confidenceLevel += additiveEvidenceData[1];
                     }
                   }
                 }
