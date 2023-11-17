@@ -1,5 +1,6 @@
 import React, { useState, Suspense, lazy } from "react";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepButton from "@mui/material/StepButton";
@@ -63,6 +64,14 @@ export default function EvidenceTable({ fileName, filePath, file }) {
     setActiveStep(step);
   };
 
+  const handleTable = () => {
+    setActiveStep(1);
+  };
+
+  const handleFirst = () => {
+    setActiveStep(0);
+  };
+
   return (
     <div>
       <Cover>
@@ -97,22 +106,31 @@ export default function EvidenceTable({ fileName, filePath, file }) {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              padding: "0 5% 0 5%",
+              padding: "0 10% 0 10%",
             }}
           >
             <div>
-              <p>
-                {steps[activeStep].description}
-                
-              </p>
+              <p>{steps[activeStep].description}</p>
               {activeStep === 0 && (
-                  <Link to="/manual/help/evidenceclassification">
-                    Evidence Help
-                  </Link>
-                )}{" "}
+                <Link to="/manual/help/evidenceclassification">
+                  Evidence Help
+                </Link>
+              )}{" "}
             </div>
-            <div>
-              {/*<Button
+          </div>
+          <div>{steps[activeStep].component}</div>
+          <div
+          style={{
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-around",
+            padding: "0 10% 0 10%",
+          }}
+          >
+          <Button
+              size="small"
+              color="secondary"
                 variant="contained"
                 onClick={activeStep === 0 ? handleTable : handleFirst}
               >
@@ -120,12 +138,12 @@ export default function EvidenceTable({ fileName, filePath, file }) {
                 {activeStep === 0
                   ? "Continue to Table Result"
                   : "Return to Select Evidence"}{" "}
-                </Button>*/}
-            </div>
+              </Button>
           </div>
-          <div>{steps[activeStep].component}</div>
         </Box>
       </Box>
+      <br />
+      <br />
     </div>
   );
 }

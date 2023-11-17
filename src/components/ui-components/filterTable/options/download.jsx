@@ -44,8 +44,8 @@ export function Download({
         }
         //console.log(columns);
         const formatSeparator = {
-            csv: ", ",
-            tsv: "\t ",
+            csv: ",",
+            tsv: "\t",
         }
         //file head
         let fileInfo = columns.map(column => column.id).join(formatSeparator[format]) + "\n"
