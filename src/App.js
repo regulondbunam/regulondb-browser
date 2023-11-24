@@ -26,6 +26,7 @@ import Manual from './apps/manual';
 import ExperimentalDatasets from './apps/experimentalDatasets';
 import MCO from './apps/mco';
 import TFPSSMs, {TFPSSMsTest} from './apps/TF-PSSMs';
+import Notebooks from './apps/Notebooks';
 
 //wsSandbox
 const router = createBrowserRouter([
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "TF-PSSMsTest",
         element: <TFPSSMsTest />,
+      },
+      {
+        path: "notebook",
+        element: <Notebooks />,
       },
       {
         path: "TF-PSSMs",
