@@ -33,7 +33,7 @@
     "file-saver": "^2.0.5",
     "graphql": "^16.5.0",
     "html2canvas": "^1.4.1",
-    "igv": "^2.13.3",
+    "igv": "^2.15.11",
     "markdown-navbar": "^1.3.5",
     "md-2-json": "^2.0.0",
     "react": "^18.1.0",
