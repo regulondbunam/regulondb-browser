@@ -1,5 +1,6 @@
 import igv from "igv/dist/igv.esm";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import {ACTION} from "./static"
 
 let conf = {
   id: "Ecoli",
@@ -7,43 +8,33 @@ let conf = {
   fastaURL: "/media/raw/e_coli_k12.fna",
   indexURL: "/media/raw/e_coli_k12.fna.fai",
   order: 1000,
-  tracks: [
-    {
-      name: "Genes",
-      type: "annotation",
-      url: "/media/raw/gff3/GeneProductSet.gff3",
-      format: "gff3",
-      color: "#000000",
-      displayMode: "EXPANDED",
-    },
-  ],
 };
 
-export default function IGVDraw({ igvBrowser, setIgvBrowser }) {
-  const [view, setView] = useState(false);
-  const [genomeLoad, setGenomeLoad] = useState(false);
+export default function IGVDraw({dispatch}) {
+  const [guid, setGuid] = useState();
+  const b = useRef([])
   useEffect(() => {
     let igvDiv = document.getElementById("igv-divK");
-    if (igvDiv && !view) {
-      setView(true);
-      igv.createBrowser(igvDiv).then(function (browser) {
-        setIgvBrowser(browser);
+    if (igvDiv && !guid) {
+      igv.createBrowser(igvDiv,{genome: conf}).then(function (browser) {
+        setGuid(browser.guid)
+        b.current.push(browser)
+        dispatch({type: ACTION.INIT, sessionObject: browser.toJSON, browser: browser})
       });
     }
-    if (view && igvBrowser && !genomeLoad) {
-      setGenomeLoad(true);
-      igvBrowser.loadGenome(conf);
-    }
-  }, [genomeLoad, view, igvBrowser, setIgvBrowser]);
-
-  return <>{correct()}</>;
+  }, [guid,dispatch]);
+  if (b.current.length > 1) {
+    b.current.forEach(browser => {
+      if(browser.guid !== guid ){
+        try {
+          igv.removeBrowser(browser)
+        } catch (error) {
+          console.error("IGVremove error:",error);
+        }
+        
+      }
+    });
+  }
+  return <></>;
 }
 
-function correct() {
-  setTimeout(() => {
-    const igv = document.getElementsByClassName("igv-container");
-    if (igv.length > 1) {
-      igv[0].remove();
-    }
-  }, 500);
-}
