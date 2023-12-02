@@ -11,30 +11,18 @@ let conf = {
 };
 
 export default function IGVDraw({dispatch}) {
-  const [guid, setGuid] = useState();
-  const b = useRef([])
+  const igvContainerRef = useRef(null);
+  const igvRef = useRef(null);
   useEffect(() => {
-    let igvDiv = document.getElementById("igv-divK");
-    if (igvDiv && !guid) {
-      igv.createBrowser(igvDiv,{genome: conf}).then(function (browser) {
-        setGuid(browser.guid)
-        b.current.push(browser)
+    if (igvRef.current === null) {
+      igvRef.current = igv.createBrowser(igvContainerRef.current,{genome: conf}).then(function (browser) {
         dispatch({type: ACTION.INIT, sessionObject: browser.toJSON, browser: browser})
       });
     }
-  }, [guid,dispatch]);
-  if (b.current.length > 1) {
-    b.current.forEach(browser => {
-      if(browser.guid !== guid ){
-        try {
-          igv.removeBrowser(browser)
-        } catch (error) {
-          console.error("IGVremove error:",error);
-        }
-        
-      }
-    });
-  }
-  return <></>;
+  }, [dispatch]);
+  return <div
+      id="igv-div"
+      ref={igvContainerRef}
+    />;
 }
 

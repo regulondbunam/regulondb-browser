@@ -11,6 +11,8 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import { Checkbox } from "@mui/material";
 import { List, ListItemButton, Tooltip, Button, ListItem } from "@mui/material";
 import { useState } from "react";
+import { RDBTracks } from "./RDBTracks";
+import {ACTION} from "../static"
 
 export default function Menu({ state, dispatch, viewMenu, setViewMenu }) {
   const handleViewMenu = () => {
@@ -47,7 +49,7 @@ export default function Menu({ state, dispatch, viewMenu, setViewMenu }) {
             <AddBoxIcon />
           </ListItemButton>
           <Divider />
-          <RegulonDBList />
+          <RegulonDBList state={state} dispatch={dispatch} />
           <Divider />
           <HTList />
         </List>
@@ -57,7 +59,7 @@ export default function Menu({ state, dispatch, viewMenu, setViewMenu }) {
 }
 
 function RegulonDBList({ state, dispatch }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   const handleOpen = () => {
     setOpen(!open);
@@ -71,9 +73,18 @@ function RegulonDBList({ state, dispatch }) {
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List dense component="div" disablePadding>
-          <ListItem sx={{ pl: 4 }} secondaryAction={<Checkbox />}>
-            <ListItemText primary="track" />
-          </ListItem>
+          {RDBTracks.map((track) => {
+            return (
+              <ListItem key={"MenuTackGene"+track.id} sx={{ pl: 4 }} 
+              secondaryAction={<Checkbox
+                checked={state.tracks.find(t=>t.id===track.id)}
+                onChange={()=>{dispatch({type:ACTION.ADD_TRACK,track:track})}}
+                />}
+              >
+                <ListItemText primary={track.name} />
+              </ListItem>
+            );
+          })}
         </List>
       </Collapse>
     </>
