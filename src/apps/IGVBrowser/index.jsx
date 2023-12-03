@@ -1,4 +1,4 @@
-import React, { useReducer, Suspense, lazy, useState } from "react";
+import React, { useReducer, Suspense, lazy, useState, useRef, useEffect } from "react";
 import { Cover, Circular } from "../../components/ui-components";
 import Menu from "./Menu";
 import {ACTION} from "./static"
@@ -13,10 +13,15 @@ function reducer(state, action) {
       return {...state,sessionObject: action.browser.toJSON(), browser: action.browser}
     case ACTION.ADD_TRACK:
       if(state?.browser){
-        state.browser.loadTrack(action.track)
-        return {...state, tracks: [...state.tracks, action.track.id]}
+        //state.browser.loadTrack(action.track)
+        return {...state, tracks: [...state.tracks, action.track.id], loadTrack: action.track}
       }else{
         console.error("browser Information no loaded");
+      }
+      return state
+    case ACTION.CLEAN_LOAD_TRACK:
+      if (state.loadTrack !== null) {
+        return {...state, loadTrack: null}
       }
       return state
     default:
@@ -26,7 +31,8 @@ function reducer(state, action) {
 }
 
 const initReducer = {
-  tracks: []
+  tracks: [],
+  loadTrack: null
 }
 
 
@@ -34,8 +40,19 @@ const initReducer = {
 export default function IGVBrowser() {
   const [viewMenu, setViewMenu] = useState(true)
   const [state, dispatch] = useReducer(reducer,initReducer)
+  const igvFunction = useRef(null)
 
   console.log(state);
+
+  useEffect(() => {
+    if(igvFunction.current === null && state.loadTrack !== null){
+      igvFunction.current = state.browser.loadTrack(state.loadTrack).then((track)=>{
+        dispatch({type: ACTION.CLEAN_LOAD_TRACK})
+        igvFunction.current = null
+      })
+    }
+  }, [state])
+  
 
   return (
     <div>
