@@ -77,8 +77,14 @@ function RegulonDBList({ state, dispatch }) {
             return (
               <ListItem key={"MenuTackGene"+track.id} sx={{ pl: 4 }} 
               secondaryAction={<Checkbox
-                checked={state.tracks.find(t=>t.id===track.id)}
-                onChange={()=>{dispatch({type:ACTION.ADD_TRACK,track:track})}}
+                checked={state.tracks.hasOwnProperty(track.name)}
+                onChange={()=>{
+                  if(state.tracks.hasOwnProperty(track.name)){
+                    dispatch({type:ACTION.DELETE_TRACK,trackName:track.name})
+                  }else{
+                    dispatch({type:ACTION.ADD_TRACK,track:track})
+                  }
+                }}
                 />}
               >
                 <ListItemText primary={track.name} />

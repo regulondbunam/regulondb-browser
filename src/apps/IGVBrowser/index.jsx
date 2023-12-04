@@ -14,7 +14,19 @@ function reducer(state, action) {
     case ACTION.ADD_TRACK:
       if(state?.browser){
         //state.browser.loadTrack(action.track)
-        return {...state, tracks: [...state.tracks, action.track.id], loadTrack: action.track}
+        const tracks = {...state.tracks}
+        tracks[action.track.name] = true
+        return {...state, tracks: { ...tracks}, loadTrack: action.track}
+      }else{
+        console.error("browser Information no loaded");
+      }
+      return state
+      case ACTION.DELETE_TRACK:
+      if(state?.browser){
+        state.browser.removeTrackByName(action.trackName)
+        const tracks = {...state.tracks}
+        delete tracks[action.trackName]
+        return {...state, tracks: {...tracks}}
       }else{
         console.error("browser Information no loaded");
       }
@@ -31,7 +43,7 @@ function reducer(state, action) {
 }
 
 const initReducer = {
-  tracks: [],
+  tracks: {},
   loadTrack: null
 }
 
