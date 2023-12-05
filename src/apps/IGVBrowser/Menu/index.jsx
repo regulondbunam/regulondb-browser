@@ -2,7 +2,6 @@ import * as React from "react";
 import Divider from "@mui/material/Divider";
 import Paper from "@mui/material/Paper";
 import ListItemText from "@mui/material/ListItemText";
-import AddBoxIcon from "@mui/icons-material/AddBox";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import MenuIcon from "@mui/icons-material/Menu";
 import Collapse from "@mui/material/Collapse";
@@ -21,6 +20,8 @@ import { useState } from "react";
 import { RDBTracks } from "./RDBTracks";
 import { ACTION } from "../static";
 import HTTracks from "./HTTracks";
+import UploadFile from "./UploadFile";
+import AddBoxIcon from "@mui/icons-material/AddBox";
 
 export default function Menu({ state, dispatch, viewMenu, setViewMenu }) {
   const handleViewMenu = () => {
@@ -52,10 +53,7 @@ export default function Menu({ state, dispatch, viewMenu, setViewMenu }) {
             </Tooltip>
           </ListItem>
           <Divider />
-          <ListItemButton sx={{ m: "auto" }}>
-            <ListItemText primary="Upload File" />
-            <AddBoxIcon />
-          </ListItemButton>
+          <UploadFile state={state} dispatch={dispatch} />
           <Divider />
           <RegulonDBList state={state} dispatch={dispatch} />
           <Divider />
@@ -155,7 +153,7 @@ function HTList({ state, dispatch }) {
           </ListItemButton>
           {Object.keys(state.htTracks).map((key) => {
             return (
-              <ListItem sx={{ pl: 4 }} key={key}  secondaryAction={<Checkbox />}>
+              <ListItem sx={{ pl: 4 }} key={key} secondaryAction={<Checkbox />}>
                 <ListItemText primary={key} />
               </ListItem>
             );

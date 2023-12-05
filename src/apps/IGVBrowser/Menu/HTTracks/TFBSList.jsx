@@ -111,7 +111,7 @@ const datasetItem = memo(({ index, data, style }) => {
         datasetId: dataset._id,
       },
       onCompleted: (data) => {
-        console.log(data);
+        //console.log(data);
         setIsFeatures({
           peaks: DataVerifier.isValidArray(data.getAllPeaksOfDataset),
           sites: DataVerifier.isValidArray(data.getAllTFBindingOfDataset),

@@ -41,6 +41,20 @@ function reducer(state, action) {
         console.error("browser Information no loaded");
       }
       return state;
+    case ACTION.ADD_FILE_TRACK:
+      if (state?.browser) {
+        //state.browser.loadTrack(action.track)
+        const fileTracks = { ...state.fileTracks };
+        fileTracks[action.track.name] = action.track;
+        return {
+          ...state,
+          fileTracks: { ...fileTracks },
+          loadTrack: action.track,
+        };
+      } else {
+        console.error("browser Information no loaded");
+      }
+      return state;
     case ACTION.DELETE_TRACK:
       if (state?.browser) {
         state.browser.removeTrackByName(action.trackName);
@@ -61,6 +75,16 @@ function reducer(state, action) {
         console.error("browser Information no loaded");
       }
       return state;
+    case ACTION.DELETE_FILE_TRACK:
+      if (state?.browser) {
+        state.browser.removeTrackByName(action.trackName);
+        const fileTracks = { ...state.fileTracks };
+        delete fileTracks[action.trackName];
+        return { ...state, fileTracks: { ...fileTracks } };
+      } else {
+        console.error("browser Information no loaded");
+      }
+      return state;
     case ACTION.CLEAN_LOAD_TRACK:
       if (state.loadTrack !== null) {
         return { ...state, loadTrack: null };
@@ -74,6 +98,7 @@ function reducer(state, action) {
 const initReducer = {
   tracks: {},
   htTracks: {},
+  fileTracks: {},
   loadTrack: null,
 };
 
