@@ -11,6 +11,11 @@
                     "id": "dtt-browsing",
                     "label": "Drawing Traces Tool",
                     "link" : "/dtt"
+                },
+                {
+                    "id": "igv-browsing",
+                    "label": "IGV Browser",
+                    "link" : "/igv-browser"
                 }
             ]
         },

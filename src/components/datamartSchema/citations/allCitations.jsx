@@ -69,7 +69,7 @@ ModalCitation: The list of citations is rendered inside the "ModalCitation" comp
  **/
 
 import { ModalCitation } from "./modal";
-import { DataVerifier } from "../../ui-components";
+import { DataVerifier, Accordion } from "../../ui-components";
 import { useMemo, useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import FormHelperText from "@mui/material/FormHelperText";
@@ -133,45 +133,12 @@ export default function useIndexedCitation(allCitations, OrderProperties) {
 }
 
 export function AllCitations({ publications, evidences }) {
-  const [view, setView] = useState(3);
-
-  const handleChange = (event) => {
-    setView(event.target.value);
-  };
   return (
     <div>
-      <div>
-        <FormControl size="small" sx={{ m: 1, minWidth: 120 }}>
-          <Select
-            value={view}
-            onChange={handleChange}
-            displayEmpty
-            inputProps={{ "aria-label": "Without label" }}
-          >
-            <MenuItem value={1}>Publications</MenuItem>
-            <MenuItem value={2}>Evidence</MenuItem>
-            <MenuItem value={3}>Publications & Evidence</MenuItem>
-          </Select>
-          <FormHelperText>
-            Select the view of publications or evidence, related to
-          </FormHelperText>
-        </FormControl>
+        <Publications evidences={evidences} publications={publications} />
+        <br />
+        <Evidences evidences={evidences} publications={publications} />
       </div>
-      <div>
-        {view === 1 && (
-          <Publications evidences={evidences} publications={publications} />
-        )}
-        {view === 2 && (
-          <Evidences evidences={evidences} publications={publications} />
-        )}
-        {view === 3 && (
-          <>
-            <Publications evidences={evidences} publications={publications} />
-            <Evidences evidences={evidences} publications={publications} />
-          </>
-        )}
-      </div>
-    </div>
   );
 }
 
@@ -258,8 +225,7 @@ function getUniquePublication(allCitations = []) {
 export function Evidences({ evidences, publications, small = false }) {
   //console.log(evidences);
   return (
-    <>
-      <h3>Evidence</h3>
+    <Accordion title={<h3>Evidence</h3>} backgroundColor="#cadce7" >
       <table>
         <tbody>
           {Object.keys(evidences).map((evidenceId) => {
@@ -290,15 +256,15 @@ export function Evidences({ evidences, publications, small = false }) {
         </tbody>
       </table>
       <br />
-    </>
+    </Accordion>
   );
 }
 
 export function Publications({ evidences, publications, small = false }) {
   //console.log(publications);
   return (
-    <>
-      <h3>Publications</h3>
+    <Accordion  title={<h3>Publications</h3>} backgroundColor="#cadce7" >
+      
       <table>
         <tbody>
           {Object.keys(publications).map((publicationId) => {
@@ -327,6 +293,6 @@ export function Publications({ evidences, publications, small = false }) {
         </tbody>
       </table>
       <br />
-    </>
+    </Accordion>
   );
 }
