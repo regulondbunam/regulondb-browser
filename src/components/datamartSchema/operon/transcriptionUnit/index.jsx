@@ -26,7 +26,7 @@ export default function TranscriptionUnit({
   synonyms = [],
   terminators = [],
 }) {
-  const {propertiesPhrase} = useGetPhraseByObjectId(_id)
+  const { propertiesPhrase } = useGetPhraseByObjectId(_id);
   let isPromoterRi = false;
   if (DataVerifier.isValidObject(promoter)) {
     if (DataVerifier.isValidArray(promoter.regulatorBindingSites)) {
@@ -98,46 +98,56 @@ export default function TranscriptionUnit({
           <Accordion
             title={<h2 style={{ margin: 0 }}>{`Regulatory Interactions`}</h2>}
           >
-            <div style={{overflow: 'auto'}} >
-            {DataVerifier.isValidObject(promoter) && (
-              <>
-                {DataVerifier.isValidArray(promoter.regulatorBindingSites) && (
+            <div style={{ overflow: "auto" }}>
+              {DataVerifier.isValidObject(promoter) && (
+                <>
+                  <h4>
+                    Regulation identified by {" "}
+                    {" " + promoter.name + " "}promoter
+                  </h4>
+                  {DataVerifier.isValidArray(
+                    promoter.regulatorBindingSites
+                  ) && (
+                    <RegulatorBindingSites
+                      regulatorBindingSites={promoter.regulatorBindingSites}
+                      allCitations={allCitations}
+                    />
+                  )}
+                </>
+              )}
+              {DataVerifier.isValidArray(genes) && (
+                <div>
+                  {genes.map((gene) => {
+                    return (
+                      <div>
+                        {DataVerifier.isValidArray(
+                          gene.regulatorBindingSites
+                        ) && (
+                          <>
+                            <h4>
+                              Regulation identified only at gene {gene.name}{" "}
+                              level
+                            </h4>
+                            <RegulatorBindingSites
+                              regulatorBindingSites={gene.regulatorBindingSites}
+                              allCitations={allCitations}
+                            />
+                          </>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+              {DataVerifier.isValidArray(regulatorBindingSites) && (
+                <>
+                  <h4>Regulation identified only at TU level</h4>
                   <RegulatorBindingSites
-                    regulatorBindingSites={promoter.regulatorBindingSites}
+                    regulatorBindingSites={regulatorBindingSites}
                     allCitations={allCitations}
                   />
-                )}
-              </>
-            )}
-            {DataVerifier.isValidArray(genes) && (
-              <div>
-                {genes.map((gene) => {
-                  return (
-                    <div>
-                      {DataVerifier.isValidArray(
-                        gene.regulatorBindingSites
-                      ) && (
-                        <>
-                          <h4>
-                            Regulation identified only at gene {gene.name} level
-                          </h4>
-                          <RegulatorBindingSites
-                            regulatorBindingSites={gene.regulatorBindingSites}
-                            allCitations={allCitations}
-                          />
-                        </>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-            {DataVerifier.isValidArray(regulatorBindingSites) && (
-              <RegulatorBindingSites
-                regulatorBindingSites={regulatorBindingSites}
-                allCitations={allCitations}
-              />
-            )}
+                </>
+              )}
             </div>
           </Accordion>
         )}
