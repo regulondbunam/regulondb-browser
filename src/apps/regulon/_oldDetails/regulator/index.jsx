@@ -87,11 +87,11 @@ export default function Regulator({
             )}
           </>
         )}
-        {DataVerifier.isValidString(confidenceLevel) && (
+        {/*DataVerifier.isValidString(confidenceLevel) && (
           <p>
             <b>Confidence Level:</b> {_confidenceLevel}
           </p>
-        )}
+        )*/}
         {encodedFrom && <EncodedFrom encodedFrom={encodedFrom} />}
         {encodedBy && <EncodedFrom encodedFrom={encodedBy} />}
         

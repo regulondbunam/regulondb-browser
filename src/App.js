@@ -26,6 +26,7 @@ import Manual from './apps/manual';
 import ExperimentalDatasets from './apps/experimentalDatasets';
 import MCO from './apps/mco';
 import TFPSSMs, {TFPSSMsTest} from './apps/TF-PSSMs';
+import IGVBrowser from './apps/IGVBrowser';
 
 //wsSandbox
 const router = createBrowserRouter([
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "wsSandbox",
         element: <EmbeddedSandbox />,
+      },
+      {
+        path: "igv-browser",
+        element: <IGVBrowser />,
       },
       {
         path: "TF-PSSMsTest",
