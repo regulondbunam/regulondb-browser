@@ -1,6 +1,8 @@
-import { TRACK_genes } from "../tracks/regulonDB";
+import { TRACK_genes, TRACK_promoters, TRACK_terminator } from "../tracks/regulonDB";
 
 
 export const RDBTracks = [
-    TRACK_genes
+    TRACK_genes,
+    TRACK_promoters,
+    TRACK_terminator
 ]

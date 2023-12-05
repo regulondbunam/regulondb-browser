@@ -27,7 +27,6 @@ export default function UploadFile({ state, dispatch }) {
           type: "annotation",
           format: "gff",
           displayMode: "expanded",
-          order: 1,
           url: url,
         };
         setTrackFiles([...TrackFiles, fileTrack]);
