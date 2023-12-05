@@ -16,6 +16,10 @@ export const QUERY_getDatasetsFromSearch = gql`
       sample {
         title
       }
+      sourceSerie {
+        strategy
+        title
+      }
     }
   }
 `;

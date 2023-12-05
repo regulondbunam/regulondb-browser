@@ -3,4 +3,6 @@ export const ACTION = {
   ADD_TRACK: 1,
   CLEAN_LOAD_TRACK: 2,
   DELETE_TRACK: 3,
+  ADD_HT_TRACK: 4,
+  DELETE_HT_TRACK: 5,
 };

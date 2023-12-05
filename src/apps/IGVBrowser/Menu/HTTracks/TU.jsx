@@ -21,7 +21,7 @@ const createItemData = memoize((datasets, toggleItemActive) => ({
   toggleItemActive,
 }));
 
-export default function TFBSList({ datasetList = [], state, dispatch }) {
+export default function TUList({ datasetList = [], state, dispatch }) {
   const [datasets, setDatasets] = useState(
     datasetList.map((dataset) => ({ ...dataset, isActive: false }))
   );
@@ -83,6 +83,7 @@ const datasetItem = memo(({ index, data, style }) => {
   const { datasets, toggleItemActive } = itemData;
   const dataset = datasets[index];
   const open = dataset.isActive;
+  console.log(dataset);
   const trackName = dataset.sample.title.substring(0, 4);
   const peaksFile = `${process.env.REACT_APP_PROSSES_SERVICE}/${dataset._id}/peaks/gff3`;
   const sitesFile = `${process.env.REACT_APP_PROSSES_SERVICE}/${dataset._id}/sites/gff3`;
@@ -102,7 +103,7 @@ const datasetItem = memo(({ index, data, style }) => {
     color: "#A466F6",
     nameField: trackName,
   };
-  // {state.htTracks.hasOwnProperty(track.name)}
+  // {state.tracks.hasOwnProperty(track.name)}
   const handleOpen = () => {
     toggleItemActive(index);
     getFeatures({
@@ -156,14 +157,10 @@ const datasetItem = memo(({ index, data, style }) => {
                 <ListItemButton
                   sx={{ pl: 4 }}
                   onClick={() => {
-                    if(state.htTracks.hasOwnProperty(trackPeaks.name)){
-                      dispatch({ type: ACTION.DELETE_HT_TRACK, trackName: trackPeaks.name });
-                    }else{
-                      dispatch({ type: ACTION.ADD_HT_TRACK, track: trackPeaks });
-                    }
+                    dispatch({ type: ACTION.ADD_TRACK, track: trackPeaks });
                   }}
                 >
-                  {state.htTracks.hasOwnProperty(trackPeaks.name) && (
+                  {state.tracks.hasOwnProperty(trackPeaks.name) && (
                     <ListItemIcon>
                       <CheckIcon />
                     </ListItemIcon>
@@ -175,15 +172,10 @@ const datasetItem = memo(({ index, data, style }) => {
                 <ListItemButton
                   sx={{ pl: 4 }}
                   onClick={() => {
-                    if(state.htTracks.hasOwnProperty(trackSites.name)){
-                      dispatch({ type: ACTION.DELETE_HT_TRACK, trackName: trackSites.name });
-                    }else{
-                      dispatch({ type: ACTION.ADD_HT_TRACK, track: trackSites });
-                    }
-                    
+                    dispatch({ type: ACTION.ADD_TRACK, track: trackSites });
                   }}
                 >
-                  {state.htTracks.hasOwnProperty(trackSites.name) && (
+                  {state.tracks.hasOwnProperty(trackSites.name) && (
                     <ListItemIcon>
                       <CheckIcon />
                     </ListItemIcon>

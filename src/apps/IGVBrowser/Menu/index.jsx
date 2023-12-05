@@ -22,7 +22,6 @@ import { RDBTracks } from "./RDBTracks";
 import { ACTION } from "../static";
 import HTTracks from "./HTTracks";
 
-
 export default function Menu({ state, dispatch, viewMenu, setViewMenu }) {
   const handleViewMenu = () => {
     setViewMenu(!viewMenu);
@@ -116,7 +115,6 @@ function RegulonDBList({ state, dispatch }) {
 function HTList({ state, dispatch }) {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-const [_HTTracks, setHTTracks] = useState([]);
 
   const handleClickOpenModal = () => {
     setOpenModal(true);
@@ -125,8 +123,7 @@ const [_HTTracks, setHTTracks] = useState([]);
   const handleCloseModal = () => {
     setOpenModal(false);
   };
-  
-  
+
   const handleOpen = () => {
     setOpen(!open);
   };
@@ -139,13 +136,13 @@ const [_HTTracks, setHTTracks] = useState([]);
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List dense component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }} onClick={handleClickOpenModal} >
+          <ListItemButton sx={{ pl: 4 }} onClick={handleClickOpenModal}>
             <Box
               sx={{
                 display: "flex",
                 flexDirection: "column",
                 alignContent: "center",
-                alignItems: "center"
+                alignItems: "center",
               }}
             >
               <div>
@@ -156,16 +153,21 @@ const [_HTTracks, setHTTracks] = useState([]);
               </div>
             </Box>
           </ListItemButton>
-          {_HTTracks.map((track) => {
+          {Object.keys(state.htTracks).map((key) => {
             return (
-              <ListItem sx={{ pl: 4 }} secondaryAction={<Checkbox />}>
-                <ListItemText primary="track" />
+              <ListItem sx={{ pl: 4 }} key={key}  secondaryAction={<Checkbox />}>
+                <ListItemText primary={key} />
               </ListItem>
             );
           })}
         </List>
       </Collapse>
-      <HTTracks state={state} dispatch={dispatch} open={openModal} handleClose={handleCloseModal} />
+      <HTTracks
+        state={state}
+        dispatch={dispatch}
+        open={openModal}
+        handleClose={handleCloseModal}
+      />
     </>
   );
 }

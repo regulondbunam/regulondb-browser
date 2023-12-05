@@ -47,7 +47,7 @@ export default function HTTracks({
   const {
     datasetList: listTFBINDING,
     loading: loadingTFBINDING,
-    error: errorTFBINDING,
+    /*error: errorTFBINDING,*/
   } = useGetAllHTDatasetsTFBINDING();
   //console.log(progress);
   const [value, setValue] = React.useState(0);
@@ -114,8 +114,7 @@ export default function HTTracks({
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Add</Button>
+          <Button variant="outlined" onClick={handleClose}>Close</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>
