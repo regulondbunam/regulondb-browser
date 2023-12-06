@@ -22,11 +22,7 @@ function CustomTabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          {children}
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   );
 }
@@ -42,7 +38,8 @@ export default function HTTracks({
   open,
   handleClose = () => {},
   state,
-  dispatch = () => {},
+  handleAddTrack = () => {},
+  handleRemoveTrack = () => {},
 }) {
   const {
     datasetList: listTFBINDING,
@@ -97,7 +94,8 @@ export default function HTTracks({
               ) : (
                 <TFBSList
                   state={state}
-                  dispatch={dispatch}
+                  handleAddTrack={handleAddTrack}
+                  handleRemoveTrack={handleRemoveTrack}
                   datasetList={listTFBINDING}
                 />
               )}
@@ -114,7 +112,9 @@ export default function HTTracks({
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button variant="outlined" onClick={handleClose}>Close</Button>
+          <Button variant="outlined" onClick={handleClose}>
+            Close
+          </Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

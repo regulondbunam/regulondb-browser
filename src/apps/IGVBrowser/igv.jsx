@@ -1,5 +1,5 @@
 import igv from "igv/dist/igv.esm";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import {ACTION} from "./static"
 
 let conf = {

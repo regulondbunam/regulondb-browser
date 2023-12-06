@@ -113,6 +113,32 @@ function RegulonDBList({ state, dispatch }) {
 function HTList({ state, dispatch }) {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [tracks, setTracks] = useState({});
+
+  /*
+  
+                    } else {
+                      
+   */
+  const handleAddTrack = (track) => {
+    dispatch({
+      type: ACTION.ADD_HT_TRACK,
+      track: track,
+    });
+    let newTracks = {...tracks}
+    newTracks[track.name] = {...track, _checked: true}
+    setTracks(newTracks)
+  };
+
+  const handleRemoveTrack = (track) => {
+    dispatch({
+      type: ACTION.DELETE_HT_TRACK,
+      trackName: track.name,
+    });
+    let newTracks = {...tracks}
+    newTracks[track.name] = {...track, _checked: false}
+    setTracks(newTracks)
+  };
 
   const handleClickOpenModal = () => {
     setOpenModal(true);
@@ -151,9 +177,25 @@ function HTList({ state, dispatch }) {
               </div>
             </Box>
           </ListItemButton>
-          {Object.keys(state.htTracks).map((key) => {
+          {Object.keys(tracks).map((key) => {
+            const track = tracks[key]
             return (
-              <ListItem sx={{ pl: 4 }} key={key} secondaryAction={<Checkbox />}>
+              <ListItem
+                sx={{ pl: 4 }}
+                key={key}
+                secondaryAction={
+                  <Checkbox
+                    checked={track._checked}
+                    onChange={() => {
+                      if (track._checked) {
+                        handleRemoveTrack(tracks[key]);
+                      } else {
+                        handleAddTrack(tracks[key]);
+                      }
+                    }}
+                  />
+                }
+              >
                 <ListItemText primary={key} />
               </ListItem>
             );
@@ -162,7 +204,8 @@ function HTList({ state, dispatch }) {
       </Collapse>
       <HTTracks
         state={state}
-        dispatch={dispatch}
+        handleAddTrack={handleAddTrack}
+        handleRemoveTrack={handleRemoveTrack}
         open={openModal}
         handleClose={handleCloseModal}
       />
