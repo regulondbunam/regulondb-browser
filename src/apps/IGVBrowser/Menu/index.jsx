@@ -53,6 +53,11 @@ export default function Menu({ state, dispatch, viewMenu, setViewMenu }) {
             </Tooltip>
           </ListItem>
           <Divider />
+          <div>
+            <Tooltip title="The supported format is GFF3 the seqid queue must contain the id NC_000913.3" >
+            <p><b>sequence ID: NC_000913.3</b></p>
+            </Tooltip>
+          </div>
           <UploadFile state={state} dispatch={dispatch} />
           <Divider />
           <RegulonDBList state={state} dispatch={dispatch} />
