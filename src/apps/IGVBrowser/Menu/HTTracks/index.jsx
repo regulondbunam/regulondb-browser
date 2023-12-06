@@ -11,6 +11,8 @@ import Box from "@mui/material/Box";
 import { useGetAllHTDatasetsTFBINDING, useGetAllHTDatasetsTUS, useGetAllHTDatasetsTTS, useGetAllHTDatasetsTSS  } from "../../tracks/htCollection";
 import TFBSList from "./TFBSList";
 import TUSList from "./TUSList";
+import TTSList from "./TTSList";
+import TSSList from "./TTSList"
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -146,10 +148,62 @@ export default function HTTracks({
               )}
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
-              Transcription Termination Sites
+            {loadingTTS ? (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <CircularProgress />
+                    Loading...
+                  </div>
+                </div>
+              ) : (
+                <TTSList
+                  state={state}
+                  handleAddTrack={handleAddTrack}
+                  handleRemoveTrack={handleRemoveTrack}
+                  datasetList={listTTS}
+                />
+              )}
             </CustomTabPanel>
             <CustomTabPanel value={value} index={3}>
-              Transcription Start Sites
+            {loadingTSS ? (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <CircularProgress />
+                    Loading...
+                  </div>
+                </div>
+              ) : (
+                <TSSList
+                  state={state}
+                  handleAddTrack={handleAddTrack}
+                  handleRemoveTrack={handleRemoveTrack}
+                  datasetList={listTSS}
+                />
+              )}
             </CustomTabPanel>
           </Box>
         </DialogContent>

@@ -36,9 +36,25 @@ export const QUERY_getAllTipsDataset = gql`
 `;
 
 export const QUERY_getAllTUSDataset = gql`
-query GetAllTransUnitsOfDataset($datasetId: String, $limit: Int) {
-  getAllTransUnitsOfDataset(datasetId: $datasetId, limit: $limit) {
-    _id
+  query GetAllTransUnitsOfDataset($datasetId: String, $limit: Int) {
+    getAllTransUnitsOfDataset(datasetId: $datasetId, limit: $limit) {
+      _id
+    }
   }
-}
+`;
+
+export const QUERY_getAllTTSDataset = gql`
+  query GetAllTTSOfDataset($datasetId: String, $limit: Int) {
+    getAllTTSOfDataset(datasetId: $datasetId, limit: $limit) {
+      _id
+    }
+  }
+`;
+
+export const QUERY_getAllTSSDataset = gql`
+  query GetAllTSSOfDataset($datasetId: String, $limit: Int) {
+    getAllTSSOfDataset(datasetId: $datasetId, limit: $limit) {
+      _id
+    }
+  }
 `;
