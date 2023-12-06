@@ -8,8 +8,9 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import { useGetAllHTDatasetsTFBINDING } from "../../tracks/htCollection";
+import { useGetAllHTDatasetsTFBINDING, useGetAllHTDatasetsTUS, useGetAllHTDatasetsTTS, useGetAllHTDatasetsTSS  } from "../../tracks/htCollection";
 import TFBSList from "./TFBSList";
+import TUSList from "./TUSList";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -46,7 +47,22 @@ export default function HTTracks({
     loading: loadingTFBINDING,
     /*error: errorTFBINDING,*/
   } = useGetAllHTDatasetsTFBINDING();
-  //console.log(progress);
+  const {
+    datasetList: listTUS,
+    loading: loadingTUS,
+    /*error: errorTUS,*/
+  } = useGetAllHTDatasetsTUS();
+  const {
+    datasetList: listTTS,
+    loading: loadingTTS,
+    /*error: errorTTS,*/
+  } = useGetAllHTDatasetsTTS();
+  const {
+    datasetList: listTSS,
+    loading: loadingTSS,
+    /*error: errorTSS,*/
+  } = useGetAllHTDatasetsTSS();
+
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -66,9 +82,9 @@ export default function HTTracks({
                 aria-label="basic tabs example"
               >
                 <Tab label="TFBS" {...a11yProps(0)} />
-                <Tab label="TU" {...a11yProps(1)} />
+                <Tab label="TUS" {...a11yProps(1)} />
                 <Tab label="TTS" {...a11yProps(2)} />
-                <Tab label="TSS" {...a11yProps(2)} />
+                <Tab label="TSS" {...a11yProps(3)} />
               </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>
@@ -101,7 +117,33 @@ export default function HTTracks({
               )}
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-              Transcription Units
+            {loadingTUS ? (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <CircularProgress />
+                    Loading...
+                  </div>
+                </div>
+              ) : (
+                <TUSList
+                  state={state}
+                  handleAddTrack={handleAddTrack}
+                  handleRemoveTrack={handleRemoveTrack}
+                  datasetList={listTUS}
+                />
+              )}
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
               Transcription Termination Sites

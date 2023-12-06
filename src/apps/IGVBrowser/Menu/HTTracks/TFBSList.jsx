@@ -14,7 +14,6 @@ import { TextField } from "@mui/material";
 import { useLazyQuery } from "@apollo/client";
 import { QUERY_getAllTipsDataset } from "../../tracks/htCollection/queries";
 import { DataVerifier } from "../../../../components/ui-components";
-import { ACTION } from "../../static";
 
 const createItemData = memoize((datasets, toggleItemActive) => ({
   datasets,

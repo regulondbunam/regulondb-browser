@@ -34,3 +34,11 @@ export const QUERY_getAllTipsDataset = gql`
     }
   }
 `;
+
+export const QUERY_getAllTUSDataset = gql`
+query GetAllTransUnitsOfDataset($datasetId: String, $limit: Int) {
+  getAllTransUnitsOfDataset(datasetId: $datasetId, limit: $limit) {
+    _id
+  }
+}
+`;

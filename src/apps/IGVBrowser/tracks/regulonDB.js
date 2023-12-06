@@ -9,7 +9,7 @@ export const TRACK_genes =  {
 }
 
 export const TRACK_promoters =  {
-    id: "trackRegulonDBGenes",
+    id: "trackRegulonDBPromoter",
     name: "Promoters",
     type: "annotation",
     url: "/media/raw/gff3/PromoterSet.gff3",
@@ -19,7 +19,7 @@ export const TRACK_promoters =  {
 }
 
 export const TRACK_terminator =  {
-    id: "trackRegulonDBGenes",
+    id: "trackRegulonDBTerminator",
     name: "Terminators",
     type: "annotation",
     url: "/media/raw/gff3/TerminatorSet.gff3",

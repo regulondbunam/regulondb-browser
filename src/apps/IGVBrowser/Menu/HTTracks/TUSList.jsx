@@ -12,16 +12,20 @@ import CheckIcon from "@mui/icons-material/Check";
 import { CircularProgress } from "@mui/material";
 import { TextField } from "@mui/material";
 import { useLazyQuery } from "@apollo/client";
-import { QUERY_getAllTipsDataset } from "../../tracks/htCollection/queries";
+import { QUERY_getAllTUSDataset } from "../../tracks/htCollection/queries";
 import { DataVerifier } from "../../../../components/ui-components";
-import { ACTION } from "../../static";
 
 const createItemData = memoize((datasets, toggleItemActive) => ({
   datasets,
   toggleItemActive,
 }));
 
-export default function TUList({ datasetList = [], state, dispatch }) {
+export default function TUSList({
+  datasetList = [],
+  state,
+  handleAddTrack = () => {},
+  handleRemoveTrack = () => {},
+}) {
   const [datasets, setDatasets] = useState(
     datasetList.map((dataset) => ({ ...dataset, isActive: false }))
   );
@@ -53,7 +57,7 @@ export default function TUList({ datasetList = [], state, dispatch }) {
 
   return (
     <div>
-      <h3>TF Binding Sites</h3>
+      <h3>Transcription Units</h3>
       <TextField size="small" onChange={handleFilter} />
       <List
         sx={{ width: "100%", bgcolor: "background.paper" }}
@@ -64,7 +68,7 @@ export default function TUList({ datasetList = [], state, dispatch }) {
           height={300}
           itemSize={40}
           itemCount={datasets.length}
-          itemData={{ itemData, state, dispatch }}
+          itemData={{ itemData, state, handleAddTrack, handleRemoveTrack }}
         >
           {datasetItem}
         </FixedSizeList>
@@ -74,36 +78,23 @@ export default function TUList({ datasetList = [], state, dispatch }) {
 }
 
 const datasetItem = memo(({ index, data, style }) => {
-  const [getFeatures, { loading }] = useLazyQuery(QUERY_getAllTipsDataset);
-  const [isFeatures, setIsFeatures] = useState({
-    peaks: undefined,
-    sites: undefined,
-  });
-  const { itemData, state, dispatch } = data;
+  const [getFeatures, { loading }] = useLazyQuery(QUERY_getAllTUSDataset);
+  const [isFeatures, setIsFeatures] = useState(false);
+  const { itemData, state, handleAddTrack, handleRemoveTrack } = data;
   const { datasets, toggleItemActive } = itemData;
   const dataset = datasets[index];
   const open = dataset.isActive;
-  console.log(dataset);
-  const trackName = dataset.sample.title.substring(0, 4);
-  const peaksFile = `${process.env.REACT_APP_PROSSES_SERVICE}/${dataset._id}/peaks/gff3`;
-  const sitesFile = `${process.env.REACT_APP_PROSSES_SERVICE}/${dataset._id}/sites/gff3`;
-  const trackPeaks = {
-    name: trackName + "-Peaks",
-    url: peaksFile,
+  const trackName = dataset.sourceSerie.title;
+  const file = `${process.env.REACT_APP_PROSSES_SERVICE}/${dataset._id}/tus/gff3`
+  const track = {
+    name: trackName + "-TUS",
+    url: file,
     format: "gff3",
     displayMode: "EXPANDED",
     color: "#0EC2C3",
     nameField: trackName,
   };
-  const trackSites = {
-    name: trackName + "-TFBS",
-    url: sitesFile,
-    format: "gff3",
-    displayMode: "EXPANDED",
-    color: "#A466F6",
-    nameField: trackName,
-  };
-  // {state.tracks.hasOwnProperty(track.name)}
+  // {state.htTracks.hasOwnProperty(track.name)}
   const handleOpen = () => {
     toggleItemActive(index);
     getFeatures({
@@ -112,11 +103,8 @@ const datasetItem = memo(({ index, data, style }) => {
         datasetId: dataset._id,
       },
       onCompleted: (data) => {
-        console.log(data);
-        setIsFeatures({
-          peaks: DataVerifier.isValidArray(data.getAllPeaksOfDataset),
-          sites: DataVerifier.isValidArray(data.getAllTFBindingOfDataset),
-        });
+        //console.log(data);
+        setIsFeatures(DataVerifier.isValidArray(data.getAllTransUnitsOfDataset));
       },
     });
   };
@@ -128,7 +116,7 @@ const datasetItem = memo(({ index, data, style }) => {
   return (
     <div key={dataset._id + "_" + index} style={style}>
       <ListItemButton onClick={handleOpen}>
-        <ListItemText primary={dataset.sample.title} />
+        <ListItemText primary={dataset.sourceSerie.title} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
@@ -153,37 +141,25 @@ const datasetItem = memo(({ index, data, style }) => {
             </div>
           ) : (
             <>
-              {isFeatures.peaks && (
+              {isFeatures ? (
                 <ListItemButton
                   sx={{ pl: 4 }}
                   onClick={() => {
-                    dispatch({ type: ACTION.ADD_TRACK, track: trackPeaks });
+                    if (state.htTracks.hasOwnProperty(track.name)) {
+                      handleRemoveTrack(track)
+                    } else {
+                      handleAddTrack(track)
+                    }
                   }}
                 >
-                  {state.tracks.hasOwnProperty(trackPeaks.name) && (
+                  {state.htTracks.hasOwnProperty(track.name) && (
                     <ListItemIcon>
                       <CheckIcon />
                     </ListItemIcon>
                   )}
-                  <ListItemText primary={trackPeaks.name + " Track"} />
+                  <ListItemText primary={track.name + " Track"} />
                 </ListItemButton>
-              )}
-              {isFeatures.sites && (
-                <ListItemButton
-                  sx={{ pl: 4 }}
-                  onClick={() => {
-                    dispatch({ type: ACTION.ADD_TRACK, track: trackSites });
-                  }}
-                >
-                  {state.tracks.hasOwnProperty(trackSites.name) && (
-                    <ListItemIcon>
-                      <CheckIcon />
-                    </ListItemIcon>
-                  )}
-                  <ListItemText primary={trackSites.name + " Track"} />
-                </ListItemButton>
-              )}
-              {!isFeatures.peaks && !isFeatures.sites && (
+              ):(
                 <ListItemButton sx={{ pl: 4 }} onClick={handleClose}>
                   <ListItemText primary="This Dataset has no drawing track files." />
                 </ListItemButton>
