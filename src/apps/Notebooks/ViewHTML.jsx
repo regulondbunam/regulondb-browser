@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Style from "./style.module.css"
 
 //funcion descarga el html del proseso de rmd
 function resolveHTML(sethtml, htmlURL = "") {
@@ -24,6 +25,12 @@ export default function ViewHTML({rawUrl}) {
 
 
     return(
-        <div dangerouslySetInnerHTML={{ __html: htmlNotebook }} />
+        <div className={Style.documentContainer}>
+              <iframe
+                style={{ width: "100%", height: "100%", backgroundColor: "white" }}
+                srcDoc={htmlNotebook}
+                title="Notebook"
+              />
+            </div>
     )
 }
