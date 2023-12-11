@@ -57,7 +57,7 @@ export default function TSSList({
 
   return (
     <div>
-      <h3>Transcription Units</h3>
+      <h3>Transcription Start Sites</h3>
       <TextField size="small" onChange={handleFilter} />
       <List
         sx={{ width: "100%", bgcolor: "background.paper" }}
@@ -84,10 +84,10 @@ const datasetItem = memo(({ index, data, style }) => {
   const { datasets, toggleItemActive } = itemData;
   const dataset = datasets[index];
   const open = dataset.isActive;
-  const trackName = dataset.sourceSerie?.title ?? dataset._id;
+  const trackName = "["+dataset._id+"]"+dataset.sourceSerie?.title ?? "";
   const file = `${process.env.REACT_APP_PROSSES_SERVICE}/${dataset._id}/tss/gff3`
   const track = {
-    name: trackName + "-TUS",
+    name: "["+dataset._id+"]",
     url: file,
     format: "gff3",
     displayMode: "EXPANDED",
@@ -96,6 +96,7 @@ const datasetItem = memo(({ index, data, style }) => {
   };
   // {state.htTracks.hasOwnProperty(track.name)}
   const handleOpen = () => {
+    console.log("Abierto")
     toggleItemActive(index);
     getFeatures({
       variables: {

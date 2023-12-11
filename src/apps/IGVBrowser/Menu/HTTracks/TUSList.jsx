@@ -87,7 +87,7 @@ const datasetItem = memo(({ index, data, style }) => {
   const trackName = dataset.sourceSerie.title;
   const file = `${process.env.REACT_APP_PROSSES_SERVICE}/${dataset._id}/tus/gff3`
   const track = {
-    name: trackName + "-TUS",
+    name: "["+dataset._id+"]"+trackName + "-TUS",
     url: file,
     format: "gff3",
     displayMode: "EXPANDED",
@@ -116,7 +116,7 @@ const datasetItem = memo(({ index, data, style }) => {
   return (
     <div key={dataset._id + "_" + index} style={style}>
       <ListItemButton onClick={handleOpen}>
-        <ListItemText primary={dataset.sourceSerie.title} />
+        <ListItemText primary={track.name} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>

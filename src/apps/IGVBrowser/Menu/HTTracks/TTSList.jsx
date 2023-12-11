@@ -57,7 +57,7 @@ export default function TTSList({
 
   return (
     <div>
-      <h3>Transcription Units</h3>
+      <h3>Transcription Termination Sites</h3>
       <TextField size="small" onChange={handleFilter} />
       <List
         sx={{ width: "100%", bgcolor: "background.paper" }}
@@ -84,10 +84,10 @@ const datasetItem = memo(({ index, data, style }) => {
   const { datasets, toggleItemActive } = itemData;
   const dataset = datasets[index];
   const open = dataset.isActive;
-  const trackName = dataset.sourceSerie?.title ?? dataset._id;
+  const trackName = dataset.sourceSerie?.title ?? "";
   const file = `${process.env.REACT_APP_PROSSES_SERVICE}/${dataset._id}/tts/gff3`
   const track = {
-    name: trackName + "-TTS",
+    name: "["+dataset._id+"]"+trackName + "-TTS",
     url: file,
     format: "gff3",
     displayMode: "EXPANDED",
@@ -116,7 +116,7 @@ const datasetItem = memo(({ index, data, style }) => {
   return (
     <div key={dataset._id + "_" + index} style={style}>
       <ListItemButton onClick={handleOpen}>
-        <ListItemText primary={trackName} />
+        <ListItemText primary={track.name} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>

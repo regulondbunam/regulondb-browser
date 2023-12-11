@@ -51,7 +51,8 @@ export default function TFBSList({
       setDatasets(filteredItems);
     }, 250);
   };
-  //console.log(datasetList);
+  console.log(datasetList);
+
 
   const itemData = createItemData(datasets, toggleItemActive);
 
@@ -85,13 +86,14 @@ const datasetItem = memo(({ index, data, style }) => {
   });
   const { itemData, state, handleAddTrack, handleRemoveTrack } = data;
   const { datasets, toggleItemActive } = itemData;
+  
   const dataset = datasets[index];
   const open = dataset.isActive;
-  const trackName = dataset.sample.title.substring(0, 4);
+  const trackName = dataset.sample.title.substring(0, 4)+"-"+dataset.sourceSerie.title;
   const peaksFile = `${process.env.REACT_APP_PROSSES_SERVICE}/${dataset._id}/peaks/gff3`;
   const sitesFile = `${process.env.REACT_APP_PROSSES_SERVICE}/${dataset._id}/sites/gff3`;
   const trackPeaks = {
-    name: trackName + "-Peaks",
+    name: "["+dataset._id+"]-Peaks",
     url: peaksFile,
     format: "gff3",
     displayMode: "EXPANDED",
@@ -99,7 +101,7 @@ const datasetItem = memo(({ index, data, style }) => {
     nameField: trackName,
   };
   const trackSites = {
-    name: trackName + "-TFBS",
+    name:  "["+dataset._id+"]-TFBS",
     url: sitesFile,
     format: "gff3",
     displayMode: "EXPANDED",
@@ -131,7 +133,7 @@ const datasetItem = memo(({ index, data, style }) => {
   return (
     <div key={dataset._id + "_" + index} style={style}>
       <ListItemButton onClick={handleOpen}>
-        <ListItemText primary={dataset.sample.title} />
+        <ListItemText primary={trackName} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>

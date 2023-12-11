@@ -12,7 +12,7 @@ import { useGetAllHTDatasetsTFBINDING, useGetAllHTDatasetsTUS, useGetAllHTDatase
 import TFBSList from "./TFBSList";
 import TUSList from "./TUSList";
 import TTSList from "./TTSList";
-import TSSList from "./TTSList"
+import TSSList from "./TSSList"
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -44,6 +44,7 @@ export default function HTTracks({
   handleAddTrack = () => {},
   handleRemoveTrack = () => {},
 }) {
+  //console.log("flag");
   const {
     datasetList: listTFBINDING,
     loading: loadingTFBINDING,
