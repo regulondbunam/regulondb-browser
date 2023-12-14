@@ -1,6 +1,7 @@
 import igv from "igv/dist/igv.esm";
 import { useEffect, useRef } from "react";
 import {ACTION} from "./static"
+import { TRACK_genes } from "./tracks/regulonDB";
 
 let conf = {
   id: "Ecoli",
@@ -8,6 +9,9 @@ let conf = {
   fastaURL: "/media/raw/e_coli_k12.fna",
   indexURL: "/media/raw/e_coli_k12.fna.fai",
   order: 1000,
+  tracks: [
+    TRACK_genes
+  ]
 };
 
 export default function IGVDraw({dispatch}) {

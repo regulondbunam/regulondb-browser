@@ -10,6 +10,7 @@ import { Cover, Circular } from "../../components/ui-components";
 import Menu from "./Menu";
 import { ACTION } from "./static";
 import "./style.css";
+import { TRACK_genes } from "./tracks/regulonDB.js";
 
 const IGVDraw = lazy(() => delayForIGV(import("./igv.jsx")));
 
@@ -96,7 +97,9 @@ function reducer(state, action) {
 }
 
 const initReducer = {
-  tracks: {},
+  tracks: {
+    Genes: TRACK_genes
+  },
   htTracks: {},
   fileTracks: {},
   loadTrack: null,
@@ -108,7 +111,7 @@ export default function IGVBrowser() {
   const [state, dispatch] = useReducer(reducer, initReducer);
   const igvFunction = useRef(null);
 
-  console.log(state);
+  //console.log(state);
 
   useEffect(() => {
     if (igvFunction.current === null && state.loadTrack !== null) {
