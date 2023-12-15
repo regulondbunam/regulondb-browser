@@ -19,9 +19,8 @@ import {
 import { useState } from "react";
 import { RDBTracks } from "./RDBTracks";
 import { ACTION } from "../static";
-import HTTracks from "./HTTracks";
+import HTList from "./HTTracks";
 import UploadFile from "./UploadFile";
-import AddBoxIcon from "@mui/icons-material/AddBox";
 
 export default function Menu({ state, dispatch, viewMenu, setViewMenu }) {
   const handleViewMenu = () => {
@@ -55,7 +54,7 @@ export default function Menu({ state, dispatch, viewMenu, setViewMenu }) {
           <Divider />
           <div>
             <Tooltip title="The supported format is GFF3 the seqid queue must contain the id NC_000913.3" >
-            <p><b>sequence ID: NC_000913.3</b></p>
+              <p><b>sequence ID: NC_000913.3</b></p>
             </Tooltip>
           </div>
           <UploadFile state={state} dispatch={dispatch} />
@@ -111,109 +110,6 @@ function RegulonDBList({ state, dispatch }) {
           })}
         </List>
       </Collapse>
-    </>
-  );
-}
-
-function HTList({ state, dispatch }) {
-  const [open, setOpen] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
-  const [tracks, setTracks] = useState({});
-
-  /*
-  
-                    } else {
-                      
-   */
-  const handleAddTrack = (track) => {
-    dispatch({
-      type: ACTION.ADD_HT_TRACK,
-      track: track,
-    });
-    let newTracks = {...tracks}
-    newTracks[track.name] = {...track, _checked: true}
-    setTracks(newTracks)
-  };
-
-  const handleRemoveTrack = (track) => {
-    dispatch({
-      type: ACTION.DELETE_HT_TRACK,
-      trackName: track.name,
-    });
-    let newTracks = {...tracks}
-    newTracks[track.name] = {...track, _checked: false}
-    setTracks(newTracks)
-  };
-
-  const handleClickOpenModal = () => {
-    setOpenModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setOpenModal(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(!open);
-  };
-
-  return (
-    <>
-      <ListItemButton onClick={handleOpen} sx={{ m: "auto" }}>
-        <ListItemText primary="HT Datasets" />
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItemButton>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List dense component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }} onClick={handleClickOpenModal}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <div>
-                <AddBoxIcon />
-              </div>
-              <div>
-                <p>Add HT Dataset Track</p>
-              </div>
-            </Box>
-          </ListItemButton>
-          {Object.keys(tracks).map((key) => {
-            const track = tracks[key]
-            return (
-              <ListItem
-                sx={{ pl: 4 }}
-                key={key}
-                secondaryAction={
-                  <Checkbox
-                    checked={track._checked}
-                    onChange={() => {
-                      if (track._checked) {
-                        handleRemoveTrack(tracks[key]);
-                      } else {
-                        handleAddTrack(tracks[key]);
-                      }
-                    }}
-                  />
-                }
-              >
-                <ListItemText primary={key} />
-              </ListItem>
-            );
-          })}
-        </List>
-      </Collapse>
-      <HTTracks
-        state={state}
-        handleAddTrack={handleAddTrack}
-        handleRemoveTrack={handleRemoveTrack}
-        open={openModal}
-        handleClose={handleCloseModal}
-      />
     </>
   );
 }

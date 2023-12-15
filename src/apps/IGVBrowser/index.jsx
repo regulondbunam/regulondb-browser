@@ -36,7 +36,7 @@ function reducer(state, action) {
       if (state?.browser) {
         //state.browser.loadTrack(action.track)
         const htTracks = { ...state.htTracks };
-        htTracks[action.track.name] = action.track;
+        htTracks[action.track.name] = {...action.track, view: true};
         return { ...state, htTracks: { ...htTracks }, loadTrack: action.track };
       } else {
         console.error("browser Information no loaded");
@@ -89,6 +89,16 @@ function reducer(state, action) {
     case ACTION.CLEAN_LOAD_TRACK:
       if (state.loadTrack !== null) {
         return { ...state, loadTrack: null };
+      }
+      return state;
+    case ACTION.HIDE_HT_TRACK:
+      if (state?.browser) {
+        state.browser.removeTrackByName(action.trackName);
+        const htTracks = state.htTracks;
+        htTracks[action.trackName] = {...htTracks[action.trackName], view: false};
+        return { ...state, htTracks: { ...htTracks } };
+      } else {
+        console.error("browser Information no loaded");
       }
       return state;
     default:

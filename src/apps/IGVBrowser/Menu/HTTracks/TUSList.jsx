@@ -1,4 +1,4 @@
-import React, { useRef, useState, memo } from "react";
+import React, { useRef, useState, memo, useEffect } from "react";
 import memoize from "memoize-one";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -14,6 +14,7 @@ import { TextField } from "@mui/material";
 import { useLazyQuery } from "@apollo/client";
 import { QUERY_getAllTUSDataset } from "../../tracks/htCollection/queries";
 import { DataVerifier } from "../../../../components/ui-components";
+import { useGetAllHTDatasetsTUS } from "../../tracks/htCollection";
 
 const createItemData = memoize((datasets, toggleItemActive) => ({
   datasets,
@@ -21,15 +22,19 @@ const createItemData = memoize((datasets, toggleItemActive) => ({
 }));
 
 export default function TUSList({
-  datasetList = [],
   state,
   handleAddTrack = () => {},
   handleRemoveTrack = () => {},
 }) {
-  const [datasets, setDatasets] = useState(
-    datasetList.map((dataset) => ({ ...dataset, isActive: false }))
-  );
+  const { datasetList, loading } = useGetAllHTDatasetsTUS();
+  const [datasets, setDatasets] = useState();
   const keyListener = useRef(null);
+
+  useEffect(() => {
+    if(datasetList && !datasets){
+      setDatasets(datasetList.map((dataset) => ({ ...dataset, isActive: false })))
+    }
+  }, [datasetList, datasets])
 
   const toggleItemActive = (index) => {
     let setDataset = { ...datasets[index] };
@@ -52,6 +57,14 @@ export default function TUSList({
     }, 250);
   };
   //console.log(datasetList);
+
+  if(!datasets){
+    return(
+      <div>
+        <h3>Loading...</h3>
+      </div>
+    )
+  }
 
   const itemData = createItemData(datasets, toggleItemActive);
 
@@ -85,9 +98,9 @@ const datasetItem = memo(({ index, data, style }) => {
   const dataset = datasets[index];
   const open = dataset.isActive;
   const trackName = dataset.sourceSerie.title;
-  const file = `${process.env.REACT_APP_PROSSES_SERVICE}/${dataset._id}/tus/gff3`
+  const file = `${process.env.REACT_APP_PROSSES_SERVICE}/${dataset._id}/tus/gff3`;
   const track = {
-    name: "["+dataset._id+"]"+trackName + "-TUS",
+    name: "[" + dataset._id + "]" + trackName + "-TUS",
     url: file,
     format: "gff3",
     displayMode: "EXPANDED",
@@ -104,7 +117,9 @@ const datasetItem = memo(({ index, data, style }) => {
       },
       onCompleted: (data) => {
         //console.log(data);
-        setIsFeatures(DataVerifier.isValidArray(data.getAllTransUnitsOfDataset));
+        setIsFeatures(
+          DataVerifier.isValidArray(data.getAllTransUnitsOfDataset)
+        );
       },
     });
   };
@@ -146,9 +161,9 @@ const datasetItem = memo(({ index, data, style }) => {
                   sx={{ pl: 4 }}
                   onClick={() => {
                     if (state.htTracks.hasOwnProperty(track.name)) {
-                      handleRemoveTrack(track)
+                      handleRemoveTrack(track);
                     } else {
-                      handleAddTrack(track)
+                      handleAddTrack(track,dataset);
                     }
                   }}
                 >
@@ -159,7 +174,7 @@ const datasetItem = memo(({ index, data, style }) => {
                   )}
                   <ListItemText primary={track.name + " Track"} />
                 </ListItemButton>
-              ):(
+              ) : (
                 <ListItemButton sx={{ pl: 4 }} onClick={handleClose}>
                   <ListItemText primary="This Dataset has no drawing track files." />
                 </ListItemButton>

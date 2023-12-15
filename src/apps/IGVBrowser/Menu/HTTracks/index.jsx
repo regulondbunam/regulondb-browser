@@ -1,219 +1,482 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import CircularProgress from "@mui/material/CircularProgress";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import DialogTitle from "@mui/material/DialogTitle";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Box from "@mui/material/Box";
-import { useGetAllHTDatasetsTFBINDING, useGetAllHTDatasetsTUS, useGetAllHTDatasetsTTS, useGetAllHTDatasetsTSS  } from "../../tracks/htCollection";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ListItemText from "@mui/material/ListItemText";
+import Collapse from "@mui/material/Collapse";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import NoteAddIcon from "@mui/icons-material/NoteAdd";
+import {
+  List,
+  ListItemButton,
+  Button,
+  ListItem,
+  ButtonGroup,
+  Box,
+} from "@mui/material";
+import { useState } from "react";
+import { ACTION } from "../../static";
 import TFBSList from "./TFBSList";
 import TUSList from "./TUSList";
 import TTSList from "./TTSList";
-import TSSList from "./TSSList"
+import TSSList from "./TSSList";
 
-function CustomTabPanel(props) {
-  const { children, value, index, ...other } = props;
+export default function HTList({ state, dispatch }) {
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(!open);
+  };
+
+  const handleAddTrack = (track, dataset) => {
+    dispatch({
+      type: ACTION.ADD_HT_TRACK,
+      track: { ...track, dataset: dataset },
+    });
+  };
+
+  const handleRemoveTrack = (track) => {
+    dispatch({
+      type: ACTION.DELETE_HT_TRACK,
+      trackName: track.name,
+    });
+  };
+
+  const handleHideTrack = (track) => {
+    dispatch({
+      type: ACTION.HIDE_HT_TRACK,
+      trackName: track.name,
+    });
+  };
 
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-    </div>
+    <>
+      <ListItemButton onClick={handleOpen} sx={{ m: "auto" }}>
+        <ListItemText primary="HT Datasets" />
+        {open ? <ExpandLess /> : <ExpandMore />}
+      </ListItemButton>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List dense component="div" disablePadding>
+          <MenuTFBS
+            state={state}
+            handleAddTrack={handleAddTrack}
+            handleRemoveTrack={handleRemoveTrack}
+            handleHideTrack={handleHideTrack}
+          />
+          <MenuTUS
+            state={state}
+            handleAddTrack={handleAddTrack}
+            handleRemoveTrack={handleRemoveTrack}
+            handleHideTrack={handleHideTrack}
+          />
+          <MenuTTS
+            state={state}
+            handleAddTrack={handleAddTrack}
+            handleRemoveTrack={handleRemoveTrack}
+            handleHideTrack={handleHideTrack}
+          />
+          <MenuTSS
+            state={state}
+            handleAddTrack={handleAddTrack}
+            handleRemoveTrack={handleRemoveTrack}
+            handleHideTrack={handleHideTrack} />
+        </List>
+      </Collapse>
+    </>
   );
 }
 
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
+/*
+ 
+          
+          
+          <MenuGE /> */
 
-export default function HTTracks({
-  open,
-  handleClose = () => {},
+function MenuTFBS({
   state,
-  handleAddTrack = () => {},
-  handleRemoveTrack = () => {},
+  handleAddTrack,
+  handleRemoveTrack,
+  handleHideTrack,
 }) {
-  //console.log("flag");
-  const {
-    datasetList: listTFBINDING,
-    loading: loadingTFBINDING,
-    /*error: errorTFBINDING,*/
-  } = useGetAllHTDatasetsTFBINDING();
-  const {
-    datasetList: listTUS,
-    loading: loadingTUS,
-    /*error: errorTUS,*/
-  } = useGetAllHTDatasetsTUS();
-  const {
-    datasetList: listTTS,
-    loading: loadingTTS,
-    /*error: errorTTS,*/
-  } = useGetAllHTDatasetsTTS();
-  const {
-    datasetList: listTSS,
-    loading: loadingTSS,
-    /*error: errorTSS,*/
-  } = useGetAllHTDatasetsTSS();
+  const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  let tracks = [];
+  Object.keys(state.htTracks).forEach((key) => {
+    const track = state.htTracks[key];
+    if (track.dataset.datasetType === "TFBINDING") {
+      tracks.push(track);
+    }
+  });
 
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const handleOpen = () => {
+    setOpen(!open);
   };
-
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
   return (
-    <React.Fragment>
-      <Dialog open={open} onClose={handleClose} fullWidth maxWidth={"md"}>
+    <>
+      <ListItem sx={{ pl: 2 }}>
+        <ListItemText primary="TFBS" />
+        <ButtonGroup variant="text" aria-label="text button group">
+          <Button onClick={handleOpenModal}>
+            <NoteAddIcon />
+          </Button>
+          <Button onClick={handleOpen}>
+            {open ? <ExpandLess /> : <ExpandMore />}
+          </Button>
+        </ButtonGroup>
+      </ListItem>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List dense component="div" disablePadding>
+          {tracks.map((track) => {
+            return (
+              <ListItem key={track.name} sx={{ pl: 3 }}>
+                <ListItemText primary={track.name} />
+                <ButtonGroup variant="text" aria-label="text button group">
+                  <Button
+                    onClick={() => {
+                      handleRemoveTrack(track);
+                    }}
+                  >
+                    <DeleteIcon />
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      if (track.view) {
+                        handleHideTrack(track);
+                      } else {
+                        handleAddTrack(track, track.dataset);
+                      }
+                    }}
+                  >
+                    {track.view ? (
+                      <CheckBoxIcon />
+                    ) : (
+                      <CheckBoxOutlineBlankIcon />
+                    )}
+                  </Button>
+                </ButtonGroup>
+              </ListItem>
+            );
+          })}
+        </List>
+      </Collapse>
+      <Dialog
+        open={openModal}
+        onClose={handleCloseModal}
+        fullWidth
+        maxWidth={"md"}
+      >
         <DialogTitle>Select HT Dataset</DialogTitle>
         <DialogContent>
           <Box>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-              <Tabs
-                value={value}
-                onChange={handleChange}
-                aria-label="basic tabs example"
-              >
-                <Tab label="TFBS" {...a11yProps(0)} />
-                <Tab label="TUS" {...a11yProps(1)} />
-                <Tab label="TTS" {...a11yProps(2)} />
-                <Tab label="TSS" {...a11yProps(3)} />
-              </Tabs>
+              <TFBSList
+                state={state}
+                handleAddTrack={handleAddTrack}
+                handleRemoveTrack={handleRemoveTrack}
+              />
             </Box>
-            <CustomTabPanel value={value} index={0}>
-              {loadingTFBINDING ? (
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                    }}
-                  >
-                    <CircularProgress />
-                    Loading...
-                  </div>
-                </div>
-              ) : (
-                <TFBSList
-                  state={state}
-                  handleAddTrack={handleAddTrack}
-                  handleRemoveTrack={handleRemoveTrack}
-                  datasetList={listTFBINDING}
-                />
-              )}
-            </CustomTabPanel>
-            <CustomTabPanel value={value} index={1}>
-            {loadingTUS ? (
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                    }}
-                  >
-                    <CircularProgress />
-                    Loading...
-                  </div>
-                </div>
-              ) : (
-                <TUSList
-                  state={state}
-                  handleAddTrack={handleAddTrack}
-                  handleRemoveTrack={handleRemoveTrack}
-                  datasetList={listTUS}
-                />
-              )}
-            </CustomTabPanel>
-            <CustomTabPanel value={value} index={2}>
-            {loadingTTS ? (
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                    }}
-                  >
-                    <CircularProgress />
-                    Loading...
-                  </div>
-                </div>
-              ) : (
-                <TTSList
-                  state={state}
-                  handleAddTrack={handleAddTrack}
-                  handleRemoveTrack={handleRemoveTrack}
-                  datasetList={listTTS}
-                />
-              )}
-            </CustomTabPanel>
-            <CustomTabPanel value={value} index={3}>
-            {loadingTSS ? (
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                    }}
-                  >
-                    <CircularProgress />
-                    Loading...
-                  </div>
-                </div>
-              ) : (
-                <TSSList
-                  state={state}
-                  handleAddTrack={handleAddTrack}
-                  handleRemoveTrack={handleRemoveTrack}
-                  datasetList={listTSS}
-                />
-              )}
-            </CustomTabPanel>
           </Box>
         </DialogContent>
-        <DialogActions>
-          <Button variant="outlined" onClick={handleClose}>
-            Close
-          </Button>
-        </DialogActions>
       </Dialog>
-    </React.Fragment>
+    </>
+  );
+}
+
+function MenuTUS({
+  state,
+  handleAddTrack,
+  handleRemoveTrack,
+  handleHideTrack,
+}) {
+  const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  let tracks = [];
+  Object.keys(state.htTracks).forEach((key) => {
+    const track = state.htTracks[key];
+    if (track.dataset.datasetType === "TUS") {
+      tracks.push(track);
+    }
+  });
+
+  const handleOpen = () => {
+    setOpen(!open);
+  };
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+  return (
+    <>
+      <ListItem sx={{ pl: 2 }}>
+        <ListItemText primary="TUS" />
+        <ButtonGroup variant="text" aria-label="text button group">
+          <Button onClick={handleOpenModal}>
+            <NoteAddIcon />
+          </Button>
+          <Button onClick={handleOpen}>
+            {open ? <ExpandLess /> : <ExpandMore />}
+          </Button>
+        </ButtonGroup>
+      </ListItem>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List dense component="div" disablePadding>
+          {tracks.map((track) => {
+            return (
+              <ListItem key={track.name} sx={{ pl: 3 }}>
+                <ListItemText primary={track.name} />
+                <ButtonGroup variant="text" aria-label="text button group">
+                  <Button
+                    onClick={() => {
+                      handleRemoveTrack(track);
+                    }}
+                  >
+                    <DeleteIcon />
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      if (track.view) {
+                        handleHideTrack(track);
+                      } else {
+                        handleAddTrack(track, track.dataset);
+                      }
+                    }}
+                  >
+                    {track.view ? (
+                      <CheckBoxIcon />
+                    ) : (
+                      <CheckBoxOutlineBlankIcon />
+                    )}
+                  </Button>
+                </ButtonGroup>
+              </ListItem>
+            );
+          })}
+        </List>
+      </Collapse>
+      <Dialog
+        open={openModal}
+        onClose={handleCloseModal}
+        fullWidth
+        maxWidth={"md"}
+      >
+        <DialogTitle>Select HT Dataset</DialogTitle>
+        <DialogContent>
+          <Box>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <TUSList
+                state={state}
+                handleAddTrack={handleAddTrack}
+                handleRemoveTrack={handleRemoveTrack}
+              />
+            </Box>
+          </Box>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}
+
+function MenuTTS({
+  state,
+  handleAddTrack,
+  handleRemoveTrack,
+  handleHideTrack,
+}) {
+  const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  let tracks = [];
+  Object.keys(state.htTracks).forEach((key) => {
+    const track = state.htTracks[key];
+    if (track.dataset.datasetType === "TTS") {
+      tracks.push(track);
+    }
+  });
+
+  const handleOpen = () => {
+    setOpen(!open);
+  };
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+  return (
+    <>
+      <ListItem sx={{ pl: 2 }}>
+        <ListItemText primary="TTS" />
+        <ButtonGroup variant="text" aria-label="text button group">
+          <Button onClick={handleOpenModal}>
+            <NoteAddIcon />
+          </Button>
+          <Button onClick={handleOpen}>
+            {open ? <ExpandLess /> : <ExpandMore />}
+          </Button>
+        </ButtonGroup>
+      </ListItem>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List dense component="div" disablePadding>
+          {tracks.map((track) => {
+            return (
+              <ListItem key={track.name} sx={{ pl: 3 }}>
+                <ListItemText primary={track.name} />
+                <ButtonGroup variant="text" aria-label="text button group">
+                  <Button
+                    onClick={() => {
+                      handleRemoveTrack(track);
+                    }}
+                  >
+                    <DeleteIcon />
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      if (track.view) {
+                        handleHideTrack(track);
+                      } else {
+                        handleAddTrack(track, track.dataset);
+                      }
+                    }}
+                  >
+                    {track.view ? (
+                      <CheckBoxIcon />
+                    ) : (
+                      <CheckBoxOutlineBlankIcon />
+                    )}
+                  </Button>
+                </ButtonGroup>
+              </ListItem>
+            );
+          })}
+        </List>
+      </Collapse>
+      <Dialog
+        open={openModal}
+        onClose={handleCloseModal}
+        fullWidth
+        maxWidth={"md"}
+      >
+        <DialogTitle>Select HT Dataset</DialogTitle>
+        <DialogContent>
+          <Box>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <TTSList
+                state={state}
+                handleAddTrack={handleAddTrack}
+                handleRemoveTrack={handleRemoveTrack}
+              />
+            </Box>
+          </Box>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}
+
+function MenuTSS({
+  state,
+  handleAddTrack,
+  handleRemoveTrack,
+  handleHideTrack,
+}) {
+  const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  let tracks = [];
+  Object.keys(state.htTracks).forEach((key) => {
+    const track = state.htTracks[key];
+    if (track.dataset.datasetType === "TSS") {
+      tracks.push(track);
+    }
+  });
+
+  const handleOpen = () => {
+    setOpen(!open);
+  };
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+  return (
+    <>
+      <ListItem sx={{ pl: 2 }}>
+        <ListItemText primary="TSS" />
+        <ButtonGroup variant="text" aria-label="text button group">
+          <Button onClick={handleOpenModal}>
+            <NoteAddIcon />
+          </Button>
+          <Button onClick={handleOpen}>
+            {open ? <ExpandLess /> : <ExpandMore />}
+          </Button>
+        </ButtonGroup>
+      </ListItem>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List dense component="div" disablePadding>
+          {tracks.map((track) => {
+            return (
+              <ListItem key={track.name} sx={{ pl: 3 }}>
+                <ListItemText primary={track.name} />
+                <ButtonGroup variant="text" aria-label="text button group">
+                  <Button
+                    onClick={() => {
+                      handleRemoveTrack(track);
+                    }}
+                  >
+                    <DeleteIcon />
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      if (track.view) {
+                        handleHideTrack(track);
+                      } else {
+                        handleAddTrack(track, track.dataset);
+                      }
+                    }}
+                  >
+                    {track.view ? (
+                      <CheckBoxIcon />
+                    ) : (
+                      <CheckBoxOutlineBlankIcon />
+                    )}
+                  </Button>
+                </ButtonGroup>
+              </ListItem>
+            );
+          })}
+        </List>
+      </Collapse>
+      <Dialog
+        open={openModal}
+        onClose={handleCloseModal}
+        fullWidth
+        maxWidth={"md"}
+      >
+        <DialogTitle>Select HT Dataset</DialogTitle>
+        <DialogContent>
+          <Box>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <TSSList
+                state={state}
+                handleAddTrack={handleAddTrack}
+                handleRemoveTrack={handleRemoveTrack}
+              />
+            </Box>
+          </Box>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }

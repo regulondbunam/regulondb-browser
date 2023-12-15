@@ -1,4 +1,4 @@
-import React, { useRef, useState, memo } from "react";
+import React, { useRef, useState, memo, useEffect } from "react";
 import memoize from "memoize-one";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -14,6 +14,7 @@ import { TextField } from "@mui/material";
 import { useLazyQuery } from "@apollo/client";
 import { QUERY_getAllTSSDataset } from "../../tracks/htCollection/queries";
 import { DataVerifier } from "../../../../components/ui-components";
+import { useGetAllHTDatasetsTSS } from "../../tracks/htCollection";
 
 const createItemData = memoize((datasets, toggleItemActive) => ({
   datasets,
@@ -21,15 +22,19 @@ const createItemData = memoize((datasets, toggleItemActive) => ({
 }));
 
 export default function TSSList({
-  datasetList = [],
   state,
   handleAddTrack = () => {},
   handleRemoveTrack = () => {},
 }) {
-  const [datasets, setDatasets] = useState(
-    datasetList.map((dataset) => ({ ...dataset, isActive: false }))
-  );
+  const { datasetList, loading } = useGetAllHTDatasetsTSS();
+  const [datasets, setDatasets] = useState();
   const keyListener = useRef(null);
+
+  useEffect(() => {
+    if(datasetList && !datasets){
+      setDatasets(datasetList.map((dataset) => ({ ...dataset, isActive: false })))
+    }
+  }, [datasetList, datasets])
 
   const toggleItemActive = (index) => {
     let setDataset = { ...datasets[index] };
@@ -52,6 +57,14 @@ export default function TSSList({
     }, 250);
   };
   //console.log(datasetList);
+
+  if(!datasets){
+    return(
+      <div>
+        <h3>Loading...</h3>
+      </div>
+    )
+  }
 
   const itemData = createItemData(datasets, toggleItemActive);
 
@@ -149,7 +162,7 @@ const datasetItem = memo(({ index, data, style }) => {
                     if (state.htTracks.hasOwnProperty(track.name)) {
                       handleRemoveTrack(track)
                     } else {
-                      handleAddTrack(track)
+                      handleAddTrack(track,dataset)
                     }
                   }}
                 >

@@ -7,4 +7,6 @@ export const ACTION = {
   DELETE_HT_TRACK: 5,
   ADD_FILE_TRACK: 6,
   DELETE_FILE_TRACK: 7,
+  HIDE_HT_TRACK: 8,
+  SHOW_HT_TRACK: 9,
 };

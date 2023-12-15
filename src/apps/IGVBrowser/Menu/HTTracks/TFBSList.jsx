@@ -1,4 +1,4 @@
-import React, { useRef, useState, memo } from "react";
+import React, { useRef, useState, memo, useEffect } from "react";
 import memoize from "memoize-one";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -14,6 +14,7 @@ import { TextField } from "@mui/material";
 import { useLazyQuery } from "@apollo/client";
 import { QUERY_getAllTipsDataset } from "../../tracks/htCollection/queries";
 import { DataVerifier } from "../../../../components/ui-components";
+import { useGetAllHTDatasetsTFBINDING } from "../../tracks/htCollection";
 
 const createItemData = memoize((datasets, toggleItemActive) => ({
   datasets,
@@ -21,15 +22,20 @@ const createItemData = memoize((datasets, toggleItemActive) => ({
 }));
 
 export default function TFBSList({
-  datasetList = [],
   state,
   handleAddTrack = () => {},
   handleRemoveTrack = () => {},
 }) {
-  const [datasets, setDatasets] = useState(
-    datasetList.map((dataset) => ({ ...dataset, isActive: false }))
-  );
+  const { datasetList, loading } = useGetAllHTDatasetsTFBINDING();
+  const [datasets, setDatasets] = useState();
   const keyListener = useRef(null);
+
+  useEffect(() => {
+    if(datasetList && !datasets){
+      setDatasets(datasetList.map((dataset) => ({ ...dataset, isActive: false })))
+    }
+  }, [datasetList, datasets])
+  
 
   const toggleItemActive = (index) => {
     let setDataset = { ...datasets[index] };
@@ -51,8 +57,14 @@ export default function TFBSList({
       setDatasets(filteredItems);
     }, 250);
   };
-  console.log(datasetList);
 
+  if(!datasets){
+    return(
+      <div>
+        <h3>Loading...</h3>
+      </div>
+    )
+  }
 
   const itemData = createItemData(datasets, toggleItemActive);
 
@@ -86,14 +98,15 @@ const datasetItem = memo(({ index, data, style }) => {
   });
   const { itemData, state, handleAddTrack, handleRemoveTrack } = data;
   const { datasets, toggleItemActive } = itemData;
-  
+
   const dataset = datasets[index];
   const open = dataset.isActive;
-  const trackName = dataset.sample.title.substring(0, 4)+"-"+dataset.sourceSerie.title;
+  const trackName =
+    dataset.sample.title.substring(0, 4) + "-" + dataset.sourceSerie.title;
   const peaksFile = `${process.env.REACT_APP_PROSSES_SERVICE}/${dataset._id}/peaks/gff3`;
   const sitesFile = `${process.env.REACT_APP_PROSSES_SERVICE}/${dataset._id}/sites/gff3`;
   const trackPeaks = {
-    name: "["+dataset._id+"]-Peaks",
+    name: "[" + dataset._id + "]-Peaks",
     url: peaksFile,
     format: "gff3",
     displayMode: "EXPANDED",
@@ -101,7 +114,7 @@ const datasetItem = memo(({ index, data, style }) => {
     nameField: trackName,
   };
   const trackSites = {
-    name:  "["+dataset._id+"]-TFBS",
+    name: "[" + dataset._id + "]-TFBS",
     url: sitesFile,
     format: "gff3",
     displayMode: "EXPANDED",
@@ -163,9 +176,9 @@ const datasetItem = memo(({ index, data, style }) => {
                   sx={{ pl: 4 }}
                   onClick={() => {
                     if (state.htTracks.hasOwnProperty(trackPeaks.name)) {
-                      handleRemoveTrack(trackPeaks)
+                      handleRemoveTrack(trackPeaks);
                     } else {
-                      handleAddTrack(trackPeaks)
+                      handleAddTrack(trackPeaks,dataset);
                     }
                   }}
                 >
@@ -182,9 +195,9 @@ const datasetItem = memo(({ index, data, style }) => {
                   sx={{ pl: 4 }}
                   onClick={() => {
                     if (state.htTracks.hasOwnProperty(trackSites.name)) {
-                      handleRemoveTrack(trackSites)
+                      handleRemoveTrack(trackSites);
                     } else {
-                      handleAddTrack(trackSites)
+                      handleAddTrack(trackSites,dataset);
                     }
                   }}
                 >
