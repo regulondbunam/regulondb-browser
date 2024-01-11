@@ -44,12 +44,14 @@ export default function Menu({ state, dispatch, viewMenu, setViewMenu }) {
       <Paper>
         <List>
           <ListItem>
-            <ListItemText primary="Menu Track Options" />
+            <ListItemText primary="Track Options" />
+            {/*
             <Tooltip title="Hide Menu Track Options">
               <Button onClick={handleViewMenu}>
                 <MenuOpenIcon />
               </Button>
             </Tooltip>
+            */}
           </ListItem>
           <Divider />
           <div>
