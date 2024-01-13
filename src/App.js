@@ -28,6 +28,7 @@ import MCO from './apps/mco';
 import TFPSSMs, {TFPSSMsTest} from './apps/TF-PSSMs';
 import Notebooks from './apps/Notebooks';
 import IGVBrowser from './apps/IGVBrowser';
+import GeneOntology from './apps/GeneOntology';
 
 //wsSandbox
 const router = createBrowserRouter([
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "wsSandbox",
         element: <EmbeddedSandbox />,
+      },
+      {
+        path: "go-browser",
+        element: <GeneOntology />,
       },
       {
         path: "igv-browser",
