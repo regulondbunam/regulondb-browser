@@ -1,3 +1,3 @@
-import { useGetGoTerms } from "./MCOTree";
+import { useGetGoTerms, useLazyGetSubclassesOfTermId } from "./MCOTree";
 
-export { useGetGoTerms }
+export { useGetGoTerms, useLazyGetSubclassesOfTermId }

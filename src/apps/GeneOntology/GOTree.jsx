@@ -6,19 +6,18 @@ import {
   ControlledTreeEnvironment,
   Tree
 } from "react-complex-tree";
+import { useLazyGetSubclassesOfTermId } from "../../regulondb-ws/queries";
 
-export default function GoTree({ goTerms }) {
-    const [focusedItem, setFocusedItem] = useState("");
+export default function GoTree({ treeGO }) {
+    const [focusedItem, setFocusedItem] = useState(Object.keys(treeGO)[0]);
     const [expandedItems, setExpandedItems] = useState([]);
-    const [selectedItems, setSelectedItems] = useState([]);
-    const items = useMemo(() => {
-      return formatMCOData(goTerms);
-    }, [goTerms]);
+    const [selectedItems, setSelectedItems] = useState([Object.keys(treeGO)[0]]);
+    const [items, setItems] = useState(treeGO)
+    const [getSubClassesOfTermId, {loading, error}] = useLazyGetSubclassesOfTermId();
     let term
     if(DataVerifier.isValidObject(items[focusedItem])){
       term = items[focusedItem].term
     }
-    console.log(term);
     return (
       <div style={{ display: "grid", gridTemplateColumns: "30% 70%" }}>
         <div style={{ overflow: "auto" }}>
@@ -33,8 +32,16 @@ export default function GoTree({ goTerms }) {
               },
             }}
             onFocusItem={(item) => setFocusedItem(item.index)}
-            onExpandItem={(item) =>
-              setExpandedItems([...expandedItems, item.index])
+            onExpandItem={(item) =>{
+              getSubClassesOfTermId(item.index,(newItems)=>{
+                setItems({...items,...newItems})
+                setTimeout(() => {
+                  setExpandedItems([...expandedItems, item.index])
+                }, 100);
+              })
+              
+            }
+              
             }
             onCollapseItem={(item) =>
               setExpandedItems(
@@ -56,34 +63,9 @@ export default function GoTree({ goTerms }) {
             overflow: "auto",
           }}
         >
-          <OntologyData {...term} />
+          {term &&  <OntologyData {...term} /> }
         </div>
       </div>
     );
   }
 
-function formatMCOData(goTerms=[]) {
-    const items ={}
-    
-    if(DataVerifier.isValidArray(goTerms)){
-      let children = []
-        goTerms.forEach((term)=>{
-          children.push(term._id)
-          items[term._id] = {
-            index:  term._id,
-            isFolder: DataVerifier.isValidArray(term.subclasses),
-            children: term.subclasses,
-            data: term.name,
-            term: term
-        }
-        })
-        items['root'] = {
-          index: "root",
-          isFolder: true,
-          children: children,
-          data: "gene ontology"
-        }
-    }
-    
-    return items
-}
