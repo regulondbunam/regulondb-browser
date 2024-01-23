@@ -40,8 +40,7 @@ export default function Results({ keyword }) {
     OperonResult(keyword),
     RegulonResult(keyword),
     SigmulonResult(keyword),
-    GUsResult(keyword),
-    GOResult(keyword)
+    GUsResult(keyword)
   ];
 
   let title = `${keyword}`;
@@ -56,40 +55,6 @@ export default function Results({ keyword }) {
         <br />
         <h1>Search in results {title} </h1>
         <div style={{ display: "grid", gridTemplateColumns: "70% 1% 20%" }}>
-          {/* 
-          <Paper
-            sx={{
-              p: "2px 4px",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <SearchIcon />
-            <InputBase
-              sx={{ ml: 1, flex: 1 }}
-              placeholder='Example "arac OR fimb " "arac OR arabinose"'
-              value={value}
-              onChange={(e) => {
-                setValue(e.target.value);
-              }}
-              inputProps={{ "aria-label": "regulonDB search" }}
-              onKeyUp={(event) => {
-                if (event.key === "Enter") {
-                  handleSearch();
-                }
-              }}
-            />
-          </Paper>
-          <div></div>
-          <Button
-            sx={{ width: "100%" }}
-            onClick={handleSearch}
-            color="error"
-            variant="contained"
-          >
-            Search
-          </Button>
-          */}
         </div>
       </Cover>
       <Div name={keyword} />
@@ -98,6 +63,7 @@ export default function Results({ keyword }) {
   );
 }
 
+// eslint-disable-next-line no-unused-vars
 function GOResult(keyword) {
   const {goTerms, loading, error} = useGetGOBySearch(keyword)
   let title = "Gene Ontology (0)";
