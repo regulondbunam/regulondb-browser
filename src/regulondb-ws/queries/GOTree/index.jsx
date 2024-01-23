@@ -1,7 +1,34 @@
 import { useQuery, useLazyQuery } from "@apollo/client";
-import { query_GetGoTerms, query_GetSubclassesOfTermId, query_GetTermBy } from "./queries";
+import { query_GetGoTerms, query_GetSubclassesOfTermId, query_GetTermBy,query_GetNameBy } from "./queries";
 import { DataVerifier } from "../../../components/ui-components";
 //import { useState } from "react";
+
+export function useLazyGetGOName() {
+  const [getName, { loading, error }] = useLazyQuery(
+    query_GetNameBy
+  );
+  const goTerms = (id, updateSuggest = () => {}) => {
+    getName({
+      variables: {
+        id: id,
+      },
+      onCompleted: (data) => {
+        if (DataVerifier.isValidArray(data.getTermBy)) {
+          let newTerms = [];
+          data.getSubclassesOfTermId.forEach((term) => {
+            newTerms.push(term.name)
+            newTerms.push(term.ontologyId)
+          });
+          updateSuggest(newTerms)
+        }
+      },
+      onError: (error)=>{
+        console.error("getSubClasses Error:",error);
+      }
+    });
+  };
+  return [goTerms, {loading, error}]
+}
 
 export function useGetGOBySearch(search = "") {
   const {data, loading, error} = useQuery(query_GetTermBy,{

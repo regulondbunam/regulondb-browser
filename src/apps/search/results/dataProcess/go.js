@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { DataVerifier } from "../../../../components/ui-components";
 
 export default function goFormatResults(goTerm, keyword) {

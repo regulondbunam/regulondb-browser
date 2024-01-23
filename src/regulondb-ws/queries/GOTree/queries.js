@@ -51,3 +51,15 @@ export const query_GetTermBy = gql`query GetTermBy($search: String) {
     subclasses
   }
 }`
+
+export const query_GetNameBy = gql`query GetTermBy($search: String) {
+  getTermBy(search: $search) {
+    _id
+    name
+    genes {
+      name
+      productName
+    }
+    ontologyId
+  }
+}`

@@ -34,7 +34,7 @@ export default function OntologyData({
             {genes.map((gene)=>{
             return (
                 <tr key={"geneGO_"+_id+"_"+gene._id} >
-                    <td><Link to={"/gene/"+gene._id} >{`${gene.name} - ${gene.productName}`}</Link></td>
+                    <td><Link to={"/gene/"+gene._id} ><p dangerouslySetInnerHTML={{__html: `${gene.name} - ${gene.productName}`}} /></Link></td>
                 </tr>
             )
         })}
