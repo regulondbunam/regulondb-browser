@@ -19,7 +19,7 @@ export default function GoTree({ treeGO }) {
       term = items[focusedItem].term
     }
     return (
-      <div style={{ display: "grid", gridTemplateColumns: "30% 70%" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "30% 70%", margin: "2px 10% 0 0" }}>
         <div style={{ overflow: "auto" }}>
           <ControlledTreeEnvironment
             items={items}
