@@ -1,7 +1,25 @@
 import { useQuery, useLazyQuery } from "@apollo/client";
-import { query_GetGoTerms, query_GetSubclassesOfTermId } from "./queries";
+import { query_GetGoTerms, query_GetSubclassesOfTermId, query_GetTermBy } from "./queries";
 import { DataVerifier } from "../../../components/ui-components";
 //import { useState } from "react";
+
+export function useGetGOBySearch(search = "") {
+  const {data, loading, error} = useQuery(query_GetTermBy,{
+    variables: {
+      search: search
+    }
+  })
+  let goTerms
+  if (data && !error) {
+    if (DataVerifier.isValidArray(data.getTermBy)) {
+      goTerms = data.getTermBy
+    }
+  }
+  if (error) {
+    console.error(error);
+  }
+  return {goTerms,loading,error}
+}
 
 export function useGetGoTerms() {
   const { data, loading, error } = useQuery(query_GetGoTerms);

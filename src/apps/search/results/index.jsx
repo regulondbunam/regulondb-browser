@@ -16,6 +16,7 @@ import {
   regulonFormatResults,
   sigmulonFormatResults,
   gusFormatResults,
+  goFormatResults,
 } from "./dataProcess";
 import CircularProgress from "@mui/material/CircularProgress";
 //import Paper from "@mui/material/Paper";
@@ -25,6 +26,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { Div } from "../../../components/ui-components/searchKeys/code";
 //import SearchIcon from "@mui/icons-material/Search";
 import CoexpressionResults from "../coexpression";
+import { useGetGOBySearch } from "../../../regulondb-ws/queries/GOTree";
 
 export default function Results({ keyword }) {
   //const [keyword, setKeyword] = useState(inKeyword ? inKeyword : "");
@@ -38,7 +40,8 @@ export default function Results({ keyword }) {
     OperonResult(keyword),
     RegulonResult(keyword),
     SigmulonResult(keyword),
-    GUsResult(keyword)
+    GUsResult(keyword),
+    GOResult(keyword)
   ];
 
   let title = `${keyword}`;
@@ -93,6 +96,36 @@ export default function Results({ keyword }) {
       <AnchorNav title="Results" sections={section} disabledSearchTool />
     </div>
   );
+}
+
+function GOResult(keyword) {
+  const {goTerms, loading, error} = useGetGOBySearch(keyword)
+  let title = "Gene Ontology (0)";
+  let results = [];
+  if (DataVerifier.isValidArray(goTerms)) {
+    results = goFormatResults(goTerms,keyword)
+    title = "Gene Ontology (" + goTerms.length + ") ";
+  }
+  if (loading) {
+    title = (
+      <>
+        GENSOR Unit <CircularProgress size={15} />
+      </>
+    );
+  }
+  return {
+    id: "result_go",
+    label: title,
+    title: title,
+    component: (
+      <Result
+        loading={loading}
+        error={error}
+        results={results}
+        keyword={keyword}
+      />
+    ),
+  };
 }
 
 function GUsResult(keyword) {

@@ -35,3 +35,19 @@ export const query_GetSubclassesOfTermId = gql`
     }
   }
 `;
+
+export const query_GetTermBy = gql`query GetTermBy($search: String) {
+  getTermBy(search: $search) {
+    _id
+    description
+    genes {
+      _id
+      name
+      productName
+    }
+    name
+    ontologyId
+    subclassOf
+    subclasses
+  }
+}`

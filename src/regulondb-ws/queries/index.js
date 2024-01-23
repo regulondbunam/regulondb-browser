@@ -1,5 +1,5 @@
-import { useGetGoTerms, useLazyGetSubclassesOfTermId } from "./MCOTree";
+import { useGetGoTerms, useLazyGetSubclassesOfTermId, useGetGOBySearch } from "./GOTree";
 import { useGetListAllDownloadableFiles } from "./DownloadableFile";
 
-export { useGetGoTerms, useLazyGetSubclassesOfTermId,
+export { useGetGoTerms, useLazyGetSubclassesOfTermId, useGetGOBySearch,
     useGetListAllDownloadableFiles }
