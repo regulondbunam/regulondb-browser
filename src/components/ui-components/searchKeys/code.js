@@ -16,7 +16,7 @@ export function Div({name}){
     const birdDayInfo={
         andres: [3,10],
         Andres: [3,10],
-        Felipe: [0,0],
+        Felipe: [25,1],
         Elizabeth: [23,1],
         Karen: [6,8],
         parangaricutirimicuaro: [date.getDate(),date.getMonth()+1],

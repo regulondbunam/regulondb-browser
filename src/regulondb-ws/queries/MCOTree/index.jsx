@@ -1,7 +1,7 @@
 import { useQuery, useLazyQuery } from "@apollo/client";
 import { query_GetGoTerms, query_GetSubclassesOfTermId } from "./queries";
 import { DataVerifier } from "../../../components/ui-components";
-import { useState } from "react";
+//import { useState } from "react";
 
 export function useGetGoTerms() {
   const { data, loading, error } = useQuery(query_GetGoTerms);
