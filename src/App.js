@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         element: <EmbeddedSandbox />,
       },
       {
-        path: "go-browser",
+        path: "go",
         element: <GeneOntology />,
       },
       {

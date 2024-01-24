@@ -8,7 +8,8 @@ import {
 } from "react-complex-tree";
 import { useLazyGetSubclassesOfTermId } from "../../regulondb-ws/queries";
 
-export default function GoTree({ treeGO }) {
+
+export default function GoTree({ treeGO, selectedIdGO }) {
     const [focusedItem, setFocusedItem] = useState(Object.keys(treeGO)[0]);
     const [expandedItems, setExpandedItems] = useState([]);
     const [selectedItems, setSelectedItems] = useState([Object.keys(treeGO)[0]]);
@@ -19,7 +20,10 @@ export default function GoTree({ treeGO }) {
       term = items[focusedItem].term
     }
     return (
-      <div style={{ display: "grid", gridTemplateColumns: "30% 70%", margin: "2px 10% 0 0" }}>
+      <div style={{margin: "2px 10% 0 5%"}}>
+        <h2>Gene Ontology Tree</h2>
+        {selectedIdGO}
+      <div style={{ display: "grid", gridTemplateColumns: "30% 70%" }}>
         <div style={{ overflow: "auto" }}>
           <ControlledTreeEnvironment
             items={items}
@@ -65,6 +69,7 @@ export default function GoTree({ treeGO }) {
         >
           {term &&  <OntologyData {...term} /> }
         </div>
+      </div>
       </div>
     );
   }

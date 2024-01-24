@@ -3,58 +3,120 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { useGetGOBySearch } from "../../../regulondb-ws/queries";
-import { Accordion, Circular } from "../../../components/ui-components";
-import OntologyData from "../OntologyData";
-import DeleteIcon from '@mui/icons-material/Delete';
+import {
+  Accordion,
+  Circular,
+  DataVerifier,
+} from "../../../components/ui-components";
+import Result from "./Result";
+import DeleteIcon from "@mui/icons-material/Delete";
 
-export default function Search({setSelectedIdGO}) {
-  const [keyword, setKeyword] = useState()
+export default function Search({ setSelectedIdGO }) {
+  const [keyword, setKeyword] = useState();
 
-const handleSearch = ()=>{
-  setKeyword(undefined)
-  let inputText = document.getElementById("inputSearch")
-  if (inputText) {
-    setTimeout(() => {
-      setKeyword(inputText.value)
-    }, 100);
-  }
-}
+  const handleSearch = () => {
+    setKeyword(undefined);
+    let inputText = document.getElementById("inputSearch");
+    if (inputText) {
+      setTimeout(() => {
+        setKeyword(inputText.value);
+      }, 100);
+    }
+  };
 
-const handleDeleteSearch = ()=>{
-  setKeyword(undefined)
-}
+  const handleDeleteSearch = () => {
+    setKeyword(undefined);
+  };
   return (
     <div>
-      <div style={{display: "flex", margin: "0 0 0 5%"}} >
-      <TextField id="inputSearch" label="Search" variant="outlined" sx={{width: "20%"}} />
-        <Button onClick={handleSearch} variant="contained" >Search</Button>
-        {keyword && <Button color="error" onClick={handleDeleteSearch} variant="contained" ><DeleteIcon /></Button>}
+      <div style={{ display: "flex", margin: "0 0 0 5%" }}>
+        <TextField
+          size="small"
+          id="inputSearch"
+          label="Search"
+          variant="outlined"
+          sx={{ width: "20%" }}
+        />
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div>
+            <Button onClick={handleSearch} variant="contained" sx={{ mr: 1 }}>
+              Search
+            </Button>
+          </div>
+          <div>
+            {keyword && (
+              <Button
+                color="error"
+                onClick={handleDeleteSearch}
+                variant="contained"
+              >
+                Delete Results
+                <DeleteIcon />
+              </Button>
+            )}
+          </div>
+        </div>
       </div>
       <br />
-      {keyword && <GOResult keyword={keyword} />}
+      <div>
+        {keyword && (
+          <GOResult setSelectedIdGO={setSelectedIdGO} keyword={keyword} />
+        )}
+      </div>
     </div>
   );
 }
 
-function GOResult({keyword}) {
-  const {goTerms, loading, error} = useGetGOBySearch(keyword)
+function GOResult({ keyword, setSelectedIdGO = ()=>{} }) {
+  const { goTerms, loading, error } = useGetGOBySearch(keyword);
+  const [view, setView] = useState(true);
+
+  const handleSelectIdGO = (id) => {
+    setView(false)
+    setSelectedIdGO(id)
+  };
+
+  const handleViewResults = () => {
+    setView(!view);
+  };
+  if (!DataVerifier.isValidArray(goTerms) && !loading) {
+    return <div>
+      <p><b>{`No results found with ${keyword}`}</b></p>
+    </div>
+  }
+
   if (goTerms) {
-    return(
-      <div style={{margin: "0 10% 0 10%"}} >
-        {goTerms.map((term)=>{
-          return(
-            <div style={{marginBottom: "15px"}} key={"resultSearchTerm_"+term._id} >
-              <Accordion title={<h4>{term.name}</h4>} expand={false} >
-                <OntologyData {...term} />
-              </Accordion>
-            </div>
-            )
-        })}
+    return (
+      <div style={{ margin: "0 10% 0 10%" }}>
+        <Button size="small" onClick={handleViewResults} variant="outlined" >
+          {view ? "Hide " : "Show "}{`results (${goTerms.length})`}
+        </Button>
+        {view && (
+          <>
+            {goTerms.map((term) => {
+              return (
+                <div
+                  style={{ marginBottom: "15px" }}
+                  key={"resultSearchTerm_" + term._id}
+                >
+                  <Result handleSelectIdGO={handleSelectIdGO} {...term} />
+                </div>
+              );
+            })}
+          </>
+        )}
       </div>
-    )
+    );
   }
   if (loading) {
-    return <Circular />
+    return <Circular />;
   }
-  return <></>
+  return <></>;
 }

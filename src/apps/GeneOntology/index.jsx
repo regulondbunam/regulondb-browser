@@ -4,11 +4,14 @@ import { useGetGoTerms } from '../../regulondb-ws/queries';
 import GoTree from './GOTree';
 import Search from './Search';
 import { useParams } from 'react-router-dom';
+import Divider from '@mui/material/Divider';
+
 
 export default function GeneOntology() {
     const {treeGO, loading, error} = useGetGoTerms()
     const { goId }= useParams()
     const [selectedIdGO, setSelectedIdGO] = useState(goId)
+
   return (
     <div>
         <Cover state={loading ? "loading" : "done"} >
@@ -16,7 +19,8 @@ export default function GeneOntology() {
         </Cover>
         <Search setSelectedIdGO={setSelectedIdGO} />
         {loading && <Circular/>}
-        {treeGO && <GoTree treeGO={treeGO} />}
+        <Divider />
+        {treeGO && <GoTree treeGO={treeGO} selectedIdGO={selectedIdGO} />}
     </div>
   )
 }
