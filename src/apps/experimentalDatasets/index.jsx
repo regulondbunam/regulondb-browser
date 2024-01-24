@@ -228,6 +228,10 @@ export default function ExperimentalDatasets() {
         </Cover>
         <div style={{ margin: "1% 5% 1% 5%" }}>
           {Object.keys(fileGroup).map((group, index)=>{
+            const files = fileGroup[group]
+            if (!DataVerifier.isValidArray(files)) {
+              return null
+            }
             return (
               <Accordion key={"group_"+group+"_"+index} title={group} >
                 <table className="tableED">
@@ -239,7 +243,7 @@ export default function ExperimentalDatasets() {
               </tr>
             </thead>
             <tbody>
-              {fileList.map((file, i) => {
+              {files.map((file, i) => {
                 if (/internal/.test(file.fileName)) {
                   return null;
                 }
