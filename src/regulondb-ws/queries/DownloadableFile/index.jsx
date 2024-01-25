@@ -36,6 +36,5 @@ function formatGroupFiles(fileList = []){
             fileGroup.other.push(file)
         }
     })
-    console.log(fileGroup);
     return fileGroup
 }

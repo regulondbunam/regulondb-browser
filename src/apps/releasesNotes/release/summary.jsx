@@ -81,7 +81,7 @@ function DbInfoRegulons({ rdbObject, statistic }) {
     return (
         <>
             <tr>
-                <td>{rdbObject}</td>
+                <th>{rdbObject}</th>
                 <td></td>
                 <td>{total}</td>
                 <td></td>
@@ -113,13 +113,8 @@ function ProductsDBInfoType({ rdbObject, statistic }) {
     return (
         <>
             <tr>
-                <td>{rdbObject}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <th>{rdbObject}</th>
+                <td colSpan={5} ></td>
             </tr>
             {validObject(polypeptides.total)
                 ? (<SubDetailedStatistics rdbObject={"Polypeptides"} statistic={polypeptides} />)
@@ -152,7 +147,7 @@ function DbInfoExternalReferencesType({ rdbObject, statistic }) {
     }
     return (
         <tr>
-            <td>{rdbObject}</td>
+            <th>{rdbObject}</th>
             <td>
                 <table>
                     <thead>
@@ -203,7 +198,7 @@ function SubDetailedStatistics({ rdbObject, statistic, isTotal = true }) {
     return (
         <tr>
             <td></td>
-            <td>{rdbObject}</td>
+            <th>{rdbObject}</th>
             <td>{isTotal && (total)}</td>
             <td>{weak}</td>
             <td>{strong}</td>
@@ -226,7 +221,7 @@ function DetailedStatistics({ rdbObject, statistic }) {
     }
     return (
         <tr>
-            <td>{rdbObject}</td>
+            <th>{rdbObject}</th>
             <td></td>
             <td>{total}</td>
             <td>{weak}</td>
