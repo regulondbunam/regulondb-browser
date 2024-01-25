@@ -88,10 +88,11 @@ export default function Result({
             size="small"
             aria-label="outlined button group"
           >
-           
-            <Button onClick={handleView}>
-              {view ? "Hide Genes" : "Show Genes"}
-            </Button>
+            {DataVerifier.isValidArray(genes) && (
+              <Button onClick={handleView}>
+                {view ? "Hide Genes" : "Show Genes"}
+              </Button>
+            )}
           </ButtonGroup>
         </Box>
       </Paper>

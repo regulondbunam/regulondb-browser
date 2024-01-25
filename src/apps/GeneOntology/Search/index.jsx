@@ -1,21 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { useGetGOBySearch } from "../../../regulondb-ws/queries";
 import {
-  Accordion,
   Circular,
   DataVerifier,
 } from "../../../components/ui-components";
 import Result from "./Result";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-export default function Search({ setSelectedIdGO }) {
-  const [keyword, setKeyword] = useState();
+export default function Search({ setSelectedIdGO, inKeyword }) {
+  const [keyword, setKeyword] = useState(inKeyword);
 
   const handleSearch = () => {
-    setKeyword(undefined);
     let inputText = document.getElementById("inputSearch");
     if (inputText) {
       setTimeout(() => {
@@ -25,8 +23,17 @@ export default function Search({ setSelectedIdGO }) {
   };
 
   const handleDeleteSearch = () => {
-    setKeyword(undefined);
+    setKeyword("");
   };
+
+  useEffect(() => {
+    const inputSearch = document.getElementById("inputSearch")
+    if(inputSearch){
+      inputSearch.value = keyword
+    }
+  }, [keyword])
+  
+
   return (
     <div>
       <div style={{ display: "flex", margin: "0 0 0 5%" }}>
@@ -74,30 +81,47 @@ export default function Search({ setSelectedIdGO }) {
   );
 }
 
-function GOResult({ keyword, setSelectedIdGO = ()=>{} }) {
-  const { goTerms, loading, error } = useGetGOBySearch(keyword);
+function GOResult({ keyword, setSelectedIdGO = () => {} }) {
+  const { goTerms, loading, error } = useGetGOBySearch(`"${keyword}"`);
   const [view, setView] = useState(true);
 
   const handleSelectIdGO = (id) => {
-    setView(false)
-    setSelectedIdGO(id)
+    setView(false);
+    setSelectedIdGO(id);
   };
 
   const handleViewResults = () => {
     setView(!view);
   };
+
+  useEffect(() => {
+    if (goTerms && !error) {
+      if (goTerms.length === 1) {
+        setView(false);
+        setSelectedIdGO(goTerms[0]._id);
+      }
+    }
+  }, [goTerms, error, setSelectedIdGO, setView]);
+
   if (!DataVerifier.isValidArray(goTerms) && !loading) {
-    return <div>
-      <p><b>{`No results found with ${keyword}`}</b></p>
-    </div>
+    return (
+      <div>
+        <p>
+          <b>{`No results found with ${keyword}`}</b>
+        </p>
+      </div>
+    );
   }
 
-  if (goTerms) {
+  if (DataVerifier.isValidArray(goTerms)) {
     return (
       <div style={{ margin: "0 10% 0 10%" }}>
-        <Button size="small" onClick={handleViewResults} variant="outlined" >
-          {view ? "Hide " : "Show "}{`results (${goTerms.length})`}
+        {goTerms.length > 1 &&(
+          <Button size="small" onClick={handleViewResults} variant="outlined">
+          {view ? "Hide " : "Show "}
+          {`search results for "${keyword}" (${goTerms.length})`}
         </Button>
+        )}
         {view && (
           <>
             {goTerms.map((term) => {

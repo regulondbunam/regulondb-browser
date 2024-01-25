@@ -8,16 +8,16 @@ import Divider from '@mui/material/Divider';
 
 
 export default function GeneOntology() {
-    const {treeGO, loading, error} = useGetGoTerms()
-    const { goId }= useParams()
-    const [selectedIdGO, setSelectedIdGO] = useState(goId)
+    const {treeGO, loading, /*error*/} = useGetGoTerms()
+    const { keyword }= useParams()
+    const [selectedIdGO, setSelectedIdGO] = useState()
 
   return (
     <div>
         <Cover state={loading ? "loading" : "done"} >
             <h1>Gene Ontology Browser</h1>
         </Cover>
-        <Search setSelectedIdGO={setSelectedIdGO} />
+        <Search setSelectedIdGO={setSelectedIdGO} inKeyword={keyword} />
         {loading && <Circular/>}
         <Divider />
         {treeGO && <GoTree treeGO={treeGO} selectedIdGO={selectedIdGO} />}

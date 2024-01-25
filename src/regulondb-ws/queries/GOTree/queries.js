@@ -1,5 +1,21 @@
 import { gql } from "@apollo/client";
 
+export const query_GetSuperclassesOfTermId = gql`query GetSuperclassesOfTermId($_id: String) {
+  getSuperclassesOfTermId(_id: $_id) {
+    _id
+    description
+    genes {
+      _id
+      name
+      productName
+    }
+    name
+    ontologyId
+    subclassOf
+    subclasses
+  }
+}`
+
 export const query_GetGoTerms = gql`
   query GetGoTerms {
     getGoTerms {

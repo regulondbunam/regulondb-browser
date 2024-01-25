@@ -51,6 +51,9 @@ const router = createBrowserRouter([
       {
         path: "go",
         element: <GeneOntology />,
+        children: [
+          { path: ":keyword" }
+        ],
       },
       {
         path: "igv-browser",
