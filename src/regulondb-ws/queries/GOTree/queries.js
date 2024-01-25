@@ -52,8 +52,8 @@ export const query_GetSubclassesOfTermId = gql`
   }
 `;
 
-export const query_GetTermBy = gql`query GetTermBy($search: String) {
-  getTermBy(search: $search) {
+export const query_GetTermBy = gql`query GetTermBy($advancedSearch: String, $search: String) {
+  getTermBy(advancedSearch: $advancedSearch, search: $search) {
     _id
     description
     genes {

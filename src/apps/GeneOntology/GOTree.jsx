@@ -10,9 +10,10 @@ import { useLazyGetSubclassesOfTermId } from "../../regulondb-ws/queries";
 
 
 export default function GoTree({ treeGO, selectedIdGO }) {
-    const [focusedItem, setFocusedItem] = useState(Object.keys(treeGO)[0]);
+  console.log(selectedIdGO ? selectedIdGO : Object.keys(treeGO)[0]);
+    const [focusedItem, setFocusedItem] = useState(selectedIdGO ? selectedIdGO : Object.keys(treeGO)[0]);
     const [expandedItems, setExpandedItems] = useState([]);
-    const [selectedItems, setSelectedItems] = useState([Object.keys(treeGO)[0]]);
+    const [selectedItems, setSelectedItems] = useState(selectedIdGO ? selectedIdGO : Object.keys(treeGO)[0]);
     const [items, setItems] = useState(treeGO)
     const [getSubClassesOfTermId, {loading, error}] = useLazyGetSubclassesOfTermId();
     let term
