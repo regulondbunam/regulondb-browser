@@ -339,10 +339,11 @@ export default function FilterTable({
                   <tr key={row.id}>
                     {row.getVisibleCells().map((cell) => {
                       if (typeof cell.getValue() === "object") {
-                        return <td key={cell.id}>{cell.getValue()}</td>;
+                        
+                        return <td style={cell.column.columnDef.cellStyle} key={cell.id}>{cell.getValue()}</td>;
                       } else {
                         return (
-                          <td key={cell.id}>
+                          <td style={cell.column.columnDef.cellStyle} key={cell.id}>
                             {flexRender(
                               cell.column.columnDef.cell,
                               cell.getContext()

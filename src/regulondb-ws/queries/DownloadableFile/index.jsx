@@ -27,7 +27,6 @@ function formatGroupFiles(fileList = []){
     }
     fileList.forEach((file)=>{
         if (DataVerifier.isValidString(file.group)) {
-            console.log(file.group);
             if(fileGroup.hasOwnProperty(file.group)){
                 fileGroup[file.group] = [...fileGroup[file.group], file]
             }else{

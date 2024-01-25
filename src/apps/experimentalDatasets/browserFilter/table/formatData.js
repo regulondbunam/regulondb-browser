@@ -10,12 +10,17 @@ export default function formatData(content = "") {
         const cells = line.split("\t");
         if (i === 0) {
             cells.forEach((cell,ci)=>{
+              let cellStyle = {}
+              if (/sequence/g.test(cell.toLowerCase())) {
+                cellStyle = {textAlign: "left", fontFamily: '"Courier New", Courier, monospace', fontSize: "x-large"}
+              }
               let indx = ci+1
                 columns.push({
                     id: cell,
                     header: cell,
                     filter: "fuzzyText",
                     accessorKey: "column_"+indx,
+                    cellStyle: cellStyle
                   },)
             })
         } else {
