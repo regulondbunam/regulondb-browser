@@ -2,28 +2,29 @@ import { useMemo, useState } from "react";
 import { DataVerifier } from "../../components/ui-components";
 import OntologyData from "./OntologyData";
 import "react-complex-tree/lib/style-modern.css";
-import {
-  ControlledTreeEnvironment,
-  Tree
-} from "react-complex-tree";
+import { ControlledTreeEnvironment, Tree } from "react-complex-tree";
 import { useLazyGetSubclassesOfTermId } from "../../regulondb-ws/queries";
-
 
 export default function GoTree({ treeGO, selectedIdGO }) {
   console.log(selectedIdGO ? selectedIdGO : Object.keys(treeGO)[0]);
-    const [focusedItem, setFocusedItem] = useState(selectedIdGO ? selectedIdGO : Object.keys(treeGO)[0]);
-    const [expandedItems, setExpandedItems] = useState([]);
-    const [selectedItems, setSelectedItems] = useState(selectedIdGO ? selectedIdGO : Object.keys(treeGO)[0]);
-    const [items, setItems] = useState(treeGO)
-    const [getSubClassesOfTermId, {loading, error}] = useLazyGetSubclassesOfTermId();
-    let term
-    if(DataVerifier.isValidObject(items[focusedItem])){
-      term = items[focusedItem].term
-    }
-    return (
-      <div style={{margin: "2px 10% 0 5%"}}>
-        <h2>Gene Ontology Tree</h2>
-        {selectedIdGO}
+  const [focusedItem, setFocusedItem] = useState(
+    selectedIdGO ? selectedIdGO : Object.keys(treeGO)[0]
+  );
+  const [expandedItems, setExpandedItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState(
+    selectedIdGO ? [selectedIdGO] : [Object.keys(treeGO)[0]]
+  );
+  const [items, setItems] = useState(treeGO);
+  const [getSubClassesOfTermId, { loading, error }] =
+    useLazyGetSubclassesOfTermId();
+  let term;
+  if (DataVerifier.isValidObject(items[focusedItem])) {
+    term = items[focusedItem].term;
+  }
+  return (
+    <div style={{ margin: "2px 10% 0 5%" }}>
+      <h2>Gene Ontology Tree</h2>
+      {selectedIdGO}
       <div style={{ display: "grid", gridTemplateColumns: "30% 70%" }}>
         <div style={{ overflow: "auto" }}>
           <ControlledTreeEnvironment
@@ -37,17 +38,14 @@ export default function GoTree({ treeGO, selectedIdGO }) {
               },
             }}
             onFocusItem={(item) => setFocusedItem(item.index)}
-            onExpandItem={(item) =>{
-              getSubClassesOfTermId(item.index,(newItems)=>{
-                setItems({...items,...newItems})
+            onExpandItem={(item) => {
+              getSubClassesOfTermId(item.index, (newItems) => {
+                setItems({ ...items, ...newItems });
                 setTimeout(() => {
-                  setExpandedItems([...expandedItems, item.index])
+                  setExpandedItems([...expandedItems, item.index]);
                 }, 100);
-              })
-              
-            }
-              
-            }
+              });
+            }}
             onCollapseItem={(item) =>
               setExpandedItems(
                 expandedItems.filter(
@@ -68,10 +66,9 @@ export default function GoTree({ treeGO, selectedIdGO }) {
             overflow: "auto",
           }}
         >
-          {term &&  <OntologyData {...term} /> }
+          {term && <OntologyData {...term} />}
         </div>
       </div>
-      </div>
-    );
-  }
-
+    </div>
+  );
+}

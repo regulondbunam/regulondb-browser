@@ -48,7 +48,6 @@ export function useGetTree(goId){
                   data: term.name,
                   term: term,
                 };
-                console.log("a",data);
                 if (DataVerifier.isValidArray(term.subclassOf)) {
                   const idSubClassOf = term.subclassOf[0]
                   getSuperClasses({
@@ -65,16 +64,16 @@ export function useGetTree(goId){
                           data: _term.name,
                           term: _term,
                         };
-                        
                         if (DataVerifier.isValidArray(_term.subclassOf)) {
                           const idTerm = _term.subclassOf[0]
                           setTimeout(() => {
                             findSuperClass(idTerm,getSuperClasses,awaitTreeGO, setTreeGO)
                           }, 100);
                         }else{
-                          
                           setTreeGO({...awaitTreeGO})
                         }
+                      }else{
+                        setTreeGO({...awaitTreeGO})
                       }
                     }
                   })
@@ -129,7 +128,7 @@ function findSuperClass(idTerm,getSuperClasses,awaitTreeGO,setTreeGO=()=>{}){
       }
     },
     onError: (error)=>{
-      console.error("error find super class");
+      console.error("error find super class",error);
     }
   })
 }
