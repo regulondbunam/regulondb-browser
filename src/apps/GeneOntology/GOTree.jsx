@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { DataVerifier } from "../../components/ui-components";
 import OntologyData from "./OntologyData";
 import "react-complex-tree/lib/style-modern.css";
@@ -10,6 +10,7 @@ export default function GoTree({ treeGO }) {
   const [expandedItems, setExpandedItems] = useState(treeGO.expandedItems);
   const [selectedItems, setSelectedItems] = useState(treeGO.selectedItems);
   const [items, setItems] = useState(treeGO.items);
+  // eslint-disable-next-line no-unused-vars
   const [getSubClassesOfTermId, { loading, error }] =
     useLazyGetSubclassesOfTermId();
   let term;

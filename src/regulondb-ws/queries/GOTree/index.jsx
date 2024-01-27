@@ -4,7 +4,6 @@ import {
   query_GetSubclassesOfTermId,
   query_GetTermBy,
   query_GetNameBy,
-  query_GetSuperclassesOfTermId,
 } from "./queries";
 import { DataVerifier } from "../../../components/ui-components";
 import { useEffect, useState } from "react";
@@ -12,11 +11,18 @@ import { useEffect, useState } from "react";
 
 export function useGetTree(goId) {
   const [treeGO, setTreeGO] = useState();
-  const { data, loading, error } = useQuery(query_GetGoTerms);
+  const { data, loading: mainLoading, error } = useQuery(query_GetGoTerms);
   const [getSelectedTerm, { loading: loadSelectTerm, error: errorSelectTerm }] =
     useLazyQuery(query_GetTermBy);
-  const [getSuperClasses, { loading: loadSuper, error: errorSuper }] =
-    useLazyQuery(query_GetSuperclassesOfTermId);
+
+    if (error) {
+      console.error("tree search main loading error",error);
+    }
+    if(errorSelectTerm){
+      errorSelectTerm("selected term has error",errorSelectTerm)
+    }
+
+    const loading = mainLoading || loadSelectTerm
 
   useEffect(() => {
     if (data && !error && !treeGO) {
@@ -47,13 +53,13 @@ export function useGetTree(goId) {
           data: "gene ontology",
         };
         if (goId) {
-          findSuperClass(goId,getSelectedTerm, getSuperClasses, _treeGO, setTreeGO);
+          findSuperClass(goId,getSelectedTerm, _treeGO, setTreeGO);
         } else {
           setTreeGO({ ..._treeGO });
         }
       }
     }
-  }, [data, error, getSelectedTerm, getSuperClasses, goId, treeGO]);
+  }, [data, error, getSelectedTerm, goId, treeGO]);
 
   return { treeGO, loading };
 }
@@ -61,7 +67,6 @@ export function useGetTree(goId) {
 function findSuperClass(
   idTerm,
   getSelectedTerm,
-  getSuperClasses,
   _treeGO,
   setTreeGO = () => {}
 ) {
@@ -87,7 +92,7 @@ function findSuperClass(
         if (DataVerifier.isValidArray(term.subclassOf)) {
           const idSubClassOf = term.subclassOf[0];
           _treeGO.expandedItems.push(idSubClassOf);
-          findSuperClass(idSubClassOf,getSelectedTerm,getSelectedTerm,_treeGO,setTreeGO)
+          findSuperClass(idSubClassOf,getSelectedTerm,_treeGO,setTreeGO)
         } else {
           setTreeGO({ ..._treeGO });
         }

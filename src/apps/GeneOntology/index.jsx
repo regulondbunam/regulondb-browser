@@ -26,7 +26,6 @@ export default function GeneOntology() {
 
 function Tree({ selectedIdGO }) {
   const { treeGO, loading /*error*/ } = useGetTree(selectedIdGO);
-  console.log(treeGO);
   return (
     <div>
       {loading && <Circular />}
