@@ -10,28 +10,28 @@ import {
 import Result from "./Result";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-export default function Search({ setSelectedIdGO, inKeyword }) {
-  const [keyword, setKeyword] = useState(inKeyword);
+export default function Search({ setSelectedIdGO, keyword: _keyword }) {
+  const [keyword, setKeyword] = useState(_keyword ? _keyword : "");
+  const [search, setSearch] = useState(false)
 
-  const handleSearch = () => {
-    let inputText = document.getElementById("inputSearch");
-    if (inputText) {
-      setTimeout(() => {
-        setKeyword(inputText.value);
-      }, 100);
-    }
+  const handleSetId = (idGO) => {
+    setSelectedIdGO(undefined)
+    setTimeout(() => {
+      setSelectedIdGO(idGO)
+    }, 100);
   };
+
+  const handleSearch = ()=>{
+    setSearch(true)
+  }
 
   const handleDeleteSearch = () => {
-    setKeyword("");
+    setSelectedIdGO(undefined)
+    setKeyword("")
+    setSearch(false)
   };
 
-  useEffect(() => {
-    const inputSearch = document.getElementById("inputSearch")
-    if(inputSearch){
-      inputSearch.value = keyword
-    }
-  }, [keyword])
+
   
 
   return (
@@ -43,6 +43,9 @@ export default function Search({ setSelectedIdGO, inKeyword }) {
           label="Search"
           variant="outlined"
           sx={{ width: "20%" }}
+          value={keyword}
+          onChange={(e)=>{setKeyword(e.target.value)}}
+          onKeyDown={(e)=>{console.log(e.key==="Enter");}}
         />
         <div
           style={{
@@ -73,22 +76,17 @@ export default function Search({ setSelectedIdGO, inKeyword }) {
       </div>
       <br />
       <div>
-        {keyword && (
-          <GOResult setSelectedIdGO={setSelectedIdGO} keyword={keyword} />
+        {search && (
+          <GOResult keyword={keyword} handleSetId={handleSetId} />
         )}
       </div>
     </div>
   );
 }
 
-function GOResult({ keyword, setSelectedIdGO = () => {} }) {
+function GOResult({ keyword, handleSetId = () => {} }) {
   const { goTerms, loading, error } = useGetGOBySearch(`"${keyword}"`);
   const [view, setView] = useState(true);
-
-  const handleSelectIdGO = (id) => {
-    setView(false);
-    setSelectedIdGO(id);
-  };
 
   const handleViewResults = () => {
     setView(!view);
@@ -98,10 +96,10 @@ function GOResult({ keyword, setSelectedIdGO = () => {} }) {
     if (goTerms && !error) {
       if (goTerms.length === 1) {
         setView(false);
-        setSelectedIdGO(goTerms[0]._id);
+        handleSetId(goTerms[0]._id);
       }
     }
-  }, [goTerms, error, setSelectedIdGO, setView]);
+  }, [goTerms, error, handleSetId, setView]);
 
   if (!DataVerifier.isValidArray(goTerms) && !loading) {
     return (
@@ -130,7 +128,7 @@ function GOResult({ keyword, setSelectedIdGO = () => {} }) {
                   style={{ marginBottom: "15px" }}
                   key={"resultSearchTerm_" + term._id}
                 >
-                  <Result handleSelectIdGO={handleSelectIdGO} {...term} />
+                  <Result handleSetId={handleSetId} {...term} />
                 </div>
               );
             })}

@@ -14,7 +14,7 @@ export default function Result({
   ontologyId,
   subclassOf,
   subclasses,
-  handleSelectIdGO = () => {},
+  handleSetId = () => {},
 }) {
   const [view, setView] = useState(false);
 
@@ -23,7 +23,7 @@ export default function Result({
   };
 
   const handleSetIdGO = () => {
-    handleSelectIdGO(_id);
+    handleSetId(_id);
   };
 
   return (

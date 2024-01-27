@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Cover, Circular } from "../../components/ui-components";
-import { useGetTree } from "../../regulondb-ws/queries";
+import { useGetTree, useGetGoTerms } from "../../regulondb-ws/queries";
 import GoTree from "./GOTree";
 import Search from "./Search";
 import { useParams } from "react-router-dom";
@@ -15,11 +15,23 @@ export default function GeneOntology() {
       <Cover>
         <h1>Gene Ontology Browser</h1>
       </Cover>
-      <Search setSelectedIdGO={setSelectedIdGO} inKeyword={keyword} />
-      {((!keyword) || (keyword && selectedIdGO)) && (
-         <Tree selectedIdGO={selectedIdGO} />
+      <Search setSelectedIdGO={setSelectedIdGO} keyword={keyword} />
+      {selectedIdGO ? (
+        <Tree selectedIdGO={selectedIdGO} />
+      ) : (
+        <SimpleTree />
       )}
-     
+    </div>
+  );
+}
+
+function SimpleTree(){
+  const { treeGO, loading /*error*/ } = useGetTree();
+  return (
+    <div>
+      {loading && <Circular />}
+      <Divider />
+      {treeGO && <GoTree treeGO={treeGO} />}
     </div>
   );
 }
