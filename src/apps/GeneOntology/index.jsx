@@ -31,7 +31,7 @@ function Tree({ selectedIdGO }) {
     <div>
       {loading && <Circular />}
       <Divider />
-      {treeGO && <GoTree treeGO={treeGO} selectedIdGO={selectedIdGO} />}
+      {treeGO && <GoTree treeGO={treeGO} />}
     </div>
   );
 }

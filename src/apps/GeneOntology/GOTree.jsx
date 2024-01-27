@@ -5,16 +5,11 @@ import "react-complex-tree/lib/style-modern.css";
 import { ControlledTreeEnvironment, Tree } from "react-complex-tree";
 import { useLazyGetSubclassesOfTermId } from "../../regulondb-ws/queries";
 
-export default function GoTree({ treeGO, selectedIdGO }) {
-  console.log(selectedIdGO ? selectedIdGO : Object.keys(treeGO)[0]);
-  const [focusedItem, setFocusedItem] = useState(
-    selectedIdGO ? selectedIdGO : Object.keys(treeGO)[0]
-  );
-  const [expandedItems, setExpandedItems] = useState([]);
-  const [selectedItems, setSelectedItems] = useState(
-    selectedIdGO ? [selectedIdGO] : [Object.keys(treeGO)[0]]
-  );
-  const [items, setItems] = useState(treeGO);
+export default function GoTree({ treeGO }) {
+  const [focusedItem, setFocusedItem] = useState(treeGO.focusedItem);
+  const [expandedItems, setExpandedItems] = useState(treeGO.expandedItems);
+  const [selectedItems, setSelectedItems] = useState(treeGO.selectedItems);
+  const [items, setItems] = useState(treeGO.items);
   const [getSubClassesOfTermId, { loading, error }] =
     useLazyGetSubclassesOfTermId();
   let term;
@@ -24,7 +19,6 @@ export default function GoTree({ treeGO, selectedIdGO }) {
   return (
     <div style={{ margin: "2px 10% 0 5%" }}>
       <h2>Gene Ontology Tree</h2>
-      {selectedIdGO}
       <div style={{ display: "grid", gridTemplateColumns: "30% 70%" }}>
         <div style={{ overflow: "auto" }}>
           <ControlledTreeEnvironment
