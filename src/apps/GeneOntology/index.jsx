@@ -9,18 +9,14 @@ import Divider from "@mui/material/Divider";
 export default function GeneOntology() {
   const { keyword } = useParams();
   const [selectedIdGO, setSelectedIdGO] = useState();
-
+  console.log(selectedIdGO);
   return (
     <div>
       <Cover>
         <h1>Gene Ontology Browser</h1>
       </Cover>
       <Search setSelectedIdGO={setSelectedIdGO} keyword={keyword} />
-      {selectedIdGO ? (
-        <Tree selectedIdGO={selectedIdGO} />
-      ) : (
-        <SimpleTree />
-      )}
+
     </div>
   );
 }

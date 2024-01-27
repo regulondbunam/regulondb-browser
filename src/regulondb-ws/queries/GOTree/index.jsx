@@ -156,6 +156,32 @@ export function useLazyGetGOName() {
   return [goTerms, { loading, error }];
 }
 
+export function useLazyGetGOBySearch() {
+  const [getTermBy, { data, loading, error }] = useLazyQuery(query_GetTermBy);
+  let goTerms;
+  if (data && !error && !loading) {
+    if (DataVerifier.isValidArray(data.getTermBy)) {
+      goTerms = data.getTermBy;
+    }else{
+      goTerms = null
+    }
+  }
+  if (error) {
+    console.error(error);
+  }
+
+  const searchGOTermBy = (keyword) =>{
+    console.log(keyword);
+    getTermBy({
+      variables: {
+        search: `"${keyword}"`
+      }
+    })
+  }
+
+  return[ searchGOTermBy, { goTerms, loading, error }];
+}
+
 export function useGetGOBySearch(search = "") {
   const { data, loading, error } = useQuery(query_GetTermBy, {
     variables: {
@@ -205,35 +231,3 @@ export function useLazyGetSubclassesOfTermId() {
   };
   return [getSubClassesOfTermId, { loading, error }];
 }
-
-/**
-getSuperClasses({
-            variables: {
-              _id: idSubClassOf,
-            },
-            onCompleted: (data) => {
-              if (DataVerifier.isValidArray(data.getSuperclassesOfTermId)) {
-                const _term = data.getSuperclassesOfTermId[0];
-                _treeGO.items[_term._id] = {
-                  index: _term._id,
-                  isFolder: DataVerifier.isValidArray(_term.subclasses),
-                  children: _term.subclasses,
-                  data: _term.name,
-                  term: _term,
-                };
-                if (DataVerifier.isValidArray(_term.subclassOf)) {
-                  const idTerm = _term.subclassOf[0];
-                  _treeGO.expandedItems.push(idTerm);
-                  findSuperClass(idTerm,getSelectedTerm, getSuperClasses, _treeGO, setTreeGO);
-                } else {
-                  setTreeGO({ ..._treeGO });
-                }
-              } else {
-                setTreeGO({ ..._treeGO });
-              }
-            },
-            onError: (error) => {
-              console.error("error find super class", error);
-            },
-          });
- */
