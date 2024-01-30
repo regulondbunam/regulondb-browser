@@ -70,7 +70,7 @@ function findSuperClass(
   _treeGO,
   setTreeGO = () => {}
 ) {
-  console.log(idTerm);
+  //console.log(idTerm);
   if(_treeGO.items.hasOwnProperty(idTerm)){
     setTreeGO({ ..._treeGO });
   }
@@ -79,7 +79,7 @@ function findSuperClass(
       advancedSearch: `${idTerm}[_id]`,
     },
     onCompleted: (data) => {
-      console.log(data.getTermBy[0]);
+      //console.log(data.getTermBy[0]);
       if (DataVerifier.isValidArray(data.getTermBy)) {
         const term = data.getTermBy[0];
         _treeGO.items[term._id] = {
@@ -171,7 +171,7 @@ export function useLazyGetGOBySearch() {
   }
 
   const searchGOTermBy = (keyword) =>{
-    console.log(keyword);
+    //console.log(keyword);
     getTermBy({
       variables: {
         search: `"${keyword}"`

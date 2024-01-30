@@ -15,6 +15,7 @@ export default function Result({
   subclassOf,
   subclasses,
   handleSetId = () => {},
+  handleViewResults = () => {},
 }) {
   const [view, setView] = useState(false);
 
@@ -23,6 +24,7 @@ export default function Result({
   };
 
   const handleSetIdGO = () => {
+    handleViewResults()
     handleSetId(_id);
   };
 
@@ -34,9 +36,9 @@ export default function Result({
           <b>Ontology id</b>
           {": " + ontologyId}
         </p>
-        <p>
+        <Button onClick={handleSetIdGO}>
           <b>{name}</b>
-        </p>
+        </Button>
         <p>{description}</p>
         {view && (
           <div>

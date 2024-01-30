@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { useLazyGetGOBySearch } from "../../../regulondb-ws/queries";
 import { Circular, DataVerifier } from "../../../components/ui-components";
 import Result from "./Result";
-import DeleteIcon from "@mui/icons-material/Delete";
+//import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function Search({ setSelectedIdGO, keyword: _keyword }) {
-  const [searchGOTermBy, { goTerms, loading, error }] = useLazyGetGOBySearch();
+  const [searchGOTermBy, { goTerms, loading }] = useLazyGetGOBySearch();
   const [keyword, setKeyword] = useState();
 
   useEffect(() => {
@@ -42,6 +41,7 @@ export default function Search({ setSelectedIdGO, keyword: _keyword }) {
     }
   };
 
+  // eslint-disable-next-line no-unused-vars
   const handleDeleteSearch = () => {
     setSelectedIdGO(undefined);
     const inputSearch = document.getElementById("inputSearch");
@@ -82,7 +82,7 @@ export default function Search({ setSelectedIdGO, keyword: _keyword }) {
           </div>
           {keyword && (
             <div>
-              {keyword && (
+              { /*keyword && (
                 <Button
                   color="error"
                   onClick={handleDeleteSearch}
@@ -91,7 +91,7 @@ export default function Search({ setSelectedIdGO, keyword: _keyword }) {
                   Clean Results
                   <DeleteIcon />
                 </Button>
-              )}
+              )*/}
             </div>
           )}
         </div>
@@ -145,7 +145,7 @@ function GOResult({ keyword, goTerms, handleSetId = () => {} }) {
                   style={{ marginBottom: "15px" }}
                   key={"resultSearchTerm_" + term._id}
                 >
-                  <Result handleSetId={handleSetId} {...term} />
+                  <Result handleViewResults={handleViewResults} handleSetId={handleSetId} {...term} />
                 </div>
               );
             })}
