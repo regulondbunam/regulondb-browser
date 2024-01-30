@@ -79,7 +79,12 @@ useQuery: it is a hook provided by Apollo Client that is used to execute GraphQL
 
 import React from "react";
 import "./exData.css";
-import { Cover, DataVerifier, Circular, Accordion } from "../../components/ui-components";
+import {
+  Cover,
+  DataVerifier,
+  Circular,
+  Accordion,
+} from "../../components/ui-components";
 import DownloadIcon from "@mui/icons-material/Download";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import Button from "@mui/material/Button";
@@ -87,11 +92,10 @@ import Tooltip from "@mui/material/Tooltip";
 import { Link, useParams } from "react-router-dom";
 import BrowserFilter from "./browserFilter";
 import { useLazyGetDataFile } from "../../components/webservices";
-import LoadingButton from '@mui/lab/LoadingButton';
-import ScienceIcon from '@mui/icons-material/Science';
+import LoadingButton from "@mui/lab/LoadingButton";
+import ScienceIcon from "@mui/icons-material/Science";
 import EvidenceTable from "./EvidenceTable";
 import { useGetListAllDownloadableFiles } from "../../regulondb-ws/queries";
-
 
 /**
  * Description placeholder
@@ -100,7 +104,11 @@ import { useGetListAllDownloadableFiles } from "../../regulondb-ws/queries";
  * @returns {React.JSX|HTMLElement}
  */
 export default function ExperimentalDatasets() {
-  const {fileList, fileGroup, loading: loadingListFiles } = useGetListAllDownloadableFiles()
+  const {
+    fileList,
+    fileGroup,
+    loading: loadingListFiles,
+  } = useGetListAllDownloadableFiles();
   const [getFile, { loading: loadingFileData }] = useLazyGetDataFile();
   const { idFile, tool } = useParams();
 
@@ -119,7 +127,7 @@ export default function ExperimentalDatasets() {
             const fileData = data.getDataOfFile;
             let fileInfo = "";
             if (DataVerifier.isValidString(fileData.license)) {
-              fileInfo += "# License\n#\t" +fileData.license + "\n"
+              fileInfo += "# License\n#\t" + fileData.license + "\n";
             }
             if (DataVerifier.isValidString(fileData.citation)) {
               fileInfo += "# Citation\n#\t" + fileData.citation + "\n";
@@ -140,7 +148,7 @@ export default function ExperimentalDatasets() {
               }`;
             }
             if (DataVerifier.isValidString(fileData.creationDate)) {
-              fileInfo += "#Date:\n#\t" +fileData.creationDate + "\n";
+              fileInfo += "#Date:\n#\t" + fileData.creationDate + "\n";
             }
             if (DataVerifier.isValidString(fileData.columnsDetails)) {
               fileInfo +=
@@ -149,14 +157,14 @@ export default function ExperimentalDatasets() {
             if (DataVerifier.isValidString(fileData.content)) {
               fileInfo += fileData.content;
             }
-            const blob = new Blob([fileInfo], { type: 'text/plain' });
+            const blob = new Blob([fileInfo], { type: "text/plain" });
             const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
+            const a = document.createElement("a");
             a.href = url;
-            a.download = fileData.fileName + ".tsv"
+            a.download = fileData.fileName + ".tsv";
             a.click();
             window.URL.revokeObjectURL(url);
-            a.remove()
+            a.remove();
             //console.log(fileInfo);
           },
         });
@@ -188,7 +196,7 @@ export default function ExperimentalDatasets() {
       if (!file) {
         return <>there is no file with this name or id:{idFile}</>;
       }
-      if(tool==="browser"){
+      if (tool === "browser") {
         return (
           <BrowserFilter
             fileName={file.fileName}
@@ -203,7 +211,7 @@ export default function ExperimentalDatasets() {
           />
         );
       }
-      if(tool==="evidence"){
+      if (tool === "evidence") {
         return (
           <EvidenceTable
             fileName={file.fileName}
@@ -218,8 +226,7 @@ export default function ExperimentalDatasets() {
           />
         );
       }
-      return <>{tool+" tool error"}</>;
-      
+      return <>{tool + " tool error"}</>;
     }
     return (
       <div>
@@ -227,79 +234,86 @@ export default function ExperimentalDatasets() {
           <h1>Downloadable Experimental Datasets</h1>
         </Cover>
         <div style={{ margin: "1% 5% 1% 5%" }}>
-          {Object.keys(fileGroup).map((group, index)=>{
-            const files = fileGroup[group]
-            if (!DataVerifier.isValidArray(files)) {
-              return null
-            }
-            return (
-              <Accordion key={"group_"+group+"_"+index} title={group} >
-                <table className="tableED">
-            <thead>
-              <tr>
-                <th>File</th>
-                <th>Description</th>
-                <th>Options</th>
-              </tr>
-            </thead>
+          <table className="tableED">
             <tbody>
-              {files.map((file, i) => {
-                if (/internal/.test(file.fileName)) {
+              {Object.keys(fileGroup).map((group, index) => {
+                const files = fileGroup[group];
+                if (!DataVerifier.isValidArray(files)) {
                   return null;
                 }
                 return (
-                  <tr key={"file_" + file._id + "_" + i}>
-                    <td>{file.fileName}</td>
-                    <td>
-                      <p dangerouslySetInnerHTML={{__html: file.description}} />
-                    </td>
-                    <td>
-                    <Tooltip title="Download File">
-                        <LoadingButton
-                          loading={loadingFileData}
-                          onClick={() => {
-                            handleDownload({
-                              id: file._id,
-                              name: file.fileName,
-                              path: {
-                                url: "",
-                                type: "graphQLservice",
-                              },
-                              version: "",
-                              format: "tsv",
-                              type: "table",
-                            });
-                          }}
-                          variant="outlined"
-                        >
-                          <DownloadIcon />
-                        </LoadingButton>
-                      </Tooltip>
-                      <Tooltip title="Browse & Filter">
-                        <Link to={"/datasets/browser/" + file._id}>
-                          <Button variant="outlined">
-                            <ManageSearchIcon />
-                          </Button>
-                        </Link>
-                      </Tooltip>
-                      {["TF-RISet","RISet"].find(f=>f===file.fileName) && (
-                        <Tooltip title="Confidence Level Calculator Tool">
-                        <Link to={"/datasets/evidence/" + file._id}>
-                          <Button variant="outlined">
-                            <ScienceIcon />
-                          </Button>
-                        </Link>
-                      </Tooltip>
-                      )}
-                    </td>
-                  </tr>
+                  <React.Fragment key={"group_" + group + "_" + index}>
+                    <tr>
+                      <th style={{backgroundColor: "#72a7c7", color: "white"}} colSpan={3}>{group}</th>
+                    </tr>
+                    <tr>
+                      <th>File</th>
+                      <th>Description</th>
+                      <th>Options</th>
+                    </tr>
+                    {files.map((file, i) => {
+                      if (/internal/.test(file.fileName)) {
+                        return null;
+                      }
+                      return (
+                        <tr key={"file_" + file._id + "_" + i}>
+                          <td>{file.fileName}</td>
+                          <td>
+                            <p
+                              dangerouslySetInnerHTML={{
+                                __html: file.description,
+                              }}
+                            />
+                          </td>
+                          <td>
+                            <Tooltip title="Download File">
+                              <LoadingButton
+                                loading={loadingFileData}
+                                onClick={() => {
+                                  handleDownload({
+                                    id: file._id,
+                                    name: file.fileName,
+                                    path: {
+                                      url: "",
+                                      type: "graphQLservice",
+                                    },
+                                    version: "",
+                                    format: "tsv",
+                                    type: "table",
+                                  });
+                                }}
+                                variant="outlined"
+                              >
+                                <DownloadIcon />
+                              </LoadingButton>
+                            </Tooltip>
+                            <Tooltip title="Browse & Filter">
+                              <Link to={"/datasets/browser/" + file._id}>
+                                <Button variant="outlined">
+                                  <ManageSearchIcon />
+                                </Button>
+                              </Link>
+                            </Tooltip>
+                            {["TF-RISet", "RISet"].find(
+                              (f) => f === file.fileName
+                            ) && (
+                              <Tooltip title="Confidence Level Calculator Tool">
+                                <Link to={"/datasets/evidence/" + file._id}>
+                                  <Button variant="outlined">
+                                    <ScienceIcon />
+                                  </Button>
+                                </Link>
+                              </Tooltip>
+                            )}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </React.Fragment>
                 );
               })}
             </tbody>
           </table>
-              </Accordion>
-            )
-          })}
         </div>
       </div>
     );
@@ -307,6 +321,3 @@ export default function ExperimentalDatasets() {
 
   return <></>;
 }
-
-
-
