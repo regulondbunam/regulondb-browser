@@ -83,7 +83,6 @@ import {
   Cover,
   DataVerifier,
   Circular,
-  Accordion,
 } from "../../components/ui-components";
 import DownloadIcon from "@mui/icons-material/Download";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
@@ -249,7 +248,7 @@ export default function ExperimentalDatasets() {
                     <tr>
                       <th>File</th>
                       <th>Description</th>
-                      <th>Options</th>
+                      <th style={{width: "300px"}} >Options</th>
                     </tr>
                     {files.map((file, i) => {
                       if (/internal/.test(file.fileName)) {
