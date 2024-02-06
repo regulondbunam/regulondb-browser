@@ -159,12 +159,13 @@ function MenuItem({ options, setMenu }) {
               </>
             }
           >
-            {menu.options.map((menu) => {
+            {menu.options.map((menu,index) => {
               if (menu.disabled) {
                 return null;
               }
               return (
                 <ListItemButton
+                key={"listItemButton_"+menu.label+"_"+index}
                   onClick={() => {
                     navigate(menu.link);
                   }}

@@ -108,9 +108,9 @@ export function Body() {
       <div style={{ height: "170px" }}>
         <Slider {...carruselSettings}>
           {cardData.map((card, index) => (
-            <div style={{ width: 500 }}>
+            <div key={"card_" + index} style={{ width: 500 }}>
               <div style={{ width: 450 }}>
-                <Card key={"card_" + index}>{card}</Card>
+                <Card >{card}</Card>
               </div>
             </div>
           ))}

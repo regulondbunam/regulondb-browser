@@ -121,7 +121,7 @@ export default function Cover() {
           <Stack direction="row" spacing={1}>
             {searchLinks.map((link) => {
               return (
-                <Item elevation={0} key={"cover_link" + link}>
+                <Item elevation={0} key={"cover_link_" + link.label}>
                   <Link style={{ color: "#ffffff" }} to={link.link}>
                     {link.label}
                   </Link>

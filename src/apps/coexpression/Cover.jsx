@@ -14,7 +14,7 @@ export function UpdateTitle({ state, message }) {
   }
   const COVER = document.getElementById(IDTitle);
   if (COVER) {
-    console.log(COVER);
+    //console.log(COVER);
     const COVER_REACTION = new CustomEvent(eventName, {
       bubbles: true,
       detail: detail,
