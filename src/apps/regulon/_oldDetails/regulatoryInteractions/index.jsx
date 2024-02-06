@@ -14,7 +14,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Map from "../../../FeatureMaps/Map";
-import { log } from "cytoscape-sbgn-stylesheet";
 
 const COLUMNS = [
   {
@@ -237,7 +236,8 @@ function formatData(regulatoryInteractions = [], allCitations) {
 function formatDataGraph(regulatoryInteractions = []) {
   let data = {
     map: {
-      trackLength: 0,
+      trackLeft: 0,
+      trackRight: 0,
       name: "",
       distanceTO: ["promoter","gene"],
     },
@@ -253,20 +253,28 @@ function formatDataGraph(regulatoryInteractions = []) {
         }
         data.tracks[ri.regulatedEntity._id] = track
       }
-      let feature = {
-        distanceTO:{
-          promoter: ri.distanceToPromoter,
-          gene: ri.distanceToFirstGene
-        },
-        sequence: ri.regulatoryBindingSites.sequence,
-        strand : ri.regulatoryBindingSites.strand,
-        function: ri.regulatoryBindingSites.function,
-        rbs: ri.regulatoryBindingSites
+      if (DataVerifier.isValidNumber(ri.distanceToPromoter)) {
+        if(ri.distanceToPromoter<data.map.trackLeft){
+          data.map.trackLeft = ri.distanceToPromoter
+        }
+        if(ri.distanceToPromoter>data.map.trackRight){
+          data.map.trackRight = ri.distanceToPromoter
+        }
+        let feature = {
+          distanceTO:{
+            promoter: ri.distanceToPromoter,
+            gene: ri.distanceToFirstGene
+          },
+          sequence: ri.regulatoryBindingSites.sequence,
+          strand : ri.regulatoryBindingSites.strand,
+          function: ri.regulatoryBindingSites.function,
+          rbs: ri.regulatoryBindingSites
+        }
+        data.tracks[ri.regulatedEntity._id].features.push(feature)
       }
-      data.tracks[ri.regulatedEntity._id].features.push(feature)
     }
   });
-  console.log(data);
+ // console.log(data);
   return data
 }
 
@@ -301,9 +309,11 @@ function RegulatoryInteractions(props) {
 }
 
 function RIMap({ regulatoryInteractions, allCitations }) {
-  console.log(regulatoryInteractions);
-  formatDataGraph(regulatoryInteractions)
-  return <Map />;
+  const data = useMemo(() => {
+    return formatDataGraph(regulatoryInteractions);
+  }, [regulatoryInteractions]);
+  
+  return <Map featureData={data} />;
 }
 
 function RITable({ regulatoryInteractions, allCitations }) {
