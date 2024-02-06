@@ -4,7 +4,17 @@ import {
   DataVerifier,
 } from "../../../../components/ui-components";
 import { Link } from "react-router-dom";
-import { ParagraphCitations, PC_VARIANTS, CITATION_SIZE  } from "../../../../components/datamartSchema";
+import {
+  ParagraphCitations,
+  PC_VARIANTS,
+  CITATION_SIZE,
+} from "../../../../components/datamartSchema";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import Map from "../../../FeatureMaps/Map";
+import { log } from "cytoscape-sbgn-stylesheet";
 
 const COLUMNS = [
   {
@@ -16,8 +26,10 @@ const COLUMNS = [
         header: "name",
         filter: "fuzzyText",
         accessorKey: "_activeConformation_name",
-        cell: (info) => (<p dangerouslySetInnerHTML={{__html: info.getValue()}} />),
-      }
+        cell: (info) => (
+          <p dangerouslySetInnerHTML={{ __html: info.getValue() }} />
+        ),
+      },
     ],
   },
   {
@@ -86,7 +98,7 @@ const COLUMNS = [
                   key={
                     "ri_" + info.row.original.id + "_regulatedGene_" + gene._id
                   }
-                  to={"/gene/"+gene._id}
+                  to={"/gene/" + gene._id}
                 >
                   <p dangerouslySetInnerHTML={{ __html: gene.name }} />
                 </Link>
@@ -136,7 +148,12 @@ const COLUMNS = [
       const citations = info.row.original.citations;
       const allCitations = info.row.original.allCitations;
       return (
-        <ParagraphCitations variant={PC_VARIANTS.paragraph} citationSize={CITATION_SIZE.ONLY_INDEX}  allCitations={allCitations} citations={citations} />
+        <ParagraphCitations
+          variant={PC_VARIANTS.paragraph}
+          citationSize={CITATION_SIZE.ONLY_INDEX}
+          allCitations={allCitations}
+          citations={citations}
+        />
       );
     },
   },
@@ -150,7 +167,10 @@ function formatData(regulatoryInteractions = [], allCitations) {
       let _regulatedEntity_type = "";
       if (DataVerifier.isValidObject(ri.regulatedEntity)) {
         _regulatedEntity_name = ri.regulatedEntity.name;
-        _regulatedEntity_type = ri.regulatedEntity.type === "transcriptionUnit" ? "TU" : ri.regulatedEntity.type ;
+        _regulatedEntity_type =
+          ri.regulatedEntity.type === "transcriptionUnit"
+            ? "TU"
+            : ri.regulatedEntity.type;
       }
       let _activeConformation_name = "";
       let _activeConformation_type = "";
@@ -178,8 +198,10 @@ function formatData(regulatoryInteractions = [], allCitations) {
         if (
           DataVerifier.isValidNumber(ri.regulatoryBindingSites.leftEndPosition)
         ) {
-          _regulatoryBindingSite_LeftPos = ri.regulatoryBindingSites.leftEndPosition;
-          _regulatoryBindingSite_RightPos = ri.regulatoryBindingSites.rightEndPosition;
+          _regulatoryBindingSite_LeftPos =
+            ri.regulatoryBindingSites.leftEndPosition;
+          _regulatoryBindingSite_RightPos =
+            ri.regulatoryBindingSites.rightEndPosition;
         }
         _regulatoryBindingSite_strand = ri.regulatoryBindingSites.strand;
         _regulatoryBindingSite_sequence = ri.regulatoryBindingSites.sequence;
@@ -212,11 +234,83 @@ function formatData(regulatoryInteractions = [], allCitations) {
   return data;
 }
 
-function RegulatoryInteractions({ regulatoryInteractions, allCitations }) {
-  //console.log(regulatoryInteractions);
+function formatDataGraph(regulatoryInteractions = []) {
+  let data = {
+    map: {
+      trackLength: 0,
+      name: "",
+      distanceTO: ["promoter","gene"],
+    },
+    tracks: {},
+  };
+  regulatoryInteractions.forEach((ri) => {
+    if (ri.regulatedEntity) {
+      if(!data.tracks.hasOwnProperty(ri.regulatedEntity._id)){
+        let track = {
+          _id: ri.regulatedEntity._id,
+          label: ri.regulatedEntity.name,
+          features: []
+        }
+        data.tracks[ri.regulatedEntity._id] = track
+      }
+      let feature = {
+        distanceTO:{
+          promoter: ri.distanceToPromoter,
+          gene: ri.distanceToFirstGene
+        },
+        sequence: ri.regulatoryBindingSites.sequence,
+        strand : ri.regulatoryBindingSites.strand,
+        function: ri.regulatoryBindingSites.function,
+        rbs: ri.regulatoryBindingSites
+      }
+      data.tracks[ri.regulatedEntity._id].features.push(feature)
+    }
+  });
+  console.log(data);
+  return data
+}
+
+function RegulatoryInteractions(props) {
+  const [viewOption, setViewOption] = React.useState(1);
+
+  const handleChange = (event) => {
+    setViewOption(event.target.value);
+  };
+  return (
+    <div>
+      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-standard-label">
+          view Option
+        </InputLabel>
+        <Select
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-standard"
+          value={viewOption}
+          onChange={handleChange}
+          label="View Option"
+        >
+          <MenuItem value={0}>RI Table</MenuItem>
+          <MenuItem value={1}>Graphs-TF</MenuItem>
+        </Select>
+      </FormControl>
+      <br />
+      {viewOption === 0 && <RITable {...props} />}
+      {viewOption === 1 && <RIMap {...props} />}
+    </div>
+  );
+}
+
+function RIMap({ regulatoryInteractions, allCitations }) {
+  console.log(regulatoryInteractions);
+  formatDataGraph(regulatoryInteractions)
+  return <Map />;
+}
+
+function RITable({ regulatoryInteractions, allCitations }) {
   const data = useMemo(() => {
     return formatData(regulatoryInteractions, allCitations);
   }, [regulatoryInteractions, allCitations]);
+  //console.log(data);
   return <FilterTable data={data} columns={COLUMNS} />;
 }
 
