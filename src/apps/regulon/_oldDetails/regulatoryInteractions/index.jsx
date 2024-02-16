@@ -239,7 +239,7 @@ function formatDataGraph(regulatoryInteractions = []) {
       trackLeft: 0,
       trackRight: 0,
       name: "",
-      distanceTO: ["promoter","gene"],
+      distanceTo: ["promoter","gene"],
     },
     tracks: {},
   };
@@ -249,6 +249,7 @@ function formatDataGraph(regulatoryInteractions = []) {
         let track = {
           _id: ri.regulatedEntity._id,
           label: ri.regulatedEntity.name,
+          type: ri.regulatedEntity.type,
           features: []
         }
         data.tracks[ri.regulatedEntity._id] = track
@@ -258,16 +259,16 @@ function formatDataGraph(regulatoryInteractions = []) {
           data.map.trackLeft = ri.distanceToPromoter
         }
         if(ri.distanceToPromoter>data.map.trackRight){
-          data.map.trackRight = ri.distanceToPromoter
+          let sequence = ri.regulatoryBindingSites.sequence
+          if (DataVerifier.isValidString(sequence)) {
+            data.map.trackRight = ri.distanceToPromoter+sequence.length
+          }
         }
         let feature = {
-          distanceTO:{
+          distanceTo:{
             promoter: ri.distanceToPromoter,
             gene: ri.distanceToFirstGene
           },
-          sequence: ri.regulatoryBindingSites.sequence,
-          strand : ri.regulatoryBindingSites.strand,
-          function: ri.regulatoryBindingSites.function,
           rbs: ri.regulatoryBindingSites
         }
         data.tracks[ri.regulatedEntity._id].features.push(feature)
@@ -309,6 +310,7 @@ function RegulatoryInteractions(props) {
 }
 
 function RIMap({ regulatoryInteractions, allCitations }) {
+  //console.log(regulatoryInteractions);
   const data = useMemo(() => {
     return formatDataGraph(regulatoryInteractions);
   }, [regulatoryInteractions]);
