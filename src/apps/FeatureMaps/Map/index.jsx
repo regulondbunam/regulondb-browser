@@ -121,6 +121,24 @@ export default function Map({ featureData }) {
                 dangerouslySetInnerHTML={{ __html: track.type }}
               />
             </td>
+            {[...Array(range+1)].map((r, index) => {
+              const position = map.trackLeft + zoomLevel * (index);
+              if (position > 1 && position - zoomLevel < 0) {
+                return (
+                  <React.Fragment
+                    key={"position_map_" + position + "_" + index}
+                  >
+                    <td> || </td>
+                    <td> | </td>
+                  </React.Fragment>
+                );
+              }
+              return (
+                <td key={"position_map_" + position + "_" + index}>
+                   | 
+                </td>
+              );
+            })}
           </tr>
         );
       })}
