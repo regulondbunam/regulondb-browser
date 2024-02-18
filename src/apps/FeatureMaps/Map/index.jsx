@@ -16,7 +16,14 @@ export default function Map({ featureData }) {
   const range = Math.round(
     Math.abs(map.trackLeft - map.trackRight) / zoomLevel
   );
-
+  const positions = []
+  for (let i = 0; i < range+1; i++) {
+    const position = map.trackLeft + zoomLevel * (i);
+    if (position > 1 && position - zoomLevel < 0) {
+        positions.push("+1")
+    }
+    positions.push(""+position)
+  }
   console.log(range, zoomLevel);
 
   const handleChange = (event) => {
@@ -67,18 +74,7 @@ export default function Map({ featureData }) {
           <tr>
             <th style={{minWidth: "140px"}} >Regulated Entity</th>
             <th style={{minWidth: "50px"}} >Type</th>
-            {[...Array(range+1)].map((r, index) => {
-              const position = map.trackLeft + zoomLevel * (index);
-              if (position > 1 && position - zoomLevel < 0) {
-                return (
-                  <React.Fragment
-                    key={"position_map_" + position + "_" + index}
-                  >
-                    <th>+1</th>
-                    <th>{position}</th>
-                  </React.Fragment>
-                );
-              }
+            {positions.map((position, index) => {
               return (
                 <th key={"position_map_" + position + "_" + index}>
                   {position}
@@ -121,20 +117,9 @@ export default function Map({ featureData }) {
                 dangerouslySetInnerHTML={{ __html: track.type }}
               />
             </td>
-            {[...Array(range+1)].map((r, index) => {
-              const position = map.trackLeft + zoomLevel * (index);
-              if (position > 1 && position - zoomLevel < 0) {
-                return (
-                  <React.Fragment
-                    key={"position_map_" + position + "_" + index}
-                  >
-                    <td> || </td>
-                    <td> | </td>
-                  </React.Fragment>
-                );
-              }
+            {positions.map((position, index) => {
               return (
-                <td key={"position_map_" + position + "_" + index}>
+                <td key={"position_track_" + position + "_" + index}>
                    | 
                 </td>
               );
