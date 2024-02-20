@@ -27,3 +27,13 @@ export const TRACK_terminator =  {
     color: "#000000",
     displayMode: "EXPANDED",
 }
+
+export const TRACK_ris =  {
+    id: "trackRegulonDB_RISet",
+    name: "RIset",
+    type: "annotation",
+    url: "/media/raw/gff3/RISet.gff3",
+    format: "gff3",
+    color: "#000000",
+    displayMode: "EXPANDED",
+}
