@@ -118,6 +118,7 @@ export const fragment_REGULATES = gql`fragment REGULATES on Regulates {
 }`
 
 export const fragment_RI = gql`fragment RI on RegulonRegulatoryInteractions {
+  _id
   citations {
     ...CITATIONS
   }

@@ -13,7 +13,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import Map from "../../../FeatureMaps/Map";
+//import Map from "../../../FeatureMaps/Map";
 
 const COLUMNS = [
   {
@@ -233,50 +233,133 @@ function formatData(regulatoryInteractions = [], allCitations) {
   return data;
 }
 
+function getOverlap(l, r, positions = []) {
+  positions.forEach((pos) => {
+    console.log(l , pos.r , r , pos.l)
+    if (l < pos.r && r > pos.l) {
+      return true;
+    }
+  });
+  return false;
+}
+
 function formatDataGraph(regulatoryInteractions = []) {
   let data = {
     map: {
-      trackLeft: 0,
-      trackRight: 0,
       name: "",
-      distanceTo: ["promoter","gene"],
+      viewType: {
+        promoter: {
+          trackLeft: 0,
+          trackRight: 0,
+          width: 0,
+          height: 0,
+        },
+        gene: {
+          trackLeft: 0,
+          trackRight: 0,
+          width: 0,
+          height: 0,
+        },
+      },
     },
     tracks: {},
   };
+  const defaultHeightFeature = 15;
   regulatoryInteractions.forEach((ri) => {
     if (ri.regulatedEntity) {
-      if(!data.tracks.hasOwnProperty(ri.regulatedEntity._id)){
+      if (!data.tracks.hasOwnProperty(ri.regulatedEntity._id)) {
         let track = {
           _id: ri.regulatedEntity._id,
           label: ri.regulatedEntity.name,
           type: ri.regulatedEntity.type,
-          features: []
-        }
-        data.tracks[ri.regulatedEntity._id] = track
+          positions: [],
+          features: {},
+          drawFeatures: {
+            levelsReverse: 1,
+            levelsForward: 1,
+            widthTrack: 0,
+            heightTrack: 2,
+          },
+        };
+        data.tracks[ri.regulatedEntity._id] = track;
       }
+      let sequence = "";
+      let rbsSequence = "";
+      if (ri.regulatoryBindingSites.sequence) {
+        sequence = ri.regulatoryBindingSites.sequence;
+        rbsSequence = sequence.match(/[A-Z]/g).join("");
+      }
+      let feature = {
+        size: 0,
+        sequence: sequence,
+        rbsSequence: rbsSequence,
+        height: defaultHeightFeature,
+        level: 1,
+        viewPosition: {
+          promoter: {
+            level: 1,
+            distanceTo: undefined,
+            l: undefined,
+            r: undefined,
+          },
+          gene: {
+            level: 1,
+            distanceTo: undefined,
+            l: undefined,
+            r: undefined,
+          },
+        },
+        ri: ri,
+      };
       if (DataVerifier.isValidNumber(ri.distanceToPromoter)) {
-        if(ri.distanceToPromoter<data.map.trackLeft){
-          data.map.trackLeft = ri.distanceToPromoter
+        if (ri.distanceToPromoter < data.map.viewType.promoter.trackLeft) {
+          data.map.viewType.promoter.trackLeft = ri.distanceToPromoter;
         }
-        if(ri.distanceToPromoter>data.map.trackRight){
-          let sequence = ri.regulatoryBindingSites.sequence
+        if (ri.distanceToPromoter > data.map.viewType.promoter.trackRight) {
           if (DataVerifier.isValidString(sequence)) {
-            data.map.trackRight = ri.distanceToPromoter+sequence.length
+            data.map.viewType.promoter.trackRight =
+              ri.distanceToPromoter + sequence.length;
           }
         }
-        let feature = {
-          distanceTo:{
-            promoter: ri.distanceToPromoter,
-            gene: ri.distanceToFirstGene
-          },
-          rbs: ri.regulatoryBindingSites
+        feature.viewPosition.promoter.distanceTo = ri.distanceToPromoter;
+        feature.viewPosition.promoter.l =
+          ri.distanceToPromoter - rbsSequence.length;
+        feature.viewPosition.promoter.r =
+          ri.distanceToPromoter + rbsSequence.length;
+        if (
+          getOverlap(
+            ri.distanceToPromoter - rbsSequence.length,
+            ri.distanceToPromoter + rbsSequence.length,
+            data.tracks[ri.regulatedEntity._id].positions
+          )
+        ) {
+          feature.viewPosition.promoter.level =
+            feature.viewPosition.promoter.level + 1;
         }
-        data.tracks[ri.regulatedEntity._id].features.push(feature)
+        data.tracks[ri.regulatedEntity._id].positions.push({
+          l: ri.distanceToPromoter - rbsSequence.length,
+          r: ri.distanceToPromoter + rbsSequence.length,
+        });
       }
+      if (DataVerifier.isValidNumber(ri.distanceToFirstGene)) {
+        if (ri.distanceToFirstGene < data.map.viewType.gene.trackLeft) {
+          data.map.viewType.gene.trackLeft = ri.distanceToFirstGene;
+        }
+        if (ri.distanceToFirstGene > data.map.viewType.gene.trackRight) {
+          let sequence = ri.regulatoryBindingSites.sequence;
+          if (DataVerifier.isValidString(sequence)) {
+            data.map.viewType.gene.trackRight =
+              ri.distanceToFirstGene + sequence.length;
+          }
+        }
+        feature.viewPosition.gene = ri.distanceToFirstGene;
+      }
+
+      data.tracks[ri.regulatedEntity._id].features[ri._id] = feature;
     }
   });
- // console.log(data);
-  return data
+  //data.map.width = Math.abs(data.map.trackLeft - data.map.trackRight);
+  return data;
 }
 
 function RegulatoryInteractions(props) {
@@ -314,8 +397,9 @@ function RIMap({ regulatoryInteractions, allCitations }) {
   const data = useMemo(() => {
     return formatDataGraph(regulatoryInteractions);
   }, [regulatoryInteractions]);
-  
-  return <Map featureData={data} />;
+  console.log(data);
+  return <></>;
+  //return <Map featureData={data} />;
 }
 
 function RITable({ regulatoryInteractions, allCitations }) {
