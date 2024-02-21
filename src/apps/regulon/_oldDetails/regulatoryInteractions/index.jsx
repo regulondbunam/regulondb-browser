@@ -239,6 +239,8 @@ function getOverlap(l, r, positions = []) {
 
 function formatDataTracks(regulatoryInteractions = []) {
   let tracks = {};
+  let promoters = {}
+  let genes = {}
   regulatoryInteractions.forEach((regulatoryInteraction) => {
     if (
       DataVerifier.isValidObject(regulatoryInteraction.regulatedEntity) &&
@@ -251,6 +253,7 @@ function formatDataTracks(regulatoryInteractions = []) {
           features: {},
           leftEndPosition: undefined,
           rightEndPosition: undefined,
+          type: "FeatureMap"
         };
       }
       let sequence = "";

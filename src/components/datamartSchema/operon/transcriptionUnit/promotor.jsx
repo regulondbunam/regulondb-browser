@@ -1,6 +1,6 @@
 import { Accordion, DataVerifier } from "../../../ui-components";
 import { ParagraphCitations, NoteCitations } from "../../citations";
-import SimpleTrack from "../../../drawingTrack";
+import SimpleTrack from "../../../drawingTrack/_old";
 //import RegulatorBindingSites from "./regulatorBindingSites";
 import { useMemo } from "react";
 
