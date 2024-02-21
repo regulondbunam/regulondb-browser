@@ -234,132 +234,60 @@ function formatData(regulatoryInteractions = [], allCitations) {
 }
 
 function getOverlap(l, r, positions = []) {
-  positions.forEach((pos) => {
-    console.log(l , pos.r , r , pos.l)
-    if (l < pos.r && r > pos.l) {
-      return true;
-    }
-  });
-  return false;
+  return positions.some((pos) => l <= pos.r && r >= pos.l);
 }
 
-function formatDataGraph(regulatoryInteractions = []) {
-  let data = {
-    map: {
-      name: "",
-      viewType: {
-        promoter: {
-          trackLeft: 0,
-          trackRight: 0,
-          width: 0,
-          height: 0,
-        },
-        gene: {
-          trackLeft: 0,
-          trackRight: 0,
-          width: 0,
-          height: 0,
-        },
-      },
-    },
-    tracks: {},
-  };
-  const defaultHeightFeature = 15;
-  regulatoryInteractions.forEach((ri) => {
-    if (ri.regulatedEntity) {
-      if (!data.tracks.hasOwnProperty(ri.regulatedEntity._id)) {
-        let track = {
-          _id: ri.regulatedEntity._id,
-          label: ri.regulatedEntity.name,
-          type: ri.regulatedEntity.type,
-          positions: [],
+function formatDataTracks(regulatoryInteractions = []) {
+  let tracks = {};
+  regulatoryInteractions.forEach((regulatoryInteraction) => {
+    if (
+      DataVerifier.isValidObject(regulatoryInteraction.regulatedEntity) &&
+      DataVerifier.isValidObject(regulatoryInteraction.regulatoryBindingSites)
+    ) {
+      const RE = regulatoryInteraction.regulatedEntity;
+      const RBS = regulatoryInteraction.regulatoryBindingSites;
+      if (!tracks.hasOwnProperty(RE._id)) {
+        tracks[RE._id] = {
           features: {},
-          drawFeatures: {
-            levelsReverse: 1,
-            levelsForward: 1,
-            widthTrack: 0,
-            heightTrack: 2,
-          },
+          leftEndPosition: undefined,
+          rightEndPosition: undefined,
         };
-        data.tracks[ri.regulatedEntity._id] = track;
       }
       let sequence = "";
-      let rbsSequence = "";
-      if (ri.regulatoryBindingSites.sequence) {
-        sequence = ri.regulatoryBindingSites.sequence;
-        rbsSequence = sequence.match(/[A-Z]/g).join("");
+      if (DataVerifier.isValidString(RBS.sequence)) {
+        sequence = RBS.sequence.match(/[A-Z]/g).join("");
       }
-      let feature = {
-        size: 0,
+      tracks[RE._id].features[regulatoryInteraction._id] = {
+        _id: regulatoryInteraction._id,
+        leftEndPosition: RBS.leftEndPosition,
+        rightEndPosition: RBS.rightEndPosition,
         sequence: sequence,
-        rbsSequence: rbsSequence,
-        height: defaultHeightFeature,
-        level: 1,
-        viewPosition: {
-          promoter: {
-            level: 1,
-            distanceTo: undefined,
-            l: undefined,
-            r: undefined,
-          },
-          gene: {
-            level: 1,
-            distanceTo: undefined,
-            l: undefined,
-            r: undefined,
-          },
-        },
-        ri: ri,
+        strand: RBS.strand,
+        objectRGBColor:
+          RBS.function === "Activator" ? "0, 250, 0" : "250, 0, 0",
+        objectType: "RegulatoryInteraction",
+        objectData: regulatoryInteraction,
       };
-      if (DataVerifier.isValidNumber(ri.distanceToPromoter)) {
-        if (ri.distanceToPromoter < data.map.viewType.promoter.trackLeft) {
-          data.map.viewType.promoter.trackLeft = ri.distanceToPromoter;
-        }
-        if (ri.distanceToPromoter > data.map.viewType.promoter.trackRight) {
-          if (DataVerifier.isValidString(sequence)) {
-            data.map.viewType.promoter.trackRight =
-              ri.distanceToPromoter + sequence.length;
-          }
-        }
-        feature.viewPosition.promoter.distanceTo = ri.distanceToPromoter;
-        feature.viewPosition.promoter.l =
-          ri.distanceToPromoter - rbsSequence.length;
-        feature.viewPosition.promoter.r =
-          ri.distanceToPromoter + rbsSequence.length;
+      if (
+        DataVerifier.isValidNumber(RBS.leftEndPosition) &&
+        DataVerifier.isValidNumber(RBS.rightEndPosition)
+      ) {
         if (
-          getOverlap(
-            ri.distanceToPromoter - rbsSequence.length,
-            ri.distanceToPromoter + rbsSequence.length,
-            data.tracks[ri.regulatedEntity._id].positions
-          )
+          tracks[RE._id].leftEndPosition === undefined ||
+          tracks[RE._id].leftEndPosition < RBS.leftEndPosition
         ) {
-          feature.viewPosition.promoter.level =
-            feature.viewPosition.promoter.level + 1;
+          tracks[RE._id].leftEndPosition = RBS.leftEndPosition;
         }
-        data.tracks[ri.regulatedEntity._id].positions.push({
-          l: ri.distanceToPromoter - rbsSequence.length,
-          r: ri.distanceToPromoter + rbsSequence.length,
-        });
+        if (
+          tracks[RE._id].rightEndPosition === undefined ||
+          tracks[RE._id].rightEndPosition < RBS.rightEndPosition
+        ) {
+          tracks[RE._id].rightEndPosition = RBS.rightEndPosition;
+        }
       }
-      if (DataVerifier.isValidNumber(ri.distanceToFirstGene)) {
-        if (ri.distanceToFirstGene < data.map.viewType.gene.trackLeft) {
-          data.map.viewType.gene.trackLeft = ri.distanceToFirstGene;
-        }
-        if (ri.distanceToFirstGene > data.map.viewType.gene.trackRight) {
-          let sequence = ri.regulatoryBindingSites.sequence;
-          if (DataVerifier.isValidString(sequence)) {
-            data.map.viewType.gene.trackRight =
-              ri.distanceToFirstGene + sequence.length;
-          }
-        }
-        feature.viewPosition.gene = ri.distanceToFirstGene;
-      }
-
-      data.tracks[ri.regulatedEntity._id].features[ri._id] = feature;
     }
   });
-  //data.map.width = Math.abs(data.map.trackLeft - data.map.trackRight);
-  return data;
+  return tracks;
 }
 
 function RegulatoryInteractions(props) {
@@ -394,10 +322,10 @@ function RegulatoryInteractions(props) {
 
 function RIMap({ regulatoryInteractions, allCitations }) {
   //console.log(regulatoryInteractions);
-  const data = useMemo(() => {
-    return formatDataGraph(regulatoryInteractions);
+  const tracks = useMemo(() => {
+    return formatDataTracks(regulatoryInteractions);
   }, [regulatoryInteractions]);
-  console.log(data);
+  console.log(tracks);
   return <></>;
   //return <Map featureData={data} />;
 }
