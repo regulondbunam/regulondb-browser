@@ -11,7 +11,7 @@ export default function List({datasetType, title, advancedSearch }) {
   const [_conf, set_conf] = useState()
   
 
-  //console.log(_data);
+  //console.log(title);
 
   let _title = "Dataset list of " + title
 

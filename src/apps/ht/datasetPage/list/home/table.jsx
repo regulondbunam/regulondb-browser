@@ -167,6 +167,7 @@ export function DatasetTable({ jsonTable, datasetType }) {
     }
     let show = []
     switch (datasetType) {
+        case 'RNAP_BINDING_SITES':
         case 'TFBINDING':
             show = ['_id', "objectsTested_name", "sample_title"]
             show.forEach(element => {
