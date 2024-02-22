@@ -57,10 +57,10 @@ export function labelCitation({
         if (DataVerifier.isValidObjectWith_id(evidence)) {
           if (evidence?.code) {
             if (evidence.type === "S") {
-              evidencesCodes.push(`<b>[${evidence.code}]<sup>e${evidence.index}</sup></b>`);
+              evidencesCodes.push(`<b>[${evidence.code}]<sup>EV${evidence.index}</sup></b>`);
               evidencesIndex += `<b>e${evidence.index}</b>,`
             } else {
-              evidencesCodes.push(`[${evidence.code}]<sup>e${evidence.index}</sup>`);
+              evidencesCodes.push(`[${evidence.code}]<sup>EV${evidence.index}</sup>`);
               evidencesIndex += `e${evidence.index},`;
             }
           }
@@ -69,7 +69,7 @@ export function labelCitation({
     }
     switch (citationSize) {
       case CITATION_SIZE.LARGE:
-        return `${index} ${citation ? `${citation},` : ""} ${(evidencesCodes.length > 0)&& (evidencesCodes.length > 1 ? "Evidences:" : "Evidence: ")} ${evidencesCodes.join(",")}`;
+        return `${index} ${citation ? `${citation},` : ""} ${(evidencesCodes.length > 0) ? (evidencesCodes.length > 1 ? "Evidences:" : "Evidence: "): ""} ${evidencesCodes.join(",")}`;
       case CITATION_SIZE.SMALL:
         return `(${authors[0]}., et al. ${year ? year : ""})<sup>${index}</sup>${evidencesCodes.join(",")}`;
       case CITATION_SIZE.ONLY_INDEX:

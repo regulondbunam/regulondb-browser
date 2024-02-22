@@ -248,7 +248,6 @@ export default function FilterTable({
                 <th colSpan={table.getAllLeafColumns().length}>
                   <div
                     style={{
-                      width: "95vw",
                       position: "sticky",
                       top: 0,
                       left: 0,

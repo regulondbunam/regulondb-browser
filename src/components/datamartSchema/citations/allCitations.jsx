@@ -238,7 +238,7 @@ export function Evidences({ evidences, publications, small = false }) {
                     textAlign: "end",
                   }}
                 >
-                  e{evidence.index}.
+                  EV{evidence.index}.
                 </td>
                 <td>
                   <ModalCitation
