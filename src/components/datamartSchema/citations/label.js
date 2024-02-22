@@ -18,7 +18,8 @@ export function labelCitation({
   isEvidence = false,
   showIndex = true,
 }) {
-  if (isEvidence) {
+  //Evidence label citation
+  if (isEvidence && DataVerifier.isValidObject(evidence)) {
     let code = "";
     if (evidence?.code) {
       if (evidence.type === "S") {
@@ -42,58 +43,42 @@ export function labelCitation({
         } ${code}`;
     }
   }
-  let index = "",
-    authors = "",
-    citation = "",
-    year = "";
 
-  const evidences = publication.evidences;
+  //Publication Citation
+  if (DataVerifier.isValidObjectWith_id(publication)) {
+    const {index, authors, citation, year, evidences } = publication
 
-  if (publication?._id) {
-    index = showIndex ? publication.index : "";
-    authors = publication.authors;
-    citation = publication.citation;
-    year = publication.year;
-  }
+    //evidence label
+    let evidencesCodes = [];
+    let evidencesIndex = "";
 
-  const evidenceCode = () => {
-    let codesA = [];
-    let codesIndexA = [];
     if (DataVerifier.isValidArray(evidences)) {
       evidences.forEach((evidence) => {
-        if (DataVerifier.isValidObject(evidence)) {
+        if (DataVerifier.isValidObjectWith_id(evidence)) {
           if (evidence?.code) {
             if (evidence.type === "S") {
-              codesA.push(`<b>[${evidence.code}]</b>`);
-              codesIndexA.push(`<b>e${evidence.index}</b>`);
+              evidencesCodes.push(`<b>[${evidence.code}]<sup>e${evidence.index}</sup></b>`);
+              evidencesIndex += `<b>e${evidence.index}</b>,`
             } else {
-              codesA.push(`[${evidence.code}]`);
-              codesIndexA.push(`e${evidence.index}`);
+              evidencesCodes.push(`[${evidence.code}]<sup>e${evidence.index}</sup>`);
+              evidencesIndex += `e${evidence.index},`;
             }
           }
         }
       });
     }
-    let codes = "";
-    if (codesA.length > 0) {
-      codes =
-        codesA.length > 1
-          ? "Evidences: " + codesA.join(" ")
-          : "Evidence: " + codesA.join(" ");
+    switch (citationSize) {
+      case CITATION_SIZE.LARGE:
+        return `${index} ${citation ? `${citation},` : ""} ${(evidencesCodes.length > 0)&& (evidencesCodes.length > 1 ? "Evidences:" : "Evidence: ")} ${evidencesCodes.join(",")}`;
+      case CITATION_SIZE.SMALL:
+        return `(${authors[0]}., et al. ${year ? year : ""})<sup>${index}</sup>${evidencesCodes.join(",")}`;
+      case CITATION_SIZE.ONLY_INDEX:
+        return `[${index},${evidencesIndex}]`;
+      default:
+        return `${index} ${citation ? `${citation},` : ""} ${evidencesCodes.join(",")}`;
     }
-    return { codes, codesIndex: codesIndexA.join(", ") };
-  };
 
-  const { codes, codesIndex } = evidenceCode();
-
-  switch (citationSize) {
-    case CITATION_SIZE.LARGE:
-      return `${index} ${citation ? `${citation},` : ""} ${codes}`;
-    case CITATION_SIZE.SMALL:
-      return `(${authors[0]}., et al. ${year ? year : ""})<sup>${index}</sup>`;
-    case CITATION_SIZE.ONLY_INDEX:
-      return `[${index},${codesIndex}]`;
-    default:
-      return `${index} ${citation ? `${citation},` : ""} ${codes}`;
   }
+
+  return "._"
 }

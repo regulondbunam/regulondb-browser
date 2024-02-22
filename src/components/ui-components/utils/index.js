@@ -32,6 +32,29 @@ class DataVerifier {
    * Description placeholder
    *
    * @static
+   * @param {{}} [obj={}]
+   * @returns {boolean}
+   */
+  static isValidObjectWith_id(obj = {}) {
+    if (!obj) {
+      return false;
+    }
+    if (obj === null) {
+      return false;
+    }
+    if (Object.keys(obj).length === 0) {
+      return false;
+    }
+    if(obj?._id){
+      return true
+    }
+    return false;
+  }
+
+  /**
+   * Description placeholder
+   *
+   * @static
    * @param {*} array
    * @returns {boolean}
    */
