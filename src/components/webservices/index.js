@@ -1,4 +1,4 @@
-import { useGetRegulonData, useGetRegulonBySearch } from "./regulon";
+import { useGetRegulonBySearch } from "./regulon";
 import { useGetGenesBy, useGetGenesBySearch, useLazyLoadGenesBySearch, useGetMainGenesBySearch } from './gene';
 import { useGetOperonByID, useGetOperonByTuId, useGetOperonBySearch, useGetOperonByAdvancedSearch } from './operon'
 import useGetObjectList from "./objectList";
@@ -10,7 +10,7 @@ import { useGetPhraseByObjectId } from "./phrases";
 import { useGetDataFile, useLazyGetDataFile } from "./dataOfFile";
 
 export {
-    useGetRegulonData, useGetRegulonBySearch,
+    useGetRegulonBySearch,
     useGetGenesBy, useGetGenesBySearch, useGetAllGenes, useLazyLoadGenesBySearch, useGetMainGenesBySearch,
     useGetObjectList,
     useGetOperonByID, useGetOperonByTuId, useGetOperonBySearch, useGetOperonByAdvancedSearch, getRelatedIdsByOperonData,

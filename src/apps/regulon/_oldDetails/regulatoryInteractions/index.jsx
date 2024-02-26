@@ -210,7 +210,7 @@ function formatData(regulatoryInteractions = [], allCitations) {
         }
       }
       data.push({
-        id: "ri_" + index + "_" + ri._id,
+        id: "ri_" + index + "_" + ri._id+"_"+ri.regulatoryBindingSites.strand,
         _regulatedEntity_name: _regulatedEntity_name,
         _regulatedEntity_type: _regulatedEntity_type,
         _activeConformation_name: _activeConformation_name,
@@ -294,13 +294,14 @@ function formatDataTracks(regulatoryInteractions = []) {
 }
 
 function RegulatoryInteractions(props) {
-  const [viewOption, setViewOption] = React.useState(1);
-
+  const [viewOption, setViewOption] = React.useState(0);
+/*
   const handleChange = (event) => {
     setViewOption(event.target.value);
-  };
+  };*/
   return (
     <div>
+      {/*
       <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
         <InputLabel id="demo-simple-select-standard-label">
           view Option
@@ -317,6 +318,7 @@ function RegulatoryInteractions(props) {
         </Select>
       </FormControl>
       <br />
+      */}
       {viewOption === 0 && <RITable {...props} />}
       {viewOption === 1 && <RIMap {...props} />}
     </div>
@@ -337,7 +339,7 @@ function RITable({ regulatoryInteractions, allCitations }) {
   const data = useMemo(() => {
     return formatData(regulatoryInteractions, allCitations);
   }, [regulatoryInteractions, allCitations]);
-  //console.log(data);
+  //console.log(regulatoryInteractions);
   return <FilterTable data={data} columns={COLUMNS} />;
 }
 

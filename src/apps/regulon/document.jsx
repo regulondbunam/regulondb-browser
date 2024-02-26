@@ -31,7 +31,7 @@ export default function Document({ regulonData, section }) {
             //summary,
             terms,
         } = regulonData
-
+        console.log(regulatoryInteractions);
         let _sections = []
         if(DataVerifier.isValidObject(regulator)){
             _sections.push({
