@@ -118,6 +118,9 @@ import {
   Column,
   Table,
   useReactTable,
+  useBlockLayout,
+  useResizeColumns,
+  ColumnResizeMode,
   ColumnFiltersState,
   getCoreRowModel,
   getFilteredRowModel,
@@ -169,7 +172,6 @@ const fuzzyFilter = (row, columnId, value, addMeta) => {
   return itemRank.passed;
 };
 
-
 /**
  * Description placeholder
  *
@@ -189,7 +191,7 @@ const fuzzyFilter = (row, columnId, value, addMeta) => {
 }
  * @returns {number; pagination?: { pageIndex: number; pageSize: number; }; fileName?: string; }) => any}
  */
-export default function FilterTable(props){
+export default function FilterTable(props) {
   const [tableSizes, setTableSizes] = useState({});
   const id = useId();
   //{width:0,height:0}
@@ -198,7 +200,7 @@ export default function FilterTable(props){
     if (container && !tableSizes?.width) {
       setTableSizes({
         width: container.offsetWidth,
-        height: window.innerHeight - window.innerHeight*0.1,
+        height: window.innerHeight - window.innerHeight * 0.1,
       });
     }
   }, [id, tableSizes]);
@@ -208,8 +210,7 @@ export default function FilterTable(props){
         id={id}
         style={{ width: "100%", height: "1px", backgroundColor: "red" }}
       ></div>
-      <div>
-      </div>
+      <div></div>
       {tableSizes?.width && <FTable {...props} {...tableSizes} />}
     </div>
   );
@@ -227,6 +228,9 @@ function FTable({
 }) {
   const [columnFilters, setColumnFilters] = React.useState([]);
   const [columnVisibility, setColumnVisibility] = React.useState({});
+  const [columnResizeMode, setColumnResizeMode] = React.useState("onChange");
+  const [columnResizeDirection, setColumnResizeDirection] =
+    React.useState("ltr");
   console.log(width, height);
   /**
    * Description placeholder
@@ -238,7 +242,7 @@ function FTable({
     initialState: {
       pagination: {
         pageIndex: 0,
-        pageSize: Math.round(height/rowHeight)-5,
+        pageSize: Math.round(height / rowHeight) - 5,
       },
     },
     columns,
@@ -259,6 +263,8 @@ function FTable({
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
+    columnResizeMode,
+    columnResizeDirection,
   });
 
   //console.log(table.getAllLeafColumns().length);
@@ -267,14 +273,20 @@ function FTable({
     <div>
       {showColumnsInfo && <InfoColumns {...table} columnsInfo={columnsInfo} />}
       <div>
-        <table className={style.table}>
+        <table className={style.table}
+        {...{
+          style: {
+            width: table.getCenterTotalSize(),
+          },
+        }}
+        >
           <thead className={style.tableHead}>
             {!disableOptions && (
               <tr>
                 <th colSpan={table.getAllLeafColumns().length}>
                   <div
                     style={{
-                      width: width+"px",
+                      width: width + "px",
                       position: "sticky",
                       top: 0,
                       left: 0,
@@ -312,9 +324,21 @@ function FTable({
                         //style={{ width: column ? column.width : "" }}
 
                         return (
-                          <th key={header.id} colSpan={header.colSpan}>
+                          <th
+                            {...{
+                              key: header.id,
+                              colSpan: header.colSpan,
+                              style: {
+                                width: header.getSize(),
+                              },
+                            }}
+                          >
                             {header.isPlaceholder ? null : (
                               <>
+                                {flexRender(
+                                  header.column.columnDef.header,
+                                  header.getContext()
+                                )}
                                 <div
                                   {...{
                                     className: header.column.getCanSort()
@@ -324,15 +348,38 @@ function FTable({
                                       header.column.getToggleSortingHandler(),
                                   }}
                                 >
-                                  {flexRender(
-                                    header.column.columnDef.header,
-                                    header.getContext()
-                                  )}
                                   {{
                                     asc: " 🔼",
                                     desc: " 🔽",
                                   }[header.column.getIsSorted()] ?? null}
                                 </div>
+                                <div
+                                  {...{
+                                    onMouseDown: header.getResizeHandler(),
+                                    onTouchStart: header.getResizeHandler(),
+                                    className: `${style.resizer} ${
+                                      table.options.columnResizeDirection
+                                    } ${
+                                      header.column.getIsResizing()
+                                        ? "isResizing"
+                                        : ""
+                                    }`,
+                                    style: {
+                                      transform:
+                                        columnResizeMode === "onEnd" &&
+                                        header.column.getIsResizing()
+                                          ? `translateX(${
+                                              (table.options
+                                                .columnResizeDirection === "rtl"
+                                                ? -1
+                                                : 1) *
+                                              (table.getState().columnSizingInfo
+                                                .deltaOffset ?? 0)
+                                            }px)`
+                                          : "",
+                                    },
+                                  }}
+                                />
                                 {header.column.getCanFilter() ? (
                                   <div>
                                     <Simple
@@ -360,14 +407,16 @@ function FTable({
                * @param {*} row
                * @returns {HTMLElement}
                */
-              (row) => (<Row row={row} rowHeight={rowHeight} />)
+              (row) => (
+                <Row row={row} rowHeight={rowHeight} />
+              )
             )}
             {table.getPageCount() > 1 && (
               <tr>
                 <td colSpan={table.getAllLeafColumns().length}>
                   <div
                     style={{
-                      width: width+"px",
+                      width: width + "px",
                       position: "sticky",
                       top: 0,
                       left: 0,
