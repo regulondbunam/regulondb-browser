@@ -1,7 +1,6 @@
 //import regulonData from "./dataTest.json"
-import { useQuery, useLazyQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import {
-  query_GET_REGULON_BY,
   query_GET_REGULON_BYSearch,
 } from "./query";
 
@@ -20,8 +19,8 @@ export function useGetRegulonBySearch({ search }) {
     }
   }
   if (error) {
-    console.error("useQuery query_GET_REGULON_BY Error:", error);
-    console.log("query: ", query_GET_REGULON_BY);
+    console.error("useQuery query_GET_REGULON_BYSearch Error:", error);
+    console.log("query: ", query_GET_REGULON_BYSearch);
   }
   return { regulonsData, error, loading };
 }

@@ -1,4 +1,4 @@
-import { useQuery, useLazyQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { query_GetRegulonBy } from "./queries";
 import { DataVerifier } from "../../../components/ui-components";
 
