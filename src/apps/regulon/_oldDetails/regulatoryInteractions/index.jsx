@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useId, useMemo, useState } from "react";
 import {
   FilterTable,
   DataVerifier,
@@ -210,7 +210,8 @@ function formatData(regulatoryInteractions = [], allCitations) {
         }
       }
       data.push({
-        id: "ri_" + index + "_" + ri._id+"_"+ri.regulatoryBindingSites.strand,
+        id:
+          "ri_" + index + "_" + ri._id + "_" + ri.regulatoryBindingSites.strand,
         _regulatedEntity_name: _regulatedEntity_name,
         _regulatedEntity_type: _regulatedEntity_type,
         _activeConformation_name: _activeConformation_name,
@@ -239,8 +240,8 @@ function getOverlap(l, r, positions = []) {
 
 function formatDataTracks(regulatoryInteractions = []) {
   let tracks = {};
-  let promoters = {}
-  let genes = {}
+  let promoters = {};
+  let genes = {};
   regulatoryInteractions.forEach((regulatoryInteraction) => {
     if (
       DataVerifier.isValidObject(regulatoryInteraction.regulatedEntity) &&
@@ -253,7 +254,7 @@ function formatDataTracks(regulatoryInteractions = []) {
           features: {},
           leftEndPosition: undefined,
           rightEndPosition: undefined,
-          type: "FeatureMap"
+          type: "FeatureMap",
         };
       }
       let sequence = "";
@@ -295,7 +296,7 @@ function formatDataTracks(regulatoryInteractions = []) {
 
 function RegulatoryInteractions(props) {
   const [viewOption, setViewOption] = React.useState(0);
-/*
+  /*
   const handleChange = (event) => {
     setViewOption(event.target.value);
   };*/
@@ -340,7 +341,7 @@ function RITable({ regulatoryInteractions, allCitations }) {
     return formatData(regulatoryInteractions, allCitations);
   }, [regulatoryInteractions, allCitations]);
   //console.log(regulatoryInteractions);
-  return <FilterTable data={data} columns={COLUMNS} />;
+  return  <FilterTable data={data} columns={COLUMNS} />;
 }
 
 export default RegulatoryInteractions;

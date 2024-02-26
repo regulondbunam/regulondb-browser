@@ -109,10 +109,11 @@ boolean: true if the item should be included in the filtered result; false if it
  **/
 
 import style from "./table.module.css";
-import React from "react";
+import React, { useEffect, useId, useState } from "react";
 import Options from "./options";
 import Pagination from "./pagination";
 import { Simple } from "./Filters";
+import Row from "./Row";
 import {
   Column,
   Table,
@@ -168,6 +169,7 @@ const fuzzyFilter = (row, columnId, value, addMeta) => {
   return itemRank.passed;
 };
 
+
 /**
  * Description placeholder
  *
@@ -187,24 +189,45 @@ const fuzzyFilter = (row, columnId, value, addMeta) => {
 }
  * @returns {number; pagination?: { pageIndex: number; pageSize: number; }; fileName?: string; }) => any}
  */
-export default function FilterTable({
+export default function FilterTable(props){
+  const [tableSizes, setTableSizes] = useState({});
+  const id = useId();
+  //{width:0,height:0}
+  useEffect(() => {
+    const container = document.getElementById(id);
+    if (container && !tableSizes?.width) {
+      setTableSizes({
+        width: container.offsetWidth,
+        height: window.innerHeight - window.innerHeight*0.1,
+      });
+    }
+  }, [id, tableSizes]);
+  return (
+    <div>
+      <div
+        id={id}
+        style={{ width: "100%", height: "1px", backgroundColor: "red" }}
+      ></div>
+      <div>
+      </div>
+      {tableSizes?.width && <FTable {...props} {...tableSizes} />}
+    </div>
+  );
+}
+function FTable({
   columns,
   showColumnsInfo = false,
   columnsInfo,
   disableOptions = false,
   data,
-  getItemSize = () => {
-    return 30;
-  },
-  pagination = {
-    pageIndex: 0,
-    pageSize: 20,
-  },
   fileName = "tableData",
+  rowHeight = 35,
+  width,
+  height,
 }) {
   const [columnFilters, setColumnFilters] = React.useState([]);
   const [columnVisibility, setColumnVisibility] = React.useState({});
-
+  console.log(width, height);
   /**
    * Description placeholder
    *
@@ -213,7 +236,10 @@ export default function FilterTable({
   const table = useReactTable({
     data,
     initialState: {
-      pagination: pagination,
+      pagination: {
+        pageIndex: 0,
+        pageSize: Math.round(height/rowHeight)-5,
+      },
     },
     columns,
     filterFns: {
@@ -248,6 +274,7 @@ export default function FilterTable({
                 <th colSpan={table.getAllLeafColumns().length}>
                   <div
                     style={{
+                      width: width+"px",
                       position: "sticky",
                       top: 0,
                       left: 0,
@@ -333,34 +360,14 @@ export default function FilterTable({
                * @param {*} row
                * @returns {HTMLElement}
                */
-              (row) => {
-                return (
-                  <tr key={row.id}>
-                    {row.getVisibleCells().map((cell) => {
-                      if (typeof cell.getValue() === "object") {
-                        
-                        return <td style={cell.column.columnDef.cellStyle} key={cell.id}>{cell.getValue()}</td>;
-                      } else {
-                        return (
-                          <td style={cell.column.columnDef.cellStyle} key={cell.id}>
-                            {flexRender(
-                              cell.column.columnDef.cell,
-                              cell.getContext()
-                            )}
-                          </td>
-                        );
-                      }
-                    })}
-                  </tr>
-                );
-              }
+              (row) => (<Row row={row} rowHeight={rowHeight} />)
             )}
             {table.getPageCount() > 1 && (
               <tr>
                 <td colSpan={table.getAllLeafColumns().length}>
                   <div
                     style={{
-                      width: "95vw",
+                      width: width+"px",
                       position: "sticky",
                       top: 0,
                       left: 0,

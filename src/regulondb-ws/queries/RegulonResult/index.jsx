@@ -13,7 +13,7 @@ export function useGetRegulonData(id) {
       if (data) {
         try {
           if (DataVerifier.isValidArray(data.getRegulonBy.data)) {
-            console.log(data);
+            //console.log(data);
             regulonData = data.getRegulonBy.data[0];
           } else {
             regulonData = null;
