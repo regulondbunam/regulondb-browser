@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useMemo, useState } from "react";
+import React, {useMemo } from "react";
 import {
   FilterTable,
   DataVerifier,
@@ -9,138 +9,102 @@ import {
   PC_VARIANTS,
   CITATION_SIZE,
 } from "../../../../components/datamartSchema";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+//import InputLabel from "@mui/material/InputLabel";
+//import MenuItem from "@mui/material/MenuItem";
+//import FormControl from "@mui/material/FormControl";
+//import Select from "@mui/material/Select";
 //import Map from "../../../FeatureMaps/Map";
 
 const COLUMNS = [
   {
-    id: "activeConformation",
-    header: "Active Conformation",
-    columns: [
-      {
-        id: "activeConformation_name",
-        header: "name",
-        filter: "fuzzyText",
-        accessorKey: "_activeConformation_name",
-        cell: (info) => (
-          <p dangerouslySetInnerHTML={{ __html: info.getValue() }} />
-        ),
-      },
-    ],
+    id: "activeConformation_name",
+    header: "Active Conformation Name",
+    filter: "fuzzyText",
+    accessorKey: "_activeConformation_name",
+    cell: (info) => (
+      <p dangerouslySetInnerHTML={{ __html: info.getValue() }} />
+    ),
   },
   {
-    id: "regulatoryInteraction",
-    header: "Regulatory Interaction",
-    columns: [
-      {
-        id: "regulatoryInteraction_function",
-        header: "Function",
-        filter: "fuzzyText",
-        accessorKey: "_regulatoryInteraction_function",
-      },
-    ],
+    id: "regulatoryInteraction_function",
+    header: "Function",
+    filter: "fuzzyText",
+    accessorKey: "_regulatoryInteraction_function",
   },
   {
-    id: "regulatedEntity",
-    header: "Regulated Entity",
-    columns: [
-      {
-        id: "regulatedEntity_name",
-        filter: "fuzzyText",
-        header: "name",
-        accessorKey: "_regulatedEntity_name",
-      },
-      {
-        id: "regulatedEntity_type",
-        filter: "fuzzyText",
-        header: "type",
-        accessorKey: "_regulatedEntity_type",
-      },
-    ],
+    id: "regulatedEntity_name",
+    filter: "fuzzyText",
+    header: "Regulated Entity Name",
+    accessorKey: "_regulatedEntity_name",
   },
   {
-    id: "regulatoryInteraction_distanceTo",
-    header: "Distance to",
-    columns: [
-      {
-        id: "regulatoryInteraction_distanceTo_gene",
-        filter: "fuzzyText",
-        header: "First Gene",
-        accessorKey: "_distanceGene",
-      },
-      {
-        id: "regulatoryInteraction_distanceTo_promoter",
-        filter: "fuzzyText",
-        header: "Promoter",
-        accessorKey: "_distancePromoter",
-      },
-    ],
+    id: "regulatedEntity_type",
+    filter: "fuzzyText",
+    header: "Regulated Entity Type",
+    accessorKey: "_regulatedEntity_type",
   },
   {
-    id: "regulatedGenes",
-    header: "Regulated Gene",
-    columns: [
-      {
-        id: "regulatedGenes_name",
-        header: "name",
-        accessorKey: "_regulatedGenes_name",
-        filter: "fuzzyText",
-        cell: (info) => {
-          const genes = info.row.original.regulatedGenes;
-          return (
-            <>
-              {genes.map((gene) => (
-                <Link
-                  key={
-                    "ri_" + info.row.original.id + "_regulatedGene_" + gene._id
-                  }
-                  to={"/gene/" + gene._id}
-                >
-                  <p dangerouslySetInnerHTML={{ __html: gene.name }} />
-                </Link>
-              ))}
-            </>
-          );
-        },
-      },
-    ],
+    id: "regulatoryInteraction_distanceTo_gene",
+    filter: "fuzzyText",
+    header: "Distance to First Gene",
+    accessorKey: "_distanceGene",
   },
   {
-    id: "regulatoryBindingSite",
-    header: "Regulatory BindingSite",
-    columns: [
-      {
-        id: "regulatoryBindingSite_leftPos",
-        filter: "fuzzyText",
-        header: "LeftPos",
-        accessorKey: "_regulatoryBindingSite_LeftPos",
-      },
-      {
-        id: "regulatoryBindingSite_RightPos",
-        filter: "fuzzyText",
-        header: "RightPos",
-        accessorKey: "_regulatoryBindingSite_RightPos",
-      },
-      {
-        id: "regulatoryBindingSite_strand",
-        filter: "fuzzyText",
-        header: "Strand",
-        accessorKey: "_regulatoryBindingSite_strand",
-      },
-      {
-        id: "regulatoryBindingSite_sequence",
-        filter: "fuzzyText",
-        header: "Sequence",
-        accessorKey: "_regulatoryBindingSite_sequence",
-      },
-    ],
+    id: "regulatoryInteraction_distanceTo_promoter",
+    filter: "fuzzyText",
+    header: "Distance to Promoter",
+    accessorKey: "_distancePromoter",
+  },
+  {
+    id: "regulatedGenes_name",
+    header: "Regulated Genes",
+    accessorKey: "_regulatedGenes_name",
+    filter: "fuzzyText",
+    cell: (info) => {
+      const genes = info.row.original.regulatedGenes;
+      return (
+        <>
+          {genes.map((gene) => (
+            <Link
+              key={
+                "ri_" + info.row.original.id + "_regulatedGene_" + gene._id
+              }
+              to={"/gene/" + gene._id}
+            >
+              <p dangerouslySetInnerHTML={{ __html: gene.name }} />
+            </Link>
+          ))}
+        </>
+      );
+    },
+  },
+  {
+    id: "regulatoryBindingSite_leftPos",
+    filter: "fuzzyText",
+    header: "RBS LeftEndPosition",
+    accessorKey: "_regulatoryBindingSite_LeftPos",
+  },
+  {
+    id: "regulatoryBindingSite_RightPos",
+    filter: "fuzzyText",
+    header: "RBS RightEndPosition",
+    accessorKey: "_regulatoryBindingSite_RightPos",
+  },
+  {
+    id: "regulatoryBindingSite_strand",
+    filter: "fuzzyText",
+    header: "Strand",
+    accessorKey: "_regulatoryBindingSite_strand",
+  },
+  {
+    id: "regulatoryBindingSite_sequence",
+    filter: "fuzzyText",
+    header: "Sequence",
+    accessorKey: "_regulatoryBindingSite_sequence",
   },
   {
     id: "citations",
-    header: <p>Evidence & Citations (EV: <b>Confirmed, Strong</b>, weak)</p>,
+    header: <p>Evidence & Citations</p>,
     accessorKey: "_citations",
     filter: "fuzzyText",
     cell: (info) => {

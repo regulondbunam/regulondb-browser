@@ -30,7 +30,7 @@ export default function HeaderCell({ header, table }) {
       </div>
       <div className="FT_headerCell_options">
       <div className="FT_headerCell_menu">
-        <SettingsIcon fontSize="12" />
+        {/*<SettingsIcon fontSize="12" />*/}
       </div>
         {header.column.getCanFilter() ? (
           <div className="FT_headerCell_filter">
