@@ -18,12 +18,6 @@
           "link" : "/gu"
         },
         {
-          "id": "growthConditions-search",
-          "label": "Growth Conditions",
-          "link" : "/growthConditions",
-          "state": false
-        },
-        {
           "id": "operon-search",
           "label": "Operon",
           "link" : "/operon"
