@@ -30,15 +30,15 @@ export function labelCitation({
 
     switch (citationSize) {
       case CITATION_SIZE.LARGE:
-        return `${showIndex ? "e" + evidence.index + "." : ""}${
+        return `${showIndex ? "EV" + evidence.index + "." : ""}${
           evidence?.name ? evidence.name : ""
         } ${code}`;
       case CITATION_SIZE.SMALL:
-        return `${showIndex ? "e" + evidence.index + "." : ""}${code}`;
+        return `${showIndex ? "EV" + evidence.index + "." : ""}${code}`;
       case CITATION_SIZE.ONLY_INDEX:
         return `[e${evidence.index}]`;
       default:
-        return `${showIndex ? "e" + evidence.index + "." : ""}${
+        return `${showIndex ? "EV" + evidence.index + "." : ""}${
           evidence?.name ? evidence.name : ""
         } ${code}`;
     }
@@ -58,10 +58,10 @@ export function labelCitation({
           if (evidence?.code) {
             if (evidence.type === "S") {
               evidencesCodes.push(`<b>[${evidence.code}]<sup>EV${evidence.index}</sup></b>`);
-              evidencesIndex += `<b>e${evidence.index}</b>,`
+              evidencesIndex += `<b>EV${evidence.index}</b>,`
             } else {
               evidencesCodes.push(`[${evidence.code}]<sup>EV${evidence.index}</sup>`);
-              evidencesIndex += `e${evidence.index},`;
+              evidencesIndex += `EV${evidence.index}`;
             }
           }
         }

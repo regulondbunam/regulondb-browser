@@ -140,7 +140,7 @@ const COLUMNS = [
   },
   {
     id: "citations",
-    header: "Citations",
+    header: <p>Evidence & Citations (EV: <b>Confirmed, Strong</b>, weak)</p>,
     accessorKey: "_citations",
     filter: "fuzzyText",
     cell: (info) => {
