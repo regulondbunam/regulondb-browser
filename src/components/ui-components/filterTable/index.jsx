@@ -112,8 +112,9 @@ import style from "./table.module.css";
 import React, { useEffect, useId, useState } from "react";
 import Options from "./options";
 import Pagination from "./pagination";
-import { Simple } from "./Filters";
+
 import Row from "./Row";
+import HeaderCell from "./HeaderCell";
 import {
   Column,
   Table,
@@ -208,7 +209,7 @@ export default function FilterTable(props) {
     <div>
       <div
         id={id}
-        style={{ width: "100%", height: "1px", backgroundColor: "red" }}
+        style={{ width: "100%", height: "1px"}}
       ></div>
       <div></div>
       {tableSizes?.width && <FTable {...props} {...tableSizes} />}
@@ -228,10 +229,6 @@ function FTable({
 }) {
   const [columnFilters, setColumnFilters] = React.useState([]);
   const [columnVisibility, setColumnVisibility] = React.useState({});
-  const [columnResizeMode, setColumnResizeMode] = React.useState("onChange");
-  const [columnResizeDirection, setColumnResizeDirection] =
-    React.useState("ltr");
-  console.log(width, height);
   /**
    * Description placeholder
    *
@@ -239,10 +236,14 @@ function FTable({
    */
   const table = useReactTable({
     data,
+    defaultColumn: {
+      minSize: 170, //enforced during column resizing
+      maxSize: 500, //enforced during column resizing
+    },
     initialState: {
       pagination: {
         pageIndex: 0,
-        pageSize: Math.round(height / rowHeight) - 5,
+        pageSize: Math.round(((height-(height*0.3))) / rowHeight+1),
       },
     },
     columns,
@@ -263,8 +264,8 @@ function FTable({
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
-    columnResizeMode,
-    columnResizeDirection,
+    columnResizeMode: 'onChange',
+    columnResizeDirection: 'rtl',
   });
 
   //console.log(table.getAllLeafColumns().length);
@@ -329,67 +330,11 @@ function FTable({
                               key: header.id,
                               colSpan: header.colSpan,
                               style: {
-                                width: header.getSize(),
+                                width: header.getSize()+"px",
                               },
                             }}
                           >
-                            {header.isPlaceholder ? null : (
-                              <>
-                                {flexRender(
-                                  header.column.columnDef.header,
-                                  header.getContext()
-                                )}
-                                <div
-                                  {...{
-                                    className: header.column.getCanSort()
-                                      ? "cursor-pointer select-none"
-                                      : "",
-                                    onClick:
-                                      header.column.getToggleSortingHandler(),
-                                  }}
-                                >
-                                  {{
-                                    asc: " 🔼",
-                                    desc: " 🔽",
-                                  }[header.column.getIsSorted()] ?? null}
-                                </div>
-                                <div
-                                  {...{
-                                    onMouseDown: header.getResizeHandler(),
-                                    onTouchStart: header.getResizeHandler(),
-                                    className: `${style.resizer} ${
-                                      table.options.columnResizeDirection
-                                    } ${
-                                      header.column.getIsResizing()
-                                        ? "isResizing"
-                                        : ""
-                                    }`,
-                                    style: {
-                                      transform:
-                                        columnResizeMode === "onEnd" &&
-                                        header.column.getIsResizing()
-                                          ? `translateX(${
-                                              (table.options
-                                                .columnResizeDirection === "rtl"
-                                                ? -1
-                                                : 1) *
-                                              (table.getState().columnSizingInfo
-                                                .deltaOffset ?? 0)
-                                            }px)`
-                                          : "",
-                                    },
-                                  }}
-                                />
-                                {header.column.getCanFilter() ? (
-                                  <div>
-                                    <Simple
-                                      column={header.column}
-                                      table={table}
-                                    />
-                                  </div>
-                                ) : null}
-                              </>
-                            )}
+                            {header.isPlaceholder ? null : (<HeaderCell header={header} table={table} columnResizeMode />)}
                           </th>
                         );
                       }
@@ -434,3 +379,35 @@ function FTable({
     </div>
   );
 }
+
+/*
+
+                                <div
+                                  {...{
+                                    onMouseDown: header.getResizeHandler(),
+                                    onTouchStart: header.getResizeHandler(),
+                                    className: `${style.resizer} ${
+                                      table.options.columnResizeDirection
+                                    } ${
+                                      header.column.getIsResizing()
+                                        ? "isResizing"
+                                        : ""
+                                    }`,
+                                    style: {
+                                      transform:
+                                        columnResizeMode === "onEnd" &&
+                                        header.column.getIsResizing()
+                                          ? `translateX(${
+                                              (table.options
+                                                .columnResizeDirection === "rtl"
+                                                ? -1
+                                                : 1) *
+                                              (table.getState().columnSizingInfo
+                                                .deltaOffset ?? 0)
+                                            }px)`
+                                          : "",
+                                    },
+                                  }}
+                                />
+                                
+*/
