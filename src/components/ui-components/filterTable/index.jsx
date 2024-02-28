@@ -116,32 +116,32 @@ import Pagination from "./pagination";
 import Row from "./Row";
 import HeaderCell from "./HeaderCell";
 import {
-  Column,
-  Table,
+ /* Column,
+  Table,*/
   useReactTable,
-  useBlockLayout,
+ /* useBlockLayout,
   useResizeColumns,
   ColumnResizeMode,
-  ColumnFiltersState,
+  ColumnFiltersState,*/
   getCoreRowModel,
   getFilteredRowModel,
   getFacetedRowModel,
   getFacetedUniqueValues,
   getFacetedMinMaxValues,
   getPaginationRowModel,
-  sortingFns,
+ // sortingFns,
   getSortedRowModel,
-  FilterFn,
-  SortingFn,
-  ColumnDef,
-  flexRender,
-  FilterFns,
+ // FilterFn,
+ // SortingFn,
+ // ColumnDef,
+//  flexRender,
+//  FilterFns,
 } from "@tanstack/react-table";
 
 import {
-  RankingInfo,
+//  RankingInfo,
   rankItem,
-  compareItems,
+//  compareItems,
 } from "@tanstack/match-sorter-utils";
 import InfoColumns from "./infoColumns";
 
@@ -224,7 +224,6 @@ function FTable({
   data,
   fileName = "tableData",
   rowHeight = 35,
-  width,
   height,
 }) {
   const [columnFilters, setColumnFilters] = React.useState([]);
@@ -268,7 +267,7 @@ function FTable({
     columnResizeDirection: 'rtl',
   });
 
-  //console.log(table.getAllLeafColumns().length);
+  //console.log(table.getCenterTotalSize(),width);
   /**preGlobalFilteredRows={table.getPre} allColumns={allColumns} */
   return (
     <div>
@@ -277,7 +276,7 @@ function FTable({
         <table className={style.table}
         {...{
           style: {
-            width: table.getCenterTotalSize(),
+            width: table.getCenterTotalSize()+"px",
           },
         }}
         >
@@ -287,7 +286,7 @@ function FTable({
                 <th colSpan={table.getAllLeafColumns().length}>
                   <div
                     style={{
-                      width: width + "px",
+                      width: table.getCenterTotalSize()+"px",
                       position: "sticky",
                       top: 0,
                       left: 0,
@@ -361,7 +360,7 @@ function FTable({
                 <td colSpan={table.getAllLeafColumns().length}>
                   <div
                     style={{
-                      width: width + "px",
+                      width: table.getCenterTotalSize()+"px",
                       position: "sticky",
                       top: 0,
                       left: 0,

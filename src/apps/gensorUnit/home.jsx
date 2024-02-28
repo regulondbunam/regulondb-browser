@@ -20,6 +20,7 @@ const COLUMNS = [
     header: "Groups",
     id: "gu_groups",
     accessorKey: "_groups",
+    size: 500,
     filter: "fuzzyText",
     cell: (info) => {
       if (DataVerifier.isValidArray(info.row.original.groups)) {
@@ -41,6 +42,7 @@ const COLUMNS_GROUP = [
     header: "Group",
     id: "gu_group",
     accessorKey: "_group",
+    size: 500,
     filter: "fuzzyText",
   },
   {
@@ -199,7 +201,10 @@ export default function Home({ gusData }) {
             <MenuItem value={"Functionality"}>Functional Group</MenuItem>
           </Select>
         </FormControl>
-        <FilterTable columns={columns} data={data} />
+        
+      </div>
+      <div style={{ display: "flex", justifyContent: "space-around" }} >
+      <FilterTable columns={columns} data={data} />
       </div>
     </div>
   );

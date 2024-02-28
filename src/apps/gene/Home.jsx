@@ -12,6 +12,7 @@ const COLUMNS = [
     id: "geneName",
     header: "Name",
     accessorKey: "_name",
+    size: 200,
     filter: "fuzzyText",
     cell: (info) => (
       <Link to={"/gene/" + info.row.original.id}>
@@ -23,12 +24,14 @@ const COLUMNS = [
     id: "geneSynonyms",
     header: "Synonyms",
     accessorKey: "_synonyms",
+    size: 200,
     filter: "fuzzyText",
   },
   {
     id: "geneProduct",
     header: "Product(s)",
     accessorKey: "_product",
+    size: 400,
     filter: "fuzzyText",
     cell: (info) => (
       <span dangerouslySetInnerHTML={{ __html: info.getValue() }} />
@@ -85,7 +88,7 @@ function LoadTable({ objectsList }) {
     return formatData(objectsList);
   }, [objectsList]);
   return (
-    <div style={{ margin: "10px 3% 10px 3%" }}>
+    <div style={{ display: "flex", justifyContent: "space-around" }}>
       <FilterTable
         data={data}
         columns={COLUMNS}

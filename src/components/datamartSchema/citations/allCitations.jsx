@@ -70,11 +70,7 @@ ModalCitation: The list of citations is rendered inside the "ModalCitation" comp
 
 import { ModalCitation } from "./modal";
 import { DataVerifier, Accordion } from "../../ui-components";
-import { useMemo, useState } from "react";
-import MenuItem from "@mui/material/MenuItem";
-import FormHelperText from "@mui/material/FormHelperText";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import { useMemo } from "react";
 
 /**
  * Description placeholder
