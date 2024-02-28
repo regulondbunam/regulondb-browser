@@ -232,14 +232,6 @@ export function Evidences({ evidences, publications, small = false }) {
             const evidence = evidences[evidenceId];
             return (
               <tr key={`citation_no_000${evidence.index}`}>
-                <td
-                  style={{
-                    verticalAlign: "middle",
-                    textAlign: "end",
-                  }}
-                >
-                  EV{evidence.index}.
-                </td>
                 <td>
                   <ModalCitation
                     evidence={evidence}
@@ -247,7 +239,7 @@ export function Evidences({ evidences, publications, small = false }) {
                     evidences={evidences}
                     small={small}
                     isEvidence
-                    showIndex={false}
+                    showIndex={true}
                   />
                 </td>
               </tr>
@@ -271,14 +263,6 @@ export function Publications({ evidences, publications, small = false }) {
             const publication = publications[publicationId];
             return (
               <tr key={`citation_no_000${publication.index}`}>
-                <td
-                  style={{
-                    verticalAlign: "middle",
-                    textAlign: "end",
-                  }}
-                >
-                  {publication.index}.
-                </td>
                 <td>
                   <ModalCitation
                     publication={publication}
