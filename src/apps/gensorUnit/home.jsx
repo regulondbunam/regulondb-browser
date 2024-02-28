@@ -127,7 +127,7 @@ function formatDataByGroup(gusData = []) {
               };
             }
           } else {
-            const idGroup = "unknown";
+            const idGroup = "";
             const row = groups[group];
             if (row) {
               groups[idGroup] = {
