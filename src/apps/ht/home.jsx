@@ -31,7 +31,7 @@ const confMainPage = {
           "url_rawDescription" : "https://raw.githubusercontent.com/regulondbunam/RegulonDBHT-Web/master/docs/web_conf/mainPage/TFBS_description.md",
           "tooltip": "",
           "enable": true
-      },/*
+      },
       {
           "id": "DS-RNA-006",
           "url": "RNAP_BINDING_SITES",
@@ -39,7 +39,7 @@ const confMainPage = {
           "url_rawDescription" : "a",
           "tooltip": "",
           "enable": true
-      },*/
+      },
       {
           "id": "DS-TUS-002",
           "url": "TUS",
