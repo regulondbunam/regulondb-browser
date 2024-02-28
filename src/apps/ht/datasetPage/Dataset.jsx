@@ -59,8 +59,10 @@ export default function Dataset({datasetId, datasetType, experimentType, tfName}
       case "GENE_EXPRESSION":
         title = " Gene Expression"
         break;
+      case "RNAP_BINDING_SITES":
+        title = "RNAP_BINDING_SITES"
+        break;
       default:
-        title = " ..."
         break;
     }
     return {advancedSearch: advancedSearch, title: title}
@@ -69,7 +71,7 @@ export default function Dataset({datasetId, datasetType, experimentType, tfName}
   if (datasetId) {
     return <Info datasetId={datasetId} />
   }
-
+  console.log(propList.advancedSearch);
   if (experimentType || datasetType || tfName) {
     return <List datasetType={datasetType.toLocaleUpperCase()} title={propList.title} advancedSearch={propList.advancedSearch} />
   }
