@@ -29,6 +29,7 @@ import TFPSSMs, {TFPSSMsTest} from './apps/TF-PSSMs';
 import Notebooks from './apps/Notebooks';
 import IGVBrowser from './apps/IGVBrowser';
 import GeneOntology from './apps/GeneOntology';
+import UiDocs from './UiComponents/UiDocs';
 
 //wsSandbox
 const router = createBrowserRouter([
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
         children: [
           { path: ":keyword" }
         ],
+      },
+      {
+        path: "uiDocs",
+        element: <UiDocs />,
       },
       {
         path: "igv-browser",
