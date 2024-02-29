@@ -10,7 +10,7 @@ import {
 const COLUMNS = [
   {
     id: "regulator_name",
-    header: <p>Regulator name (function: - represor, + activator, +- dual)</p>,
+    header: "Regulator name (function: - represor, + activator, +- dual)",
     accessorKey: "_regulatorName",
     filter: "fuzzyText",
     cell: (info) => {
@@ -84,7 +84,7 @@ const COLUMNS = [
   },*/
   {
     id: "citations",
-    header:  <p>Citations</p>,
+    header:  "Citations",
     accessorKey: "_citations",
     filter: "fuzzyText",
     cell: (info) => {
