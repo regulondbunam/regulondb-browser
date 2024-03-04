@@ -26,9 +26,6 @@ export default class Track {
       .size(this.width, this.height)
       .id(this.id);
 
-    this.canvas
-      .line(0, this.height - 1, this.width, this.height - 1)
-      .stroke({ color: "#00F", width: 1, linecap: "round" });
     return true;
   }
 

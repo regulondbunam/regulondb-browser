@@ -286,7 +286,6 @@ function FTable({
                 <th colSpan={table.getAllLeafColumns().length}>
                   <div
                     style={{
-                      width: table.getCenterTotalSize()+"px",
                       position: "sticky",
                       top: 0,
                       left: 0,
@@ -352,7 +351,7 @@ function FTable({
                * @returns {HTMLElement}
                */
               (row) => (
-                <Row row={row} rowHeight={rowHeight} />
+                <Row row={row} defaultRowHeight={rowHeight}/>
               )
             )}
             {table.getPageCount() > 1 && (

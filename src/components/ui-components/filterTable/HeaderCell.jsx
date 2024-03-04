@@ -1,7 +1,7 @@
 import React from "react";
 import { flexRender } from "@tanstack/react-table";
 import SortIcon from "@mui/icons-material/Sort";
-import SettingsIcon from '@mui/icons-material/Settings';
+//import SettingsIcon from '@mui/icons-material/Settings';
 import "./header_cell.css";
 import { Tooltip } from "@mui/material";
 import { Simple } from "./Filters";
