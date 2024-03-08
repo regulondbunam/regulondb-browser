@@ -47,17 +47,18 @@ const COLUMNS = [
 
 export default function Conformations({ conformations = [] }) {
     return (
-        <table className="table_data" >
+        <table  >
             <thead>
                 <tr>
+                <th>Type</th>
                     <th>Name</th>
-                    <th>Type</th>
+                   
                 </tr>
             </thead>
             <tbody>
                 {
-                    conformations.map((conformation, index)=>{
-                        return <Conformation key={conformation._id+"_"+index+"Conformation"} {...conformation} />
+                    conformations.map((conformation, index) => {
+                        return <Conformation key={conformation._id + "_" + index + "Conformation"} {...conformation} />
                     })
                 }
             </tbody>
@@ -80,8 +81,9 @@ function Conformation({
 
     return (
         <tr>
-            <td>{name}</td>
             <td>{type}</td>
+            <td>{name}</td>
+
         </tr>
     )
 }

@@ -204,7 +204,7 @@ function SequencePromoter({
       boxes.forEach((box, index) => {
         
         if (sequence.toLowerCase().includes(box.sequence.toLowerCase())) {
-          console.log(transcriptionStartSite.leftEndPosition);
+          //console.log(transcriptionStartSite.leftEndPosition);
           let boxPosition =
             strand === "forward" ? box.leftEndPosition : box.rightEndPosition;
           const distancePromoter_BoxLeft = transcriptionStartSite.leftEndPosition - boxPosition;
