@@ -4,7 +4,7 @@ import SimpleTrack from "../../../drawingTrack/_old";
 //import RegulatorBindingSites from "./regulatorBindingSites";
 import { useMemo } from "react";
 
-function confLevel(level){
+function confLevel(level) {
   let _confidenceLevel = <></>
   switch (level) {
     case "S":
@@ -78,11 +78,11 @@ export default function Promoter({ _id, promoter, strand, allCitations }) {
               {DataVerifier.isValidNumber(
                 promoter.transcriptionStartSite.leftEndPosition
               ) && (
-                <p>
-                  <b>Transcription start site:</b>
-                  {" " + promoter.transcriptionStartSite.leftEndPosition}
-                </p>
-              )}
+                  <p>
+                    <b>Transcription start site:</b>
+                    {" " + promoter.transcriptionStartSite.leftEndPosition}
+                  </p>
+                )}
             </>
           )}
           {DataVerifier.isValidObject(promoter.bindsSigmaFactor) && (
@@ -175,7 +175,7 @@ function SequencePromoter({
   boxes,
   name,
   transcriptionStartSite,
-  sequence,
+  sequence = "",
   strand,
 }) {
   const drawPlaceId = "canva_sequence_" + _id;
@@ -202,20 +202,23 @@ function SequencePromoter({
     });
     if (DataVerifier.isValidArray(boxes)) {
       boxes.forEach((box, index) => {
-        let boxPosition =
-          strand === "forward" ? box.leftEndPosition : box.rightEndPosition;
-        const distancePromoter_BoxLeft = Math.abs(
-          transcriptionStartSite.leftEndPosition - boxPosition
-        );
+        
+        if (sequence.toLowerCase().includes(box.sequence.toLowerCase())) {
+          console.log(transcriptionStartSite.leftEndPosition);
+          let boxPosition =
+            strand === "forward" ? box.leftEndPosition : box.rightEndPosition;
+          const distancePromoter_BoxLeft = transcriptionStartSite.leftEndPosition - boxPosition;
 
-        _features.push({
-          id: _id + "_box_" + index + "_feature",
-          label: box.type.replace("minus", "-"),
-          posX: promoterRelativePosition - distancePromoter_BoxLeft,
-          posY: height - 30,
-          type: "box",
-          sequence: box.sequence,
-        });
+          _features.push({
+            id: _id + "_box_" + index + "_feature",
+            label: box.type.replace("minus", "-"),
+            posX: promoterRelativePosition - distancePromoter_BoxLeft,
+            posY: height - 30,
+            type: "box",
+            sequence: box.sequence,
+          });
+        }
+
       });
     }
     return _features;
