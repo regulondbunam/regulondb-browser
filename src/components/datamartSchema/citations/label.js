@@ -55,10 +55,10 @@ export function labelCitation({
           publicationLabel = `${index} ${citation}`;
           break;
         case CITATION_SIZE.SMALL:
-          publicationLabel = `(${authors[0]}., et al. ${year ? year : ""})<sup>${index}</sup>`;
+          publicationLabel = `${authors[0]}., et al. ${year ? year : ""}<sup>${index}</sup>`;
           break
         case CITATION_SIZE.ONLY_INDEX:
-          publicationLabel = `[${index}]`;
+          publicationLabel = `${index}`;
           break
         default:
           publicationLabel = " "
@@ -86,6 +86,7 @@ export function labelCitation({
         }
       }
     });
+    
 
     if (DataVerifier.isValidArray(evidencesCodes)) {
       switch (citationSize) {
@@ -93,13 +94,13 @@ export function labelCitation({
           evidenceLabel = `${(evidencesCodes.length > 1 ? "Evidences: " : "Evidence: ")}${evidencesCodes.join(", ")}`;
           break;
         case CITATION_SIZE.SMALL:
-          evidenceLabel = `${evidencesCodes.join(", ")}`;
+          evidenceLabel = `${evidencesCodes.join(",")}`;
           break
         case CITATION_SIZE.ONLY_INDEX:
-          evidenceLabel = `[EV ${evidencesIndex.join(", ")}]`;
+          evidenceLabel = `EV:${evidencesIndex.join(",")}`;
           break
         default:
-          evidenceLabel = " "
+          evidenceLabel = ""
           break
       }
     }
@@ -107,26 +108,15 @@ export function labelCitation({
   }
 
 
-
-
-
-  return `${publicationLabel} ${evidenceLabel}`
-
-  //evidence label
-
-
-  /*
-  
-    switch (citationSize) {
-      case CITATION_SIZE.LARGE:
-        return `${index} ${citation ? `${citation},` : ""} ${(evidencesCodes.length > 0) ? (evidencesCodes.length > 1 ? "Evidences:" : "Evidence: ") : ""} ${evidencesCodes.join(",")}`;
-      case CITATION_SIZE.SMALL:
-        return `(${authors[0]}., et al. ${year ? year : ""})<sup>${index}</sup>${evidencesCodes.join(",")}`;
-      case CITATION_SIZE.ONLY_INDEX:
-        return `[${index},${evidencesIndex}]`;
-      default:
-        return "_"
-    }
-  */
+  switch (citationSize) {
+    case CITATION_SIZE.LARGE:
+      return `${publicationLabel}-${evidenceLabel}`
+    case CITATION_SIZE.SMALL:
+      return `${publicationLabel}-${evidenceLabel}`
+    case CITATION_SIZE.ONLY_INDEX:
+      return `[${publicationLabel}|${evidenceLabel}]`
+    default:
+      return ""
+  }
 
 }

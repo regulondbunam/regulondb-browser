@@ -51,6 +51,7 @@ export default function Conformations({ conformations = [] }) {
             <thead>
                 <tr>
                 <th>Type</th>
+                <th>Class</th>
                     <th>Name</th>
                    
                 </tr>
@@ -58,6 +59,7 @@ export default function Conformations({ conformations = [] }) {
             <tbody>
                 {
                     conformations.map((conformation, index) => {
+                        console.log(conformation);
                         return <Conformation key={conformation._id + "_" + index + "Conformation"} {...conformation} />
                     })
                 }
@@ -66,22 +68,24 @@ export default function Conformations({ conformations = [] }) {
     )
 }
 
-function Conformation({
-    _id = "",
-    additiveEvidences = [],
-    citations = [],
-    confidenceLevel = "",
-    effector,
-    effectorInteractionType = "",
-    functionalType = "",
-    name = "",
-    note = "",
-    type = "",
-}) {
+function Conformation( props ) {
+    const {
+ //       _id = "",
+ //       additiveEvidences = [],
+  //      citations = [],
+   //     confidenceLevel = "",
+   //     effector,
+  //      effectorInteractionType = "",
+ //       functionalType = "",
+        name = "",
+ //       note = "",
+        type = "",
+    } = props
 
     return (
         <tr>
             <td>{type}</td>
+            <td>{props.class}</td>
             <td>{name}</td>
 
         </tr>
