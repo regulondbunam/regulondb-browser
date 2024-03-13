@@ -65,26 +65,16 @@ const COLUMNS = [
     accessorKey: "_sequence",
     width: 400,
     filter: "fuzzyText",
-  },/*
+  },
   {
     id: "confidenceLevel",
-    header:  <p>Confidence Level <b><i> C: Confirmed</i>, S: Strong</b>, W Weak)</p>,
+    header:  <p>Confidence Level <b><i> C: Confirmed</i>, S: Strong</b>, W Weak</p>,
     accessorKey: "_confidenceLevel",
     filter: "fuzzyText",
-    cell: (info) => {
-      let spanColor = "#000";
-      let fun = "";
-      return (
-        <span style={{ color: spanColor }}>
-          {info.getValue()}
-          {fun}
-        </span>
-      );
-    },
-  },*/
+  },
   {
     id: "citations",
-    header:  "Citations",
+    header:  "Evidence & Citations [publication | Evidences]",
     accessorKey: "_citations",
     filter: "fuzzyText",
     cell: (info) => {
@@ -113,10 +103,12 @@ function formatData(regulatorBindingSites = [], allCitations) {
       let _absolutePosition = "",
         _leftEndPosition = "",
         _rightEndPosition = "",
-        _sequence = "";
+        _sequence = "",
+        _confidenceLevel = "";
 
       rbs.regulatoryInteractions.forEach((regulatoryInteraction) => {
         let regulatorySite = regulatoryInteraction.regulatorySite;
+        _confidenceLevel = regulatoryInteraction.confidenceLevel
         _absolutePosition = regulatoryInteraction.relativeCenterPosition;
         _leftEndPosition = regulatorySite.leftEndPosition;
         _rightEndPosition = regulatorySite.rightEndPosition;
@@ -141,6 +133,7 @@ function formatData(regulatorBindingSites = [], allCitations) {
           _leftEndPosition,
           _rightEndPosition,
           _sequence,
+          _confidenceLevel,
           _citations: citationValues.join("; "),
           allCitations: allCitations,
           citations: regulatorySite.citations,
@@ -158,6 +151,7 @@ export default function RegulatorBindingSites({
   regulatorBindingSites = [],
   allCitations,
 }) {
+  //console.log(regulatorBindingSites);
   const data = useMemo(() => {
     return formatData(regulatorBindingSites, allCitations);
   }, [regulatorBindingSites, allCitations]);

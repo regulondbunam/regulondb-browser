@@ -103,8 +103,14 @@ const COLUMNS = [
     accessorKey: "_regulatoryBindingSite_sequence",
   },
   {
+    id: "confidenceLevel",
+    header:  <p>Confidence Level <b><i> C: Confirmed</i>, S: Strong</b>, W Weak</p>,
+    accessorKey: "_confidenceLevel",
+    filter: "fuzzyText",
+  },
+  {
     id: "citations",
-    header: <p>Evidence & Citations</p>,
+    header:  "Evidence & Citations [publication | Evidences]",
     accessorKey: "_citations",
     filter: "fuzzyText",
     cell: (info) => {
@@ -191,6 +197,7 @@ function formatData(regulatoryInteractions = [], allCitations) {
         _regulatoryBindingSite_sequence: _regulatoryBindingSite_sequence,
         citations: citations,
         allCitations: allCitations,
+        _confidenceLevel: ri.confidenceLevel,
         _citations: "",
       });
     });
