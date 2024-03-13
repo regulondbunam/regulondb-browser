@@ -56,7 +56,7 @@ export function Table({ columns, data }) {
                                 //console.log(cell.value);
                                 component = <div>
                                     <Link to={"/gene/" + cell.value.id}>
-                                        <p>{`${cell.value.name} (${cell.value.function})`}</p>
+                                        <p>{`${cell.value.name}`}</p>
                                     </Link>
                                 </div>
                                 break;
@@ -80,6 +80,9 @@ export function Table({ columns, data }) {
                                 </div>
                                 break
                             default:
+                                component = <div>
+                                        <p>{`${cell.value}`}</p>
+                                </div>
                                 break;
                         }
                         return (

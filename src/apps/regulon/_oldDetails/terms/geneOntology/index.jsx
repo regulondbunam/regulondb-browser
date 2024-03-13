@@ -1,5 +1,5 @@
 import React from "react";
-import {ParagraphCitations} from "../../../../../components/citations";
+import {ParagraphCitations} from "../../../../../components/datamartSchema/citations";
 
 const thStyle = {
   fontWeight: "bold",

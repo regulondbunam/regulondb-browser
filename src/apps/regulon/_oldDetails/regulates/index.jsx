@@ -20,7 +20,7 @@ function Regulates({ regulates }) {
         transcriptionFactors,
         transcriptionUnits,
     } = regulates
-    //console.log(regulates);
+    //console.log(transcriptionUnits);
     return (
         <div style={{ marginLeft: "2%", marginRight: "3%" }} >
             {genes.length > 0 && (<Genes genes={genes} />)}

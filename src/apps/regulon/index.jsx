@@ -72,7 +72,7 @@ Document: It displays documents or detailed information about regulons in the ap
 **/
 import { useParams } from "react-router-dom";
 import Title from "./Title";
-import { useGetRegulonData } from "../../components/webservices";
+import { useGetRegulonData } from "../../regulondb-ws/queries";
 import Home from "./home";
 import Document from "./document";
 

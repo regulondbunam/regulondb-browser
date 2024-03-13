@@ -70,11 +70,7 @@ ModalCitation: The list of citations is rendered inside the "ModalCitation" comp
 
 import { ModalCitation } from "./modal";
 import { DataVerifier, Accordion } from "../../ui-components";
-import { useMemo, useState } from "react";
-import MenuItem from "@mui/material/MenuItem";
-import FormHelperText from "@mui/material/FormHelperText";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import { useMemo } from "react";
 
 /**
  * Description placeholder
@@ -232,14 +228,6 @@ export function Evidences({ evidences, publications, small = false }) {
             const evidence = evidences[evidenceId];
             return (
               <tr key={`citation_no_000${evidence.index}`}>
-                <td
-                  style={{
-                    verticalAlign: "middle",
-                    textAlign: "end",
-                  }}
-                >
-                  e{evidence.index}.
-                </td>
                 <td>
                   <ModalCitation
                     evidence={evidence}
@@ -247,7 +235,7 @@ export function Evidences({ evidences, publications, small = false }) {
                     evidences={evidences}
                     small={small}
                     isEvidence
-                    showIndex={false}
+                    showIndex={true}
                   />
                 </td>
               </tr>
@@ -271,14 +259,6 @@ export function Publications({ evidences, publications, small = false }) {
             const publication = publications[publicationId];
             return (
               <tr key={`citation_no_000${publication.index}`}>
-                <td
-                  style={{
-                    verticalAlign: "middle",
-                    textAlign: "end",
-                  }}
-                >
-                  {publication.index}.
-                </td>
                 <td>
                   <ModalCitation
                     publication={publication}

@@ -350,6 +350,10 @@ td {
 	font-size: 12px;
 }
 
+.citation b {
+	font-size: 11px;
+}
+
 .divA:hover {
 	cursor: pointer;
 	-webkit-box-shadow: inset 2px 3px 13px 1px var(--color-blue4);

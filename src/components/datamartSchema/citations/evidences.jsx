@@ -115,16 +115,16 @@ export function Evidences({
                 let evidenceType = "", evidenceCode = ""; 
                 switch (evidence.type) {
                     case "S":
-                        evidenceType = <span style={{ fontWeight: "bold", color: "#0C6A87" }} >Strong</span>
-                        evidenceCode = <span style={{ fontWeight: "bold", color: "#0C6A87" }} >{evidence.code}</span>
+                        evidenceType = <span style={{ fontWeight: "bold",  }} >Strong</span>
+                        evidenceCode = <span style={{ fontWeight: "bold",  }} >{evidence.code}</span>
                         break;
                     case "C":
                         evidenceType = <span style={{ fontWeight: "bold", color: "#000000" }} >Confirmed</span>
                         evidenceCode = <span style={{ fontWeight: "bold", color: "#000000" }} >{evidence.code}</span>
                         break;
                     case "W":
-                        evidenceType = <span style={{ color: "#0C6A87" }} >Weak</span>
-                        evidenceCode = <span style={{ color: "#0C6A87" }} >{evidence.code}</span>
+                        evidenceType = <span style={{  }} >Weak</span>
+                        evidenceCode = <span style={{  }} >{evidence.code}</span>
                         break;
                     default:
                         evidenceType = ""
@@ -132,7 +132,7 @@ export function Evidences({
                 }
                 return(
                    <tr key={`evidence_${evidence._id}_${id}`}>
-                    <td>[e{evidence.index}]</td>
+                    <td>[EV{evidence.index}]</td>
                     <td>
                     <p>{evidenceCode}</p>
                     <p>{evidence.name}</p>

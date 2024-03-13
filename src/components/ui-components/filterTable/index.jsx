@@ -109,34 +109,39 @@ boolean: true if the item should be included in the filtered result; false if it
  **/
 
 import style from "./table.module.css";
-import React from "react";
+import React, { useEffect, useId, useState } from "react";
 import Options from "./options";
 import Pagination from "./pagination";
-import { Simple } from "./Filters";
+
+import Row from "./Row";
+import HeaderCell from "./HeaderCell";
 import {
-  Column,
-  Table,
+ /* Column,
+  Table,*/
   useReactTable,
-  ColumnFiltersState,
+ /* useBlockLayout,
+  useResizeColumns,
+  ColumnResizeMode,
+  ColumnFiltersState,*/
   getCoreRowModel,
   getFilteredRowModel,
   getFacetedRowModel,
   getFacetedUniqueValues,
   getFacetedMinMaxValues,
   getPaginationRowModel,
-  sortingFns,
+ // sortingFns,
   getSortedRowModel,
-  FilterFn,
-  SortingFn,
-  ColumnDef,
-  flexRender,
-  FilterFns,
+ // FilterFn,
+ // SortingFn,
+ // ColumnDef,
+//  flexRender,
+//  FilterFns,
 } from "@tanstack/react-table";
 
 import {
-  RankingInfo,
+//  RankingInfo,
   rankItem,
-  compareItems,
+//  compareItems,
 } from "@tanstack/match-sorter-utils";
 import InfoColumns from "./infoColumns";
 
@@ -187,24 +192,42 @@ const fuzzyFilter = (row, columnId, value, addMeta) => {
 }
  * @returns {number; pagination?: { pageIndex: number; pageSize: number; }; fileName?: string; }) => any}
  */
-export default function FilterTable({
+export default function FilterTable(props) {
+  const [tableSizes, setTableSizes] = useState({});
+  const id = useId();
+  //{width:0,height:0}
+  useEffect(() => {
+    const container = document.getElementById(id);
+    if (container && !tableSizes?.width) {
+      setTableSizes({
+        width: container.offsetWidth,
+        height: window.innerHeight - window.innerHeight * 0.1,
+      });
+    }
+  }, [id, tableSizes]);
+  return (
+    <div>
+      <div
+        id={id}
+        style={{ width: "100%", height: "1px"}}
+      ></div>
+      <div></div>
+      {tableSizes?.width && <FTable {...props} {...tableSizes} />}
+    </div>
+  );
+}
+function FTable({
   columns,
   showColumnsInfo = false,
   columnsInfo,
   disableOptions = false,
   data,
-  getItemSize = () => {
-    return 30;
-  },
-  pagination = {
-    pageIndex: 0,
-    pageSize: 20,
-  },
   fileName = "tableData",
+  rowHeight = 35,
+  height,
 }) {
   const [columnFilters, setColumnFilters] = React.useState([]);
   const [columnVisibility, setColumnVisibility] = React.useState({});
-
   /**
    * Description placeholder
    *
@@ -212,8 +235,15 @@ export default function FilterTable({
    */
   const table = useReactTable({
     data,
+    defaultColumn: {
+      minSize: 170, //enforced during column resizing
+      maxSize: 500, //enforced during column resizing
+    },
     initialState: {
-      pagination: pagination,
+      pagination: {
+        pageIndex: 0,
+        pageSize: Math.round(((height-(height*0.3))) / rowHeight+1),
+      },
     },
     columns,
     filterFns: {
@@ -233,22 +263,29 @@ export default function FilterTable({
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
+    columnResizeMode: 'onChange',
+    columnResizeDirection: 'rtl',
   });
 
-  //console.log(table.getAllLeafColumns().length);
+  //console.log(table.getCenterTotalSize(),width);
   /**preGlobalFilteredRows={table.getPre} allColumns={allColumns} */
   return (
     <div>
       {showColumnsInfo && <InfoColumns {...table} columnsInfo={columnsInfo} />}
       <div>
-        <table className={style.table}>
+        <table className={style.table}
+        {...{
+          style: {
+            width: table.getCenterTotalSize()+"px",
+          },
+        }}
+        >
           <thead className={style.tableHead}>
             {!disableOptions && (
               <tr>
                 <th colSpan={table.getAllLeafColumns().length}>
                   <div
                     style={{
-                      width: "95vw",
                       position: "sticky",
                       top: 0,
                       left: 0,
@@ -286,37 +323,16 @@ export default function FilterTable({
                         //style={{ width: column ? column.width : "" }}
 
                         return (
-                          <th key={header.id} colSpan={header.colSpan}>
-                            {header.isPlaceholder ? null : (
-                              <>
-                                <div
-                                  {...{
-                                    className: header.column.getCanSort()
-                                      ? "cursor-pointer select-none"
-                                      : "",
-                                    onClick:
-                                      header.column.getToggleSortingHandler(),
-                                  }}
-                                >
-                                  {flexRender(
-                                    header.column.columnDef.header,
-                                    header.getContext()
-                                  )}
-                                  {{
-                                    asc: " 🔼",
-                                    desc: " 🔽",
-                                  }[header.column.getIsSorted()] ?? null}
-                                </div>
-                                {header.column.getCanFilter() ? (
-                                  <div>
-                                    <Simple
-                                      column={header.column}
-                                      table={table}
-                                    />
-                                  </div>
-                                ) : null}
-                              </>
-                            )}
+                          <th
+                            {...{
+                              key: header.id,
+                              colSpan: header.colSpan,
+                              style: {
+                                width: header.getSize()+"px",
+                              },
+                            }}
+                          >
+                            {header.isPlaceholder ? null : (<HeaderCell header={header} table={table} columnResizeMode />)}
                           </th>
                         );
                       }
@@ -334,34 +350,16 @@ export default function FilterTable({
                * @param {*} row
                * @returns {HTMLElement}
                */
-              (row) => {
-                return (
-                  <tr key={row.id}>
-                    {row.getVisibleCells().map((cell) => {
-                      if (typeof cell.getValue() === "object") {
-                        
-                        return <td style={cell.column.columnDef.cellStyle} key={cell.id}>{cell.getValue()}</td>;
-                      } else {
-                        return (
-                          <td style={cell.column.columnDef.cellStyle} key={cell.id}>
-                            {flexRender(
-                              cell.column.columnDef.cell,
-                              cell.getContext()
-                            )}
-                          </td>
-                        );
-                      }
-                    })}
-                  </tr>
-                );
-              }
+              (row) => (
+                <Row row={row} defaultRowHeight={rowHeight}/>
+              )
             )}
             {table.getPageCount() > 1 && (
               <tr>
                 <td colSpan={table.getAllLeafColumns().length}>
                   <div
                     style={{
-                      width: "95vw",
+                      width: table.getCenterTotalSize()+"px",
                       position: "sticky",
                       top: 0,
                       left: 0,
@@ -379,3 +377,35 @@ export default function FilterTable({
     </div>
   );
 }
+
+/*
+
+                                <div
+                                  {...{
+                                    onMouseDown: header.getResizeHandler(),
+                                    onTouchStart: header.getResizeHandler(),
+                                    className: `${style.resizer} ${
+                                      table.options.columnResizeDirection
+                                    } ${
+                                      header.column.getIsResizing()
+                                        ? "isResizing"
+                                        : ""
+                                    }`,
+                                    style: {
+                                      transform:
+                                        columnResizeMode === "onEnd" &&
+                                        header.column.getIsResizing()
+                                          ? `translateX(${
+                                              (table.options
+                                                .columnResizeDirection === "rtl"
+                                                ? -1
+                                                : 1) *
+                                              (table.getState().columnSizingInfo
+                                                .deltaOffset ?? 0)
+                                            }px)`
+                                          : "",
+                                    },
+                                  }}
+                                />
+                                
+*/

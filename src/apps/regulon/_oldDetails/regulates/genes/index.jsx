@@ -71,9 +71,9 @@ function formatTable(genes = []) {
         data.push({
             gene: {
                 id: gene._id,
-                name: gene.name,
-                function: gene.function
+                name: gene.name
             },
+            function: gene.function,
             multifunction: terms.multifun,
             strMultifunction: strMultifunction,
             biologicalProcess: terms.geneOntology?.biologicalProcess ? terms.geneOntology?.biologicalProcess : [],

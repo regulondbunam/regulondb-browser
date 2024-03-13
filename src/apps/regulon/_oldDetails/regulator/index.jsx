@@ -1,11 +1,9 @@
 import "./regulator.css";
 import { DataVerifier } from "../../../../components/ui-components";
-//import { CitationsNote } from "../../../../components/citations/citations_note";
-import { NoteCitations } from "../../../../components/datamartSchema/citations";
-import { ParagraphCitations } from "../../../../components/citations";
+import { NoteCitations, ParagraphCitations } from "../../../../components/datamartSchema/citations";
 import Conformations from "./conformations";
 import EncodedFrom from "./encode";
-import Products from "./products";
+//import Products from "./products";
 import { useState } from "react";
 export default function Regulator({
   regulator,

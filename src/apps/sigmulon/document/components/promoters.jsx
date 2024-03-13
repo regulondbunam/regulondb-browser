@@ -4,7 +4,7 @@ import {
   FilterTable,
 } from "../../../../components/ui-components";
 import { Link } from "react-router-dom";
-import SimpleTrack from "../../../../components/drawingTrack";
+import SimpleTrack from "../../../../components/drawingTrack/_old";
 
 const COLUMNS = [
   {

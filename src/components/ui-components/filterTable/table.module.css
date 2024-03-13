@@ -7,15 +7,13 @@
     border-top: 1px solid;;
 }
 .table{
-    border: 1px solid;
+    border: 0px solid;
 }
 
 .table th{
     background-color: #C9DBE7;
     font-weight: bold;
     text-align: center;
-    border-left: 1px solid;
-    border-right: 1px solid;
 }
 
 .table tr:nth-child(even){background-color: #f2f2f2;}
@@ -24,8 +22,6 @@
 
 .table td{
     text-align: center;
-    border-left: 1px solid;
-    border-right: 1px solid;
 }
 
 columnSel:hover{
@@ -36,3 +32,39 @@ columnSel:hover{
     position: sticky;
     top: 0;
 }
+
+
+.resizer {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 5px;
+    background: rgba(0, 0, 0, 0.5);
+    cursor: col-resize;
+    user-select: none;
+    touch-action: none;
+  }
+  
+  .resizer.ltr {
+    right: 0;
+  }
+  
+  .resizer.rtl {
+    left: 0;
+  }
+  
+    .isResizing {
+    background: blue;
+    opacity: 1;
+  }
+  
+  @media (hover: hover) {
+    .resizer {
+      opacity: 0;
+    }
+  
+    *:hover > .resizer {
+      opacity: 1;
+    }
+  }
+  

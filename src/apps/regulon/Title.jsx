@@ -41,13 +41,6 @@ export function Title({ state, title, message, regulator = {} }) {
             )}
           </div>
           <div style={{marginLeft: "2%"}} >
-            {DataVerifier.isValidArray(conformations) && (
-              <>
-              <p><b>Conformations:</b></p>
-              {
-                conformations.map((conformation=>(<Conformation key={conformation._id} {...conformation}  />)))
-              }</>
-            )}
           </div>
         </div>
         <br />

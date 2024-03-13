@@ -1,5 +1,5 @@
 import { Accordion, DataVerifier } from "../../../ui-components";
-import SimpleTrack from "../../../drawingTrack";
+import SimpleTrack from "../../../drawingTrack/_old";
 import { ParagraphCitations } from "../../citations";
 //import { LinealSequence } from "../../../sequence";
 import { useMemo } from "react";

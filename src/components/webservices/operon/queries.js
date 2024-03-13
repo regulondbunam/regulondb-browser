@@ -32,6 +32,7 @@ export const fragment_RegulatorBS = gql`fragment RegulatorBS on RegulatorBinding
       citations {
         ...CITATIONS
       }
+      confidenceLevel
     }
     function
   }`

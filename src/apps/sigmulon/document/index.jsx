@@ -34,10 +34,9 @@ export default function Document({ sigmulonData }) {
         label: "Regulators",
         title: "Sigmulon Regulators",
         component: (
-          <div style={{ overflow: "auto" }}>
+          <div style={{ overflow: "auto", maxHeight: "100vh", marginLeft: "5%" }}>
             <Regulators
               regulators={sigmaFactor.sigmulonRegulators}
-              variant="filterTable"
               sigmulonId={_id}
             />
           </div>

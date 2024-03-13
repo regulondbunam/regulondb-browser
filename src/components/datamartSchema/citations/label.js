@@ -18,7 +18,8 @@ export function labelCitation({
   isEvidence = false,
   showIndex = true,
 }) {
-  if (isEvidence) {
+  //Evidence label citation
+  if (isEvidence && DataVerifier.isValidObject(evidence)) {
     let code = "";
     if (evidence?.code) {
       if (evidence.type === "S") {
@@ -29,71 +30,93 @@ export function labelCitation({
 
     switch (citationSize) {
       case CITATION_SIZE.LARGE:
-        return `${showIndex ? "e" + evidence.index + "." : ""}${
-          evidence?.name ? evidence.name : ""
-        } ${code}`;
+        return `${showIndex ? "EV" + evidence.index + "." : ""}${evidence?.name ? evidence.name : ""
+          } ${code}`;
       case CITATION_SIZE.SMALL:
-        return `${showIndex ? "e" + evidence.index + "." : ""}${code}`;
+        return `${showIndex ? "EV" + evidence.index + "." : ""}${code}`;
       case CITATION_SIZE.ONLY_INDEX:
         return `[e${evidence.index}]`;
       default:
-        return `${showIndex ? "e" + evidence.index + "." : ""}${
-          evidence?.name ? evidence.name : ""
-        } ${code}`;
+        return `${showIndex ? "EV" + evidence.index + "." : ""}${evidence?.name ? evidence.name : ""
+          } ${code}`;
     }
   }
-  let index = "",
-    authors = "",
-    citation = "",
-    year = "";
-
-  const evidences = publication.evidences;
-
-  if (publication?._id) {
-    index = showIndex ? publication.index : "";
-    authors = publication.authors;
-    citation = publication.citation;
-    year = publication.year;
+  if (!DataVerifier.isValidObject(publication)) {
+    return "_"
   }
 
-  const evidenceCode = () => {
-    let codesA = [];
-    let codesIndexA = [];
-    if (DataVerifier.isValidArray(evidences)) {
-      evidences.forEach((evidence) => {
-        if (DataVerifier.isValidObject(evidence)) {
-          if (evidence?.code) {
-            if (evidence.type === "S") {
-              codesA.push(`<b>[${evidence.code}]</b>`);
-              codesIndexA.push(`<b>e${evidence.index}</b>`);
-            } else {
-              codesA.push(`[${evidence.code}]`);
-              codesIndexA.push(`e${evidence.index}`);
-            }
+  //Publication Citation
+  let publicationLabel = ""
+  if (DataVerifier.isValidObjectWith_id(publication)) {
+    const { index, authors, citation, year } = publication
+    if (DataVerifier.isValidString(citation)) {
+      switch (citationSize) {
+        case CITATION_SIZE.LARGE:
+          publicationLabel = `${index} ${citation}`;
+          break;
+        case CITATION_SIZE.SMALL:
+          publicationLabel = `${authors[0]}., et al. ${year ? year : ""}<sup>${index}</sup>`;
+          break
+        case CITATION_SIZE.ONLY_INDEX:
+          publicationLabel = `${index}`;
+          break
+        default:
+          publicationLabel = " "
+          break
+      }
+    }
+  }
+
+  //Evidences
+  let evidenceLabel = ""
+  if (DataVerifier.isValidArray(publication.evidences)) {
+
+    let evidencesCodes = [];
+    let evidencesIndex = [];
+    publication.evidences.forEach((evidence) => {
+      if (DataVerifier.isValidObjectWith_id(evidence)) {
+        if (evidence?.code) {
+          if (evidence.type === "S") {
+            evidencesCodes.push(`<b>${evidence.code}<sup>EV${evidence.index}</sup></b>`);
+            evidencesIndex.push(`<b>${evidence.index}</b>`)
+          } else {
+            evidencesCodes.push(`${evidence.code}<sup>EV${evidence.index}</sup>`);
+            evidencesIndex.push(`${evidence.index}`);
           }
         }
-      });
-    }
-    let codes = "";
-    if (codesA.length > 0) {
-      codes =
-        codesA.length > 1
-          ? "Evidences: " + codesA.join(" ")
-          : "Evidence: " + codesA.join(" ");
-    }
-    return { codes, codesIndex: codesIndexA.join(", ") };
-  };
+      }
+    });
+    
 
-  const { codes, codesIndex } = evidenceCode();
+    if (DataVerifier.isValidArray(evidencesCodes)) {
+      switch (citationSize) {
+        case CITATION_SIZE.LARGE:
+          evidenceLabel = `${(evidencesCodes.length > 1 ? "Evidences: " : "Evidence: ")}${evidencesCodes.join(", ")}`;
+          break;
+        case CITATION_SIZE.SMALL:
+          evidenceLabel = `${evidencesCodes.join(",")}`;
+          break
+        case CITATION_SIZE.ONLY_INDEX:
+          evidenceLabel = `EV:${evidencesIndex.join(",")}`;
+          break
+        default:
+          evidenceLabel = ""
+          break
+      }
+    }
+
+  }
+
 
   switch (citationSize) {
     case CITATION_SIZE.LARGE:
-      return `${index} ${citation ? `${citation},` : ""} ${codes}`;
+      return `${publicationLabel}-${evidenceLabel}`
     case CITATION_SIZE.SMALL:
-      return `(${authors[0]}., et al. ${year ? year : ""})<sup>${index}</sup>`;
+      return `${publicationLabel}-${evidenceLabel}`
     case CITATION_SIZE.ONLY_INDEX:
-      return `[${index},${codesIndex}]`;
+      return `[${publicationLabel}|${evidenceLabel}]`
     default:
-      return `${index} ${citation ? `${citation},` : ""} ${codes}`;
+      return ""
   }
+
 }
