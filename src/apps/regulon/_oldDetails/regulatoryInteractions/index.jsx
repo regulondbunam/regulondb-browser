@@ -9,6 +9,7 @@ import {
   PC_VARIANTS,
   CITATION_SIZE,
 } from "../../../../components/datamartSchema";
+import { LinealSequence } from "../../../../components/sequence";
 //import InputLabel from "@mui/material/InputLabel";
 //import MenuItem from "@mui/material/MenuItem";
 //import FormControl from "@mui/material/FormControl";
@@ -63,18 +64,17 @@ const COLUMNS = [
     cell: (info) => {
       const genes = info.row.original.regulatedGenes;
       return (
-        <>
+        <div style={{display: "flex"}} >
           {genes.map((gene) => (
-            <Link
-              key={
-                "ri_" + info.row.original.id + "_regulatedGene_" + gene._id
-              }
-              to={"/gene/" + gene._id}
-            >
+            <div style={{marginLeft: "5px"}} key={
+              "ri_" + info.row.original.id + "_regulatedGene_" + gene._id
+            }>
+              <Link to={"/gene/" + gene._id}>
               <p dangerouslySetInnerHTML={{ __html: gene.name }} />
             </Link>
+            </div>
           ))}
-        </>
+        </div>
       );
     },
   },
@@ -101,6 +101,11 @@ const COLUMNS = [
     filter: "fuzzyText",
     header: "Sequence",
     accessorKey: "_regulatoryBindingSite_sequence",
+    cell: (info) => {
+      const sequence = info.row.original._regulatoryBindingSite_sequence
+      const id = info.row.original.id
+      return <LinealSequence sequenceId={"sequence_"+id} sequence={sequence} controls={false} height={10} color />
+    },
   },
   {
     id: "confidenceLevel",

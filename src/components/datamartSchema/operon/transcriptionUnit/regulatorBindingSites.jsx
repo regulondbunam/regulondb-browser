@@ -5,6 +5,7 @@ import {
   PC_VARIANTS,
   CITATION_SIZE,
 } from "../../citations";
+import { LinealSequence } from "../../../sequence";
 //import { Link } from "react-router-dom";
 
 const COLUMNS = [
@@ -65,6 +66,11 @@ const COLUMNS = [
     accessorKey: "_sequence",
     width: 400,
     filter: "fuzzyText",
+    cell: (info) => {
+      const sequence = info.row.original._sequence
+      const id = info.row.original.id
+      return <LinealSequence sequenceId={"sequence_"+id} sequence={sequence} controls={false} height={10} color />
+    },
   },
   {
     id: "confidenceLevel",
