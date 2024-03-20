@@ -112,6 +112,19 @@ const COLUMNS = [
     header:  <p>Confidence Level <b><i> C: Confirmed</i>, S: Strong</b>, W Weak</p>,
     accessorKey: "_confidenceLevel",
     filter: "fuzzyText",
+    cell: (info) => {
+      const confidenceLevel = info.row.original._confidenceLevel
+      switch (confidenceLevel) {
+        case "W":
+          return "W"
+        case "S":
+          return <b>{"S"}</b>
+        case "C":
+          return <b><i>{"C"}</i></b>
+        default:
+          return ""
+      }
+    },
   },
   {
     id: "citations",

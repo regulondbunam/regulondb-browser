@@ -118,6 +118,7 @@ export default function TranscriptionUnit({
               {DataVerifier.isValidArray(genes) && (
                 <div>
                   {genes.map((gene) => {
+                    //console.log(gene.regulatorBindingSites);
                     return (
                       <div>
                         {DataVerifier.isValidArray(

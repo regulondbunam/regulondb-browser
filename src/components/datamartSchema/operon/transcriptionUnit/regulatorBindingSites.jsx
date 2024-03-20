@@ -81,11 +81,11 @@ const COLUMNS = [
       const confidenceLevel = info.row.original._confidenceLevel
       switch (confidenceLevel) {
         case "W":
-          return {confidenceLevel}
+          return "W"
         case "S":
-          return <b>{confidenceLevel}</b>
+          return <b>{"S"}</b>
         case "C":
-          return <b><i>{confidenceLevel}</i></b>
+          return <b><i>{"C"}</i></b>
         default:
           return ""
       }
