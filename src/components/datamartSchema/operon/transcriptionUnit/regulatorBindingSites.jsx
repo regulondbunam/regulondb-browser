@@ -68,13 +68,26 @@ const COLUMNS = [
   },
   {
     id: "confidenceLevel",
-    header:  <p>Confidence Level <b><i> C: Confirmed</i>, S: Strong</b>, W Weak</p>,
+    header: <p>Confidence Level <b><i> C: Confirmed</i>, S: Strong</b>, W Weak</p>,
     accessorKey: "_confidenceLevel",
     filter: "fuzzyText",
+    cell: (info) => {
+      const confidenceLevel = info.row.original._confidenceLevel
+      switch (confidenceLevel) {
+        case "W":
+          return {confidenceLevel}
+        case "S":
+          return <b>{confidenceLevel}</b>
+        case "C":
+          return <b><i>{confidenceLevel}</i></b>
+        default:
+          return ""
+      }
+    },
   },
   {
     id: "citations",
-    header:  "Evidence & Citations [publication | Evidences]",
+    header: "Evidence & Citations [publication | Evidences]",
     accessorKey: "_citations",
     filter: "fuzzyText",
     cell: (info) => {
@@ -139,7 +152,6 @@ function formatData(regulatorBindingSites = [], allCitations) {
           citations: regulatorySite.citations,
           regulonId: regulonId,
           function: rbs.function,
-          // _confidenceLevel
         });
       });
     }

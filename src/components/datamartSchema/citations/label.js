@@ -52,7 +52,7 @@ export function labelCitation({
     if (DataVerifier.isValidString(citation)) {
       switch (citationSize) {
         case CITATION_SIZE.LARGE:
-          publicationLabel = `${index} ${citation}`;
+          publicationLabel = `[${index}] ${citation}`;
           break;
         case CITATION_SIZE.SMALL:
           publicationLabel = `${authors[0]}., et al. ${year ? year : ""}<sup>${index}</sup>`;
@@ -77,10 +77,10 @@ export function labelCitation({
       if (DataVerifier.isValidObjectWith_id(evidence)) {
         if (evidence?.code) {
           if (evidence.type === "S") {
-            evidencesCodes.push(`<b>${evidence.code}<sup>EV${evidence.index}</sup></b>`);
+            evidencesCodes.push(`<b>[EV${evidence.index}]${evidence.code}</b>`);
             evidencesIndex.push(`<b>${evidence.index}</b>`)
           } else {
-            evidencesCodes.push(`${evidence.code}<sup>EV${evidence.index}</sup>`);
+            evidencesCodes.push(`[EV${evidence.index}]${evidence.code}`);
             evidencesIndex.push(`${evidence.index}`);
           }
         }
@@ -110,9 +110,9 @@ export function labelCitation({
 
   switch (citationSize) {
     case CITATION_SIZE.LARGE:
-      return `${publicationLabel}-${evidenceLabel}`
+      return `${publicationLabel}, ${evidenceLabel}`
     case CITATION_SIZE.SMALL:
-      return `${publicationLabel}-${evidenceLabel}`
+      return `${publicationLabel}, ${evidenceLabel}`
     case CITATION_SIZE.ONLY_INDEX:
       return `[${publicationLabel}|${evidenceLabel}]`
     default:
