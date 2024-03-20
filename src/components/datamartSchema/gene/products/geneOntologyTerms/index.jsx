@@ -245,11 +245,11 @@ function GeneOntologyItem(components, allCitations) {
               key={`ccT_${component._id}`}
             >
               <td>
-                <div>
+                <div style={{display: "flex"}} >
                   <div>{component.name}</div>
-                  <div>
+                  <div style={{marginLeft: "10px"}} >
                     <ParagraphCitations
-                    citationSize={CITATION_SIZE.SMALL}
+                    citationSize={CITATION_SIZE.ONLY_INDEX}
                       citations={component.citations}
                       allCitations={allCitations}
                     />
