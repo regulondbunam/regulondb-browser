@@ -8,84 +8,78 @@ import { DataVerifier, FilterTable } from "../../../components/ui-components";
 
 const COLUMNS = [
   {
-    id: "coexpression",
-    header: "Coexpression",
-    columns: [
-      {
-        id: "coexpression_rank",
-        filter: "fuzzyText",
-        header: "Rank",
-        accessorKey: "_rank",
-      },
-      {
-        id: "locusTag",
-        filter: "fuzzyText",
-        header: "locusTag",
-        accessorKey: "_locusTag",
-      },
-    ],
+    id: "coexpression_rank",
+    filter: "fuzzyText",
+    header: "Coexpression Rank",
+    accessorKey: "_rank",
+    cell: (info) => (
+      <p dangerouslySetInnerHTML={{ __html: info.getValue() }} />
+    ),
   },
   {
-    id: "gene",
-    header: "Gene",
-    columns: [
-      {
-        id: "gene_name",
-        filter: "fuzzyText",
-        header: "name",
-        accessorKey: "_geneName",
-        cell: (info) => (
-          <Link to={"/gene/" + info.row.original.geneId}>
-            <p dangerouslySetInnerHTML={{ __html: info.getValue() }} />
-          </Link>
-        ),
-      },
-      {
-        id: "gene_products",
-        filter: "fuzzyText",
-        header: "products",
-        accessorKey: "_products",
-        cell: (info) => (
-          <p dangerouslySetInnerHTML={{ __html: info.getValue() }} />
-        ),
-      },
-      {
-        id: "gene_operon",
-        filter: "fuzzyText",
-        header: "operon",
-        accessorKey: "_operon",
-        cell: (info) => (
-          <Link to={"/operon/" + info.row.original.operonId}>
-            {info.getValue()}
-          </Link>
-        ),
-      },
-      {
-        id: "gene_regulators",
-        filter: "fuzzyText",
-        header: "regulators",
-        accessorKey: "_regulators",
-        cell: (info) => {
-          const regulators = info.row.original.regulators;
-          return (
-            <div>
-              {regulators.map((regulator, index) => {
-                return (
-                  <Link to={"/regulon/" + regulator._id}><span style={{marginRight: "10px"}} dangerouslySetInnerHTML={{__html: regulator.name}}/></Link>
-                );
-              })}
-            </div>
-          );
-        },
-      },
-      {
-        id: "ontologyTerms",
-        filter: "fuzzyText",
-        header: "Ontology Terms",
-        accessorKey: "_terms",
-        cell: (info) => <OTModal products={info.row.original.products} />,
-      },
-    ],
+    id: "locusTag",
+    filter: "fuzzyText",
+    header: "Gene locusTag",
+    accessorKey: "_locusTag",
+    cell: (info) => (
+      <p dangerouslySetInnerHTML={{ __html: info.getValue() }} />
+    ),
+  },
+  {
+    id: "gene_name",
+    filter: "fuzzyText",
+    header: "Gene name",
+    accessorKey: "_geneName",
+    cell: (info) => (
+      <Link to={"/gene/" + info.row.original.geneId}>
+        <p dangerouslySetInnerHTML={{ __html: info.getValue() }} />
+      </Link>
+    ),
+  },
+  {
+    id: "gene_products",
+    filter: "fuzzyText",
+    header: "Products",
+    accessorKey: "_products",
+    cell: (info) => (
+      <p dangerouslySetInnerHTML={{ __html: info.getValue() }} />
+    ),
+  },
+  {
+    id: "gene_operon",
+    filter: "fuzzyText",
+    header: "Operon",
+    accessorKey: "_operon",
+    cell: (info) => (
+      <Link to={"/operon/" + info.row.original.operonId}>
+        {info.getValue()}
+      </Link>
+    ),
+  },
+  {
+    id: "gene_regulators",
+    filter: "fuzzyText",
+    header: "Regulators",
+    accessorKey: "_regulators",
+    cell: (info) => {
+      const regulators = info.row.original.regulators;
+      return (
+        <div>
+          {regulators.map((regulator, index) => {
+            return (
+              <Link to={"/regulon/" + regulator._id}><span style={{marginRight: "10px"}} dangerouslySetInnerHTML={{__html: regulator.name}}/></Link>
+            );
+          })}
+        </div>
+      );
+    },
+  },
+  {
+    id: "ontologyTerms",
+    filter: "fuzzyText",
+    header: "Ontology Terms",
+    accessorKey: "_terms",
+    cell: (info) => <OTModal products={info.row.original.products} />,
   },
 ];
 

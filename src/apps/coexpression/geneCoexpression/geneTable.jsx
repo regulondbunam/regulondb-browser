@@ -16,7 +16,7 @@ const COLUMNS = [
     accessorKey: "_operon",
     cell: (info) => (
       <Link to={"/operon/" + info.row.original.operonId}>
-        {info.getValue()}
+       <p> {info.getValue()}</p>
       </Link>
     ),
   },
@@ -30,7 +30,7 @@ const COLUMNS = [
         <div>
           {regulators.map((regulator, index) => {
             return (
-              <Link to={"/regulon/" + regulator._id}><span style={{marginRight: "10px"}} dangerouslySetInnerHTML={{__html: regulator.name}}/></Link>
+              <Link to={"/regulon/" + regulator._id}><p style={{marginRight: "10px"}} dangerouslySetInnerHTML={{__html: regulator.name}}/></Link>
             );
           })}
         </div>

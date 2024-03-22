@@ -332,13 +332,13 @@ function IntCoexpression({ selectedGenes = [], geneList }) {
     {
       id: "tab_02_geneCoexpression",
       name: "Coexpression",
-      disabled: loadGeneState.loading,
+      disabled: !DataVerifier.isValidArray(genes),
       component: <GeneCoexpression genes={genes} />,
     },
     {
       id: "tab_03_Matrix",
       name: "Matrix",
-      disabled: loadGeneState.loading,
+      disabled: !DataVerifier.isValidArray(genes),
       component: (
         <Matrix genesInformation={genes} selectedGenes={selectedGenes} matrices={matrices} addMatrix={addMatrix} />
       ),
