@@ -81,6 +81,7 @@ function formatData(geneData = []) {
         id: gene.gene._id,
         _geneName: gene.gene.name,
         _products: products,
+        products: gene.products,
         operonId: operon._id,
         _operon: operon?.name ? operon.name : "",
         regulators: regulators,
