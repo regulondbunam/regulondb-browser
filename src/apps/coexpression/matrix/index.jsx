@@ -1,6 +1,8 @@
 import React from 'react'
 import Grid from './grid';
 import "./matrix.css"
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+
 
 export default function Matrix({genesInformation,matrices, addMatrix}) {
 
@@ -21,6 +23,14 @@ export default function Matrix({genesInformation,matrices, addMatrix}) {
 
   return (
     <div id="matrixDescription">
+        <div style={{ margin: "10px 0 10px 5px", display: "flex" }}>
+        <div style={{display: "flex", alignItems: "center"}} >
+          <HelpOutlineIcon sx={{color: "blue"}} fontSize="large" />
+        </div>
+        <div>
+          <p>This section targets matrixHeatMap...". The table can be sorted by any of the features by clicking on the name of the column associated with the feature.</p>
+        </div>
+      </div>
         <h2>Color range</h2>
         <p>
             The coexpression strength of a gene pair is given by the SCR (Spearman Correlation Rank, user guide). Each coexpression block is colored by a logarithmic color-scale (see legend). The highest value (high coexpression) is SCR=1 and the lowest value (no coexpression) is SCR=4320.
