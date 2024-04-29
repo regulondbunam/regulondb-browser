@@ -28,7 +28,6 @@ export const query_GetRegulonBy = gql`query GetRegulonBy($advancedSearch: String
             url
             year
           }
-          
         }
         evolutionaryConservation {
           urlPromoterTargetGene
@@ -287,14 +286,68 @@ export const query_GetRegulonBy = gql`query GetRegulonBy($advancedSearch: String
             biologicalProcess {
               _id
               name
+              citations {
+                evidence {
+                  _id
+                  additiveEvidenceCodeRule
+                  code
+                  name
+                  type
+                }
+                publication {
+                  _id
+                  authors
+                  citation
+                  pmid
+                  title
+                  url
+                  year
+                }
+              }
             }
             cellularComponent {
               _id
               name
+              citations {
+                evidence {
+                  _id
+                  additiveEvidenceCodeRule
+                  code
+                  name
+                  type
+                }
+                publication {
+                  _id
+                  authors
+                  citation
+                  pmid
+                  title
+                  url
+                  year
+                }
+              }
             }
             molecularFunction {
               _id
               name
+              citations {
+                evidence {
+                  _id
+                  additiveEvidenceCodeRule
+                  code
+                  name
+                  type
+                }
+                publication {
+                  _id
+                  authors
+                  citation
+                  pmid
+                  title
+                  url
+                  year
+                }
+              }
             }
           }
           multifun {
