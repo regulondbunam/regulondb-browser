@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Home from './apps/home';
 import Search from './apps/search';
-import Gene from './apps/Gene';
+import Gene from './apps/gene';
 import DrawingTracesInterface from './apps/dtt';
 import Operon from './apps/operon';
 import Embed from "./apps/embed";
