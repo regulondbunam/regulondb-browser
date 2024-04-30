@@ -1,61 +1,40 @@
 import { REDUCER_TYPES, FILTER, getCellValue } from "../../../static"
+import { updateDataFilter } from "./updateDataFilters"
 
 export function onlyContentFilter(row,columnLabel){
     return getCellValue(row, columnLabel)
 }
 
-export function setOnlyContent(column,columnIndex, currentData, dispatch, tableId) {
-    const filterKey = "onlyContent_"+column.key
-    let newData = []
-    let keyRowsDeleted = new Set()
-    if (column.isOnlyContent === false) {
-        currentData.forEach((row) => {
-            if (onlyContentFilter(row, column.label)) {
-                newData.push(row)
-            }else{
-                keyRowsDeleted.add(row["_properties" + tableId].key)
-            }
-        })
+export function setOnlyContent(columnLabel,columnOnlyContent,columnIndex,state,dispatch) {
+    const index = state.filters.length
+    const filterKey = "type_"+FILTER.TYPES.ONLY_CONTENT+"_"+columnLabel
+    if (columnOnlyContent === false) {
+        const newFilter = {
+            columnLabel: columnLabel,
+            key: filterKey,
+            type: FILTER.TYPES.ONLY_CONTENT,
+            index: index,
+            logicConnector: "OR",
+            value: columnOnlyContent,
+        }
+        let newData = updateDataFilter(state.data,[...state.filters, newFilter])
         dispatch({
             type: REDUCER_TYPES.setFilter,
-            isOnlyContent: true,
             newData: newData,
+            newFilter: newFilter,
             columnIndex: columnIndex,
-            columnLabel: column.label,
-            filterIndex: "OnlyContent",
-            filterKey: filterKey,
-            filterType: FILTER.TYPES.ONLY_CONTENT,
-            filterLogicConnector: FILTER.LOGIC_CONNECTOR.OR,
-            value: "",
-            keyRowsDeleted: keyRowsDeleted
+            isOnlyContent: true
         })
     } else {
+        const filter = state.filters.find(f=>f.key===filterKey)
         dispatch({
             type: REDUCER_TYPES.deleteFilter,
+            filter: filter,
             columnIndex: columnIndex,
-            columnLabel: column.label,
-            filterIndex: "OnlyContent",
-            filterKey: filterKey,
-            filterType: FILTER.TYPES.ONLY_CONTENT,
+            isOnlyContent: false
         })
         //deleteFilter(filterKey)
     }
 
-    /*
-        if (!column.isOnlyContent) {
-            currentData.forEach((row)=>{
-            if (DataVerifier.isValidString(row[column.label])) {
-                rows.push(row)
-            }
-        })
-        }else{
-            rows = currentData
-        }
-        dispatch({ 
-            type: REDUCER_TYPES.showOnlyContent, 
-            newData: rows, 
-            columnIndex: index,
-            isOnlyContent: !column.isOnlyContent,
-        })
-        */
+
 }

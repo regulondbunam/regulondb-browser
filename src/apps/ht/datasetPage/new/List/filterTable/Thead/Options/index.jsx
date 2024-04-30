@@ -70,7 +70,7 @@ export default function Options({ state, column, dispatch, index, tableId }) {
     }
 
     const handleShowOnlyContent = () => {
-        setOnlyContent(column, index, state.currentData, dispatch, tableId)
+        setOnlyContent(column.label,column.isOnlyContent,index,state,dispatch)
     }
 
 

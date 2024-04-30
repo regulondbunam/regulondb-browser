@@ -51,43 +51,24 @@ function reducer(state, action) {
       return { ...state, currentData: action.newData, nRows: action.newData.length, totalPages: Math.ceil(action.newData.length / state.items) - 1, }
     case REDUCER_TYPES.deleteFilter: {
       let columns = [...state.columns]
-      if (action.filterType === FILTER.TYPES.ONLY_CONTENT) {
+      if (action.filter.type === FILTER.TYPES.ONLY_CONTENT) {
         columns[action.columnIndex] = {
           ...columns[action.columnIndex],
           isOnlyContent: false,
         }
       }
-      const { newFilters, newData } = deleteFilter(action.filterIndex, state, action.columnLabel)
+      const { newFilters, newData } = deleteFilter(action.filter,state)
       return { ...state, columns: columns, currentData: [...newData], filters: newFilters, nRows: newData.length, totalPages: Math.ceil(newData.length / state.items) - 1, }
     }
     case REDUCER_TYPES.setFilter: {
       let columns = [...state.columns]
-      if (action.filterType === FILTER.TYPES.ONLY_CONTENT) {
+      if (action.newFilter.type === FILTER.TYPES.ONLY_CONTENT) {
         columns[action.columnIndex] = {
           ...columns[action.columnIndex],
           isOnlyContent: action.isOnlyContent,
         }
       }
-      let newFilters = { ...state.filters }
-      const filter = {
-        columnLabel: action.columnLabel,
-        key: action.filterKey,
-        type: action.filterType,
-        index: action.filterIndex,
-        logicConnector: action.filterLogicConnector ? action.filterLogicConnector : "OR",
-        value: action.value,
-        keyRowsDeleted: action.keyRowsDeleted,
-      }
-      //newFilters[action.columnLabel][ action.filterIndex] = filter
-      
-      if (DataVerifier.isValidArray(state.filters[action.columnLabel])) {
-        newFilters[action.columnLabel][action.filterIndex] = filter
-      } else {
-        newFilters[action.columnLabel] = []
-        newFilters[action.columnLabel][action.filterIndex] = filter
-      }
-      
-
+      let newFilters = [...state.filters, action.newFilter]
       return { ...state, columns: columns, currentData: [...action.newData], filters: newFilters, nRows: action.newData.length, totalPages: Math.ceil(action.newData.length / state.items) - 1, page: 0, }
 
     }
@@ -134,7 +115,7 @@ function initialState(columns = [], data = [], tableId) {
     items: 10,
     totalPages: Math.ceil(data.length / 10) - 1,
     //filter
-    filters: {}
+    filters: []
   }
 }
 
@@ -143,7 +124,7 @@ export default function FilterTable({ columns, data, tableName = "Table", titleV
   const tableId = useId()
   const [state, dispatch] = useReducer(reducer, initialState(columns, data, tableId))
 
-  console.log(state.filters);
+  console.log(state);
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }} >
