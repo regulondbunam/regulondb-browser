@@ -4,43 +4,48 @@ import { FILTER, REDUCER_TYPES, getCellValue } from '../../../static';
 import Autocomplete from '@mui/material/Autocomplete';
 import DataVerifier from '../../../../utils';
 import Box from '@mui/material/Box';
-import { setTextFilter } from './text';
+import { deleteTextFilter, setTextFilter } from './text';
 import Button from '@mui/material/Button';
 
 
 //import MenuItem from '@mui/material/MenuItem';
 //import Select from '@mui/material/Select';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { FilterSharp } from '@mui/icons-material';
+//import { FilterSharp } from '@mui/icons-material';
 
+const filtersForm = {}
+filtersForm[FILTER.TYPES.TEXT] = FormTextFilter
 
 export default function Filters(props) {
-    const filtersForm = {}
-    filtersForm[FILTER.TYPES.TEXT] = FormTextFilter
+
     const Element = filtersForm[props.column.filterType]
     const [options, setOptions] = useState(null)
 
     const [filters, setFilters] = useState(props.state.filters[props.column.label] ? props.state.filters[props.column.label] : [])
+    
 
     useEffect(() => {
-        if (options===null) {
+        if (options === null) {
             createListOptions(props.state, props.column).then((data) => {
                 //console.log(data);
                 setOptions(data)
             })
         }
+        return()=>{
+            setFilters([...props.state.filters])
+        }
     }, [props, options])
 
-    const handleNewFilter =()=>{
-        setFilters([...filters,{
+    const handleNewFilter = () => {
+        setFilters([...filters, {
             columnLabel: props.column.label,
-            key: "textFilter_"+(filters.length+1)+"_"+props.column.key,
+            key: "textFilter_" + (filters.length + 1) + "_" + props.column.key,
             type: props.column.filterType,
-            index: filters.length+1,
+            index: filters.length + 1,
             logicConnector: "OR",
             value: "",
             keyRowsDeleted: [],
-          }])
+        }])
     }
 
     //console.log(filters);
@@ -55,19 +60,19 @@ export default function Filters(props) {
                     return Form({ key: filter.key, ...props, filter: filter, options: options })
                 })
             }
-            <Button onClick={handleNewFilter} size='small' sx={{width: "80px"}} >+ Filter</Button>
+                <Button onClick={handleNewFilter} size='small' sx={{ width: "80px" }} >+ Filter</Button>
             </>) : (<>
                 {Element({ ...props, filterIndex: 0, options: options })}
             </>)}
 
-            
+
         </div>
     )
 }
 
 function FormTextFilter(props) {
-    const { state, column, dispatch, index, filter, filterIndex, tableId, handleClose, options } = props
-    const filterKey = "textFilter_"+filterIndex+"_"+column.key
+    const { state, column, dispatch, index, filter, filterIndex, handleClose, options } = props
+    const filterKey = "textFilter_" + filterIndex + "_" + column.key
     //const [logicConnector, setLogicConnector] = useState(filter?.logicConnector ? filter?.logicConnector : FILTER.LOGIC_CONNECTOR.OR)
     //const logicConnector = filter?.logicConnector ? filter?.logicConnector : FILTER.LOGIC_CONNECTOR.OR
     if (options !== null) {
@@ -78,53 +83,27 @@ function FormTextFilter(props) {
 
     const handleFilterText = (event, newValue) => {
         let filterValue = newValue ? newValue : event.target.value
-        let logicConnector = document.getElementById('logicConnector_'+filterKey)
+        let logicConnector = document.getElementById('logicConnector_' + filterKey)
 
         if (logicConnector) {
             logicConnector = logicConnector.innerText
-        }else{
+        } else {
             logicConnector = "OR"
         }
-        
+
         if (DataVerifier.isValidString(filterValue)) {
-            setTextFilter(filterValue, filterIndex, logicConnector, column, index, state, dispatch, tableId)
-        } else {
-            const filterKey = "textFilter_" + filterIndex + "_" + column.key
-            dispatch({
-                type: REDUCER_TYPES.deleteFilter,
-                columnIndex: index,
-                filterKey: filterKey,
-                filterType: filter.type,
-            })
+            setTextFilter(filterValue, column.label, state, dispatch, logicConnector)
+        }else{
+            deleteTextFilter(filter.key,state,dispatch)
         }
         handleClose()
     }
-    /*
-    const handleSetFilter = () => {
-        if (DataVerifier.isValidString(word)) {
-            setTextFilter(word, filterIndex, logicConnector, column, index, state, dispatch, tableId)
-        } else {
-            const filterKey = "textFilter_" + filterIndex + "_" + column.key
-            dispatch({
-                type: REDUCER_TYPES.deleteFilter,
-                columnIndex: index,
-                filterKey: filterKey,
-                filterType: filter.type,
-            })
-        }
-        handleClose()
-    }
+    
 
     const handleDeleteFilter = () => {
-        const filterKey = "textFilter_" + filterIndex + "_" + column.key
-        setWord("")
-        dispatch({
-            type: REDUCER_TYPES.deleteFilter,
-            columnIndex: index,
-            filterKey: filterKey,
-            filterType: filter.type,
-        })
-    }*/
+        deleteTextFilter(filter.key,state,dispatch)
+        handleClose()
+    }
     //
     return (
         <Box sx={{ display: 'grid', gridTemplateColumns: "255px 40px" }} >
@@ -155,8 +134,8 @@ function FormTextFilter(props) {
                 <Button onClick={handleSetFilter} color='secondary' variant="contained" size='small' sx={{ minWidth: 0 }}>set filter</Button>
             </div>*/
             }
-            <Button size='small' sx={{minWidth: 0}}><DeleteIcon/></Button>
-            
+            <Button size='small' sx={{ minWidth: 0 }} onClick={handleDeleteFilter}><DeleteIcon /></Button>
+
         </Box>
     )
 }
