@@ -40,19 +40,19 @@ export default function TUS({ experimentType, tfName, datasetType }) {
                     <Typography variant='h1' >{title}</Typography>
                 </Cover>
                 <br />
-                <Table datasets={datasets} />
+                <Table datasets={datasets} datasetType={datasetType} />
             </div>
         )
     }
 }
 
-function Table({ datasets }) {
-    const table = useMemo(() => processData(datasets), [datasets])
+function Table({ datasets, datasetType }) {
+    const table = useMemo(() => processData(datasets,datasetType), [datasets,datasetType])
     return <FilterTable columns={table.columns} data={table.data} />
 }
 
 
-function processData(datasets = []) {
+function processData(datasets = [],datasetType) {
     let table = {
         columns: [
             {
@@ -109,7 +109,7 @@ function processData(datasets = []) {
             })
         }
         table.data.push({
-            "id": <LinkDataset value={dataset._id} datasetId={dataset._id} />,
+            "id": <LinkDataset value={dataset._id} datasetId={dataset._id} datasetType={datasetType} />,
             "Transcription Factor": objects.join(", "),
             "Title": DataVerifier.isValidString(dataset?.sourceSerie?.title) ? dataset?.sourceSerie.title : "",
             "Strategy": DataVerifier.isValidString(dataset?.sourceSerie?.strategy) ? dataset?.sourceSerie.strategy : "",
@@ -122,8 +122,8 @@ function processData(datasets = []) {
     return table
 }
 
-function LinkDataset({ datasetId }) {
+function LinkDataset({ datasetId, datasetType }) {
     const navigate = useNavigate()
     //TFBINDING
-    return <Button onClick={() => { navigate("./dataset/TFBINDING/datasetId=" + datasetId) }} >View Dataset</Button>
+    return <Button onClick={() => { navigate("./dataset/"+datasetType+"/datasetId=" + datasetId) }} >{datasetId}</Button>
 }

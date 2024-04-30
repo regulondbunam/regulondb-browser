@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import TextField from '@mui/material/TextField';
-import { FILTER, REDUCER_TYPES, getCellValue } from '../../../static';
+import { FILTER, getCellValue } from '../../../static';
 import Autocomplete from '@mui/material/Autocomplete';
 import DataVerifier from '../../../../utils';
 import Box from '@mui/material/Box';
@@ -21,7 +21,7 @@ export default function Filters(props) {
     const Element = filtersForm[props.column.filterType]
     const [options, setOptions] = useState(null)
 
-    const [filters, setFilters] = useState(props.state.filters[props.column.label] ? props.state.filters[props.column.label] : [])
+    const [filters, setFilters] = useState([...props.state.filters].filter(filter=>filter.columnLabel===props.column.label))
     
 
     useEffect(() => {
@@ -32,7 +32,7 @@ export default function Filters(props) {
             })
         }
         return()=>{
-            setFilters([...props.state.filters])
+            setFilters([...props.state.filters].filter(filter=>filter.columnLabel===props.column.label))
         }
     }, [props, options])
 
