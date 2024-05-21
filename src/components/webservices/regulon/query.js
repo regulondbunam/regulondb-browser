@@ -392,13 +392,9 @@ ${fragment_REGULATES}
 ${fragment_RI}
 ${fragment_TERMS}
 ${fragment_SUMMARY}
-query GetRegulonInfo($advancedSearch: String, $fullMatchOnly: Boolean = false, $limit: Int = 10, $organismName: String, $page: Int = 0, $search: String) {
+query GetRegulonInfo($advancedSearch: String, $search: String) {
   getRegulonBy(
     advancedSearch: $advancedSearch
-    fullMatchOnly: $fullMatchOnly
-    limit: $limit
-    organismName: $organismName
-    page: $page
     search: $search
   ) {
     data {
@@ -438,7 +434,6 @@ query GetRegulonInfo($advancedSearch: String, $fullMatchOnly: Boolean = false, $
 
 export const query_GET_REGULON_BYV2 = gql`
 ${fragment_CITATIONS}
-${fragment_PAGINATION}
 ${fragment_ALIGMENTMATRIX}
 ${fragment_EVOLUTIONARYCONSERVATION}
 ${fragment_GeneTerms}
@@ -484,9 +479,6 @@ query GetRegulonInfo($advancedSearch: String, $fullMatchOnly: Boolean = false, $
       summary{
         ...SUMMARY
       }
-    }
-    pagination {
-      ...PAGINATION
     }
   }
 }`

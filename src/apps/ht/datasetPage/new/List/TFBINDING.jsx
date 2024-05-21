@@ -132,5 +132,5 @@ function processData(datasets = []) {
 function LinkDataset({ datasetId }) {
     const navigate = useNavigate()
     //TFBINDING
-    return <Button onClick={() => { navigate("./dataset/TFBINDING/datasetId=" + datasetId) }} >View Dataset</Button>
+    return <Button onClick={() => { navigate("./dataset/TFBINDING/datasetId=" + datasetId) }} >{datasetId}</Button>
 }

@@ -125,7 +125,7 @@ function ProductsDBInfoType({ rdbObject, statistic }) {
                 : null
             }
             {validObject(srna.total)
-                ? (<SubDetailedStatistics rdbObject={"SRNA"} statistic={srna} />)
+                ? (<SubDetailedStatistics rdbObject={"sRNA"} statistic={srna} />)
                 : null
             }
         </>
