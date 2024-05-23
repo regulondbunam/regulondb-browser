@@ -22,17 +22,15 @@ export function relCitation(allCitations, idCit, small = true) {
      */
     const id_cit = re.exec(idCit)[0]
 
-    
     /**
      * Description placeholder
      * @type {string}
      */
     let index
 
-    
     try {
         index = allCitations.findIndex(element => element?.publication?._id === id_cit)
-        if (!index) {
+        if (index === -1) {
             return ""
         }
     } catch (error) {
@@ -48,7 +46,6 @@ export function relCitation(allCitations, idCit, small = true) {
      */
     const fullCit = allCitations[index]
 
-    
     /**
      * Description placeholder
      *  
@@ -82,7 +79,6 @@ export function relCitation(allCitations, idCit, small = true) {
  * @returns {string}
  */
 export const NoteCitations = (allCitations, note) => {
-    
     /**
      * Description placeholder
      *
@@ -117,6 +113,6 @@ export const NoteCitations = (allCitations, note) => {
             note = note.replace(REX, relCitation(allCitations, REX.exec(note)[0]))
         };
     }
-    
+    console.log(note);
     return note
 }
