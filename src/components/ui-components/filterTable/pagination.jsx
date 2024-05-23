@@ -6,7 +6,7 @@ import { Tooltip, ButtonGroup, Box } from "@mui/material";
 export default function Pagination({ table }) {
 
     return (
-        <div style={{ display: "flex", alignItems: "center", width: "100%", height: "100%", flexDirection: "row-reverse" }}>
+        <div style={{ display: "flex", alignItems: "center", width: "100%", height: "100%" }}>
             <ButtonGroup
                 variant="contained"
                 size="small"
