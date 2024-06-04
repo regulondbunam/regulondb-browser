@@ -1,16 +1,6 @@
 import { Card } from "../../../components/ui-components";
 import Style from "../style.module.css";
 
-function validObject(obj) {
-  if (!obj) {
-    return false;
-  }
-  if (obj === null) {
-    return false;
-  }
-  return true;
-}
-
 export function Summary({ statistics }) {
   if (statistics === null) {
     return null;
