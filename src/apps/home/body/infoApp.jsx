@@ -33,10 +33,15 @@ const query_GetDataBaseStatistics = gql`
           total
         }
         regulons {
-          total
-        }
-        promoters {
-          total
+          regulatoryContinuant {
+            total
+          }
+          srna {
+            total
+          }
+          transcriptionFactor {
+            total
+          }
         }
         transcriptionUnits {
           total
@@ -56,6 +61,12 @@ export function Summary(params) {
   }
   if (data) {
     const statistics = data.getDatabaseInfo[0].statistics;
+    let allRegulons = 0
+    Object.keys(statistics.regulons).forEach((key)=>{
+      if (Number.isInteger(statistics.regulons[key].total)) {
+        allRegulons += statistics.regulons[key].total
+      }
+    })
     return (
       <Box >
         <div style={{ display: "flex", alignItems: "center" }}>
@@ -75,11 +86,9 @@ export function Summary(params) {
                 <b>{statistics.operon.total}{" "}</b>Operons
               </p>
             )}
-          {statistics.regulons?.total && (
               <p>
-                <b>{statistics.regulons.total}</b>{" "}Regulons
+                <b>{allRegulons}</b>{" "}Regulons
               </p>
-            )}
           {statistics.transcriptionUnits?.total && (
               <p>
                 <b>{statistics.transcriptionUnits.total}</b>{" "}Transcription Units
