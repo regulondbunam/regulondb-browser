@@ -23,7 +23,7 @@ export const query_getSumaryHistoryData = gql`query GetDatabaseInfo {
           strong
           confirmed
           withoutEvidences
-          withwithConfidenceLevel
+          withConfidenceLevel
           withPublications
           withEvidences
         }
@@ -33,7 +33,7 @@ export const query_getSumaryHistoryData = gql`query GetDatabaseInfo {
           strong
           confirmed
           withoutEvidences
-          withwithConfidenceLevel
+          withConfidenceLevel
           withPublications
           withEvidences
         }
@@ -43,7 +43,7 @@ export const query_getSumaryHistoryData = gql`query GetDatabaseInfo {
           strong
           confirmed
           withoutEvidences
-          withwithConfidenceLevel
+          withConfidenceLevel
           withPublications
           withEvidences
         }
@@ -54,7 +54,7 @@ export const query_getSumaryHistoryData = gql`query GetDatabaseInfo {
         strong
         confirmed
         withoutEvidences
-        withwithConfidenceLevel
+        withConfidenceLevel
         withPublications
         withEvidences
       }
@@ -64,7 +64,7 @@ export const query_getSumaryHistoryData = gql`query GetDatabaseInfo {
         strong
         confirmed
         withoutEvidences
-        withwithConfidenceLevel
+        withConfidenceLevel
         withPublications
         withEvidences
       }
@@ -74,7 +74,7 @@ export const query_getSumaryHistoryData = gql`query GetDatabaseInfo {
         strong
         confirmed
         withoutEvidences
-        withwithConfidenceLevel
+        withConfidenceLevel
         withPublications
         withEvidences
       }
@@ -84,7 +84,7 @@ export const query_getSumaryHistoryData = gql`query GetDatabaseInfo {
         strong
         confirmed
         withoutEvidences
-        withwithConfidenceLevel
+        withConfidenceLevel
         withPublications
         withEvidences
       }
@@ -94,7 +94,7 @@ export const query_getSumaryHistoryData = gql`query GetDatabaseInfo {
         strong
         confirmed
         withoutEvidences
-        withwithConfidenceLevel
+        withConfidenceLevel
         withPublications
         withEvidences
       }
@@ -104,7 +104,7 @@ export const query_getSumaryHistoryData = gql`query GetDatabaseInfo {
         strong
         confirmed
         withoutEvidences
-        withwithConfidenceLevel
+        withConfidenceLevel
         withPublications
         withEvidences
       }
@@ -114,7 +114,7 @@ export const query_getSumaryHistoryData = gql`query GetDatabaseInfo {
         strong
         confirmed
         withoutEvidences
-        withwithConfidenceLevel
+        withConfidenceLevel
         withPublications
         withEvidences
       }
@@ -124,7 +124,7 @@ export const query_getSumaryHistoryData = gql`query GetDatabaseInfo {
         strong
         confirmed
         withoutEvidences
-        withwithConfidenceLevel
+        withConfidenceLevel
         withPublications
         withEvidences
       }
@@ -134,7 +134,7 @@ export const query_getSumaryHistoryData = gql`query GetDatabaseInfo {
         strong
         confirmed
         withoutEvidences
-        withwithConfidenceLevel
+        withConfidenceLevel
         withPublications
         withEvidences
       }
@@ -144,7 +144,7 @@ export const query_getSumaryHistoryData = gql`query GetDatabaseInfo {
         strong
         confirmed
         withoutEvidences
-        withwithConfidenceLevel
+        withConfidenceLevel
         withPublications
         withEvidences
       }
@@ -154,7 +154,7 @@ export const query_getSumaryHistoryData = gql`query GetDatabaseInfo {
         strong
         confirmed
         withoutEvidences
-        withwithConfidenceLevel
+        withConfidenceLevel
         withPublications
         withEvidences
       }
@@ -164,7 +164,7 @@ export const query_getSumaryHistoryData = gql`query GetDatabaseInfo {
         strong
         confirmed
         withoutEvidences
-        withwithConfidenceLevel
+        withConfidenceLevel
         withPublications
         withEvidences
       }
@@ -174,7 +174,7 @@ export const query_getSumaryHistoryData = gql`query GetDatabaseInfo {
         strong
         confirmed
         withoutEvidences
-        withwithConfidenceLevel
+        withConfidenceLevel
         withPublications
         withEvidences
       }
@@ -184,7 +184,7 @@ export const query_getSumaryHistoryData = gql`query GetDatabaseInfo {
         strong
         confirmed
         withoutEvidences
-        withwithConfidenceLevel
+        withConfidenceLevel
         withPublications
         withEvidences
       }
@@ -194,7 +194,7 @@ export const query_getSumaryHistoryData = gql`query GetDatabaseInfo {
         strong
         confirmed
         withoutEvidences
-        withwithConfidenceLevel
+        withConfidenceLevel
         withPublications
         withEvidences
       }
@@ -204,7 +204,7 @@ export const query_getSumaryHistoryData = gql`query GetDatabaseInfo {
         strong
         confirmed
         withoutEvidences
-        withwithConfidenceLevel
+        withConfidenceLevel
         withPublications
         withEvidences
       }
@@ -214,7 +214,7 @@ export const query_getSumaryHistoryData = gql`query GetDatabaseInfo {
         strong
         confirmed
         withoutEvidences
-        withwithConfidenceLevel
+        withConfidenceLevel
         withPublications
         withEvidences
       }
@@ -225,7 +225,7 @@ export const query_getSumaryHistoryData = gql`query GetDatabaseInfo {
           strong
           confirmed
           withoutEvidences
-          withwithConfidenceLevel
+          withConfidenceLevel
           withPublications
           withEvidences
         }
@@ -235,7 +235,7 @@ export const query_getSumaryHistoryData = gql`query GetDatabaseInfo {
           strong
           confirmed
           withoutEvidences
-          withwithConfidenceLevel
+          withConfidenceLevel
           withPublications
           withEvidences
         }
