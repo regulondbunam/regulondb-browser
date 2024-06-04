@@ -73,7 +73,7 @@ function DbInfoRegulons({ rdbObject, statistic }) {
         <td colSpan={5}></td>
       </tr>
       {Object.keys(statistic).map((key) => {
-        if (key === "__typename") {
+        if (key === "__typename" || statistic[key] === null) {
           return null;
         }
         return (
@@ -92,7 +92,7 @@ function ProductsDBInfoType({ rdbObject, statistic }) {
         <td colSpan={5}></td>
       </tr>
       {Object.keys(statistic).map((key) => {
-        if (key === "__typename") {
+        if (key === "__typename" || statistic[key] === null) {
           return null;
         }
         return (
