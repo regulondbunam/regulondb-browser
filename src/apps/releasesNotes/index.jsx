@@ -81,6 +81,8 @@ function ReleaseNotes() {
     // eslint-disable-next-line no-unused-vars
     const { releases, loading, error } = useGetReleasesVersions()
 
+    console.log(releases);
+
     
     /**
      * Description placeholder

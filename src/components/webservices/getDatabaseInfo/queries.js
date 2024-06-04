@@ -1,131 +1,262 @@
-import { gql } from "@apollo/client"
-
-const fragment_detailed = `
-fragment detailed on detailedStatistics {
-    confirmed
-    strong
-    total
-    weak
-    withoutEvidences
-  }
-`
-const fragment_detailedExtern = `
-fragment detailedExtern on dbInfoExternalReferencesType{
-    total
-    origin{
-      expasy
-      genbank
-      geneprotec
-      medline
-      ouMicroArray
-      pdb
-      pir
-      swissprot     
-      }
-  }
-`
-
-const fragment_product = `
-fragment product on productsDBInfoType{
-    polypeptides{
-      ...detailed
-    } 
-    rnas{
-      ...detailed
-    }
-   srna{
-    ...detailed
-   }
-  }
-`
-
-const fragment_regulons = `
-fragment regulons on dbInfoRegulons{
-    complexRegulons{
-      ...detailed
-    } 
-    simpleRegulons{
-      ...detailed
-    }
-   total
-  }
-`
+import { gql } from "@apollo/client";
 
 export const query_getSummaryHistoryData = gql`
-${fragment_detailed}
-${fragment_detailedExtern}
-${fragment_product}
-${fragment_regulons}
-  query getSummaryHistoryData{
-    getDatabaseInfo{
-      releaseDate
-      route
+  query GetDatabaseInfo {
+    getDatabaseInfo {
       regulonDBVersion
       ecocycVersion
       lcVersion
+      releaseDate
       note
-      statistics{
-        attenuators{
-          ...detailed
+      genomeVersion
+      localData {
+        type
+        sourceName
+        version
+        note
+        responsible
+      }
+      statistics {
+        regulons {
+          regulatoryContinuant {
+            total
+            weak
+            strong
+            confirmed
+            withoutEvidences
+
+            withPublications
+            withEvidences
+          }
+          srna {
+            total
+            weak
+            strong
+            confirmed
+            withoutEvidences
+
+            withPublications
+            withEvidences
+          }
+          transcriptionFactor {
+            total
+            weak
+            strong
+            confirmed
+            withoutEvidences
+
+            withPublications
+            withEvidences
+          }
         }
-        effectors{
-          ...detailed
-        } 
-        externalReferences{
-          ...detailedExtern
+        operon {
+          total
+          weak
+          strong
+          confirmed
+          withoutEvidences
+
+          withPublications
+          withEvidences
         }
-        functConfTF{
-          ...detailed
+        regulatoryInteractions {
+          total
+          weak
+          strong
+          confirmed
+          withoutEvidences
+
+          withPublications
+          withEvidences
         }
-        functionalClasses{
-          ...detailed
+        srnaInteractions {
+          total
+          weak
+          strong
+          confirmed
+          withoutEvidences
+
+          withPublications
+          withEvidences
         }
-        genes{
-          ...detailed
+        functConfTF {
+          total
+          weak
+          strong
+          confirmed
+          withoutEvidences
+
+          withPublications
+          withEvidences
         }
-        gensorUnits{
-          ...detailed
+        effectors {
+          total
+          weak
+          strong
+          confirmed
+          withoutEvidences
+
+          withPublications
+          withEvidences
         }
-        operon{
-          ...detailed
+        transcriptionFactors {
+          total
+          weak
+          strong
+          confirmed
+          withoutEvidences
+
+          withPublications
+          withEvidences
         }
-        product{
-          ...product
+        regulatorBindingSites {
+          total
+          weak
+          strong
+          confirmed
+          withoutEvidences
+
+          withPublications
+          withEvidences
         }
-        promoters{
-          ...detailed
+        promoters {
+          total
+          weak
+          strong
+          confirmed
+          withoutEvidences
+
+          withPublications
+          withEvidences
         }
-        regulatorBindingSites{
-          ...detailed
+        genes {
+          total
+          weak
+          strong
+          confirmed
+          withoutEvidences
+
+          withPublications
+          withEvidences
         }
-        regulatoryInteractions{
-          ...detailed
+        transcriptionUnits {
+          total
+          weak
+          strong
+          confirmed
+          withoutEvidences
+
+          withPublications
+          withEvidences
         }
-        regulons{
-          ...regulons
+        terminators {
+          total
+          weak
+          strong
+          confirmed
+          withoutEvidences
+
+          withPublications
+          withEvidences
         }
-        riboswitches{
-          ...detailed
+        shineDalgarnos {
+          total
+          weak
+          strong
+          confirmed
+          withoutEvidences
+
+          withPublications
+          withEvidences
         }
-        shineDalgarnos{
-          ...detailed
+        attenuators {
+          total
+          weak
+          strong
+          confirmed
+          withoutEvidences
+
+          withPublications
+          withEvidences
         }
-        srnaInteractions{
-          ...detailed
+        riboswitches {
+          total
+          weak
+          strong
+          confirmed
+          withoutEvidences
+
+          withPublications
+          withEvidences
         }
-        synonyms{
-          ...detailed
+        functionalClasses {
+          total
+          weak
+          strong
+          confirmed
+          withoutEvidences
+
+          withPublications
+          withEvidences
         }
-        terminators{
-          ...detailed
+        gensorUnits {
+          total
+          weak
+          strong
+          confirmed
+          withoutEvidences
+
+          withPublications
+          withEvidences
         }
-        transcriptionFactors{
-          ...detailed
+        synonyms {
+          total
+          weak
+          strong
+          confirmed
+          withoutEvidences
+
+          withPublications
+          withEvidences
         }
-        transcriptionUnits{
-          ...detailed
+        product {
+          rnas {
+            total
+            weak
+            strong
+            confirmed
+            withoutEvidences
+
+            withPublications
+            withEvidences
+          }
+          polypeptides {
+            total
+            weak
+            strong
+            confirmed
+            withoutEvidences
+
+            withPublications
+            withEvidences
+          }
+        }
+        externalReferences {
+          total
+          origin {
+            medline
+            genbank
+            swissprot
+            expasy
+            geneprotec
+            ouMicroArray
+            pdb
+            pir
+          }
         }
       }
+      route
+      regulondbPMID
     }
   }
-`
+`;
