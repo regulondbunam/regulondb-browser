@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 
 
 
-export default function RNAP({ experimentType, tfName }) {
+export default function RNAP({ experimentType, tfName, }) {
     const { datasets, loading, error } = useGetDatasetByAdvancedSearch("RNAP_BINDING_SITES[datasetType]")
     let title = " RNAP Binding Sites"
     if (experimentType) {
@@ -40,19 +40,19 @@ export default function RNAP({ experimentType, tfName }) {
                     <Typography variant='h1' >{title}</Typography>
                 </Cover>
                 <br />
-                <Table datasets={datasets} />
+                <Table datasets={datasets} experimentType={experimentType} />
             </div>
         )
     }
 }
 
-function Table({ datasets }) {
-    const table = useMemo(() => processData(datasets), [datasets])
+function Table({ datasets, experimentType }) {
+    const table = useMemo(() => processData(datasets, experimentType), [datasets,experimentType])
     return <FilterTable columns={table.columns} data={table.data} />
 }
 
 
-function processData(datasets = []) {
+function processData(datasets = [], experimentType) {
     let table = {
         columns: [
             {
@@ -66,6 +66,7 @@ function processData(datasets = []) {
             },
             {
                 label: "Strategy",
+                setFilter: experimentType
             },
             {
                 label: "Genes",

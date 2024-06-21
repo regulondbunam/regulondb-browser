@@ -3,7 +3,7 @@ import Style from "./filterTable.module.css"
 import Thead from './Thead';
 import Tbody from './Tbody';
 import Pagination from './Pagination';
-import { REDUCER_TYPES, FILTER } from './static';
+import { REDUCER_TYPES, FILTER, getCellValue } from './static';
 import DataVerifier from '../utils';
 import Options from './Options';
 import { deleteFilter } from './Thead/Options/filters/deleteFilter';
@@ -77,11 +77,30 @@ function reducer(state, action) {
   }
 }
 
+function textFilter(filterValue, row, columnLabel) {
+  const cellValue = getCellValue(row, columnLabel)
+  if (cellValue) {
+      return cellValue.toLowerCase().includes(filterValue.toLowerCase())
+  }
+  return false
+}
+
 function initialState(columns = [], data = [], tableId) {
   let newColumns = [];
   let currentData = [];
   let mapData = {};
+  let filters = []
   columns.forEach((column, index) => {
+    if (column?.setFilter) {
+      filters.push({
+        columnLabel:column.label,
+        index:filters.length,
+        key:`type_${filters.length}_Strategy_${filters.length}`,
+        logicConnector:"OR",
+        type:0,
+        value:column.setFilter
+      })
+    }
     newColumns.push({
       id: "column_" + index + "_" + tableId,
       key: "columnKey_" + index + "_" + tableId,
@@ -101,7 +120,15 @@ function initialState(columns = [], data = [], tableId) {
       ...row?._properties
     }
     mapData["rowKey_" + index + "_" + tableId] = newRow
-    currentData.push(newRow)
+    if(filters.length>0){
+      filters.forEach(filter => {
+      if(textFilter(filter.value,newRow,filter.columnLabel)){
+        currentData.push(newRow)
+      }
+    });
+    }else{
+      currentData.push(newRow)
+    }
   });
 
   return {
@@ -115,7 +142,7 @@ function initialState(columns = [], data = [], tableId) {
     items: 10,
     totalPages: Math.ceil(data.length / 10) - 1,
     //filter
-    filters: []
+    filters: filters
   }
 }
 

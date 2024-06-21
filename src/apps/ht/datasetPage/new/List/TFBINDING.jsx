@@ -40,19 +40,19 @@ export default function TFBINDING({ experimentType, tfName }) {
                     <Typography variant='h1' >{title}</Typography>
                 </Cover>
                 <br />
-                <Table datasets={datasets} />
+                <Table datasets={datasets} experimentType={experimentType} />
             </div>
         )
     }
 }
 
-function Table({ datasets }) {
-    const table = useMemo(() => processData(datasets), [datasets])
+function Table({ datasets, experimentType }) {
+    const table = useMemo(() => processData(datasets, experimentType), [datasets,experimentType])
     return <FilterTable columns={table.columns} data={table.data} />
 }
 
 
-function processData(datasets = []) {
+function processData(datasets = [], experimentType) {
     let table = {
         columns: [
             {
@@ -66,6 +66,7 @@ function processData(datasets = []) {
             },
             {
                 label: "Strategy",
+                setFilter: experimentType
             },
             {
                 label: "Genes",
