@@ -49,15 +49,21 @@ export default function LinealSequence({
     const formatSequence = new Format(sequence, "")
     const width = sequence.length * 8.41
     const middleHeight = height / 2
+    let zoomStyles={}
+    if(controls){
+        zoomStyles = {
+            zoom: states.zoom,
+            MsZoom: states.zoom,
+            WebkitZoom: states.zoom,
+            MozTransform: `scale(${states.zoom},${states.zoom})`,
+        }
+    }
     const divStyle = {
         height: height + 10,
         width: `${width}px`,
         overflow: "auto",
         position: "relative",
-        zoom: states.zoom,
-        MsZoom: states.zoom,
-        WebkitZoom: states.zoom,
-        MozTransform: `scale(${states.zoom},${states.zoom})`,
+        ...zoomStyles,
     }
     const sequenceStyle = {
         position: "absolute",

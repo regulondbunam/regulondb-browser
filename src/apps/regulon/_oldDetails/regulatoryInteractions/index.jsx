@@ -104,7 +104,9 @@ const COLUMNS = [
     cell: (info) => {
       const sequence = info.row.original._regulatoryBindingSite_sequence
       const id = info.row.original.id
-      return <LinealSequence sequenceId={"sequence_"+id} sequence={sequence} controls={false} height={10} color />
+      return <div className="sequenceRowContainer">
+        <LinealSequence sequenceId={"sequence_"+id} sequence={sequence} controls={false} height={10} color />
+      </div>
     },
   },
   {
