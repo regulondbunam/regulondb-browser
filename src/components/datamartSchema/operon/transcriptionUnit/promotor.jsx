@@ -202,17 +202,38 @@ function SequencePromoter({
     });
     if (DataVerifier.isValidArray(boxes)) {
       boxes.forEach((box, index) => {
-        
+
         if (sequence.toLowerCase().includes(box.sequence.toLowerCase())) {
           //console.log(transcriptionStartSite.leftEndPosition);
-          let boxPosition =
-            strand === "forward" ? box.leftEndPosition : box.rightEndPosition;
-          const distancePromoter_BoxLeft = transcriptionStartSite.leftEndPosition - boxPosition;
+          console.log(strand);
+          const tss = transcriptionStartSite.leftEndPosition
+          let distancePromoterBox = -1
+          let posX = -1
 
+          if (strand === "forward") {
+            if (tss > box.leftEndPosition) {
+              distancePromoterBox = tss - box.leftEndPosition
+              posX = promoterRelativePosition - distancePromoterBox
+            }else{
+              distancePromoterBox = tss - box.rightEndPosition
+              posX = promoterRelativePosition - distancePromoterBox
+            }
+          }else{
+            if (tss < box.rightEndPosition) {
+              distancePromoterBox = tss - box.rightEndPosition
+              posX = promoterRelativePosition + distancePromoterBox
+            }else{
+              distancePromoterBox = tss - box.leftEndPosition
+              posX = promoterRelativePosition + distancePromoterBox
+            }
+          }
+
+          
+          //console.log(promoterRelativePosition, distancePromoterBox, box.type, posX);
           _features.push({
             id: _id + "_box_" + index + "_feature",
             label: box.type.replace("minus", "-"),
-            posX: promoterRelativePosition - distancePromoter_BoxLeft,
+            posX: posX,
             posY: height - 30,
             type: "box",
             sequence: box.sequence,

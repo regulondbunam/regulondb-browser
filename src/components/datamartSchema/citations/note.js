@@ -113,6 +113,6 @@ export const NoteCitations = (allCitations, note) => {
             note = note.replace(REX, relCitation(allCitations, REX.exec(note)[0]))
         };
     }
-    console.log(note);
+    //console.log(note);
     return note
 }
