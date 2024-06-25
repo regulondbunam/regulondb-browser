@@ -7,7 +7,7 @@ export default class ParseJSONtoTemplate {
     }
 
     #fragmentsExtractor() {
-        const fragmentRegex = /\$define\s+(\w+)\(([^)]*)\)\s*\{/g;
+        const fragmentRegex = /\$fragment\s+(\w+)\(([^)]*)\)\s*\{/g;
 
         let match;
         let modifiedTemplate = this.template; // Copia del template original para modificaciones
@@ -92,8 +92,10 @@ export default class ParseJSONtoTemplate {
                 // Iterar sobre los elementos del arreglo y reemplazar la invocación por cada elemento
                 let replacement = '';
                 arrayValue.forEach(item => {
-                    const { content } = this.fragments[fragmentName];
-                    replacement += this.#replaceVariables(content, item).trim() + '\n';
+                    if (this.fragments.hasOwnProperty(fragmentName)) {
+                        const { content } = this.fragments[fragmentName];
+                        replacement += this.#replaceVariables(content, item).trim() + '\n';
+                    }
                 });
                 modifiedTemplate = modifiedTemplate.replace(fullMatch, replacement.trim());
             } else {
@@ -157,7 +159,7 @@ export default class ParseJSONtoTemplate {
         // 0 -> eliminar comentarios de una sola línea y multilínea
         this.#removeMultiLineComments();
         this.#removeSingleLineComments();
-        
+
 
         // 1 -> identificar fragmentos y almacenarlos y quitarlos
         this.#fragmentsExtractor();
@@ -171,7 +173,6 @@ export default class ParseJSONtoTemplate {
         // 4 -> reemplazar variables en el template por los valores correspondientes del objeto JSON
         this.template = this.#replaceVariables(this.template, this.json);
 
-        // Imprimir el template modificado
-        console.log(this.template);
+        return this.template
     }
 }

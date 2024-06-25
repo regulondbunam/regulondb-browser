@@ -7,7 +7,7 @@ import GrowthConditions from './growthConditions/growthConditions'
 import NLPgc from './nlpGrowthConditions/NLPgc'
 import Tabs from './data/tabs'
 import Related from './related/Related'
-import ParseJSONtoTemplate from '../../../../components/transformJSON'
+//import ParseJSONtoTemplate from '../../../../components/transformJSON'
 
 export default function Info({datasetId}) {
 
@@ -17,9 +17,13 @@ export default function Info({datasetId}) {
 
   console.log(_dataset);
   if (_dataset) {
-    const template = "$#comentario\n$#{\ncomentario\nmulti linea\n}#$\nid Dataset: ${_id} $#otro comentario\nname: ${sample.title}\n$define PUBLICATION(publication){\ntitle: ${title}\nautors: ${authors}\n}\npublications: \n$[PUBLICATION(publications)]"
+    /*
+    const template = "$#comentario\n$#{\ncomentario\nmulti linea\n}#$\nid Dataset: ${_id} $#otro comentario\nname: ${sample.title}\n$fragment PUBLICATION(publication){\ntitle: ${title}\nautors: ${authors}\n}\npublications: \n$[PUBLICATION(publications)]"
     const parse = new ParseJSONtoTemplate(_dataset,template)
-    parse.getCompileText()
+    const compiled = parse.getCompileText()
+    console.log(template);
+    console.log(compiled);
+    */
   }
   
 
