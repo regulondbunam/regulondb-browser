@@ -92,7 +92,8 @@ export default class ParseJSONtoTemplate {
                 let replacement = '';
                 arrayValue.forEach(item => {
                     const { content } = this.fragments[fragmentName];
-                    replacement += content.replace(/\$[^\]]*]/g, item);
+                    console.log(content,item);
+                    replacement += this.#replaceVariables(content,item)+'\n'
                 });
                 modifiedTemplate = modifiedTemplate.replace(fullMatch, replacement);
             } else {
@@ -105,33 +106,48 @@ export default class ParseJSONtoTemplate {
         this.template = modifiedTemplate; // Actualizar el template original con el modificado
     }
 
-    #replaceVariables() {
+    #replaceVariables(template,json) {
         // Expresión regular para buscar variables en el template
         const variableRegex = /\${([^}]*)}|\$\[([^\]]*)\]\.join\(\)/g;
 
         let match;
-        let modifiedTemplate = this.template; // Copia del template original para modificaciones
+        let modifiedTemplate = template; // Copia del template original para modificaciones
 
         // Buscar todas las variables en el template
-        while ((match = variableRegex.exec(this.template)) !== null) {
+        while ((match = variableRegex.exec(template)) !== null) {
             const fullMatch = match[0];
             const property = match[1]; // Para ${<propiedad>}
             const arrayJoin = match[2]; // Para $[array].join()
 
             if (property !== undefined) {
                 // Reemplazar la variable por el valor correspondiente del objeto JSON
-                const value = this.getPropertyValue(property.trim());
+                const value = this.getPropertyValueOfObject(property.trim(),json);
                 modifiedTemplate = modifiedTemplate.replace(fullMatch, value);
             } else if (arrayJoin !== undefined) {
                 // Reemplazar el array por su representación unida
-                const arrayValue = this.getPropertyValue(arrayJoin.trim());
+                const arrayValue = this.getPropertyValueOfObject(arrayJoin.trim(),json);
                 if (Array.isArray(arrayValue)) {
                     modifiedTemplate = modifiedTemplate.replace(fullMatch, arrayValue.join());
                 }
             }
         }
 
-        this.template = modifiedTemplate; // Actualizar el template original con el modificado
+        return modifiedTemplate; // Actualizar el template original con el modificado
+    }
+
+    getPropertyValueOfObject(propertyPath,obj) {
+        // Función para obtener el valor de una propiedad en el objeto JSON
+        const pathParts = propertyPath.split('.');
+        for (const part of pathParts) {
+            if (obj[part] !== undefined) {
+                obj = obj[part];
+            } else {
+                // Manejar el caso donde la propiedad no está definida
+                console.warn(`Property '${propertyPath}' not found in JSON.`);
+                return ''; // O devuelve un valor por defecto según tu lógica
+            }
+        }
+        return obj;
     }
 
     getPropertyValue(propertyPath) {
@@ -163,7 +179,7 @@ export default class ParseJSONtoTemplate {
         this.#replaceArrayFragmentInvocations();
 
         // 4 -> reemplazar variables en el template por los valores correspondientes del objeto JSON
-        this.#replaceVariables();
+        this.template = this.#replaceVariables(this.template,this.json);
 
         // Imprimir el template modificado
         console.log('Modified Template:', this.template);
