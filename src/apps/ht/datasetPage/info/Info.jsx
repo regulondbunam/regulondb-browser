@@ -17,7 +17,7 @@ export default function Info({datasetId}) {
 
   console.log(_dataset);
   if (_dataset) {
-    const template = "id Dataset: ${_id}\nname: ${sample.title}\n$define PUBLICATION(publication){\ntitle: ${title}\nautors: $[autors].join(',')\n}\npublications: \n$[PUBLICATION(publications)]"
+    const template = "$#comentario\n$#{\ncomentario\nmulti linea\n}#$\nid Dataset: ${_id} $#otro comentario\nname: ${sample.title}\n$define PUBLICATION(publication){\ntitle: ${title}\nautors: ${authors}\n}\npublications: \n$[PUBLICATION(publications)]"
     const parse = new ParseJSONtoTemplate(_dataset,template)
     parse.getCompileText()
   }
