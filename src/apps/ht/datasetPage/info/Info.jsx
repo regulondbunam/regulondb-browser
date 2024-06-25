@@ -7,12 +7,21 @@ import GrowthConditions from './growthConditions/growthConditions'
 import NLPgc from './nlpGrowthConditions/NLPgc'
 import Tabs from './data/tabs'
 import Related from './related/Related'
+import ParseJSONtoTemplate from '../../../../components/transformJSON'
 
 export default function Info({datasetId}) {
 
   const [_datasetId, set_datasetId] = useState(datasetId)
   const [_dataset, set_dataset] = useState()
   const [_state, set_state] = useState('done')
+
+  console.log(_dataset);
+  if (_dataset) {
+    const template = "id Dataset: ${_id}\nname: ${sample.title}\n$define PUBLICATION(publication){\ntitle: ${publication}\nautors: $[publication.autors].join(',')\n}\npublications: \n$[PUBLICATION(publications)]"
+    const parse = new ParseJSONtoTemplate(_dataset,template)
+    parse.getCompileText()
+  }
+  
 
   useEffect(() => {
     let title = "High Throughput Collection"
@@ -23,6 +32,7 @@ export default function Info({datasetId}) {
             } else {
                 title = _dataset?.sample?.title
             }
+
             //console.log(_data)
         }
     const COVER = document.getElementById("title-cover-ht")

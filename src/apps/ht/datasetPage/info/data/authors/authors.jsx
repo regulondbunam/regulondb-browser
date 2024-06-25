@@ -5,7 +5,7 @@ import { AuthorTable } from './table';
 export default function Authors({ id_dataset }) {
     //console.log(data)
     const [_tableData, set_tableData] = useState();
-    console.log(id_dataset);
+
 
     useEffect(() => {
         if (!_tableData) {

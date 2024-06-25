@@ -75,7 +75,6 @@ export default function Tabs({ id_dataset, data }) {
     return "";
   };
 
-  console.log(data?.datasetType);
 
   if (data?.datasetType === "RNAP_BINDING_SITES" && _autorData) {
     return (

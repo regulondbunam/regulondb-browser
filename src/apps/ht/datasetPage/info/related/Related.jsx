@@ -17,7 +17,6 @@ export default function Related({
             let a = objectTested.map(obj=>{
                 return obj.name
             }).join("|")
-            console.log(a);
             return a
         }
         return undefined
