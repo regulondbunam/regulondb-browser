@@ -205,7 +205,7 @@ function SequencePromoter({
 
         if (sequence.toLowerCase().includes(box.sequence.toLowerCase())) {
           //console.log(transcriptionStartSite.leftEndPosition);
-          console.log(strand);
+          //console.log(strand);
           const tss = transcriptionStartSite.leftEndPosition
           let distancePromoterBox = -1
           let posX = -1
