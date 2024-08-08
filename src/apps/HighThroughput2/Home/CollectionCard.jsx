@@ -49,7 +49,7 @@ function useGetMetadata(datasetType = "", sources = []) {
         if (
           DataVerifier.isValidArray(data?.getDatasetsWithMetadata?.datasets)
         ) {
-          setMetadata([...metadata,data.getDatasetsWithMetadata]);
+          setMetadata([...metadata, data.getDatasetsWithMetadata]);
         }
         setSourcesCount(sourcesCount - 1);
       },
@@ -61,30 +61,33 @@ function useGetMetadata(datasetType = "", sources = []) {
 const CollectionCard = ({ datasetType, sources = [] }) => {
   const { metadata, loading } = useGetMetadata(datasetType, sources);
   const [open, setOpen] = useState(false);
-  const [meta, setMeta] = useState()
+  const [meta, setMeta] = useState();
   const navigate = useNavigate();
   const md = new Remarkable();
 
   const handleTableClick = () => {
-    navigate(`./table/${datasetType}`);
+    navigate(`./table/datasetType=${datasetType}`);
   };
 
   const handleBrowserClick = () => {
     navigate(`./browser/datasetType=${datasetType}`);
   };
 
+  const handleBuilder = () => {
+    navigate(`./builder/datasetType=${datasetType}`);
+  };
+
   const handleMoreInfoClick = (meta) => {
-    setMeta(meta)
+    setMeta(meta);
     setOpen(true);
   };
 
   const handleClose = () => {
-    setMeta(undefined)
+    setMeta(undefined);
     setOpen(false);
   };
 
   console.log(meta);
-  
 
   return (
     <>
@@ -96,11 +99,19 @@ const CollectionCard = ({ datasetType, sources = [] }) => {
           {loading ? (
             <>loading source information</>
           ) : (
-            <>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
               {metadata.map((data, index) => (
                 <Button
                   key={"source_" + index + "_in_" + datasetType}
-                  onClick={()=>{handleMoreInfoClick(data)}}
+                  onClick={() => {
+                    handleMoreInfoClick(data);
+                  }}
                   style={{ textTransform: "none" }}
                 >
                   <Typography variant="body2" color="textSecondary">
@@ -108,38 +119,59 @@ const CollectionCard = ({ datasetType, sources = [] }) => {
                   </Typography>
                 </Button>
               ))}
-            </>
+            </div>
           )}
         </CardContent>
         <div
           style={{
             display: "flex",
-            justifyContent: "flex-end",
+            justifyContent: "space-between",
             padding: "8px",
           }}
         >
+          <div>
           <Button
-            variant="contained"
-            color="primary"
-            onClick={handleTableClick}
+              variant="outlined"
+              color="primary"
+              onClick={handleBuilder}
+              
+            >
+              builder
+            </Button>
+          </div>
+          <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+          }}
           >
-            TABLE
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleBrowserClick}
-            style={{ marginLeft: "8px" }}
-          >
-            BROWSER
-          </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleTableClick}
+            >
+              TABLE
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleBrowserClick}
+              style={{ marginLeft: "8px" }}
+            >
+              BROWSER
+            </Button>
+          </div>
         </div>
       </Card>
 
       <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
         <DialogTitle>Metadata Information</DialogTitle>
         <DialogContent>
-          <div dangerouslySetInnerHTML={{ __html: md.render(meta?.metadata?.metadataContent) }} />
+          <div
+            dangerouslySetInnerHTML={{
+              __html: md.render(meta?.metadata?.metadataContent),
+            }}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
