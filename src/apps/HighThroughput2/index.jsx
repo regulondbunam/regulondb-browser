@@ -8,7 +8,7 @@ export const PATH_HT = {
   element: <HT />,
   children: [
     {
-      path: ":site", //dataset, table, builder, browser
+      path: ":site", //dataset, finder
       children: [
         {
           path: ":datasetType",
