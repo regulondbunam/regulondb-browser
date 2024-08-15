@@ -8,10 +8,13 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  IconButton,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { Remarkable } from "remarkable";
 import { useLazyQuery, gql } from "@apollo/client";
+import { useNavigate, Link } from "react-router-dom";
+import LiveHelpIcon from "@mui/icons-material/LiveHelp";
+import { DATASET_TYPE_NAME, SOURCE_NAMES } from "./static";
 import { DataVerifier } from "../../../components/ui-components";
 
 const query = gql`
@@ -65,16 +68,8 @@ const CollectionCard = ({ datasetType, sources = [] }) => {
   const navigate = useNavigate();
   const md = new Remarkable();
 
-  const handleTableClick = () => {
-    navigate(`./table/datasetType=${datasetType}`);
-  };
-
-  const handleBrowserClick = () => {
-    navigate(`./browser/datasetType=${datasetType}`);
-  };
-
-  const handleBuilder = () => {
-    navigate(`./builder/datasetType=${datasetType}`);
+  const handleGoSource = (source) => {
+    navigate(`./dataset/${datasetType}/source=${source}`);
   };
 
   const handleMoreInfoClick = (meta) => {
@@ -93,9 +88,12 @@ const CollectionCard = ({ datasetType, sources = [] }) => {
     <>
       <Card style={{ backgroundColor: "#e3f2fd" }}>
         <CardContent>
-          <Typography variant="h5" component="div">
-            {datasetType}
-          </Typography>
+          <Link to={"./dataset/" + datasetType}>
+            <Typography variant="h2">
+              {DATASET_TYPE_NAME(datasetType)}
+            </Typography>
+          </Link>
+
           {loading ? (
             <>loading source information</>
           ) : (
@@ -107,65 +105,37 @@ const CollectionCard = ({ datasetType, sources = [] }) => {
               }}
             >
               {metadata.map((data, index) => (
-                <Button
+                <div
                   key={"source_" + index + "_in_" + datasetType}
-                  onClick={() => {
-                    handleMoreInfoClick(data);
-                  }}
-                  style={{ textTransform: "none" }}
+                  style={{ display: "flex" }}
                 >
-                  <Typography variant="body2" color="textSecondary">
-                    {data.metadata.source}
-                  </Typography>
-                </Button>
+                  <Button
+                    onClick={() => {
+                      handleGoSource(data.metadata.source);
+                    }}
+                    style={{ textTransform: "none" }}
+                    
+                  >
+                    <Typography variant="body" color="textSecondary">
+                      {SOURCE_NAMES(data.metadata.source)}
+                    </Typography>
+                  </Button>
+                  <IconButton 
+                  onClick={()=>{
+                    handleMoreInfoClick(data)
+                  }}
+                  size="small">
+                    <LiveHelpIcon fontSize="inherit" />
+                  </IconButton>
+                </div>
               ))}
             </div>
           )}
         </CardContent>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            padding: "8px",
-          }}
-        >
-          <div>
-          <Button
-              variant="outlined"
-              color="primary"
-              onClick={handleBuilder}
-              
-            >
-              builder
-            </Button>
-          </div>
-          <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-          }}
-          >
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleTableClick}
-            >
-              TABLE
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleBrowserClick}
-              style={{ marginLeft: "8px" }}
-            >
-              BROWSER
-            </Button>
-          </div>
-        </div>
       </Card>
 
       <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
-        <DialogTitle>Metadata Information</DialogTitle>
+        <DialogTitle>{SOURCE_NAMES(meta?.metadata?.source)}</DialogTitle>
         <DialogContent>
           <div
             dangerouslySetInnerHTML={{
