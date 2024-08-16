@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import Home from "./Home";
+import Browser from "./Browser";
 //import Dataset from "./Dataset";
 
 export const PATH_HT = {
@@ -28,13 +29,9 @@ function HT() {
   if (datasetType) {
     switch (site) {
       case "dataset":
-        return <>dataset</>;
-      case "builder":
-        return <>builder</>;
-      case "browser":
-        return <>browser</>;
-      case "table":
-        return <>table</>;
+        return <Browser datasetType={datasetType}/>;
+      case "finder":
+        return <>finder</>;
       default:
         return <Home />;
     }
