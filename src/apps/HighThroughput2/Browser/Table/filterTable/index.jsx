@@ -1,4 +1,4 @@
-import React, { useId, useReducer } from 'react'
+import React, { useEffect, useId, useReducer } from 'react'
 import Style from "./filterTable.module.css"
 import Thead from './Thead';
 import Tbody from './Tbody';
@@ -72,6 +72,8 @@ function reducer(state, action) {
       return { ...state, columns: columns, currentData: [...action.newData], filters: newFilters, nRows: action.newData.length, totalPages: Math.ceil(action.newData.length / state.items) - 1, page: 0, }
 
     }
+    case "reset":
+      return { ...action.newState }
     default:
       return state
   }
@@ -85,7 +87,7 @@ function textFilter(filterValue, row, columnLabel) {
   return false
 }
 
-function initialState(columns = [], data = [], tableId) {
+function initialState({columns = [], data = [], tableId}) {
   let newColumns = [];
   let currentData = [];
   let mapData = {};
@@ -149,7 +151,12 @@ function initialState(columns = [], data = [], tableId) {
 export default function FilterTable({ columns, data, tableName = "Table", titleVariant = "h2" }) {
 
   const tableId = useId()
-  const [state, dispatch] = useReducer(reducer, initialState(columns, data, tableId))
+  const [state, dispatch] = useReducer(reducer,{columns, data, tableId}, initialState)
+
+  useEffect(() => {
+    dispatch({ type: "reset", newState: initialState({columns, data, tableId}) })
+  }, [columns, data, tableId])
+
 
  // console.log(state);
   return (

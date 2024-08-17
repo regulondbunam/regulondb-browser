@@ -1,6 +1,6 @@
 import React, {useMemo} from 'react'
 import FilterTable from './filterTable'
-import formatDatasetFilterTable from './formatDatasetFilterTable'
+import formatDatasetFilterTable from "./Formats"
 
 export default function Table({
     datasets,
@@ -9,6 +9,7 @@ export default function Table({
     source,
     experimentType,
 }) {
-    const table = useMemo(() => formatDatasetFilterTable(datasets,datasetType,experimentType,source), [datasets,datasetType,experimentType,source])
+    const table = formatDatasetFilterTable(datasets,datasetType,experimentType,source)
+    
     return <FilterTable columns={table.columns} data={table.data} tableName={dir} />
 }

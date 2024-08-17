@@ -56,10 +56,11 @@ function reducer(state, action) {
     switch (action.type) {
         case DISPATCH_TYPE.UPDATE_TREE:
             const dir = setDir(action.datasetType, action.source, action.experimentType)
-            return { ...state, 
-                dir: dir, 
-                datasetType: action.datasetType, 
-                source: action.source, 
+            return {
+                ...state,
+                dir: dir,
+                datasetType: action.datasetType,
+                source: action.source,
                 experimentType: action.experimentType
             }
         default:
@@ -77,22 +78,24 @@ export default function Browser({
     const [state, dispatch] = useReducer(reducer, { datasetType, source, experimentType }, initState)
     const [datasets, setDatasets] = useState([])
     const [getDatasetsByDatasetType, { loading, error }] = useGetDatasets()
-    const { loading: initLoading, error: initerror } = useInitDatasetsByDatasetType(datasetType, setDatasets);
+    const { loading: initLoading, error: initError } = useInitDatasetsByDatasetType(datasetType, setDatasets);
 
     const handleUpdateDatasets = (newDatasetType, newSource, newExperimentType) => {
-        dispatch({ type: DISPATCH_TYPE.UPDATE_TREE, 
+        dispatch({
+            type: DISPATCH_TYPE.UPDATE_TREE,
             datasetType: newDatasetType,
             source: newSource,
             experimentType: newExperimentType
         })
-        if(state.datasetType !== newDatasetType){
+        if (state.datasetType !== newDatasetType) {
             getDatasetsByDatasetType(newDatasetType, setDatasets)
         }
     }
-
     if (error) {
         return <Cover state={"error"}><h1>Error to load datasets</h1></Cover>
     }
+    //console.log(loading);
+
     return (
         <div>
             <Cover state={loading ? "loading" : "done"}>

@@ -1,8 +1,8 @@
-import DataVerifier from "./utils"
+import DataVerifier from "../utils"
 import { useNavigate } from "react-router-dom"
 import { Button } from "@mui/material"
 
-export default function formatDatasetFilterTable(datasets,datasetType,experimentType,source) {
+export default function formatRNAP(datasets = [], experimentType) {
     let table = {
         columns: [
             {
@@ -67,7 +67,7 @@ export default function formatDatasetFilterTable(datasets,datasetType,experiment
             })
         }
         table.data.push({
-            "id": <LinkDataset value={dataset._id} datasetId={dataset._id} type={datasetType} />,
+            "id": <LinkDataset value={dataset._id} datasetId={dataset._id} />,
             "Transcription Factor": objects.join(", "),
             "Dataset Title": DataVerifier.isValidString(dataset?.sample.title) ? dataset?.sample.title : "",
             "Strategy": dataset?.sourceSerie.strategy,
@@ -80,8 +80,8 @@ export default function formatDatasetFilterTable(datasets,datasetType,experiment
     return table
 }
 
-function LinkDataset({datasetId, type}) {
+function LinkDataset({ datasetId }) {
     const navigate = useNavigate()
     //TFBINDING
-    return <Button onClick={() => { navigate("./dataset/"+type+"/datasetId=" + datasetId) }} >{datasetId}</Button>
+    return <Button onClick={() => { navigate("./dataset/RNAP_BINDING_SITES/datasetId=" + datasetId) }} >{datasetId}</Button>
 }
