@@ -151,7 +151,7 @@ export default function FilterTable({ columns, data, tableName = "Table", titleV
   const tableId = useId()
   const [state, dispatch] = useReducer(reducer, initialState(columns, data, tableId))
 
-  console.log(state);
+ // console.log(state);
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }} >

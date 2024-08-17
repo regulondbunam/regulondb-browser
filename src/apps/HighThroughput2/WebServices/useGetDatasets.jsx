@@ -27,6 +27,8 @@ export default function useGetDatasets() {
       onCompleted: (data) => {
         if (DataVerifier.isValidArray(data?.getDatasetsFromSearch)) {
           setDatasets(data?.getDatasetsFromSearch);
+        }else{
+          setDatasets([])
         }
       },
     });
