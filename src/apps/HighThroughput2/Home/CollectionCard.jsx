@@ -14,7 +14,7 @@ import { Remarkable } from "remarkable";
 import { useLazyQuery, gql } from "@apollo/client";
 import { useNavigate, Link } from "react-router-dom";
 import LiveHelpIcon from "@mui/icons-material/LiveHelp";
-import { DATASET_TYPE_NAME, SOURCE_NAMES } from "./static";
+import { DATASET_TYPE_NAME, SOURCE_NAMES } from "../static";
 import { DataVerifier } from "../../../components/ui-components";
 
 const query = gql`
