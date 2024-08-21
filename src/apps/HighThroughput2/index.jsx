@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import Home from "./Home";
 import Browser from "./Browser";
-//import Dataset from "./Dataset";
+import DatasetInfo from "./Browser/Dataset";
 
 export const PATH_HT = {
   path: "ht",
@@ -29,7 +29,11 @@ function HT() {
   if (datasetType) {
     switch (site) {
       case "dataset":
-        return <Browser datasetType={datasetType}/>;
+        const query = new URLSearchParams(info);
+        if(query.get('datasetId')){
+          return <DatasetInfo datasetId={query.get('datasetId')} />
+        }
+        return <Browser datasetType={datasetType}  tfName={query.get('tf')} experimentType={query.get('experimentType')}/>;
       case "finder":
         return <>finder</>;
       default:
