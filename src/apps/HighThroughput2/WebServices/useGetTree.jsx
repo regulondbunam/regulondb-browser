@@ -33,6 +33,24 @@ export default function useGetInitTree() {
         {
           id: "source:REGULONDB&datasetType:TFBINDING",
           label: "Multiple_authors_methods",
+          children: [
+            {
+              id: "source:REGULONDB&datasetType:TFBINDING&experimentType:ChIP-seq",
+              label:"ChIP-seq",
+            },
+            {
+              id: "source:REGULONDB&datasetType:TFBINDING&experimentType:ChIP-exo",
+              label:"ChIP-exo",
+            },
+            {
+              id: "source:REGULONDB&datasetType:TFBINDING&experimentType:gSELEX-chip",
+              label:"gSELEX-chip",
+            },
+            {
+              id: "source:REGULONDB&datasetType:TFBINDING&experimentType:DAP",
+              label:"DAP",
+            },
+          ]
         }
       ]
     },
@@ -43,6 +61,24 @@ export default function useGetInitTree() {
         {
           id: "source:REGULONDB&datasetType:RNAP_BINDING_SITES",
           label: "Multiple_authors_methods",
+          children: [
+            {
+              id: "source:REGULONDB&datasetType:RNAP_BINDING_SITES&experimentType:ChIP-seq",
+              label:"ChIP-seq",
+            },
+            {
+              id: "source:REGULONDB&datasetType:RNAP_BINDING_SITES&experimentType:ChIP-exo",
+              label:"ChIP-exo",
+            },
+            {
+              id: "source:REGULONDB&datasetType:RNAP_BINDING_SITES&experimentType:gSELEX-chip",
+              label:"gSELEX-chip",
+            },
+            {
+              id: "source:REGULONDB&datasetType:RNAP_BINDING_SITES&experimentType:DAP",
+              label:"DAP",
+            },
+          ]
         }
       ]
     },
