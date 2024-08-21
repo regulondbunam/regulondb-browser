@@ -1,7 +1,7 @@
 import { useLazyQuery, useQuery, gql } from "@apollo/client";
 import { DataVerifier } from "../../../components/ui-components";
 
-export function useInitDatasetsByDatasetType(datasetType,setDatasets) {
+export function useInitDatasetsByDatasetType(datasetType,setDatasets=()=>{}) {
   const { data, loading, error } = useQuery(query,{
     variables:{
        advancedSearch: `${datasetType}[collectionData.type]`
@@ -12,8 +12,15 @@ export function useInitDatasetsByDatasetType(datasetType,setDatasets) {
       }
     },
   });
+  let datasets
 
-  return{ data, loading, error };
+  if(data){
+    if (DataVerifier.isValidArray(data?.getDatasetsFromSearch)) {
+      datasets = data?.getDatasetsFromSearch
+    }
+  }
+
+  return{ data, datasets, loading, error };
 }
 
 export default function useGetDatasets() {

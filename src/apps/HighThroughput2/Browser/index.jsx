@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, {useReducer} from 'react'
 import { Cover, DataVerifier } from '../../../components/ui-components'
-import { useGetDatasets, useInitDatasetsByDatasetType } from '../WebServices'
-import CircularProgress from '@mui/material/CircularProgress';
 import TreeView from './Tree'
-import { useReducer } from 'react'
 import Table from './Table'
 import { DISPATCH_TYPE } from './static';
 
@@ -76,9 +73,7 @@ export default function Browser({
 }) {
 
     const [state, dispatch] = useReducer(reducer, { datasetType, source, experimentType }, initState)
-    const [datasets, setDatasets] = useState([])
-    const [getDatasetsByDatasetType, { loading, error }] = useGetDatasets()
-    const { loading: initLoading, error: initError } = useInitDatasetsByDatasetType(datasetType, setDatasets);
+
 
     const handleUpdateDatasets = (newDatasetType, newSource, newExperimentType) => {
         dispatch({
@@ -87,18 +82,11 @@ export default function Browser({
             source: newSource,
             experimentType: newExperimentType
         })
-        if (state.datasetType !== newDatasetType) {
-            getDatasetsByDatasetType(newDatasetType, setDatasets)
-        }
     }
-    if (error) {
-        return <Cover state={"error"}><h1>Error to load datasets</h1></Cover>
-    }
-    //console.log(loading);
 
     return (
         <div>
-            <Cover state={loading ? "loading" : "done"}>
+            <Cover>
                 <h1>{`High Throughput Collection ${state.dir}`}</h1>
             </Cover>
             <div style={{ display: "flex" }} >
@@ -106,16 +94,9 @@ export default function Browser({
                     <TreeView updateDataset={handleUpdateDatasets} />
                 </div>
 
-                {loading || initLoading ? (
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        Loading...
-                        <CircularProgress />
-                    </div>
-                ) : (
-                    <div style={{ width: "100%" }} >
-                        <Table dir={state.dir} datasets={datasets} datasetType={state.datasetType} source={state.source} experimentType={state.experimentType} />
-                    </div>
-                )}
+                <div style={{ width: "100%" }} >
+                    <Table dir={state.dir} datasetType={state.datasetType} source={state.source} experimentType={state.experimentType} />
+                </div>
 
             </div>
 
