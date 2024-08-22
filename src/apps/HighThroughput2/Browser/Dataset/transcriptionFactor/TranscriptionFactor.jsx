@@ -68,7 +68,7 @@ export default function TranscriptionFactor({ objectsTested }) {
 }
 
 function linkGenes(genes = []) {
-  if (window.IN_URL.isEmbed) {
+  /*if (window.IN_URL.isEmbed) {
     return (
       <div>
         {genes.map((gen) => {
@@ -80,7 +80,7 @@ function linkGenes(genes = []) {
         })}
       </div>
     );
-  }
+  }*/
   return (
     <div>
       {genes.map((gen) => {

@@ -71,11 +71,11 @@ console.log(_dataset);
         <Maininfo
           _id={_dataset?._id}
           sample={_dataset?.sample}
-          datasetType={_dataset?.datasetType}
+          datasetType={_dataset?.collectionData?.type}
           sourceSerie={_dataset?.sourceSerie}
           publications={_dataset?.publications}
         />
-        {_dataset?.datasetType === "TFBINDING" && (
+        {_dataset?.collectionData?.type === "TFBINDING" && (
           <div>
             <h2>TRANSCRIPTION FACTOR</h2>
             <TranscriptionFactor objectsTested={_dataset?.objectsTested} />
@@ -84,7 +84,7 @@ console.log(_dataset);
         <GrowthConditions growthCondition={_dataset?.growthConditions} />
         <NLPgc datasetId={_dataset?._id} />
         <Tabs id_dataset={_dataset?._id} data={_dataset} />
-        {_dataset?.datasetType === "TFBINDING" && (
+        {_dataset?.collectionData?.type === "TFBINDING" && (
           <Related
             datasetId={_dataset?._id}
             objectTested={_dataset?.objectsTested}

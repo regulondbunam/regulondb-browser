@@ -21,7 +21,7 @@ export default function Tabs({ id_dataset, data }) {
   const [_jsonTable, set_jsonTable] = useState();
 
   useEffect(() => {
-    if (data?.datasetType === "GENE_EXPRESSION") {
+    if (data?.collectionData?.type === "GENE_EXPRESSION") {
       if (!_jsonTable) {
         try {
           //REACT_APP_PROSSES_SERVICE
@@ -48,7 +48,7 @@ export default function Tabs({ id_dataset, data }) {
   }, [data, _jsonTable, id_dataset, set_jsonTable, set_datasetData]);
 
   let tabTitle1 = "";
-  switch (data?.datasetType) {
+  switch (data?.collectionData?.type) {
     case "TFBINDING":
       tabTitle1 = "Normalized";
       break;
@@ -76,7 +76,7 @@ export default function Tabs({ id_dataset, data }) {
   };
 
 
-  if (data?.datasetType === "RNAP_BINDING_SITES" && _autorData) {
+  if (data?.collectionData?.type === "RNAP_BINDING_SITES" && _autorData) {
     return (
       <div>
         <h2>DATA FROM DATASET</h2>
@@ -139,7 +139,7 @@ export default function Tabs({ id_dataset, data }) {
           <div className={Style.tabcontent}>
             <Summary data={data} />
             <NormData
-              datasetType={data?.datasetType}
+              datasetType={data?.collectionData?.type}
               datasetData={_datasetData}
               jsonTable={_jsonTable}
             />
@@ -147,7 +147,7 @@ export default function Tabs({ id_dataset, data }) {
               <Viewer
                 id_dataset={data?._id}
                 tfs={data?.objectsTested}
-                datasetType={data?.datasetType}
+                datasetType={data?.collectionData?.type}
               />
               <br />
               <br />
@@ -178,7 +178,7 @@ export default function Tabs({ id_dataset, data }) {
           }
         }}
       />
-      {data?.datasetType === "TFBINDING" && (
+      {data?.collectionData?.type === "TFBINDING" && (
         <GetTFBSData
           id_dataset={id_dataset}
           set_datasetData={(data) => {
@@ -189,7 +189,7 @@ export default function Tabs({ id_dataset, data }) {
           }}
         />
       )}
-      {data?.datasetType === "TUS" && (
+      {data?.collectionData?.type === "TUS" && (
         <GetTUs
           id_dataset={id_dataset}
           resoultsData={(data) => {
@@ -207,7 +207,7 @@ export default function Tabs({ id_dataset, data }) {
           }}
         />
       )}
-      {data?.datasetType === "TSS" && (
+      {data?.collectionData?.type === "TSS" && (
         <GetTSS
           id_dataset={id_dataset}
           resoultsData={(data) => {
@@ -222,7 +222,7 @@ export default function Tabs({ id_dataset, data }) {
           }}
         />
       )}
-      {data?.datasetType === "TTS" && (
+      {data?.collectionData?.type === "TTS" && (
         <GetTTS
           id_dataset={id_dataset}
           resoultsData={(data) => {

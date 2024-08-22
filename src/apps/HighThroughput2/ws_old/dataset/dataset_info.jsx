@@ -2,88 +2,128 @@ import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from "@apollo/client";
 
-function query(datasetId) {
-  return gql`
-        {
-            getDatasetsFromSearch(advancedSearch: "${datasetId}[_id]") {
-              _id
-                publications {
-                  pmid
-                  doi
-                  authors
-                  title
-                  date
-                  pmcid
-                }
-                fivePrimeEnrichment
-                objectsTested {
-                  _id
-                  name
-                  synonyms
-                  genes {
-                    _id
-                    name
-                  }
-                  note
-                  activeConformations
-                  externalCrossReferences {
-                    externalCrossReferenceId
-                    externalCrossReferenceName
-                    objectId
-                    url
-                  }
-                }
-                sourceSerie {
-                  series{
-                    sourceId
-                    sourceName
-                  }
-                  platform{
-                    _id
-                    title
-                  }
-                  title
-                  strategy
-                  method
-                }
-                sample {
-                  experimentId
-                  controlId
-                  title
-                }
-                linkedDataset {
-                  controlId
-                  experimentId
-                  datasetType
-                }
-                referenceGenome
-                datasetType
-                temporalId
-                growthConditions {
-                  organism
-                  geneticBackground
-                  medium
-                  mediumSupplements
-                  aeration
-                  temperature
-                  ph
-                  pressure
-                  opticalDensity
-                  growthPhase
-                  growthRate
-                  vesselType
-                  aerationSpeed
-                }
-                releaseDataControl {
-                  date
-                  version
-                }
-                nlpGrowthConditionsId
-                experimentCondition
-              }
-        }
-    `
-}
+const query = gql`query GetDatasetsFromSearch($advancedSearch: String) {
+  getDatasetsFromSearch(advancedSearch: $advancedSearch) {
+    _id
+    assemblyGenomeId
+    collectionData {
+      source
+      type
+    }
+    cutOff
+    datasetType
+    experimentCondition
+    externalReferences {
+      description
+      name
+      note
+      url
+    }
+    fivePrimeEnrichment
+    geneExpressionFiltered
+    growthConditions {
+      aeration
+      aerationSpeed
+      geneticBackground
+      growthPhase
+      growthRate
+      medium
+      mediumSupplements
+      opticalDensity
+      organism
+      otherTerms
+      ph
+      pressure
+      temperature
+      vesselType
+    }
+    linkedDataset {
+      controlId
+      datasetType
+      experimentId
+    }
+    nlpGrowthConditionsId
+    notes
+    objectsTested {
+      _id
+      abbreviatedName
+      activeConformations
+      externalCrossReferences {
+        url
+        externalCrossReferenceId
+        externalCrossReferenceName
+        objectId
+      }
+      genes {
+        _id
+        name
+      }
+      name
+      note
+      synonyms
+    }
+    publications {
+      abstract
+      authors
+      date
+      doi
+      pmcid
+      pmid
+      title
+    }
+    referenceGenome
+    releaseDataControl {
+      date
+      version
+    }
+    sample {
+      controlId
+      experimentId
+      srrId
+      title
+    }
+    sourceReferenceGenome
+    sourceSerie {
+      method
+      platform {
+        title
+        _id
+      }
+      readType
+      series {
+        sourceId
+        sourceName
+      }
+      sourceDB
+      strategy
+      title
+    }
+    summary {
+      totalOfGenes {
+        inDataset
+        inRDBClassic
+        notInDataset
+        notInRDB
+        sharedItems
+      }
+      totalOfPeaks {
+        notInDataset
+        inDataset
+        inRDBClassic
+        notInRDB
+        sharedItems
+      }
+      totalOfTFBS {
+        inDataset
+        inRDBClassic
+        notInDataset
+        notInRDB
+        sharedItems
+      }
+    }
+    temporalId
+  }
+}`
 
 
 
@@ -92,7 +132,11 @@ const GetInfoDataset = ({
   status = () => { },
   resoultsData = () => { },
 }) => {
-  const { data, loading, error } = useQuery(query(datasetId))
+  const { data, loading, error } = useQuery(query,{
+    variables: {
+      advancedSearch: `${datasetId}[_id]`
+    }
+  })
   useEffect(() => {
     if (loading) {
       status('loading')
