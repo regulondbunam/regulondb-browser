@@ -5,7 +5,7 @@ import Maininfo from "./mainInfo/Maininfo";
 import TranscriptionFactor from "./transcriptionFactor/TranscriptionFactor";
 import GrowthConditions from "./growthConditions/growthConditions";
 import NLPgc from "./nlpGrowthConditions/NLPgc";
-import Tabs from "./data/tabs";
+import Sources from "./Sources";
 import Related from "./related/Related";
 import txtTemplate from "./template.txt";
 import { Button } from "@mui/material";
@@ -83,7 +83,7 @@ console.log(_dataset);
         )}
         <GrowthConditions growthCondition={_dataset?.growthConditions} />
         <NLPgc datasetId={_dataset?._id} />
-        <Tabs id_dataset={_dataset?._id} data={_dataset} />
+        <Sources datasetId={_dataset?._id} datasetType={_dataset?.collectionData?.type} />
         {_dataset?.collectionData?.type === "TFBINDING" && (
           <Related
             datasetId={_dataset?._id}
