@@ -2,12 +2,6 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import { RichTreeView } from '@mui/x-tree-view/RichTreeView';
 import useGetInitTree from '../../WebServices/useGetTree';
-/*import { useTreeViewApiRef } from '@mui/x-tree-view/hooks/useTreeViewApiRef';
-const apiRef = useTreeViewApiRef();
-
-  const handleSetFocusTree = (event) => {
-    apiRef.current?.focusItem(event, 'pickers');
-  };*/
 
 
 export default function TreeView({
