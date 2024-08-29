@@ -13,7 +13,10 @@ export function useInitDatasetsByDatasetType(datasetType,setDatasets=()=>{}) {
     },
   });
   let datasets
-
+  if(error){
+    console.error("Error in useGetDatasetsByDatasetType",error);
+    
+  }
   if(data){
     if (DataVerifier.isValidArray(data?.getDatasetsFromSearch)) {
       datasets = data?.getDatasetsFromSearch
@@ -53,7 +56,6 @@ const query = gql`
         type
       }
       cutOff
-      datasetType
       experimentCondition
       growthConditions {
         organism

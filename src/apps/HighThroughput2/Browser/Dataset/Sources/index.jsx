@@ -38,8 +38,8 @@ export default function Sources({ datasetId, datasetType }) {
       <h2>SOURCE DATA</h2>
       <Box sx={{ width: "100%" }}>
         <Tabs value={value} onChange={handleChange} aria-label="data tabs">
-          <Tab label={tabTitle} />
-          {authorData && <Tab label="Author" />}
+          <Tab value={0} label={tabTitle} />
+          {authorData && <Tab value={1} label="Author" />}
         </Tabs>
 
         <Box sx={{ padding: 2 }}>

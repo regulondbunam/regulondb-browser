@@ -15,6 +15,10 @@ function query(ht_query) {
     {
       getDatasetsFromSearch(advancedSearch: "${ht_query}") {
         _id
+        collectionData {
+          source
+          type
+        }
           publications {
             pmid
             title
@@ -22,7 +26,7 @@ function query(ht_query) {
           sample {
             title
           }
-          datasetType
+          
         }
       }
       `
@@ -69,9 +73,9 @@ const GetRelatedDataset = ({
   return (<></>);
 }
 
-function clean(arrayData){
-  arrayData.forEach((data,i) => {
-    if(data?.sample?.title === '-'){
+function clean(arrayData) {
+  arrayData.forEach((data, i) => {
+    if (data?.sample?.title === '-') {
       arrayData[i].sample.title = undefined;
     }
   });

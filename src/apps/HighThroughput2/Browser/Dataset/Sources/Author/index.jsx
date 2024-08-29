@@ -17,7 +17,7 @@ async function processAuthorsDataCSV(authorData) {
             }
         });
     } catch (error) {
-        console.error("error in process columns Author Data", error);
+        console.warn("error in process columns Author Data", error);
     }
     //process rowsData
     try {

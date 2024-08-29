@@ -11,7 +11,6 @@ const query = gql`query GetDatasetsFromSearch($advancedSearch: String) {
       type
     }
     cutOff
-    datasetType
     experimentCondition
     externalReferences {
       description
@@ -152,7 +151,6 @@ const GetInfoDataset = ({
       }
     }
     if (error) {
-      resoultsData(undefined)
       status('error')
       console.error(error)
     }

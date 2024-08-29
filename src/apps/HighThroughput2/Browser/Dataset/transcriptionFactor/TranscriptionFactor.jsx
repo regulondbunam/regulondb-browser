@@ -83,9 +83,9 @@ function linkGenes(genes = []) {
   }*/
   return (
     <div>
-      {genes.map((gen) => {
+      {genes.map((gen,i) => {
         return (
-          <p  >Gene:{" "}
+          <p key={gen._id+"_geneInTF_"+i} >Gene:{" "}
           <Link
             key={gen._id}
             style={{ fontSize: "16px" }}
