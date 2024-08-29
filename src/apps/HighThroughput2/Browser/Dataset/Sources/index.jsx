@@ -14,7 +14,7 @@ export default function Sources({ datasetId, datasetType }) {
   };
 
   let tabTitle = "";
-  let data = <></>
+  let NormalizedData = <></>
   switch (datasetType) {
     case "TFBINDING":
       tabTitle = "Normalized";
@@ -39,13 +39,11 @@ export default function Sources({ datasetId, datasetType }) {
       <Box sx={{ width: "100%" }}>
         <Tabs value={value} onChange={handleChange} aria-label="data tabs">
           <Tab value={0} label={tabTitle} />
-          {authorData && <Tab value={1} label="Author" />}
+          <Tab value={1} disabled={!authorData} label="Author" />
         </Tabs>
 
         <Box sx={{ padding: 2 }}>
-          {value === 0 && (
-            <Typography>Here is the Normalized data...</Typography>
-          )}
+          {value === 0 && (NormalizedData)}
           {value === 1 && <Author data={authorData} />}
         </Box>
       </Box>

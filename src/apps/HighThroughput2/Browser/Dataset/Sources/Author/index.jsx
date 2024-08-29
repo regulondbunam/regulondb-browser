@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DataVerifier } from "../../../../../../components/ui-components";
 import FilterTable from "../../../Table/filterTable";
 
