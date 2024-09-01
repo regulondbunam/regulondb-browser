@@ -7,6 +7,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Peaks from './Peaks';
 import TFBS from './TFBS';
 import TUS from './TUs';
+import TSS from './TSS';
 
 
 export default function ProcessData({
@@ -45,7 +46,7 @@ export default function ProcessData({
               <h3>Transcription Start Sites</h3>
             </AccordionSummary>
             <AccordionDetails>
-              tss table
+              <TSS tss={TSs} />
             </AccordionDetails>
           </Accordion>
         )}

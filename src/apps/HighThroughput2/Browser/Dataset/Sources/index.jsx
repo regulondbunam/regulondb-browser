@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/client";
 import { query_GetAllProcessDataFromDatasetID } from "./query";
 import DataVerifier from "../../Table/utils";
 import ProcessData from "./ProcessData";
+import {CircularProgress} from "@mui/material";
 
 export default function Sources({ datasetId, datasetType }) {
 
@@ -64,6 +65,10 @@ export default function Sources({ datasetId, datasetType }) {
   }
 
   console.log(data);
+
+  if (loading) {
+    return <div><CircularProgress/></div>
+  }
 
   return (
     <div>
