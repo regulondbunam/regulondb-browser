@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Tabs, Tab, Box, Typography } from "@mui/material";
+import { Tabs, Tab, Box } from "@mui/material";
 import Author from "./Author";
 import { useQuery } from "@apollo/client";
 import { query_GetAllProcessDataFromDatasetID } from "./query";
@@ -9,7 +9,7 @@ import {CircularProgress} from "@mui/material";
 
 export default function Sources({ datasetId, datasetType }) {
 
-  const { data, loading, error } = useQuery(query_GetAllProcessDataFromDatasetID, {
+  const { data, loading } = useQuery(query_GetAllProcessDataFromDatasetID, {
     variables: {
       datasetId
     }

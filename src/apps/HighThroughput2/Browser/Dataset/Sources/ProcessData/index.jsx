@@ -8,6 +8,7 @@ import Peaks from './Peaks';
 import TFBS from './TFBS';
 import TUS from './TUs';
 import TSS from './TSS';
+import TTS from './TTS';
 
 
 export default function ProcessData({
@@ -56,7 +57,7 @@ export default function ProcessData({
               <h3>Transcription Termination Sites</h3>
             </AccordionSummary>
             <AccordionDetails>
-              tts table
+              <TTS tts={TTs} />
             </AccordionDetails>
           </Accordion>
         )}
