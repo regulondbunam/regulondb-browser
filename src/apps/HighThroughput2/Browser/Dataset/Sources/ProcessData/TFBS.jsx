@@ -1,31 +1,33 @@
 import React, { useMemo } from 'react'
-import DataVerifier from '../../../Table/utils'
+import DataVerifier from '../utils'
 import { Link } from 'react-router-dom'
-import FilterTable from "../filterTable"
+import FilterTable from '../filterTable'
 
-function formatData(peaks=[]){
+function formatData(TFBs = []){
     let table = {
         columns: [
             {label: "chromosome", hide: true},
             {label: "start"},
             {label: "end"},
             {label: "score"},
+            {label: "strand"},
+            {label: "sequence"},
             {label: "genes"}
         ],
         data: []
     }
-    for (const peak of peaks) {
+
+    for (const tf of TFBs) {
         let genes = []
-        if (DataVerifier.isValidArray(peak?.closestGenes)) {
-            genes = peak.closestGenes
+        if (DataVerifier.isValidArray(tf?.closestGenes)) {
+            genes = tf.closestGenes
         }
         table.data.push({
-            chromosome: peak?.chromosome ? peak.chromosome : "",
-            start: peak?.peakLeftPosition ? peak.peakLeftPosition : "",
-            end: peak?.peakRightPosition ? peak.peakRightPosition : "",
-            score: peak?.score ? peak.score : "",
-            strand: peak?.strand ? peak.score : "",
-            sequence: "",
+            start: tf?.chrLeftPosition ? tf.chrLeftPosition : "",
+            end: tf?.chrRightPosition ? tf.chrRightPosition : "",
+            score: tf?.score ? tf.score : "",
+            strand: tf?.strand ? tf.strand : "",
+            sequence: tf?.sequence ? tf.sequence : "",
             genes: <div value={genes.map(gene=>gene.name).join("; ")} >
                 {genes.map((gen) => {
                     return <Link key={gen._id} style={{ marginLeft: "5px" }} to={`/gene/${gen._id}`} >{gen.name}</Link>
@@ -33,11 +35,12 @@ function formatData(peaks=[]){
             </div>,
         })
     }
+
     return table
 }
 
-export default function Peaks({peaks}) {
-    const table = useMemo(() => formatData(peaks), [peaks])
+export default function TFBS({TFBs}) {
+    const table = useMemo(() => formatData(TFBs), [TFBs])
   return (
     <FilterTable {...table} />
   )

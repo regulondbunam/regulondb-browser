@@ -5,6 +5,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Peaks from './Peaks';
+import TFBS from './TFBS';
 
 
 export default function ProcessData({
@@ -33,7 +34,7 @@ export default function ProcessData({
               <h3>Transcription Factor Bindings Sites</h3>
             </AccordionSummary>
             <AccordionDetails>
-              peaks table
+              <TFBS TFBs={TFBs} />
             </AccordionDetails>
           </Accordion>
         )}
