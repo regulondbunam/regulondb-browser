@@ -82,8 +82,6 @@ const CollectionCard = ({ datasetType, sources = [] }) => {
     setOpen(false);
   };
 
-  console.log(meta);
-
   return (
     <>
       <Card style={{ backgroundColor: "#e3f2fd" }}>
