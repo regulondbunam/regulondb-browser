@@ -46,8 +46,8 @@ export default function useGetInitTree() {
               label:"ChIP-exo",
             },
             {
-              id: "source:REGULONDB&datasetType:RNAP_BINDING_SITES&experimentType:gSELEX-chip",
-              label:"gSELEX-chip",
+              id: "source:REGULONDB&datasetType:RNAP_BINDING_SITES&experimentType:gSELEX",
+              label:"gSELEX",
             },
             {
               id: "source:REGULONDB&datasetType:RNAP_BINDING_SITES&experimentType:DAP",
