@@ -1,12 +1,46 @@
 import React, { useState } from "react";
-import { Tabs, Tab, Box, Typography } from "@mui/material";
-import { useGetAuthorDataByDatasetId } from "../../../WebServices";
+import { Tabs, Tab, Box } from "@mui/material";
 import Author from "./Author";
+import { useQuery } from "@apollo/client";
+import { query_GetAllProcessDataFromDatasetID } from "./query";
+import DataVerifier from "../../Table/utils";
+import ProcessData from "./ProcessData";
+import {CircularProgress} from "@mui/material";
 
 export default function Sources({ datasetId, datasetType }) {
-  
-  const { authorData, loading, error } = useGetAuthorDataByDatasetId(datasetId);
 
+  const { data, loading } = useQuery(query_GetAllProcessDataFromDatasetID, {
+    variables: {
+      datasetId
+    }
+  })
+
+  let authorData
+  let peaks
+  let TFBs
+  let TSs
+  let TTs
+  let TUs
+  if (data) {
+    if (DataVerifier.isValidArray(data?.getAuthorsDataOfDataset)) {
+      authorData = data?.getAuthorsDataOfDataset[0]
+    }
+    if (DataVerifier.isValidArray(data?.getAllPeaksOfDataset)) {
+      peaks = data?.getAllPeaksOfDataset
+    }
+    if (DataVerifier.isValidArray(data?.getAllTFBindingOfDataset)) {
+      TFBs = data?.getAllTFBindingOfDataset
+    }
+    if (DataVerifier.isValidArray(data?.getAllTSSOfDataset)) {
+      TSs = data?.getAllTSSOfDataset
+    }
+    if (DataVerifier.isValidArray(data?.getAllTTSOfDataset)) {
+      TTs = data?.getAllTTSOfDataset
+    }
+    if (DataVerifier.isValidArray(data?.getAllTransUnitsOfDataset)) {
+      TUs = data?.getAllTransUnitsOfDataset
+    }
+  }
 
   const [value, setValue] = useState(1);
   const handleChange = (event, newValue) => {
@@ -14,7 +48,6 @@ export default function Sources({ datasetId, datasetType }) {
   };
 
   let tabTitle = "";
-  let NormalizedData = <></>
   switch (datasetType) {
     case "TFBINDING":
       tabTitle = "Normalized";
@@ -31,7 +64,11 @@ export default function Sources({ datasetId, datasetType }) {
       break;
   }
 
-  console.log(authorData);
+  console.log(data);
+
+  if (loading) {
+    return <div><CircularProgress/></div>
+  }
 
   return (
     <div>
@@ -43,7 +80,10 @@ export default function Sources({ datasetId, datasetType }) {
         </Tabs>
 
         <Box sx={{ padding: 2 }}>
-          {value === 0 && (NormalizedData)}
+          {data && (<></>)}
+          {value === 0 && (<>
+          <ProcessData peaks={peaks} TFBs={TFBs} TSs={TSs} TTs={TTs} TUs={TUs} />
+          </>)}
           {value === 1 && <Author data={authorData} />}
         </Box>
       </Box>

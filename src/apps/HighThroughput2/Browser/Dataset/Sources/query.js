@@ -1,6 +1,11 @@
 import { gql } from "@apollo/client";
 
 export const query_GetAllProcessDataFromDatasetID = gql`query GetNormalizedData($datasetId: String){
+getAuthorsDataOfDataset(datasetId: $datasetId) {
+    _id
+    authorsData
+    datasetIds
+  }
   getAllPeaksOfDataset(datasetId: $datasetId) {
     _id
     chromosome
