@@ -4,9 +4,13 @@ import Container from "@mui/material/Container";
 import { Body } from './body';
 import "./home.css";
 import Cover from "./cover";
+import { useSearchParams } from 'react-router-dom';
+
 
 
 export default function Home() {
+  const [searchParams] = useSearchParams();
+  const theme = searchParams.get('uwu');
   return (
     <div>
       <CssBaseline />
@@ -18,7 +22,7 @@ export default function Home() {
           },
         }}
       >
-        <Cover />
+        <Cover theme={theme} />
         <Body />
       </Container>
     </div>

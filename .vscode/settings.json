@@ -42,5 +42,6 @@
         "trascriptional",
         "unam",
         "webservices"
-    ]
+    ],
+    "docwriter.style": "JSDoc"
 }
