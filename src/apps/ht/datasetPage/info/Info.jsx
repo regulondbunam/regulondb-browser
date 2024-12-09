@@ -97,7 +97,6 @@ export default function Info({ datasetId }) {
         <br />
       </article>
       <div>
-        {/*
         <Button
           variant="outlined"
           onClick={() => {
@@ -137,7 +136,6 @@ export default function Info({ datasetId }) {
         >
           Download Dataset Info
         </Button>
-       */ }
       </div>
     </div>
   );
